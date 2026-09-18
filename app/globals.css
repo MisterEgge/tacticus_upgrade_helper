@@ -28,3 +28,5 @@ th { color:#8794a7; font-size:11px; letter-spacing:.1em; text-transform:uppercas
 
 .characterCell { display:flex; align-items:center; gap:10px; min-width:150px; }
 .portrait { width:42px; height:42px; border-radius:10px; object-fit:cover; object-position:top center; background:#1b2330; border:1px solid #303b4b; }
+
+.fallback{display:inline-flex;align-items:center;justify-content:center;font-weight:900;color:#9da9ba}.below{color:#f1c96b}.rarity{font-weight:800}.rarity.legendary{color:#f1c96b}.rarity.epic{color:#d6a4ff}.rarity.rare{color:#8dbdff}.rarity.uncommon{color:#7ee2a8}
