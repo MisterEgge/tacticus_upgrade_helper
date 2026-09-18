@@ -117,7 +117,8 @@ async function main()
         .map((unit) =>
         {
 
-            const active = unit.abilities[0]!;\n            const passive = unit.abilities[1]!;
+            const active = unit.abilities[0]!;
+            const passive = unit.abilities[1]!;
             const target = targets[unit.name ?? ""];
             const priority = priorities[unit.name ?? ""]?.priority ?? 0;
 
