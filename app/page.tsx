@@ -15,7 +15,7 @@ export default async function Home() {
     <section className="cards"><Card label="Characters" value={report.summary.units}/><Card label="Legendary gear upgrades" value={report.summary.legendaryUnderTierSlots}/><Card label="Equip now" value={report.equipmentAllocation.equipNow.length}/><Card label="Ability upgrades to 17" value={report.summary.individualAbilityUpgradesTo17}/></section>
     <section className="panel"><div className="sectionTitle"><div><p className="eyebrow">EQUIPMENT</p><h2>Highest-priority targets</h2></div><Link className="viewLink" href="/equipment">View all equipment →</Link></div>
     <div className="tableWrap"><table><thead><tr><th>Character</th><th>Current</th><th>Target</th><th>Status</th></tr></thead><tbody>
-    {top.map(row=>{const now=report.equipmentAllocation.equipNow.includes(row);return <tr key={row.character+row.slotId}><td><CharacterName name={row.character} id={unitFor(report,row.character)?.id}/><small>{row.slotId}</small></td><td>{row.currentItem}</td><td><strong>{targetName(row)}</strong></td><td><span className={"status "+(now?"ready":"need")}>{now?"EQUIP NOW":"NEED"}</span></td></tr>})}
+    {top.map(row=>{const now=report.equipmentAllocation.equipNow.includes(row);return <tr key={row.character+row.slotId}><td><CharacterName name={row.character} id={unitFor(report,row.character)?.id} icon={unitFor(report,row.character)?.icon}/><small>{row.slotId}</small></td><td>{row.currentItem}</td><td><strong>{targetName(row)}</strong></td><td><span className={"status "+(now?"ready":"need")}>{now?"EQUIP NOW":"NEED"}</span></td></tr>})}
     </tbody></table></div></section>
     <footer>Generated {new Date(report.generatedAt).toLocaleString()}</footer>
   </main>;
