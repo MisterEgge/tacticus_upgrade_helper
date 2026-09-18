@@ -1,15 +1,20 @@
 {
-  "_comment": "Verified cross-family Legendary compatibility only. Same-family rarity upgrades are derived from the equipped item. Compatibility does not imply recommendation. Keep this file minimal: only alternate families independently verified for that character/slot.",
+  "_comment": "Verified cross-family Legendary compatibility only. Same-family rarity upgrades are derived from the equipped item. Compatibility does not imply recommendation; preferred equipment is handled separately. Audited 2026-09-18; redundant same-family mappings removed.",
   "characters": {
     "Actus": {
-      "Slot2": [
-        "I_Block_L002"
-      ]
+      "Slot2": ["I_Block_L002"]
     },
     "Isabella": {
-      "Slot2": [
-        "I_Block_L002"
-      ]
+      "Slot2": ["I_Block_L002"]
+    },
+    "Anuphet": {
+      "Slot2": ["I_Defensive_L003"]
+    },
+    "Trajann": {
+      "Slot2": ["I_Block_L002"]
+    },
+    "Tyrith": {
+      "Slot2": ["I_Block_L002"]
     }
   }
 }
