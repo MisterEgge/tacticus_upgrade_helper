@@ -1,0 +1,7 @@
+import Nav from "../components/Nav"; import CharacterName from "../components/CharacterName"; import {getReport,targetName,unitFor} from "../lib/report";
+export default async function Farming(){const r=await getReport();if(!r)return <main><Nav/><div className="empty">Run <code>npm run refresh</code>.</div></main>;
+const needs=[...r.equipmentAllocation.buyWatch].sort((a,b)=>b.accountPriority-a.accountPriority);
+return <main><Nav/><header><div><p className="eyebrow">FARMING</p><h1>Acquisition Targets</h1><p className="sub">What the account needs next. Campaign-node routing will plug into this page once node data is mapped.</p></div><div className="power">{needs.length} <strong>targets</strong></div></header>
+<section className="panel"><div className="tableWrap"><table><thead><tr><th>Character</th><th>Priority</th><th>Need</th><th>Current</th><th>Source</th></tr></thead><tbody>
+{needs.map(x=>{const u=unitFor(r,x.character);return <tr key={x.character+x.slotId}><td><CharacterName name={x.character} id={u?.id}/></td><td>{x.accountPriority}</td><td><strong>{targetName(x)}</strong></td><td>{x.currentItem}</td><td><span className="status unknown">NODE DATA NEXT</span></td></tr>})}
+</tbody></table></div></section></main>}
