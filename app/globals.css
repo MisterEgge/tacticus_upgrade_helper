@@ -1,0 +1,16 @@
+:root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; background:#0a0d12; color:#edf1f7; }
+* { box-sizing:border-box; } body { margin:0; background:radial-gradient(circle at top,#151b25 0,#0a0d12 42%); min-height:100vh; }
+main { width:min(1180px,calc(100% - 40px)); margin:auto; padding:48px 0 70px; }
+header,.sectionTitle { display:flex; justify-content:space-between; align-items:end; gap:24px; } h1 { font-size:42px; margin:4px 0 0; } h2 { margin:4px 0 0; }
+.eyebrow { color:#9da9ba; font-size:12px; font-weight:800; letter-spacing:.16em; margin:0; }
+.power { padding:12px 16px; border:1px solid #2b3442; border-radius:12px; background:#111720; }
+.cards { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:32px 0; }
+.card,.panel,.empty { border:1px solid #27303d; background:rgba(17,23,32,.92); border-radius:16px; }
+.card { padding:20px; display:flex; flex-direction:column; gap:5px; }.card strong { font-size:30px; }.card span,small,footer { color:#9da9ba; }
+.panel { overflow:hidden; }.sectionTitle { padding:22px 24px; border-bottom:1px solid #27303d; }.sectionTitle>span { color:#9da9ba; }
+.tableWrap { overflow-x:auto; } table { width:100%; border-collapse:collapse; } th,td { text-align:left; padding:15px 18px; border-bottom:1px solid #202733; }
+th { color:#8794a7; font-size:11px; letter-spacing:.1em; text-transform:uppercase; } td { font-size:14px; } small { display:block; margin-top:3px; }
+.status { display:inline-block; font-size:11px; font-weight:800; letter-spacing:.06em; padding:6px 9px; border-radius:999px; border:1px solid; }
+.ready { color:#7ee2a8; border-color:#286642; background:#102a1c; }.need { color:#f1c96b; border-color:#6c5524; background:#29210f; }
+.empty { margin-top:30px; padding:30px; } code { background:#1b2330; padding:3px 6px; border-radius:5px; } footer { margin-top:20px; font-size:12px; text-align:right; }
+@media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)} main{width:min(100% - 24px,1180px)} th,td{padding:12px 10px}}
