@@ -59,6 +59,10 @@ type EquipmentCompatibility = {
     characters: Record<string, Partial<Record<"Slot1" | "Slot2" | "Slot3", string[]>>>;
 };
 
+type EquipmentPreferences = {
+    characters: Record<string, Partial<Record<"Slot1" | "Slot2" | "Slot3", string[]>>>;
+};
+
 type CharacterPriority = {
     priority: number;
     modes: string[];
@@ -109,6 +113,7 @@ async function main()
     const priorities = await readJson<Record<string, CharacterPriority>>("config/character_priorities.json");
     const targets = await readJson<Record<string, AbilityTarget>>("config/ability_targets.json");
     const compatibility = await readJson<EquipmentCompatibility>("config/equipment_compatibility.json");
+    const preferences = await readJson<EquipmentPreferences>("config/equipment_preferences.json");
 
     const units = playerResponse.player.units;
 
@@ -167,17 +172,32 @@ async function main()
     for (const need of legendaryUnderTier)
     {
 
-        const allowed = compatibility.characters[need.character]?.[need.slotId as "Slot1" | "Slot2" | "Slot3"];
+        const unit = units.find((candidate) => (candidate.name ?? candidate.id) === need.character);
+        const equippedItem = unit?.items.find((item) => item.slotId === need.slotId);
+        const sameFamilyLegendaryId = equippedItem?.id.replace(/_E(\d{3})$/, "_L$1");
 
-        if (!allowed?.length)
+        const verifiedOverrides = compatibility.characters[need.character]?.[need.slotId as "Slot1" | "Slot2" | "Slot3"] ?? [];
+        const preferredOverrides = preferences.characters[need.character]?.[need.slotId as "Slot1" | "Slot2" | "Slot3"] ?? [];
+        const allowed = [
+            ...verifiedOverrides,
+            ...(sameFamilyLegendaryId && sameFamilyLegendaryId !== equippedItem?.id ? [sameFamilyLegendaryId] : [])
+        ].filter((id, index, all) => all.indexOf(id) === index);
+        const recommended = preferredOverrides.length
+            ? preferredOverrides
+            : (sameFamilyLegendaryId && sameFamilyLegendaryId !== equippedItem?.id ? [sameFamilyLegendaryId] : []);
+
+        const availableId = recommended.find((id) => (inventoryRemaining.get(id) ?? 0) > 0);
+
+        if (!allowed.length)
         {
 
-            compatibilityUnknown.push(need);
+            compatibilityUnknown.push({
+                ...need,
+                reason: "No verified override and equipped item ID does not expose an Epic-to-Legendary family mapping"
+            });
             continue;
 
         }
-
-        const availableId = allowed.find((id) => (inventoryRemaining.get(id) ?? 0) > 0);
 
         if (availableId)
         {
@@ -188,7 +208,10 @@ async function main()
             equipNow.push({
                 ...need,
                 recommendedItemId: availableId,
-                recommendedItem: inventoryItem?.name ?? availableId
+                recommendedItem: inventoryItem?.name ?? availableId,
+                recommendationSource: preferredOverrides.includes(availableId)
+                    ? "preferred equipment"
+                    : "same equipped item family at Legendary rarity"
             });
 
         }
@@ -197,7 +220,11 @@ async function main()
 
             buyWatch.push({
                 ...need,
-                compatibleLegendaryItemIds: allowed
+                compatibleLegendaryItemIds: allowed,
+                preferredLegendaryItemIds: recommended,
+                recommendationSource: preferredOverrides.length
+                    ? "preferred equipment"
+                    : "same equipped item family at Legendary rarity"
             });
 
         }
@@ -226,6 +253,11 @@ async function main()
         },
         abilityQueue,
         legendaryUnderTier,
+        equipmentAllocation: {
+            equipNow,
+            buyWatch,
+            compatibilityUnknown
+        },
         unequippedInventory: playerResponse.player.inventory.items
     };
 
@@ -237,7 +269,18 @@ async function main()
     console.log(`Characters with abilities below 17: ${report.summary.charactersWithAbilitiesBelow17}`);
     console.log(`Individual ability upgrades needed to reach 17: ${report.summary.individualAbilityUpgradesTo17}`);
     console.log(`Equipment: ${equipNow.length} EQUIP NOW | ${buyWatch.length} BUY/WATCH | ${compatibilityUnknown.length} compatibility UNKNOWN`);
-    console.log(`Legendary characters with under-tier equipment slots: ${report.summary.legendaryUnderTierSlots}`);
+    console.log("\nEQUIP NOW");
+    console.table(equipNow);
+    console.log("\nBUY / WATCH");
+    console.table(buyWatch);
+    if (compatibilityUnknown.length)
+    {
+
+        console.log("\nCOMPATIBILITY UNKNOWN");
+        console.table(compatibilityUnknown);
+
+    }
+    console.log(`Legendary under-tier equipment slots: ${report.summary.legendaryUnderTierSlots}`);
     console.log("Saved output/upgrade-report.json");
 
 }

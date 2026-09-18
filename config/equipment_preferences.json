@@ -1,0 +1,10 @@
+{
+  "_comment": "Preferred Legendary item IDs by character/slot. These control recommendations; compatibility alone must never cause an EQUIP NOW. Missing preference falls back to the character's currently equipped item family at Legendary rarity. Anuphet Slot2 I_Defensive_L005 = Optimal Nanocrystalline Plating.",
+  "characters": {
+    "Anuphet": {
+      "Slot2": [
+        "I_Defensive_L005"
+      ]
+    }
+  }
+}

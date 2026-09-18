@@ -1,0 +1,52 @@
+name: Tacticus Live Analysis
+
+on:
+  push:
+    branches:
+      - main
+      - "feature/**"
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TACTICUS_API_KEY: ${{ secrets.TACTICUS_API_KEY }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Fetch live player data
+        run: npm run fetch
+
+      - name: Analyze account
+        run: npm run analyze
+
+      - name: Upload analysis report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tacticus-upgrade-report
+          path: output/upgrade-report.json
+          if-no-files-found: warn
+          retention-days: 7
