@@ -1,0 +1,134 @@
+{
+  "Actus": {
+    "priority": 95,
+    "modes": [
+      "Guild Raid",
+      "Guild War",
+      "Mech"
+    ],
+    "note": "Core mechanical support; prioritize scarce compatible gear."
+  },
+  "Exitor-Rho": {
+    "priority": 100,
+    "modes": [
+      "Guild Raid",
+      "Guild War",
+      "Mech"
+    ],
+    "note": "Primary AdMech damage engine."
+  },
+  "Trajann": {
+    "priority": 94,
+    "modes": [
+      "Guild Raid",
+      "Guild War"
+    ],
+    "note": "High-value character; prioritize over low-use characters such as Tyrith."
+  },
+  "Kharn": {
+    "priority": 96,
+    "modes": [
+      "Guild Raid",
+      "Guild War"
+    ],
+    "note": "High-value damage carry."
+  },
+  "Re'vas": {
+    "priority": 92,
+    "modes": [
+      "Guild War",
+      "Arena",
+      "Mech"
+    ],
+    "note": "Developed multi-mode mechanical character."
+  },
+  "Isabella": {
+    "priority": 90,
+    "modes": [
+      "LRE",
+      "Campaign",
+      "Guild War"
+    ],
+    "note": "High-value sustain."
+  },
+  "Abraxas": {
+    "priority": 88,
+    "modes": [
+      "Campaign",
+      "LRE",
+      "Guild War"
+    ],
+    "note": "Strong summoner/psyker."
+  },
+  "Archimatos": {
+    "priority": 82,
+    "modes": [
+      "Campaign",
+      "LRE"
+    ],
+    "note": "Strong summon/campaign utility."
+  },
+  "Nauseous": {
+    "priority": 84,
+    "modes": [
+      "LRE",
+      "Guild War"
+    ],
+    "note": "Chaos sustain/revive utility."
+  },
+  "Typhus": {
+    "priority": 80,
+    "modes": [
+      "LRE",
+      "Guild War"
+    ],
+    "note": "Developed Chaos character."
+  },
+  "Anuphet": {
+    "priority": 86,
+    "modes": [
+      "Campaign",
+      "Mech"
+    ],
+    "note": "Useful mech/campaign option."
+  },
+  "Jain Zar": {
+    "priority": 72,
+    "modes": [
+      "Campaign",
+      "Guild War"
+    ],
+    "note": "Useful but below core teams."
+  },
+  "Nicodemus": {
+    "priority": 68,
+    "modes": [
+      "Guild War"
+    ],
+    "note": "Finish when resources are comfortable."
+  },
+  "Haarken": {
+    "priority": 52,
+    "modes": [
+      "Campaign"
+    ],
+    "note": "Campaign utility; do not consume scarce gear ahead of core characters."
+  },
+  "Laviscus": {
+    "priority": 45,
+    "modes": [
+      "Campaign"
+    ],
+    "note": "Lower immediate return."
+  },
+  "Judh": {
+    "priority": 40,
+    "modes": [],
+    "note": "Not a current core investment."
+  },
+  "Tyrith": {
+    "priority": 30,
+    "modes": [],
+    "note": "Lower-use character on this account; do not allocate scarce gear merely because it fits."
+  }
+}
