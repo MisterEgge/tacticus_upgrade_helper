@@ -167,12 +167,23 @@ async function main()
     for (const need of legendaryUnderTier)
     {
 
-        const allowed = compatibility.characters[need.character]?.[need.slotId as "Slot1" | "Slot2" | "Slot3"];
+        const unit = units.find((candidate) => (candidate.name ?? candidate.id) === need.character);
+        const equippedItem = unit?.items.find((item) => item.slotId === need.slotId);
+        const sameFamilyLegendaryId = equippedItem?.id.replace(/_E(\d{3})$/, "_L$1");
 
-        if (!allowed?.length)
+        const verifiedOverrides = compatibility.characters[need.character]?.[need.slotId as "Slot1" | "Slot2" | "Slot3"] ?? [];
+        const allowed = [
+            ...verifiedOverrides,
+            ...(sameFamilyLegendaryId && sameFamilyLegendaryId !== equippedItem?.id ? [sameFamilyLegendaryId] : [])
+        ].filter((id, index, all) => all.indexOf(id) === index);
+
+        if (!allowed.length)
         {
 
-            compatibilityUnknown.push(need);
+            compatibilityUnknown.push({
+                ...need,
+                reason: "No verified override and equipped item ID does not expose an Epic-to-Legendary family mapping"
+            });
             continue;
 
         }
@@ -188,7 +199,10 @@ async function main()
             equipNow.push({
                 ...need,
                 recommendedItemId: availableId,
-                recommendedItem: inventoryItem?.name ?? availableId
+                recommendedItem: inventoryItem?.name ?? availableId,
+                recommendationSource: verifiedOverrides.includes(availableId)
+                    ? "verified compatibility override"
+                    : "same equipped item family at Legendary rarity"
             });
 
         }
@@ -197,7 +211,10 @@ async function main()
 
             buyWatch.push({
                 ...need,
-                compatibleLegendaryItemIds: allowed
+                compatibleLegendaryItemIds: allowed,
+                recommendationSource: verifiedOverrides.length
+                    ? "verified compatibility override + same-family fallback"
+                    : "same equipped item family at Legendary rarity"
             });
 
         }
@@ -226,6 +243,11 @@ async function main()
         },
         abilityQueue,
         legendaryUnderTier,
+        equipmentAllocation: {
+            equipNow,
+            buyWatch,
+            compatibilityUnknown
+        },
         unequippedInventory: playerResponse.player.inventory.items
     };
 
@@ -237,6 +259,17 @@ async function main()
     console.log(`Characters with abilities below 17: ${report.summary.charactersWithAbilitiesBelow17}`);
     console.log(`Individual ability upgrades needed to reach 17: ${report.summary.individualAbilityUpgradesTo17}`);
     console.log(`Equipment: ${equipNow.length} EQUIP NOW | ${buyWatch.length} BUY/WATCH | ${compatibilityUnknown.length} compatibility UNKNOWN`);
+    console.log("\nEQUIP NOW");
+    console.table(equipNow);
+    console.log("\nBUY / WATCH");
+    console.table(buyWatch);
+    if (compatibilityUnknown.length)
+    {
+
+        console.log("\nCOMPATIBILITY UNKNOWN");
+        console.table(compatibilityUnknown);
+
+    }
     console.log(`Legendary characters with under-tier equipment slots: ${report.summary.legendaryUnderTierSlots}`);
     console.log("Saved output/upgrade-report.json");
 
