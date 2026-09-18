@@ -59,6 +59,10 @@ type EquipmentCompatibility = {
     characters: Record<string, Partial<Record<"Slot1" | "Slot2" | "Slot3", string[]>>>;
 };
 
+type EquipmentPreferences = {
+    characters: Record<string, Partial<Record<"Slot1" | "Slot2" | "Slot3", string[]>>>;
+};
+
 type CharacterPriority = {
     priority: number;
     modes: string[];
@@ -109,6 +113,7 @@ async function main()
     const priorities = await readJson<Record<string, CharacterPriority>>("config/character_priorities.json");
     const targets = await readJson<Record<string, AbilityTarget>>("config/ability_targets.json");
     const compatibility = await readJson<EquipmentCompatibility>("config/equipment_compatibility.json");
+    const preferences = await readJson<EquipmentPreferences>("config/equipment_preferences.json");
 
     const units = playerResponse.player.units;
 
@@ -172,10 +177,16 @@ async function main()
         const sameFamilyLegendaryId = equippedItem?.id.replace(/_E(\d{3})$/, "_L$1");
 
         const verifiedOverrides = compatibility.characters[need.character]?.[need.slotId as "Slot1" | "Slot2" | "Slot3"] ?? [];
+        const preferredOverrides = preferences.characters[need.character]?.[need.slotId as "Slot1" | "Slot2" | "Slot3"] ?? [];
         const allowed = [
             ...verifiedOverrides,
             ...(sameFamilyLegendaryId && sameFamilyLegendaryId !== equippedItem?.id ? [sameFamilyLegendaryId] : [])
         ].filter((id, index, all) => all.indexOf(id) === index);
+        const recommended = preferredOverrides.length
+            ? preferredOverrides
+            : (sameFamilyLegendaryId && sameFamilyLegendaryId !== equippedItem?.id ? [sameFamilyLegendaryId] : []);
+
+        const availableId = recommended.find((id) => (inventoryRemaining.get(id) ?? 0) > 0);
 
         if (!allowed.length)
         {
@@ -188,8 +199,6 @@ async function main()
 
         }
 
-        const availableId = allowed.find((id) => (inventoryRemaining.get(id) ?? 0) > 0);
-
         if (availableId)
         {
 
@@ -200,8 +209,8 @@ async function main()
                 ...need,
                 recommendedItemId: availableId,
                 recommendedItem: inventoryItem?.name ?? availableId,
-                recommendationSource: verifiedOverrides.includes(availableId)
-                    ? "verified compatibility override"
+                recommendationSource: preferredOverrides.includes(availableId)
+                    ? "preferred equipment"
                     : "same equipped item family at Legendary rarity"
             });
 
@@ -212,8 +221,9 @@ async function main()
             buyWatch.push({
                 ...need,
                 compatibleLegendaryItemIds: allowed,
-                recommendationSource: verifiedOverrides.length
-                    ? "verified compatibility override + same-family fallback"
+                preferredLegendaryItemIds: recommended,
+                recommendationSource: preferredOverrides.length
+                    ? "preferred equipment"
                     : "same equipped item family at Legendary rarity"
             });
 
@@ -270,7 +280,7 @@ async function main()
         console.table(compatibilityUnknown);
 
     }
-    console.log(`Legendary characters with under-tier equipment slots: ${report.summary.legendaryUnderTierSlots}`);
+    console.log(`Legendary under-tier equipment slots: ${report.summary.legendaryUnderTierSlots}`);
     console.log("Saved output/upgrade-report.json");
 
 }
