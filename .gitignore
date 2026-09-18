@@ -1,3 +1,13 @@
-node_modules
-.env
-data
+# Tacticus player/account exports
+data/player*.json
+
+# Generated reports
+output/*.xlsx
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
