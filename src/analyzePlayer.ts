@@ -23,6 +23,8 @@ type Unit = {
     xpLevel: number;
     abilities: Ability[];
     items: UnitItem[];
+    shards?: number;
+    mythicShards?: number;
 };
 
 type PlayerResponse = {
@@ -153,6 +155,7 @@ async function main()
                 .filter((item) => item.rarity && item.rarity !== "Legendary" && item.rarity !== "Mythic")
                 .map((item) => ({
                     character: unit.name ?? unit.id,
+                    characterId: unit.id,
                     slotId: item.slotId,
                     currentItem: item.name ?? item.id,
                     currentRarity: item.rarity,
@@ -283,6 +286,20 @@ async function main()
             unequippedItems: playerResponse.player.inventory.items.reduce((sum, item) => sum + item.amount, 0)
         },
         abilityQueue,
+        roster: units.map((unit) => ({
+            id: unit.id,
+            name: unit.name ?? unit.id,
+            faction: unit.faction ?? "",
+            grandAlliance: unit.grandAlliance ?? "",
+            rarity: rarityFor(unit),
+            rank: unit.rank,
+            xpLevel: unit.xpLevel,
+            progressionIndex: unit.progressionIndex,
+            shards: unit.shards ?? 0,
+            mythicShards: unit.mythicShards ?? 0,
+            abilities: unit.abilities,
+            items: unit.items
+        })),
         legendaryUnderTier,
         equipmentAllocation: {
             equipNow,
