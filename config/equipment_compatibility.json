@@ -1,0 +1,108 @@
+{
+  "_comment": "Verified/known Legendary compatibility only. Missing entries are deliberately UNKNOWN, not incompatible. Add mappings only when verified from account data, in-game confirmation, or trusted static data.",
+  "characters": {
+  "Actus": {
+    "Slot2": [
+      "I_Block_L002",
+      "I_Block_L003"
+    ],
+    "Slot3": [
+      "I_Booster_Block_L002"
+    ]
+  },
+  "Exitor-Rho": {
+    "Slot2": [
+      "I_Defensive_L003"
+    ]
+  },
+  "Anuphet": {
+    "Slot2": [
+      "I_Defensive_L003"
+    ]
+  },
+  "Trajann": {
+    "Slot1": [
+      "I_Crit_L010"
+    ],
+    "Slot2": [
+      "I_Block_L003"
+    ],
+    "Slot3": [
+      "I_Booster_Block_L002"
+    ]
+  },
+  "Kharn": {
+    "Slot1": [
+      "I_Crit_L006"
+    ],
+    "Slot2": [
+      "I_Block_L003"
+    ],
+    "Slot3": [
+      "I_Booster_Crit_L003"
+    ]
+  },
+  "Re'vas": {
+    "Slot1": [
+      "I_Crit_L007"
+    ],
+    "Slot2": [
+      "I_Block_L003"
+    ],
+    "Slot3": [
+      "I_Booster_Block_L002"
+    ]
+  },
+  "Isabella": {
+    "Slot1": [
+      "I_Crit_L002"
+    ],
+    "Slot2": [
+      "I_Block_L002",
+      "I_Block_L003"
+    ],
+    "Slot3": [
+      "I_Booster_Block_L002"
+    ]
+  },
+  "Abraxas": {
+    "Slot3": [
+      "I_Booster_Crit_L003"
+    ]
+  },
+  "Archimatos": {
+    "Slot3": [
+      "I_Booster_Crit_L003"
+    ]
+  },
+  "Typhus": {
+    "Slot2": [
+      "I_Block_L003"
+    ],
+    "Slot3": [
+      "I_Booster_Block_L002"
+    ]
+  },
+  "Jain Zar": {
+    "Slot1": [
+      "I_Crit_L008"
+    ],
+    "Slot2": [
+      "I_Block_L003"
+    ],
+    "Slot3": [
+      "I_Booster_Block_L002"
+    ]
+  },
+  "Nicodemus": {
+    "Slot3": [
+      "I_Booster_Crit_L001"
+    ]
+  },
+  "Tyrith": {
+    "Slot3": [
+      "I_Booster_Crit_L001"
+    ]
+  }
+}
+}
