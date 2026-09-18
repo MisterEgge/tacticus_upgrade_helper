@@ -1,0 +1,7 @@
+import Nav from "../components/Nav"; import CharacterName from "../components/CharacterName"; import {getReport} from "../lib/report";
+export default async function Characters(){const r=await getReport();if(!r)return <main><Nav/><div className="empty">Run <code>npm run refresh</code>.</div></main>;
+const rows=[...r.roster].sort((a,b)=>b.progressionIndex-a.progressionIndex||b.rank-a.rank||a.name.localeCompare(b.name));
+return <main><Nav/><header><div><p className="eyebrow">ROSTER</p><h1>Characters</h1><p className="sub">Your complete live Tacticus roster.</p></div><div className="power">{rows.length} <strong>units</strong></div></header>
+<section className="panel"><div className="tableWrap"><table><thead><tr><th>Character</th><th>Faction</th><th>Rarity</th><th>Rank</th><th>XP level</th><th>Active</th><th>Passive</th><th>Shards</th></tr></thead><tbody>
+{rows.map(u=><tr key={u.id}><td><CharacterName name={u.name} id={u.id}/></td><td>{u.faction}<small>{u.grandAlliance}</small></td><td><span className={"rarity "+u.rarity.toLowerCase()}>{u.rarity}</span></td><td>{u.rank}</td><td>{u.xpLevel}</td><td>{u.abilities[0]?.level??"—"}</td><td>{u.abilities[1]?.level??"—"}</td><td>{u.shards}</td></tr>)}
+</tbody></table></div></section></main>}
