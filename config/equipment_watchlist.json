@@ -1,0 +1,72 @@
+[
+  {
+    "priority": 1,
+    "item": "Grand Ceremonial Knife",
+    "character": "Trajann",
+    "slot": "Crit",
+    "tier": "BUY FIRST"
+  },
+  {
+    "priority": 2,
+    "item": "Optimal Force Field",
+    "character": "Kharn",
+    "slot": "Block",
+    "tier": "BUY FIRST"
+  },
+  {
+    "priority": 3,
+    "item": "Warpforged Frag Grenades",
+    "character": "Kharn",
+    "slot": "Crit Booster",
+    "tier": "BUY FIRST"
+  },
+  {
+    "priority": 4,
+    "item": "Prototype Pulse Pistol",
+    "character": "Re'vas",
+    "slot": "Crit",
+    "tier": "HIGH"
+  },
+  {
+    "priority": 5,
+    "item": "Warpforged Frag Grenades",
+    "character": "Abraxas",
+    "slot": "Crit Booster",
+    "tier": "HIGH"
+  },
+  {
+    "priority": 6,
+    "item": "Warpforged Frag Grenades",
+    "character": "Archimatos",
+    "slot": "Crit Booster",
+    "tier": "HIGH"
+  },
+  {
+    "priority": 7,
+    "item": "Optimal Force Field",
+    "character": "Typhus",
+    "slot": "Block",
+    "tier": "HIGH"
+  },
+  {
+    "priority": 8,
+    "item": "Soul-Linked Shuriken Pistol",
+    "character": "Jain Zar",
+    "slot": "Crit",
+    "tier": "MEDIUM"
+  },
+  {
+    "priority": 9,
+    "item": "Artificer Frag Grenades",
+    "character": "Nicodemus",
+    "slot": "Crit Booster",
+    "tier": "MEDIUM"
+  },
+  {
+    "priority": 10,
+    "item": "Warpforged Frag Grenades",
+    "character": "Nauseous",
+    "slot": "Crit Booster",
+    "tier": "MEDIUM"
+  }
+]
