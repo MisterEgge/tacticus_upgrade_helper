@@ -1,0 +1,4 @@
+"use client";import DataTable,{Column}from"../components/DataTable";import type{InventoryItem}from"../lib/report";
+export default function InventoryTable({rows}:{rows:InventoryItem[]}){const c:Column<InventoryItem>[]=[
+{key:"item",label:"Item",sort:r=>r.name??r.id,search:r=>(r.name??"")+" "+r.id,render:r=><strong>{r.name??r.id}</strong>},
+{key:"amount",label:"Amount",sort:r=>r.amount,render:r=>r.amount},{key:"level",label:"Level",sort:r=>r.level,render:r=>r.level},{key:"id",label:"Internal ID",sort:r=>r.id,search:r=>r.id,render:r=><small>{r.id}</small>}];return <DataTable rows={rows} columns={c} placeholder="Search inventory…"/>;}
