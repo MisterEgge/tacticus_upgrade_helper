@@ -222,6 +222,7 @@ async function main()
                 ...need,
                 compatibleLegendaryItemIds: allowed,
                 preferredLegendaryItemIds: recommended,
+                preferredLegendaryItems: recommended.map((id) => playerResponse.player.inventory.items.find((item) => item.id === id)?.name ?? id),
                 recommendationSource: preferredOverrides.length
                     ? "preferred equipment"
                     : "same equipped item family at Legendary rarity"
