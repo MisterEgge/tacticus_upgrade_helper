@@ -165,6 +165,35 @@ async function main()
         playerResponse.player.inventory.items.map((item) => [item.id, item.amount])
     );
 
+    const itemNames = new Map<string, string>();
+    for (const unit of units)
+    {
+
+        for (const item of unit.items)
+        {
+
+            if (item.name)
+            {
+
+                itemNames.set(item.id, item.name);
+
+            }
+
+        }
+
+    }
+    for (const item of playerResponse.player.inventory.items)
+    {
+
+        if (item.name)
+        {
+
+            itemNames.set(item.id, item.name);
+
+        }
+
+    }
+
     const equipNow: Array<Record<string, unknown>> = [];
     const buyWatch: Array<Record<string, unknown>> = [];
     const compatibilityUnknown: Array<Record<string, unknown>> = [];
@@ -222,7 +251,7 @@ async function main()
                 ...need,
                 compatibleLegendaryItemIds: allowed,
                 preferredLegendaryItemIds: recommended,
-                preferredLegendaryItems: recommended.map((id) => playerResponse.player.inventory.items.find((item) => item.id === id)?.name ?? id),
+                preferredLegendaryItems: recommended.map((id) => itemNames.get(id) ?? id),
                 recommendationSource: preferredOverrides.length
                     ? "preferred equipment"
                     : "same equipped item family at Legendary rarity"
