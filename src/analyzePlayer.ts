@@ -55,7 +55,11 @@ type AbilityTarget = {
     confidence: string;
 };
 
-type EquipmentCompatibility = {\n    characters: Record<string, Partial<Record<"Slot1" | "Slot2" | "Slot3", string[]>>>;\n};\n\ntype CharacterPriority = {
+type EquipmentCompatibility = {
+    characters: Record<string, Partial<Record<"Slot1" | "Slot2" | "Slot3", string[]>>>;
+};
+
+type CharacterPriority = {
     priority: number;
     modes: string[];
     note: string;
@@ -103,7 +107,8 @@ async function main()
 
     const playerResponse = await readJson<PlayerResponse>("data/player.json");
     const priorities = await readJson<Record<string, CharacterPriority>>("config/character_priorities.json");
-    const targets = await readJson<Record<string, AbilityTarget>>("config/ability_targets.json");\n    const compatibility = await readJson<EquipmentCompatibility>("config/equipment_compatibility.json");
+    const targets = await readJson<Record<string, AbilityTarget>>("config/ability_targets.json");
+    const compatibility = await readJson<EquipmentCompatibility>("config/equipment_compatibility.json");
 
     const units = playerResponse.player.units;
 
@@ -213,7 +218,8 @@ async function main()
         },
         summary: {
             units: units.length,
-            charactersWithAbilitiesBelow17: abilityQueue.length,\n            individualAbilityUpgradesTo17,
+            charactersWithAbilitiesBelow17: abilityQueue.length,
+            individualAbilityUpgradesTo17,
             legendaryUnderTierSlots: legendaryUnderTier.length,
             unequippedItems: playerResponse.player.inventory.items.reduce((sum, item) => sum + item.amount, 0)
         },
@@ -227,7 +233,9 @@ async function main()
 
     console.log(`Player: ${report.source.player} | Power: ${report.source.powerLevel}`);
     console.log(`Units: ${report.summary.units}`);
-    console.log(`Characters with abilities below 17: ${report.summary.charactersWithAbilitiesBelow17}`);\n    console.log(`Individual ability upgrades needed to reach 17: ${report.summary.individualAbilityUpgradesTo17}`);\n    console.log(`Equipment: ${equipNow.length} EQUIP NOW | ${buyWatch.length} BUY/WATCH | ${compatibilityUnknown.length} compatibility UNKNOWN`);
+    console.log(`Characters with abilities below 17: ${report.summary.charactersWithAbilitiesBelow17}`);
+    console.log(`Individual ability upgrades needed to reach 17: ${report.summary.individualAbilityUpgradesTo17}`);
+    console.log(`Equipment: ${equipNow.length} EQUIP NOW | ${buyWatch.length} BUY/WATCH | ${compatibilityUnknown.length} compatibility UNKNOWN`);
     console.log(`Legendary characters with under-tier equipment slots: ${report.summary.legendaryUnderTierSlots}`);
     console.log("Saved output/upgrade-report.json");
 
