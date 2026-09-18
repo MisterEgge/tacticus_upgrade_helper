@@ -1,0 +1,98 @@
+{
+  "Bellator": {
+    "active": "44+",
+    "passive": "17-35",
+    "focus": "Active",
+    "confidence": "community-specific"
+  },
+  "Eldryon": {
+    "active": "17-35",
+    "passive": "50",
+    "focus": "Passive",
+    "confidence": "community-specific"
+  },
+  "Isabella": {
+    "active": "35",
+    "passive": "44+",
+    "focus": "Passive",
+    "confidence": "community-specific"
+  },
+  "Nauseous": {
+    "active": "35-44",
+    "passive": "44+",
+    "focus": "Passive",
+    "confidence": "community-specific"
+  },
+  "Snotflogga": {
+    "active": "17-35",
+    "passive": "50",
+    "focus": "Passive",
+    "confidence": "community-specific"
+  },
+  "Gulgortz": {
+    "active": "44+",
+    "passive": "35+",
+    "focus": "Active",
+    "confidence": "community-specific"
+  },
+  "Abraxas": {
+    "active": "44+",
+    "passive": "35-44",
+    "focus": "Active",
+    "confidence": "community-specific"
+  },
+  "Angrax": {
+    "active": "17-26",
+    "passive": "35-44",
+    "focus": "Passive",
+    "confidence": "community-specific"
+  },
+  "Archimatos": {
+    "active": "35-44",
+    "passive": "26-35",
+    "focus": "Active",
+    "confidence": "community-specific"
+  },
+  "Actus": {
+    "active": "35-36",
+    "passive": "36",
+    "focus": "Low after core",
+    "confidence": "community-specific"
+  },
+  "Exitor-Rho": {
+    "active": "44-50",
+    "passive": "50",
+    "focus": "Passive",
+    "confidence": "community-specific"
+  },
+  "Re'vas": {
+    "active": "35-44",
+    "passive": "44-50",
+    "focus": "Passive",
+    "confidence": "community-specific"
+  },
+  "Kharn": {
+    "active": "50+",
+    "passive": "36+",
+    "focus": "Active / both",
+    "confidence": "community-specific"
+  },
+  "Trajann": {
+    "active": "17-35",
+    "passive": "44-50",
+    "focus": "Passive",
+    "confidence": "community-specific"
+  },
+  "Tan Gi'da": {
+    "active": "35+",
+    "passive": "44-50",
+    "focus": "Passive",
+    "confidence": "community-specific"
+  },
+  "Mataneo": {
+    "active": "17-26",
+    "passive": "35+",
+    "focus": "Passive",
+    "confidence": "community-specific"
+  }
+}
