@@ -19,7 +19,7 @@ pip install -r requirements.txt
 python src/build_report.py data/player.json
 ```
 
-The generated workbook is written to `output/Tacticus_Upgrade_Priorities.xlsx`.
+`npm run refresh` fetches the latest player snapshot and writes `output/upgrade-report.json`. The existing Python workbook generator remains available while the report logic is migrated into TypeScript.
 
 ## Data model
 
