@@ -1,23 +1,7 @@
-const FILE_NAMES: Record<string, string> = {
-  "Kharn": "Kharn.png",
-  "Trajann": "Trajann.png",
-  "Re'vas": "Re'vas.png",
-  "Isabella": "Isabella.png",
-  "Abraxas": "Abraxas.png",
-  "Anuphet": "Anuphet.png",
-  "Nauseous": "Nauseous Rotbone.png",
-  "Archimatos": "Archimatos.png",
-  "Typhus": "Typhus.png",
-  "Jain Zar": "Jain Zar.png",
-  "Nicodemus": "Nicodemus.png",
-  "Haarken": "Haarken Worldclaimer.png",
-  "Laviscus": "Laviscus.png",
-  "Judh": "Judh.png",
-  "Tyrith": "Tyrith.png"
-};
-
-export default function CharacterName({ name }: { name: string }) {
-  const file = FILE_NAMES[name] ?? `${name}.png`;
-  const src = `https://tacticus.wiki.gg/wiki/Special:Redirect/file/${encodeURIComponent(file)}`;
-  return <span className="characterCell"><img className="portrait" src={src} alt="" loading="lazy" /><strong>{name}</strong></span>;
+function portraitKey(id: string) {
+  return id.replace(/([a-z0-9])([A-Z])/g, "$1_$2").replace(/-/g, "_").toLowerCase();
+}
+export default function CharacterName({ name, id }: { name: string; id?: string }) {
+  const src=id?`https://tacticusdb.com/images/generated/characters/portrait_${portraitKey(id)}.webp`:"";
+  return <span className="characterCell">{src?<img className="portrait" src={src} alt={name} loading="lazy"/>:<span className="portrait fallback">{name.slice(0,1)}</span>}<strong>{name}</strong></span>;
 }
