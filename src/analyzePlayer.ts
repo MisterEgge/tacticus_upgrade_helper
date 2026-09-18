@@ -114,6 +114,7 @@ async function main()
     const targets = await readJson<Record<string, AbilityTarget>>("config/ability_targets.json");
     const compatibility = await readJson<EquipmentCompatibility>("config/equipment_compatibility.json");
     const preferences = await readJson<EquipmentPreferences>("config/equipment_preferences.json");
+    const equipmentNames = await readJson<Record<string, string>>("config/equipment_names.json");
 
     const units = playerResponse.player.units;
 
@@ -165,7 +166,7 @@ async function main()
         playerResponse.player.inventory.items.map((item) => [item.id, item.amount])
     );
 
-    const itemNames = new Map<string, string>();
+    const itemNames = new Map<string, string>(Object.entries(equipmentNames));
     for (const unit of units)
     {
 
