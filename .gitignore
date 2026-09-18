@@ -1,3 +1,10 @@
+# Environment / secrets
+.env
+.env.*
+
+# Node
+node_modules/
+
 # Tacticus player/account exports
 data/player*.json
 
