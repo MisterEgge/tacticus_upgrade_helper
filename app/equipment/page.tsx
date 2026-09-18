@@ -1,3 +1,4 @@
+import CharacterName from "../components/CharacterName";
 import Nav from "../components/Nav";
 import { getReport, targetName } from "../lib/report";
 
@@ -25,7 +26,7 @@ export default async function Equipment() {
     <section className="panel"><div className="tableWrap"><table>
       <thead><tr><th>#</th><th>Character</th><th>Account priority</th><th>Slot</th><th>Current</th><th>Preferred target</th><th>Status</th></tr></thead>
       <tbody>{rows.map((row,i)=><tr key={row.character+row.slotId}>
-        <td>{i+1}</td><td><strong>{row.character}</strong></td><td>{row.accountPriority}</td><td>{row.slotId}</td>
+        <td>{i+1}</td><td><CharacterName name={row.character}/></td><td>{row.accountPriority}</td><td>{row.slotId}</td>
         <td>{row.currentItem}<small>{row.currentRarity} · Level {row.currentLevel}</small></td>
         <td><strong>{targetName(row)}</strong></td>
         <td><span className={"status "+(row.state==="EQUIP NOW"?"ready":row.state==="NEED"?"need":"unknown")}>{row.state}</span></td>
