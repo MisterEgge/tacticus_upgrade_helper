@@ -1,12 +1,15 @@
 {
-  "name": "tacticus_api",
+  "name": "tacticus_upgrade_helper",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Account-specific Tacticus upgrade analysis using the official player API.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "fetch": "tsx src/fetchPlayer.ts",
+    "discover": "tsx src/discover.ts",
+    "analyze": "tsx src/analyzePlayer.ts",
+    "refresh": "npm run fetch && npm run analyze",
+    "typecheck": "tsc --noEmit"
   },
-  "keywords": [],
+  "keywords": ["tacticus"],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
