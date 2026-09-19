@@ -16,3 +16,10 @@
 - [x] Use upgrade-material inventory (not equipment inventory) when calculating rank-material shortages.
 - [ ] Validate campaign battle numbering against a fresh live player response and synced battle dataset.
 - [ ] Add multi-rank character goals so farming can plan beyond only the next rank.
+
+## Game-wide ability research
+- [x] Make the Abilities page cover the full synced character catalog, including unowned characters.
+- [x] Separate practical breakpoint from high-investment target and show research confidence.
+- [ ] Review every unreviewed character against current community discussion and ability scaling; never auto-fill unsupported targets.
+- [ ] Add source/evidence metadata per character so recommendations can be re-audited after balance patches.
+- [ ] Add Machines of War as a separate ability-investment dataset after the character roster is complete.
