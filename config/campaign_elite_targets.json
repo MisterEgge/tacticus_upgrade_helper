@@ -1,0 +1,110 @@
+{
+  "_meta": {
+    "scope": "Elite 3-star campaign completion",
+    "schemaVersion": 1,
+    "policy": "Current rank/ability levels always come from live player API. Suggested targets are community-efficient planning targets and must be researched; unreviewed targets remain explicit.",
+    "lastReviewed": "2026-09-19"
+  },
+  "campaigns": {
+    "Indomitus": {
+      "status": "researching",
+      "characters": {
+        "Tigurius": {},
+        "Certus": {},
+        "Bellator": {
+          "rank": "Gold I",
+          "active": "44",
+          "passive": "35",
+          "role": "carry",
+          "confidence": "medium",
+          "note": "Bellator is normally the primary investment; final rank target still needs campaign-specific evidence before being treated as authoritative."
+        }
+      }
+    },
+    "Indomitus Mirror": {
+      "status": "researching",
+      "characters": {
+        "Makhotep": {},
+        "Imospekh": {},
+        "Aleph-Null": {
+          "rank": "Gold I",
+          "active": "36",
+          "passive": "35",
+          "role": "carry",
+          "confidence": "medium",
+          "note": "Aleph-Null is the natural primary investment; exact Elite 3-star floor remains under review."
+        }
+      }
+    },
+    "Fall of Cadia": {
+      "status": "researching",
+      "characters": {
+        "Angrax": {},
+        "Archimatos": {},
+        "Haarken": {}
+      }
+    },
+    "Fall of Cadia Mirror": {
+      "status": "researching",
+      "characters": {
+        "Sibyll": {},
+        "Kut": {},
+        "Thaddeus": {}
+      }
+    },
+    "Octarius": {
+      "status": "researching",
+      "characters": {
+        "Gibbascrapz": {},
+        "Snappawrecka": {},
+        "Gulgortz": {}
+      }
+    },
+    "Octarius Mirror": {
+      "status": "researching",
+      "characters": {
+        "Godswyl": {},
+        "Burchard": {},
+        "Thoread": {}
+      }
+    },
+    "Saim-Hann": {
+      "status": "researching",
+      "characters": {
+        "Calandis": {},
+        "Aethana": {},
+        "Eldryon": {}
+      }
+    },
+    "Saim-Hann Mirror": {
+      "status": "researching",
+      "characters": {
+        "Yazaghor": {},
+        "Toth": {},
+        "Abraxas": {}
+      }
+    },
+    "Adeptus Mechanicus": {
+      "status": "researching",
+      "characters": {
+        "Maladus": {},
+        "Pestillian": {},
+        "Corrodius": {}
+      }
+    },
+    "T'au Empire": {
+      "status": "researching",
+      "characters": {
+        "Hollan": {},
+        "Xybia": {},
+        "Judh": {}
+      }
+    },
+    "Tyranids": {
+      "status": "researching",
+      "characters": {
+        "Bellator": {}
+      }
+    }
+  }
+}
