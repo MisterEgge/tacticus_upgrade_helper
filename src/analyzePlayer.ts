@@ -39,7 +39,9 @@ type PlayerResponse = {
             powerLevel: number;
         };
         units: Unit[];
+        progress?: { campaigns?: Array<{ id:string; name:string; type:"Standard"|"Mirror"|"Elite"|"EliteMirror"; battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number}> }> };
         inventory: {
+            upgrades?: Array<{id:string;name?:string;amount:number}>;
             items: Array<{
                 id: string;
                 name?: string;
@@ -312,6 +314,8 @@ async function main()
             buyWatch,
             compatibilityUnknown
         },
+        campaignProgress: playerResponse.player.progress?.campaigns ?? [],
+        upgradeInventory: playerResponse.player.inventory.upgrades ?? [],
         unequippedInventory: playerResponse.player.inventory.items
     };
 
