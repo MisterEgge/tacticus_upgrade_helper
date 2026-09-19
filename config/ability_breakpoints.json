@@ -1,0 +1,332 @@
+{
+  "_meta": {
+    "scope": "All playable characters",
+    "schemaVersion": 1,
+    "notes": "Community-derived planning guidance. Breakpoints are planning targets, not game rules. Missing characters remain explicitly unreviewed rather than guessed.",
+    "baseline": "Raise useful abilities to 9 immediately; current account-wide uncommon project targets useful abilities to 17.",
+    "lastReviewed": "2026-09-18"
+  },
+  "Bellator": {
+    "active": {
+      "practical": "44",
+      "high": "50",
+      "priority": "high",
+      "modes": [
+        "Campaign",
+        "LRE",
+        "Guild Raid"
+      ],
+      "note": "Summon scaling remains valuable at high investment."
+    },
+    "passive": {
+      "practical": "35-36",
+      "high": "44",
+      "priority": "medium",
+      "modes": [
+        "Campaign",
+        "LRE"
+      ],
+      "note": "Useful, but active normally receives badges first."
+    },
+    "confidence": "high"
+  },
+  "Eldryon": {
+    "active": {
+      "practical": "17-35",
+      "high": "35",
+      "priority": "low",
+      "modes": [
+        "Guild Raid"
+      ],
+      "note": "Usually secondary to Doom."
+    },
+    "passive": {
+      "practical": "44",
+      "high": "50",
+      "priority": "max",
+      "modes": [
+        "Guild Raid",
+        "Arena"
+      ],
+      "note": "Doom is a premier max-investment buff ability."
+    },
+    "confidence": "high"
+  },
+  "Nicodemus": {
+    "active": {
+      "practical": "26",
+      "high": "35+",
+      "priority": "situational",
+      "modes": [
+        "Blood Angels",
+        "LRE"
+      ],
+      "note": "26 is a reasonable stop unless specifically building around Blood Chalice."
+    },
+    "passive": {
+      "practical": "35",
+      "high": "44+",
+      "priority": "high",
+      "modes": [
+        "LRE",
+        "Campaign",
+        "Guild War"
+      ],
+      "note": "More generally useful healer investment than the active."
+    },
+    "confidence": "medium"
+  },
+  "Tan Gi'da": {
+    "active": {
+      "practical": "35-36",
+      "high": "44+",
+      "priority": "medium",
+      "modes": [
+        "AdMech",
+        "LRE"
+      ],
+      "note": "Useful scaling; passive usually defines the investment."
+    },
+    "passive": {
+      "practical": "36",
+      "high": "50",
+      "priority": "max",
+      "modes": [
+        "AdMech",
+        "Guild Raid",
+        "LRE"
+      ],
+      "note": "Key summon-count breakpoints occur around 27 and 36; dedicated AdMech can justify maxing."
+    },
+    "confidence": "high"
+  },
+  "Exitor-Rho": {
+    "active": {
+      "practical": "35",
+      "high": "44-50",
+      "priority": "high",
+      "modes": [
+        "Guild Raid",
+        "AdMech"
+      ],
+      "note": "Strong, but passive is the defining investment."
+    },
+    "passive": {
+      "practical": "44",
+      "high": "50",
+      "priority": "max",
+      "modes": [
+        "Guild Raid",
+        "AdMech"
+      ],
+      "note": "Core Rho engine ability and strong max target."
+    },
+    "confidence": "high"
+  },
+  "Kharn": {
+    "active": {
+      "practical": "44",
+      "high": "50+",
+      "priority": "max",
+      "modes": [
+        "Guild Raid",
+        "Arena"
+      ],
+      "note": "Continues to reward high investment."
+    },
+    "passive": {
+      "practical": "36",
+      "high": "44-50",
+      "priority": "high",
+      "modes": [
+        "Guild Raid",
+        "Arena"
+      ],
+      "note": "Worth substantial investment; exact stop depends on team and badge pressure."
+    },
+    "confidence": "high"
+  },
+  "Trajann": {
+    "active": {
+      "practical": "26",
+      "high": "35",
+      "priority": "medium",
+      "modes": [
+        "Guild Raid",
+        "Arena"
+      ],
+      "note": "Useful but generally not the primary badge sink."
+    },
+    "passive": {
+      "practical": "44",
+      "high": "50",
+      "priority": "high",
+      "modes": [
+        "Guild Raid"
+      ],
+      "note": "Primary long-term ability investment."
+    },
+    "confidence": "medium"
+  },
+  "Actus": {
+    "active": {
+      "practical": "35-36",
+      "high": "44",
+      "priority": "medium",
+      "modes": [
+        "AdMech",
+        "LRE"
+      ],
+      "note": "Useful support scaling after core team investments."
+    },
+    "passive": {
+      "practical": "36",
+      "high": "44",
+      "priority": "high",
+      "modes": [
+        "AdMech",
+        "Guild Raid"
+      ],
+      "note": "Important to the mechanical attack engine."
+    },
+    "confidence": "medium"
+  },
+  "Re'vas": {
+    "active": {
+      "practical": "35",
+      "high": "44-50",
+      "priority": "high",
+      "modes": [
+        "Arena",
+        "Guild War"
+      ],
+      "note": "High value where Overwatch control matters."
+    },
+    "passive": {
+      "practical": "44",
+      "high": "50",
+      "priority": "high",
+      "modes": [
+        "Guild Raid",
+        "Arena"
+      ],
+      "note": "Strong long-term scaling."
+    },
+    "confidence": "medium"
+  },
+  "Abraxas": {
+    "active": {
+      "practical": "40-44",
+      "high": "50",
+      "priority": "high",
+      "modes": [
+        "Campaign",
+        "Guild Raid",
+        "LRE"
+      ],
+      "note": "Summon ability is the primary investment."
+    },
+    "passive": {
+      "practical": "35",
+      "high": "44",
+      "priority": "medium",
+      "modes": [
+        "Psyker teams",
+        "Guild Raid"
+      ],
+      "note": "Useful after active is established."
+    },
+    "confidence": "medium"
+  },
+  "Angrax": {
+    "active": {
+      "practical": "26-35",
+      "high": "35",
+      "priority": "low",
+      "modes": [
+        "Campaign"
+      ],
+      "note": "Usually lower priority."
+    },
+    "passive": {
+      "practical": "36",
+      "high": "44",
+      "priority": "high",
+      "modes": [
+        "LRE",
+        "Onslaught"
+      ],
+      "note": "Passive is the signature horde-mode investment."
+    },
+    "confidence": "high"
+  },
+  "Archimatos": {
+    "active": {
+      "practical": "35",
+      "high": "44",
+      "priority": "high",
+      "modes": [
+        "Campaign",
+        "LRE"
+      ],
+      "note": "Summons depend heavily on ability level."
+    },
+    "passive": {
+      "practical": "26-35",
+      "high": "35-44",
+      "priority": "medium",
+      "modes": [
+        "Campaign",
+        "LRE"
+      ],
+      "note": "Useful after active."
+    },
+    "confidence": "high"
+  },
+  "Isabella": {
+    "active": {
+      "practical": "35",
+      "high": "40-44",
+      "priority": "medium",
+      "modes": [
+        "LRE",
+        "Campaign"
+      ],
+      "note": "Useful resurrection/healing tool."
+    },
+    "passive": {
+      "practical": "40-44",
+      "high": "50",
+      "priority": "high",
+      "modes": [
+        "LRE",
+        "Campaign"
+      ],
+      "note": "Primary sustain investment."
+    },
+    "confidence": "high"
+  },
+  "Mataneo": {
+    "active": {
+      "practical": "26-35",
+      "high": "35",
+      "priority": "medium",
+      "modes": [
+        "Campaign",
+        "Arena"
+      ],
+      "note": "Can stop earlier when badge-constrained."
+    },
+    "passive": {
+      "practical": "35",
+      "high": "44",
+      "priority": "high",
+      "modes": [
+        "LRE",
+        "Campaign"
+      ],
+      "note": "Summon/survival value generally merits more investment."
+    },
+    "confidence": "medium"
+  }
+}
