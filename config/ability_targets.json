@@ -94,5 +94,11 @@
     "passive": "35+",
     "focus": "Passive",
     "confidence": "community-specific"
+  },
+  "Nicodemus": {
+    "active": "26 situational; 35+ for dedicated Blood Angels/LRE use",
+    "passive": "35-44+; higher for dedicated healer use",
+    "focus": "Passive first; active is roster/mode dependent",
+    "confidence": "community-mixed"
   }
 }
