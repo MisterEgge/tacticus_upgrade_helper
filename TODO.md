@@ -10,3 +10,9 @@
 - [ ] Build verified campaign-node/material dataset for the farming engine.
 - [ ] Add active navigation state and continue mobile polish.
 - [ ] Harden equipment preference/compatibility invariant and tests.
+
+## Farming follow-up
+- [x] Replace manually maintained campaign progress with official player API campaign progress.
+- [x] Use upgrade-material inventory (not equipment inventory) when calculating rank-material shortages.
+- [ ] Validate campaign battle numbering against a fresh live player response and synced battle dataset.
+- [ ] Add multi-rank character goals so farming can plan beyond only the next rank.
