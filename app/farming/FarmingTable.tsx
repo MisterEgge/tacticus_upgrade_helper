@@ -1,8 +1,9 @@
 "use client";import DataTable,{Column,Filter}from"../components/DataTable";
-type Row={id:string;name:string;rarity:string;stat:string;node:string;campaign:string;campaignType:string;nodeNumber:number;energy:number;rate:number};
+type Row={id:string;name:string;rarity:string;owned:number;needed:number;shortage:number;topCharacter:string;topPriority:number;node:string;campaign:string;campaignType:string;nodeNumber:number;energy:number;rate:number};
 export default function FarmingTable({rows}:{rows:Row[]}){const c:Column<Row>[]=[
-{key:"material",label:"Material",sort:r=>r.name,search:r=>r.name+" "+r.id,render:r=><><strong>{r.name}</strong><small>{r.rarity} · {r.stat}</small></>},
-{key:"campaign",label:"Best campaign",sort:r=>r.campaign,search:r=>r.campaign+" "+r.campaignType,render:r=><><strong>{r.campaign}</strong><small>{r.campaignType}</small></>},
-{key:"node",label:"Node",sort:r=>r.nodeNumber,search:r=>r.node,render:r=><strong>{r.node}</strong>},{key:"energy",label:"Energy",sort:r=>r.energy,render:r=>r.energy},
-{key:"rate",label:"Expected drop",sort:r=>r.rate,render:r=>r.rate?((r.rate*100).toFixed(1)+"%"):"—"}];
-const f:Filter<Row>[]=[{key:"elite",label:"Elite",matches:r=>r.campaignType==="Elite"},{key:"legendary",label:"Legendary",matches:r=>r.rarity==="Legendary"},{key:"epic",label:"Epic",matches:r=>r.rarity==="Epic"},{key:"rare",label:"Rare",matches:r=>r.rarity==="Rare"}];return <DataTable rows={rows} columns={c} filters={f} placeholder="Search material, campaign, node, rarity…"/>}
+{key:"material",label:"Material",sort:r=>r.name,search:r=>r.name+" "+r.id,render:r=><><strong>{r.name}</strong><small>{r.rarity}</small></>},
+{key:"shortage",label:"Need",sort:r=>r.shortage,render:r=><><strong className="below">{r.shortage}</strong><small>{r.owned} owned / {r.needed} required</small></>},
+{key:"character",label:"Highest priority",sort:r=>r.topPriority,search:r=>r.topCharacter,render:r=><><strong>{r.topCharacter||"—"}</strong><small>Priority {r.topPriority}</small></>},
+{key:"campaign",label:"Best unlocked source",sort:r=>r.campaign,search:r=>r.campaign+" "+r.campaignType+" "+r.node,render:r=>r.node?<><strong>{r.node}</strong><small>{r.campaign} · {r.campaignType}</small></>:<span className="status unknown">NO RECORDED UNLOCK</span>},
+{key:"energy",label:"Energy",sort:r=>r.energy,render:r=>r.energy||"—"},{key:"rate",label:"Expected / raid",sort:r=>r.rate,render:r=>r.rate?r.rate.toFixed(2):"—"}];
+const f:Filter<Row>[]=[{key:"elite",label:"Elite source",matches:r=>r.campaignType.toLowerCase().includes("elite")},{key:"blocked",label:"No unlocked source",matches:r=>!r.node},{key:"priority",label:"Priority 80+",matches:r=>r.topPriority>=80},{key:"legendary",label:"Legendary mats",matches:r=>r.rarity==="Legendary"}];return <DataTable rows={rows} columns={c} filters={f} placeholder="Search material, character, campaign or node…"/>}
