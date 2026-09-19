@@ -9,8 +9,7 @@ export type EquipmentRow = {
 };
 export type AbilityRow = {
   character:string; faction:string; activeId:string; activeLevel:number; passiveId:string; passiveLevel:number;
-  activeTo17:boolean; passiveTo17:boolean; accountPriority:number; focus:string; basis:string; communityActiveTarget?:string; communityPassiveTarget?:string; targetConfidence?:string;
-  communityActiveTarget:string; communityPassiveTarget:string; targetConfidence:string;
+  activeTo17:boolean; passiveTo17:boolean; accountPriority:number; focus:string; basis:string; communityActiveTarget:string; communityPassiveTarget:string; targetConfidence:string;
 };
 export type RosterUnit = {
   id:string; icon?:string; name:string; faction:string; grandAlliance:string; rarity:string; rank:number; xpLevel:number;
@@ -23,7 +22,7 @@ export type Report = {
   summary:{units:number;charactersWithAbilitiesBelow17:number;individualAbilityUpgradesTo17:number;legendaryUnderTierSlots:number};
   abilityQueue:AbilityRow[]; roster:RosterUnit[]; unequippedInventory:InventoryItem[];
   equipmentAllocation:{equipNow:EquipmentRow[];buyWatch:EquipmentRow[];compatibilityUnknown:EquipmentRow[]};
-  campaignProgress?:Array<{id:string;name:string;type:"Standard"|"Mirror"|"Elite"|"EliteMirror";battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number}>}>;
+  campaignProgress?:Array<{id:string;name:string;type:"Standard"|"Mirror"|"Elite"|"EliteMirror";highestUnlockedBattle:number;battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number}>}>;
   upgradeInventory?:Array<{id:string;name?:string;amount:number}>;
 };
 export async function getReport():Promise<Report|null>{
