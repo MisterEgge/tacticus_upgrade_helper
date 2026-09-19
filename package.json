@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "sync:game-data": "tsx src/syncGameData.ts"
   },
   "keywords": [
     "tacticus"
