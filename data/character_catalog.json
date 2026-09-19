@@ -1,8 +1,10 @@
 {
-  "source": "unrstuart/datamine_tacticus characters.data.json",
+  "source": "unrstuart/datamine_tacticus new-character-data2.json (current 112-character game dataset); legacy characters.data.json used only for display metadata/icons where available",
+  "sourceCharacterCount": 112,
   "characters": [
     {
-      "name": "Varro Tigurius",
+      "id": "ultraTigurius",
+      "name": "Tigurius",
       "fullName": "Varro Tigurius",
       "shortName": "Tigurius",
       "title": "Chief Librarian",
@@ -11,19 +13,24 @@
       "initialRarity": "Uncommon",
       "icon": "VarroTigurius.webp",
       "traits": [
+        "Hero",
         "Psyker"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "Indomitus"
-      ]
+      ],
+      "activeAbilityId": "StormOfWrath",
+      "passiveAbilityIds": "PsychicFortress",
+      "movement": 3
     },
     {
+      "id": "ultraEliminatorSgt",
       "name": "Certus",
       "fullName": "Certus",
       "shortName": "Certus",
@@ -33,21 +40,26 @@
       "initialRarity": "Common",
       "icon": "certus-removebg-preview.webp",
       "traits": [
+        "Hero",
         "Overwatch",
-        "Heavy Weapon",
+        "HeavyWeapon",
         "Infiltrate"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "Indomitus"
-      ]
+      ],
+      "activeAbilityId": "MortisRound",
+      "passiveAbilityIds": "CamoCloak",
+      "movement": 2
     },
     {
+      "id": "ultraInceptorSgt",
       "name": "Bellator",
       "fullName": "Bellator",
       "shortName": "Bellator",
@@ -57,21 +69,26 @@
       "initialRarity": "Common",
       "icon": "bellator.webp",
       "traits": [
+        "Hero",
         "Flying",
-        "MK X Gravis"
+        "MkXGravis"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "Indomitus",
         "Tyranids"
-      ]
+      ],
+      "activeAbilityId": "DeathFromAbove",
+      "passiveAbilityIds": "ShockAssault",
+      "movement": 4
     },
     {
+      "id": "ultraApothecary",
       "name": "Incisus",
       "fullName": "Incisus",
       "shortName": "Incisus",
@@ -81,20 +98,25 @@
       "initialRarity": "Common",
       "icon": "incisus-removebg-preview.webp",
       "traits": [
+        "Hero",
         "Healer"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
       "campaignsRequiredIn": [
         "Tyranids"
-      ]
+      ],
+      "activeAbilityId": "CombatRestoratives",
+      "passiveAbilityIds": "Narthecium",
+      "movement": 3
     },
     {
-      "name": "Marneus Calgar",
+      "id": "ultraCalgar",
+      "name": "Calgar",
       "fullName": "Marneus Calgar",
       "shortName": "Calgar",
       "title": "Chapter Master",
@@ -103,18 +125,24 @@
       "initialRarity": "Legendary",
       "icon": "marneus_calgar-removebg-preview.webp",
       "traits": [
-        "MK X Gravis",
-        "Final Vengeance"
+        "Hero",
+        "CrushingStrike",
+        "FinalJustice",
+        "MkXGravis"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "GauntletsOfUltramar",
+      "passiveAbilityIds": "RitesOfBattle",
+      "movement": 3
     },
     {
+      "id": "ultraTitus",
       "name": "Titus",
       "fullName": "Demetrian Titus",
       "shortName": "Titus",
@@ -124,352 +152,25 @@
       "initialRarity": "Epic",
       "icon": "titus.webp",
       "traits": [
-        "Beast Slayer",
-        "Final Vengeance"
+        "Hero",
+        "BeastSlayer",
+        "FinalJustice"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
       "campaignsRequiredIn": [
         "Tyranids"
-      ]
+      ],
+      "activeAbilityId": "TacticalPrecision",
+      "passiveAbilityIds": "FuelledByFury",
+      "movement": 3
     },
     {
-      "name": "Makhotep",
-      "fullName": "Makhotep",
-      "shortName": "Makhotep",
-      "title": "Royal Warden",
-      "faction": "Necrons",
-      "alliance": "Xenos",
-      "initialRarity": "Common",
-      "icon": "Makhotep-removebg-preview.webp",
-      "traits": [
-        "Living Metal"
-      ],
-      "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": true,
-      "campaignsRequiredIn": [
-        "Indomitus Mirror"
-      ]
-    },
-    {
-      "name": "Imospekh",
-      "fullName": "Imospekh",
-      "shortName": "Imospekh",
-      "title": "Hexmark Destroyer",
-      "faction": "Necrons",
-      "alliance": "Xenos",
-      "initialRarity": "Common",
-      "icon": "Imospekh-removebg-preview.webp",
-      "traits": [
-        "Living Metal",
-        "Overwatch"
-      ],
-      "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": true,
-      "campaignsRequiredIn": [
-        "Indomitus Mirror"
-      ]
-    },
-    {
-      "name": "Aleph-Null",
-      "fullName": "Aleph-Null",
-      "shortName": "Aleph",
-      "title": "Canoptek Spyder",
-      "faction": "Necrons",
-      "alliance": "Xenos",
-      "initialRarity": "Uncommon",
-      "icon": "Aleph-null.webp",
-      "traits": [
-        "Living Metal",
-        "Explodes",
-        "Flying",
-        "Mechanic"
-      ],
-      "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": true,
-      "campaignsRequiredIn": [
-        "Indomitus Mirror"
-      ]
-    },
-    {
-      "name": "Thutmose",
-      "fullName": "Thutmose",
-      "shortName": "Thutmose",
-      "title": "Plasmancer",
-      "faction": "Necrons",
-      "alliance": "Xenos",
-      "initialRarity": "Rare",
-      "icon": "Thutmose-removebg-preview.webp",
-      "traits": [
-        "Living Metal",
-        "Flying"
-      ],
-      "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
-    },
-    {
-      "name": "Anuphet",
-      "fullName": "Anuphet",
-      "shortName": "Anuphet",
-      "title": "Overlord",
-      "faction": "Necrons",
-      "alliance": "Xenos",
-      "initialRarity": "Epic",
-      "icon": "Anuphet.webp",
-      "traits": [
-        "Living Metal"
-      ],
-      "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
-    },
-    {
-      "name": "Sibyll",
-      "fullName": "Sibyll Devine",
-      "shortName": "Sibyll",
-      "title": "Primaris Psyker",
-      "faction": "Astra Militarum",
-      "alliance": "Imperial",
-      "initialRarity": "Common",
-      "icon": "Sibyll-removebg-preview.webp",
-      "traits": [
-        "Psyker"
-      ],
-      "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": true,
-      "campaignsRequiredIn": [
-        "Fall of Cadia Mirror"
-      ]
-    },
-    {
-      "name": "Commissar Yarrick",
-      "fullName": "Sebastian Yarrick",
-      "shortName": "Yarrick",
-      "title": "Lord Commissar",
-      "faction": "Astra Militarum",
-      "alliance": "Imperial",
-      "initialRarity": "Rare",
-      "icon": "CommissarYarrick-removebg-preview.webp",
-      "traits": [
-        "Resilient"
-      ],
-      "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
-      ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
-    },
-    {
-      "name": "Kut Skoden",
-      "fullName": "Kut Skoden",
-      "shortName": "Kut",
-      "title": "Bone'ead",
-      "faction": "Astra Militarum",
-      "alliance": "Imperial",
-      "initialRarity": "Uncommon",
-      "icon": "Kutskoden-removebg-preview.webp",
-      "traits": [
-        "Big Target"
-      ],
-      "equipment": [
-        "Crit",
-        "Defense",
-        "Defense"
-      ],
-      "requiredInCampaign": true,
-      "campaignsRequiredIn": [
-        "Fall of Cadia Mirror"
-      ]
-    },
-    {
-      "name": "Thaddeus Noble",
-      "fullName": "Thaddeus Noble",
-      "shortName": "Thaddeus",
-      "title": "Master of Ordnance",
-      "faction": "Astra Militarum",
-      "alliance": "Imperial",
-      "initialRarity": "Rare",
-      "icon": "Thaddeusnoble-removebg-preview.webp",
-      "traits": [
-        "Suppressive Fire",
-        "Indirect Fire"
-      ],
-      "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": true,
-      "campaignsRequiredIn": [
-        "Fall of Cadia Mirror"
-      ]
-    },
-    {
-      "name": "Castellan Creed",
-      "fullName": "Castellan Creed",
-      "shortName": "Creed",
-      "title": "Lord General",
-      "faction": "Astra Militarum",
-      "alliance": "Imperial",
-      "initialRarity": "Legendary",
-      "icon": "Castellancreed-removebg-preview.webp",
-      "traits": [],
-      "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
-      ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
-    },
-    {
-      "name": "Angrax",
-      "fullName": "Drakfus Angrax",
-      "shortName": "Angrax",
-      "title": "Terminator Champion",
-      "faction": "Black Legion",
-      "alliance": "Chaos",
-      "initialRarity": "Common",
-      "icon": "Angrax.webp",
-      "traits": [
-        "Let the Galaxy Burn",
-        "Deep Strike",
-        "Terminator Armour"
-      ],
-      "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
-      ],
-      "requiredInCampaign": true,
-      "campaignsRequiredIn": [
-        "Fall of Cadia"
-      ]
-    },
-    {
-      "name": "Volk",
-      "fullName": "Volk, Reforged by the Warp",
-      "shortName": "Volk",
-      "title": "Obliterator",
-      "faction": "Black Legion",
-      "alliance": "Chaos",
-      "initialRarity": "Rare",
-      "icon": "volk-removebg-preview.webp",
-      "traits": [
-        "Let the Galaxy Burn",
-        "Suppressive Fire",
-        "Daemon",
-        "Big Target"
-      ],
-      "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
-    },
-    {
-      "name": "Archimatos",
-      "fullName": "Archimatos",
-      "shortName": "Archimatos",
-      "title": "Master",
-      "faction": "Black Legion",
-      "alliance": "Chaos",
-      "initialRarity": "Uncommon",
-      "icon": "archimatos.webp",
-      "traits": [
-        "Let the Galaxy Burn",
-        "Psyker"
-      ],
-      "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": true,
-      "campaignsRequiredIn": [
-        "Fall of Cadia"
-      ]
-    },
-    {
-      "name": "Haarken Worldclaimer",
-      "fullName": "Haarken Worldclaimer",
-      "shortName": "Haarken",
-      "title": "Chaos Lord",
-      "faction": "Black Legion",
-      "alliance": "Chaos",
-      "initialRarity": "Epic",
-      "icon": "HaarkenWorldclaimer-removebg-preview.webp",
-      "traits": [
-        "Let the Galaxy Burn",
-        "Flying",
-        "Terrifying"
-      ],
-      "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": true,
-      "campaignsRequiredIn": [
-        "Fall of Cadia"
-      ]
-    },
-    {
-      "name": "Abaddon The Despoiler",
-      "fullName": "Ezekyle Abaddon",
-      "shortName": "Abaddon",
-      "title": "Warmaster of the Imperium Nihilus",
-      "faction": "Black Legion",
-      "alliance": "Chaos",
-      "initialRarity": "Legendary",
-      "icon": "Abaddonthedespolier.webp",
-      "traits": [
-        "Let the Galaxy Burn",
-        "Terminator Armour",
-        "Resilient"
-      ],
-      "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
-      ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
-    },
-    {
+      "id": "adeptRetributor",
       "name": "Vindicta",
       "fullName": "Vindicta",
       "shortName": "Vindicta",
@@ -479,18 +180,23 @@
       "initialRarity": "Common",
       "icon": "Vindicta-removebg-preview.webp",
       "traits": [
-        "Act of Faith",
-        "Heavy Weapon"
+        "Hero",
+        "ActOfFaith",
+        "HeavyWeapon"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "ArmoriumCherub",
+      "passiveAbilityIds": "FireOfAbsolution",
+      "movement": 3
     },
     {
+      "id": "adeptHospitaller",
       "name": "Isabella",
       "fullName": "Isabella Mariken",
       "shortName": "Isabella",
@@ -500,18 +206,23 @@
       "initialRarity": "Rare",
       "icon": "Isabella-removebg-preview.webp",
       "traits": [
-        "Act of Faith",
+        "Hero",
+        "ActOfFaith",
         "Healer"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "RitesOfRestoration",
+      "passiveAbilityIds": "MedicusMinistorum",
+      "movement": 3
     },
     {
+      "id": "adeptMorvenn",
       "name": "Morvenn Vahl",
       "fullName": "Morvenn Vahl",
       "shortName": "Morvenn",
@@ -521,20 +232,25 @@
       "initialRarity": "Legendary",
       "icon": "MorvennVahl-removebg-preview.webp",
       "traits": [
-        "Act of Faith",
-        "Mechanical",
+        "Hero",
+        "ActOfFaith",
+        "BigTarget",
         "Explodes",
-        "Big Target"
+        "Mechanical"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "SanctorumMissile",
+      "passiveAbilityIds": "RighteousRepugnance",
+      "movement": 3
     },
     {
+      "id": "adeptCanoness",
       "name": "Roswitha",
       "fullName": "Roswitha Esther",
       "shortName": "Roswitha",
@@ -544,17 +260,22 @@
       "initialRarity": "Uncommon",
       "icon": "Roswitha-removebg-preview.webp",
       "traits": [
-        "Act of Faith"
+        "Hero",
+        "ActOfFaith"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "BrazierOfHolyFire",
+      "passiveAbilityIds": "CondemnorStake",
+      "movement": 3
     },
     {
+      "id": "adeptCelestine",
       "name": "Celestine",
       "fullName": "Celestine",
       "shortName": "Celestine",
@@ -564,248 +285,491 @@
       "initialRarity": "Legendary",
       "icon": "Celestine-removebg-preview.webp",
       "traits": [
-        "Act of Faith",
+        "Hero",
+        "ActOfFaith",
         "Flying"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "SkyStrike",
+      "passiveAbilityIds": "GeminaeSuperia",
+      "movement": 4
     },
     {
-      "name": "Snotflogga",
-      "fullName": "Grumbal Snotflogga",
-      "shortName": "Snot",
-      "title": "Runtherd",
-      "faction": "Orks",
-      "alliance": "Xenos",
-      "initialRarity": "Rare",
-      "icon": "snotflogga-removebg-preview.webp",
-      "traits": [
-        "Get Stuck In",
-        "Beast Slayer"
-      ],
-      "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
-    },
-    {
-      "name": "Gibbascrapz",
-      "fullName": "Gibbascrapz, da Spezulist",
-      "shortName": "Gibba",
-      "title": "Big Mek",
-      "faction": "Orks",
+      "id": "necroWarden",
+      "name": "Makhotep",
+      "fullName": "Makhotep",
+      "shortName": "Makhotep",
+      "title": "Royal Warden",
+      "faction": "Necrons",
       "alliance": "Xenos",
       "initialRarity": "Common",
-      "icon": "Gibbascrapz-removebg-preview.webp",
+      "icon": "Makhotep-removebg-preview.webp",
       "traits": [
-        "Mechanic",
-        "Get Stuck In"
+        "Hero",
+        "LivingMetal",
+        "Mechanical"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
-        "Octarius"
-      ]
+        "Indomitus Mirror"
+      ],
+      "activeAbilityId": "AdaptiveStrategy",
+      "passiveAbilityIds": "RelentlessMarch",
+      "movement": 3
     },
     {
-      "name": "Snappawrecka",
-      "fullName": "Snappawrecka",
-      "shortName": "Snappa",
-      "title": "Killa Kan",
-      "faction": "Orks",
+      "id": "necroDestroyer",
+      "name": "Imospekh",
+      "fullName": "Imospekh",
+      "shortName": "Imospekh",
+      "title": "Hexmark Destroyer",
+      "faction": "Necrons",
+      "alliance": "Xenos",
+      "initialRarity": "Common",
+      "icon": "Imospekh-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "Overwatch",
+        "LivingMetal",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": true,
+      "campaignsRequiredIn": [
+        "Indomitus Mirror"
+      ],
+      "activeAbilityId": "MultiThreatEliminator",
+      "passiveAbilityIds": "InescapableDeath",
+      "movement": 3
+    },
+    {
+      "id": "necroSpyder",
+      "name": "Aleph-Null",
+      "fullName": "Aleph-Null",
+      "shortName": "Aleph",
+      "title": "Canoptek Spyder",
+      "faction": "Necrons",
       "alliance": "Xenos",
       "initialRarity": "Uncommon",
-      "icon": "Snappawrecka-removebg-preview.webp",
+      "icon": "Aleph-null.webp",
       "traits": [
-        "Mechanical",
-        "Big Target",
+        "Hero",
+        "LivingMetal",
         "Explodes",
-        "Get Stuck In"
+        "Mechanical",
+        "Flying",
+        "Mechanic"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
-        "Octarius"
-      ]
+        "Indomitus Mirror"
+      ],
+      "activeAbilityId": "ScarabHive",
+      "passiveAbilityIds": "FabricatorClawArray",
+      "movement": 3
     },
     {
-      "name": "Tanksmasha",
-      "fullName": "Olog Tanksmasha",
-      "shortName": "Smasha",
-      "title": "Nob",
-      "faction": "Orks",
+      "id": "necroPlasmancer",
+      "name": "Thutmose",
+      "fullName": "Thutmose",
+      "shortName": "Thutmose",
+      "title": "Plasmancer",
+      "faction": "Necrons",
+      "alliance": "Xenos",
+      "initialRarity": "Rare",
+      "icon": "Thutmose-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "LivingMetal",
+        "Mechanical",
+        "Flying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "HarbingerOfDestruction",
+      "passiveAbilityIds": "LivingLightning",
+      "movement": 3
+    },
+    {
+      "id": "necroOverlord",
+      "name": "Anuphet",
+      "fullName": "Anuphet",
+      "shortName": "Anuphet",
+      "title": "Overlord",
+      "faction": "Necrons",
       "alliance": "Xenos",
       "initialRarity": "Epic",
-      "icon": "Tanksmasha-removebg-preview.webp",
+      "icon": "Anuphet.webp",
       "traits": [
-        "Get Stuck In",
-        "Beast Slayer",
+        "Hero",
+        "LivingMetal",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "ResurrectionOrb",
+      "passiveAbilityIds": "MartialApotheosis",
+      "movement": 3
+    },
+    {
+      "id": "necroChronomancer",
+      "name": "Thothmek",
+      "fullName": "Thothmek",
+      "shortName": "Thothmek",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Rare",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "LivingMetal",
+        "Mechanical",
+        "Flying",
+        "SuppressiveFire"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "Chronometron",
+      "passiveAbilityIds": "TimesplinterMantle",
+      "movement": 3
+    },
+    {
+      "id": "astraPrimarisPsy",
+      "name": "Sibyll",
+      "fullName": "Sibyll Devine",
+      "shortName": "Sibyll",
+      "title": "Primaris Psyker",
+      "faction": "Astra Militarum",
+      "alliance": "Imperial",
+      "initialRarity": "Common",
+      "icon": "Sibyll-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "Psyker"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": true,
+      "campaignsRequiredIn": [
+        "Fall of Cadia Mirror"
+      ],
+      "activeAbilityId": "PsychicMaelstrom",
+      "passiveAbilityIds": "Nightshroud",
+      "movement": 3
+    },
+    {
+      "id": "astraYarrick",
+      "name": "Yarrick",
+      "fullName": "Sebastian Yarrick",
+      "shortName": "Yarrick",
+      "title": "Lord Commissar",
+      "faction": "Astra Militarum",
+      "alliance": "Imperial",
+      "initialRarity": "Rare",
+      "icon": "CommissarYarrick-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "SendInTheNextWave",
+      "passiveAbilityIds": "SummaryExecution",
+      "movement": 3
+    },
+    {
+      "id": "astraBullgryn",
+      "name": "Kut",
+      "fullName": "Kut Skoden",
+      "shortName": "Kut",
+      "title": "Bone'ead",
+      "faction": "Astra Militarum",
+      "alliance": "Imperial",
+      "initialRarity": "Uncommon",
+      "icon": "Kutskoden-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "BigTarget"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Defensive"
+      ],
+      "requiredInCampaign": true,
+      "campaignsRequiredIn": [
+        "Fall of Cadia Mirror"
+      ],
+      "activeAbilityId": "FragBomb",
+      "passiveAbilityIds": "AvalancheOfMuscle",
+      "movement": 3
+    },
+    {
+      "id": "astraOrdnance",
+      "name": "Thaddeus",
+      "fullName": "Thaddeus Noble",
+      "shortName": "Thaddeus",
+      "title": "Master of Ordnance",
+      "faction": "Astra Militarum",
+      "alliance": "Imperial",
+      "initialRarity": "Rare",
+      "icon": "Thaddeusnoble-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "SuppressiveFire",
+        "IndirectFire"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": true,
+      "campaignsRequiredIn": [
+        "Fall of Cadia Mirror"
+      ],
+      "activeAbilityId": "BasiliskBarrage",
+      "passiveAbilityIds": "SpotterReworked",
+      "movement": 3
+    },
+    {
+      "id": "astraCreed",
+      "name": "Creed",
+      "fullName": "Castellan Creed",
+      "shortName": "Creed",
+      "title": "Lord General",
+      "faction": "Astra Militarum",
+      "alliance": "Imperial",
+      "initialRarity": "Legendary",
+      "icon": "Castellancreed-removebg-preview.webp",
+      "traits": [
+        "Hero"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "SupremeCommander",
+      "passiveAbilityIds": "SwornProtector",
+      "movement": 3
+    },
+    {
+      "id": "astraDreir",
+      "name": "Dreir",
+      "fullName": "Dreir",
+      "shortName": "Dreir",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Epic",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "Resilient",
         "Unstoppable"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "LeadingTheCharge",
+      "passiveAbilityIds": "ToughToKill",
+      "movement": 4
     },
     {
-      "name": "Boss Gulgortz",
-      "fullName": "Gulgortz Bulldoza",
-      "shortName": "Gulgortz",
-      "title": "Warboss",
-      "faction": "Orks",
-      "alliance": "Xenos",
-      "initialRarity": "Epic",
-      "icon": "BossGulgortz-removebg-preview.webp",
-      "traits": [
-        "Mechanical",
-        "Big Target",
-        "Final Vengeance",
-        "Get Stuck In",
-        "Crushing Strike"
-      ],
-      "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
-      ],
-      "requiredInCampaign": true,
-      "campaignsRequiredIn": [
-        "Octarius"
-      ]
-    },
-    {
-      "name": "Sword Brother Godswyl",
-      "fullName": "Fedreus Godswyl",
-      "shortName": "Godswyl",
-      "title": "Sword Brother",
-      "faction": "Black Templars",
-      "alliance": "Imperial",
+      "id": "blackTerminator",
+      "name": "Angrax",
+      "fullName": "Drakfus Angrax",
+      "shortName": "Angrax",
+      "title": "Terminator Champion",
+      "faction": "Black Legion",
+      "alliance": "Chaos",
       "initialRarity": "Common",
-      "icon": "sbg-removebg-preview.webp",
+      "icon": "Angrax.webp",
       "traits": [
-        "Rapid Assault",
-        "Parry"
+        "Hero",
+        "LetTheGalaxyBurn",
+        "TeleportStrike",
+        "TerminatorArmour"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
-        "Octarius Mirror"
-      ]
+        "Fall of Cadia"
+      ],
+      "activeAbilityId": "BringerOfDespair",
+      "passiveAbilityIds": "HatefulAssault",
+      "movement": 2
     },
     {
-      "name": "Brother Burchard",
-      "fullName": "Raimund Burchard",
-      "shortName": "Burchard",
-      "title": "Brother",
-      "faction": "Black Templars",
-      "alliance": "Imperial",
-      "initialRarity": "Uncommon",
-      "icon": "brotherBurchard-removebg-preview.webp",
-      "traits": [
-        "MK X Gravis",
-        "Suppressive Fire",
-        "Crushing Strike"
-      ],
-      "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": true,
-      "campaignsRequiredIn": [
-        "Octarius Mirror"
-      ]
-    },
-    {
-      "name": "Ancient Thoread",
-      "fullName": "Cantus Thoread",
-      "shortName": "Thoread",
-      "title": "Ancioent",
-      "faction": "Black Templars",
-      "alliance": "Imperial",
+      "id": "blackObliterator",
+      "name": "Volk",
+      "fullName": "Volk, Reforged by the Warp",
+      "shortName": "Volk",
+      "title": "Obliterator",
+      "faction": "Black Legion",
+      "alliance": "Chaos",
       "initialRarity": "Rare",
-      "icon": "AncientThoread.webp",
+      "icon": "volk-removebg-preview.webp",
       "traits": [
-        "Final Vengeance",
-        "Parry"
+        "Hero",
+        "LetTheGalaxyBurn",
+        "BigTarget",
+        "Daemon",
+        "HeavyWeapon",
+        "SuppressiveFire"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "FrenziedFiring",
+      "passiveAbilityIds": "FleshmetalGuns",
+      "movement": 2
+    },
+    {
+      "id": "blackPossession",
+      "name": "Archimatos",
+      "fullName": "Archimatos",
+      "shortName": "Archimatos",
+      "title": "Master",
+      "faction": "Black Legion",
+      "alliance": "Chaos",
+      "initialRarity": "Uncommon",
+      "icon": "archimatos.webp",
+      "traits": [
+        "Hero",
+        "LetTheGalaxyBurn",
+        "Psyker"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
-        "Octarius Mirror"
-      ]
+        "Fall of Cadia"
+      ],
+      "activeAbilityId": "Incursion",
+      "passiveAbilityIds": "Possession",
+      "movement": 3
     },
     {
-      "name": "Brother Jaeger",
-      "fullName": "Kenric Jaeger",
-      "shortName": "Jaeger",
-      "title": "Brother",
-      "faction": "Black Templars",
-      "alliance": "Imperial",
+      "id": "blackHaarken",
+      "name": "Haarken",
+      "fullName": "Haarken Worldclaimer",
+      "shortName": "Haarken",
+      "title": "Chaos Lord",
+      "faction": "Black Legion",
+      "alliance": "Chaos",
       "initialRarity": "Epic",
-      "icon": "brotherJaeger-removebg-preview.webp",
+      "icon": "HaarkenWorldclaimer-removebg-preview.webp",
       "traits": [
-        "Rapid Assault",
-        "Final Vengeance",
-        "Parry"
+        "Hero",
+        "LetTheGalaxyBurn",
+        "Flying",
+        "Terrifying"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
       ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "requiredInCampaign": true,
+      "campaignsRequiredIn": [
+        "Fall of Cadia"
+      ],
+      "activeAbilityId": "HeraldOfTheApocalypse",
+      "passiveAbilityIds": "HeadClaimer",
+      "movement": 4
     },
     {
-      "name": "High Marshal Helbrecht",
-      "fullName": "Helbrecht",
-      "shortName": "Helbrecht",
-      "title": "High Marshal",
-      "faction": "Black Templars",
-      "alliance": "Imperial",
+      "id": "blackAbaddon",
+      "name": "Abaddon",
+      "fullName": "Ezekyle Abaddon",
+      "shortName": "Abaddon",
+      "title": "Warmaster of the Imperium Nihilus",
+      "faction": "Black Legion",
+      "alliance": "Chaos",
       "initialRarity": "Legendary",
-      "icon": "HighMarshalHelbrecht-removebg-preview.webp",
+      "icon": "Abaddonthedespolier.webp",
       "traits": [
-        "Final Vengeance",
-        "Parry"
+        "Hero",
+        "LetTheGalaxyBurn",
+        "Resilient",
+        "TerminatorArmour"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "Drachnyen",
+      "passiveAbilityIds": "FirstAmongTraitors",
+      "movement": 3
     },
     {
+      "id": "deathTyphus",
       "name": "Typhus",
       "fullName": "Calas Typhon",
       "shortName": "Typhus",
@@ -815,20 +779,25 @@
       "initialRarity": "Legendary",
       "icon": "Typhus-removebg-preview.webp",
       "traits": [
-        "Contagions of Nurgle",
+        "Hero",
+        "ContagionsOfNurgle",
         "Resilient",
         "Psyker",
-        "Terminator Armour"
+        "TerminatorArmour"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "PlagueWind",
+      "passiveAbilityIds": "DestroyerHive",
+      "movement": 2
     },
     {
+      "id": "deathBlightlord",
       "name": "Maladus",
       "fullName": "Maladus Phlegmore",
       "shortName": "Maladus",
@@ -838,22 +807,27 @@
       "initialRarity": "Uncommon",
       "icon": "Maladus-removebg-preview.webp",
       "traits": [
-        "Contagions of Nurgle",
+        "Hero",
+        "ContagionsOfNurgle",
         "Resilient",
-        "Terminator Armour"
+        "TerminatorArmour"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "Adeptus Mechanicus"
-      ]
+      ],
+      "activeAbilityId": "FlailSwing",
+      "passiveAbilityIds": "HazeOfCorruption",
+      "movement": 2
     },
     {
-      "name": "Nauseous Rotbone",
+      "id": "deathRotbone",
+      "name": "Nauseous",
       "fullName": "Nauseous Rotbone",
       "shortName": "Nauseous",
       "title": "Plague Surgeon",
@@ -862,19 +836,24 @@
       "initialRarity": "Epic",
       "icon": "Nauseousrotbone-removebg-preview.webp",
       "traits": [
-        "Contagions of Nurgle",
+        "Hero",
+        "ContagionsOfNurgle",
         "Resilient",
         "Healer"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Block Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "RevitalizingMalignancy",
+      "passiveAbilityIds": "TaintedNarthecium",
+      "movement": 2
     },
     {
+      "id": "deathPutrifier",
       "name": "Pestillian",
       "fullName": "Pestillian Witherpus",
       "shortName": "Pestillian",
@@ -884,21 +863,26 @@
       "initialRarity": "Rare",
       "icon": "Pestillian-removebg-preview.webp",
       "traits": [
-        "Contagions of Nurgle",
+        "Hero",
+        "ContagionsOfNurgle",
         "Resilient",
-        "Explodes"
+        "PutridExplosion"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "Adeptus Mechanicus"
-      ]
+      ],
+      "activeAbilityId": "FoulInfusion",
+      "passiveAbilityIds": "ExplosiveMaladies",
+      "movement": 2
     },
     {
+      "id": "deathBlightbringer",
       "name": "Corrodius",
       "fullName": "Corrodius Achebile",
       "shortName": "Corrodius",
@@ -908,20 +892,305 @@
       "initialRarity": "Rare",
       "icon": "Corrodius-removebg-preview.webp",
       "traits": [
-        "Contagions of Nurgle",
+        "Hero",
+        "ContagionsOfNurgle",
         "Resilient"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "Adeptus Mechanicus"
-      ]
+      ],
+      "activeAbilityId": "Poxwalkers",
+      "passiveAbilityIds": "CursedPlagueBell",
+      "movement": 2
     },
     {
+      "id": "orksRuntherd",
+      "name": "Snotflogga",
+      "fullName": "Grumbal Snotflogga",
+      "shortName": "Snot",
+      "title": "Runtherd",
+      "faction": "Orks",
+      "alliance": "Xenos",
+      "initialRarity": "Rare",
+      "icon": "snotflogga-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "GetStuckIn",
+        "BeastSlayer"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "GetEmRuntz",
+      "passiveAbilityIds": "SquigHound",
+      "movement": 3
+    },
+    {
+      "id": "orksBigMek",
+      "name": "Gibbascrapz",
+      "fullName": "Gibbascrapz, da Spezulist",
+      "shortName": "Gibba",
+      "title": "Big Mek",
+      "faction": "Orks",
+      "alliance": "Xenos",
+      "initialRarity": "Common",
+      "icon": "Gibbascrapz-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "GetStuckIn",
+        "Mechanic"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": true,
+      "campaignsRequiredIn": [
+        "Octarius"
+      ],
+      "activeAbilityId": "GrotTank",
+      "passiveAbilityIds": "KustomForceFieldReworked",
+      "movement": 3
+    },
+    {
+      "id": "orksKillaKan",
+      "name": "Snappawrecka",
+      "fullName": "Snappawrecka",
+      "shortName": "Snappa",
+      "title": "Killa Kan",
+      "faction": "Orks",
+      "alliance": "Xenos",
+      "initialRarity": "Uncommon",
+      "icon": "Snappawrecka-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "GetStuckIn",
+        "BigTarget",
+        "Explodes",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": true,
+      "campaignsRequiredIn": [
+        "Octarius"
+      ],
+      "activeAbilityId": "DakkaDakkaDakka",
+      "passiveAbilityIds": "PowerTrip",
+      "movement": 3
+    },
+    {
+      "id": "orksNob",
+      "name": "Tanksmasha",
+      "fullName": "Olog Tanksmasha",
+      "shortName": "Smasha",
+      "title": "Nob",
+      "faction": "Orks",
+      "alliance": "Xenos",
+      "initialRarity": "Epic",
+      "icon": "Tanksmasha-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "GetStuckIn",
+        "BeastSlayer",
+        "Unstoppable"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "UnstoppableMomentumReworked",
+      "passiveAbilityIds": "SmashaEad",
+      "movement": 4
+    },
+    {
+      "id": "orksWarboss",
+      "name": "Gulgortz",
+      "fullName": "Gulgortz Bulldoza",
+      "shortName": "Gulgortz",
+      "title": "Warboss",
+      "faction": "Orks",
+      "alliance": "Xenos",
+      "initialRarity": "Epic",
+      "icon": "BossGulgortz-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "GetStuckIn",
+        "BigTarget",
+        "CrushingStrike",
+        "FinalJustice",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ],
+      "requiredInCampaign": true,
+      "campaignsRequiredIn": [
+        "Octarius"
+      ],
+      "activeAbilityId": "Waaagh",
+      "passiveAbilityIds": "LightImUp",
+      "movement": 3
+    },
+    {
+      "id": "templSwordBrother",
+      "name": "Godswyl",
+      "fullName": "Fedreus Godswyl",
+      "shortName": "Godswyl",
+      "title": "Sword Brother",
+      "faction": "Black Templars",
+      "alliance": "Imperial",
+      "initialRarity": "Common",
+      "icon": "sbg-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "Parry",
+        "RapidAssault"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": true,
+      "campaignsRequiredIn": [
+        "Octarius Mirror"
+      ],
+      "activeAbilityId": "ThunderousAssault",
+      "passiveAbilityIds": "ChampionOfTheFeast",
+      "movement": 3
+    },
+    {
+      "id": "templAggressor",
+      "name": "Burchard",
+      "fullName": "Raimund Burchard",
+      "shortName": "Burchard",
+      "title": "Brother",
+      "faction": "Black Templars",
+      "alliance": "Imperial",
+      "initialRarity": "Uncommon",
+      "icon": "brotherBurchard-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "CrushingStrike",
+        "MkXGravis",
+        "SuppressiveFire"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": true,
+      "campaignsRequiredIn": [
+        "Octarius Mirror"
+      ],
+      "activeAbilityId": "FragstormGrenadeLauncher",
+      "passiveAbilityIds": "Boltstorm",
+      "movement": 2
+    },
+    {
+      "id": "templAncient",
+      "name": "Thoread",
+      "fullName": "Cantus Thoread",
+      "shortName": "Thoread",
+      "title": "Ancioent",
+      "faction": "Black Templars",
+      "alliance": "Imperial",
+      "initialRarity": "Rare",
+      "icon": "AncientThoread.webp",
+      "traits": [
+        "Hero",
+        "FinalJustice",
+        "Parry"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": true,
+      "campaignsRequiredIn": [
+        "Octarius Mirror"
+      ],
+      "activeAbilityId": "UnbreakableDuty",
+      "passiveAbilityIds": "AstartesBanner",
+      "movement": 3
+    },
+    {
+      "id": "templChampion",
+      "name": "Jaeger",
+      "fullName": "Kenric Jaeger",
+      "shortName": "Jaeger",
+      "title": "Brother",
+      "faction": "Black Templars",
+      "alliance": "Imperial",
+      "initialRarity": "Epic",
+      "icon": "brotherJaeger-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "FinalJustice",
+        "Parry",
+        "RapidAssault"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "HolyDuel",
+      "passiveAbilityIds": "MartialSuperiority",
+      "movement": 3
+    },
+    {
+      "id": "templHelbrecht",
+      "name": "Helbrecht",
+      "fullName": "Helbrecht",
+      "shortName": "Helbrecht",
+      "title": "High Marshal",
+      "faction": "Black Templars",
+      "alliance": "Imperial",
+      "initialRarity": "Legendary",
+      "icon": "HighMarshalHelbrecht-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "FinalJustice",
+        "Parry"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "CrusadeOfWrath",
+      "passiveAbilityIds": "DestroyTheWitch",
+      "movement": 3
+    },
+    {
+      "id": "eldarRanger",
       "name": "Calandis",
       "fullName": "Calandis Tawaren",
       "shortName": "Calandis",
@@ -931,20 +1200,25 @@
       "initialRarity": "Common",
       "icon": "Calandis-removebg-preview.webp",
       "traits": [
-        "Heavy Weapon",
+        "Hero",
+        "HeavyWeapon",
         "Overwatch"
       ],
       "equipment": [
-        "Crit",
-        "Crit",
-        "Crit Booster"
+        "I_Crit",
+        "I_Crit",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "Saim-Hann"
-      ]
+      ],
+      "activeAbilityId": "FireAndReposition",
+      "passiveAbilityIds": "WireweaveNet",
+      "movement": 3
     },
     {
+      "id": "eldarAutarch",
       "name": "Aethana",
       "fullName": "Aethana Barantharal",
       "shortName": "Aethana",
@@ -954,20 +1228,25 @@
       "initialRarity": "Uncommon",
       "icon": "Aethana.webp",
       "traits": [
+        "Hero",
         "Flying",
-        "Deep Strike"
+        "TeleportStrike"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "Saim-Hann"
-      ]
+      ],
+      "activeAbilityId": "Loki_SwoopingHawk",
+      "passiveAbilityIds": "PathOfCommand",
+      "movement": 5
     },
     {
+      "id": "eldarFarseer",
       "name": "Eldryon",
       "fullName": "Eldryon Ynaduin",
       "shortName": "Eldryon",
@@ -977,19 +1256,24 @@
       "initialRarity": "Rare",
       "icon": "eldryon-removebg-preview.webp",
       "traits": [
+        "Hero",
         "Psyker"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "Saim-Hann"
-      ]
+      ],
+      "activeAbilityId": "Executioner",
+      "passiveAbilityIds": "Doom",
+      "movement": 3
     },
     {
+      "id": "eldarMauganRa",
       "name": "Maugan Ra",
       "fullName": "Maugan Ra",
       "shortName": "Maugan",
@@ -999,19 +1283,24 @@
       "initialRarity": "Legendary",
       "icon": "Maugan_Ra-removebg-preview.webp",
       "traits": [
+        "Hero",
         "Terrifying",
-        "Heavy Weapon",
+        "HeavyWeapon",
         "Overwatch"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "HarvesterOfSouls",
+      "passiveAbilityIds": "InescapableAccuracy",
+      "movement": 3
     },
     {
+      "id": "eldarJainZar",
       "name": "Jain Zar",
       "fullName": "Jain Zar",
       "shortName": "Jain",
@@ -1021,18 +1310,23 @@
       "initialRarity": "Legendary",
       "icon": "Jain_Zar-removebg-preview.webp",
       "traits": [
+        "Hero",
         "Infiltrate"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "SilentDeath",
+      "passiveAbilityIds": "TerrorsLament",
+      "movement": 4
     },
     {
-      "name": "Sho'Syl",
+      "id": "tauMarksman",
+      "name": "Sho'syl",
       "fullName": "Vior'la Sho'syl",
       "shortName": "Sho",
       "title": "Shas'ui",
@@ -1041,19 +1335,24 @@
       "initialRarity": "Uncommon",
       "icon": "sho_syl-removebg-preview.webp",
       "traits": [
+        "Hero",
         "Camouflage",
-        "Close Combat Weakness"
+        "RangedSpecialist"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "SeekerMissileFrequencyLock",
+      "passiveAbilityIds": "MV71SniperDroneSquad",
+      "movement": 2
     },
     {
-      "name": "Re'Vas",
+      "id": "tauCrisis",
+      "name": "Re'vas",
       "fullName": "Vior'la Re'vas",
       "shortName": "Re'vas",
       "title": "Shas'vre",
@@ -1062,20 +1361,25 @@
       "initialRarity": "Uncommon",
       "icon": "re_vas-removebg-preview.webp",
       "traits": [
-        "Close Combat Weakness",
-        "Big Target",
+        "Hero",
+        "BigTarget",
         "Flying",
-        "Mechanical"
+        "Mechanical",
+        "RangedSpecialist"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "EarlyWarningOverride",
+      "passiveAbilityIds": "CyclicIonBlaster",
+      "movement": 3
     },
     {
+      "id": "tauDarkstrider",
       "name": "Darkstrider",
       "fullName": "T'au Myamoto",
       "shortName": "Darkstrider",
@@ -1085,19 +1389,24 @@
       "initialRarity": "Rare",
       "icon": "darkstrider-removebg-preview.webp",
       "traits": [
-        "Close Combat Weakness",
+        "Hero",
         "Infiltrate",
-        "Suppressive Fire"
+        "RangedSpecialist",
+        "SuppressiveFire"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "FightingRetreat",
+      "passiveAbilityIds": "StructuralAnalyser",
+      "movement": 3
     },
     {
+      "id": "tauAunShi",
       "name": "Aun'Shi",
       "fullName": "Vior'la Aun'shi",
       "shortName": "Aun'shi",
@@ -1106,16 +1415,22 @@
       "alliance": "Xenos",
       "initialRarity": "Legendary",
       "icon": "Aun-shi.webp",
-      "traits": [],
+      "traits": [
+        "Hero"
+      ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "InspiredToGreatness",
+      "passiveAbilityIds": "SereneUnifier",
+      "movement": 3
     },
     {
+      "id": "tauShadowsun",
       "name": "Shadowsun",
       "fullName": "T'au Shaserra",
       "shortName": "Shadowsun",
@@ -1125,20 +1440,53 @@
       "initialRarity": "Legendary",
       "icon": "ShadowSun.webp",
       "traits": [
-        "Close Combat Weakness",
+        "Hero",
         "Camouflage",
         "Flying",
-        "Infiltrate"
+        "Infiltrate",
+        "RangedSpecialist"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "ExemplarOfTheKauyon",
+      "passiveAbilityIds": "DefenderOfTheGreaterGood",
+      "movement": 4
     },
     {
+      "id": "tauFarsight",
+      "name": "Farsight",
+      "fullName": "Farsight",
+      "shortName": "Farsight",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Legendary",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "BeastSlayer",
+        "BigTarget",
+        "Flying",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "ExemplarOfTheMontka",
+      "passiveAbilityIds": "WayOfTheShortBlade",
+      "movement": 4
+    },
+    {
+      "id": "spaceWulfen",
       "name": "Ulf",
       "fullName": "Ulf Frosthowl",
       "shortName": "Ulf",
@@ -1148,18 +1496,23 @@
       "initialRarity": "Uncommon",
       "icon": "Ulf.webp",
       "traits": [
-        "Final Vengeance",
+        "Hero",
+        "FinalJustice",
         "Unstoppable"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "GreatFrostAxe",
+      "passiveAbilityIds": "SavageKiller",
+      "movement": 3
     },
     {
+      "id": "spaceHound",
       "name": "Tjark",
       "fullName": "Tjark Wyrdslayer",
       "shortName": "Tjark",
@@ -1169,18 +1522,23 @@
       "initialRarity": "Uncommon",
       "icon": "Tjark.webp",
       "traits": [
+        "Hero",
         "Infiltrate",
         "Terrifying"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "GrapnelLauncher",
+      "passiveAbilityIds": "HuntersBeyondDeath",
+      "movement": 3
     },
     {
+      "id": "spaceRockfist",
       "name": "Arjac",
       "fullName": "Arjac Rockfist",
       "shortName": "Arjac",
@@ -1190,21 +1548,26 @@
       "initialRarity": "Rare",
       "icon": "arjac.webp",
       "traits": [
-        "Terminator Armour",
-        "Deep Strike",
+        "Hero",
         "Resilient",
+        "TeleportStrike",
+        "TerminatorArmour",
         "Unstoppable"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "Foehammer",
+      "passiveAbilityIds": "AnvilShield",
+      "movement": 2
     },
     {
-      "name": "Njal Stormcaller",
+      "id": "spaceStormcaller",
+      "name": "Njal",
       "fullName": "Njal Stormcaller",
       "shortName": "Njal",
       "title": "High Rune Priest",
@@ -1213,20 +1576,25 @@
       "initialRarity": "Epic",
       "icon": "Njal.webp",
       "traits": [
+        "Hero",
         "Psyker",
-        "Terminator Armour",
+        "TerminatorArmour",
         "Unstoppable"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "Stormcaller",
+      "passiveAbilityIds": "LordOfTempests",
+      "movement": 2
     },
     {
-      "name": "Ragnar Blackmane",
+      "id": "spaceBlackmane",
+      "name": "Ragnar",
       "fullName": "Ragnar Blackmane",
       "shortName": "Ragnar",
       "title": "Wolf Lord",
@@ -1235,19 +1603,51 @@
       "initialRarity": "Legendary",
       "icon": "Ragnar.webp",
       "traits": [
-        "Rapid Assault",
-        "Final Vengeance",
-        "Beast Slayer"
+        "Hero",
+        "BeastSlayer",
+        "FinalJustice",
+        "RapidAssault"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "WarHowl",
+      "passiveAbilityIds": "SagaOfTheWarriorBorn",
+      "movement": 3
     },
     {
+      "id": "spaceWolfPriest",
+      "name": "Baldr",
+      "fullName": "Baldr",
+      "shortName": "Baldr",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Rare",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "Healer",
+        "FinalJustice",
+        "Terrifying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "RitesOfMorkai",
+      "passiveAbilityIds": "HealingBalms",
+      "movement": 3
+    },
+    {
+      "id": "thousTzaangor",
       "name": "Yazaghor",
       "fullName": "Yazaghor Ficklefate",
       "shortName": "Yaz",
@@ -1257,20 +1657,25 @@
       "initialRarity": "Common",
       "icon": "Yazaghor.webp",
       "traits": [
-        "Flying",
-        "Weaver of Fates"
+        "Hero",
+        "WeaverOfFate",
+        "Flying"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "Saim-Hann Mirror"
-      ]
+      ],
+      "activeAbilityId": "SorcerousFacade",
+      "passiveAbilityIds": "RealityUnbound",
+      "movement": 4
     },
     {
+      "id": "thousTerminator",
       "name": "Toth",
       "fullName": "Sokar Toth",
       "shortName": "Toth",
@@ -1280,21 +1685,26 @@
       "initialRarity": "Uncommon",
       "icon": "toth.webp",
       "traits": [
-        "Terminator Armour",
-        "Suppressive Fire",
-        "Weaver of Fates"
+        "Hero",
+        "WeaverOfFate",
+        "SuppressiveFire",
+        "TerminatorArmour"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "Saim-Hann Mirror"
-      ]
+      ],
+      "activeAbilityId": "HellfyreMissileRack",
+      "passiveAbilityIds": "TimeFlux",
+      "movement": 2
     },
     {
+      "id": "thousInfernalMaster",
       "name": "Abraxas",
       "fullName": "Arkarzar Abraxas",
       "shortName": "Abraxas",
@@ -1304,20 +1714,25 @@
       "initialRarity": "Rare",
       "icon": "Abraxas.webp",
       "traits": [
-        "Psyker",
-        "Weaver of Fates"
+        "Hero",
+        "WeaverOfFate",
+        "Psyker"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "Saim-Hann Mirror"
-      ]
+      ],
+      "activeAbilityId": "MasterOfTheTutelaries",
+      "passiveAbilityIds": "InfernalPacts",
+      "movement": 3
     },
     {
+      "id": "thousSorcerer",
       "name": "Thaumachus",
       "fullName": "Kairatar Thaumachus",
       "shortName": "Thaumachus",
@@ -1327,19 +1742,24 @@
       "initialRarity": "Epic",
       "icon": "Thaumachus-removebg-preview.webp",
       "traits": [
-        "Weaver of Fates",
+        "Hero",
+        "WeaverOfFate",
         "Flying",
         "Psyker"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "AttemptedPossession",
+      "passiveAbilityIds": "ArcaneShield",
+      "movement": 3
     },
     {
+      "id": "thousAhriman",
       "name": "Ahriman",
       "fullName": "Ahzek Ahriman",
       "shortName": "Ahriman",
@@ -1349,40 +1769,24 @@
       "initialRarity": "Legendary",
       "icon": "Ahriman.webp",
       "traits": [
-        "Weaver of Fates",
+        "Hero",
+        "WeaverOfFate",
         "Flying",
         "Psyker"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "Doombolt",
+      "passiveAbilityIds": "PsychicStalk",
+      "movement": 3
     },
     {
-      "name": "Azrael",
-      "fullName": "Azrael",
-      "shortName": "Azrael",
-      "title": "Supreme Grand Master",
-      "faction": "Dark Angels",
-      "alliance": "Imperial",
-      "initialRarity": "Epic",
-      "icon": "Azrael-removebg-preview.webp",
-      "traits": [
-        "Final Vengeance",
-        "Overwatch"
-      ],
-      "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
-      ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
-    },
-    {
+      "id": "darkaHellblaster",
       "name": "Sarquael",
       "fullName": "Sarquael",
       "shortName": "Sarquael",
@@ -1392,39 +1796,24 @@
       "initialRarity": "Uncommon",
       "icon": "Sarquael.webp",
       "traits": [
-        "Final Vengeance",
+        "Hero",
+        "FinalJustice",
         "Overwatch",
-        "Heavy Weapon"
+        "HeavyWeapon"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "Supercharge",
+      "passiveAbilityIds": "GrimRetribution",
+      "movement": 3
     },
     {
-      "name": "Asmodai",
-      "fullName": "Asmodai",
-      "shortName": "Asmodai",
-      "title": "Interrogator-Chaplain",
-      "faction": "Dark Angels",
-      "alliance": "Imperial",
-      "initialRarity": "Epic",
-      "icon": "asmodai.webp",
-      "traits": [
-        "Terrifying"
-      ],
-      "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
-    },
-    {
+      "id": "darkaTerminator",
       "name": "Baraqiel",
       "fullName": "Baraqiel",
       "shortName": "Baraqiel",
@@ -1434,20 +1823,25 @@
       "initialRarity": "Uncommon",
       "icon": "baraqiel.webp",
       "traits": [
-        "Terminator Armour",
-        "Deep Strike",
-        "Heavy Weapon",
-        "Crushing Strike"
+        "Hero",
+        "TeleportStrike",
+        "CrushingStrike",
+        "HeavyWeapon",
+        "TerminatorArmour"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "PlasmaCannon",
+      "passiveAbilityIds": "Deathwing",
+      "movement": 2
     },
     {
+      "id": "darkaCompanion",
       "name": "Forcas",
       "fullName": "Forcas Oathsworn",
       "shortName": "Forcas",
@@ -1457,18 +1851,99 @@
       "initialRarity": "Rare",
       "icon": "forcas.webp",
       "traits": [
+        "Hero",
         "Camouflage",
         "Parry"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "CalibaniteGreatsword",
+      "passiveAbilityIds": "EnmityForTheUnworthy",
+      "movement": 3
     },
     {
+      "id": "darkaAsmodai",
+      "name": "Asmodai",
+      "fullName": "Asmodai",
+      "shortName": "Asmodai",
+      "title": "Interrogator-Chaplain",
+      "faction": "Dark Angels",
+      "alliance": "Imperial",
+      "initialRarity": "Epic",
+      "icon": "asmodai.webp",
+      "traits": [
+        "Hero",
+        "Terrifying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "ExemplarOfHate",
+      "passiveAbilityIds": "FearedInterrogator",
+      "movement": 3
+    },
+    {
+      "id": "darkaAzrael",
+      "name": "Azrael",
+      "fullName": "Azrael",
+      "shortName": "Azrael",
+      "title": "Supreme Grand Master",
+      "faction": "Dark Angels",
+      "alliance": "Imperial",
+      "initialRarity": "Epic",
+      "icon": "Azrael-removebg-preview.webp",
+      "traits": [
+        "Hero",
+        "FinalJustice",
+        "Overwatch"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "DarkTalonStrike",
+      "passiveAbilityIds": "LionHelm",
+      "movement": 3
+    },
+    {
+      "id": "darkaSternguard",
+      "name": "Ramus",
+      "fullName": "Ramus",
+      "shortName": "Ramus",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Rare",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "Overwatch"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "SternguardFocus",
+      "passiveAbilityIds": "SpecialIssueCombiMelta",
+      "movement": 3
+    },
+    {
+      "id": "tyranNeurothrope",
       "name": "Neurothrope",
       "fullName": "Neurothrope",
       "shortName": "Neurothrope",
@@ -1478,21 +1953,26 @@
       "initialRarity": "Rare",
       "icon": "Neurothrope-removebg-preview.webp",
       "traits": [
-        "Close Combat Weakness",
+        "Hero",
+        "RangedSpecialist",
         "Flying",
         "Psyker",
-        "Shadow in the Warp",
+        "ShadowInTheWarp",
         "Synapse"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "SpiritLeech",
+      "passiveAbilityIds": "Neuroparasite",
+      "movement": 2
     },
     {
+      "id": "tyranTyrantGuard",
       "name": "Tyrant Guard",
       "fullName": "Tyrant Guard",
       "shortName": "Tyrant G",
@@ -1502,19 +1982,24 @@
       "initialRarity": "Uncommon",
       "icon": "TyrantGuard.webp",
       "traits": [
-        "Big Target",
-        "Crushing Strike"
+        "Hero",
+        "BigTarget",
+        "CrushingStrike"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Defense"
+        "I_Crit",
+        "I_Defensive",
+        "I_Defensive"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "CrushingClaws",
+      "passiveAbilityIds": "GuardianOrganism",
+      "movement": 3
     },
     {
-      "name": "Winged Tyrant Prime",
+      "id": "tyranWingedPrime",
+      "name": "Winged Prime",
       "fullName": "Winged Tyranid Prime",
       "shortName": "Winged Prime",
       "title": "",
@@ -1523,19 +2008,24 @@
       "initialRarity": "Rare",
       "icon": "Winged_Prime.webp",
       "traits": [
-        "Flying",
+        "Hero",
         "Synapse",
-        "Final Vengeance"
+        "Flying",
+        "FinalJustice"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "AlphaWarrior",
+      "passiveAbilityIds": "SynapticLinchpin",
+      "movement": 4
     },
     {
+      "id": "tyranDeathleaper",
       "name": "Deathleaper",
       "fullName": "Deathleaper",
       "shortName": "Deathleaper",
@@ -1545,21 +2035,26 @@
       "initialRarity": "Epic",
       "icon": "Deathleaper.webp",
       "traits": [
+        "Hero",
         "Camouflage",
-        "Deep Strike",
+        "TeleportStrike",
         "Infiltrate",
         "Terrifying"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "FearOfTheUnseen",
+      "passiveAbilityIds": "FeederTendrils",
+      "movement": 3
     },
     {
-      "name": "PoM",
+      "id": "tyranParasite",
+      "name": "Parasite of Mortrex",
       "fullName": "Parasite of Mortrex",
       "shortName": "PoM",
       "title": "Invader Organism",
@@ -1568,17 +2063,23 @@
       "initialRarity": "Epic",
       "icon": "pom.webp",
       "traits": [
-        "Flying"
+        "Hero",
+        "Flying",
+        "Synapse"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "ItItches",
+      "passiveAbilityIds": "BarbedOvipositor",
+      "movement": 4
     },
     {
+      "id": "admecDominus",
       "name": "Vitruvius",
       "fullName": "Vitruvius Thannek",
       "shortName": "Vitruvius",
@@ -1588,18 +2089,23 @@
       "initialRarity": "Legendary",
       "icon": "vitruvius.webp",
       "traits": [
+        "Hero",
         "Mechanical",
         "Mechanic"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "RadBombardment",
+      "passiveAbilityIds": "MasterAnnihilator",
+      "movement": 3
     },
     {
+      "id": "admecManipulus",
       "name": "Actus",
       "fullName": "Actus Fulgorosus",
       "shortName": "Actus",
@@ -1609,20 +2115,25 @@
       "initialRarity": "Rare",
       "icon": "actus.webp",
       "traits": [
+        "Hero",
         "Mechanical",
         "Mechanic",
         "Flying"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "DefendTheDivineWork",
+      "passiveAbilityIds": "GalvanicField",
+      "movement": 3
     },
     {
-      "name": "Tan Gi'Da",
+      "id": "admecMarshall",
+      "name": "Tan Gi'da",
       "fullName": "Tan Gi'da",
       "shortName": "Tan Gi'da",
       "title": "Marshal",
@@ -1631,17 +2142,22 @@
       "initialRarity": "Rare",
       "icon": "tanGida.webp",
       "traits": [
+        "Hero",
         "Mechanical"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "DoctrinaImperatives",
+      "passiveAbilityIds": "ControlEdict",
+      "movement": 3
     },
     {
+      "id": "admecRuststalker",
       "name": "Exitor-Rho",
       "fullName": "Exitor-Rho-1.15/X",
       "shortName": "Rho",
@@ -1651,21 +2167,26 @@
       "initialRarity": "Uncommon",
       "icon": "exitor-rho.webp",
       "traits": [
+        "Hero",
         "Mechanical",
         "Camouflage",
-        "Unstoppable",
-        "Infiltrate"
+        "Infiltrate",
+        "Unstoppable"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "CordClaw",
+      "passiveAbilityIds": "OptimizedGait",
+      "movement": 4
     },
     {
-      "name": "Sy-Gex",
+      "id": "admecDestroyer",
+      "name": "Sy-gex",
       "fullName": "Sy-Gex-KPH008/15.MK41",
       "shortName": "Sy-Gex",
       "title": "Kataphron Destroyer",
@@ -1674,20 +2195,25 @@
       "initialRarity": "Uncommon",
       "icon": "sy-gex.webp",
       "traits": [
+        "Hero",
         "Mechanical",
-        "Heavy Weapon",
+        "HeavyWeapon",
         "Overwatch",
         "Vehicle"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "SentinelDirectives",
+      "passiveAbilityIds": "HeavyGravCannon",
+      "movement": 2
     },
     {
+      "id": "worldTerminator",
       "name": "Wrask",
       "fullName": "Wrask",
       "shortName": "Wrask",
@@ -1697,21 +2223,26 @@
       "initialRarity": "Uncommon",
       "icon": "wrask.webp",
       "traits": [
-        "Blessing Of Khorne",
-        "Deep Strike",
-        "Rapid Assault",
-        "Terminator Armour",
+        "Hero",
+        "BlessingsOfKhorne",
+        "TeleportStrike",
+        "RapidAssault",
+        "TerminatorArmour",
         "Unstoppable"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "BloodyFury",
+      "passiveAbilityIds": "WrathfulDevotion",
+      "movement": 2
     },
     {
+      "id": "worldJakhal",
       "name": "Macer",
       "fullName": "Macer Bloodgrin",
       "shortName": "Macer",
@@ -1721,18 +2252,23 @@
       "initialRarity": "Uncommon",
       "icon": "macer.webp",
       "traits": [
-        "Blessing Of Khorne",
+        "Hero",
+        "BlessingsOfKhorne",
         "Resilient"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "JakhalStimms",
+      "passiveAbilityIds": "Skullsmasher",
+      "movement": 3
     },
     {
+      "id": "worldEightbound",
       "name": "Azkor",
       "fullName": "Azkor",
       "shortName": "Azkor",
@@ -1742,21 +2278,26 @@
       "initialRarity": "Rare",
       "icon": "azkor.webp",
       "traits": [
-        "Blessing Of Khorne",
+        "Hero",
+        "BlessingsOfKhorne",
         "Daemon",
         "Resilient",
         "Terrifying",
         "Unstoppable"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "OverwhelmingWrath",
+      "passiveAbilityIds": "BeaconOfRage",
+      "movement": 3
     },
     {
+      "id": "worldExecutions",
       "name": "Tarvakh",
       "fullName": "Tarvakh",
       "shortName": "Tarvakh",
@@ -1766,18 +2307,23 @@
       "initialRarity": "Rare",
       "icon": "tarvakh.webp",
       "traits": [
-        "Blessing Of Khorne",
-        "Rapid Assault"
+        "Hero",
+        "BlessingsOfKhorne",
+        "RapidAssault"
       ],
       "equipment": [
-        "Crit",
-        "Crit",
-        "Crit Booster"
+        "I_Crit",
+        "I_Crit",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "MurderousSwing",
+      "passiveAbilityIds": "TrophyTaker",
+      "movement": 3
     },
     {
+      "id": "worldKharn",
       "name": "Kharn",
       "fullName": "Khârn the Betrayer",
       "shortName": "Khârn",
@@ -1787,19 +2333,24 @@
       "initialRarity": "Legendary",
       "icon": "kharn.webp",
       "traits": [
-        "Blessing Of Khorne",
-        "Rapid Assault",
-        "Final Vengeance"
+        "Hero",
+        "BlessingsOfKhorne",
+        "RapidAssault",
+        "FinalJustice"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "KillMaimBurn",
+      "passiveAbilityIds": "TheBetrayer",
+      "movement": 3
     },
     {
+      "id": "bloodIntercessor",
       "name": "Mataneo",
       "fullName": "Mataneo",
       "shortName": "Mataneo",
@@ -1809,19 +2360,24 @@
       "initialRarity": "Uncommon",
       "icon": "mataneo.webp",
       "traits": [
-        "Deep Strike",
+        "Hero",
+        "TeleportStrike",
         "Flying",
-        "Rapid Assault"
+        "RapidAssault"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "HammerOfWrath",
+      "passiveAbilityIds": "AggressiveOnslaught",
+      "movement": 4
     },
     {
+      "id": "bloodDeathCompany",
       "name": "Lucien",
       "fullName": "Lucien",
       "shortName": "Lucien",
@@ -1831,19 +2387,24 @@
       "initialRarity": "Uncommon",
       "icon": "lucien.webp",
       "traits": [
-        "Rapid Assault",
+        "Hero",
+        "RapidAssault",
         "Resilient",
         "Unstoppable"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "BlackRage",
+      "passiveAbilityIds": "VisionsOfHeresy",
+      "movement": 3
     },
     {
+      "id": "bloodSanguinary",
       "name": "Nicodemus",
       "fullName": "Nicodemus",
       "shortName": "Nicodemus",
@@ -1853,18 +2414,23 @@
       "initialRarity": "Rare",
       "icon": "nicodemus.webp",
       "traits": [
+        "Hero",
         "Healer",
-        "Rapid Assault"
+        "RapidAssault"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "BloodChalice",
+      "passiveAbilityIds": "SanguinaryPriest",
+      "movement": 3
     },
     {
+      "id": "bloodMephiston",
       "name": "Mephiston",
       "fullName": "Mephiston",
       "shortName": "Mephiston",
@@ -1874,19 +2440,24 @@
       "initialRarity": "Legendary",
       "icon": "mephiston.webp",
       "traits": [
+        "Hero",
         "Psyker",
-        "Rapid Assault",
+        "RapidAssault",
         "Terrifying"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "TheQuickening",
+      "passiveAbilityIds": "FuryOfTheAncients",
+      "movement": 3
     },
     {
+      "id": "bloodDante",
       "name": "Dante",
       "fullName": "Commander Dante",
       "shortName": "Dante",
@@ -1896,21 +2467,53 @@
       "initialRarity": "Legendary",
       "icon": "dante.webp",
       "traits": [
+        "Hero",
+        "TeleportStrike",
+        "FinalJustice",
         "Flying",
-        "Deep Strike",
-        "Terrifying",
-        "Rapid Assault",
-        "Final Vengeance"
+        "RapidAssault",
+        "Terrifying"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "LightOfSanguinius",
+      "passiveAbilityIds": "LordOfTheHost",
+      "movement": 4
     },
     {
+      "id": "bloodTerminator",
+      "name": "Cezare",
+      "fullName": "Cezare",
+      "shortName": "Cezare",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Uncommon",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "TeleportStrike",
+        "TerminatorArmour",
+        "RapidAssault"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "SavageEchoes",
+      "passiveAbilityIds": "RedRampage",
+      "movement": 2
+    },
+    {
+      "id": "genesBiophagus",
       "name": "Hollan",
       "fullName": "Hollan Baumgart",
       "shortName": "Hollan",
@@ -1920,20 +2523,25 @@
       "initialRarity": "Uncommon",
       "icon": "hollan.webp",
       "traits": [
+        "Hero",
         "Ambush",
         "Healer"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "T'au Empire"
-      ]
+      ],
+      "activeAbilityId": "AberrantHypermorph",
+      "passiveAbilityIds": "TwistedScience",
+      "movement": 3
     },
     {
+      "id": "genesMagus",
       "name": "Xybia",
       "fullName": "Xybia Kheiser",
       "shortName": "Xybia",
@@ -1943,20 +2551,25 @@
       "initialRarity": "Rare",
       "icon": "xybia.webp",
       "traits": [
+        "Hero",
         "Ambush",
         "Psyker"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "T'au Empire"
-      ]
+      ],
+      "activeAbilityId": "MindControl",
+      "passiveAbilityIds": "SpiritualLeader",
+      "movement": 3
     },
     {
+      "id": "genesPrimus",
       "name": "Isaak",
       "fullName": "Isaak Starn",
       "shortName": "Isaak",
@@ -1966,17 +2579,22 @@
       "initialRarity": "Rare",
       "icon": "isaak.webp",
       "traits": [
+        "Hero",
         "Ambush"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "CultDemagogue",
+      "passiveAbilityIds": "DecoysAndMisdirection",
+      "movement": 3
     },
     {
+      "id": "genesKelermorph",
       "name": "Judh",
       "fullName": "Judh Lhaskan",
       "shortName": "Judh",
@@ -1986,21 +2604,26 @@
       "initialRarity": "Epic",
       "icon": "judh.webp",
       "traits": [
+        "Hero",
         "Ambush",
-        "Beast Slayer"
+        "BeastSlayer"
       ],
       "equipment": [
-        "Crit",
-        "Crit",
-        "Crit Booster"
+        "I_Crit",
+        "I_Crit",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": true,
       "campaignsRequiredIn": [
         "T'au Empire"
-      ]
+      ],
+      "activeAbilityId": "HeroicFusillade",
+      "passiveAbilityIds": "HypersensoryAbilities",
+      "movement": 3
     },
     {
-      "name": "Patermine",
+      "id": "genesPatriarch",
+      "name": "The Patermine",
       "fullName": "The Patermine",
       "shortName": "Patermine",
       "title": "Genestealer Patriarch",
@@ -2009,20 +2632,25 @@
       "initialRarity": "Legendary",
       "icon": "patermine.webp",
       "traits": [
+        "Hero",
         "Infiltrate",
         "Synapse",
         "Terrifying",
         "Unstoppable"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "MightFromBelow",
+      "passiveAbilityIds": "CosmicHorror",
+      "movement": 4
     },
     {
+      "id": "custoVexilusPraetor",
       "name": "Aesoth",
       "fullName": "Aesoth Koumadra",
       "shortName": "Aesoth",
@@ -2032,86 +2660,24 @@
       "initialRarity": "Uncommon",
       "icon": "aesoth.webp",
       "traits": [
-        "Martial Ka'tah",
-        "Big Target",
+        "Hero",
+        "MartialKatah",
+        "BigTarget",
         "Resilient"
       ],
       "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "VexillaMagnifica",
+      "passiveAbilityIds": "StandVigil",
+      "movement": 3
     },
     {
-      "name": "Kariyan",
-      "fullName": "Kariyan Helsates",
-      "shortName": "Kariyan",
-      "title": "Blade Champion",
-      "faction": "Adeptus Custodes",
-      "alliance": "Imperial",
-      "initialRarity": "Epic",
-      "icon": "kariyan.webp",
-      "traits": [
-        "Martial Ka'tah",
-        "Beast Slayer",
-        "Rapid Assault",
-        "Parry",
-        "Resilient"
-      ],
-      "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
-    },
-    {
-      "name": "Trajann",
-      "fullName": "Trajann Valoris",
-      "shortName": "Trajann",
-      "title": "Captain-General",
-      "faction": "Adeptus Custodes",
-      "alliance": "Imperial",
-      "initialRarity": "Legendary",
-      "icon": "trajann.webp",
-      "traits": [
-        "Martial Ka'tah",
-        "Crushing Strike",
-        "Resilient"
-      ],
-      "equipment": [
-        "Crit",
-        "Block",
-        "Block Booster"
-      ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
-    },
-    {
-      "name": "Lucius",
-      "fullName": "Lucius the Eternal",
-      "shortName": "Lucius",
-      "title": "Champion of Slaanesh",
-      "faction": "Emperor's Children",
-      "alliance": "Chaos",
-      "initialRarity": "Legendary",
-      "icon": "lucius.webp",
-      "traits": [
-        "Thrill Seekers",
-        "Parry"
-      ],
-      "equipment": [
-        "Crit",
-        "Block",
-        "Crit Booster"
-      ],
-      "requiredInCampaign": false,
-      "campaignsRequiredIn": []
-    },
-    {
+      "id": "custoAtlacoya",
       "name": "Atlacoya",
       "fullName": "Atlacoya",
       "shortName": "Atlacoya",
@@ -2121,16 +2687,364 @@
       "initialRarity": "Rare",
       "icon": "atlacoya.webp",
       "traits": [
+        "Hero",
         "Parry",
         "Terrifying"
       ],
       "equipment": [
-        "Crit",
-        "Defense",
-        "Crit Booster"
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
       ],
       "requiredInCampaign": false,
-      "campaignsRequiredIn": []
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "TalonsOfTheEmperor",
+      "passiveAbilityIds": "DaughterOfTheAbyss",
+      "movement": 3
+    },
+    {
+      "id": "custoKyrus",
+      "name": "Tyrith",
+      "fullName": "Tyrith",
+      "shortName": "Tyrith",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Rare",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "MartialKatah",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "VigilanceEternal",
+      "passiveAbilityIds": "UnwaveringSentinel",
+      "movement": 3
+    },
+    {
+      "id": "custoBladeChampion",
+      "name": "Kariyan",
+      "fullName": "Kariyan Helsates",
+      "shortName": "Kariyan",
+      "title": "Blade Champion",
+      "faction": "Adeptus Custodes",
+      "alliance": "Imperial",
+      "initialRarity": "Epic",
+      "icon": "kariyan.webp",
+      "traits": [
+        "Hero",
+        "MartialKatah",
+        "BeastSlayer",
+        "RapidAssault",
+        "Parry",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "MartialInspiration",
+      "passiveAbilityIds": "LegacyOfCombat",
+      "movement": 3
+    },
+    {
+      "id": "custoTrajann",
+      "name": "Trajann",
+      "fullName": "Trajann Valoris",
+      "shortName": "Trajann",
+      "title": "Captain-General",
+      "faction": "Adeptus Custodes",
+      "alliance": "Imperial",
+      "initialRarity": "Legendary",
+      "icon": "trajann.webp",
+      "traits": [
+        "Hero",
+        "MartialKatah",
+        "CrushingStrike",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "MomentShackle",
+      "passiveAbilityIds": "LegendaryCommander",
+      "movement": 3
+    },
+    {
+      "id": "emperNoiseMarine",
+      "name": "Shiron",
+      "fullName": "Shiron",
+      "shortName": "Shiron",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Uncommon",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "ThrillSeekers",
+        "HeavyWeapon",
+        "SuppressiveFire"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "ExcruciatingFrequencies",
+      "passiveAbilityIds": "TerrifyingCrescendo",
+      "movement": 3
+    },
+    {
+      "id": "emperFlawlessBlade",
+      "name": "Hascule",
+      "fullName": "Hascule",
+      "shortName": "Hascule",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Rare",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "ThrillSeekers",
+        "Parry"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "DaemonicPatrons",
+      "passiveAbilityIds": "EcstaticSlaughter",
+      "movement": 4
+    },
+    {
+      "id": "emperKakophonist",
+      "name": "Adamatar",
+      "fullName": "Adamatar",
+      "shortName": "Adamatar",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Rare",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "ThrillSeekers"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "DoomSiren",
+      "passiveAbilityIds": "ObsessiveAnnunciation",
+      "movement": 3
+    },
+    {
+      "id": "emperExultant",
+      "name": "Laviscus",
+      "fullName": "Laviscus",
+      "shortName": "Laviscus",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Epic",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "ThrillSeekers",
+        "CrushingStrike"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "EuphoricStrikes",
+      "passiveAbilityIds": "RefusalToBeOutdone",
+      "movement": 3
+    },
+    {
+      "id": "emperLucius",
+      "name": "Lucius",
+      "fullName": "Lucius the Eternal",
+      "shortName": "Lucius",
+      "title": "Champion of Slaanesh",
+      "faction": "Emperor's Children",
+      "alliance": "Chaos",
+      "initialRarity": "Legendary",
+      "icon": "lucius.webp",
+      "traits": [
+        "Hero",
+        "ThrillSeekers",
+        "Parry"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "LashOfTorment",
+      "passiveAbilityIds": "ArmourOfShriekingSouls",
+      "movement": 4
+    },
+    {
+      "id": "votanIronmaster",
+      "name": "Vynn",
+      "fullName": "Vynn",
+      "shortName": "Vynn",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Rare",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "PrioritisedEfficiency",
+        "Mechanic"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "GravitonRifle",
+      "passiveAbilityIds": "EcogSupport",
+      "movement": 2
+    },
+    {
+      "id": "votanBeserk",
+      "name": "Havyr",
+      "fullName": "Havyr",
+      "shortName": "Havyr",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Uncommon",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "PrioritisedEfficiency",
+        "Resilient",
+        "CrushingStrike"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "AugmentedAssault",
+      "passiveAbilityIds": "FuryFromTheDelve",
+      "movement": 2
+    },
+    {
+      "id": "votanMemnyr",
+      "name": "Ammuk",
+      "fullName": "Ammuk",
+      "shortName": "Ammuk",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Rare",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "PrioritisedEfficiency",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "IronkinSteeljack",
+      "passiveAbilityIds": "PredictiveGuidance",
+      "movement": 2
+    },
+    {
+      "id": "votanUthar",
+      "name": "Uthar",
+      "fullName": "Uthar",
+      "shortName": "Uthar",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Legendary",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "PrioritisedEfficiency",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "AncestralFortune",
+      "passiveAbilityIds": "GrimEfficiency",
+      "movement": 2
+    },
+    {
+      "id": "astarCyrus",
+      "name": "Cyrus",
+      "fullName": "Cyrus",
+      "shortName": "Cyrus",
+      "title": "",
+      "faction": "",
+      "alliance": "",
+      "initialRarity": "Epic",
+      "icon": "",
+      "traits": [
+        "Hero",
+        "Camouflage",
+        "Infiltrate",
+        "SuppressiveFire"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ],
+      "requiredInCampaign": false,
+      "campaignsRequiredIn": [],
+      "activeAbilityId": "StrikeFromTheShadows",
+      "passiveAbilityIds": "HaywireMine",
+      "movement": 3
     }
   ]
 }
