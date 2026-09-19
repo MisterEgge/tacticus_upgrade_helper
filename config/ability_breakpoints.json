@@ -4,7 +4,9 @@
     "schemaVersion": 1,
     "notes": "Community-derived planning guidance. Breakpoints are planning targets, not game rules. Missing characters remain explicitly unreviewed rather than guessed.",
     "baseline": "Raise useful abilities to 9 immediately; current account-wide uncommon project targets useful abilities to 17.",
-    "lastReviewed": "2026-09-18"
+    "lastReviewed": "2026-09-18",
+    "reviewedCharacters": 29,
+    "evidencePolicy": "Targets require character-specific community evidence or a clearly documented mechanical breakpoint; generic rarity caps alone are not treated as recommendations."
   },
   "Bellator": {
     "active": {
@@ -326,6 +328,349 @@
         "Campaign"
       ],
       "note": "Summon/survival value generally merits more investment."
+    },
+    "confidence": "medium"
+  },
+  "Aleph-Null": {
+    "active": {
+      "practical": "36",
+      "high": "44-50",
+      "priority": "high",
+      "modes": [
+        "Campaign",
+        "LRE",
+        "Guild Raid"
+      ],
+      "note": "Scarabs are the main badge sink; community guidance repeatedly prioritizes the active."
+    },
+    "passive": {
+      "practical": "35-36",
+      "high": "44",
+      "priority": "medium",
+      "modes": [
+        "Campaign",
+        "LRE",
+        "AdMech"
+      ],
+      "note": "Useful sustain/Mechanical synergy after the active is established."
+    },
+    "confidence": "high"
+  },
+  "Snotflogga": {
+    "active": {
+      "practical": "17-35",
+      "high": "35",
+      "priority": "low",
+      "modes": [
+        "Campaign",
+        "LRE"
+      ],
+      "note": "Generally secondary to the passive."
+    },
+    "passive": {
+      "practical": "44",
+      "high": "50+",
+      "priority": "max",
+      "modes": [
+        "Campaign",
+        "LRE"
+      ],
+      "note": "Community consistently treats the passive/grot engine as the long-term investment; Mythic levels can matter for one-shot thresholds."
+    },
+    "confidence": "high"
+  },
+  "Gulgortz": {
+    "active": {
+      "practical": "35-36",
+      "high": "44+",
+      "priority": "high",
+      "modes": [
+        "Campaign",
+        "Arena"
+      ],
+      "note": "Current community advice identifies Boss G's active as a key campaign investment."
+    },
+    "passive": {
+      "practical": "35",
+      "high": "44",
+      "priority": "medium",
+      "modes": [
+        "Campaign",
+        "Arena"
+      ],
+      "note": "Useful after the active; exact high-end value is more roster dependent."
+    },
+    "confidence": "medium"
+  },
+  "Corrodius": {
+    "active": {
+      "practical": "35",
+      "high": "44+",
+      "priority": "high",
+      "modes": [
+        "LRE",
+        "Campaign",
+        "Guild War"
+      ],
+      "note": "Summons are the ability worth investing in."
+    },
+    "passive": {
+      "practical": "17-26",
+      "high": "35",
+      "priority": "low",
+      "modes": [
+        "Chaos teams"
+      ],
+      "note": "Recent community discussion explicitly describes the passive as much less valuable than the summons."
+    },
+    "confidence": "medium"
+  },
+  "Roswitha": {
+    "active": {
+      "practical": "36",
+      "high": "41-46",
+      "priority": "high",
+      "modes": [
+        "Guild Raid"
+      ],
+      "note": "Established raid guidance uses staged active breakpoints around 36, 41 and 46."
+    },
+    "passive": {
+      "practical": "36",
+      "high": "36-50",
+      "priority": "low",
+      "modes": [
+        "Guild Raid"
+      ],
+      "note": "36 is a common efficient stop; further investment is usually lower priority."
+    },
+    "confidence": "medium"
+  },
+  "Maugan Ra": {
+    "active": {
+      "practical": "17-35",
+      "high": "35",
+      "priority": "low",
+      "modes": [
+        "Guild Raid",
+        "Arena"
+      ],
+      "note": "Usually not the primary badge investment."
+    },
+    "passive": {
+      "practical": "36",
+      "high": "44-50",
+      "priority": "high",
+      "modes": [
+        "Guild Raid"
+      ],
+      "note": "Longstanding raid guidance prioritizes the passive."
+    },
+    "confidence": "medium"
+  },
+  "Calgar": {
+    "active": {
+      "practical": "35-36",
+      "high": "44",
+      "priority": "medium",
+      "modes": [
+        "Arena",
+        "Campaign"
+      ],
+      "note": "Useful but normally secondary to the team buff."
+    },
+    "passive": {
+      "practical": "44",
+      "high": "50",
+      "priority": "high",
+      "modes": [
+        "Guild Raid",
+        "Arena"
+      ],
+      "note": "Team damage buff is the defining long-term ability investment."
+    },
+    "confidence": "medium"
+  },
+  "Aethana": {
+    "active": {
+      "practical": "17-26",
+      "high": "35",
+      "priority": "low",
+      "modes": [
+        "Campaign",
+        "Arena"
+      ],
+      "note": "Usually secondary."
+    },
+    "passive": {
+      "practical": "35-36",
+      "high": "44-50",
+      "priority": "high",
+      "modes": [
+        "Guild Raid",
+        "Campaign"
+      ],
+      "note": "Buff passive is the primary reason to invest badges."
+    },
+    "confidence": "medium"
+  },
+  "Thaddeus": {
+    "active": {
+      "practical": "35",
+      "high": "44",
+      "priority": "medium",
+      "modes": [
+        "Arena",
+        "Campaign"
+      ],
+      "note": "Useful artillery scaling, but team support often has broader value."
+    },
+    "passive": {
+      "practical": "35-36",
+      "high": "44-50",
+      "priority": "high",
+      "modes": [
+        "Guild Raid",
+        "Campaign"
+      ],
+      "note": "Community raid guidance commonly prioritizes his ranged damage buff."
+    },
+    "confidence": "medium"
+  },
+  "Yarrick": {
+    "active": {
+      "practical": "35-36",
+      "high": "44+",
+      "priority": "high",
+      "modes": [
+        "Campaign",
+        "LRE"
+      ],
+      "note": "Summons remain his primary ability investment."
+    },
+    "passive": {
+      "practical": "26-35",
+      "high": "35-44",
+      "priority": "medium",
+      "modes": [
+        "Campaign",
+        "LRE"
+      ],
+      "note": "Useful after the active."
+    },
+    "confidence": "medium"
+  },
+  "Ulf": {
+    "active": {
+      "practical": "26-35",
+      "high": "35-44",
+      "priority": "medium",
+      "modes": [
+        "Arena",
+        "Guild War"
+      ],
+      "note": "Useful burst but not usually the defining badge sink."
+    },
+    "passive": {
+      "practical": "35-36",
+      "high": "44+",
+      "priority": "high",
+      "modes": [
+        "LRE",
+        "Arena",
+        "Guild War"
+      ],
+      "note": "Anti-summon/ability retaliation is his signature utility and scales with investment."
+    },
+    "confidence": "medium"
+  },
+  "Ragnar": {
+    "active": {
+      "practical": "44",
+      "high": "50+",
+      "priority": "max",
+      "modes": [
+        "Guild Raid",
+        "Arena"
+      ],
+      "note": "Team burst active is the core Ragnar-team investment."
+    },
+    "passive": {
+      "practical": "35-36",
+      "high": "44+",
+      "priority": "high",
+      "modes": [
+        "Guild Raid",
+        "Arena"
+      ],
+      "note": "Strong secondary investment once the active is established."
+    },
+    "confidence": "medium"
+  },
+  "Neurothrope": {
+    "active": {
+      "practical": "35-36",
+      "high": "44",
+      "priority": "medium",
+      "modes": [
+        "Guild Raid"
+      ],
+      "note": "Useful but secondary in dedicated Neuro raid teams."
+    },
+    "passive": {
+      "practical": "44",
+      "high": "50+",
+      "priority": "max",
+      "modes": [
+        "Guild Raid"
+      ],
+      "note": "Core Neuroparasite damage engine; dedicated raid use justifies very high investment."
+    },
+    "confidence": "medium"
+  },
+  "Maladus": {
+    "active": {
+      "practical": "26-35",
+      "high": "35-44",
+      "priority": "medium",
+      "modes": [
+        "LRE",
+        "Guild War"
+      ],
+      "note": "Useful damage ability but often sufficient below max."
+    },
+    "passive": {
+      "practical": "26-35",
+      "high": "35-44",
+      "priority": "medium",
+      "modes": [
+        "LRE",
+        "Guild War"
+      ],
+      "note": "Investment is useful but Maladus derives substantial value from base stats/traits too."
+    },
+    "confidence": "low"
+  },
+  "Macer": {
+    "active": {
+      "practical": "9-17",
+      "high": "26",
+      "priority": "low",
+      "modes": [
+        "Campaign",
+        "Guild War"
+      ],
+      "note": "Recent community discussion specifically cites Macer as a character whose abilities often do not justify heavy investment."
+    },
+    "passive": {
+      "practical": "9-17",
+      "high": "26",
+      "priority": "low",
+      "modes": [
+        "Campaign",
+        "Guild War"
+      ],
+      "note": "Base stats/traits matter more than pushing badges."
     },
     "confidence": "medium"
   }
