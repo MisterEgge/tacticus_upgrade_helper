@@ -9,7 +9,7 @@ export type EquipmentRow = {
 };
 export type AbilityRow = {
   character:string; faction:string; activeId:string; activeLevel:number; passiveId:string; passiveLevel:number;
-  activeTo17:boolean; passiveTo17:boolean; accountPriority:number; focus:string; basis:string;
+  activeTo17:boolean; passiveTo17:boolean; accountPriority:number; focus:string; basis:string; communityActiveTarget?:string; communityPassiveTarget?:string; targetConfidence?:string;
   communityActiveTarget:string; communityPassiveTarget:string; targetConfidence:string;
 };
 export type RosterUnit = {
