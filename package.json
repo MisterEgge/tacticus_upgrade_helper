@@ -6,14 +6,15 @@
     "fetch": "tsx src/fetchPlayer.ts",
     "discover": "tsx src/discover.ts",
     "analyze": "tsx src/analyzePlayer.ts",
-    "refresh": "npm run fetch && npm run analyze",
+    "refresh": "npm run fetch && npm run snapshot:campaigns && npm run analyze",
     "typecheck": "tsc --noEmit",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "sync:game-data": "tsx src/syncGameData.ts",
     "sync:portraits": "tsx src/syncPortraits.ts",
-    "sync:assets": "npm run sync:game-data && npm run sync:portraits"
+    "sync:assets": "npm run sync:game-data && npm run sync:portraits",
+    "snapshot:campaigns": "tsx src/snapshotCampaignProgress.ts"
   },
   "keywords": [
     "tacticus"
