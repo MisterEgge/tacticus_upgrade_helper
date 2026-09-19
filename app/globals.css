@@ -41,3 +41,5 @@ th { color:#8794a7; font-size:11px; letter-spacing:.1em; text-transform:uppercas
 .traitLine{color:#7f8b9c;font-size:13px;margin:10px 0 0}.detailPanel{margin-top:18px}.detailCopy{padding:18px 24px}.detailCopy p{margin:0 0 8px}.detailCopy p:last-child{margin-bottom:0}
 
 .targetGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}.targetGrid>div{border:1px solid #27303d;background:#0c1118;border-radius:10px;padding:12px}.targetGrid small{font-size:10px;letter-spacing:.08em}.targetGrid strong{display:block;font-size:20px;margin-top:4px}@media(max-width:600px){.targetGrid{grid-template-columns:1fr}}
+
+.targetGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:16px}.targetGrid>div{border:1px solid #27303d;background:#0c1118;border-radius:12px;padding:14px}.targetGrid strong{display:block;font-size:22px;margin-top:4px}@media(max-width:600px){.targetGrid{grid-template-columns:1fr}}
