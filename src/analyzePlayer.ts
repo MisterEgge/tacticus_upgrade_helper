@@ -319,6 +319,8 @@ async function main()
             name: campaign.name,
             type: campaign.type,
             highestUnlockedBattle: campaign.battles.reduce((max, battle) => Math.max(max, battle.battleIndex + 1), 0),
+            // Tacticus unlock semantics: battle N being unlocked proves completion through N-1, not N.
+            highestCompletedBattle: Math.max(0, campaign.battles.reduce((max, battle) => Math.max(max, battle.battleIndex + 1), 0) - 1),
             battles: campaign.battles
         })),
         upgradeInventory: playerResponse.player.inventory.upgrades ?? [],
