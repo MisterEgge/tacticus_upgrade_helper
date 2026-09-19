@@ -316,6 +316,14 @@ async function main()
         },
         campaignProgress: playerResponse.player.progress?.campaigns ?? [],
         upgradeInventory: playerResponse.player.inventory.upgrades ?? [],
+        upgradeInventory: playerResponse.player.inventory.upgrades ?? [],
+        campaignProgress: playerResponse.player.progress.campaigns.map((campaign) => ({
+            id: campaign.id,
+            name: campaign.name,
+            type: campaign.type,
+            highestUnlockedBattle: campaign.battles.reduce((max, battle) => Math.max(max, battle.battleIndex + 1), 0),
+            battles: campaign.battles
+        })),
         unequippedInventory: playerResponse.player.inventory.items
     };
 
