@@ -83,6 +83,9 @@ type AbilityQueueRow = {
     accountPriority: number;
     focus: string;
     basis: string;
+    communityActiveTarget: string;
+    communityPassiveTarget: string;
+    targetConfidence: string;
 };
 
 const RARITY_BY_PROGRESSION = [
@@ -141,7 +144,10 @@ async function main()
                 passiveTo17: passive.level > 0 && passive.level < 17,
                 accountPriority: priority,
                 focus: target?.focus ?? "Baseline / review",
-                basis: target?.confidence ?? "User level-17 baseline"
+                basis: target?.confidence ?? "User level-17 baseline",
+                communityActiveTarget: target?.active ?? "Review",
+                communityPassiveTarget: target?.passive ?? "Review",
+                targetConfidence: target?.confidence ?? "baseline-only"
             };
 
         })
