@@ -11,3 +11,8 @@ type BreakpointFile=Record<string,CharacterAbilityGuidance|unknown>;
 let breakpointCache:BreakpointFile|null=null;
 export async function getAbilityBreakpoints(){if(!breakpointCache)breakpointCache=JSON.parse(await fs.readFile(path.join(process.cwd(),"config","ability_breakpoints.json"),"utf8")) as BreakpointFile;return breakpointCache;}
 export async function getAbilityGuidance(name:string){const d=await getAbilityBreakpoints();return d[name] as CharacterAbilityGuidance|undefined;}
+
+export type CampaignTarget={rank?:string;active?:string;passive?:string;role?:string;confidence?:string;note?:string};
+export type CampaignTargetFile={_meta:Record<string,unknown>;campaigns:Record<string,{status:string;characters:Record<string,CampaignTarget>} >};
+let campaignTargetCache:CampaignTargetFile|null=null;
+export async function getCampaignTargets(){if(!campaignTargetCache)campaignTargetCache=JSON.parse(await fs.readFile(path.join(process.cwd(),"config","campaign_elite_targets.json"),"utf8")) as CampaignTargetFile;return campaignTargetCache;}
