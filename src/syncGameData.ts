@@ -6,4 +6,5 @@ const files=[
 ];
 await fs.mkdir("data/game",{recursive:true});
 for(const file of files){const r=await fetch(file.url);if(!r.ok)throw new Error(`${file.name}: HTTP ${r.status}`);const text=await r.text();JSON.parse(text);await fs.writeFile(`data/game/${file.name}`,text);console.log(`Synced ${file.name} (${Math.round(text.length/1024)} KB)`);}
+console.log("Campaign data source validated.");
 await fs.writeFile("data/game/source.json",JSON.stringify({source:"svehera/tacticusplanner",branch:"develop",syncedAt:new Date().toISOString()},null,2));
