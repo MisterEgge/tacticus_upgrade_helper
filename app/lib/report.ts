@@ -22,7 +22,7 @@ export type Report = {
   summary:{units:number;charactersWithAbilitiesBelow17:number;individualAbilityUpgradesTo17:number;legendaryUnderTierSlots:number};
   abilityQueue:AbilityRow[]; roster:RosterUnit[]; unequippedInventory:InventoryItem[];
   equipmentAllocation:{equipNow:EquipmentRow[];buyWatch:EquipmentRow[];compatibilityUnknown:EquipmentRow[]};
-  campaignProgress?:Array<{id:string;name:string;type:"Standard"|"Mirror"|"Elite"|"EliteMirror";highestUnlockedBattle:number;battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number}>}>;
+  campaignProgress?:Array<{id:string;name:string;type:"Standard"|"Mirror"|"Elite"|"EliteMirror";highestUnlockedBattle:number;highestCompletedBattle?:number;battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number}>}>;
   upgradeInventory?:Array<{id:string;name?:string;amount:number}>;
 };
 export async function getReport():Promise<Report|null>{
