@@ -1,6 +1,7 @@
 import Nav from "../components/Nav";import{getReport,targetName}from"../lib/report";import InventoryTable from "./InventoryTable";
 export default async function Inventory(){const r=await getReport();if(!r)return <main><Nav/><div className="empty">Run <code>npm run refresh</code>.</div></main>;
-const needs=[...r.equipmentAllocation.equipNow,...r.equipmentAllocation.buyWatch].map(x=>({item:targetName(x),character:x.character,priority:x.accountPriority}));
+const rawNeeds=[...r.equipmentAllocation.equipNow,...r.equipmentAllocation.buyWatch].map(x=>({item:targetName(x),character:x.character,priority:x.accountPriority}));
+const needs=[...new Map(rawNeeds.map(n=>[`${n.item}::${n.character}`,n])).values()];
 const demandNames=new Set(needs.map(n=>n.item));const rows=r.unequippedInventory.map(i=>{const demand=needs.filter(n=>n.item===(i.name??i.id)).sort((a,b)=>b.priority-a.priority);return {...i,demandCount:demand.length,net:i.amount-demand.length,recipients:demand,topRecipient:demand[0]?.character??"",topPriority:demand[0]?.priority??0}});
 const missing=[...new Set(needs.filter(n=>!r.unequippedInventory.some(i=>(i.name??i.id)===n.item)).map(n=>n.item))].map(item=>{const demand=needs.filter(n=>n.item===item).sort((a,b)=>b.priority-a.priority);return {id:item,name:item,level:0,amount:0,demandCount:demand.length,net:-demand.length,recipients:demand,topRecipient:demand[0]?.character??"",topPriority:demand[0]?.priority??0}});
 const all=[...rows,...missing].sort((a,b)=>b.topPriority-a.topPriority||a.net-b.net);
