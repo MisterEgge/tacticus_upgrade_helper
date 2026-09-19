@@ -11,7 +11,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "sync:game-data": "tsx src/syncGameData.ts"
+    "sync:game-data": "tsx src/syncGameData.ts",
+    "sync:portraits": "tsx src/syncPortraits.ts",
+    "sync:assets": "npm run sync:game-data && npm run sync:portraits"
   },
   "keywords": [
     "tacticus"
