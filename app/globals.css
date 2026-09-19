@@ -37,3 +37,5 @@ th { color:#8794a7; font-size:11px; letter-spacing:.1em; text-transform:uppercas
 @media(max-width:800px){header{align-items:flex-start}h1{font-size:32px}.power{font-size:13px}.tablePanel{padding:12px}.tablePanel .tableWrap{margin:0 -12px -12px}.tableTools{align-items:stretch;flex-direction:column}.tableTools input{width:100%}.tableTools span{align-self:flex-end}}
 
 .filterChips{display:flex;gap:8px;flex-wrap:wrap;margin:-4px 0 16px}.filterChips button{border:1px solid #303b4b;background:#0c1118;color:#9da9ba;border-radius:999px;padding:7px 11px;cursor:pointer;font:inherit;font-size:12px;font-weight:700}.filterChips button:hover,.filterChips button.active{color:#edf1f7;border-color:#65758b;background:#1b2330}.filterChips b{margin-left:4px;color:#7f8b9c}
+
+.traitLine{color:#7f8b9c;font-size:13px;margin:10px 0 0}.detailPanel{margin-top:18px}.detailCopy{padding:18px 24px}.detailCopy p{margin:0 0 8px}.detailCopy p:last-child{margin-bottom:0}
