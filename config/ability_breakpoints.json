@@ -4,9 +4,10 @@
     "schemaVersion": 1,
     "notes": "Community-derived planning guidance. Breakpoints are planning targets, not game rules. Missing characters remain explicitly unreviewed rather than guessed.",
     "baseline": "Raise useful abilities to 9 immediately; current account-wide uncommon project targets useful abilities to 17.",
-    "lastReviewed": "2026-09-18",
+    "lastReviewed": "2026-09-19",
     "reviewedCharacters": 29,
-    "evidencePolicy": "Targets require character-specific community evidence or a clearly documented mechanical breakpoint; generic rarity caps alone are not treated as recommendations."
+    "evidencePolicy": "Targets require character-specific community evidence or a clearly documented mechanical breakpoint; generic rarity caps alone are not treated as recommendations.",
+    "reviewedCount": 32
   },
   "Bellator": {
     "active": {
@@ -333,74 +334,74 @@
   },
   "Aleph-Null": {
     "active": {
+      "practical": "35-36",
+      "high": "44-50",
+      "priority": "high",
+      "modes": [
+        "Campaign",
+        "LRE"
+      ],
+      "note": "Scarabs are a major campaign/LRE carry; community repeatedly treats the active as a core early Xenos investment."
+    },
+    "passive": {
+      "practical": "35-36",
+      "high": "44",
+      "priority": "high",
+      "modes": [
+        "LRE",
+        "Mechanical"
+      ],
+      "note": "Healing/damage remains useful at high levels; exact ceiling depends on mechanical-team use."
+    },
+    "confidence": "medium"
+  },
+  "Snotflogga": {
+    "active": {
+      "practical": "35-36",
+      "high": "44",
+      "priority": "medium",
+      "modes": [
+        "Campaign",
+        "LRE"
+      ],
+      "note": "Useful summons, but community generally favors the passive when badges are constrained."
+    },
+    "passive": {
       "practical": "36",
       "high": "44-50",
       "priority": "high",
       "modes": [
         "Campaign",
         "LRE",
-        "Guild Raid"
+        "Onslaught"
       ],
-      "note": "Scarabs are the main badge sink; community guidance repeatedly prioritizes the active."
-    },
-    "passive": {
-      "practical": "35-36",
-      "high": "44",
-      "priority": "medium",
-      "modes": [
-        "Campaign",
-        "LRE",
-        "AdMech"
-      ],
-      "note": "Useful sustain/Mechanical synergy after the active is established."
-    },
-    "confidence": "high"
-  },
-  "Snotflogga": {
-    "active": {
-      "practical": "17-35",
-      "high": "35",
-      "priority": "low",
-      "modes": [
-        "Campaign",
-        "LRE"
-      ],
-      "note": "Generally secondary to the passive."
-    },
-    "passive": {
-      "practical": "44",
-      "high": "50+",
-      "priority": "max",
-      "modes": [
-        "Campaign",
-        "LRE"
-      ],
-      "note": "Community consistently treats the passive/grot engine as the long-term investment; Mythic levels can matter for one-shot thresholds."
+      "note": "Signature grot engine and the more common first investment."
     },
     "confidence": "high"
   },
   "Gulgortz": {
     "active": {
-      "practical": "35-36",
-      "high": "44+",
+      "practical": "41-44",
+      "high": "50",
       "priority": "high",
       "modes": [
         "Campaign",
-        "Arena"
+        "Guild Raid",
+        "LRE"
       ],
-      "note": "Current community advice identifies Boss G's active as a key campaign investment."
+      "note": "Primary investment: summons plus Waaagh utility; community commonly prioritizes it over the passive."
     },
     "passive": {
-      "practical": "35",
-      "high": "44",
+      "practical": "35-36",
+      "high": "41-44",
       "priority": "medium",
       "modes": [
         "Campaign",
-        "Arena"
+        "LRE"
       ],
-      "note": "Useful after the active; exact high-end value is more roster dependent."
+      "note": "Strong extra damage, but commonly deferred behind the active and other scarce Xenos badge sinks."
     },
-    "confidence": "medium"
+    "confidence": "high"
   },
   "Corrodius": {
     "active": {
@@ -497,10 +498,9 @@
       "high": "35",
       "priority": "low",
       "modes": [
-        "Campaign",
-        "Arena"
+        "Campaign"
       ],
-      "note": "Usually secondary."
+      "note": "Community generally treats the active as secondary and often leaves it low."
     },
     "passive": {
       "practical": "35-36",
@@ -510,9 +510,9 @@
         "Guild Raid",
         "Campaign"
       ],
-      "note": "Buff passive is the primary reason to invest badges."
+      "note": "Crit aura is the defining investment and is consistently prioritized over the active."
     },
-    "confidence": "medium"
+    "confidence": "high"
   },
   "Thaddeus": {
     "active": {
@@ -587,25 +587,25 @@
   "Ragnar": {
     "active": {
       "practical": "44",
-      "high": "50+",
+      "high": "50",
       "priority": "max",
       "modes": [
         "Guild Raid",
         "Arena"
       ],
-      "note": "Team burst active is the core Ragnar-team investment."
+      "note": "Community consistently recommends pushing the active very high for melee-team burst."
     },
     "passive": {
-      "practical": "35-36",
-      "high": "44+",
-      "priority": "high",
+      "practical": "36",
+      "high": "44",
+      "priority": "medium",
       "modes": [
-        "Guild Raid",
-        "Arena"
+        "Arena",
+        "Space Wolves"
       ],
-      "note": "Strong secondary investment once the active is established."
+      "note": "Level 36 is a frequently cited breakpoint; active normally gets priority afterward."
     },
-    "confidence": "medium"
+    "confidence": "high"
   },
   "Neurothrope": {
     "active": {
@@ -671,6 +671,74 @@
         "Guild War"
       ],
       "note": "Base stats/traits matter more than pushing badges."
+    },
+    "confidence": "medium"
+  },
+  "Calandis": {
+    "active": {
+      "practical": "17-26",
+      "high": "26-35",
+      "priority": "low",
+      "modes": [
+        "Tournament Arena",
+        "Campaign"
+      ],
+      "note": "Much of the active's utility is front-loaded; older community guidance explicitly notes limited benefit from heavy leveling."
+    },
+    "passive": {
+      "practical": "26-35",
+      "high": "35-44",
+      "priority": "medium",
+      "modes": [
+        "Tournament Arena"
+      ],
+      "note": "Useful PvP retaliation, but not normally a premium Xenos badge sink."
+    },
+    "confidence": "medium"
+  },
+  "Sho'syl": {
+    "active": {
+      "practical": "26-35",
+      "high": "35-44",
+      "priority": "medium",
+      "modes": [
+        "Guild Raid",
+        "LRE"
+      ],
+      "note": "Useful drone control/scaling, but usually secondary."
+    },
+    "passive": {
+      "practical": "35-36",
+      "high": "44-50",
+      "priority": "high",
+      "modes": [
+        "Guild Raid",
+        "LRE"
+      ],
+      "note": "Drone scaling is widely treated as Sho'syl's primary ability investment."
+    },
+    "confidence": "high"
+  },
+  "Nauseous": {
+    "active": {
+      "practical": "35",
+      "high": "44",
+      "priority": "medium",
+      "modes": [
+        "LRE",
+        "Guild War"
+      ],
+      "note": "Useful emergency sustain; usually secondary to the passive."
+    },
+    "passive": {
+      "practical": "44",
+      "high": "50",
+      "priority": "high",
+      "modes": [
+        "LRE",
+        "Guild War"
+      ],
+      "note": "Core repeatable Chaos sustain and the usual long-term priority."
     },
     "confidence": "medium"
   }
