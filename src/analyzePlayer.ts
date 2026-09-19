@@ -39,7 +39,7 @@ type PlayerResponse = {
             powerLevel: number;
         };
         units: Unit[];
-        progress?: { campaigns?: Array<{ id:string; name:string; type:"Standard"|"Mirror"|"Elite"|"EliteMirror"; battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number}> }> };
+        progress?: { campaigns?: Array<{ id:string; name:string; type:"Standard"|"Mirror"|"Elite"|"EliteMirror"; battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number;stars?:number;medals?:number;score?:number;completed?:boolean}> }> };
         inventory: {
             upgrades?: Array<{id:string;name?:string;amount:number}>;
             items: Array<{
@@ -314,16 +314,14 @@ async function main()
             buyWatch,
             compatibilityUnknown
         },
-        campaignProgress: playerResponse.player.progress?.campaigns ?? [],
-        upgradeInventory: playerResponse.player.inventory.upgrades ?? [],
-        upgradeInventory: playerResponse.player.inventory.upgrades ?? [],
-        campaignProgress: playerResponse.player.progress.campaigns.map((campaign) => ({
+        campaignProgress: (playerResponse.player.progress?.campaigns ?? []).map((campaign) => ({
             id: campaign.id,
             name: campaign.name,
             type: campaign.type,
             highestUnlockedBattle: campaign.battles.reduce((max, battle) => Math.max(max, battle.battleIndex + 1), 0),
             battles: campaign.battles
         })),
+        upgradeInventory: playerResponse.player.inventory.upgrades ?? [],
         unequippedInventory: playerResponse.player.inventory.items
     };
 
