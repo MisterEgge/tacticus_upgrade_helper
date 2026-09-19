@@ -27,8 +27,8 @@ export async function getReport():Promise<Report|null>{
   try{
     const report=JSON.parse(await fs.readFile(path.join(process.cwd(),"output","upgrade-report.json"),"utf8")) as Report;
     const catalog=await getCharacterCatalog();
-    const byName=new Map(catalog.characters.flatMap(c=>[[c.name,c],[c.fullName,c],[c.shortName,c]] as const));
-    report.roster=report.roster.map(u=>({...u,icon:byName.get(u.name)?.icon??""}));
+    const byKey=new Map(catalog.characters.flatMap(c=>[[c.id.toLowerCase(),c],[c.name.toLowerCase(),c],[c.fullName.toLowerCase(),c],[c.shortName.toLowerCase(),c]] as const));
+    report.roster=report.roster.map(u=>{const c=byKey.get(u.id.toLowerCase())??byKey.get(u.name.toLowerCase());return {...u,icon:c?.icon??""};});
     return report;
   }catch{return null;}
 }
