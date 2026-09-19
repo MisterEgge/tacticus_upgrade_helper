@@ -23,3 +23,10 @@
 - [ ] Review every unreviewed character against current community discussion and ability scaling; never auto-fill unsupported targets.
 - [ ] Add source/evidence metadata per character so recommendations can be re-audited after balance patches.
 - [ ] Add Machines of War as a separate ability-investment dataset after the character roster is complete.
+
+## Elite campaign planner
+- [x] Cross-reference live Elite campaign progression with current mandatory-character ranks and ability levels.
+- [ ] Confirm whether official player API exposes per-battle star/medal state; do not infer 3-star completion from unlock state alone.
+- [ ] Persist progression snapshots over time so future recommendations can use the actual ranks/abilities present when new Elite milestones are reached.
+- [ ] Research community-efficient 3-star targets for every mandatory campaign character and separate carry vs survival-only investment.
+- [ ] Feed campaign target rank gaps into multi-rank farming demand.
