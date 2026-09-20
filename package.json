@@ -7,7 +7,7 @@
     "discover": "tsx src/discover.ts",
     "analyze": "tsx src/analyzePlayer.ts",
     "refresh": "npm run fetch && npm run snapshot:campaigns && npm run analyze",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
