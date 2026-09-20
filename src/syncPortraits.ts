@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";import path from "node:path";
 const base="https://raw.githubusercontent.com/svehera/tacticusplanner/develop/";
 const assetBase=base+"src/assets/images/";
-type Portrait={id:string;name:string;asset?:string};
+type Portrait={id:string;name:string;asset?:string|undefined};
 async function json<T>(url:string):Promise<T>{const r=await fetch(url);if(!r.ok)throw new Error(`${url}: HTTP ${r.status}`);return r.json() as Promise<T>;}
 const characters=await json<Array<{id:string;Name:string;RoundIcon?:string;Icon?:string}>>(base+"src/fsd/4-entities/character/data/new-character-data.json");
 const mowData=await json<{mows:Array<{snowprintId:string;name:string;roundIcon?:string;icon?:string}>}>(base+"src/fsd/4-entities/mow/data/new-mow-data.json");
