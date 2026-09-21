@@ -4,7 +4,6 @@ export type CleanoutCatalogCharacter = { id: string; equipment: string[] };
 export type CleanoutDemand = { recommendedItemId?: string; compatibleLegendaryItemIds?: string[]; preferredLegendaryItemIds?: string[] };
 export type CleanoutRow = CleanoutInventoryItem & { keep: number; scrap: number; status: "SCRAP SAFE" | "EXCESS" | "KEEP / RESERVED" | "UNKNOWN — DO NOT SCRAP"; reason: string };
 
-const rarityCode = (id: string) => id.match(/_([CUR EL M])\d{3}$/x);
 function rarityIndexFromId(id: string): number | null
 {
 
