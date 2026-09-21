@@ -17,7 +17,10 @@
           "note": "Keep alive in restricted missions; stronger optional Imperial carries can do most damage.",
           "evidence": [
             "indom-2026-07",
-            "indom-2025-12"
+            "indom-2025-12",
+            "terminus-indomitus-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Certus": {
@@ -27,7 +30,10 @@
           "note": "S1 is a conservative survivability target; B2 clears exist but were described as retry-heavy.",
           "evidence": [
             "indom-2026-07",
-            "indom-2025-12"
+            "indom-2025-12",
+            "terminus-indomitus-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Bellator": {
@@ -38,7 +44,10 @@
           "confidence": "medium",
           "note": "Core investment target; summons and durability provide the safest mandatory-character carry path.",
           "evidence": [
-            "indom-2026-07"
+            "indom-2026-07",
+            "terminus-indomitus-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         }
       }
@@ -53,7 +62,10 @@
           "note": "Can often be hidden while Aleph or optional Necrons carry; G1 is a comfort target rather than an efficient floor.",
           "evidence": [
             "indom-mirror-2026-09",
-            "indom-mirror-2025-02"
+            "indom-mirror-2025-02",
+            "terminus-indomitus-mirror-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Imospekh": {
@@ -64,7 +76,10 @@
           "note": "Investment varies strongly with optional Necrons; higher ranks reduce late-node one-shot risk.",
           "evidence": [
             "indom-mirror-2026-09",
-            "indom-mirror-2025-02"
+            "indom-mirror-2025-02",
+            "terminus-indomitus-mirror-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Aleph-Null": {
@@ -76,7 +91,10 @@
           "note": "Primary mandatory investment. Recent reworks and Anuphet/Thotmek can reduce how far Aleph must be pushed; D1 solo-carry strategies are intentionally not the default target.",
           "evidence": [
             "indom-mirror-2026-09",
-            "indom-mirror-2025-02"
+            "indom-mirror-2025-02",
+            "terminus-indomitus-mirror-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         }
       }
@@ -93,7 +111,10 @@
           "note": "G1 appears sufficient when paired with strong Chaos support such as Rotbone/Abraxas.",
           "evidence": [
             "foc-2024-03",
-            "foc-2024-10"
+            "foc-2024-10",
+            "terminus-foc-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Archimatos": {
@@ -105,7 +126,10 @@
           "note": "Glassier mandatory unit; summons are valuable while allied Chaos units absorb pressure.",
           "evidence": [
             "foc-2024-03",
-            "foc-2024-10"
+            "foc-2024-10",
+            "terminus-foc-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Haarken": {
@@ -117,7 +141,10 @@
           "note": "Keep investment focused on stats/survival; reported clears do not require heavy ability investment.",
           "evidence": [
             "foc-2024-03",
-            "foc-2024-10"
+            "foc-2024-10",
+            "terminus-foc-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         }
       }
@@ -140,7 +167,10 @@
           "note": "Can remain low when Boss and Snot carry; keep back and repair.",
           "evidence": [
             "oct-2026-09",
-            "oct-2025-02"
+            "oct-2025-02",
+            "terminus-octarius-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Snappawrecka": {
@@ -150,7 +180,10 @@
           "note": "Low-investment passenger target; protect in back line.",
           "evidence": [
             "oct-2026-09",
-            "oct-2025-02"
+            "oct-2025-02",
+            "terminus-octarius-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Gulgortz": {
@@ -162,7 +195,10 @@
           "note": "Recent full-clear evidence specifically identifies G2 Boss and active 44 as a strong efficient route.",
           "evidence": [
             "oct-2026-09",
-            "oct-2025-02"
+            "oct-2025-02",
+            "terminus-octarius-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         }
       }
@@ -176,7 +212,10 @@
           "confidence": "medium",
           "note": "Optional Imperial carries reduce required Templar investment.",
           "evidence": [
-            "oct-mirror-2025-02"
+            "oct-mirror-2025-02",
+            "terminus-octarius-mirror-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Burchard": {
@@ -185,7 +224,10 @@
           "confidence": "medium",
           "note": "Best core Templar investment among the mandatory trio in the cited full clear.",
           "evidence": [
-            "oct-mirror-2025-02"
+            "oct-mirror-2025-02",
+            "terminus-octarius-mirror-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Thoread": {
@@ -194,7 +236,10 @@
           "confidence": "medium",
           "note": "Keep investment limited when strong Imperial carries are available.",
           "evidence": [
-            "oct-mirror-2025-02"
+            "oct-mirror-2025-02",
+            "terminus-octarius-mirror-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         }
       }
@@ -209,7 +254,10 @@
           "note": "G1 is a commonly cited efficient floor, but late nodes can require stronger gear, positioning, or more roster support.",
           "evidence": [
             "saim-2026-03",
-            "saim-2025-07"
+            "saim-2025-07",
+            "terminus-saim-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Aethana": {
@@ -219,7 +267,10 @@
           "note": "Late Elite survivability is the limiting factor; stronger optional Aeldari can reduce required investment.",
           "evidence": [
             "saim-2026-03",
-            "saim-2025-07"
+            "saim-2025-07",
+            "terminus-saim-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Eldryon": {
@@ -230,7 +281,10 @@
           "note": "High-value investment outside campaign as well; late-node reports vary widely with composition.",
           "evidence": [
             "saim-2026-03",
-            "saim-2025-07"
+            "saim-2025-07",
+            "terminus-saim-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         }
       }
@@ -244,7 +298,10 @@
           "confidence": "low",
           "note": "Exact efficient rank floor remains under-researched; Abraxas should receive the bulk of investment.",
           "evidence": [
-            "saim-mirror-2025-09"
+            "saim-mirror-2025-09",
+            "terminus-saim-mirror-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Toth": {
@@ -253,7 +310,10 @@
           "confidence": "low",
           "note": "Exact efficient floor remains under-researched; prioritize surviving while Abraxas carries.",
           "evidence": [
-            "saim-mirror-2025-09"
+            "saim-mirror-2025-09",
+            "terminus-saim-mirror-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         },
         "Abraxas": {
@@ -264,7 +324,10 @@
           "confidence": "medium",
           "note": "Clear evidence identifies Abraxas as the central carry; one reported final 3-star required 41/41.",
           "evidence": [
-            "saim-mirror-2025-09"
+            "saim-mirror-2025-09",
+            "terminus-saim-mirror-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
           ]
         }
       }
