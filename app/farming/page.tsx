@@ -13,7 +13,10 @@ export default async function Farming({ searchParams }: { searchParams: Promise<
 
     const [data, report, query, catalog, campaignTargets] = await Promise.all([loadFarmingData(), getReport(), searchParams, getCharacterCatalog(), getCampaignTargets()]);
     if (!data || !report) return <main><Nav/><header><h1>Personal Farming Queue</h1></header><div className="empty">Account or farming data unavailable. Run <code>npm run sync:game-data</code> and <code>npm run refresh</code>.</div></main>;
-    const [priorities, battleCatalog] = await Promise.all([\n        readFile("config/character_priorities.json", "utf8").then(value => JSON.parse(value) as Record<string, { priority: number }>),\n        readFile("data/game/campaign-battles.json", "utf8").then(value => Object.values(JSON.parse(value) as Record<string, CampaignBattleDefinition>))\n    ]);
+    const [priorities, battleCatalog] = await Promise.all([
+        readFile("config/character_priorities.json", "utf8").then(value => JSON.parse(value) as Record<string, { priority: number }>),
+        readFile("data/game/campaign-battles.json", "utf8").then(value => Object.values(JSON.parse(value) as Record<string, CampaignBattleDefinition>))
+    ]);
     const progress = progressFromReport(report.campaignProgress ?? []);
     const characterIds = new Set(catalog.characters.map(c => c.id));
     const rankRoster = report.roster.filter(u => characterIds.has(u.id));
