@@ -154,3 +154,45 @@ export function abilityGap(current: number | null | undefined, target?: string):
     return Math.max(0, level - current);
 
 }
+
+export type CampaignRecommendationInput = {
+    campaign: string;
+    characterId: string;
+    characterName: string;
+    currentRank: number | null;
+    targetRank?: string;
+    role?: string;
+    confidence?: string;
+    accountPriority?: number;
+};
+
+export type CampaignRecommendation = CampaignRecommendationInput & {
+    targetRankIndex: number | null;
+    rankStepsRemaining: number | null;
+    recommendationPriority: number;
+    reason: string;
+};
+
+export function campaignRecommendationPriority(input: CampaignRecommendationInput): CampaignRecommendation
+{
+
+    const targetRankIndex = campaignRankIndex(input.targetRank);
+    const rankStepsRemaining = campaignRankGap(input.currentRank, input.targetRank);
+    if (targetRankIndex === null || rankStepsRemaining === null)
+        return { ...input, targetRankIndex, rankStepsRemaining, recommendationPriority: 0, reason: "Target or live account rank unavailable" };
+    if (rankStepsRemaining === 0)
+        return { ...input, targetRankIndex, rankStepsRemaining, recommendationPriority: 0, reason: "Campaign rank target already met" };
+    const role = (input.role ?? "").toLowerCase();
+    const roleWeight = role.includes("primary") || role.includes("carry") ? 30 : role.includes("contributor") || role.includes("support") ? 15 : 5;
+    const confidenceWeight = input.confidence === "high" ? 15 : input.confidence === "medium" ? 8 : 0;
+    const accountWeight = Math.round((input.accountPriority ?? 0) / 10);
+    const gapWeight = Math.min(20, rankStepsRemaining * 4);
+    return {
+        ...input,
+        targetRankIndex,
+        rankStepsRemaining,
+        recommendationPriority: roleWeight + confidenceWeight + accountWeight + gapWeight,
+        reason: (input.role ?? "campaign requirement") + " · " + rankStepsRemaining + " rank step(s) below " + input.targetRank
+    };
+
+}
