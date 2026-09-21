@@ -51,7 +51,7 @@
 - [ ] Review full ability catalog sources and keep Machines of War separate.
 
 ## Technical debt
-- [ ] Collapse duplicate campaign farming goals by stable character ID and keep the highest justified target.
-- [ ] Make low-confidence campaign targets display-only unless explicitly marked eligible for automatic farming.
+- [x] Collapse duplicate campaign farming goals by stable character ID and keep the highest justified target.
+- [x] Make low-confidence campaign targets display-only unless explicitly marked eligible for automatic farming.
 - [ ] Consolidate duplicated campaign rank-name constants.
 - [ ] Replace dense one-line page/component source where it materially hurts maintainability.
