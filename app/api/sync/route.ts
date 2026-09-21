@@ -1,18 +1,17 @@
-import { execFile } from "node:child_process";
+import { exec } from "node:child_process";
 import { promisify } from "node:util";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const execFileAsync = promisify(execFile);
+const execAsync = promisify(exec);
 let syncInProgress = false;
 
 async function runScript(script: string): Promise<void>
 {
 
-    const npx = process.platform === "win32" ? "npx.cmd" : "npx";
-    await execFileAsync(npx, ["tsx", script], { cwd: process.cwd(), env: process.env, maxBuffer: 10 * 1024 * 1024 });
+    await execAsync(`npx tsx ${script}`, { cwd: process.cwd(), env: process.env, maxBuffer: 10 * 1024 * 1024 });
 
 }
 
