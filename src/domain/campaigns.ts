@@ -160,10 +160,10 @@ export type CampaignRecommendationInput = {
     characterId: string;
     characterName: string;
     currentRank: number | null;
-    targetRank?: string;
-    role?: string;
-    confidence?: string;
-    accountPriority?: number;
+    targetRank?: string | undefined;
+    role?: string | undefined;
+    confidence?: string | undefined;
+    accountPriority?: number | undefined;
 };
 
 export type CampaignRecommendation = CampaignRecommendationInput & {
