@@ -11,7 +11,9 @@ test("lower rarity excess is scrap-safe after every proven recipient already exc
             { id: "a", name: "A", progressionIndex: 12, items: [{ slotId: "Slot1", id: "I_Test_E001", rarity: "Epic", level: 1 }] },
             { id: "b", name: "B", progressionIndex: 9, items: [{ slotId: "Slot1", id: "I_Test_E001", rarity: "Epic", level: 1 }] }
         ],
-        [],\n        [{ id: "a", equipment: ["I_Test"] }, { id: "b", equipment: ["I_Test"] }]\n    );
+        [],
+        [{ id: "a", equipment: ["I_Test"] }, { id: "b", equipment: ["I_Test"] }]
+    );
     assert.equal(rows[0]!.status, "SCRAP SAFE");
     assert.equal(rows[0]!.scrap, 4);
 
@@ -26,7 +28,9 @@ test("future higher-rarity recipient reserves copies and only surplus is scrap",
             { id: "a", name: "A", progressionIndex: 12, items: [{ slotId: "Slot1", id: "I_Test_E001", rarity: "Epic", level: 1 }] },
             { id: "b", name: "B", progressionIndex: 12, items: [{ slotId: "Slot1", id: "I_Test_E001", rarity: "Epic", level: 1 }] }
         ],
-        [],\n        [{ id: "a", equipment: ["I_Test"] }, { id: "b", equipment: ["I_Test"] }]\n    );
+        [],
+        [{ id: "a", equipment: ["I_Test"] }, { id: "b", equipment: ["I_Test"] }]
+    );
     assert.equal(rows[0]!.keep, 2);
     assert.equal(rows[0]!.scrap, 1);
     assert.equal(rows[0]!.status, "EXCESS");
