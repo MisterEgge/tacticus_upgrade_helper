@@ -1,5 +1,6 @@
 export type CleanoutInventoryItem = { id: string; name?: string; level: number; amount: number };
-export type CleanoutUnit = { id: string; name: string; progressionIndex: number; items: Array<{ slotId: string; id: string; rarity?: string; level: number }> };\nexport type CleanoutCatalogCharacter = { id: string; equipment: string[] };
+export type CleanoutUnit = { id: string; name: string; progressionIndex: number; items: Array<{ slotId: string; id: string; rarity?: string; level: number }> };
+export type CleanoutCatalogCharacter = { id: string; equipment: string[] };
 export type CleanoutDemand = { recommendedItemId?: string; compatibleLegendaryItemIds?: string[]; preferredLegendaryItemIds?: string[] };
 export type CleanoutRow = CleanoutInventoryItem & { keep: number; scrap: number; status: "SCRAP SAFE" | "EXCESS" | "KEEP / RESERVED" | "UNKNOWN — DO NOT SCRAP"; reason: string };
 
@@ -28,7 +29,7 @@ function progressionRarityIndex(progressionIndex: number): number
 export function inventoryCleanout(items: CleanoutInventoryItem[], units: CleanoutUnit[], demands: CleanoutDemand[], catalog: CleanoutCatalogCharacter[]): CleanoutRow[]
 {
 
-    const catalogById = new Map(catalog.map(character => [character.id, character]));\n    const demandIds = new Set(demands.flatMap(d => [d.recommendedItemId, ...(d.compatibleLegendaryItemIds ?? []), ...(d.preferredLegendaryItemIds ?? [])].filter((x): x is string => !!x)));
+    const demandIds = new Set(demands.flatMap(d => [d.recommendedItemId, ...(d.compatibleLegendaryItemIds ?? []), ...(d.preferredLegendaryItemIds ?? [])].filter((x): x is string => !!x)));
     return items.map(item =>
     {
 
