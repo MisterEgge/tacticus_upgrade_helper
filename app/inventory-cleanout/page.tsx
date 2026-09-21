@@ -8,9 +8,7 @@ export default async function InventoryCleanout()
 
     const [report, catalog] = await Promise.all([getReport(), getCharacterCatalog()]);
     if (!report) return <main><Nav/><div className="empty">Run <code>npm run refresh</code>.</div></main>;
-    const catalogIds = new Set(catalog.characters.map(character => character.id));
-    const completeCharacterCatalog = report.roster.every(unit => catalogIds.has(unit.id));
-    const rows = inventoryCleanout(report.unequippedInventory, report.roster, [...report.equipmentAllocation.equipNow, ...report.equipmentAllocation.buyWatch], completeCharacterCatalog);
+    const rows = inventoryCleanout(report.unequippedInventory, report.roster, [...report.equipmentAllocation.equipNow, ...report.equipmentAllocation.buyWatch], catalog.characters);
     const safe = rows.filter(row => row.scrap > 0 && row.status !== "UNKNOWN — DO NOT SCRAP");
     const unknown = rows.filter(row => row.status === "UNKNOWN — DO NOT SCRAP");
     return <main><Nav/><header><div><p className="eyebrow">INVENTORY</p><h1>Inventory Cleanout</h1><p className="sub">Conservative salvage audit. Items are only marked scrap-safe when the current account proves every verified same-family recipient already meets or exceeds that rarity. Unknown compatibility is never treated as scrap-safe.</p></div><div className="power">{safe.reduce((sum,row)=>sum+row.scrap,0)}<strong> copies identified</strong></div></header>
