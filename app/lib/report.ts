@@ -13,7 +13,7 @@ export type AbilityRow = {
 };
 export type RosterUnit = {
   id:string; icon?:string; name:string; faction:string; grandAlliance:string; rarity:string; rank:number; xpLevel:number;
-  progressionIndex:number; shards:number; mythicShards:number; abilities:Array<{id:string;level:number}>;
+  upgrades?:number[]; progressionIndex:number; shards:number; mythicShards:number; abilities:Array<{id:string;level:number}>;
   items:Array<{slotId:string;level:number;id:string;name?:string;rarity?:string}>;
 };
 export type InventoryItem = { id:string; name?:string; level:number; amount:number };

@@ -43,3 +43,6 @@ th { color:#8794a7; font-size:11px; letter-spacing:.1em; text-transform:uppercas
 .targetGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}.targetGrid>div{border:1px solid #27303d;background:#0c1118;border-radius:10px;padding:12px}.targetGrid small{font-size:10px;letter-spacing:.08em}.targetGrid strong{display:block;font-size:20px;margin-top:4px}@media(max-width:600px){.targetGrid{grid-template-columns:1fr}}
 
 .targetGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:16px}.targetGrid>div{border:1px solid #27303d;background:#0c1118;border-radius:12px;padding:14px}.targetGrid strong{display:block;font-size:22px;margin-top:4px}@media(max-width:600px){.targetGrid{grid-template-columns:1fr}}
+
+.goalForm{display:flex;flex-wrap:wrap;align-items:end;gap:16px;padding:18px;margin-top:24px}.goalForm label{display:flex;flex-direction:column;gap:8px;flex:1;min-width:180px}.goalForm select,.goalForm button{font:inherit;color:#edf1f7;background:#1b2330;border:1px solid #65758b;border-radius:8px;padding:10px;max-width:100%}.goalForm button{cursor:pointer}.detailPanel>p.sub{padding:12px 24px;margin:0}
+@media(max-width:600px){header,.sectionTitle{flex-wrap:wrap}.goalForm{flex-direction:column;align-items:stretch}.detailPanel table{min-width:800px}}

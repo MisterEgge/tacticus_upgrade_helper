@@ -22,6 +22,7 @@ type Unit = {
     grandAlliance?: "Imperial" | "Xenos" | "Chaos";
     progressionIndex: number;
     rank: number;
+    upgrades?: number[];
     xpLevel: number;
     abilities: Ability[];
     items: UnitItem[];
@@ -190,6 +191,7 @@ async function main()
             grandAlliance: unit.grandAlliance ?? "",
             rarity: rarityFor(unit),
             rank: unit.rank,
+            upgrades: unit.upgrades,
             xpLevel: unit.xpLevel,
             progressionIndex: unit.progressionIndex,
             shards: unit.shards ?? 0,
@@ -210,7 +212,7 @@ async function main()
             ...campaignProgress(campaign),
             battles: campaign.battles
         })),
-        upgradeInventory: playerResponse.player.inventory.upgrades ?? [],
+        upgradeInventory: playerResponse.player.inventory.upgrades,
         unequippedInventory: playerResponse.player.inventory.items
     };
 

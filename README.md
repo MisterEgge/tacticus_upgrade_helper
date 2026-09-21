@@ -43,3 +43,38 @@ This separation lets a new player export regenerate the report without rewriting
 ## Safety
 
 Do not commit real `player.json` exports. They are excluded by `.gitignore`.
+
+## Dashboard development
+
+Use Node 24 and `npm ci`. Set `TACTICUS_API_KEY` in a local `.env`, then run
+`npm run refresh` and `npm run dev`. Account data is read on each request, so a
+production server picks up refreshed reports without rebuilding. A missing export
+or API key is not replaced with demonstration or historical account values.
+
+Validation (no account key required):
+
+```bash
+npm test
+npm run typecheck
+npm run build
+npm run test:smoke
+python -m pytest -q
+```
+
+Install `pytest` and `requirements.txt` for the existing Python tests. The HTTP
+smoke test uses a labeled synthetic fixture in an isolated temporary directory;
+it never writes to the real account export or report. CI runs both test suites,
+typecheck, production build, and HTTP smoke checks before account analysis.
+
+The Farming page accepts a character and target rank. It excludes upgrades
+already equipped at the current rank, consumes finished/intermediate materials
+before expanding recipes, and shares one inventory ledger across all goals.
+Missing inventory, slot data, or recipes produces an explicit unavailable state.
+Accessible farming battles are not necessarily eligible for raids.
+
+Campaign snapshots are local under `data/history/campaigns/`. Schema v2 preserves
+changed roster/progression observations and records advances separately. The
+first observation is a baseline, not a recent clear. Previous schema snapshots
+remain untouched; their character matching may be unreliable. No snapshot proves
+which upgrade caused a clear or establishes three-star completion. Campaign
+targets without campaign-specific evidence remain under research.

@@ -15,7 +15,8 @@
     "sync:portraits": "tsx src/syncPortraits.ts",
     "sync:assets": "npm run sync:game-data && npm run sync:portraits",
     "snapshot:campaigns": "tsx src/snapshotCampaignProgress.ts",
-    "test": "node --import tsx --test tests/*.test.ts"
+    "test": "node --import tsx --test tests/*.test.ts",
+    "test:smoke": "node tests/smoke.mjs"
   },
   "keywords": [
     "tacticus"
