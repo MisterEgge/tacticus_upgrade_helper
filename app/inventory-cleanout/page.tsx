@@ -16,7 +16,7 @@ export default async function InventoryCleanout()
     return <main><Nav/><header><div><p className="eyebrow">INVENTORY</p><h1>Inventory Cleanout</h1><p className="sub">Conservative salvage audit. Items are only marked scrap-safe when the current account proves every verified same-family recipient already meets or exceeds that rarity. Unknown compatibility is never treated as scrap-safe.</p></div><div className="power">{safe.reduce((sum,row)=>sum+row.scrap,0)}<strong> copies identified</strong></div></header>
         <section className="cards compact"><div className="card"><strong>{safe.length}</strong><span>Items with excess copies</span></div><div className="card"><strong>{unknown.length}</strong><span>Compatibility unresolved</span><small>Do not scrap these yet</small></div></section>
         <section className="panel tablePanel"><div className="tableWrap"><table><thead><tr><th>Item</th><th>Owned</th><th>Keep</th><th>Scrap</th><th>Status / reason</th></tr></thead><tbody>{rows.map(row=><tr key={row.id}><td><strong>{row.name??row.id}</strong><small>{row.id}</small></td><td>{row.amount}</td><td>{row.keep}</td><td><strong>{row.scrap||"—"}</strong></td><td><strong>{row.status}</strong><small>{row.reason}</small></td></tr>)}</tbody></table></div></section>
-        <p className="sub">This first pass intentionally refuses to infer cross-family or faction-wide compatibility from names. Those rows remain UNKNOWN until compatibility evidence is complete.</p>
+        <p className="sub">The recipient pool comes from the synced game-wide character equipment types. If any compatible character is still locked, or an equipped slot cannot be proven, the item remains UNKNOWN rather than being suggested for salvage.</p>
     </main>;
 
 }
