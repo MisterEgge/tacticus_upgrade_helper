@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
-import { abilityGap, advancedCampaigns, buildCampaignSnapshot, campaignKey, campaignProgress, campaignRankGap, requiredCampaignName, type Campaign, type CampaignCharacter, type SnapshotPlayer } from "../src/domain/campaigns";
+import { abilityGap, advancedCampaigns, campaignRecommendationPriority, buildCampaignSnapshot, campaignKey, campaignProgress, campaignRankGap, requiredCampaignName, type Campaign, type CampaignCharacter, type SnapshotPlayer } from "../src/domain/campaigns";
 import { farmNodesFor, progressFromApi, progressFromReport } from "../app/lib/farming";
 
 const campaign: Campaign = { id: "mirror", name: "Indomitus", type: "EliteMirror", battles: [{ battleIndex: 38 }] };
@@ -127,5 +127,17 @@ test("campaign target gaps are deterministic and never recommend downgrades", ()
     assert.equal(abilityGap(17, "35+"), 18);
     assert.equal(abilityGap(44, "35+"), 0);
     assert.equal(abilityGap(17, undefined), null);
+
+});
+
+test("campaign recommendations prioritize carries and suppress completed rank goals", () =>
+{
+
+    const carry = campaignRecommendationPriority({ campaign: "Test", characterId: "carry", characterName: "Carry", currentRank: 9, targetRank: "Gold I", role: "primary carry", confidence: "high", accountPriority: 90 });
+    const passenger = campaignRecommendationPriority({ campaign: "Test", characterId: "passenger", characterName: "Passenger", currentRank: 9, targetRank: "Gold I", role: "survival", confidence: "medium", accountPriority: 20 });
+    assert.ok(carry.recommendationPriority > passenger.recommendationPriority);
+    assert.equal(carry.rankStepsRemaining, 3);
+    assert.equal(campaignRecommendationPriority({ campaign: "Test", characterId: "done", characterName: "Done", currentRank: 12, targetRank: "Gold I" }).recommendationPriority, 0);
+    assert.equal(campaignRecommendationPriority({ campaign: "Test", characterId: "unknown", characterName: "Unknown", currentRank: null, targetRank: "Gold I" }).recommendationPriority, 0);
 
 });
