@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
-import { advancedCampaigns, buildCampaignSnapshot, campaignKey, campaignProgress, requiredCampaignName, type Campaign, type CampaignCharacter, type SnapshotPlayer } from "../src/domain/campaigns";
+import { abilityGap, advancedCampaigns, buildCampaignSnapshot, campaignKey, campaignProgress, campaignRankGap, requiredCampaignName, type Campaign, type CampaignCharacter, type SnapshotPlayer } from "../src/domain/campaigns";
 import { farmNodesFor, progressFromApi, progressFromReport } from "../app/lib/farming";
 
 const campaign: Campaign = { id: "mirror", name: "Indomitus", type: "EliteMirror", battles: [{ battleIndex: 38 }] };
@@ -114,5 +114,18 @@ test("every published numeric campaign target carries auditable evidence", () =>
             }
 
         }
+
+});
+
+test("campaign target gaps are deterministic and never recommend downgrades", () =>
+{
+
+    assert.equal(campaignRankGap(9, "Gold I"), 3);
+    assert.equal(campaignRankGap(14, "Gold I"), 0);
+    assert.equal(campaignRankGap(9, "Not a rank"), null);
+    assert.equal(campaignRankGap(null, "Gold I"), null);
+    assert.equal(abilityGap(17, "35+"), 18);
+    assert.equal(abilityGap(44, "35+"), 0);
+    assert.equal(abilityGap(17, undefined), null);
 
 });
