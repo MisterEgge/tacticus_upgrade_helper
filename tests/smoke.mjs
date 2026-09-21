@@ -43,6 +43,7 @@ try
 
     };
     assert.match(await get('/campaigns'), /Account data unavailable/);
+    assert.match(await get('/abilities'), /OWNERSHIP UNKNOWN/);
     const report = {
         generatedAt: 'SYNTHETIC TEST FIXTURE — NOT ACCOUNT DATA',
         source: { player: 'SYNTHETIC TEST FIXTURE', powerLevel: 0 },

@@ -11,7 +11,7 @@ async function main()
     const snapshot = buildCampaignSnapshot(player, catalog.characters, new Date().toISOString());
     const dir = path.join("data", "history", "campaigns");
     await fs.mkdir(dir, { recursive: true });
-    const files = (await fs.readdir(dir)).filter(f => f.endsWith(".json") && f !== "latest.json");
+    const files = (await fs.readdir(dir)).filter(f => f.endsWith(".json"));
     // Fail visibly on corrupt history instead of silently discarding evidence.
     const history = await Promise.all(files.map(async f => JSON.parse(await fs.readFile(path.join(dir, f), "utf8")) as CampaignSnapshot));
     const advances = advancedCampaigns(snapshot, history);

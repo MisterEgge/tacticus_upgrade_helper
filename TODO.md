@@ -9,13 +9,13 @@
 - [ ] Add inventory demand: owned vs needed and highest-priority recipients.
 - [ ] Build verified campaign-node/material dataset for the farming engine.
 - [ ] Add active navigation state and continue mobile polish.
-- [ ] Harden equipment preference/compatibility invariant and tests.
+- [x] Harden equipment preference/compatibility invariant and tests.
 
 ## Farming follow-up
 - [x] Replace manually maintained campaign progress with official player API campaign progress.
 - [x] Use upgrade-material inventory (not equipment inventory) when calculating rank-material shortages.
 - [ ] Validate campaign battle numbering against a fresh live player response and synced battle dataset.
-- [ ] Add multi-rank character goals so farming can plan beyond only the next rank.
+- [x] Add multi-rank character goals so farming can plan beyond only the next rank.
 
 ## Game-wide ability research
 - [x] Make the Abilities page cover the full synced character catalog, including unowned characters.
@@ -26,7 +26,14 @@
 
 ## Elite campaign planner
 - [x] Cross-reference live Elite campaign progression with current mandatory-character ranks and ability levels.
-- [ ] Confirm whether official player API exposes per-battle star/medal state; do not infer 3-star completion from unlock state alone.
-- [ ] Persist progression snapshots over time so future recommendations can use the actual ranks/abilities present when new Elite milestones are reached.
+- [x] Inspect checked-in official API schema: attempts/unlock indices only; star state remains unknown. Re-audit when schema updates.
+- [x] Persist changed roster/progression observations, separate advances, and reject stale timestamps.
 - [ ] Research community-efficient 3-star targets for every mandatory campaign character and separate carry vs survival-only investment.
 - [ ] Feed campaign target rank gaps into multi-rank farming demand.
+
+## Remaining verification and evidence
+- [ ] Verify changes against a freshly fetched account export (API key unavailable in the development session).
+- [ ] Complete interactive desktop/mobile browser checks; isolated production HTTP smoke tests pass, but the remote browser could not reach the local app.
+- [ ] Research campaign-specific targets with cited sources before enabling automatic campaign-to-farming goals. Unverified numeric targets were removed.
+- [ ] Display comparisons of schema-v2 historical observations in the campaign planner without implying causation.
+- [ ] Review full ability catalog sources and keep Machines of War separate.

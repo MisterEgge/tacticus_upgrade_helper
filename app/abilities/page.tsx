@@ -1,4 +1,21 @@
-import Nav from "../components/Nav";import AbilityTable from "./AbilityTable";import{getReport,unitFor}from"../lib/report";import{getCharacterCatalog,getAbilityBreakpoints}from"../lib/catalog";
-export default async function Abilities(){const[r,catalog,guidance]=await Promise.all([getReport(),getCharacterCatalog(),getAbilityBreakpoints()]);if(!r)return <main><Nav/><div className="empty">Run <code>npm run refresh</code>.</div></main>;
-const queue=new Map(r.abilityQueue.map(x=>[x.character,x]));const owned=new Map(r.roster.map(x=>[x.name,x]));const rows=catalog.characters.map(c=>{const u=owned.get(c.name),q=queue.get(c.name),g=guidance[c.name] as any;return{character:c.name,faction:c.faction,activeId:c.activeAbilityId??u?.abilities[0]?.id??"",activeLevel:u?.abilities[0]?.level??0,passiveId:c.passiveAbilityIds??u?.abilities[1]?.id??"",passiveLevel:u?.abilities[1]?.level??0,activeTo17:!!u&&((u.abilities[0]?.level??99)<17),passiveTo17:!!u&&((u.abilities[1]?.level??99)<17),accountPriority:q?.accountPriority??0,focus:q?.focus??g?.active?.priority??"Unreviewed",basis:q?.basis??g?.active?.note??"Community breakpoint research pending.",communityActiveTarget:g?.active?.practical??q?.communityActiveTarget??"UNREVIEWED",communityPassiveTarget:g?.passive?.practical??q?.communityPassiveTarget??"UNREVIEWED",targetConfidence:g?.confidence??q?.targetConfidence??"unreviewed",id:c.id,icon:c.icon,owned:!!u,activeHigh:g?.active?.high??"",passiveHigh:g?.passive?.high??""}});
-const reviewed=rows.filter(x=>x.targetConfidence!=="unreviewed").length;return <main><Nav/><header><div><p className="eyebrow">ABILITIES</p><h1>Game-wide Ability Guide</h1><p className="sub">All {rows.length} current characters. Your live levels are overlaid on community-derived practical and high-investment targets; unreviewed abilities are never guessed.</p></div><div className="power">{reviewed}/{rows.length} <strong>reviewed</strong></div></header><section className="panel tablePanel"><AbilityTable rows={rows}/></section></main>}
+import Nav from "../components/Nav";
+import AbilityTable from "./AbilityTable";
+import { getReport } from "../lib/report";
+import { getCharacterCatalog, getAbilityBreakpoints } from "../lib/catalog";
+import { abilityGuideRows } from "../../src/domain/abilities";
+import { readFile } from "node:fs/promises";
+
+export default async function Abilities()
+{
+
+    const [report, catalog, guidance, priorities] = await Promise.all([getReport(), getCharacterCatalog(), getAbilityBreakpoints(), readFile("config/character_priorities.json", "utf8")]);
+    const rows = abilityGuideRows(catalog.characters, report?.roster ?? null, guidance, JSON.parse(priorities));
+    const reviewed = rows.filter(row => row.reviewed).length;
+    return <main><Nav/><header><div><p className="eyebrow">ABILITIES</p><h1>Game-wide Ability Guide</h1>
+        <p className="sub">All {rows.length} synced characters. Community practical and high-investment targets are separate from your level-17 baseline project; a baseline is not reviewed research.</p>
+        <p className="sub">{report ? `Account report: ${report.generatedAt}` : "Account data unavailable — ownership and current levels are unknown. Run npm run refresh to update."}</p>
+    </div><div className="power">{reviewed}/{rows.length}<strong> reviewed</strong></div></header>
+        <section className="panel tablePanel"><AbilityTable rows={rows}/></section>
+    </main>;
+
+}
