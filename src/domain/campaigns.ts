@@ -24,6 +24,27 @@ export function requiredCampaignName(campaign: Pick<Campaign, "name" | "type">):
 
 }
 
+export type CampaignBattleDefinition = { campaign: string; campaignType: string; nodeNumber: number };
+
+export function finalCampaignBattle(campaignName: string, campaignType: string, battles: Iterable<CampaignBattleDefinition>): number | null
+{
+
+    const key = campaignKey(campaignName, campaignType);
+    const nodes = [...battles].filter(battle => campaignKey(battle.campaign, battle.campaignType) === key).map(battle => battle.nodeNumber);
+    if (!nodes.length || nodes.some(node => !Number.isInteger(node) || node <= 0)) return null;
+    return Math.max(...nodes);
+
+}
+
+export function campaignIsComplete(campaign: { name: string; type: string; highestCompletedBattle?: number | null } | undefined, battles: Iterable<CampaignBattleDefinition>): boolean
+{
+
+    if (!campaign || campaign.highestCompletedBattle === null || campaign.highestCompletedBattle === undefined) return false;
+    const finalBattle = finalCampaignBattle(campaign.name, campaign.type, battles);
+    return finalBattle !== null && campaign.highestCompletedBattle >= finalBattle;
+
+}
+
 export function campaignProgress(campaign: Campaign)
 {
 
