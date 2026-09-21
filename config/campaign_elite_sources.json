@@ -77,6 +77,66 @@
       "url": "https://www.reddit.com/r/WH40KTacticus/comments/1nfyuri/saimhann_mirror_elite_completed/",
       "published": "2025-09-13",
       "note": "Reported near-full clear identifies Abraxas as primary carry; final missing 3-star obtained after Abraxas reached 41/41."
+    },
+    "terminus-campaigns-2026": {
+      "title": "Terminus Maximus Campaign Guides",
+      "url": "https://terminusmaximus.com/campaigns/",
+      "published": "2026-09-21",
+      "note": "Current campaign hub with recommended Elite investment, equipment priorities, and replay-backed guidance across all eight classic campaigns."
+    },
+    "terminus-elite-2026": {
+      "title": "Terminus Maximus Elite Campaigns",
+      "url": "https://terminusmaximus.com/elite-campaigns/",
+      "published": "2026-07",
+      "note": "Minimum-practical-investment framework; explicitly treats targets as starting points rather than absolute requirements."
+    },
+    "terminus-indomitus-2026": {
+      "title": "Terminus Maximus Indomitus Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/indomitus/",
+      "published": "2026-08-12",
+      "note": "Replay-backed stage guidance; emphasizes opening useful nodes and concentrating carry investment rather than forcing medals early."
+    },
+    "terminus-indomitus-mirror-2026": {
+      "title": "Terminus Maximus Indomitus Mirror Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/indomitus-mirror/",
+      "published": "2026-08-06",
+      "note": "Replay-backed Necron campaign guidance and practical investment framing."
+    },
+    "terminus-foc-2026": {
+      "title": "Terminus Maximus Fall of Cadia Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/fall-of-cadia/",
+      "published": "2026-08-12",
+      "note": "Replay-backed Chaos guidance; recommends stopping at valuable farming breakpoints when full completion is inefficient."
+    },
+    "terminus-foc-mirror-2026": {
+      "title": "Terminus Maximus Fall of Cadia Mirror Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/fall-of-cadia-mirror/",
+      "published": "2026-08-12",
+      "note": "Replay-backed Imperial campaign guidance."
+    },
+    "terminus-octarius-2026": {
+      "title": "Terminus Maximus Octarius Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/octarius/",
+      "published": "2026-08-15",
+      "note": "Current post-rework Ork replay library; late Elite evidence supports concentrated Boss/Snot investment and protecting Gibba/Snappa."
+    },
+    "terminus-octarius-mirror-2026": {
+      "title": "Terminus Maximus Octarius Mirror Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/octarius-mirror/",
+      "published": "2026-08-19",
+      "note": "Identifies Burchard as required carry and Isabella as best support; recommends upgrading the actual bottleneck rather than leveling the trio evenly."
+    },
+    "terminus-saim-2026": {
+      "title": "Terminus Maximus Saim-Hann Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/saim-hann/",
+      "published": "2026-08-19",
+      "note": "Describes late Saim-Hann Elite as highly investment-heavy with repeated required-trio restrictions, supporting higher core investment."
+    },
+    "terminus-saim-mirror-2026": {
+      "title": "Terminus Maximus Saim-Hann Mirror Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/saim-hann-mirror/",
+      "published": "2026-08-23",
+      "note": "Recommends concentrating Chaos support/carry value and avoiding disproportionate Toth/Yazaghor investment."
     }
   }
 }
