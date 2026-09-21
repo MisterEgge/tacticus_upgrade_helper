@@ -29,7 +29,7 @@ export default async function Campaigns()
             const campaignComplete = campaignIsComplete(progress, battleCatalog);
             return <section className="panel detailPanel" key={name}>
                 <div className="sectionTitle"><div><p className="eyebrow">{campaign.status.toUpperCase()}</p><h2>{name} Elite</h2></div>
-                    <div className="power">{progress?.highestCompletedBattle ?? "Unknown"}<strong> completed through · {progress?.highestUnlockedBattle ?? "unknown"} unlock frontier</strong></div>
+                    <div className="power">{campaignComplete ? "Completed" : progress?.highestCompletedBattle ?? "Unknown"}<strong>{campaignComplete ? " · all Elite missions cleared" : ` completed through · ${progress?.highestUnlockedBattle ?? "unknown"} unlock frontier`}</strong></div>
                 </div>
                 <p className="sub">Confirmed 3★ progress: UNKNOWN — the available API schema does not expose stars. Unlock frontier N proves completion through N−1; a terminal frontier can be a sentinel, not a playable battle.</p>
                 <div className="tableWrap"><table><thead><tr><th>Required character</th><th>Current account state</th><th>Suggested Elite target</th><th>Abilities current → target</th><th>Role / evidence</th></tr></thead>
