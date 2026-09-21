@@ -1,0 +1,142 @@
+{
+  "_meta": {
+    "scope": "Community clear evidence for Elite campaign planning",
+    "schemaVersion": 1,
+    "lastReviewed": "2026-09-21",
+    "policy": "Sources document reported clears and community guidance. They are evidence, not official game rules or proof of an absolute minimum."
+  },
+  "sources": {
+    "indom-2026-07": {
+      "title": "3 star Indomitus Elite",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1vaqlw7/3_star_indomitus_elite/",
+      "published": "2026-07-30",
+      "note": "Multiple reported full clears keep Tigurius and Certus around S1 while Bellator/carries absorb investment."
+    },
+    "indom-2025-12": {
+      "title": "Doing Indomitus Elite - lowest Certus rank",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1psj1ji/doing_indomitus_elite_whats_the_lowest_rank_you/",
+      "published": "2025-12-21",
+      "note": "Reported clear with S2 Bellator, S1 Tigurius and B2 Certus plus stronger optional carries; author would prefer S1 Certus for consistency."
+    },
+    "indom-mirror-2026-09": {
+      "title": "Indomitus Mirror Elite minimum",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1w7e1d4/indomitus_mirror_elite_minimum/",
+      "published": "2026-09-04",
+      "note": "Recent post-rework discussion emphasizes Aleph/Anuphet/Thotmek carries and suggests low Makhotep investment can work."
+    },
+    "indom-mirror-2025-02": {
+      "title": "Indomitus Mirror Elite 100%",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1ixytzw/indomitus_mirror_elite_100/",
+      "published": "2025-02-25",
+      "note": "Reported full clear at G1 core with Aleph 38/38, Imospekh 35/35, Makhotep 26/26 and G1 Anuphet 35/17."
+    },
+    "foc-2024-03": {
+      "title": "Fall of Cadia Elite minimum investment",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1b6se48/finally_beat_foc_elite_fall_of_cadia_elite/",
+      "published": "2024-03-05",
+      "note": "Reported low-investment clear relies heavily on Rotbone and Abraxas; abilities listed for mandatory trio and carries."
+    },
+    "foc-2024-10": {
+      "title": "Fall of Cadia Elite",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1g2hakn/fall_of_cadia_elite/",
+      "published": "2024-10-13",
+      "note": "Reported completion with G1 Angrax, Haarken, Rotbone, Typhus and G2 Archimatos; discussion emphasizes allied Chaos carries."
+    },
+    "oct-2026-09": {
+      "title": "Octarius Elite minimum",
+      "url": "https://www.reddit.com/r/WarhammerTacticus/comments/1w9d2ns/octarius_elite_minimum/",
+      "published": "2026-09-07",
+      "note": "Recent reported full clear: G2 Boss, G1 Snot, S1 Gibba, S1 Snappa; Boss active 44 was important later."
+    },
+    "oct-2025-02": {
+      "title": "Octarius Elite and Mirror Elite completed",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1ixzbay/octarius_elite_and_octarius_mirror_elite_completed/",
+      "published": "2025-02-25",
+      "note": "Reported Octarius full clear with G1 Snot/Boss and S1 Snappa/Gibba; Snot 35/35, Boss 42/35."
+    },
+    "oct-mirror-2025-02": {
+      "title": "Octarius Mirror Elite completed",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1ixzbay/octarius_elite_and_octarius_mirror_elite_completed/",
+      "published": "2025-02-25",
+      "note": "Reported full clear with G1 Burchard, S2 Godswyl, S1 Thoread supported by G1 Bellator and G2 Isabella."
+    },
+    "saim-2026-03": {
+      "title": "Saim-Hann Elite 39 and 40",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1rj3jqj/saimhaan_elite_39_and_40/",
+      "published": "2026-03-02",
+      "note": "Recent discussion shows late nodes are sensitive to composition and RNG; reports range from G3-ish core to D2 investment."
+    },
+    "saim-2025-07": {
+      "title": "Saim-Hann Elite minimum discussion",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1lxc082/saim_hann_elite/",
+      "published": "2025-07-11",
+      "note": "Discussion cites G1 Calandis/G3 Aethana/G3 Eldryon minimum-investment guidance but notes composition and positioning matter."
+    },
+    "saim-mirror-2025-09": {
+      "title": "Saim-Hann Mirror Elite completed",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1nfyuri/saimhann_mirror_elite_completed/",
+      "published": "2025-09-13",
+      "note": "Reported near-full clear identifies Abraxas as primary carry; final missing 3-star obtained after Abraxas reached 41/41."
+    },
+    "terminus-campaigns-2026": {
+      "title": "Terminus Maximus Campaign Guides",
+      "url": "https://terminusmaximus.com/campaigns/",
+      "published": "2026-09-21",
+      "note": "Current campaign hub with recommended Elite investment, equipment priorities, and replay-backed guidance across all eight classic campaigns."
+    },
+    "terminus-elite-2026": {
+      "title": "Terminus Maximus Elite Campaigns",
+      "url": "https://terminusmaximus.com/elite-campaigns/",
+      "published": "2026-07",
+      "note": "Minimum-practical-investment framework; explicitly treats targets as starting points rather than absolute requirements."
+    },
+    "terminus-indomitus-2026": {
+      "title": "Terminus Maximus Indomitus Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/indomitus/",
+      "published": "2026-08-12",
+      "note": "Replay-backed stage guidance; emphasizes opening useful nodes and concentrating carry investment rather than forcing medals early."
+    },
+    "terminus-indomitus-mirror-2026": {
+      "title": "Terminus Maximus Indomitus Mirror Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/indomitus-mirror/",
+      "published": "2026-08-06",
+      "note": "Replay-backed Necron campaign guidance and practical investment framing."
+    },
+    "terminus-foc-2026": {
+      "title": "Terminus Maximus Fall of Cadia Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/fall-of-cadia/",
+      "published": "2026-08-12",
+      "note": "Replay-backed Chaos guidance; recommends stopping at valuable farming breakpoints when full completion is inefficient."
+    },
+    "terminus-foc-mirror-2026": {
+      "title": "Terminus Maximus Fall of Cadia Mirror Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/fall-of-cadia-mirror/",
+      "published": "2026-08-12",
+      "note": "Replay-backed Imperial campaign guidance."
+    },
+    "terminus-octarius-2026": {
+      "title": "Terminus Maximus Octarius Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/octarius/",
+      "published": "2026-08-15",
+      "note": "Current post-rework Ork replay library; late Elite evidence supports concentrated Boss/Snot investment and protecting Gibba/Snappa."
+    },
+    "terminus-octarius-mirror-2026": {
+      "title": "Terminus Maximus Octarius Mirror Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/octarius-mirror/",
+      "published": "2026-08-19",
+      "note": "Identifies Burchard as required carry and Isabella as best support; recommends upgrading the actual bottleneck rather than leveling the trio evenly."
+    },
+    "terminus-saim-2026": {
+      "title": "Terminus Maximus Saim-Hann Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/saim-hann/",
+      "published": "2026-08-19",
+      "note": "Describes late Saim-Hann Elite as highly investment-heavy with repeated required-trio restrictions, supporting higher core investment."
+    },
+    "terminus-saim-mirror-2026": {
+      "title": "Terminus Maximus Saim-Hann Mirror Campaign Guide",
+      "url": "https://terminusmaximus.com/campaigns/saim-hann-mirror/",
+      "published": "2026-08-23",
+      "note": "Recommends concentrating Chaos support/carry value and avoiding disproportionate Toth/Yazaghor investment."
+    }
+  }
+}

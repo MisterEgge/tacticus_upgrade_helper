@@ -116,3 +116,83 @@ export function advancedCampaigns(current: CampaignSnapshot, history: CampaignSn
     }).map(([id]) => id);
 
 }
+
+export const campaignRankNames = ["Stone I","Stone II","Stone III","Iron I","Iron II","Iron III","Bronze I","Bronze II","Bronze III","Silver I","Silver II","Silver III","Gold I","Gold II","Gold III","Diamond I","Diamond II","Diamond III","Adamantine I","Adamantine II"] as const;
+
+export function campaignRankIndex(rank?: string): number | null
+{
+
+    if (!rank) return null;
+    const index = campaignRankNames.indexOf(rank as typeof campaignRankNames[number]);
+    return index >= 0 ? index : null;
+
+}
+
+export function campaignRankGap(currentRank: number | null | undefined, targetRank?: string): number | null
+{
+
+    const target = campaignRankIndex(targetRank);
+    if (currentRank === null || currentRank === undefined || target === null || !Number.isInteger(currentRank) || currentRank < 0) return null;
+    return Math.max(0, target - currentRank);
+
+}
+
+export function abilityTargetLevel(target?: string): number | null
+{
+
+    if (!target) return null;
+    const match = target.match(/\d+/);
+    return match ? Number(match[0]) : null;
+
+}
+
+export function abilityGap(current: number | null | undefined, target?: string): number | null
+{
+
+    const level = abilityTargetLevel(target);
+    if (current === null || current === undefined || level === null) return null;
+    return Math.max(0, level - current);
+
+}
+
+export type CampaignRecommendationInput = {
+    campaign: string;
+    characterId: string;
+    characterName: string;
+    currentRank: number | null;
+    targetRank?: string | undefined;
+    role?: string | undefined;
+    confidence?: string | undefined;
+    accountPriority?: number | undefined;
+};
+
+export type CampaignRecommendation = CampaignRecommendationInput & {
+    targetRankIndex: number | null;
+    rankStepsRemaining: number | null;
+    recommendationPriority: number;
+    reason: string;
+};
+
+export function campaignRecommendationPriority(input: CampaignRecommendationInput): CampaignRecommendation
+{
+
+    const targetRankIndex = campaignRankIndex(input.targetRank);
+    const rankStepsRemaining = campaignRankGap(input.currentRank, input.targetRank);
+    if (targetRankIndex === null || rankStepsRemaining === null)
+        return { ...input, targetRankIndex, rankStepsRemaining, recommendationPriority: 0, reason: "Target or live account rank unavailable" };
+    if (rankStepsRemaining === 0)
+        return { ...input, targetRankIndex, rankStepsRemaining, recommendationPriority: 0, reason: "Campaign rank target already met" };
+    const role = (input.role ?? "").toLowerCase();
+    const roleWeight = role.includes("primary") || role.includes("carry") ? 30 : role.includes("contributor") || role.includes("support") ? 15 : 5;
+    const confidenceWeight = input.confidence === "high" ? 15 : input.confidence === "medium" ? 8 : 0;
+    const accountWeight = Math.round((input.accountPriority ?? 0) / 10);
+    const gapWeight = Math.min(20, rankStepsRemaining * 4);
+    return {
+        ...input,
+        targetRankIndex,
+        rankStepsRemaining,
+        recommendationPriority: roleWeight + confidenceWeight + accountWeight + gapWeight,
+        reason: (input.role ?? "campaign requirement") + " · " + rankStepsRemaining + " rank step(s) below " + input.targetRank
+    };
+
+}
