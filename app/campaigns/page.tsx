@@ -1,7 +1,7 @@
 import Nav from "../components/Nav";
 import CharacterName from "../components/CharacterName";
 import { getReport } from "../lib/report";
-import { getCampaignTargets, getCharacterCatalog } from "../lib/catalog";
+import { getCampaignEvidence, getCampaignTargets, getCharacterCatalog } from "../lib/catalog";
 import { requiredCampaignName } from "../../src/domain/campaigns";
 
 const rankNames = ["Stone I", "Stone II", "Stone III", "Iron I", "Iron II", "Iron III", "Bronze I", "Bronze II", "Bronze III", "Silver I", "Silver II", "Silver III", "Gold I", "Gold II", "Gold III", "Diamond I", "Diamond II", "Diamond III", "Adamantine I", "Adamantine II"];
@@ -9,7 +9,7 @@ const rankNames = ["Stone I", "Stone II", "Stone III", "Iron I", "Iron II", "Iro
 export default async function Campaigns()
 {
 
-    const [report, targets, catalog] = await Promise.all([getReport(), getCampaignTargets(), getCharacterCatalog()]);
+    const [report, targets, catalog, evidence] = await Promise.all([getReport(), getCampaignTargets(), getCharacterCatalog(), getCampaignEvidence()]);
     if (!report) return <main><Nav/><div className="empty">Account data unavailable. Run <code>npm run refresh</code>.</div></main>;
     const roster = new Map(report.roster.map(unit => [unit.id, unit]));
     return <main>
@@ -38,7 +38,7 @@ export default async function Campaigns()
                             <td><strong>{unit ? rankNames[unit.rank] ?? `Unknown rank (${unit.rank})` : "Not in account roster"}</strong></td>
                             <td><strong>{target?.rank ?? "RESEARCHING"}</strong>{target?.rank ? <small>{target.confidence ?? "Unknown"} confidence</small> : null}</td>
                             <td><strong>A {unit?.abilities[0]?.level ?? "—"} → {target?.active ?? "—"}</strong><small>P {unit?.abilities[1]?.level ?? "—"} → {target?.passive ?? "—"}</small></td>
-                            <td><strong>{target?.role ?? "Unreviewed"}</strong><small>{target?.note ?? "Campaign-specific Elite 3★ research pending."}</small></td>
+                            <td><strong>{target?.role ?? "Unreviewed"}</strong><small>{target?.note ?? "Campaign-specific Elite 3★ research pending."}</small>{target?.evidence?.length ? <small>Evidence: {target.evidence.map((id, index) => { const source = evidence.sources[id]; return source ? <span key={id}>{index ? " · " : ""}<a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></span> : null; })}</small> : null}</td>
                         </tr>;
 
                     })}</tbody>
