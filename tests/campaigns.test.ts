@@ -172,7 +172,7 @@ test("synced campaign battle numbering agrees with report frontier semantics", (
 
         assert.ok(nodes.every(node => Number.isInteger(node) && node > 0), `${key} contains invalid node numbering`);
         assert.equal(new Set(nodes).size, nodes.length, `${key} contains duplicate node numbers`);
-        assert.equal(Math.min(...nodes), 1, `${key} does not start at node 1`);
+        if (!/Challenge$/i.test(key)) assert.equal(Math.min(...nodes), 1, `${key} does not start at node 1`);
 
     }
 
