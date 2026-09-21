@@ -1,8 +1,20 @@
 # Tacticus Upgrade Helper — TODO
 
+## Working policy
+- Finish existing correctness/data-completeness TODOs before expanding new feature concepts.
+- New feature ideas go to TODO; non-blocking cleanup/refactors go to Technical debt; fix hard correctness bugs immediately.
+- Store/equipment recommendations must never treat real-money or Blackstone purchases as actionable. Only recommend acquisition through other in-game currencies/sources.
+
+
 ## Dashboard / Equipment
 - [ ] Review the new `/equipment-demand` view after more dashboard work. Decide whether it belongs inside Equipment, deserves its own nav entry, or should feed a dashboard card.
 - [ ] Improve equipment demand matching so owned counts use stable item IDs instead of display names wherever possible.
+
+## Inventory / acquisition backlog
+- [ ] Add acquisition-currency classification for equipment/shop sources.
+- [ ] Suppress real-money and Blackstone item offers from actionable recommendations; user will only spend other in-game currencies on items.
+- [ ] Finish game-wide equipment compatibility evidence before promoting unresolved cleanout rows to scrap-safe.
+- [ ] Validate inventory cleanout against fresh live inventory after compatibility coverage is complete.
 
 ## Next enhancements
 - [ ] Add immediate/community ability targets to character detail pages.
@@ -37,3 +49,9 @@
 - [ ] Research campaign-specific targets with cited sources before enabling automatic campaign-to-farming goals. Unverified numeric targets were removed.
 - [ ] Display comparisons of schema-v2 historical observations in the campaign planner without implying causation.
 - [ ] Review full ability catalog sources and keep Machines of War separate.
+
+## Technical debt
+- [ ] Collapse duplicate campaign farming goals by stable character ID and keep the highest justified target.
+- [ ] Make low-confidence campaign targets display-only unless explicitly marked eligible for automatic farming.
+- [ ] Consolidate duplicated campaign rank-name constants.
+- [ ] Replace dense one-line page/component source where it materially hurts maintainability.
