@@ -53,6 +53,7 @@ try
         equipmentAllocation: { equipNow: [], buyWatch: [], compatibilityUnknown: [] },
         campaignProgress: [{ id: 'synthetic', name: 'Indomitus', type: 'EliteMirror', highestUnlockedBattle: 39, highestCompletedBattle: 38, battles: [{ battleIndex: 38 }] }]
     };
+    report.roster.push({ ...report.roster[0], id: 'test-machine-outside-character-catalog', name: 'Synthetic excluded unit' });
     const reportPath = path.join(cwd, 'output/upgrade-report.json');
     await writeFile(reportPath, JSON.stringify(report));
     const campaigns = await get('/campaigns');
@@ -62,7 +63,9 @@ try
     assert.match(campaigns, /UNKNOWN/);
     assert.doesNotMatch(campaigns, /Tyranids Elite/);
     for (const route of ['/', '/equipment', '/equipment-demand', '/abilities', '/characters', '/characters/necroSpyder', '/inventory']) await get(route);
+    assert.match(await get('/farming'), /Expected \/ battle/);
     const farming = await get('/farming?character=necroSpyder&target=3');
+    assert.match(farming, /Synthetic excluded unit/);
     assert.match(farming, /Calculate materials/);
     assert.match(farming, /Expected \/ battle/);
     assert.match(await get('/farming?character=necroSpyder&target=0'), /Choose a target rank/);
