@@ -1,25 +1,27 @@
-import { spawn } from "node:child_process";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+const execFileAsync = promisify(execFile);
 let syncInProgress = false;
 
-function refreshAccount(): Promise<void>
+async function runScript(script: string): Promise<void>
 {
 
-    return new Promise((resolve, reject) =>
-    {
+    const npx = process.platform === "win32" ? "npx.cmd" : "npx";
+    await execFileAsync(npx, ["tsx", script], { cwd: process.cwd(), env: process.env, maxBuffer: 10 * 1024 * 1024 });
 
-        const npm = process.platform === "win32" ? "npm.cmd" : "npm";
-        const child = spawn(npm, ["run", "refresh"], { cwd: process.cwd(), env: process.env, stdio: ["ignore", "pipe", "pipe"] });
-        let stderr = "";
-        child.stderr.on("data", chunk => { stderr += String(chunk); });
-        child.on("error", reject);
-        child.on("close", code => code === 0 ? resolve() : reject(new Error(stderr.trim() || `Account refresh exited with code ${code}`)));
+}
 
-    });
+async function refreshAccount(): Promise<void>
+{
+
+    await runScript("src/fetchPlayer.ts");
+    await runScript("src/snapshotCampaignProgress.ts");
+    await runScript("src/analyzePlayer.ts");
 
 }
 
@@ -39,7 +41,8 @@ export async function POST()
     {
 
         console.error("Account sync failed", error);
-        return NextResponse.json({ ok: false, error: "Account sync failed. Check the server API configuration and logs." }, { status: 500 });
+        const detail = error instanceof Error ? error.message : "Unknown sync error";
+        return NextResponse.json({ ok: false, error: process.env.NODE_ENV === "development" ? `Account sync failed: ${detail}` : "Account sync failed. Check the server logs." }, { status: 500 });
 
     }
     finally
