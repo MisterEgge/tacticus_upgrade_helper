@@ -92,3 +92,27 @@ test("actual synced Mirror Elite nodes match API unlocks without double suffixes
     assert.equal(farmNodesFor(reward.id, battles, {}).find(n => n.id === id)?.unlocked, false);
 
 });
+
+test("every published numeric campaign target carries auditable evidence", () =>
+{
+
+    const targets = JSON.parse(readFileSync("config/campaign_elite_targets.json", "utf8"));
+    const sources = JSON.parse(readFileSync("config/campaign_elite_sources.json", "utf8")).sources;
+    for (const [campaignName, campaign] of Object.entries(targets.campaigns) as Array<[string, any]>)
+        for (const [characterName, target] of Object.entries(campaign.characters) as Array<[string, any]>)
+        {
+
+            const hasNumericRecommendation = Boolean(target.rank || target.active || target.passive);
+            if (!hasNumericRecommendation) continue;
+            assert.ok(target.evidence?.length, `${campaignName} / ${characterName} has a target without evidence`);
+            for (const sourceId of target.evidence)
+            {
+
+                assert.ok(sources[sourceId], `${campaignName} / ${characterName} references missing source ${sourceId}`);
+                assert.match(sources[sourceId].url, /^https:\/\//);
+
+            }
+
+        }
+
+});
