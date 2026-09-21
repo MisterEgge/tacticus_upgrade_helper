@@ -11,9 +11,7 @@ test("lower rarity excess is scrap-safe after every proven recipient already exc
             { id: "a", name: "A", progressionIndex: 12, items: [{ slotId: "Slot1", id: "I_Test_E001", rarity: "Epic", level: 1 }] },
             { id: "b", name: "B", progressionIndex: 9, items: [{ slotId: "Slot1", id: "I_Test_E001", rarity: "Epic", level: 1 }] }
         ],
-        [],
-        true
-    );
+        [],\n        [{ id: "a", equipment: ["I_Test"] }, { id: "b", equipment: ["I_Test"] }]\n    );
     assert.equal(rows[0]!.status, "SCRAP SAFE");
     assert.equal(rows[0]!.scrap, 4);
 
@@ -28,9 +26,7 @@ test("future higher-rarity recipient reserves copies and only surplus is scrap",
             { id: "a", name: "A", progressionIndex: 12, items: [{ slotId: "Slot1", id: "I_Test_E001", rarity: "Epic", level: 1 }] },
             { id: "b", name: "B", progressionIndex: 12, items: [{ slotId: "Slot1", id: "I_Test_E001", rarity: "Epic", level: 1 }] }
         ],
-        [],
-        true
-    );
+        [],\n        [{ id: "a", equipment: ["I_Test"] }, { id: "b", equipment: ["I_Test"] }]\n    );
     assert.equal(rows[0]!.keep, 2);
     assert.equal(rows[0]!.scrap, 1);
     assert.equal(rows[0]!.status, "EXCESS");
@@ -40,9 +36,9 @@ test("future higher-rarity recipient reserves copies and only surplus is scrap",
 test("unproven compatibility never becomes scrap-safe", () =>
 {
 
-    const [unknownFamily] = inventoryCleanout([{ id: "opaque", level: 1, amount: 8 }], [], [], true);
-    const [unknownPool] = inventoryCleanout([{ id: "I_Test_R001", level: 1, amount: 8 }], [{ id: "a", name: "A", progressionIndex: 12, items: [] }], [], true);
-    const [incompleteCatalog] = inventoryCleanout([{ id: "I_Test_R001", level: 1, amount: 8 }], [{ id: "a", name: "A", progressionIndex: 12, items: [{ slotId: "Slot1", id: "I_Test_E001", level: 1 }] }], [], false);
+    const [unknownFamily] = inventoryCleanout([{ id: "opaque", level: 1, amount: 8 }], [], [], []);
+    const [unknownPool] = inventoryCleanout([{ id: "I_Test_R001", level: 1, amount: 8 }], [{ id: "a", name: "A", progressionIndex: 12, items: [] }], [], [{ id: "a", equipment: ["I_Test"] }]);
+    const [incompleteCatalog] = inventoryCleanout([{ id: "I_Test_R001", level: 1, amount: 8 }], [{ id: "a", name: "A", progressionIndex: 12, items: [{ slotId: "Slot1", id: "I_Test_E001", level: 1 }] }], [], [{ id: "a", equipment: ["I_Test"] }, { id: "locked", equipment: ["I_Test"] }]);
     for (const row of [unknownFamily!, unknownPool!, incompleteCatalog!])
     {
 
