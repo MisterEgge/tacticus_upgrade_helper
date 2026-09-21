@@ -2,7 +2,7 @@ import Nav from "../components/Nav";
 import CharacterName from "../components/CharacterName";
 import { getReport } from "../lib/report";
 import { getCampaignEvidence, getCampaignTargets, getCharacterCatalog } from "../lib/catalog";
-import { requiredCampaignName } from "../../src/domain/campaigns";
+import { abilityGap, campaignRankGap, requiredCampaignName } from "../../src/domain/campaigns";
 
 const rankNames = ["Stone I", "Stone II", "Stone III", "Iron I", "Iron II", "Iron III", "Bronze I", "Bronze II", "Bronze III", "Silver I", "Silver II", "Silver III", "Gold I", "Gold II", "Gold III", "Diamond I", "Diamond II", "Diamond III", "Adamantine I", "Adamantine II"];
 
@@ -36,8 +36,8 @@ export default async function Campaigns()
                         return <tr key={character.id}>
                             <td><CharacterName name={character.name} id={character.id}/></td>
                             <td><strong>{unit ? rankNames[unit.rank] ?? `Unknown rank (${unit.rank})` : "Not in account roster"}</strong></td>
-                            <td><strong>{target?.rank ?? "RESEARCHING"}</strong>{target?.rank ? <small>{target.confidence ?? "Unknown"} confidence</small> : null}</td>
-                            <td><strong>A {unit?.abilities[0]?.level ?? "—"} → {target?.active ?? "—"}</strong><small>P {unit?.abilities[1]?.level ?? "—"} → {target?.passive ?? "—"}</small></td>
+                            <td><strong>{target?.rank ?? "RESEARCHING"}</strong>{target?.rank ? <small>{target.confidence ?? "Unknown"} confidence · {unit ? `${campaignRankGap(unit.rank, target.rank) ?? "?"} rank step(s) remaining` : "current rank unavailable"}</small> : null}</td>
+                            <td><strong>A {unit?.abilities[0]?.level ?? "—"} → {target?.active ?? "—"}</strong><small>{target?.active && unit ? `${abilityGap(unit.abilities[0]?.level, target.active) ?? "?"} active levels remaining · ` : ""}P {unit?.abilities[1]?.level ?? "—"} → {target?.passive ?? "—"}{target?.passive && unit ? ` · ${abilityGap(unit.abilities[1]?.level, target.passive) ?? "?"} passive levels remaining` : ""}</small></td>
                             <td><strong>{target?.role ?? "Unreviewed"}</strong><small>{target?.note ?? "Campaign-specific Elite 3★ research pending."}</small>{target?.evidence?.length ? <small>Evidence: {target.evidence.map((id, index) => { const source = evidence.sources[id]; return source ? <span key={id}>{index ? " · " : ""}<a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></span> : null; })}</small> : null}</td>
                         </tr>;
 
