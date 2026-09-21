@@ -1,4 +1,6 @@
 import fs from "node:fs/promises";
+import { allocateEquipment } from "./domain/equipment";
+import { campaignProgress } from "./domain/campaigns";
 
 type Ability = {
     id: string;
@@ -20,9 +22,12 @@ type Unit = {
     grandAlliance?: "Imperial" | "Xenos" | "Chaos";
     progressionIndex: number;
     rank: number;
+    upgrades?: number[];
     xpLevel: number;
     abilities: Ability[];
     items: UnitItem[];
+    shards?: number;
+    mythicShards?: number;
 };
 
 type PlayerResponse = {
@@ -37,7 +42,9 @@ type PlayerResponse = {
             powerLevel: number;
         };
         units: Unit[];
+        progress?: { campaigns?: Array<{ id:string; name:string; type:"Standard"|"Mirror"|"Elite"|"EliteMirror"; battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number;stars?:number;medals?:number;score?:number;completed?:boolean}> }> };
         inventory: {
+            upgrades?: Array<{id:string;name?:string;amount:number}>;
             items: Array<{
                 id: string;
                 name?: string;
@@ -81,6 +88,9 @@ type AbilityQueueRow = {
     accountPriority: number;
     focus: string;
     basis: string;
+    communityActiveTarget: string;
+    communityPassiveTarget: string;
+    targetConfidence: string;
 };
 
 const RARITY_BY_PROGRESSION = [
@@ -114,6 +124,7 @@ async function main()
     const targets = await readJson<Record<string, AbilityTarget>>("config/ability_targets.json");
     const compatibility = await readJson<EquipmentCompatibility>("config/equipment_compatibility.json");
     const preferences = await readJson<EquipmentPreferences>("config/equipment_preferences.json");
+    const equipmentNames = await readJson<Record<string, string>>("config/equipment_names.json");
 
     const units = playerResponse.player.units;
 
@@ -138,98 +149,19 @@ async function main()
                 passiveTo17: passive.level > 0 && passive.level < 17,
                 accountPriority: priority,
                 focus: target?.focus ?? "Baseline / review",
-                basis: target?.confidence ?? "User level-17 baseline"
+                basis: target?.confidence ?? "User level-17 baseline",
+                communityActiveTarget: target?.active ?? "Review",
+                communityPassiveTarget: target?.passive ?? "Review",
+                targetConfidence: target?.confidence ?? "baseline-only"
             };
 
         })
         .filter((row) => row.activeTo17 || row.passiveTo17)
         .sort((a, b) => b.accountPriority - a.accountPriority || a.character.localeCompare(b.character));
 
-    const legendaryUnderTier = units
-        .filter((unit) => rarityFor(unit) === "Legendary")
-        .flatMap((unit) =>
-            unit.items
-                .filter((item) => item.rarity && item.rarity !== "Legendary" && item.rarity !== "Mythic")
-                .map((item) => ({
-                    character: unit.name ?? unit.id,
-                    slotId: item.slotId,
-                    currentItem: item.name ?? item.id,
-                    currentRarity: item.rarity,
-                    currentLevel: item.level,
-                    accountPriority: priorities[unit.name ?? ""]?.priority ?? 0
-                }))
-        )
-        .sort((a, b) => b.accountPriority - a.accountPriority || a.character.localeCompare(b.character));
-
-    const inventoryRemaining = new Map<string, number>(
-        playerResponse.player.inventory.items.map((item) => [item.id, item.amount])
+    const { legendaryUnderTier, equipNow, buyWatch, compatibilityUnknown } = allocateEquipment(
+        units, playerResponse.player.inventory.items, priorities, compatibility, preferences, equipmentNames
     );
-
-    const equipNow: Array<Record<string, unknown>> = [];
-    const buyWatch: Array<Record<string, unknown>> = [];
-    const compatibilityUnknown: Array<Record<string, unknown>> = [];
-
-    for (const need of legendaryUnderTier)
-    {
-
-        const unit = units.find((candidate) => (candidate.name ?? candidate.id) === need.character);
-        const equippedItem = unit?.items.find((item) => item.slotId === need.slotId);
-        const sameFamilyLegendaryId = equippedItem?.id.replace(/_E(\d{3})$/, "_L$1");
-
-        const verifiedOverrides = compatibility.characters[need.character]?.[need.slotId as "Slot1" | "Slot2" | "Slot3"] ?? [];
-        const preferredOverrides = preferences.characters[need.character]?.[need.slotId as "Slot1" | "Slot2" | "Slot3"] ?? [];
-        const allowed = [
-            ...verifiedOverrides,
-            ...(sameFamilyLegendaryId && sameFamilyLegendaryId !== equippedItem?.id ? [sameFamilyLegendaryId] : [])
-        ].filter((id, index, all) => all.indexOf(id) === index);
-        const recommended = preferredOverrides.length
-            ? preferredOverrides
-            : (sameFamilyLegendaryId && sameFamilyLegendaryId !== equippedItem?.id ? [sameFamilyLegendaryId] : []);
-
-        const availableId = recommended.find((id) => (inventoryRemaining.get(id) ?? 0) > 0);
-
-        if (!allowed.length)
-        {
-
-            compatibilityUnknown.push({
-                ...need,
-                reason: "No verified override and equipped item ID does not expose an Epic-to-Legendary family mapping"
-            });
-            continue;
-
-        }
-
-        if (availableId)
-        {
-
-            const inventoryItem = playerResponse.player.inventory.items.find((item) => item.id === availableId);
-            inventoryRemaining.set(availableId, (inventoryRemaining.get(availableId) ?? 0) - 1);
-
-            equipNow.push({
-                ...need,
-                recommendedItemId: availableId,
-                recommendedItem: inventoryItem?.name ?? availableId,
-                recommendationSource: preferredOverrides.includes(availableId)
-                    ? "preferred equipment"
-                    : "same equipped item family at Legendary rarity"
-            });
-
-        }
-        else
-        {
-
-            buyWatch.push({
-                ...need,
-                compatibleLegendaryItemIds: allowed,
-                preferredLegendaryItemIds: recommended,
-                recommendationSource: preferredOverrides.length
-                    ? "preferred equipment"
-                    : "same equipped item family at Legendary rarity"
-            });
-
-        }
-
-    }
 
     const individualAbilityUpgradesTo17 = abilityQueue.reduce(
         (sum, row) => sum + Number(row.activeTo17) + Number(row.passiveTo17),
@@ -252,12 +184,35 @@ async function main()
             unequippedItems: playerResponse.player.inventory.items.reduce((sum, item) => sum + item.amount, 0)
         },
         abilityQueue,
+        roster: units.map((unit) => ({
+            id: unit.id,
+            name: unit.name ?? unit.id,
+            faction: unit.faction ?? "",
+            grandAlliance: unit.grandAlliance ?? "",
+            rarity: rarityFor(unit),
+            rank: unit.rank,
+            upgrades: unit.upgrades,
+            xpLevel: unit.xpLevel,
+            progressionIndex: unit.progressionIndex,
+            shards: unit.shards ?? 0,
+            mythicShards: unit.mythicShards ?? 0,
+            abilities: unit.abilities,
+            items: unit.items
+        })),
         legendaryUnderTier,
         equipmentAllocation: {
             equipNow,
             buyWatch,
             compatibilityUnknown
         },
+        campaignProgress: (playerResponse.player.progress?.campaigns ?? []).map((campaign) => ({
+            id: campaign.id,
+            name: campaign.name,
+            type: campaign.type,
+            ...campaignProgress(campaign),
+            battles: campaign.battles
+        })),
+        upgradeInventory: playerResponse.player.inventory.upgrades,
         unequippedInventory: playerResponse.player.inventory.items
     };
 

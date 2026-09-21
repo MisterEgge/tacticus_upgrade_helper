@@ -5,6 +5,11 @@
 # Node
 node_modules/
 
+# Next.js
+.next/
+next-env.d.ts
+*.tsbuildinfo
+
 # Tacticus player/account exports
 data/player*.json
 
@@ -18,3 +23,7 @@ __pycache__/
 
 # OS
 .DS_Store
+output/
+
+# Account-specific progression history
+data/history/campaigns/

@@ -6,19 +6,35 @@
     "fetch": "tsx src/fetchPlayer.ts",
     "discover": "tsx src/discover.ts",
     "analyze": "tsx src/analyzePlayer.ts",
-    "refresh": "npm run fetch && npm run analyze",
-    "typecheck": "tsc --noEmit"
+    "refresh": "npm run fetch && npm run snapshot:campaigns && npm run analyze",
+    "typecheck": "next typegen && tsc --noEmit",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "sync:game-data": "tsx src/syncGameData.ts",
+    "sync:portraits": "tsx src/syncPortraits.ts",
+    "sync:assets": "npm run sync:game-data && npm run sync:portraits",
+    "snapshot:campaigns": "tsx src/snapshotCampaignProgress.ts",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "test:smoke": "node tests/smoke.mjs"
   },
-  "keywords": ["tacticus"],
+  "keywords": [
+    "tacticus"
+  ],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
-    "dotenv": "^17.4.2"
+    "dotenv": "^17.4.2",
+    "next": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^26.1.0",
     "tsx": "^4.23.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
   }
 }

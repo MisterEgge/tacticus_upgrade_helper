@@ -1,0 +1,36 @@
+{
+  "lastReviewed": "2026-09-18",
+  "sources": [
+    {
+      "id": "wiki-abilities",
+      "kind": "mechanics",
+      "url": "https://tacticus.wiki.gg/wiki/Abilities",
+      "supports": "Ability rarity gates, badge/coin costs, special breakpoints and Mythic levels."
+    },
+    {
+      "id": "reddit-optimum-2026",
+      "kind": "community",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1ro5wo6/optimum_ability_levels/",
+      "supports": "Ability-specific investment; Bellator active, Gulgortz active, Snotflogga passive, Aleph active; Corrodius active over passive; Macer/Roswitha not blanket max targets."
+    },
+    {
+      "id": "reddit-tangida-breakpoints",
+      "kind": "community",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1ighd8z",
+      "supports": "Tan Gi'da summon breakpoints at 27 and 36 and community sweet-spot discussion."
+    },
+    {
+      "id": "reddit-mythic-abilities",
+      "kind": "community",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1w3kuf8/value_of_a_skills_above_50/",
+      "supports": "Post-50 diminishing returns and selective Mythic investment; Snotflogga summon threshold example."
+    },
+    {
+      "id": "raid-guide",
+      "kind": "community-guide",
+      "url": "https://lordlancelot.fandom.com/wiki/Tacticus_Guild",
+      "supports": "Historical raid breakpoints/order for Eldryon, Maugan Ra, Bellator, Aleph-Null, Roswitha, Re'vas, Calgar, Thaddeus, Aethana and Archimatos."
+    }
+  ],
+  "note": "This file records evidence inputs for auditability. A listed source does not imply every character recommendation comes from every source."
+}

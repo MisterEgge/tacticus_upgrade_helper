@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "lastReviewed": "2026-09-19",
+    "purpose": "Human-auditable community evidence for ability breakpoint guidance. URLs are evidence inputs, not authoritative game rules."
+  },
+  "general": [
+    {
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1ro5wo6/optimum_ability_levels/",
+      "date": "2026-03-08",
+      "supports": [
+        "Ability-specific stopping points",
+        "Aesoth percentage breakpoint at 36",
+        "No universal 35/50 rule"
+      ]
+    }
+  ],
+  "Gulgortz": [
+    {
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1redavi/which_abilty_to_upgrade/",
+      "date": "2026-02-25",
+      "supports": [
+        "Active priority",
+        "41/36 conservation strategy"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1j9jv6k/",
+      "date": "2025-03-12",
+      "supports": [
+        "Active first",
+        "Both abilities useful"
+      ]
+    }
+  ],
+  "Snotflogga": [
+    {
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1cf5a3a/",
+      "date": "2024-04-28",
+      "supports": [
+        "Passive first under badge pressure"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1kgaqu5/",
+      "date": "2025-05-06",
+      "supports": [
+        "36/36 practical investment",
+        "Both remain useful"
+      ]
+    }
+  ],
+  "Aethana": [
+    {
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1cz0u7u/",
+      "date": "2024-05-23",
+      "supports": [
+        "Passive priority",
+        "Active low priority"
+      ]
+    }
+  ],
+  "Calandis": [
+    {
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1cz0u7u/",
+      "date": "2024-05-23",
+      "supports": [
+        "Active utility front-loaded",
+        "Abilities secondary to Eldryon/Aethana passive"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/12c8m1p/",
+      "date": "2023-04-05",
+      "supports": [
+        "Older community stop-at-26 guidance"
+      ]
+    }
+  ],
+  "Ragnar": [
+    {
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1ifu29x/",
+      "date": "2025-02-02",
+      "supports": [
+        "Active to 50",
+        "Passive 36 breakpoint"
+      ],
+      "caution": "Predates later balance changes; revalidate after material balance patches."
+    }
+  ],
+  "Sho'syl": [
+    {
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/18pz9dt/",
+      "date": "2023-12-24",
+      "supports": [
+        "Passive first",
+        "Active useful but secondary"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1sfmpob/",
+      "date": "2026-04-08",
+      "supports": [
+        "Drone mechanics context"
+      ]
+    }
+  ],
+  "Re'vas": [
+    {
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1redavi/which_abilty_to_upgrade/",
+      "date": "2026-02-25",
+      "supports": [
+        "Active high investment",
+        "41/46 conservation strategy"
+      ]
+    }
+  ]
+}

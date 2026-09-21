@@ -14,7 +14,28 @@ permissions:
   contents: read
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm run test:smoke
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt pytest
+      - run: python -m pytest -q
+
   analyze:
+    needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
@@ -37,13 +58,15 @@ jobs:
         run: npm run typecheck
 
       - name: Fetch live player data
+        if: env.TACTICUS_API_KEY != ''
         run: npm run fetch
 
       - name: Analyze account
+        if: env.TACTICUS_API_KEY != ''
         run: npm run analyze
 
       - name: Upload analysis report
-        if: always()
+        if: success() && env.TACTICUS_API_KEY != ''
         uses: actions/upload-artifact@v4
         with:
           name: tacticus-upgrade-report
