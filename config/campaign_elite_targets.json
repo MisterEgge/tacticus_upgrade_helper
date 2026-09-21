@@ -8,7 +8,7 @@
   },
   "campaigns": {
     "Indomitus": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Tigurius": {
           "rank": "Silver I",
@@ -53,7 +53,7 @@
       }
     },
     "Indomitus Mirror": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Makhotep": {
           "rank": "Silver I",
@@ -100,7 +100,7 @@
       }
     },
     "Fall of Cadia": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Angrax": {
           "rank": "Gold I",
@@ -150,15 +150,51 @@
       }
     },
     "Fall of Cadia Mirror": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
-        "Sibyll": {},
-        "Kut": {},
-        "Thaddeus": {}
+        "Sibyll": {
+          "rank": "Gold I",
+          "active": "26+",
+          "passive": "26+",
+          "role": "protected psychic support",
+          "confidence": "high",
+          "note": "Restricted trio stages require survival, but Thaddeus should receive carry investment first.",
+          "evidence": [
+            "terminus-foc-mirror-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
+          ]
+        },
+        "Kut": {
+          "rank": "Gold I",
+          "active": "26+",
+          "passive": "17+",
+          "role": "frontline screen",
+          "confidence": "high",
+          "note": "Screens the backline on trio-only stages; durability matters more than turning him into the damage carry.",
+          "evidence": [
+            "terminus-foc-mirror-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
+          ]
+        },
+        "Thaddeus": {
+          "rank": "Gold I",
+          "active": "35",
+          "passive": "26",
+          "role": "primary carry",
+          "confidence": "high",
+          "note": "Required carry. Concentrate damage investment here before equalizing the trio.",
+          "evidence": [
+            "terminus-foc-mirror-2026",
+            "terminus-campaigns-2026",
+            "terminus-elite-2026"
+          ]
+        }
       }
     },
     "Octarius": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Gibbascrapz": {
           "rank": "Silver I",
@@ -204,7 +240,7 @@
       }
     },
     "Octarius Mirror": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Godswyl": {
           "rank": "Silver II",
@@ -245,7 +281,7 @@
       }
     },
     "Saim-Hann": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Calandis": {
           "rank": "Gold I",
@@ -290,7 +326,7 @@
       }
     },
     "Saim-Hann Mirror": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Yazaghor": {
           "rank": "Silver III",

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
-import { abilityGap, advancedCampaigns, campaignRecommendationPriority, buildCampaignSnapshot, campaignKey, campaignProgress, campaignRankGap, requiredCampaignName, type Campaign, type CampaignCharacter, type SnapshotPlayer } from "../src/domain/campaigns";
+import { abilityGap, advancedCampaigns, campaignIsComplete, campaignRecommendationPriority, buildCampaignSnapshot, campaignKey, campaignProgress, campaignRankGap, finalCampaignBattle, requiredCampaignName, type Campaign, type CampaignCharacter, type SnapshotPlayer } from "../src/domain/campaigns";
 import { farmNodesFor, progressFromApi, progressFromReport } from "../app/lib/farming";
 
 const campaign: Campaign = { id: "mirror", name: "Indomitus", type: "EliteMirror", battles: [{ battleIndex: 38 }] };
@@ -139,5 +139,55 @@ test("campaign recommendations prioritize carries and suppress completed rank go
     assert.equal(carry.rankStepsRemaining, 3);
     assert.equal(campaignRecommendationPriority({ campaign: "Test", characterId: "done", characterName: "Done", currentRank: 12, targetRank: "Gold I" }).recommendationPriority, 0);
     assert.equal(campaignRecommendationPriority({ campaign: "Test", characterId: "unknown", characterName: "Unknown", currentRank: null, targetRank: "Gold I" }).recommendationPriority, 0);
+
+});
+
+test("campaign completion is derived from the synced playable endpoint", () =>
+{
+
+    const battles = [
+        { campaign: "Variable Elite", campaignType: "Elite", nodeNumber: 1 },
+        { campaign: "Variable Elite", campaignType: "Elite", nodeNumber: 17 }
+    ];
+    assert.equal(finalCampaignBattle("Variable", "Elite", battles), 17);
+    assert.equal(campaignIsComplete({ name: "Variable", type: "Elite", highestCompletedBattle: 16 }, battles), false);
+    assert.equal(campaignIsComplete({ name: "Variable", type: "Elite", highestCompletedBattle: 17 }, battles), true);
+    assert.equal(campaignIsComplete({ name: "Missing", type: "Elite", highestCompletedBattle: 75 }, battles), false);
+
+});
+
+test("completed campaigns suppress all campaign-driven character upgrades", () =>
+{
+
+    const recommendation = campaignRecommendationPriority({ campaign: "Saim-Hann Mirror", campaignComplete: true, characterId: "abraxas", characterName: "Abraxas", currentRank: 12, targetRank: "Gold III", role: "primary summon carry", confidence: "high", accountPriority: 100 });
+    assert.equal(recommendation.recommendationPriority, 0);
+    assert.equal(recommendation.rankStepsRemaining, 0);
+    assert.equal(recommendation.targetRankIndex, 12);
+    assert.match(recommendation.reason, /already complete/i);
+
+});
+
+test("synced campaign battle numbering agrees with report frontier semantics", () =>
+{
+
+    const battles = JSON.parse(readFileSync("data/game/campaign-battles.json", "utf8")) as Record<string, { campaign: string; campaignType: string; nodeNumber: number }>;
+    const byCampaign = new Map<string, number[]>();
+    for (const battle of Object.values(battles))
+    {
+
+        const key = campaignKey(battle.campaign, battle.campaignType);
+        const values = byCampaign.get(key) ?? [];
+        values.push(battle.nodeNumber);
+        byCampaign.set(key, values);
+
+    }
+    for (const [key, nodes] of byCampaign)
+    {
+
+        assert.ok(nodes.every(node => Number.isInteger(node) && node > 0), `${key} contains invalid node numbering`);
+        assert.equal(new Set(nodes).size, nodes.length, `${key} contains duplicate node numbers`);
+        if (!/Challenge$/i.test(key)) assert.equal(Math.min(...nodes), 1, `${key} does not start at node 1`);
+
+    }
 
 });
