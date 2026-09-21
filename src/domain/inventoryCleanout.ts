@@ -40,7 +40,7 @@ export function inventoryCleanout(items: CleanoutInventoryItem[], units: Cleanou
         const itemFamily = family(item.id);
         if (itemRarity === null || itemFamily === null)
             return { ...item, keep: item.amount, scrap: 0, status: "UNKNOWN — DO NOT SCRAP" as const, reason: "Item family or rarity is not verified." };
-        const itemType = item.id.replace(/_[CURELM]\\d{3}$/, "");
+        const itemType = item.id.replace(/_[CURELM]\d{3}$/, "");
         const catalogRecipients = catalog.filter(character => character.equipment.includes(itemType));
         if (!catalogRecipients.length)
             return { ...item, keep: item.amount, scrap: 0, status: "UNKNOWN — DO NOT SCRAP" as const, reason: "No catalog equipment compatibility exists for this item type." };
