@@ -28,32 +28,46 @@ function progressionRarityIndex(progressionIndex: number): number
 export function inventoryCleanout(items: CleanoutInventoryItem[], units: CleanoutUnit[], demands: CleanoutDemand[], catalog: CleanoutCatalogCharacter[]): CleanoutRow[]
 {
 
-    const demandIds = new Set(demands.flatMap(d => [d.recommendedItemId, ...(d.compatibleLegendaryItemIds ?? []), ...(d.preferredLegendaryItemIds ?? [])].filter((x): x is string => !!x)));
+    const demandCounts = new Map<string, number>();
+    for (const demand of demands)
+        for (const id of [demand.recommendedItemId, ...(demand.compatibleLegendaryItemIds ?? []), ...(demand.preferredLegendaryItemIds ?? [])])
+            if (id) demandCounts.set(id, (demandCounts.get(id) ?? 0) + 1);
+    const ownedById = new Map(units.map(unit => [unit.id, unit]));
     return items.map(item =>
     {
 
         const itemRarity = rarityIndexFromId(item.id);
         const itemFamily = family(item.id);
-        if (!completeCharacterCatalog || itemRarity === null || itemFamily === null)
-            return { ...item, keep: item.amount, scrap: 0, status: "UNKNOWN — DO NOT SCRAP" as const, reason: "Item family/rarity or complete recipient pool is not verified." };
-        const equippedSameFamily = units.flatMap(unit => unit.items.map(equipped => ({ unit, equipped }))).filter(x => family(x.equipped.id) === itemFamily);
-        if (!equippedSameFamily.length)
-            return { ...item, keep: item.amount, scrap: 0, status: "UNKNOWN — DO NOT SCRAP" as const, reason: "No equipped same-family item proves which characters can use this family." };
-        const possibleRecipients = new Map(equippedSameFamily.map(x => [x.unit.id, x]));
-        const reserve = [...possibleRecipients.values()].filter(({ unit, equipped }) =>
+        if (itemRarity === null || itemFamily === null)
+            return { ...item, keep: item.amount, scrap: 0, status: "UNKNOWN — DO NOT SCRAP" as const, reason: "Item family or rarity is not verified." };
+        const itemType = item.id.replace(/_[CURELM]\\d{3}$/, "");
+        const catalogRecipients = catalog.filter(character => character.equipment.includes(itemType));
+        if (!catalogRecipients.length)
+            return { ...item, keep: item.amount, scrap: 0, status: "UNKNOWN — DO NOT SCRAP" as const, reason: "No catalog equipment compatibility exists for this item type." };
+        if (catalogRecipients.some(character => !ownedById.has(character.id)))
+            return { ...item, keep: item.amount, scrap: 0, status: "UNKNOWN — DO NOT SCRAP" as const, reason: "At least one compatible character is not unlocked; reserve cannot be proven complete." };
+        const recipients = catalogRecipients.map(character =>
         {
 
-            const characterRarity = progressionRarityIndex(unit.progressionIndex);
-            const equippedRarity = rarityIndexFromId(equipped.id);
-            if (equippedRarity === null) return true;
-            return itemRarity > equippedRarity && itemRarity <= characterRarity;
+            const unit = ownedById.get(character.id)!;
+            const equipped = unit.items.find(candidate => candidate.id.startsWith(itemType + "_") || family(candidate.id) === itemFamily);
+            return { unit, equipped };
+
+        });
+        if (recipients.some(recipient => !recipient.equipped))
+            return { ...item, keep: item.amount, scrap: 0, status: "UNKNOWN — DO NOT SCRAP" as const, reason: "A compatible unlocked character has no matching equipped slot/family proof." };
+        const reserve = recipients.filter(({ unit, equipped }) =>
+        {
+
+            const equippedRarity = rarityIndexFromId(equipped!.id);
+            return equippedRarity === null || (itemRarity > equippedRarity && itemRarity <= progressionRarityIndex(unit.progressionIndex));
 
         }).length;
-        const explicitDemand = demandIds.has(item.id) ? 1 : 0;
+        const explicitDemand = demandCounts.get(item.id) ?? 0;
         const keep = Math.min(item.amount, Math.max(reserve, explicitDemand));
         const scrap = Math.max(0, item.amount - keep);
         if (!scrap) return { ...item, keep, scrap, status: "KEEP / RESERVED" as const, reason: reserve ? `${reserve} compatible character(s) can still upgrade into this rarity.` : "Current equipment plan reserves this item." };
-        return { ...item, keep, scrap, status: keep ? "EXCESS" as const : "SCRAP SAFE" as const, reason: keep ? `Keep ${keep} for verified future recipients; ${scrap} extra cop${scrap === 1 ? "y is" : "ies are"} surplus.` : "All verified same-family recipients already meet or exceed this item's rarity." };
+        return { ...item, keep, scrap, status: keep ? "EXCESS" as const : "SCRAP SAFE" as const, reason: keep ? `Keep ${keep} for verified future recipients; ${scrap} extra cop${scrap === 1 ? "y is" : "ies are"} surplus.` : "All verified compatible recipients already meet or exceed this item's rarity." };
 
     }).sort((a, b) => b.scrap - a.scrap || a.status.localeCompare(b.status) || (a.name ?? a.id).localeCompare(b.name ?? b.id));
 
