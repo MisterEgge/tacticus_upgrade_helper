@@ -29,7 +29,7 @@
 - [x] Inspect checked-in official API schema: attempts/unlock indices only; star state remains unknown. Re-audit when schema updates.
 - [x] Persist changed roster/progression observations, separate advances, and reject stale timestamps.
 - [ ] Research community-efficient 3-star targets for every mandatory campaign character and separate carry vs survival-only investment.
-- [ ] Feed campaign target rank gaps into multi-rank farming demand.
+- [x] Feed campaign target rank gaps into multi-rank farming demand.
 
 ## Remaining verification and evidence
 - [x] Verify account analysis via the existing CI API secret and exercise production routes/farming calculations using its fresh report. Player exports and generated reports remain untracked.
