@@ -2,7 +2,7 @@ import Nav from "../components/Nav";
 import CharacterName from "../components/CharacterName";
 import { getReport } from "../lib/report";
 import { getCampaignEvidence, getCampaignTargets, getCharacterCatalog } from "../lib/catalog";
-import { abilityGap, campaignRankGap, campaignRecommendationPriority, requiredCampaignName } from "../../src/domain/campaigns";
+import { abilityGap, campaignIsComplete, campaignRankGap, campaignRecommendationPriority, requiredCampaignName, type CampaignBattleDefinition } from "../../src/domain/campaigns";
 import { readFile } from "node:fs/promises";
 
 const rankNames = ["Stone I", "Stone II", "Stone III", "Iron I", "Iron II", "Iron III", "Bronze I", "Bronze II", "Bronze III", "Silver I", "Silver II", "Silver III", "Gold I", "Gold II", "Gold III", "Diamond I", "Diamond II", "Diamond III", "Adamantine I", "Adamantine II"];
@@ -10,10 +10,10 @@ const rankNames = ["Stone I", "Stone II", "Stone III", "Iron I", "Iron II", "Iro
 export default async function Campaigns()
 {
 
-    const [report, targets, catalog, evidence, priorities] = await Promise.all([getReport(), getCampaignTargets(), getCharacterCatalog(), getCampaignEvidence(), readFile("config/character_priorities.json", "utf8").then(value => JSON.parse(value) as Record<string, { priority: number }>) ]);
+    const [report, targets, catalog, evidence, priorities, battleText] = await Promise.all([getReport(), getCampaignTargets(), getCharacterCatalog(), getCampaignEvidence(), readFile("config/character_priorities.json", "utf8").then(value => JSON.parse(value) as Record<string, { priority: number }>), readFile("data/game/campaign-battles.json", "utf8") ]);\n    const battleCatalog = Object.values(JSON.parse(battleText) as Record<string, CampaignBattleDefinition>);
     if (!report) return <main><Nav/><div className="empty">Account data unavailable. Run <code>npm run refresh</code>.</div></main>;
     const roster = new Map(report.roster.map(unit => [unit.id, unit]));
-    const recommendations = Object.entries(targets.campaigns).flatMap(([campaignName, campaign]) => { const progress = report.campaignProgress?.find(c => (c.type === "Elite" || c.type === "EliteMirror") && requiredCampaignName(c) === campaignName); const campaignComplete = (progress?.highestCompletedBattle ?? 0) >= 40; return catalog.characters.filter(character => character.campaignsRequiredIn.includes(campaignName)).map(character => { const unit = roster.get(character.id); const target = campaign.characters[character.name]; return campaignRecommendationPriority({ campaign: campaignName, campaignComplete, characterId: character.id, characterName: character.name, currentRank: unit?.rank ?? null, targetRank: target?.rank, role: target?.role, confidence: target?.confidence, accountPriority: priorities[character.name]?.priority ?? 0 }); }); }).filter(row => row.recommendationPriority > 0).sort((a, b) => b.recommendationPriority - a.recommendationPriority);
+    const recommendations = Object.entries(targets.campaigns).flatMap(([campaignName, campaign]) => { const progress = report.campaignProgress?.find(c => (c.type === "Elite" || c.type === "EliteMirror") && requiredCampaignName(c) === campaignName); const campaignComplete = campaignIsComplete(progress, battleCatalog); return catalog.characters.filter(character => character.campaignsRequiredIn.includes(campaignName)).map(character => { const unit = roster.get(character.id); const target = campaign.characters[character.name]; return campaignRecommendationPriority({ campaign: campaignName, campaignComplete, characterId: character.id, characterName: character.name, currentRank: unit?.rank ?? null, targetRank: target?.rank, role: target?.role, confidence: target?.confidence, accountPriority: priorities[character.name]?.priority ?? 0 }); }); }).filter(row => row.recommendationPriority > 0).sort((a, b) => b.recommendationPriority - a.recommendationPriority);
     return <main>
         <Nav/>
         <header><div><p className="eyebrow">CAMPAIGNS</p><h1>Elite 3★ Upgrade Planner</h1>
@@ -25,7 +25,7 @@ export default async function Campaigns()
 
             const progress = report.campaignProgress?.find(c => (c.type === "Elite" || c.type === "EliteMirror") && requiredCampaignName(c) === name);
             const required = catalog.characters.filter(c => c.campaignsRequiredIn.includes(name));
-            const campaignComplete = (progress?.highestCompletedBattle ?? 0) >= 40;
+            const campaignComplete = campaignIsComplete(progress, battleCatalog);
             return <section className="panel detailPanel" key={name}>
                 <div className="sectionTitle"><div><p className="eyebrow">{campaign.status.toUpperCase()}</p><h2>{name} Elite</h2></div>
                     <div className="power">{progress?.highestCompletedBattle ?? "Unknown"}<strong> completed through · {progress?.highestUnlockedBattle ?? "unknown"} unlock frontier</strong></div>
