@@ -141,3 +141,14 @@ test("campaign recommendations prioritize carries and suppress completed rank go
     assert.equal(campaignRecommendationPriority({ campaign: "Test", characterId: "unknown", characterName: "Unknown", currentRank: null, targetRank: "Gold I" }).recommendationPriority, 0);
 
 });
+
+test("completed campaigns suppress all campaign-driven character upgrades", () =>
+{
+
+    const recommendation = campaignRecommendationPriority({ campaign: "Saim-Hann Mirror", campaignComplete: true, characterId: "abraxas", characterName: "Abraxas", currentRank: 12, targetRank: "Gold III", role: "primary summon carry", confidence: "high", accountPriority: 100 });
+    assert.equal(recommendation.recommendationPriority, 0);
+    assert.equal(recommendation.rankStepsRemaining, 0);
+    assert.equal(recommendation.targetRankIndex, 12);
+    assert.match(recommendation.reason, /already complete/i);
+
+});
