@@ -1,4 +1,6 @@
 import fs from "node:fs/promises";
+import { allocateEquipment } from "./domain/equipment";
+import { campaignProgress } from "./domain/campaigns";
 
 type Ability = {
     id: string;
@@ -156,122 +158,9 @@ async function main()
         .filter((row) => row.activeTo17 || row.passiveTo17)
         .sort((a, b) => b.accountPriority - a.accountPriority || a.character.localeCompare(b.character));
 
-    const legendaryUnderTier = units
-        .filter((unit) => rarityFor(unit) === "Legendary")
-        .flatMap((unit) =>
-            unit.items
-                .filter((item) => item.rarity && item.rarity !== "Legendary" && item.rarity !== "Mythic")
-                .map((item) => ({
-                    character: unit.name ?? unit.id,
-                    characterId: unit.id,
-                    slotId: item.slotId,
-                    currentItem: item.name ?? item.id,
-                    currentRarity: item.rarity,
-                    currentLevel: item.level,
-                    accountPriority: priorities[unit.name ?? ""]?.priority ?? 0
-                }))
-        )
-        .sort((a, b) => b.accountPriority - a.accountPriority || a.character.localeCompare(b.character));
-
-    const inventoryRemaining = new Map<string, number>(
-        playerResponse.player.inventory.items.map((item) => [item.id, item.amount])
+    const { legendaryUnderTier, equipNow, buyWatch, compatibilityUnknown } = allocateEquipment(
+        units, playerResponse.player.inventory.items, priorities, compatibility, preferences, equipmentNames
     );
-
-    const itemNames = new Map<string, string>(Object.entries(equipmentNames));
-    for (const unit of units)
-    {
-
-        for (const item of unit.items)
-        {
-
-            if (item.name)
-            {
-
-                itemNames.set(item.id, item.name);
-
-            }
-
-        }
-
-    }
-    for (const item of playerResponse.player.inventory.items)
-    {
-
-        if (item.name)
-        {
-
-            itemNames.set(item.id, item.name);
-
-        }
-
-    }
-
-    const equipNow: Array<Record<string, unknown>> = [];
-    const buyWatch: Array<Record<string, unknown>> = [];
-    const compatibilityUnknown: Array<Record<string, unknown>> = [];
-
-    for (const need of legendaryUnderTier)
-    {
-
-        const unit = units.find((candidate) => (candidate.name ?? candidate.id) === need.character);
-        const equippedItem = unit?.items.find((item) => item.slotId === need.slotId);
-        const sameFamilyLegendaryId = equippedItem?.id.replace(/_E(\d{3})$/, "_L$1");
-
-        const verifiedOverrides = compatibility.characters[need.character]?.[need.slotId as "Slot1" | "Slot2" | "Slot3"] ?? [];
-        const preferredOverrides = preferences.characters[need.character]?.[need.slotId as "Slot1" | "Slot2" | "Slot3"] ?? [];
-        const allowed = [
-            ...verifiedOverrides,
-            ...(sameFamilyLegendaryId && sameFamilyLegendaryId !== equippedItem?.id ? [sameFamilyLegendaryId] : [])
-        ].filter((id, index, all) => all.indexOf(id) === index);
-        const recommended = preferredOverrides.length
-            ? preferredOverrides
-            : (sameFamilyLegendaryId && sameFamilyLegendaryId !== equippedItem?.id ? [sameFamilyLegendaryId] : []);
-
-        const availableId = recommended.find((id) => (inventoryRemaining.get(id) ?? 0) > 0);
-
-        if (!allowed.length)
-        {
-
-            compatibilityUnknown.push({
-                ...need,
-                reason: "No verified override and equipped item ID does not expose an Epic-to-Legendary family mapping"
-            });
-            continue;
-
-        }
-
-        if (availableId)
-        {
-
-            const inventoryItem = playerResponse.player.inventory.items.find((item) => item.id === availableId);
-            inventoryRemaining.set(availableId, (inventoryRemaining.get(availableId) ?? 0) - 1);
-
-            equipNow.push({
-                ...need,
-                recommendedItemId: availableId,
-                recommendedItem: inventoryItem?.name ?? availableId,
-                recommendationSource: preferredOverrides.includes(availableId)
-                    ? "preferred equipment"
-                    : "same equipped item family at Legendary rarity"
-            });
-
-        }
-        else
-        {
-
-            buyWatch.push({
-                ...need,
-                compatibleLegendaryItemIds: allowed,
-                preferredLegendaryItemIds: recommended,
-                preferredLegendaryItems: recommended.map((id) => itemNames.get(id) ?? id),
-                recommendationSource: preferredOverrides.length
-                    ? "preferred equipment"
-                    : "same equipped item family at Legendary rarity"
-            });
-
-        }
-
-    }
 
     const individualAbilityUpgradesTo17 = abilityQueue.reduce(
         (sum, row) => sum + Number(row.activeTo17) + Number(row.passiveTo17),
@@ -318,9 +207,7 @@ async function main()
             id: campaign.id,
             name: campaign.name,
             type: campaign.type,
-            highestUnlockedBattle: campaign.battles.reduce((max, battle) => Math.max(max, battle.battleIndex + 1), 0),
-            // Tacticus unlock semantics: battle N being unlocked proves completion through N-1, not N.
-            highestCompletedBattle: Math.max(0, campaign.battles.reduce((max, battle) => Math.max(max, battle.battleIndex + 1), 0) - 1),
+            ...campaignProgress(campaign),
             battles: campaign.battles
         })),
         upgradeInventory: playerResponse.player.inventory.upgrades ?? [],

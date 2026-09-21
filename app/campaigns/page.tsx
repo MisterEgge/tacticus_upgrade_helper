@@ -1,3 +1,52 @@
-import Nav from"../components/Nav";import CharacterName from"../components/CharacterName";import{getReport}from"../lib/report";import{getCampaignTargets,getCharacterCatalog}from"../lib/catalog";
-const rankNames=["Stone I","Stone II","Stone III","Iron I","Iron II","Iron III","Bronze I","Bronze II","Bronze III","Silver I","Silver II","Silver III","Gold I","Gold II","Gold III","Diamond I","Diamond II","Diamond III"];
-export default async function Campaigns(){const[r,targets,catalog]=await Promise.all([getReport(),getCampaignTargets(),getCharacterCatalog()]);if(!r)return <main><Nav/><div className="empty">Run <code>npm run refresh</code>.</div></main>;const roster=new Map(r.roster.map(x=>[x.name,x]));const meta=new Map(catalog.characters.map(x=>[x.name,x]));const campaigns=Object.entries(targets.campaigns);const eliteProgress=(name:string)=>r.campaignProgress?.filter(x=>x.name===name&&(x.type==="Elite"||x.type==="EliteMirror")).sort((a,b)=>b.highestUnlockedBattle-a.highestUnlockedBattle)[0];return <main><Nav/><header><div><p className="eyebrow">CAMPAIGNS</p><h1>Elite 3★ Upgrade Planner</h1><p className="sub">Live account state versus researched community-efficient targets for complete Elite three-star clears. Unresearched targets stay blank instead of being guessed.</p></div><div className="power">{campaigns.length} <strong>campaigns</strong></div></header>{campaigns.map(([name,c])=><section className="panel detailPanel" key={name}><div className="sectionTitle"><div><p className="eyebrow">{c.status.toUpperCase()}</p><h2>{name} Elite</h2></div>{(()=>{const p=eliteProgress(name);return p?<div className="power">{p.highestCompletedBattle??Math.max(0,p.highestUnlockedBattle-1)}<strong> completed · {p.highestUnlockedBattle} unlocked</strong></div>:<div className="power">—<strong> no live Elite progress match</strong></div>})()}</div><div className="tableWrap"><table><thead><tr><th>Character</th><th>Current</th><th>Suggested Elite target</th><th>Abilities current → target</th><th>Role / evidence</th></tr></thead><tbody>{Object.entries(c.characters).map(([character,t])=>{const u=roster.get(character),m=meta.get(character);const currentRank=u?rankNames[u.rank]??`Rank ${u.rank}`:"Not owned";const p=eliteProgress(name);const observed=p?(p.highestCompletedBattle??Math.max(0,p.highestUnlockedBattle-1)):0;return <tr key={character}><td><CharacterName name={character} id={m?.id} icon={m?.icon}/></td><td><strong>{currentRank}</strong>{u?<small>A {u.abilities[0]?.level??"—"} · P {u.abilities[1]?.level??"—"}</small>:null}</td><td>{t.rank?<><strong>{t.rank}</strong><small>{t.confidence??"researching"} confidence</small></>:<strong>RESEARCHING</strong>}</td><td>{t.active||t.passive?<><strong>A {u?.abilities[0]?.level??"—"} → {t.active??"—"}</strong><small>P {u?.abilities[1]?.level??"—"} → {t.passive??"—"}</small></>:"—"}</td><td><strong>{t.role??"Unreviewed"}</strong><small>{t.note??"Campaign-specific Elite 3★ target research pending."}</small>{observed?<small>Account evidence: completed through Elite battle {observed} with today's roster. This is a ceiling snapshot, not proof these were the ranks used to clear earlier battles.</small>:null}</td></tr>})}</tbody></table></div></section>)}</main>}
+import Nav from "../components/Nav";
+import CharacterName from "../components/CharacterName";
+import { getReport } from "../lib/report";
+import { getCampaignTargets, getCharacterCatalog } from "../lib/catalog";
+import { requiredCampaignName } from "../../src/domain/campaigns";
+
+const rankNames = ["Stone I", "Stone II", "Stone III", "Iron I", "Iron II", "Iron III", "Bronze I", "Bronze II", "Bronze III", "Silver I", "Silver II", "Silver III", "Gold I", "Gold II", "Gold III", "Diamond I", "Diamond II", "Diamond III", "Adamantine I", "Adamantine II"];
+
+export default async function Campaigns()
+{
+
+    const [report, targets, catalog] = await Promise.all([getReport(), getCampaignTargets(), getCharacterCatalog()]);
+    if (!report) return <main><Nav/><div className="empty">Account data unavailable. Run <code>npm run refresh</code>.</div></main>;
+    const roster = new Map(report.roster.map(unit => [unit.id, unit]));
+    return <main>
+        <Nav/>
+        <header><div><p className="eyebrow">CAMPAIGNS</p><h1>Elite 3★ Upgrade Planner</h1>
+            <p className="sub">Account data as of report {report.generatedAt}. Community targets remain RESEARCHING until supported by campaign-specific evidence.</p>
+        </div></header>
+        {Object.entries(targets.campaigns).map(([name, campaign]) =>
+        {
+
+            const progress = report.campaignProgress?.find(c => (c.type === "Elite" || c.type === "EliteMirror") && requiredCampaignName(c) === name);
+            const required = catalog.characters.filter(c => c.campaignsRequiredIn.includes(name));
+            return <section className="panel detailPanel" key={name}>
+                <div className="sectionTitle"><div><p className="eyebrow">{campaign.status.toUpperCase()}</p><h2>{name} Elite</h2></div>
+                    <div className="power">{progress?.highestCompletedBattle ?? "Unknown"}<strong> completed through · {progress?.highestUnlockedBattle ?? "unknown"} unlock frontier</strong></div>
+                </div>
+                <p className="sub">Confirmed 3★ progress: UNKNOWN — the available API schema does not expose stars. Unlock frontier N proves completion through N−1; a terminal frontier can be a sentinel, not a playable battle.</p>
+                <div className="tableWrap"><table><thead><tr><th>Required character</th><th>Current account state</th><th>Suggested Elite target</th><th>Abilities current → target</th><th>Role / evidence</th></tr></thead>
+                    <tbody>{required.map(character =>
+                    {
+
+                        const unit = roster.get(character.id);
+                        const target = campaign.characters[character.name];
+                        return <tr key={character.id}>
+                            <td><CharacterName name={character.name} id={character.id}/></td>
+                            <td><strong>{unit ? rankNames[unit.rank] ?? `Unknown rank (${unit.rank})` : "Not in account roster"}</strong></td>
+                            <td><strong>{target?.rank ?? "RESEARCHING"}</strong>{target?.rank ? <small>{target.confidence ?? "Unknown"} confidence</small> : null}</td>
+                            <td><strong>A {unit?.abilities[0]?.level ?? "—"} → {target?.active ?? "—"}</strong><small>P {unit?.abilities[1]?.level ?? "—"} → {target?.passive ?? "—"}</small></td>
+                            <td><strong>{target?.role ?? "Unreviewed"}</strong><small>{target?.note ?? "Campaign-specific Elite 3★ research pending."}</small></td>
+                        </tr>;
+
+                    })}</tbody>
+                </table></div>
+                <p className="sub">Current ranks do not establish the ranks used for earlier clears. Historical observations are saved by <code>npm run refresh</code>; roster changes alongside progress are correlation, not proof of cause.</p>
+            </section>;
+
+        })}
+    </main>;
+
+}

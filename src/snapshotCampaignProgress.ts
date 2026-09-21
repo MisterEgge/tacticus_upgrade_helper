@@ -1,31 +1,40 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { advancedCampaigns, buildCampaignSnapshot, type CampaignCharacter, type CampaignSnapshot, type SnapshotPlayer } from "./domain/campaigns";
 
-type Battle={battleIndex:number};
-type Campaign={id:string;name:string;type:string;battles:Battle[]};
-type Unit={id:string;name?:string;rank:number;progressionIndex:number;abilities:Array<{id:string;level:number}>};
-type PlayerFile={metaData:{lastUpdatedOn:number};player:{units:Unit[];progress?:{campaigns?:Campaign[]}}};
-type Catalog={characters:Array<{name:string;id:string;campaignsRequiredIn:string[]}>};
-type Snapshot={capturedAt:string;apiLastUpdatedOn:number;campaigns:Record<string,{id:string;type:string;highestUnlockedBattle:number;highestCompletedBattle:number;requiredCharacters:Array<{name:string;id:string;rank:number|null;progressionIndex:number|null;activeLevel:number|null;passiveLevel:number|null}>}>};
+async function main()
+{
 
-async function read<T>(p:string){return JSON.parse(await fs.readFile(p,"utf8")) as T;}
-async function main(){
- const player=await read<PlayerFile>("data/player.json"),catalog=await read<Catalog>("data/character_catalog.json");
- const units=new Map(player.player.units.map(u=>[u.name??u.id,u]));
- const campaigns:Snapshot["campaigns"]={};
- for(const c of player.player.progress?.campaigns??[]){
-  if(c.type!=="Elite"&&c.type!=="EliteMirror")continue;
-  const unlocked=c.battles.reduce((m,b)=>Math.max(m,b.battleIndex+1),0);
-  const baseName=c.name.replace(/\s+Elite(?:\s+Mirror)?$/i,"").replace(/\s+Mirror$/i,"").trim();
-  const required=catalog.characters.filter(x=>x.campaignsRequiredIn.includes(baseName)||x.campaignsRequiredIn.includes(c.name));
-  campaigns[c.id]={id:c.id,type:c.type,highestUnlockedBattle:unlocked,highestCompletedBattle:Math.max(0,unlocked-1),requiredCharacters:required.map(ch=>{const u=units.get(ch.name);return{name:ch.name,id:ch.id,rank:u?.rank??null,progressionIndex:u?.progressionIndex??null,activeLevel:u?.abilities[0]?.level??null,passiveLevel:u?.abilities[1]?.level??null};})};
- }
- const snap:Snapshot={capturedAt:new Date().toISOString(),apiLastUpdatedOn:player.metaData.lastUpdatedOn,campaigns};
- const dir=path.join("data","history","campaigns");await fs.mkdir(dir,{recursive:true});
- const latest=path.join(dir,"latest.json");let previous:Snapshot|null=null;try{previous=await read<Snapshot>(latest)}catch{}
- const advanced=Object.entries(campaigns).some(([id,c])=>c.highestCompletedBattle>(previous?.campaigns[id]?.highestCompletedBattle??-1));
- if(advanced||!previous){const stamp=snap.capturedAt.replace(/[:.]/g,"-");await fs.writeFile(path.join(dir,stamp+".json"),JSON.stringify(snap,null,2));console.log("Saved campaign milestone snapshot.");}
- else console.log("No new Elite completion milestone; history unchanged.");
- await fs.writeFile(latest,JSON.stringify(snap,null,2));
+    const player = JSON.parse(await fs.readFile("data/player.json", "utf8")) as SnapshotPlayer;
+    const catalog = JSON.parse(await fs.readFile("data/character_catalog.json", "utf8")) as { characters: CampaignCharacter[] };
+    if (!player.player?.progress?.campaigns) throw new Error("Campaign progress unavailable; history was not changed.");
+    const snapshot = buildCampaignSnapshot(player, catalog.characters, new Date().toISOString());
+    const dir = path.join("data", "history", "campaigns");
+    await fs.mkdir(dir, { recursive: true });
+    const files = (await fs.readdir(dir)).filter(f => f.endsWith(".json") && f !== "latest.json");
+    // Fail visibly on corrupt history instead of silently discarding evidence.
+    const history = await Promise.all(files.map(async f => JSON.parse(await fs.readFile(path.join(dir, f), "utf8")) as CampaignSnapshot));
+    const advances = advancedCampaigns(snapshot, history);
+    const latestApi = Math.max(0, ...history.map(s => s.apiLastUpdatedOn ?? 0));
+    if (snapshot.apiLastUpdatedOn !== null && snapshot.apiLastUpdatedOn < latestApi)
+        throw new Error("Stale API response; campaign history was not changed.");
+
+    // Preserve roster observations even without progress, so the next advance
+    // can be compared with the actual previously observed ranks and abilities.
+    const previous = history.sort((a, b) => a.capturedAt.localeCompare(b.capturedAt)).at(-1);
+    const changed = !previous || previous.schemaVersion !== 2 || JSON.stringify(previous.campaigns) !== JSON.stringify(snapshot.campaigns);
+    if (changed)
+    {
+
+        const stamp = snapshot.capturedAt.replace(/[:.]/g, "-");
+        await fs.writeFile(path.join(dir, stamp + ".json"), JSON.stringify({ ...snapshot, advancedCampaignIds: advances }, null, 2), { flag: "wx" });
+
+    }
+    const temporary = path.join(dir, "latest.json.tmp");
+    await fs.writeFile(temporary, JSON.stringify(snapshot, null, 2));
+    await fs.rename(temporary, path.join(dir, "latest.json"));
+    console.log(advances.length ? `Saved ${advances.length} campaign advance(s).` : changed ? "Saved roster/progress observation; no confirmed new milestone." : "No changed campaign observation.");
+
 }
-main().catch(e=>{console.error(e);process.exitCode=1;});
+
+main().catch(error => { console.error(error); process.exitCode = 1; });
