@@ -13,6 +13,7 @@ export function campaignKey(name: string, type: string): string
     const mirror = /mirror/i.test(type) || /\bmirror\b/i.test(name);
     const elite = /elite/i.test(type) || /\belite\b/i.test(name);
     const base = name.replace(/(?:\s+(?:Elite|Mirror))+$/i, "").trim();
+    const canonicalBase = /^Saim-Hainn$/i.test(base) ? "Saim-Hann" : base;
     return `${canonicalBase}${mirror ? " Mirror" : ""}${elite ? " Elite" : ""}`;
 
 }
