@@ -46,3 +46,5 @@ th { color:#8794a7; font-size:11px; letter-spacing:.1em; text-transform:uppercas
 
 .goalForm{display:flex;flex-wrap:wrap;align-items:end;gap:16px;padding:18px;margin-top:24px}.goalForm label{display:flex;flex-direction:column;gap:8px;flex:1;min-width:180px}.goalForm select,.goalForm button{font:inherit;color:#edf1f7;background:#1b2330;border:1px solid #65758b;border-radius:8px;padding:10px;max-width:100%}.goalForm button{cursor:pointer}.detailPanel>p.sub{padding:12px 24px;margin:0}
 @media(max-width:600px){header,.sectionTitle{flex-wrap:wrap}.goalForm{flex-direction:column;align-items:stretch}.detailPanel table{min-width:800px}}
+
+.syncAccount{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}.syncAccount button{font:inherit;font-size:13px;font-weight:800;color:#edf1f7;background:#1b2330;border:1px solid #65758b;border-radius:9px;padding:9px 13px;cursor:pointer}.syncAccount button:hover:not(:disabled){background:#273344}.syncAccount button:disabled{opacity:.55;cursor:wait}.syncAccount small{display:inline;margin:0}.syncAccount .syncError{color:#ff9b9b;flex-basis:100%}
