@@ -157,6 +157,7 @@ export function abilityGap(current: number | null | undefined, target?: string):
 
 export type CampaignRecommendationInput = {
     campaign: string;
+    campaignComplete?: boolean | undefined;
     characterId: string;
     characterName: string;
     currentRank: number | null;
@@ -178,6 +179,8 @@ export function campaignRecommendationPriority(input: CampaignRecommendationInpu
 
     const targetRankIndex = campaignRankIndex(input.targetRank);
     const rankStepsRemaining = campaignRankGap(input.currentRank, input.targetRank);
+    if (input.campaignComplete)
+        return { ...input, targetRankIndex: input.currentRank, rankStepsRemaining: 0, recommendationPriority: 0, reason: "Campaign already complete; no campaign-driven investment needed" };
     if (targetRankIndex === null || rankStepsRemaining === null)
         return { ...input, targetRankIndex, rankStepsRemaining, recommendationPriority: 0, reason: "Target or live account rank unavailable" };
     if (rankStepsRemaining === 0)
