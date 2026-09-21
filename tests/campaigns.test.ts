@@ -152,3 +152,28 @@ test("completed campaigns suppress all campaign-driven character upgrades", () =
     assert.match(recommendation.reason, /already complete/i);
 
 });
+
+test("synced campaign battle numbering agrees with report frontier semantics", () =>
+{
+
+    const battles = JSON.parse(readFileSync("data/game/campaign-battles.json", "utf8")) as Record<string, { campaign: string; campaignType: string; nodeNumber: number }>;
+    const byCampaign = new Map<string, number[]>();
+    for (const battle of Object.values(battles))
+    {
+
+        const key = campaignKey(battle.campaign, battle.campaignType);
+        const values = byCampaign.get(key) ?? [];
+        values.push(battle.nodeNumber);
+        byCampaign.set(key, values);
+
+    }
+    for (const [key, nodes] of byCampaign)
+    {
+
+        assert.ok(nodes.every(node => Number.isInteger(node) && node > 0), `${key} contains invalid node numbering`);
+        assert.equal(new Set(nodes).size, nodes.length, `${key} contains duplicate node numbers`);
+        assert.equal(Math.min(...nodes), 1, `${key} does not start at node 1`);
+
+    }
+
+});
