@@ -8,7 +8,7 @@
   },
   "campaigns": {
     "Indomitus": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Tigurius": {
           "rank": "Silver I",
@@ -53,7 +53,7 @@
       }
     },
     "Indomitus Mirror": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Makhotep": {
           "rank": "Silver I",
@@ -100,7 +100,7 @@
       }
     },
     "Fall of Cadia": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Angrax": {
           "rank": "Gold I",
@@ -194,7 +194,7 @@
       }
     },
     "Octarius": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Gibbascrapz": {
           "rank": "Silver I",
@@ -240,7 +240,7 @@
       }
     },
     "Octarius Mirror": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Godswyl": {
           "rank": "Silver II",
@@ -281,7 +281,7 @@
       }
     },
     "Saim-Hann": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Calandis": {
           "rank": "Gold I",
@@ -326,7 +326,7 @@
       }
     },
     "Saim-Hann Mirror": {
-      "status": "researching",
+      "status": "reviewed",
       "characters": {
         "Yazaghor": {
           "rank": "Silver III",
