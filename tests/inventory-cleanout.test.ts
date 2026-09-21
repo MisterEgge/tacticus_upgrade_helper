@@ -52,3 +52,20 @@ test("unproven compatibility never becomes scrap-safe", () =>
     }
 
 });
+
+test("explicit demand reserves multiplicity for the same item", () =>
+{
+
+    const rows = inventoryCleanout(
+        [{ id: "I_Test_L001", name: "Legendary Test", level: 1, amount: 3 }],
+        [{ id: "a", name: "A", progressionIndex: 12, items: [{ slotId: "Slot1", id: "I_Test_L001", rarity: "Legendary", level: 1 }] }],
+        [
+            { recommendedItemId: "I_Test_L001" },
+            { recommendedItemId: "I_Test_L001" }
+        ],
+        [{ id: "a", equipment: ["I_Test"] }]
+    );
+    assert.equal(rows[0]!.keep, 2);
+    assert.equal(rows[0]!.scrap, 1);
+
+});
