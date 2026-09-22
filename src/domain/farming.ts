@@ -1,4 +1,5 @@
-export const RANK_NAMES = ["Stone I", "Stone II", "Stone III", "Iron I", "Iron II", "Iron III", "Bronze I", "Bronze II", "Bronze III", "Silver I", "Silver II", "Silver III", "Gold I", "Gold II", "Gold III", "Diamond I", "Diamond II", "Diamond III", "Adamantine I", "Adamantine II"] as const;
+import { RANK_NAMES } from "./ranks";
+export { RANK_NAMES } from "./ranks";
 export type RankData = Record<string, Record<string, string[]>>;
 export type Recipe = { material: string; snowprintId: string; rarity: string; stat: string; craftable: boolean; recipe?: Array<{ material: string; count: number }> };
 export type RankGoal = { id: string; name: string; currentRank: number; targetRank: number; upgrades?: number[]; priority: number };
