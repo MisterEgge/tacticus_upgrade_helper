@@ -3,15 +3,18 @@ import AbilityTable from "./AbilityTable";
 import { getReport } from "../lib/report";
 import { getCharacterCatalog, getAbilityBreakpoints } from "../lib/catalog";
 import { abilityGuideRows } from "../../src/domain/abilities";
+import { campaignIsComplete, requiredCampaignName, type CampaignBattleDefinition } from "../../src/domain/campaigns";
 import { readFile } from "node:fs/promises";
 
 export default async function Abilities()
 {
 
-    const [report, catalog, guidance, priorities] = await Promise.all([getReport(), getCharacterCatalog(), getAbilityBreakpoints(), readFile("config/character_priorities.json", "utf8")]);
+    const [report, catalog, guidance, priorities, battleText] = await Promise.all([getReport(), getCharacterCatalog(), getAbilityBreakpoints(), readFile("config/character_priorities.json", "utf8"), readFile("data/game/campaign-battles.json", "utf8")]);
     const accountPriorities=JSON.parse(priorities) as Record<string,{priority:number;modes?:string[]}>;
     const rows = abilityGuideRows(catalog.characters, report?.roster ?? null, guidance, accountPriorities).filter(row=>row.owned);
-    const campaignIds=catalog.characters.filter(character=>character.requiredInCampaign).map(character=>character.id);
+    const battleCatalog=Object.values(JSON.parse(battleText)) as CampaignBattleDefinition[];
+    const incompleteCampaigns=new Set((report?.campaignProgress??[]).filter(campaign=>!campaignIsComplete(campaign,battleCatalog)).map(requiredCampaignName));
+    const campaignIds=catalog.characters.filter(character=>character.campaignsRequiredIn.some(name=>incompleteCampaigns.has(name))).map(character=>character.id);
     const reviewed = rows.filter(row => row.reviewed).length;
     if(!report)return <main><Nav/><div className="empty">Run <code>npm run refresh</code> to load your owned characters.</div></main>;
     return <main><Nav/><header><div><p className="eyebrow">ABILITIES</p><h1>Your Ability Upgrade Plan</h1>
