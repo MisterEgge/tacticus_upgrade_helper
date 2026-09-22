@@ -15,6 +15,27 @@ export function targetLevel(value:string, fallback=35)
 
 }
 
+export function abilityUpgradePlan(rows:AbilityGuideRow[], priorities:Record<string,{priority:number;modes?:string[]}>, goals:string[])
+{
+
+    return rows.filter(row =>
+    {
+
+        const modes=priorities[row.character]?.modes??[];
+        return row.owned && goals.some(goal => modes.includes(goal)) && ((row.activeLevel??Infinity)<row.activeTargetLevel||(row.passiveLevel??Infinity)<row.passiveTargetLevel);
+
+    }).map(row =>
+    {
+
+        const activeGap=Math.max(0,row.activeTargetLevel-(row.activeLevel??row.activeTargetLevel));
+        const passiveGap=Math.max(0,row.passiveTargetLevel-(row.passiveLevel??row.passiveTargetLevel));
+        const next=activeGap>=passiveGap?{name:formatAbilityName(row.activeId),level:row.activeLevel,target:row.activeTargetLevel}:{name:formatAbilityName(row.passiveId),level:row.passiveLevel,target:row.passiveTargetLevel};
+        return {...row,modes:priorities[row.character]?.modes??[],next,rank:priorities[row.character]?.priority??0};
+
+    }).sort((a,b)=>b.rank-a.rank||b.next.target-(b.next.level??b.next.target)||a.character.localeCompare(b.character));
+
+}
+
 export function abilityGuideRows(catalog: CatalogCharacter[], roster: RosterUnit[] | null, guidance: Record<string, unknown>, priorities: Record<string, { priority: number }>)
 {
 

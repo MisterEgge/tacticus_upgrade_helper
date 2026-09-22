@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
-import { abilityGuideRows, formatAbilityName, targetLevel } from "../src/domain/abilities";
+import { abilityGuideRows, abilityUpgradePlan, formatAbilityName, targetLevel } from "../src/domain/abilities";
 import type { CatalogCharacter } from "../app/lib/catalog";
 import type { RosterUnit } from "../app/lib/report";
 
@@ -23,6 +23,15 @@ test("ability target levels use the practical target's lower bound", () =>
     assert.equal(targetLevel("35-36"), 35);
     assert.equal(targetLevel("44+"), 44);
     assert.equal(targetLevel("", 35), 35);
+
+});
+
+test("ability plan ranks owned characters matching the selected account goals", () =>
+{
+
+    const rows=abilityGuideRows(catalog,roster,{},{});
+    const plan=abilityUpgradePlan(rows,{[character.name]:{priority:99,modes:["Guild Raid"]}},["Guild Raid"]);
+    assert.equal(plan[0]?.character,character.name);
 
 });
 
