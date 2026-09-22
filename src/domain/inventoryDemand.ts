@@ -16,9 +16,12 @@ export function inventoryDemandTargets(rows: DemandEquipmentRow[]): DemandTarget
     for (const row of rows)
     {
 
-        const itemId = row.recommendedItemId ?? row.preferredLegendaryItemIds?.[0];
+        const preferredIds = row.preferredLegendaryItemIds ?? [];
+        // A recommended inventory item is exact. Multiple preferred IDs are alternatives,
+        // not multiple required copies and not a license to choose one arbitrarily.
+        const itemId = row.recommendedItemId ?? (preferredIds.length === 1 ? preferredIds[0] : undefined);
         if (!itemId) continue;
-        const itemName = row.recommendedItem ?? row.preferredLegendaryItems?.[0] ?? itemId;
+        const itemName = row.recommendedItem ?? (preferredIds.length === 1 ? row.preferredLegendaryItems?.[0] : undefined) ?? itemId;
         const target = { itemId, itemName, character: row.character, priority: row.accountPriority };
         const key = `${itemId}::${row.character}`;
         const existing = byTarget.get(key);

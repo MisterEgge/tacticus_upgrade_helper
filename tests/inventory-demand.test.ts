@@ -13,3 +13,14 @@ test("inventory demand joins gear requirements by stable item ID, not display na
     assert.equal(targets[0]!.itemName, "Optimal Force Field");
 
 });
+
+test("inventory demand does not invent an exact item when a slot has alternatives", () =>
+{
+
+    const targets = inventoryDemandTargets([
+        { character: "Choice", accountPriority: 50, preferredLegendaryItemIds: ["I_Block_L003", "I_Block_L004"], preferredLegendaryItems: ["Field A", "Field B"] },
+        { character: "Exact", accountPriority: 50, recommendedItemId: "I_Block_L003", recommendedItem: "Field A" }
+    ]);
+    assert.deepEqual(targets.map(target => [target.character, target.itemId]), [["Exact", "I_Block_L003"]]);
+
+});

@@ -35,6 +35,4 @@ export async function getReport():Promise<Report|null>{
   }catch{return null;}
 }
 export function targetName(row:EquipmentRow){return row.recommendedItem??row.preferredLegendaryItems?.join(", ")??row.preferredLegendaryItemIds?.join(", ")??"Review";}
-export function targetItemId(row: EquipmentRow): string | undefined { return row.recommendedItemId ?? row.preferredLegendaryItemIds?.[0]; }
-export function targetItemName(row: EquipmentRow): string { return row.recommendedItem ?? row.preferredLegendaryItems?.[0] ?? targetItemId(row) ?? "Review"; }
 export function unitFor(report:Report,name:string){return report.roster.find(unit=>unit.name===name);}
