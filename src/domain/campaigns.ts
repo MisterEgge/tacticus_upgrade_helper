@@ -139,7 +139,8 @@ export function advancedCampaigns(current: CampaignSnapshot, history: CampaignSn
 
 }
 
-export const campaignRankNames = ["Stone I","Stone II","Stone III","Iron I","Iron II","Iron III","Bronze I","Bronze II","Bronze III","Silver I","Silver II","Silver III","Gold I","Gold II","Gold III","Diamond I","Diamond II","Diamond III","Adamantine I","Adamantine II"] as const;
+import { RANK_NAMES } from "./ranks";
+export const campaignRankNames = RANK_NAMES;
 
 export function campaignRankIndex(rank?: string): number | null
 {
