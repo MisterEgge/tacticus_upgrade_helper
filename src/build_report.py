@@ -10,6 +10,10 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "config"
 OUTPUT = ROOT / "output"
+RANK_NAMES = ("Stone I", "Stone II", "Stone III", "Iron I", "Iron II", "Iron III", "Bronze I", "Bronze II", "Bronze III", "Silver I", "Silver II", "Silver III", "Gold I", "Gold II", "Gold III", "Diamond I", "Diamond II", "Diamond III", "Adamantine I", "Adamantine II")
+
+def rank_name(rank) -> str:
+    return RANK_NAMES[rank] if isinstance(rank, int) and 0 <= rank < len(RANK_NAMES) else "Unknown rank"
 
 def load_json(path: Path):
     with path.open("r", encoding="utf-8") as f:
@@ -72,7 +76,7 @@ def build(player_path: Path, output_path: Path):
         cp = priorities.get(char, {})
         ws.append([
             row["priority"], row["item"], char, row["slot"], row["tier"],
-            cp.get("priority",""), u.get("rank",""), cp.get("note","")
+            cp.get("priority",""), rank_name(u.get("rank")), cp.get("note","")
         ])
     if ws.max_row > 1:
         add_table(ws, f"A1:H{ws.max_row}", "LegendaryWatchlist")
@@ -109,7 +113,7 @@ def build(player_path: Path, output_path: Path):
             focus = "Baseline / review later"
             basis = "User level-17 baseline; no researched character-specific target stored"
 
-        wa.append([name,u.get("faction",""),u.get("rank",""),active.get("id",""),active.get("level",0),
+        wa.append([name,u.get("faction",""),rank_name(u.get("rank")),active.get("id",""),active.get("level",0),
                    passive.get("id",""),passive.get("level",0),uncommon_priority,focus,
                    active_target,passive_target,basis])
 
