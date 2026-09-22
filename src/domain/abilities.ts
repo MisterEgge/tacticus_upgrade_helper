@@ -1,6 +1,13 @@
 import type { CatalogCharacter, CharacterAbilityGuidance } from "../../app/lib/catalog";
 import type { RosterUnit } from "../../app/lib/report";
 
+export function formatAbilityName(value:string)
+{
+
+    return value.replace(/([a-z\d])([A-Z])/g, "$1 $2").replace(/[_-]+/g, " ").trim();
+
+}
+
 export function abilityGuideRows(catalog: CatalogCharacter[], roster: RosterUnit[] | null, guidance: Record<string, unknown>, priorities: Record<string, { priority: number }>)
 {
 

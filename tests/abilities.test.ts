@@ -1,13 +1,21 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
-import { abilityGuideRows } from "../src/domain/abilities";
+import { abilityGuideRows, formatAbilityName } from "../src/domain/abilities";
 import type { CatalogCharacter } from "../app/lib/catalog";
 import type { RosterUnit } from "../app/lib/report";
 
 const catalog: CatalogCharacter[] = JSON.parse(readFileSync("data/character_catalog.json", "utf8")).characters;
 const character = catalog[0]!;
 const roster: RosterUnit[] = [{ id: character.id, name: "Different display name", faction: "", grandAlliance: "", rarity: "Common", rank: 0, xpLevel: 1, progressionIndex: 0, shards: 0, mythicShards: 0, abilities: [{ id: "a", level: 0 }, { id: "p", level: 9 }], items: [] }];
+
+test("ability IDs are displayed as readable names", () =>
+{
+
+    assert.equal(formatAbilityName("InfernalPacts"), "Infernal Pacts");
+    assert.equal(formatAbilityName("FirstAmongTraitors"), "First Among Traitors");
+
+});
 
 test("full synced catalog remains available without account data, ownership is unknown", () =>
 {
