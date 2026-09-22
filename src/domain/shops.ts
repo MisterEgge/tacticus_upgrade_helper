@@ -21,6 +21,17 @@ export const CURRENCIES: Record<string, string> = {
     crusadeCurrency: "Crusade Credits", elderShopCurrency: "Archeotech", dust: "Salvage", mythicDust: "Mythic salvage"
 };
 export function currencyName(id: string): string { return CURRENCIES[id] ?? id; }
+export type CurrencyClass = "in-game" | "premium" | "real-money" | "unknown";
+export function currencyClass(id: string): CurrencyClass
+{
+
+    if (["gold", "guildCredits", "guildWarCurrency", "crusadeCurrency", "elderShopCurrency", "dust", "mythicDust"].includes(id)) return "in-game";
+    if (["gems", "blackstone", "blackstoneCurrency"].includes(id)) return "premium";
+    if (["money", "cash", "realMoney", "iap"].includes(id)) return "real-money";
+    return "unknown";
+
+}
+export function isActionableOffer(offer: ShopOffer): boolean { return currencyClass(offer.cost.currency) === "in-game"; }
 
 export function scheduledOn(schedule: string, day: string): boolean | null
 {
@@ -64,7 +75,7 @@ export function sourceMatch(itemId: string, offer: ShopOffer, equipment: ShopCat
 export function sourcesForItem(itemId: string, catalog: ShopCatalog): string[]
 {
 
-    return catalog.shops.filter(s => s.coverage === "catalog" && s.offers.some(o => sourceMatch(itemId, o, catalog.equipment))).map(s => s.name);
+    return catalog.shops.filter(s => s.coverage === "catalog" && s.offers.some(o => isActionableOffer(o) && sourceMatch(itemId, o, catalog.equipment))).map(s => s.name);
 
 }
 

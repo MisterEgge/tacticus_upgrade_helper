@@ -12,8 +12,8 @@
 
 ## Inventory / acquisition backlog
 - [x] Track known shop rotations, refresh rules, prices and manually observed stock in a dedicated acquisition view; unknown Main/Event/Web shop catalogs remain explicitly unverified.
-- [ ] Add acquisition-currency classification for equipment/shop sources.
-- [ ] Suppress real-money and Blackstone item offers from actionable recommendations; user will only spend other in-game currencies on items.
+- [x] Add acquisition-currency classification for equipment/shop sources.
+- [x] Suppress real-money and Blackstone item offers from actionable recommendations; only other in-game currencies can surface there.
 - [ ] Finish game-wide equipment compatibility evidence before promoting unresolved cleanout rows to scrap-safe.
 - [ ] Validate inventory cleanout against fresh live inventory after compatibility coverage is complete.
 

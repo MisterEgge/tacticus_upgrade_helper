@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { offerEligibility, recordState, refreshesLoggedToday, scheduleLabel, scheduledOn, sourceMatch, validateRecord, type ShopCatalog, type ShopOffer, type ShopRecord } from "../src/domain/shops";
+import { currencyClass, isActionableOffer, offerEligibility, recordState, refreshesLoggedToday, scheduleLabel, scheduledOn, sourceMatch, sourcesForItem, validateRecord, type ShopCatalog, type ShopOffer, type ShopRecord } from "../src/domain/shops";
 
 const offer = (itemId = "I_Test_L001"): ShopOffer => ({ id: "guild:1:1", slot: 1, itemId, quantity: 1, schedule: "0 0 0 ? * MON,WED *", cost: { currency: "guildCredits", amount: 100 }, maxPurchases: 1, conditions: {}, weight: null });
 const catalog: ShopCatalog = { schemaVersion: 1, reviewedAt: "2026-09-22T00:00:00.000Z", sourceCommit: "a".repeat(40), sourceKind: "community", equipment: { I_Test_L001: { name: "Test item", rarity: "Legendary", type: "I_Test" } }, shops: [{ id: "guild", name: "Guild Shop", coverage: "catalog", sourceUrl: "", notes: "", adRefresh: true, refreshLimit: 1, refreshCost: null, offers: [offer(), offer("itemsLegendary_I_Test")] }] };
@@ -18,6 +18,19 @@ test("shop sources distinguish exact items from random compatible pools", () =>
     assert.equal(sourceMatch("I_Test_L001", offer(), catalog.equipment), "exact");
     assert.equal(sourceMatch("I_Test_L001", offer("itemsLegendary_I_Test"), catalog.equipment), "pool");
     assert.equal(sourceMatch("I_Other_L001", offer("itemsLegendary_I_Test"), catalog.equipment), null);
+});
+
+test("premium and real-money offers never become actionable acquisition sources", () =>
+{
+
+    const premium = { ...offer(), cost: { currency: "gems", amount: 50 } };
+    const cash = { ...offer(), cost: { currency: "realMoney", amount: 5 } };
+    assert.equal(currencyClass("guildCredits"), "in-game");
+    assert.equal(currencyClass("gems"), "premium");
+    assert.equal(isActionableOffer(premium), false);
+    assert.equal(isActionableOffer(cash), false);
+    const premiumOnly: ShopCatalog = { ...catalog, shops: [{ ...catalog.shops[0]!, offers: [premium] }] };
+    assert.deepEqual(sourcesForItem("I_Test_L001", premiumOnly), []);
 });
 
 test("shop eligibility never assumes unrecognized locks are open", () =>
