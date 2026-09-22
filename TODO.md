@@ -8,7 +8,7 @@
 
 ## Dashboard / Equipment
 - [ ] Review the new `/equipment-demand` view after more dashboard work. Decide whether it belongs inside Equipment, deserves its own nav entry, or should feed a dashboard card.
-- [ ] Improve equipment demand matching so owned counts use stable item IDs instead of display names wherever possible.
+- [x] Match equipment demand and owned counts by stable item IDs rather than display names.
 
 ## Inventory / acquisition backlog
 - [x] Track known shop rotations, refresh rules, prices and manually observed stock in a dedicated acquisition view; unknown Main/Event/Web shop catalogs remain explicitly unverified.
@@ -19,7 +19,7 @@
 
 ## Next enhancements
 - [ ] Add immediate/community ability targets to character detail pages.
-- [ ] Add inventory demand: owned vs needed and highest-priority recipients.
+- [ ] Add inventory demand: owned vs needed and recipient coverage.
 - [ ] Build verified campaign-node/material dataset for the farming engine.
 - [x] Add active navigation state; continue mobile polish.
 - [x] Harden equipment preference/compatibility invariant and tests.

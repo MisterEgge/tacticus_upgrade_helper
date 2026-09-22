@@ -2,10 +2,9 @@
 type Row=EquipmentRow&{state:string;target:string;acquisition:Array<{id:string;name:string;shops:string[]}>};
 export default function EquipmentTable({rows}:{rows:Row[]}){const cols:Column<Row>[]=[
 {key:"character",label:"Character",sort:r=>r.character,search:r=>r.character,render:r=><CharacterName name={r.character} id={r.characterId}/>},
-{key:"priority",label:"Priority",sort:r=>r.accountPriority,render:r=>r.accountPriority},
 {key:"slot",label:"Slot",sort:r=>r.slotId,render:r=>r.slotId},
 {key:"current",label:"Current",sort:r=>r.currentItem,search:r=>r.currentItem,render:r=><>{r.currentItem}<small>{r.currentRarity} · Level {r.currentLevel}</small></>},
 {key:"target",label:"Preferred target",sort:r=>r.target,search:r=>r.target,render:r=><strong>{r.target}</strong>},
 {key:"sources",label:"Where to get it",search:r=>r.acquisition.flatMap(a=>a.shops).join(" "),render:r=>r.acquisition.length?r.acquisition.map(a=><div key={a.id}><Link className="sourceLink" href={`/sources?item=${encodeURIComponent(a.id)}`}>{a.name}</Link><small>{a.shops.length?a.shops.join(", "):"Shop coverage under research"} · verify stock / pool</small></div>):<Link className="sourceLink" href="/sources">Browse sources (target unresolved)</Link>},
 {key:"status",label:"Status",sort:r=>r.state,search:r=>r.state,render:r=><span className={"status "+(r.state==="EQUIP NOW"?"ready":r.state==="NEED"?"need":"unknown")}>{r.state}</span>}
-];const filters:Filter<Row>[]=[{key:"equip",label:"Equip now",matches:r=>r.state==="EQUIP NOW"},{key:"need",label:"Need",matches:r=>r.state==="NEED"},{key:"unknown",label:"Review",matches:r=>r.state==="UNKNOWN"},{key:"priority",label:"Priority 80+",matches:r=>r.accountPriority>=80}];return <DataTable rows={rows} columns={cols} filters={filters} placeholder="Search character, item, or status…"/>;}
+];const filters:Filter<Row>[]=[{key:"equip",label:"Equip now",matches:r=>r.state==="EQUIP NOW"},{key:"need",label:"Need",matches:r=>r.state==="NEED"},{key:"unknown",label:"Review",matches:r=>r.state==="UNKNOWN"}];return <DataTable rows={rows} columns={cols} filters={filters} placeholder="Search character, item, or status…"/>;}
