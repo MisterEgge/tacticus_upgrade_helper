@@ -1,0 +1,15 @@
+{
+  "_meta":{"sourceUrl":"https://tacticus.xyz/wars/analyze/defenders?battlefield%5B%5D=2","reviewedOn":"2026-09-22","note":"Account-specific defensive squads selected from the high-performing core/flex patterns in the supplied Battlefield 2 defender analysis. Teams are deliberately non-overlapping."},
+  "teams":[
+    {"name":"Forge Network","members":["Actus","Exitor-Rho","Tan Gi'da","Aleph-Null","Re'vas"]},
+    {"name":"Ork Wall","members":["Gulgortz","Snotflogga","Gibbascrapz","Snappawrecka","Tanksmasha"]},
+    {"name":"Thousand Sons Summons","members":["Abraxas","Archimatos","Yazaghor","Toth","Thaumachus"]},
+    {"name":"Blood Angels Counterpunch","members":["Mataneo","Lucien","Nicodemus","Cezare","Mephiston"]},
+    {"name":"Necron Reanimation","members":["Anuphet","Makhotep","Imospekh","Thutmose","Thothmek"]},
+    {"name":"Death Guard Attrition","members":["Maladus","Nauseous","Corrodius","Typhus","Pestillian"]},
+    {"name":"Black Legion Pressure","members":["Angrax","Haarken","Volk","Wrask","Kharn"]},
+    {"name":"Black Templar Hold","members":["Burchard","Godswyl","Thoread","Jaeger","Isabella"]},
+    {"name":"Astra Gunline","members":["Thaddeus","Kut","Sibyll","Dreir","Yarrick"]},
+    {"name":"Ultramarine Screen","members":["Bellator","Tigurius","Certus","Incisus","Titus"]}
+  ]
+}

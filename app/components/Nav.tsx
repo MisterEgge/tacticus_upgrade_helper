@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 const links = [
   ["/", "Dashboard"], ["/equipment", "Equipment"], ["/abilities", "Abilities"], ["/characters", "Characters"],
-  ["/review-status", "Review Status"], ["/campaigns", "Campaigns"], ["/inventory", "Inventory"], ["/inventory-cleanout", "Cleanout"], ["/reallocation", "Gear Audit"],
+  ["/review-status", "Review Status"], ["/campaigns", "Campaigns"], ["/war-defense", "War Defense"], ["/inventory", "Inventory"], ["/inventory-cleanout", "Cleanout"], ["/reallocation", "Gear Audit"],
   ["/farming", "Farming"], ["/sources", "Shops & Sources"]
 ] as const;
 
