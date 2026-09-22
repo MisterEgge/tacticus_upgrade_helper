@@ -1,5 +1,6 @@
 import Nav from "../components/Nav";
 import CharacterName from "../components/CharacterName";
+import CampaignSection from "./CampaignSection";
 import { getReport } from "../lib/report";
 import { getCampaignEvidence, getCampaignTargets, getCharacterCatalog } from "../lib/catalog";
 import { abilityGap, campaignIsComplete, campaignRankGap, campaignRecommendationPriority, requiredCampaignName, type CampaignBattleDefinition } from "../../src/domain/campaigns";
