@@ -62,7 +62,10 @@ try
     assert.match(campaigns, /Elite 3★ Upgrade Planner/);
     assert.match(campaigns, /completed through/);
     assert.doesNotMatch(campaigns, /Tyranids Elite/);
-    for (const route of ['/', '/equipment', '/equipment-demand', '/abilities', '/characters', '/characters/necroSpyder', '/inventory']) await get(route);
+    const dashboard = await get('/');
+    assert.match(dashboard, /ACCOUNT OVERVIEW/);
+    assert.match(dashboard, /Highest-priority characters/);
+    for (const route of ['/equipment', '/equipment-demand', '/abilities', '/characters', '/characters/necroSpyder', '/inventory']) await get(route);
     assert.match(await get('/sources'), /Shops &amp; Sources/);
     assert.match(await get('/farming'), /Expected \/ battle/);
     const farming = await get('/farming?character=necroSpyder&target=3');
