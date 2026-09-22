@@ -1,15 +1,12 @@
-{
-  "_meta":{"sourceUrl":"https://tacticus.xyz/wars/analyze/defenders?battlefield%5B%5D=2","reviewedOn":"2026-09-22","note":"Account-specific defensive squads selected from the high-performing core/flex patterns in the supplied Battlefield 2 defender analysis. Teams are deliberately non-overlapping."},
-  "teams":[
-    {"name":"Forge Network","members":["Actus","Exitor-Rho","Tan Gi'da","Aleph-Null","Re'vas"]},
-    {"name":"Ork Wall","members":["Gulgortz","Snotflogga","Gibbascrapz","Snappawrecka","Tanksmasha"]},
-    {"name":"Thousand Sons Summons","members":["Abraxas","Archimatos","Yazaghor","Toth","Thaumachus"]},
-    {"name":"Blood Angels Counterpunch","members":["Mataneo","Lucien","Nicodemus","Cezare","Mephiston"]},
-    {"name":"Necron Reanimation","members":["Anuphet","Makhotep","Imospekh","Thutmose","Thothmek"]},
-    {"name":"Death Guard Attrition","members":["Maladus","Nauseous","Corrodius","Typhus","Pestillian"]},
-    {"name":"Black Legion Pressure","members":["Angrax","Haarken","Volk","Wrask","Kharn"]},
-    {"name":"Black Templar Hold","members":["Burchard","Godswyl","Thoread","Jaeger","Isabella"]},
-    {"name":"Astra Gunline","members":["Thaddeus","Kut","Sibyll","Dreir","Yarrick"]},
-    {"name":"Ultramarine Screen","members":["Bellator","Tigurius","Certus","Incisus","Titus"]}
-  ]
-}
+{"_meta":{"sourceUrl":"https://tacticus.xyz/wars/analyze/defenders?battlefield%5B%5D=2","reviewedOn":"2026-09-22","note":"Core and flex units transcribed from the supplied Battlefield 2 defender analysis. Each pattern records its source sample and defense rate; selected members are your account build choice."},"teams":[
+{"name":"Forge Network","core":["Actus","Tan Gi'da","Exitor-Rho"],"flex":["Re'vas","Aleph-Null","Exorcist","Sho'syl","Gulgortz","Xybia"],"members":["Actus","Tan Gi'da","Exitor-Rho","Re'vas","Aleph-Null"],"used":3231,"wins":2614,"defense":80.9,"score":283.9},
+{"name":"Kariyan / Ragnar / Kharn","core":["Kariyan","Ragnar","Kharn"],"flex":["Snotflogga","Mephiston","Titus","Gulgortz","Maladus"],"members":["Kariyan","Ragnar","Kharn","Snotflogga","Mephiston"],"used":1819,"wins":1418,"defense":78,"score":254.3},
+{"name":"Ork Pressure","core":["Snappawrecka","Snotflogga","Gulgortz"],"flex":["Tanksmasha","Re'vas","Aleph-Null","Thoread","Maladus","Rukkatrukk"],"members":["Snappawrecka","Snotflogga","Gulgortz","Tanksmasha","Rukkatrukk"],"used":3677,"wins":2575,"defense":70,"score":249.6},
+{"name":"Necron Machine Wall","core":["Imospekh","Aleph-Null","Makhotep"],"flex":["Thutmose","Xybia","Tan Gi'da","Gulgortz","Nicodemus","Pestillian"],"members":["Imospekh","Aleph-Null","Makhotep","Thutmose","Xybia"],"used":2218,"wins":1645,"defense":74.2,"score":248.3},
+{"name":"Black Legion Summons","core":["Haarken","Archimatos","Angrax"],"flex":["Maladus","Abraxas","Storm Speeder","Trajann","Exorcist","Lucien"],"members":["Haarken","Archimatos","Angrax","Maladus","Abraxas"],"used":2452,"wins":1761,"defense":71.8,"score":243.4},
+{"name":"Eldar Control","core":["Aethana","Eldryon","Calandis"],"flex":["Sho'syl","Snotflogga","Gulgortz","Thoread","Nicodemus","Ragnar"],"members":["Aethana","Eldryon","Calandis","Sho'syl","Thoread"],"used":1027,"wins":829,"defense":80.7,"score":243.1},
+{"name":"Ultramarine Screen","core":["Incisus","Bellator","Tigurius"],"flex":["Calgar","Titus","Certus","Baldr","Storm Speeder","Ramus"],"members":["Incisus","Bellator","Tigurius","Titus","Certus"],"used":853,"wins":695,"defense":81.5,"score":238.9},
+{"name":"Genestealer Ambush","core":["Hollan","Judh","Isaak"],"flex":["Neurothrope","Xybia","Deathleaper","Malleus Rocket Launcher","Nicodemus","Thaddeus"],"members":["Hollan","Judh","Isaak","Neurothrope","Xybia"],"used":5237,"wins":3272,"defense":62.5,"score":232.4},
+{"name":"Death Guard + Sho'syl","core":["Maladus","Nauseous","Sho'syl"],"flex":["Toth","Pestillian","Trajann","Wrask","Typhus","Exorcist"],"members":["Maladus","Nauseous","Sho'syl","Toth","Pestillian"],"used":3212,"wins":2099,"defense":65.3,"score":229},
+{"name":"Blood Angels Sustain","core":["Lucien","Mephiston","Nicodemus"],"flex":["Calgar","Bellator","Dreir","Xybia","Maladus","Baldr"],"members":["Lucien","Mephiston","Nicodemus","Dreir","Baldr"],"used":1001,"wins":747,"defense":74.6,"score":223.9}
+]}
