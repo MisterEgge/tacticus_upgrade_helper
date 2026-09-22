@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { getShopCatalog } from "../lib/shops";
+import { sourcesForItem } from "../../src/domain/shops";
 import Nav from "../components/Nav";
 import FarmingTable from "./FarmingTable";
 import { loadFarmingData, bestFarmNode, planMaterials, progressFromReport, RANK_NAMES } from "../lib/farming";
@@ -11,7 +14,7 @@ type Query = { character?: string; target?: string; plan?: string };
 export default async function Farming({ searchParams }: { searchParams: Promise<Query> })
 {
 
-    const [data, report, query, catalog, campaignTargets] = await Promise.all([loadFarmingData(), getReport(), searchParams, getCharacterCatalog(), getCampaignTargets()]);
+    const [data, report, query, catalog, campaignTargets, shops] = await Promise.all([loadFarmingData(), getReport(), searchParams, getCharacterCatalog(), getCampaignTargets(), getShopCatalog()]);
     if (!data || !report) return <main><Nav/><header><h1>Personal Farming Queue</h1></header><div className="empty">Account or farming data unavailable. Run <code>npm run sync:game-data</code> and <code>npm run refresh</code>.</div></main>;
     const [priorities, battleCatalog] = await Promise.all([
         readFile("config/character_priorities.json", "utf8").then(value => JSON.parse(value) as Record<string, { priority: number }>),
@@ -50,11 +53,12 @@ export default async function Farming({ searchParams }: { searchParams: Promise<
 
         const recipe = data.recipes[id];
         const node = bestFarmNode(id, data.battles, progress);
-        return { id, name: recipe?.material ?? id, rarity: recipe?.rarity ?? "", owned: d.owned, needed: d.needed, shortage: d.shortage, topCharacter: d.characters[0]?.name ?? "", topPriority: d.characters[0]?.priority ?? 0, node: node?.id ?? "", campaign: node?.campaign ?? "", campaignType: node?.campaignType ?? "", nodeNumber: node?.nodeNumber ?? 0, energy: node?.energyCost ?? 0, rate: node?.rate ?? 0 };
+        return { id, shops: shops ? sourcesForItem(id, shops) : [], name: recipe?.material ?? id, rarity: recipe?.rarity ?? "", owned: d.owned, needed: d.needed, shortage: d.shortage, topCharacter: d.characters[0]?.name ?? "", topPriority: d.characters[0]?.priority ?? 0, node: node?.id ?? "", campaign: node?.campaign ?? "", campaignType: node?.campaignType ?? "", nodeNumber: node?.nodeNumber ?? 0, energy: node?.energyCost ?? 0, rate: node?.rate ?? 0 };
 
     }).filter(x => x.shortage > 0).sort((a, b) => b.topPriority - a.topPriority || b.shortage - a.shortage);
     return <main><Nav/><header><div><p className="eyebrow">FARMING</p><h1>Personal Farming Queue</h1>
         <p className="sub">Plan a character across multiple ranks, or the roster’s next ranks. Equipped upgrades and owned crafted materials are deducted before base-material shortages.</p>
+        <p className="sub"><Link className="sourceLink" href="/sources">Shop catalogs, rotations and refresh tracking</Link>. Per-material links include shop offers, recipes and all campaign sources.</p>
         <p className="sub">Account report: {report.generatedAt}. Unlocked sources are accessible battles; raid eligibility and three-star completion are unknown.</p>
     </div><div className="power">{error ? "Unknown" : rows.length}<strong> shortages</strong></div></header>
         {excluded.length ? <p className="sub">Excluded from character rank planning (outside synced character catalog): {excluded.map(u => u.name).join(", ")}. No rank costs are assumed for these units.</p> : null}

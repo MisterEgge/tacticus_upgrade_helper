@@ -4,7 +4,7 @@ import {getCharacterCatalog} from "./catalog";
 
 export type EquipmentRow = {
   character: string; characterId?: string; slotId: string; currentItem: string; currentRarity: string;
-  currentLevel: number; accountPriority: number; recommendedItem?: string; compatibleLegendaryItemIds?: string[];
+  currentLevel: number; accountPriority: number; recommendedItemId?: string; recommendedItem?: string; compatibleLegendaryItemIds?: string[];
   preferredLegendaryItemIds?: string[]; preferredLegendaryItems?: string[];
 };
 export type AbilityRow = {

@@ -1,5 +1,19 @@
+"use client";
 import Link from "next/link";
-export default function Nav(){return <nav className="nav">
-<Link href="/">Dashboard</Link><Link href="/equipment">Equipment</Link><Link href="/abilities">Abilities</Link>
-<Link href="/characters">Characters</Link><Link href="/review-status">Review Status</Link><Link href="/campaigns">Campaigns</Link><Link href="/inventory">Inventory</Link><Link href="/inventory-cleanout">Cleanout</Link><Link href="/farming">Farming</Link>
-</nav>;}
+import { usePathname } from "next/navigation";
+
+const links = [
+  ["/", "Dashboard"], ["/equipment", "Equipment"], ["/abilities", "Abilities"], ["/characters", "Characters"],
+  ["/review-status", "Review Status"], ["/campaigns", "Campaigns"], ["/inventory", "Inventory"], ["/inventory-cleanout", "Cleanout"],
+  ["/farming", "Farming"], ["/sources", "Shops & Sources"]
+] as const;
+
+export default function Nav()
+{
+  const pathname = usePathname();
+  return <nav className="nav" aria-label="Main navigation">{links.map(([href, label]) =>
+  {
+    const active = href === "/" ? pathname === href : pathname === href || pathname.startsWith(href + "/");
+    return <Link href={href} key={href} aria-current={active ? "page" : undefined} className={active ? "active" : undefined}>{label}</Link>;
+  })}</nav>;
+}

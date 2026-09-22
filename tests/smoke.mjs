@@ -59,10 +59,11 @@ try
     const campaigns = await get('/campaigns');
     assert.match(campaigns, /Indomitus Mirror Elite/);
     assert.match(campaigns, /<h2>Indomitus Mirror Elite<\/h2>.*?class="power">38/s);
-    assert.match(campaigns, /Confirmed 3/);
-    assert.match(campaigns, /UNKNOWN/);
+    assert.match(campaigns, /Elite 3★ Upgrade Planner/);
+    assert.match(campaigns, /completed through/);
     assert.doesNotMatch(campaigns, /Tyranids Elite/);
     for (const route of ['/', '/equipment', '/equipment-demand', '/abilities', '/characters', '/characters/necroSpyder', '/inventory']) await get(route);
+    assert.match(await get('/sources'), /Shops &amp; Sources/);
     assert.match(await get('/farming'), /Expected \/ battle/);
     const farming = await get('/farming?character=necroSpyder&target=3');
     assert.match(farming, /Synthetic excluded unit/);

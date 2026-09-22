@@ -11,6 +11,7 @@
 - [ ] Improve equipment demand matching so owned counts use stable item IDs instead of display names wherever possible.
 
 ## Inventory / acquisition backlog
+- [x] Track known shop rotations, refresh rules, prices and manually observed stock in a dedicated acquisition view; unknown Main/Event/Web shop catalogs remain explicitly unverified.
 - [ ] Add acquisition-currency classification for equipment/shop sources.
 - [ ] Suppress real-money and Blackstone item offers from actionable recommendations; user will only spend other in-game currencies on items.
 - [ ] Finish game-wide equipment compatibility evidence before promoting unresolved cleanout rows to scrap-safe.
@@ -20,7 +21,7 @@
 - [ ] Add immediate/community ability targets to character detail pages.
 - [ ] Add inventory demand: owned vs needed and highest-priority recipients.
 - [ ] Build verified campaign-node/material dataset for the farming engine.
-- [ ] Add active navigation state and continue mobile polish.
+- [x] Add active navigation state; continue mobile polish.
 - [x] Harden equipment preference/compatibility invariant and tests.
 
 ## Farming follow-up
