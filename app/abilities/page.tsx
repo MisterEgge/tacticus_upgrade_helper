@@ -9,7 +9,7 @@ import { readFile } from "node:fs/promises";
 export default async function Abilities()
 {
 
-    const [report, catalog, guidance, priorities, battleText] = await Promise.all([getReport(), getCharacterCatalog(), getAbilityBreakpoints(), readFile("config/character_priorities.json", "utf8"), readFile("data/game/campaign-battles.json", "utf8")]);
+    const [report, catalog, guidance, priorities, battleText, raidMetaText] = await Promise.all([getReport(), getCharacterCatalog(), getAbilityBreakpoints(), readFile("config/character_priorities.json", "utf8"), readFile("data/game/campaign-battles.json", "utf8"), readFile("config/raid_boss_meta.json", "utf8")]);
     const accountPriorities=JSON.parse(priorities) as Record<string,{priority:number;modes?:string[]}>;
     const rows = abilityGuideRows(catalog.characters, report?.roster ?? null, guidance, accountPriorities).filter(row=>row.owned);
     const battleCatalog=Object.values(JSON.parse(battleText)) as CampaignBattleDefinition[];
@@ -21,7 +21,7 @@ export default async function Abilities()
         <p className="sub">Only your owned characters are shown. Character-specific community targets override the general planning ladder.</p>
         <p className="sub">Account report: {report.generatedAt}</p>
     </div><div className="power">{reviewed}/{rows.length}<strong> character-specific</strong></div></header>
-        <section className="panel tablePanel"><AbilityTable rows={rows} campaignIds={campaignIds}/></section>
+        <section className="panel tablePanel"><AbilityTable rows={rows} campaignIds={campaignIds} raidMeta={JSON.parse(raidMetaText)}/></section>
     </main>;
 
 }
