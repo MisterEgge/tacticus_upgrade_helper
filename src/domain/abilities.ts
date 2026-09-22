@@ -8,6 +8,13 @@ export function formatAbilityName(value:string)
 
 }
 
+export function targetLevel(value:string, fallback=35)
+{
+
+    return Number(value.match(/\d+/)?.[0] ?? fallback);
+
+}
+
 export function abilityGuideRows(catalog: CatalogCharacter[], roster: RosterUnit[] | null, guidance: Record<string, unknown>, priorities: Record<string, { priority: number }>)
 {
 
@@ -27,6 +34,8 @@ export function abilityGuideRows(catalog: CatalogCharacter[], roster: RosterUnit
             activeId: character.activeAbilityId ?? unit?.abilities[0]?.id ?? "Unknown ability",
             passiveId: character.passiveAbilityIds ?? unit?.abilities[1]?.id ?? "Unknown ability",
             activeLevel, passiveLevel,
+            activeTargetLevel: targetLevel(g?.active.practical ?? "", 35),
+            passiveTargetLevel: targetLevel(g?.passive.practical ?? "", 35),
             activeTo17: activeLevel !== null && activeLevel > 0 && activeLevel < 17,
             passiveTo17: passiveLevel !== null && passiveLevel > 0 && passiveLevel < 17,
             accountPriority: priorities[character.name]?.priority ?? 0,

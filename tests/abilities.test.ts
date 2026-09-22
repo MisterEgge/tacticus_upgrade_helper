@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
-import { abilityGuideRows, formatAbilityName } from "../src/domain/abilities";
+import { abilityGuideRows, formatAbilityName, targetLevel } from "../src/domain/abilities";
 import type { CatalogCharacter } from "../app/lib/catalog";
 import type { RosterUnit } from "../app/lib/report";
 
@@ -14,6 +14,15 @@ test("ability IDs are displayed as readable names", () =>
 
     assert.equal(formatAbilityName("InfernalPacts"), "Infernal Pacts");
     assert.equal(formatAbilityName("FirstAmongTraitors"), "First Among Traitors");
+
+});
+
+test("ability target levels use the practical target's lower bound", () =>
+{
+
+    assert.equal(targetLevel("35-36"), 35);
+    assert.equal(targetLevel("44+"), 44);
+    assert.equal(targetLevel("", 35), 35);
 
 });
 
