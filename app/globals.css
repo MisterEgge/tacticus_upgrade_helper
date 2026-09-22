@@ -60,3 +60,7 @@ th { color:#8794a7; font-size:11px; letter-spacing:.1em; text-transform:uppercas
 .campaignChevron{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #65758b;border-radius:8px;font-size:18px;line-height:1;flex:0 0 auto}
 .campaignSectionBody{padding:0 22px 22px}
 @media(max-width:700px){.campaignSectionToggle{align-items:flex-start;padding:18px}.campaignSectionStatus{gap:8px}.campaignSectionStatus .power{font-size:14px}.campaignSectionBody{padding:0 18px 18px}}
+
+.campaignThreeStar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 18px;padding:12px 14px;border:1px solid #334155;border-radius:10px;background:rgba(255,255,255,.02)}
+.campaignThreeStar select{min-width:150px;padding:8px 10px;border-radius:7px;border:1px solid #65758b;background:#111827;color:inherit;font:inherit}
+.campaignThreeStar small{flex-basis:100%;opacity:.72}
