@@ -22,7 +22,7 @@ export default async function Campaigns()
         <header><div><p className="eyebrow">CAMPAIGNS</p><h1>Elite 3★ Upgrade Planner</h1>
             <p className="sub">Account data as of report {report.generatedAt}. Community targets remain RESEARCHING until supported by campaign-specific evidence.</p>
         </div></header>
-        {recommendations.length ? <section className="panel detailPanel"><div className="sectionTitle"><div><p className="eyebrow">NEXT INVESTMENTS</p><h2>Account-specific campaign priorities</h2></div><div className="power">{recommendations.length}<strong> rank gaps</strong></div></div><div className="tableWrap"><table><thead><tr><th>Character</th><th>Campaign</th><th>Target</th><th>Gap</th><th>Why</th></tr></thead><tbody>{recommendations.slice(0, 12).map(row => <tr key={row.campaign + row.characterId}><td><CharacterName name={row.characterName} id={row.characterId}/></td><td>{row.campaign}</td><td><strong>{row.targetRank}</strong></td><td><strong>{row.rankStepsRemaining}</strong><small>rank step(s)</small></td><td><strong>{row.reason}</strong></td></tr>)}</tbody></table></div></section> : null}
+        {recommendations.length ? <section className="panel detailPanel"><div className="sectionTitle"><div><p className="eyebrow">NEXT INVESTMENTS</p><h2>Account-specific campaign priorities</h2></div><div className="power">{recommendations.length}<strong> rank gaps</strong></div></div>{Object.entries(Object.groupBy(recommendations.slice(0, 12), row => row.campaign)).map(([campaignName, rows]) => <div className="campaignInvestmentGroup" key={campaignName}><h3>{campaignName} Elite</h3><div className="tableWrap"><table><thead><tr><th>Character</th><th>Target</th><th>Gap</th><th>Why</th></tr></thead><tbody>{rows?.map(row => <tr key={row.campaign + row.characterId}><td><CharacterName name={row.characterName} id={row.characterId}/></td><td><strong>{row.targetRank}</strong></td><td><strong>{row.rankStepsRemaining}</strong><small>rank step(s)</small></td><td><strong>{row.reason}</strong></td></tr>)}</tbody></table></div></div>)}</section> : null}
         {Object.entries(targets.campaigns).map(([name, campaign]) =>
         {
 
@@ -30,8 +30,8 @@ export default async function Campaigns()
             const required = catalog.characters.filter(c => c.campaignsRequiredIn.includes(name));
             const campaignComplete = campaignIsComplete(progress, battleCatalog);
             const progressLabel = <>{campaignComplete ? "Completed" : progress?.highestCompletedBattle ?? "Unknown"}<strong>{campaignComplete ? " · all Elite missions cleared" : ` completed through · ${progress?.highestUnlockedBattle ?? "unknown"} unlock frontier`}</strong></>;
-            return <CampaignSection key={name} status={campaign.status} name={name} progressLabel={progressLabel}>
-                <ThreeStarProgress campaign={name} finalBattle={progress ? finalCampaignBattle(progress.name, progress.type, battleCatalog) : null}/>
+            return <CampaignSection key={name} status={campaign.status} name={name} progressLabel={progressLabel} finalBattle={finalBattle}>
+                <ThreeStarProgress campaign={name} finalBattle={finalBattle}/>
                 <div className="tableWrap"><table><thead><tr><th>Required character</th><th>Current account state</th><th>Suggested Elite target</th><th>Abilities current → target</th><th>Role / evidence</th></tr></thead>
                     <tbody>{required.map(character =>
                     {
