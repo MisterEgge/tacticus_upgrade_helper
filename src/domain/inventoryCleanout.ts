@@ -28,12 +28,32 @@ function progressionRarityIndex(progressionIndex: number): number
 export function inventoryCleanout(items: CleanoutInventoryItem[], units: CleanoutUnit[], demands: CleanoutDemand[], catalog: CleanoutCatalogCharacter[]): CleanoutRow[]
 {
 
+    const combinedItems = new Map<string, CleanoutInventoryItem>();
+    for (const item of items)
+    {
+
+        const previous = combinedItems.get(item.id);
+        if (!previous) combinedItems.set(item.id, item);
+        else
+        {
+
+            const name = previous.name ?? item.name;
+            combinedItems.set(item.id, {
+                id: item.id,
+                ...(name ? { name } : {}),
+                level: Math.max(previous.level, item.level),
+                amount: previous.amount + item.amount
+            });
+
+        }
+
+    }
     const demandCounts = new Map<string, number>();
     for (const demand of demands)
         for (const id of [demand.recommendedItemId, ...(demand.compatibleLegendaryItemIds ?? []), ...(demand.preferredLegendaryItemIds ?? [])])
             if (id) demandCounts.set(id, (demandCounts.get(id) ?? 0) + 1);
     const ownedById = new Map(units.map(unit => [unit.id, unit]));
-    return items.map(item =>
+    return [...combinedItems.values()].map(item =>
     {
 
         const itemRarity = rarityIndexFromId(item.id);

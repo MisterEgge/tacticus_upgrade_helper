@@ -36,6 +36,8 @@ test("campaign variants normalize once and keep Mirror distinct", () =>
     assert.equal(requiredCampaignName(campaign), "Indomitus Mirror");
     assert.equal(campaignKey("Indomitus", "Elite"), "Indomitus Elite");
     assert.notEqual(campaignKey("Tyranids Standard Challenge", "Standard"), campaignKey("Tyranids", "Standard"));
+    assert.equal(campaignKey("Saim-Hainn Mirror Elite", "EliteMirror"), "Saim-Hann Mirror Elite");
+    assert.equal(requiredCampaignName({ name: "Saim-Hainn Mirror Elite", type: "EliteMirror" }), "Saim-Hann Mirror");
 
 });
 

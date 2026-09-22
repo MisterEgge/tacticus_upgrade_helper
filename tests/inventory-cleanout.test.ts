@@ -69,3 +69,21 @@ test("explicit demand reserves multiplicity for the same item", () =>
     assert.equal(rows[0]!.scrap, 1);
 
 });
+
+test("duplicate inventory stacks are combined before salvage is calculated", () =>
+{
+
+    const rows = inventoryCleanout(
+        [
+            { id: "I_Test_R001", name: "Rare Test", level: 1, amount: 2 },
+            { id: "I_Test_R001", name: "Rare Test", level: 1, amount: 3 }
+        ],
+        [{ id: "a", name: "A", progressionIndex: 12, items: [{ slotId: "Slot1", id: "I_Test_E001", rarity: "Epic", level: 1 }] }],
+        [],
+        [{ id: "a", equipment: ["I_Test"] }]
+    );
+    assert.equal(rows.length, 1);
+    assert.equal(rows[0]!.amount, 5);
+    assert.equal(rows[0]!.scrap, 5);
+
+});

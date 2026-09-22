@@ -48,3 +48,24 @@ th { color:#8794a7; font-size:11px; letter-spacing:.1em; text-transform:uppercas
 @media(max-width:600px){header,.sectionTitle{flex-wrap:wrap}.goalForm{flex-direction:column;align-items:stretch}.detailPanel table{min-width:800px}}
 
 .syncAccount{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}.syncAccount button{font:inherit;font-size:13px;font-weight:800;color:#edf1f7;background:#1b2330;border:1px solid #65758b;border-radius:9px;padding:9px 13px;cursor:pointer}.syncAccount button:hover:not(:disabled){background:#273344}.syncAccount button:disabled{opacity:.55;cursor:wait}.syncAccount small{display:inline;margin:0}.syncAccount .syncError{color:#ff9b9b;flex-basis:100%}
+
+
+.campaignSection{padding:0;overflow:hidden}
+.campaignSectionToggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;text-align:left;color:inherit;background:transparent;border:0;padding:20px 22px;cursor:pointer;font:inherit}
+.campaignSectionToggle:hover{background:rgba(255,255,255,.025)}
+.campaignSectionToggle h2{margin:0}
+.campaignSectionToggle .eyebrow{margin-bottom:4px}
+.campaignSectionStatus{display:flex;align-items:center;gap:14px}
+.campaignSectionStatus .power{text-align:right}
+.campaignChevron{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #65758b;border-radius:8px;font-size:18px;line-height:1;flex:0 0 auto}
+.campaignSectionBody{padding:0 22px 22px}
+@media(max-width:700px){.campaignSectionToggle{align-items:flex-start;padding:18px}.campaignSectionStatus{gap:8px}.campaignSectionStatus .power{font-size:14px}.campaignSectionBody{padding:0 18px 18px}}
+
+.campaignThreeStar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 18px;padding:12px 14px;border:1px solid #334155;border-radius:10px;background:rgba(255,255,255,.02)}
+.campaignThreeStar select{min-width:150px;padding:8px 10px;border-radius:7px;border:1px solid #65758b;background:#111827;color:inherit;font:inherit}
+.campaignThreeStar small{flex-basis:100%;opacity:.72}
+
+.campaignObjective{margin-top:5px;color:#c7d2e2}
+.campaignStarSummary{min-width:120px;text-align:right}.campaignStarSummary strong{display:block;font-size:13px}.campaignStarSummary span{display:block;width:120px;height:5px;margin-top:6px;border-radius:999px;background:#27303d;overflow:hidden}.campaignStarSummary i{display:block;height:100%;background:currentColor;border-radius:inherit}
+.campaignInvestmentGroup{border-top:1px solid #27303d}.campaignInvestmentGroup h3{margin:0;padding:14px 18px;background:#0c1118;font-size:14px;letter-spacing:.02em}.campaignInvestmentGroup:last-child table tr:last-child td{border-bottom:0}
+@media(max-width:700px){.campaignSectionStatus{flex-wrap:wrap;justify-content:flex-end}.campaignStarSummary{order:2;width:100%}.campaignStarSummary span{margin-left:auto}.campaignObjective{display:block}}
