@@ -9,6 +9,7 @@ import { getCampaignTargets, getCharacterCatalog } from "../lib/catalog";
 import { campaignIsComplete, campaignRankIndex, campaignRecommendationPriority, requiredCampaignName, type CampaignBattleDefinition } from "../../src/domain/campaigns";
 import { readFile } from "node:fs/promises";
 import { collapseCampaignGoals } from "../../src/domain/campaignGoals";
+import { rankName } from "../../src/domain/ranks";
 
 type Query = { character?: string; target?: string; plan?: string };
 export default async function Farming({ searchParams }: { searchParams: Promise<Query> })
@@ -64,7 +65,7 @@ export default async function Farming({ searchParams }: { searchParams: Promise<
         {excluded.length ? <p className="sub">Excluded from character rank planning (outside synced character catalog): {excluded.map(u => u.name).join(", ")}. No rank costs are assumed for these units.</p> : null}
         <form className="goalForm panel" action="/farming">
             <label>Plan<select name="plan" defaultValue={query.plan ?? "next"}><option value="next">Roster next ranks</option><option value="campaign">Campaign recommendation gaps</option></select></label>
-            <label>Character<select name="character" defaultValue={query.character ?? ""}><option value="">All characters — next rank</option>{rankRoster.map(u => <option key={u.id} value={u.id}>{u.name} ({RANK_NAMES[u.rank] ?? "Unknown rank"})</option>)}</select></label>
+            <label>Character<select name="character" defaultValue={query.character ?? ""}><option value="">All characters — next rank</option>{rankRoster.map(u => <option key={u.id} value={u.id}>{u.name} ({rankName(u.rank)})</option>)}</select></label>
             <label>Target rank<select name="target" defaultValue={query.target ?? ""}><option value="">Next rank</option>{RANK_NAMES.map((name, index) => <option key={name} value={index}>{name}</option>)}</select></label>
             <button type="submit">Calculate materials</button>
         </form>
