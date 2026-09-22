@@ -29,6 +29,9 @@ export default async function Campaigns()
             const progress = report.campaignProgress?.find(c => (c.type === "Elite" || c.type === "EliteMirror") && requiredCampaignName(c) === name);
             const required = catalog.characters.filter(c => c.campaignsRequiredIn.includes(name));
             const campaignComplete = campaignIsComplete(progress, battleCatalog);
+            const finalBattle = progress
+                ? finalCampaignBattle(progress.name, progress.type, battleCatalog)
+                : finalCampaignBattle(name, / Mirror$/i.test(name) ? "EliteMirror" : "Elite", battleCatalog);
             const progressLabel = <>{campaignComplete ? "Completed" : progress?.highestCompletedBattle ?? "Unknown"}<strong>{campaignComplete ? " · all Elite missions cleared" : ` completed through · ${progress?.highestUnlockedBattle ?? "unknown"} unlock frontier`}</strong></>;
             return <CampaignSection key={name} status={campaign.status} name={name} progressLabel={progressLabel} finalBattle={finalBattle}>
                 <ThreeStarProgress campaign={name} finalBattle={finalBattle}/>
