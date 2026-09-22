@@ -28,11 +28,7 @@ export default async function Campaigns()
             const progress = report.campaignProgress?.find(c => (c.type === "Elite" || c.type === "EliteMirror") && requiredCampaignName(c) === name);
             const required = catalog.characters.filter(c => c.campaignsRequiredIn.includes(name));
             const campaignComplete = campaignIsComplete(progress, battleCatalog);
-            return <section className="panel detailPanel" key={name}>
-                <div className="sectionTitle"><div><p className="eyebrow">{campaign.status.toUpperCase()}</p><h2>{name} Elite</h2></div>
-                    <div className="power">{campaignComplete ? "Completed" : progress?.highestCompletedBattle ?? "Unknown"}<strong>{campaignComplete ? " · all Elite missions cleared" : ` completed through · ${progress?.highestUnlockedBattle ?? "unknown"} unlock frontier`}</strong></div>
-                </div>
-                <p className="sub">Confirmed 3★ progress: UNKNOWN — the available API schema does not expose stars. Unlock frontier N proves completion through N−1; a terminal frontier can be a sentinel, not a playable battle.</p>
+            const progressLabel = <>{campaignComplete ? "Completed" : progress?.highestCompletedBattle ?? "Unknown"}<strong>{campaignComplete ? " · all Elite missions cleared" : ` completed through · ${progress?.highestUnlockedBattle ?? "unknown"} unlock frontier`}</strong></>;\n            return <CampaignSection key={name} status={campaign.status} name={name} progressLabel={progressLabel}>\n                <p className="sub">Confirmed 3★ progress: UNKNOWN — the available API schema does not expose stars. Unlock frontier N proves completion through N−1; a terminal frontier can be a sentinel, not a playable battle.</p>
                 <div className="tableWrap"><table><thead><tr><th>Required character</th><th>Current account state</th><th>Suggested Elite target</th><th>Abilities current → target</th><th>Role / evidence</th></tr></thead>
                     <tbody>{required.map(character =>
                     {
@@ -50,7 +46,7 @@ export default async function Campaigns()
                     })}</tbody>
                 </table></div>
                 <p className="sub">Current ranks do not establish the ranks used for earlier clears. Historical observations are saved by <code>npm run refresh</code>; roster changes alongside progress are correlation, not proof of cause.</p>
-            </section>;
+            </CampaignSection>;
 
         })}
     </main>;
