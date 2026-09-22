@@ -26,6 +26,7 @@ export default function ThreeStarProgress({ campaign, finalBattle }: Props)
         setValue(next);
         if (next) window.localStorage.setItem(storageKey, next);
         else window.localStorage.removeItem(storageKey);
+        window.dispatchEvent(new CustomEvent("tacticus:campaign-three-star", { detail: { campaign, value: next ? Number(next) : null } }));
 
     }
 
