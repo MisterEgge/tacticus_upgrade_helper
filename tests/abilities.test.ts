@@ -25,7 +25,8 @@ test("stable IDs resolve owned units; locked abilities do not enter baseline que
     assert.equal(row.owned, true);
     assert.equal(row.activeTo17, false);
     assert.equal(row.passiveTo17, true);
-    assert.equal(row.communityActiveTarget, "UNREVIEWED");
+    assert.equal(row.communityActiveTarget, "17 baseline · 35 general stop");
+    assert.equal(row.activeHigh, "44–50 high investment");
     assert.equal(row.reviewed, false);
 
 });

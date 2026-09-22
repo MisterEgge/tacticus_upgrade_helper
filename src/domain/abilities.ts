@@ -23,12 +23,12 @@ export function abilityGuideRows(catalog: CatalogCharacter[], roster: RosterUnit
             activeTo17: activeLevel !== null && activeLevel > 0 && activeLevel < 17,
             passiveTo17: passiveLevel !== null && passiveLevel > 0 && passiveLevel < 17,
             accountPriority: priorities[character.name]?.priority ?? 0,
-            focus: g?.active.priority ?? "Unreviewed",
-            basis: g?.active.note ?? "Community breakpoint research pending.",
-            communityActiveTarget: g?.active.practical ?? "UNREVIEWED",
-            communityPassiveTarget: g?.passive.practical ?? "UNREVIEWED",
-            targetConfidence: g?.confidence ?? "unreviewed",
-            activeHigh: g?.active.high ?? "", passiveHigh: g?.passive.high ?? "",
+            focus: g?.active.priority ?? "General baseline",
+            basis: g?.active.note ?? "Use level 17 as the account baseline. Level 35 is the usual general stop; 44–50 is reserved for a deliberate high-investment build.",
+            communityActiveTarget: g?.active.practical ?? "17 baseline · 35 general stop",
+            communityPassiveTarget: g?.passive.practical ?? "17 baseline · 35 general stop",
+            targetConfidence: g?.confidence ?? "general planning baseline — character research pending",
+            activeHigh: g?.active.high ?? "44–50 high investment", passiveHigh: g?.passive.high ?? "44–50 high investment",
             reviewed
         };
 

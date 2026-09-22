@@ -12,9 +12,9 @@ export default async function Abilities()
     const rows = abilityGuideRows(catalog.characters, report?.roster ?? null, guidance, JSON.parse(priorities));
     const reviewed = rows.filter(row => row.reviewed).length;
     return <main><Nav/><header><div><p className="eyebrow">ABILITIES</p><h1>Game-wide Ability Guide</h1>
-        <p className="sub">All {rows.length} synced characters. Community practical and high-investment targets are separate from your level-17 baseline project; a baseline is not reviewed research.</p>
+        <p className="sub">Every character has a planning ladder: level 17 baseline, level 35 general stop, and level 44–50 only for a deliberate high-investment build. Character-specific community targets override that ladder when reviewed.</p>
         <p className="sub">{report ? `Account report: ${report.generatedAt}` : "Account data unavailable — ownership and current levels are unknown. Run npm run refresh to update."}</p>
-    </div><div className="power">{reviewed}/{rows.length}<strong> reviewed</strong></div></header>
+    </div><div className="power">{reviewed}/{rows.length}<strong> character-specific</strong></div></header>
         <section className="panel tablePanel"><AbilityTable rows={rows}/></section>
     </main>;
 
