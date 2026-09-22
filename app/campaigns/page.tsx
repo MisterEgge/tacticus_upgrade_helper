@@ -1,9 +1,10 @@
 import Nav from "../components/Nav";
 import CharacterName from "../components/CharacterName";
 import CampaignSection from "./CampaignSection";
+import ThreeStarProgress from "./ThreeStarProgress";
 import { getReport } from "../lib/report";
 import { getCampaignEvidence, getCampaignTargets, getCharacterCatalog } from "../lib/catalog";
-import { abilityGap, campaignIsComplete, campaignRankGap, campaignRecommendationPriority, requiredCampaignName, type CampaignBattleDefinition } from "../../src/domain/campaigns";
+import { abilityGap, campaignIsComplete, campaignRankGap, campaignRecommendationPriority, finalCampaignBattle, requiredCampaignName, type CampaignBattleDefinition } from "../../src/domain/campaigns";
 import { readFile } from "node:fs/promises";
 
 const rankNames = ["Stone I", "Stone II", "Stone III", "Iron I", "Iron II", "Iron III", "Bronze I", "Bronze II", "Bronze III", "Silver I", "Silver II", "Silver III", "Gold I", "Gold II", "Gold III", "Diamond I", "Diamond II", "Diamond III", "Adamantine I", "Adamantine II"];
@@ -29,7 +30,8 @@ export default async function Campaigns()
             const required = catalog.characters.filter(c => c.campaignsRequiredIn.includes(name));
             const campaignComplete = campaignIsComplete(progress, battleCatalog);
             const progressLabel = <>{campaignComplete ? "Completed" : progress?.highestCompletedBattle ?? "Unknown"}<strong>{campaignComplete ? " · all Elite missions cleared" : ` completed through · ${progress?.highestUnlockedBattle ?? "unknown"} unlock frontier`}</strong></>;
-            return <CampaignSection key={name} status={campaign.status} name={name} progressLabel={progressLabel}>\n                <p className="sub">Confirmed 3★ progress: UNKNOWN — the available API schema does not expose stars. Unlock frontier N proves completion through N−1; a terminal frontier can be a sentinel, not a playable battle.</p>
+            return <CampaignSection key={name} status={campaign.status} name={name} progressLabel={progressLabel}>
+                <ThreeStarProgress campaign={name} finalBattle={progress ? finalCampaignBattle(progress.name, progress.type, battleCatalog) : null}/>
                 <div className="tableWrap"><table><thead><tr><th>Required character</th><th>Current account state</th><th>Suggested Elite target</th><th>Abilities current → target</th><th>Role / evidence</th></tr></thead>
                     <tbody>{required.map(character =>
                     {
