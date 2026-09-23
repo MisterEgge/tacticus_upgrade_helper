@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
-import { abilityGuideRows, abilityUpgradePlan, formatAbilityName, targetLevel } from "../src/domain/abilities";
+import { abilityActionQueue, abilityGuideRows, abilityUpgradePlan, formatAbilityName, targetLevel } from "../src/domain/abilities";
 import type { CatalogCharacter } from "../app/lib/catalog";
 import type { RosterUnit } from "../app/lib/report";
 
@@ -32,6 +32,16 @@ test("ability plan ranks owned characters matching the selected account goals", 
     const rows=abilityGuideRows(catalog,roster,{},{});
     const plan=abilityUpgradePlan(rows,{[character.name]:{priority:99,modes:["Guild Raid"]}},["Guild Raid"]);
     assert.equal(plan[0]?.character,character.name);
+
+});
+
+test("direct ability queue chooses the ability-specific priority before raw gap",() =>
+{
+
+    const guidance = { [character.name]: { confidence:"medium", active:{practical:"35",high:"44",priority:"low"}, passive:{practical:"26",high:"35",priority:"high"} } };
+    const rows=abilityGuideRows(catalog,roster,guidance,{});
+    const queue=abilityActionQueue(rows,{[character.name]:{priority:1}},{[character.name]:{score:4,teams:["Core"]}});
+    assert.equal(queue[0]?.next.ability,"Passive");
 
 });
 
