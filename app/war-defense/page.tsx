@@ -16,8 +16,9 @@ export default async function WarDefense()
     const build=(lineup:FullLineup)=>{const missing=lineup.members.filter(name=>!units.has(name));return {name:lineup.name,used:lineup.used,wins:lineup.wins,defense:lineup.defense,score:lineup.score,fieldable:missing.length===0,missing,members:lineup.members.map(name=>{const unit=units.get(name);return {id:unit?.id??`missing-${name}`,name,icon:unit?icons.get(unit.id):undefined,rank:unit?.rank??null,activeLevel:unit?.abilities[0]?.level??null,passiveLevel:unit?.abilities[1]?.level??null,items:unit?.items??[]};})};};
     const defensePlan=JSON.parse(defenseText)as Plan;
     const offensePlan=JSON.parse(offenseText)as Plan;
-    const defense=(defensePlan.validatedFullLineups??[]).map(build);
-    const offense=(offensePlan.validatedFullLineups??[]).map(build);
-    return <main><Nav/><header><div><p className="eyebrow">GUILD WAR</p><h1>Guild War team options</h1><p className="sub">Every row is an exact five-character lineup from the supplied War source. Owned lineups are selectable; rows missing roster characters remain listed as can’t build, with the missing character named.</p></div><div className="power">{defense.filter(team=>team.fieldable).length}<strong> buildable defense options</strong></div></header><WarDefensePlanner teams={defense} offenseTeams={offense}/></main>;
+    const byWinRate=(a:ReturnType<typeof build>,b:ReturnType<typeof build>)=>b.wins/b.used-a.wins/a.used||b.used-a.used;
+    const defense=(defensePlan.validatedFullLineups??[]).map(build).filter(team=>team.fieldable).sort(byWinRate);
+    const offense=(offensePlan.validatedFullLineups??[]).map(build).filter(team=>team.fieldable).sort(byWinRate);
+    return <main><Nav/><header><div><p className="eyebrow">GUILD WAR</p><h1>Guild War team options</h1><p className="sub">Only exact five-character source lineups you can build are shown, ordered by observed win percentage.</p></div><div className="power">{defense.length}<strong> buildable defense options</strong></div></header><WarDefensePlanner teams={defense} offenseTeams={offense}/></main>;
 
 }
