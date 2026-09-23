@@ -1,0 +1,6 @@
+{
+  "_comment": "Source labels normalized only when the source portrait/internal ID exactly matches the catalog ID. Do not add text-only guesses.",
+  "Rotbone": { "canonical": "Nauseous", "sourceId": "deathRotbone" },
+  "Boss Gulgortz": { "canonical": "Gulgortz", "sourceId": "orksWarboss" },
+  "Abaddon the Despoiler": { "canonical": "Abaddon", "sourceId": "blackAbaddon" }
+}
