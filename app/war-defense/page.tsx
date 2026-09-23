@@ -5,7 +5,7 @@ import { getCharacterCatalog } from "../lib/catalog";
 import { getReport } from "../lib/report";
 
 type SourceTeam={name:string;core:string[];flex:Array<{name:string;used:number;win?:number}>;used:number;wins:number;defense?:number;score?:number};
-type FullLineup={name:string;members:string[];used:number;wins:number;defense:number;score:number};type Plan={teams:SourceTeam[];validatedFullLineups?:FullLineup[]};
+type FullLineup={name:string;members:string[];used:number;wins:number;defense?:number;win?:number;score:number};type Plan={teams:SourceTeam[];validatedFullLineups?:FullLineup[]};
 
 export default async function WarDefense()
 {
