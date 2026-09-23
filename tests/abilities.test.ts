@@ -1,13 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
-import { abilityActionQueue, abilityGuideRows, abilityUpgradePlan, formatAbilityName, targetLevel } from "../src/domain/abilities";
+import { abilityActionQueue, abilityGuideRows, abilityLongTermGoals, abilityUpgradePlan, formatAbilityName, targetLevel } from "../src/domain/abilities";
 import type { CatalogCharacter } from "../app/lib/catalog";
 import type { RosterUnit } from "../app/lib/report";
 
 const catalog: CatalogCharacter[] = JSON.parse(readFileSync("data/character_catalog.json", "utf8")).characters;
 const character = catalog[0]!;
-const roster: RosterUnit[] = [{ id: character.id, name: "Different display name", faction: "", grandAlliance: "", rarity: "Common", rank: 0, xpLevel: 1, progressionIndex: 0, shards: 0, mythicShards: 0, abilities: [{ id: "a", level: 0 }, { id: "p", level: 9 }], items: [] }];
+const roster: RosterUnit[] = [{ id: character.id, name: "Different display name", faction: "", grandAlliance: "", rarity: "Common", rank: 0, xpLevel: 35, progressionIndex: 0, shards: 0, mythicShards: 0, abilities: [{ id: "a", level: 0 }, { id: "p", level: 9 }], items: [] }];
 
 test("ability IDs are displayed as readable names", () =>
 {
@@ -42,6 +42,18 @@ test("direct ability queue chooses the ability-specific priority before raw gap"
     const rows=abilityGuideRows(catalog,roster,guidance,{});
     const queue=abilityActionQueue(rows,{[character.name]:{priority:1}},{[character.name]:{score:4,teams:["Core"]}});
     assert.equal(queue[0]?.next.ability,"Passive");
+
+});
+
+test("ability queues separate immediately spendable upgrades from XP-blocked goals",() =>
+{
+
+    const guidance = { [character.name]: { confidence:"medium", active:{practical:"44",high:"50",priority:"high"}, passive:{practical:"26",high:"35",priority:"low"} } };
+    const rows=abilityGuideRows(catalog,[{...roster[0]!,xpLevel:41,abilities:[{id:"a",level:41},{id:"p",level:26}]}],guidance,{});
+    assert.equal(abilityActionQueue(rows,{},{})[0],undefined);
+    const goal=abilityLongTermGoals(rows,{},{});
+    assert.equal(goal[0]?.next.ability,"Active");
+    assert.equal(goal[0]?.xpGap,3);
 
 });
 
