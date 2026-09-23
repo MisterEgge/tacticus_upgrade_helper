@@ -36,6 +36,24 @@ export function abilityUpgradePlan(rows:AbilityGuideRow[], priorities:Record<str
 
 }
 
+export type CommunityPriority={score:number;teams:string[]};
+const abilityWeight:Record<string,number>={max:6,high:5,medium:4,situational:3,low:2};
+export function abilityActionQueue(rows:AbilityGuideRow[],priorities:Record<string,{priority:number;modes?:string[]}>,community:Record<string,CommunityPriority>)
+{
+
+    return rows.filter(row=>row.owned&&row.reviewed).flatMap(row=>
+    {
+
+        const options=[{ability:"Active",name:formatAbilityName(row.activeId),level:row.activeLevel,target:row.activeTargetLevel,weight:abilityWeight[row.activePriority]??1},{ability:"Passive",name:formatAbilityName(row.passiveId),level:row.passiveLevel,target:row.passiveTargetLevel,weight:abilityWeight[row.passivePriority]??1}].filter(option=>(option.level??Infinity)<option.target);
+        if(!options.length)return[];
+        const next=options.sort((a,b)=>b.weight-a.weight||b.target-(b.level??b.target))[0]!;
+        const source=community[row.character];const account=priorities[row.character]?.priority??0;const score=(source?.score??0)*20+account+next.weight*3;
+        return[{...row,next,communityScore:source?.score??null,communityTeams:source?.teams??[],score}];
+
+    }).sort((a,b)=>b.score-a.score||b.next.weight-a.next.weight||a.character.localeCompare(b.character));
+
+}
+
 export function abilityGuideRows(catalog: CatalogCharacter[], roster: RosterUnit[] | null, guidance: Record<string, unknown>, priorities: Record<string, { priority: number }>)
 {
 
@@ -60,7 +78,7 @@ export function abilityGuideRows(catalog: CatalogCharacter[], roster: RosterUnit
             activeTo17: activeLevel !== null && activeLevel > 0 && activeLevel < 17,
             passiveTo17: passiveLevel !== null && passiveLevel > 0 && passiveLevel < 17,
             accountPriority: priorities[character.name]?.priority ?? 0,
-            focus: g?.active.priority ?? "General baseline",
+            focus: g?.active.priority ?? "General baseline",activePriority:g?.active.priority??"General baseline",passivePriority:g?.passive.priority??"General baseline",
             basis: g?.active.note ?? "Use level 17 as the account baseline. Level 35 is the usual general stop; 44–50 is reserved for a deliberate high-investment build.",
             communityActiveTarget: g?.active.practical ?? "17 baseline · 35 general stop",
             communityPassiveTarget: g?.passive.practical ?? "17 baseline · 35 general stop",
