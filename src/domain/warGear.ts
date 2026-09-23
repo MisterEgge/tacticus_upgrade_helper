@@ -10,10 +10,10 @@ export type WarGearStatus = {
  * War aims for the fully-refined stat breakpoint, not Legendary rarity alone:
  * Epic 9 and Legendary 1 have the same comparison value.
  */
-export function warGearStatus(items: WarGearItem[]): WarGearStatus
+export function warGearStatus(items: WarGearItem[] | undefined | null): WarGearStatus
 {
     const slots = ["Slot1", "Slot2", "Slot3"];
-    const bySlot = new Map(items.map((item) => [item.slotId, item]));
+    const bySlot = new Map((items ?? []).map((item) => [item.slotId, item]));
     const missing = slots.flatMap((slotId) =>
     {
         const item = bySlot.get(slotId);
@@ -26,7 +26,7 @@ export function warGearStatus(items: WarGearItem[]): WarGearStatus
     return { ready: slots.length - missing.length, total: slots.length, missing };
 }
 
-export function warGearLabel(items: WarGearItem[]): { summary: string; detail: string; ready: boolean }
+export function warGearLabel(items: WarGearItem[] | undefined | null): { summary: string; detail: string; ready: boolean }
 {
     const status = warGearStatus(items);
     if (status.ready === status.total) return { summary: "War gear ready", detail: "Epic 9 / Legendary 1 baseline met", ready: true };
