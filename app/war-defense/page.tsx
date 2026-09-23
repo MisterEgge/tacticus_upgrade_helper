@@ -1,3 +1,23 @@
-import{readFile}from"node:fs/promises";import Nav from"../components/Nav";import WarDefensePlanner from"./WarDefensePlanner";import{getCharacterCatalog}from"../lib/catalog";import{getReport}from"../lib/report";
-type Team={name:string;core:string[];flex:Array<{name:string;used:number}>;used:number;wins:number;defense:number;score:number};type Plan={teams:Team[]};
-export default async function WarDefense(){const[report,catalog,planText]=await Promise.all([getReport(),getCharacterCatalog(),readFile("config/war_defense_teams.json","utf8")]);if(!report)return <main><Nav/><div className="empty">Run <code>npm run refresh</code> to load your roster.</div></main>;const plan=JSON.parse(planText)as Plan;const units=new Map(report.roster.map(unit=>[unit.name,unit]));const icons=new Map(catalog.characters.map(character=>[character.id,character.icon]));const needs=[...report.equipmentAllocation.equipNow,...report.equipmentAllocation.buyWatch,...report.equipmentAllocation.compatibilityUnknown];const teams=plan.teams.flatMap(team=>{if(!team.core.every(name=>units.has(name)))return[];const flex=team.flex.filter(unit=>units.has(unit.name)&&!team.core.includes(unit.name)).sort((a,b)=>b.used-a.used).slice(0,2).map(unit=>unit.name);if(flex.length<2)return[];const members=[...team.core,...flex].map(name=>{const unit=units.get(name)!;return{id:unit.id,name,icon:icons.get(unit.id),rank:unit.rank,activeLevel:unit.abilities[0]?.level??null,passiveLevel:unit.abilities[1]?.level??null,gear:needs.filter(row=>row.character===name).length};});return[{name:team.name,used:team.used,wins:team.wins,defense:team.defense,score:team.score,members}];});return <main><Nav/><header><div><p className="eyebrow">GUILD WAR</p><h1>Guild War team options</h1><p className="sub">Choose Defense or Offense first. Defense uses verified source patterns; options may reuse characters because they are alternatives, not five locked defense slots.</p></div><div className="power">{teams.length}<strong> defense options</strong></div></header><WarDefensePlanner teams={teams}/></main>}
+import { readFile } from "node:fs/promises";
+import Nav from "../components/Nav";
+import WarDefensePlanner from "./WarDefensePlanner";
+import { getCharacterCatalog } from "../lib/catalog";
+import { getReport } from "../lib/report";
+
+type SourceTeam={name:string;core:string[];flex:Array<{name:string;used:number;win?:number}>;used:number;wins:number;defense?:number;score?:number};
+type Plan={teams:SourceTeam[]};
+
+export default async function WarDefense()
+{
+
+    const [report,catalog,defenseText,offenseText]=await Promise.all([getReport(),getCharacterCatalog(),readFile("config/war_defense_teams.json","utf8"),readFile("config/war_offense_teams.json","utf8")]);
+    if(!report)return <main><Nav/><div className="empty">Run <code>npm run refresh</code> to load your roster.</div></main>;
+    const units=new Map(report.roster.map(unit=>[unit.name,unit]));
+    const icons=new Map(catalog.characters.map(character=>[character.id,character.icon]));
+    const needs=[...report.equipmentAllocation.equipNow,...report.equipmentAllocation.buyWatch,...report.equipmentAllocation.compatibilityUnknown];
+    const build=(team:SourceTeam,mode:"defense"|"offense")=>{if(!team.core.every(name=>units.has(name)))return null;const flex=team.flex.filter(candidate=>units.has(candidate.name)&&!team.core.includes(candidate.name)).sort((a,b)=>b.used-a.used).slice(0,2);if(flex.length<2)return null;const names=[...team.core,...flex.map(candidate=>candidate.name)];return {name:team.name,used:team.used,wins:team.wins,defense:team.defense,score:team.score,mode,members:names.map(name=>{const unit=units.get(name)!;const candidate=team.flex.find(flex=>flex.name===name);return {id:unit.id,name,icon:icons.get(unit.id),rank:unit.rank,activeLevel:unit.abilities[0]?.level??null,passiveLevel:unit.abilities[1]?.level??null,gear:needs.filter(row=>row.character===name).length,flexUsed:candidate?.used,flexWin:candidate?.win};})};};
+    const defense=(JSON.parse(defenseText)as Plan).teams.map(team=>build(team,"defense")).filter((team):team is NonNullable<typeof team>=>!!team);
+    const offense=(JSON.parse(offenseText)as Plan).teams.map(team=>build(team,"offense")).filter((team):team is NonNullable<typeof team>=>!!team);
+    return <main><Nav/><header><div><p className="eyebrow">GUILD WAR</p><h1>Guild War team options</h1><p className="sub">Choose Defense or Offense first. Every option is source-backed and roster-aware; teams remain alternatives until you commit them to a lineup slot.</p></div><div className="power">{defense.length + offense.length}<strong> owned options</strong></div></header><WarDefensePlanner teams={defense} offenseTeams={offense}/></main>;
+
+}
