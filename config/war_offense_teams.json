@@ -1,4 +1,4 @@
-{"_meta":{"sourceKind":"user-supplied Tacticus.xyz offense table","reviewedOn":"2026-09-23","note":"Top source patterns whose three-person cores are owned. Flex candidates retain their source usage and win rate; each is a selectable alternative, never an automatic assignment."},"teams":[
+{"_meta":{"sourceKind":"user-supplied Tacticus.xyz offense table","reviewedOn":"2026-09-23","note":"Top source patterns whose three-person cores are owned. Exact five-character confirmation from the second supplied offense table is retained below. Flex candidates retain source usage and win rate; they are selectable alternatives, never automatic assignments."},"teams":[
 {"name":"Forge Network","core":["Actus","Tan Gi'da","Exitor-Rho"],"flex":[{"name":"Vitruvius","used":7527,"win":74.6},{"name":"Sho'syl","used":4541,"win":77.8},{"name":"Aleph-Null","used":4537,"win":79.3},{"name":"Sy-gex","used":2047,"win":72.8},{"name":"Gulgortz","used":1972,"win":81.4}],"used":13975,"wins":10570},
 {"name":"Genestealer Ambush","core":["Hollan","Judh","Isaak"],"flex":[{"name":"Xybia","used":9804,"win":94.4},{"name":"The Patermine","used":9469,"win":94.4},{"name":"Winged Prime","used":2887,"win":95.3},{"name":"Yarrick","used":489,"win":94.3},{"name":"Lucius","used":467,"win":92.7}],"used":13658,"wins":12843},
 {"name":"Thousand Sons Screen","core":["Archimatos","Abraxas","Yazaghor"],"flex":[{"name":"Ahriman","used":3822,"win":86.1},{"name":"Neurothrope","used":2834,"win":84.3},{"name":"Eldryon","used":2608,"win":82.6},{"name":"Toth","used":1175,"win":78},{"name":"Mephiston","used":1093,"win":84.9}],"used":9066,"wins":7465},
@@ -9,4 +9,13 @@
 {"name":"Tyranid Pressure","core":["Neurothrope","Tyrant Guard","Winged Prime"],"flex":[{"name":"Parasite of Mortrex","used":1300,"win":74.5},{"name":"Deathleaper","used":1194,"win":73.6},{"name":"Hollan","used":199,"win":82.4},{"name":"The Patermine","used":195,"win":81},{"name":"Incisus","used":118,"win":85.6}],"used":2041,"wins":1577},
 {"name":"Eldar Control","core":["Aethana","Eldryon","Calandis"],"flex":[{"name":"Maugan Ra","used":889,"win":61.4},{"name":"Jain Zar","used":680,"win":55.3},{"name":"Re'vas","used":344,"win":67.2},{"name":"Sho'syl","used":147,"win":58.5},{"name":"Thaddeus","used":121,"win":65.3}],"used":1996,"wins":1153},
 {"name":"Dark Angels Screen","core":["Azrael","Sarquael","Baraqiel"],"flex":[{"name":"Forcas","used":1097,"win":60.6},{"name":"Asmodai","used":621,"win":52.8},{"name":"Incisus","used":215,"win":62.8},{"name":"Isabella","used":197,"win":71.6},{"name":"Thaddeus","used":172,"win":67.4}],"used":1795,"wins":1094}
+],"validatedFullLineups":[
+{"name":"Genestealer Ambush · Xybia/Patermine","members":["Hollan","Judh","Xybia","The Patermine","Isaak"],"used":7006,"wins":6623,"win":94.5,"score":1458.4},
+{"name":"Blood Angels Sustain · full","members":["Dante","Lucien","Mataneo","Mephiston","Nicodemus"],"used":6377,"wins":5467,"win":85.7,"score":1318.9},
+{"name":"Ork Pressure · full Orks","members":["Gibbascrapz","Snappawrecka","Tanksmasha","Snotflogga","Gulgortz"],"used":5299,"wins":4098,"win":77.3,"score":1210.3},
+{"name":"Forge Network · Vitruvius/Sho'syl","members":["Vitruvius","Actus","Tan Gi'da","Exitor-Rho","Sho'syl"],"used":1919,"wins":1460,"win":76.1,"score":1166.4},
+{"name":"Forge Network · Vitruvius/Aleph","members":["Vitruvius","Actus","Tan Gi'da","Exitor-Rho","Aleph-Null"],"used":1612,"wins":1246,"win":77.3,"score":1195.1},
+{"name":"Genestealer Ambush · Patermine/Winged Prime","members":["Hollan","Judh","The Patermine","Isaak","Winged Prime"],"used":1595,"wins":1525,"win":95.6,"score":1477.1},
+{"name":"Thousand Sons · Ahriman/Neurothrope","members":["Archimatos","Ahriman","Abraxas","Yazaghor","Neurothrope"],"used":1430,"wins":1237,"win":86.5,"score":1316.8},
+{"name":"Tyranid Pressure · Deathleaper/Parasite","members":["Deathleaper","Neurothrope","Parasite of Mortrex","Tyrant Guard","Winged Prime"],"used":975,"wins":705,"win":72.3,"score":1114.1}
 ]}
