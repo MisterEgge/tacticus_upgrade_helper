@@ -10,6 +10,7 @@ test("War planner data keeps inferred core/flex patterns separate from exact sel
     {
         const plan = JSON.parse(fs.readFileSync(path, "utf8")) as Plan;
         assert.ok(plan.validatedFullLineups?.length);
+        assert.equal(plan.validatedFullLineups?.length, 20, `${path} must retain every supplied source row`);
         assert.ok(plan.validatedFullLineups?.every((lineup) => lineup.members.length === 5));
         const eldar = plan.teams?.find((team) => team.name === "Eldar Control");
         assert.ok(eldar);
