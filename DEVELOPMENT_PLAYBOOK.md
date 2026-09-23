@@ -55,6 +55,7 @@ Do not ask for routine approval. Ask only when blocked by missing access, an irr
 - Default team slots must be computed as a maximum-quality non-overlapping set, not simply the first N candidates. Dropdown choices that conflict with already selected teams must be unavailable.
 - Do not display unowned characters as active upgrade work. If a source lineup cannot be fielded from the account roster, exclude it from the current assignment and keep it only as a clearly labelled future/reference record.
 - Treat a user correction about a source or lineup as a data-model problem first. Re-read the supplied source, repair the extraction/selection rule, add a regression test, and only then adjust the UI.
+- Source-name variants may be normalized only with stable-ID evidence (for example, a source portrait/internal ID matching the catalog ID). Store that proof in an alias table, test every mapping, and report unresolved names instead of guessing.
 
 ## Git and merge discipline
 
