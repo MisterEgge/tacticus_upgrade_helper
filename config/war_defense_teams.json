@@ -1,4 +1,4 @@
-{"_meta":{"sourceUrl":"https://tacticus.xyz/wars/analyze/defenders?battlefield%5B%5D=2","reviewedOn":"2026-09-22","note":"Only rows whose full text was supplied are included. Flex units are ranked by the source's Used count, never screen order."},"teams":[
+{"_meta":{"sourceUrl":"https://tacticus.xyz/wars/analyze/defenders?battlefield%5B%5D=2","reviewedOn":"2026-09-23","note":"Core/flex patterns are from the first supplied defender analysis. Exact five-character lineup confirmation is retained below from the second supplied defender source; flex units are ranked by source usage, never screen order."},"teams":[
 {"name":"Forge Network","core":["Actus","Tan Gi'da","Exitor-Rho"],"flex":[{"name":"Re'vas","used":1438},{"name":"Aleph-Null","used":1328},{"name":"Vitruvius","used":1116},{"name":"Sho'syl","used":770},{"name":"Gulgortz","used":643},{"name":"Sy-gex","used":350}],"used":3231,"wins":2614,"defense":80.9,"score":283.9},
 {"name":"Kariyan / Ragnar / Kharn","core":["Kariyan","Ragnar","Kharn"],"flex":[{"name":"Dante","used":580},{"name":"Snotflogga","used":363},{"name":"Gulgortz","used":323},{"name":"Trajann","used":314},{"name":"Titus","used":259},{"name":"Mephiston","used":204}],"used":1819,"wins":1418,"defense":78,"score":254.3},
 {"name":"Ork Pressure","core":["Snappawrecka","Snotflogga","Gulgortz"],"flex":[{"name":"Gibbascrapz","used":3158},{"name":"Tanksmasha","used":2379},{"name":"Re'vas","used":191},{"name":"Aleph-Null","used":164},{"name":"Calandis","used":103},{"name":"Archimatos","used":91}],"used":3677,"wins":2575,"defense":70,"score":249.6},
@@ -11,4 +11,13 @@
 {"name":"Blood Angels Sustain","core":["Lucien","Mephiston","Nicodemus"],"flex":[{"name":"Mataneo","used":718},{"name":"Dante","used":703},{"name":"Kariyan","used":117},{"name":"Calgar","used":39},{"name":"Bellator","used":30},{"name":"Dreir","used":30}],"used":1001,"wins":747,"defense":74.6,"score":223.9},
 {"name":"Thousand Sons Screen","core":["Abraxas","Toth","Yazaghor"],"flex":[{"name":"Archimatos","used":166},{"name":"Ahriman","used":135},{"name":"Thaumachus","used":118},{"name":"Eldryon","used":56},{"name":"Haarken","used":48},{"name":"Typhus","used":31}],"used":450,"wins":373,"defense":82.9,"score":220},
 {"name":"Black Templar Hold","core":["Burchard","Thoread","Godswyl"],"flex":[{"name":"Jaeger","used":288},{"name":"Helbrecht","used":137},{"name":"Isabella","used":100},{"name":"Incisus","used":68},{"name":"Bellator","used":58},{"name":"Sibyll","used":45}],"used":624,"wins":483,"defense":77.4,"score":216.4}
+],"validatedFullLineups":[
+{"name":"Genestealer Ambush · Xybia/Patermine","members":["Hollan","Judh","Xybia","The Patermine","Isaak"],"used":9317,"wins":6168,"defense":66.2,"score":858.9},
+{"name":"Ork Pressure · full Orks","members":["Gibbascrapz","Snappawrecka","Tanksmasha","Snotflogga","Gulgortz"],"used":5606,"wins":4025,"defense":71.8,"score":924.5},
+{"name":"Necron Machine Wall · full Necrons","members":["Imospekh","Anuphet","Thutmose","Aleph-Null","Makhotep"],"used":3224,"wins":2391,"defense":74.2,"score":974.3},
+{"name":"Forge Network · Aleph/Re'vas","members":["Actus","Tan Gi'da","Exitor-Rho","Aleph-Null","Re'vas"],"used":2440,"wins":1994,"defense":81.7,"score":1123.3},
+{"name":"Genestealer Ambush · Patermine/Winged Prime","members":["Hollan","Judh","The Patermine","Isaak","Winged Prime"],"used":2197,"wins":1574,"defense":71.6,"score":953.2},
+{"name":"Death Guard · Rotbone/Typhus/Sho'syl","members":["Corrodius","Maladus","Rotbone","Typhus","Sho'syl"],"used":2984,"wins":2004,"defense":67.2,"score":844.2},
+{"name":"Blood Angels Sustain · full","members":["Dante","Lucien","Mataneo","Mephiston","Nicodemus"],"used":1716,"wins":1310,"defense":76.3,"score":999.3},
+{"name":"Forge Network · Vitruvius/Sho'syl","members":["Vitruvius","Actus","Tan Gi'da","Exitor-Rho","Sho'syl"],"used":949,"wins":834,"defense":87.9,"score":1266.8}
 ]}
