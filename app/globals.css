@@ -10,6 +10,7 @@ header,.sectionTitle { display:flex; justify-content:space-between; align-items:
 .panel { overflow:hidden; }.sectionTitle { padding:22px 24px; border-bottom:1px solid #27303d; }.sectionTitle>span { color:#9da9ba; }
 .tableWrap { overflow-x:auto; } table { width:100%; border-collapse:collapse; } th,td { text-align:left; padding:15px 18px; border-bottom:1px solid #202733; }
 th { color:#8794a7; font-size:11px; letter-spacing:.1em; text-transform:uppercase; } td { font-size:14px; } small { display:block; margin-top:3px; }
+.inlineDetail{display:inline;margin:0 0 0 4px;font-size:11px;white-space:nowrap}
 .abilityTarget{display:flex;flex-direction:column;align-items:flex-start;gap:3px}.abilityTarget small{margin:0}.abilityTarget span{color:#c6d0dd;font-size:13px}.abilityTarget strong+small{margin-top:1px}
 .abilityViews{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:16px}.abilityViews label{display:flex;flex-direction:column;gap:5px;font-size:12px;color:#9da9ba}.abilityViews select,.abilityViews button{font:inherit;background:#1b2330;border:1px solid #65758b;border-radius:8px;color:#edf1f7;padding:8px}.abilityViews button{cursor:pointer}.abilityViews button:disabled{opacity:.5}.teamChips{display:flex;gap:6px;flex-wrap:wrap}.teamChips button{font-size:12px}
 .warModeTabs{margin:24px 0 0}.warModeTabs button.active{background:#273344;color:#edf1f7;border-color:#9ccaff}
