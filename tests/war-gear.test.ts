@@ -23,3 +23,17 @@ test("under-refined Epic gear remains a War upgrade", () =>
     assert.equal(label.summary, "2/3 War-ready");
     assert.match(label.detail, /Epic 8/);
 });
+
+
+test("missing item data is safely shown as three unresolved gear slots", () =>
+{
+    assert.deepEqual(warGearStatus(undefined), {
+        ready: 0,
+        total: 3,
+        missing: [
+            { slotId: "Slot1", rarity: "Unequipped", level: 0 },
+            { slotId: "Slot2", rarity: "Unequipped", level: 0 },
+            { slotId: "Slot3", rarity: "Unequipped", level: 0 }
+        ]
+    });
+});
