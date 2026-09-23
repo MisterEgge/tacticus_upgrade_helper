@@ -44,13 +44,28 @@ export function abilityActionQueue(rows:AbilityGuideRow[],priorities:Record<stri
     return rows.filter(row=>row.owned&&row.reviewed).flatMap(row=>
     {
 
-        const options=[{ability:"Active",name:formatAbilityName(row.activeId),level:row.activeLevel,target:row.activeTargetLevel,weight:abilityWeight[row.activePriority]??1},{ability:"Passive",name:formatAbilityName(row.passiveId),level:row.passiveLevel,target:row.passiveTargetLevel,weight:abilityWeight[row.passivePriority]??1}].filter(option=>(option.level??Infinity)<option.target);
+        const options=[{ability:"Active",name:formatAbilityName(row.activeId),level:row.activeLevel,target:row.activeTargetLevel,weight:abilityWeight[row.activePriority]??1},{ability:"Passive",name:formatAbilityName(row.passiveId),level:row.passiveLevel,target:row.passiveTargetLevel,weight:abilityWeight[row.passivePriority]??1}].filter(option=>(option.level??Infinity)<option.target&&(option.level??Infinity)<row.xpLevel);
         if(!options.length)return[];
         const next=options.sort((a,b)=>b.weight-a.weight||b.target-(b.level??b.target))[0]!;
         const source=community[row.character];const account=priorities[row.character]?.priority??0;const score=(source?.score??0)*20+account+next.weight*3;
         return[{...row,next,communityScore:source?.score??null,communityTeams:source?.teams??[],score}];
 
     }).sort((a,b)=>b.score-a.score||b.next.weight-a.next.weight||a.character.localeCompare(b.character));
+
+}
+
+export function abilityLongTermGoals(rows:AbilityGuideRow[],priorities:Record<string,{priority:number;modes?:string[]}>,community:Record<string,CommunityPriority>)
+{
+
+    return rows.filter(row=>row.owned&&row.reviewed).flatMap(row=>
+    {
+
+        const options=[{ability:"Active",name:formatAbilityName(row.activeId),target:row.activeTargetLevel,weight:abilityWeight[row.activePriority]??1},{ability:"Passive",name:formatAbilityName(row.passiveId),target:row.passiveTargetLevel,weight:abilityWeight[row.passivePriority]??1}].filter(option=>option.target>row.xpLevel);
+        if(!options.length)return[];
+        const next=options.sort((a,b)=>b.weight-a.weight||b.target-a.target)[0]!;const source=community[row.character];const score=(source?.score??0)*20+(priorities[row.character]?.priority??0)+next.weight*3;
+        return[{...row,next,communityScore:source?.score??null,communityTeams:source?.teams??[],score,xpGap:next.target-row.xpLevel}];
+
+    }).sort((a,b)=>b.score-a.score||b.xpGap-a.xpGap||a.character.localeCompare(b.character));
 
 }
 
@@ -72,7 +87,7 @@ export function abilityGuideRows(catalog: CatalogCharacter[], roster: RosterUnit
             owned: roster === null ? null : !!unit,
             activeId: character.activeAbilityId ?? unit?.abilities[0]?.id ?? "Unknown ability",
             passiveId: character.passiveAbilityIds ?? unit?.abilities[1]?.id ?? "Unknown ability",
-            activeLevel, passiveLevel,
+            activeLevel, passiveLevel,xpLevel:unit?.xpLevel??0,
             activeTargetLevel: targetLevel(g?.active.practical ?? "", 35),
             passiveTargetLevel: targetLevel(g?.passive.practical ?? "", 35),
             activeTo17: activeLevel !== null && activeLevel > 0 && activeLevel < 17,
