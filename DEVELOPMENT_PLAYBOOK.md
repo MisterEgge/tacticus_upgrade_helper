@@ -46,6 +46,16 @@ Do not ask for routine approval. Ask only when blocked by missing access, an irr
 - Preserve responsive behavior and use accessible controls (`button`, `label`, `aria-expanded`, useful names for icon buttons).
 - Browser-exercise meaningful UI changes. A production build does not prove an interaction works.
 
+### Team planners: source fidelity and usable assignments
+
+- A partial team pattern (for example, a three-character core plus separate flex usage) is not an actual five-character team. Never fill its remaining slots by faction, screen order, or highest individual flex usage and present the result as source-backed.
+- Keep three-person core evidence and exact five-person lineup evidence separate. Cross-reference them before recommending a finished team; show the matched five-person record, its observed use count, and its win/defense result.
+- Rank finished teams from the full-lineup record, not from faction identity or the core's popularity alone. If the recorded five is weak, use a better supported recorded lineup—or label the core as needing more evidence.
+- When the product goal is to field multiple teams, enforce the real constraint: each selected lineup must be distinct and no character may appear in more than one active team. A duplicate warning is not an acceptable substitute for preventing invalid selections.
+- Default team slots must be computed as a maximum-quality non-overlapping set, not simply the first N candidates. Dropdown choices that conflict with already selected teams must be unavailable.
+- Do not display unowned characters as active upgrade work. If a source lineup cannot be fielded from the account roster, exclude it from the current assignment and keep it only as a clearly labelled future/reference record.
+- Treat a user correction about a source or lineup as a data-model problem first. Re-read the supplied source, repair the extraction/selection rule, add a regression test, and only then adjust the UI.
+
 ## Git and merge discipline
 
 - Start with `git status`, current branch, and recent history.
@@ -98,6 +108,7 @@ If any command fails, investigate and fix it before committing. A partial gate i
 - [ ] The implementation matches the underlying goal, not just one example.
 - [ ] All displayed facts have supporting evidence.
 - [ ] Existing visual and interaction patterns were reused where applicable.
+- [ ] Multi-team assignments are source-backed, fully fieldable, and contain no duplicate characters.
 - [ ] Full validation passed after the final edit.
 - [ ] Regression coverage exists for changed rules or fixed bugs.
 - [ ] Only task-related files are staged.
