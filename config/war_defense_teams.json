@@ -12,12 +12,24 @@
 {"name":"Thousand Sons Screen","core":["Abraxas","Toth","Yazaghor"],"flex":[{"name":"Archimatos","used":166},{"name":"Ahriman","used":135},{"name":"Thaumachus","used":118},{"name":"Eldryon","used":56},{"name":"Haarken","used":48},{"name":"Typhus","used":31}],"used":450,"wins":373,"defense":82.9,"score":220},
 {"name":"Black Templar Hold","core":["Burchard","Thoread","Godswyl"],"flex":[{"name":"Jaeger","used":288},{"name":"Helbrecht","used":137},{"name":"Isabella","used":100},{"name":"Incisus","used":68},{"name":"Bellator","used":58},{"name":"Sibyll","used":45}],"used":624,"wins":483,"defense":77.4,"score":216.4}
 ],"validatedFullLineups":[
-{"name":"Genestealer Ambush · Xybia/Patermine","members":["Hollan","Judh","Xybia","The Patermine","Isaak"],"used":9317,"wins":6168,"defense":66.2,"score":858.9},
-{"name":"Ork Pressure · full Orks","members":["Gibbascrapz","Snappawrecka","Tanksmasha","Snotflogga","Gulgortz"],"used":5606,"wins":4025,"defense":71.8,"score":924.5},
-{"name":"Necron Machine Wall · full Necrons","members":["Imospekh","Anuphet","Thutmose","Aleph-Null","Makhotep"],"used":3224,"wins":2391,"defense":74.2,"score":974.3},
-{"name":"Forge Network · Aleph/Re'vas","members":["Actus","Tan Gi'da","Exitor-Rho","Aleph-Null","Re'vas"],"used":2440,"wins":1994,"defense":81.7,"score":1123.3},
-{"name":"Genestealer Ambush · Patermine/Winged Prime","members":["Hollan","Judh","The Patermine","Isaak","Winged Prime"],"used":2197,"wins":1574,"defense":71.6,"score":953.2},
-{"name":"Death Guard · Rotbone/Typhus/Sho'syl","members":["Corrodius","Maladus","Nauseous","Typhus","Sho'syl"],"used":2984,"wins":2004,"defense":67.2,"score":844.2},
-{"name":"Blood Angels Sustain · full","members":["Dante","Lucien","Mataneo","Mephiston","Nicodemus"],"used":1716,"wins":1310,"defense":76.3,"score":999.3},
-{"name":"Forge Network · Vitruvius/Sho'syl","members":["Vitruvius","Actus","Tan Gi'da","Exitor-Rho","Sho'syl"],"used":949,"wins":834,"defense":87.9,"score":1266.8}
+{"name":"Hollan / Judh / Xybia / Patermine / Isaak","members":["Hollan","Judh","Xybia","The Patermine","Isaak"],"used":9317,"wins":6168,"defense":66.2,"score":858.9},
+{"name":"Gibbascrapz / Snappawrecka / Tanksmasha / Snotflogga / Gulgortz","members":["Gibbascrapz","Snappawrecka","Tanksmasha","Snotflogga","Gulgortz"],"used":5606,"wins":4025,"defense":71.8,"score":924.5},
+{"name":"Celestine / Mephiston / Judh / Isaak / Re'vas","members":["Celestine","Mephiston","Judh","Isaak","Re'vas"],"used":3307,"wins":2316,"defense":70,"score":906.8},
+{"name":"Imospekh / Anuphet / Thutmose / Aleph-Null / Makhotep","members":["Imospekh","Anuphet","Thutmose","Aleph-Null","Makhotep"],"used":3224,"wins":2391,"defense":74.2,"score":974.3},
+{"name":"Corrodius / Maladus / Nauseous / Typhus / Sho'syl","members":["Corrodius","Maladus","Nauseous","Typhus","Sho'syl"],"used":2984,"wins":2004,"defense":67.2,"score":844.2},
+{"name":"Actus / Tan Gi'da / Exitor-Rho / Aleph-Null / Re'vas","members":["Actus","Tan Gi'da","Exitor-Rho","Aleph-Null","Re'vas"],"used":2440,"wins":1994,"defense":81.7,"score":1123.3},
+{"name":"Hollan / Judh / Patermine / Isaak / Winged Prime","members":["Hollan","Judh","The Patermine","Isaak","Winged Prime"],"used":2197,"wins":1574,"defense":71.6,"score":953.2},
+{"name":"Maladus / Nauseous / Typhus / Sho'syl / Toth","members":["Maladus","Nauseous","Typhus","Sho'syl","Toth"],"used":1831,"wins":1254,"defense":68.5,"score":884.5},
+{"name":"Corrodius / Maladus / Pestillian / Nauseous / Typhus","members":["Corrodius","Maladus","Pestillian","Nauseous","Typhus"],"used":1744,"wins":1136,"defense":65.1,"score":796.9},
+{"name":"Dante / Lucien / Mataneo / Mephiston / Nicodemus","members":["Dante","Lucien","Mataneo","Mephiston","Nicodemus"],"used":1716,"wins":1310,"defense":76.3,"score":999.3},
+{"name":"Snotflogga / Gulgortz / Aun'Shi / Re'vas / Sho'syl","members":["Snotflogga","Gulgortz","Aun'Shi","Re'vas","Sho'syl"],"used":1296,"wins":1001,"defense":77.2,"score":1035.5},
+{"name":"Hollan / Judh / Xybia / Isaak / Winged Prime","members":["Hollan","Judh","Xybia","Isaak","Winged Prime"],"used":1034,"wins":709,"defense":68.6,"score":902.7},
+{"name":"Actus / Tan Gi'da / Aleph-Null / Gulgortz / Re'vas","members":["Actus","Tan Gi'da","Aleph-Null","Gulgortz","Re'vas"],"used":1028,"wins":787,"defense":76.6,"score":1027},
+{"name":"Actus / Tan Gi'da / Exitor-Rho / Re'vas / Sho'syl","members":["Actus","Tan Gi'da","Exitor-Rho","Re'vas","Sho'syl"],"used":995,"wins":787,"defense":79.1,"score":1065},
+{"name":"Abaddon / Corrodius / Maladus / Nauseous / Sho'syl","members":["Abaddon","Corrodius","Maladus","Nauseous","Sho'syl"],"used":956,"wins":748,"defense":78.2,"score":1051.3},
+{"name":"Vitruvius / Actus / Tan Gi'da / Exitor-Rho / Sho'syl","members":["Vitruvius","Actus","Tan Gi'da","Exitor-Rho","Sho'syl"],"used":949,"wins":834,"defense":87.9,"score":1266.8},
+{"name":"Corrodius / Maladus / Nauseous / Typhus / Toth","members":["Corrodius","Maladus","Nauseous","Typhus","Toth"],"used":934,"wins":602,"defense":64.5,"score":796.7},
+{"name":"Haarken / Archimatos / Angrax / Maladus / Nauseous","members":["Haarken","Archimatos","Angrax","Maladus","Nauseous"],"used":920,"wins":672,"defense":73,"score":942.9},
+{"name":"Volk / Maladus / Nauseous / Typhus / Toth","members":["Volk","Maladus","Nauseous","Typhus","Toth"],"used":859,"wins":563,"defense":65.5,"score":823.5},
+{"name":"Vitruvius / Actus / Tan Gi'da / Exitor-Rho / Gulgortz","members":["Vitruvius","Actus","Tan Gi'da","Exitor-Rho","Gulgortz"],"used":819,"wins":703,"defense":85.8,"score":1207.3}
 ]}
