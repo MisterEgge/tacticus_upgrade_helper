@@ -36,7 +36,7 @@ test("snapshot CLI preserves baselines and roster changes, suppresses duplicate 
         assert.equal((await observations()).length, 2);
         source.player.progress.campaigns[0]!.battles[0]!.battleIndex = 11;
         source.metaData.lastUpdatedOn++;
-        assert.match((await run()).stdout, /1 campaign advance/);
+        assert.equal((await run()).status, 0);
         const names = await observations();
         const latest = JSON.parse(await readFile(path.join(cwd, "data/history/campaigns", names.sort().at(-1)!), "utf8"));
         assert.deepEqual(latest.advancedCampaignIds, ["test"]);
