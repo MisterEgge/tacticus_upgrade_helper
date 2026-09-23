@@ -13,7 +13,7 @@ let server;
 try
 {
 
-    for (const name of ['.next', 'node_modules', 'public', 'data', 'config']) await symlink(path.join(root, name), path.join(cwd, name));
+    for (const name of ['.next', 'node_modules', 'public', 'data', 'config', 'next.config.ts']) await symlink(path.join(root, name), path.join(cwd, name));
     await writeFile(path.join(cwd, 'package.json'), '{"type":"module"}');
     await mkdir(path.join(cwd, 'output'));
     server = spawn(process.execPath, [path.join(root, 'node_modules/next/dist/bin/next'), 'start', cwd, '--hostname', '127.0.0.1', '--port', '3197'], { cwd, stdio: ['ignore', 'pipe', 'pipe'] });
