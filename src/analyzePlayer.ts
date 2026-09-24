@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import { allocateEquipment } from "./domain/equipment";
 import { campaignProgress } from "./domain/campaigns";
+import {latestRaidPowerByUnit,type RaidPowerEntry}from "./domain/raidPower";
 
 type Ability = {
     id: string;
@@ -40,6 +41,7 @@ type PlayerResponse = {
         details: {
             name: string;
             powerLevel: number;
+            userId?: string;
         };
         units: Unit[];
         progress?: { campaigns?: Array<{ id:string; name:string; type:"Standard"|"Mirror"|"Elite"|"EliteMirror"; battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number;stars?:number;medals?:number;score?:number;completed?:boolean}> }> };
@@ -54,6 +56,8 @@ type PlayerResponse = {
         };
     };
 };
+
+type GuildRaidResponse={entries:RaidPowerEntry[]};
 
 type AbilityTarget = {
     active: string;
@@ -120,6 +124,7 @@ async function main()
 {
 
     const playerResponse = await readJson<PlayerResponse>("data/player.json");
+    const raidResponse=await readJson<GuildRaidResponse>("data/guild-raid.json").catch(()=>({entries:[]}));
     const priorities = await readJson<Record<string, CharacterPriority>>("config/character_priorities.json");
     const targets = await readJson<Record<string, AbilityTarget>>("config/ability_targets.json");
     const compatibility = await readJson<EquipmentCompatibility>("config/equipment_compatibility.json");
@@ -127,6 +132,7 @@ async function main()
     const equipmentNames = await readJson<Record<string, string>>("config/equipment_names.json");
 
     const units = playerResponse.player.units;
+    const raidPower=latestRaidPowerByUnit(raidResponse.entries,playerResponse.player.details.userId);
 
     const abilityQueue: AbilityQueueRow[] = units
         .filter((unit) => unit.abilities.length >= 2)
@@ -193,6 +199,7 @@ async function main()
             rank: unit.rank,
             upgrades: unit.upgrades,
             xpLevel: unit.xpLevel,
+            ...(raidPower.has(unit.id)?{power:raidPower.get(unit.id)!}:{}),
             progressionIndex: unit.progressionIndex,
             shards: unit.shards ?? 0,
             mythicShards: unit.mythicShards ?? 0,

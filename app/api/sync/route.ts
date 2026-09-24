@@ -19,6 +19,7 @@ async function refreshAccount(): Promise<void>
 {
 
     await runScript("src/fetchPlayer.ts");
+    await runScript("src/fetchGuildData.ts");
     await runScript("src/snapshotCampaignProgress.ts");
     await runScript("src/analyzePlayer.ts");
 

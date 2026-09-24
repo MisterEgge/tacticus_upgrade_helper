@@ -29,8 +29,9 @@ th { color:#8794a7; font-size:11px; letter-spacing:.1em; text-transform:uppercas
 .viewLink { color:#edf1f7; text-decoration:none; font-weight:700; font-size:13px; }
 .viewLink:hover { text-decoration:underline; }
 .cards.compact { grid-template-columns:repeat(3,1fr); }
+.cards.compact.equipmentCards { grid-template-columns:repeat(4,1fr); }
 .unknown { color:#d6a4ff; border-color:#684783; background:#26182f; }
-@media(max-width:800px){.cards.compact{grid-template-columns:1fr}.nav{margin-bottom:28px}}
+@media(max-width:800px){.cards.compact,.cards.compact.equipmentCards{grid-template-columns:1fr}.nav{margin-bottom:28px}}
 
 .characterCell { display:flex; align-items:center; gap:10px; min-width:150px; }
 .portrait { width:42px; height:42px; border-radius:10px; object-fit:cover; object-position:top center; background:#1b2330; border:1px solid #303b4b; }

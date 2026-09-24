@@ -10,10 +10,7 @@ node_modules/
 next-env.d.ts
 *.tsbuildinfo
 
-# Tacticus player/account exports
-data/player*.json
-
-# Generated reports
+# Generated spreadsheet reports
 output/*.xlsx
 
 # Python
@@ -23,7 +20,3 @@ __pycache__/
 
 # OS
 .DS_Store
-output/
-
-# Account-specific progression history
-data/history/campaigns/

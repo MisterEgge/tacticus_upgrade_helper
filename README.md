@@ -23,7 +23,7 @@ python src/build_report.py data/player.json
 
 ## Data model
 
-`player.json` is **account state**, not recommendation data. It is intentionally gitignored.
+`player.json`, Guild data, and generated reports are account state. This is a personal-use repository, so they may be committed to keep the site portable and current. The API key itself remains in `.env` and is never committed.
 
 Maintained recommendation data lives under `config/`:
 - `character_priorities.json` — account/value weighting and notes.
@@ -40,9 +40,9 @@ This separation lets a new player export regenerate the report without rewriting
 - Legendary equipment is allocated to the highest-value compatible character, not blindly to any under-rarity slot.
 - Scarce inventory is never counted twice.
 
-## Safety
+## Account sync
 
-Do not commit real `player.json` exports. They are excluded by `.gitignore`.
+`npm run refresh` fetches Player, Guild, and Guild Raid data. Guild Raid hero details provide the latest observed per-character raid power when the Player API response supplies the account user ID.
 
 ## Dashboard development
 

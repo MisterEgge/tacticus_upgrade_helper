@@ -4,9 +4,10 @@
   "description": "Account-specific Tacticus upgrade analysis using the official player API.",
   "scripts": {
     "fetch": "tsx src/fetchPlayer.ts",
+    "fetch:guild": "tsx src/fetchGuildData.ts",
     "discover": "tsx src/discover.ts",
     "analyze": "tsx src/analyzePlayer.ts",
-    "refresh": "npm run fetch && npm run snapshot:campaigns && npm run analyze",
+    "refresh": "npm run fetch && npm run fetch:guild && npm run snapshot:campaigns && npm run analyze",
     "typecheck": "next typegen && tsc --noEmit",
     "dev": "next dev",
     "build": "next build",
@@ -33,9 +34,9 @@
   },
   "devDependencies": {
     "@types/node": "^26.1.0",
-    "tsx": "^4.23.0",
-    "typescript": "^6.0.3",
     "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0"
+    "@types/react-dom": "^19.0.0",
+    "tsx": "^4.23.0",
+    "typescript": "^6.0.3"
   }
 }
