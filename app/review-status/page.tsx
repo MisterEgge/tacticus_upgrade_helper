@@ -5,6 +5,7 @@ import { getReport } from "../lib/report";
 import { readFile } from "node:fs/promises";
 import { formatAbilityName } from "../../src/domain/abilities";
 import { abilityResearchRows, hasCharacterSpecificAbilityGuidance } from "../../src/domain/abilityReview";
+import { formatAbilityTarget } from "../../src/domain/targetDisplay";
 
 type PlanningEntry = { active:number; passive:number; note:string; source?:string };
 
@@ -49,8 +50,8 @@ export default async function ReviewStatus()
                     const evidence = sources[row.name] as Array<{url?:string}>|undefined;
                     return <tr key={row.id}>
                         <td><CharacterName name={row.name} id={row.id}/></td>
-                        <td>{formatAbilityName(row.active)}<small>{row.activeLevel ?? "UNKNOWN"} → {row.activeTarget ?? reviewedTarget?.active?.practical ?? "RESEARCHING"}</small></td>
-                        <td>{formatAbilityName(row.passive)}<small>{row.passiveLevel ?? "UNKNOWN"} → {row.passiveTarget ?? reviewedTarget?.passive?.practical ?? "RESEARCHING"}</small></td>
+                        <td>{formatAbilityName(row.active)}<small>{formatAbilityTarget(row.activeLevel,row.activeTarget ?? reviewedTarget?.active?.practical)}</small></td>
+                        <td>{formatAbilityName(row.passive)}<small>{formatAbilityTarget(row.passiveLevel,row.passiveTarget ?? reviewedTarget?.passive?.practical)}</small></td>
                         <td>{entry?.note ?? ([...row.campaigns,...row.modes].join(" · ") || "Character-specific guidance")}{entry?.source ? <small><a href={entry.source} target="_blank" rel="noreferrer">Community discussion</a></small> : evidence?.[0]?.url ? <small><a href={evidence[0].url} target="_blank" rel="noreferrer">Breakpoint evidence</a></small> : null}</td>
                         <td className="below">{row.status}<small>{row.status === "Evidence needed" ? "Verify the existing breakpoint" : row.status === "Planning recommendation" ? "Editorial target; validate against community evidence" : "No recommendation recorded"}</small></td>
                     </tr>;
