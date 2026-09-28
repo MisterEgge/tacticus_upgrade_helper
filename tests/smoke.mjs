@@ -66,6 +66,7 @@ try
     assert.match(dashboard, /ACCOUNT OVERVIEW/);
     assert.match(dashboard, /Recommended next characters/);
     for (const route of ['/equipment', '/equipment-demand', '/abilities', '/characters', '/characters/necroSpyder', '/inventory']) await get(route);
+    assert.match(await get('/review-status'), /Every owned character/);
     assert.match(await get('/sources'), /Shops &amp; Sources/);
     assert.match(await get('/farming'), /Expected \/ battle/);
     const farming = await get('/farming?character=necroSpyder&target=3');
