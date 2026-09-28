@@ -2,15 +2,11 @@
 import { useMemo, useState } from "react";
 import CharacterName from "../components/CharacterName";
 import { badgeCostBetween, totalBadgeCosts, type BadgeRarity } from "../../src/domain/abilityCosts";
+import { formatAbilityTarget } from "../../src/domain/targetDisplay";
 
 type Row = { id:string; name:string; alliance:string; activeLevel:number|null; passiveLevel:number|null; activeTarget:number; passiveTarget:number; reviewed:boolean; recommended:boolean };
 const caps = [{level:17,label:"Uncommon · level 17"},{level:26,label:"Rare · level 26"},{level:35,label:"Epic · level 35"},{level:50,label:"Legendary · level 50"}];
 const rarities:BadgeRarity[] = ["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
-function levelPlan(current:number|null,target:number):string
-{
-    if(current===null)return `— → ${target}`;
-    return current>=target?`${current} · already met`:`${current} → ${target}`;
-}
 
 export default function AbilityBadgeBudget({rows}:{rows:Row[]})
 {
@@ -39,7 +35,7 @@ export default function AbilityBadgeBudget({rows}:{rows:Row[]})
                 <tbody>{group.members.map(row => {
                     const cost = totalBadgeCosts([badgeCostBetween(row.activeLevel,row.activeTarget),badgeCostBetween(row.passiveLevel,row.passiveTarget)]);
                     return <tr key={row.id}><td><CharacterName name={row.name} id={row.id}/><small>{row.reviewed ? "Character-specific community guidance" : row.recommended ? "Planning recommendation" : "Provisional baseline · research pending"}</small></td>
-                        <td>{levelPlan(row.activeLevel,row.activeTarget)}</td><td>{levelPlan(row.passiveLevel,row.passiveTarget)}</td>
+                        <td>{formatAbilityTarget(row.activeLevel,row.activeTarget)}</td><td>{formatAbilityTarget(row.passiveLevel,row.passiveTarget)}</td>
                         <td>{rarities.filter(rarity => (cost[rarity] ?? 0) > 0).map(rarity => <small key={rarity}>{cost[rarity]} {rarity}</small>)}</td></tr>;
                 })}</tbody>
             </table></div></div> : null}
