@@ -73,7 +73,7 @@ try
         assert.match(html, /class="accountBar"/);
         assert.match(html, /SYNTHETIC TEST FIXTURE/);
         assert.match(html, /LEVEL<\/small><strong>52/);
-        assert.match(html, new RegExp(`CHARACTERS UNLOCKED<\\/small><strong>1\\/${catalog.characters.length}`));
+        assert.match(html, new RegExp(`UNLOCKED UNITS<\\/small><strong>2<\\/strong><span>1\\/${catalog.characters.length} characters · 1 machines\\/other`));
         assert.match(html, /MAIN RAID TEAM/);
         assert.match(html, /Sync Account/);
         assert.match(html, /Last synced:/);
