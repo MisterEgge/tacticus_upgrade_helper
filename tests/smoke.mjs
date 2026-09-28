@@ -1,7 +1,7 @@
 // Production HTTP smoke test. Fixtures live only in a temporary directory;
 // never overwrite the user's player export, report, or history.
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, symlink, writeFile, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, symlink, writeFile, rm, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
@@ -63,6 +63,7 @@ try
     assert.match(campaigns, /completed through/);
     assert.doesNotMatch(campaigns, /Tyranids Elite/);
     const dashboard = await get('/');
+    const catalog = JSON.parse(await readFile(path.join(root, 'data/character_catalog.json'), 'utf8'));
     assert.match(dashboard, /ACCOUNT OVERVIEW/);
     assert.match(dashboard, /Recommended next characters/);
     for (const route of ['/', '/equipment', '/equipment-demand', '/abilities', '/characters', '/characters/necroSpyder', '/inventory', '/guild-raid', '/war-defense'])
@@ -72,7 +73,7 @@ try
         assert.match(html, /class="accountBar"/);
         assert.match(html, /SYNTHETIC TEST FIXTURE/);
         assert.match(html, /LEVEL<\/small><strong>52/);
-        assert.match(html, /CHARACTERS UNLOCKED<\/small><strong>2/);
+        assert.match(html, new RegExp(`CHARACTERS UNLOCKED<\\/small><strong>1\\/${catalog.characters.length}`));
         assert.match(html, /MAIN RAID TEAM/);
         assert.match(html, /Sync Account/);
         assert.match(html, /Last synced:/);
