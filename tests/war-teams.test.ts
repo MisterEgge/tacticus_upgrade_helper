@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { uniqueWarTeamIndexes } from "../src/domain/warTeams";
+import { uniqueWarTeamIndexes, reflowWarTeamIndexes, selectableWarTeamIndexes } from "../src/domain/warTeams";
 
 test("War defaults choose five distinct teams instead of the five first options", () =>
 {
@@ -13,4 +13,16 @@ test("War defaults choose five distinct teams instead of the five first options"
         { used: 50, members: [{ name: "J" }, { name: "K" }] }
     ];
     assert.deepEqual(uniqueWarTeamIndexes(teams, 5), [0, 2, 3, 4, 5]);
+});
+
+test("choosing a later War slot keeps the chosen team and all slots distinct",()=>{
+    const teams=[
+        {used:100,members:[{name:"A"}]},
+        {used:90,members:[{name:"B"}]},
+        {used:80,members:[{name:"C"}]},
+        {used:70,members:[{name:"A"},{name:"B"}]}
+    ];
+    assert.deepEqual(reflowWarTeamIndexes(teams,2,1,3),[0,2,1]);
+    assert.equal(reflowWarTeamIndexes(teams,2,3,3),null);
+    assert.deepEqual([...selectableWarTeamIndexes(teams,3)],[0,1,2]);
 });
