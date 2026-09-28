@@ -7,6 +7,7 @@ import { getCampaignEvidence, getCampaignTargets, getCharacterCatalog } from "..
 import { abilityGap, campaignIsComplete, campaignRankGap, campaignRecommendationPriority, finalCampaignBattle, requiredCampaignName, type CampaignBattleDefinition } from "../../src/domain/campaigns";
 import { readFile } from "node:fs/promises";
 import { rankName } from "../../src/domain/ranks";
+import { formatAbilityTarget, abilityTargetMet } from "../../src/domain/targetDisplay";
 
 export default async function Campaigns()
 {
@@ -40,11 +41,12 @@ export default async function Campaigns()
 
                         const unit = roster.get(character.id);
                         const target = campaign.characters[character.name];
+                        const rankMet = Boolean(unit && (campaignComplete || campaignRankGap(unit.rank,target?.rank)===0));
                         return <tr key={character.id}>
                             <td><CharacterName name={character.name} id={character.id}/></td>
                             <td><strong>{unit ? rankName(unit.rank) : "Not in account roster"}</strong></td>
-                            <td><strong>{campaignComplete && unit ? rankName(unit.rank) : target?.rank ?? "RESEARCHING"}</strong>{campaignComplete ? <small>Campaign complete · current investment is sufficient for this account</small> : target?.rank ? <small>{target.confidence ?? "Unknown"} confidence · {unit ? `${campaignRankGap(unit.rank, target.rank) ?? "?"} rank step(s) remaining` : "current rank unavailable"}</small> : null}</td>
-                            <td><strong>A {unit?.abilities[0]?.level ?? "—"} → {campaignComplete ? unit?.abilities[0]?.level ?? "—" : target?.active ?? "—"}</strong><small>P {unit?.abilities[1]?.level ?? "—"} → {campaignComplete ? unit?.abilities[1]?.level ?? "—" : target?.passive ?? "—"}{!campaignComplete && target?.passive && unit ? ` · ${abilityGap(unit.abilities[1]?.level, target.passive) ?? "?"} passive levels remaining` : ""}</small></td>
+                            <td><strong>{rankMet ? "Target met" : target?.rank ?? "RESEARCHING"}</strong>{campaignComplete ? <small>Campaign complete · current investment is sufficient for this account</small> : !rankMet && target?.rank ? <small>{target.confidence ?? "Unknown"} confidence · {unit ? `${campaignRankGap(unit.rank, target.rank) ?? "?"} rank step(s) remaining` : "current rank unavailable"}</small> : null}</td>
+                            <td><strong>A {formatAbilityTarget(unit?.abilities[0]?.level,campaignComplete && unit ? unit.abilities[0]?.level : target?.active)}</strong><small>P {formatAbilityTarget(unit?.abilities[1]?.level,campaignComplete && unit ? unit.abilities[1]?.level : target?.passive)}{!campaignComplete && target?.passive && unit && !abilityTargetMet(unit.abilities[1]?.level,target.passive) ? ` · ${abilityGap(unit.abilities[1]?.level, target.passive) ?? "?"} passive levels remaining` : ""}</small></td>
                             <td><strong>{target?.role ?? "Unreviewed"}</strong><small>{target?.note ?? "Campaign-specific Elite 3★ research pending."}</small>{target?.evidence?.length ? <small>Evidence: {target.evidence.map((id, index) => { const source = evidence.sources[id]; return source ? <span key={id}>{index ? " · " : ""}<a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></span> : null; })}</small> : null}</td>
                         </tr>;
 
