@@ -46,7 +46,7 @@ try
     assert.match(await get('/abilities'), /npm run refresh/);
     const report = {
         generatedAt: 'SYNTHETIC TEST FIXTURE — NOT ACCOUNT DATA',
-        source: { player: 'SYNTHETIC TEST FIXTURE', powerLevel: 0 },
+        source: { player: 'SYNTHETIC TEST FIXTURE', powerLevel: 52 },
         summary: { units: 1, charactersWithAbilitiesBelow17: 0, individualAbilityUpgradesTo17: 0, legendaryUnderTierSlots: 0 },
         roster: [{ id: 'necroSpyder', name: 'Aleph-Null', faction: 'Necrons', grandAlliance: 'Xenos', rank: 0, upgrades: [0], rarity: 'Common', progressionIndex: 0, xpLevel: 1, shards: 0, mythicShards: 0, abilities: [{ id: 'a', level: 1 }, { id: 'p', level: 1 }], items: [] }],
         abilityQueue: [], unequippedInventory: [], upgradeInventory: [],
@@ -65,7 +65,19 @@ try
     const dashboard = await get('/');
     assert.match(dashboard, /ACCOUNT OVERVIEW/);
     assert.match(dashboard, /Recommended next characters/);
-    for (const route of ['/equipment', '/equipment-demand', '/abilities', '/characters', '/characters/necroSpyder', '/inventory']) await get(route);
+    for (const route of ['/', '/equipment', '/equipment-demand', '/abilities', '/characters', '/characters/necroSpyder', '/inventory', '/guild-raid', '/war-defense'])
+    {
+
+        const html = await get(route);
+        assert.match(html, /class="accountBar"/);
+        assert.match(html, /SYNTHETIC TEST FIXTURE/);
+        assert.match(html, /LEVEL<\/small><strong>52/);
+        assert.match(html, /CHARACTERS UNLOCKED<\/small><strong>2/);
+        assert.match(html, /MAIN RAID TEAM/);
+        assert.match(html, /Sync Account/);
+        assert.match(html, /Last synced:/);
+
+    }
     assert.match(await get('/review-status'), /Every owned character/);
     assert.match(await get('/sources'), /Shops &amp; Sources/);
     assert.match(await get('/farming'), /Expected \/ battle/);
