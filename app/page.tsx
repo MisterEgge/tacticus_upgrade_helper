@@ -4,6 +4,7 @@ import Nav from "./components/Nav";
 import { getReport, unitFor } from "./lib/report";
 import SyncAccountButton from "./components/SyncAccountButton";
 import { dashboardFocus } from "../src/domain/dashboard";
+import { formatAbilityTarget } from "../src/domain/targetDisplay";
 
 function Card({ label, value, detail, href }: { label: string; value: number; detail: string; href: string })
 {
@@ -40,7 +41,7 @@ export default async function Home()
                     const unit = unitFor(report, row.character);
                     return <tr key={row.character}><td><CharacterName name={row.character} id={unit?.id} icon={unit?.icon}/></td><td>
                         {row.equipmentSlots ? <strong>{row.equipmentSlots} gear slot{row.equipmentSlots === 1 ? "" : "s"}</strong> : null}
-                        {row.abilitySteps.length ? <small>{row.abilitySteps.map(step => `${step.name} ${step.level} → 17`).join(" · ")}</small> : null}
+                        {row.abilitySteps.length ? <small>{row.abilitySteps.map(step => `${step.name} ${formatAbilityTarget(step.level,17)}`).join(" · ")}</small> : null}
                     </td><td><Link className="viewLink" href={unit ? `/characters/${encodeURIComponent(unit.id)}` : "/characters"}>Open character →</Link></td></tr>;
 
                 })}</tbody></table></div> : <div className="empty">No current gear or ability focus was found in this report.</div>}
