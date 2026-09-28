@@ -2,7 +2,6 @@ import CharacterName from "./components/CharacterName";
 import Link from "next/link";
 import Nav from "./components/Nav";
 import { getReport, unitFor } from "./lib/report";
-import SyncAccountButton from "./components/SyncAccountButton";
 import { dashboardFocus } from "../src/domain/dashboard";
 import { formatAbilityTarget } from "../src/domain/targetDisplay";
 
@@ -27,7 +26,7 @@ export default async function Home()
 
     return <main>
         <Nav/>
-        <header><div><p className="eyebrow">ACCOUNT OVERVIEW</p><h1>{report.source.player}</h1><SyncAccountButton lastSynced={report.generatedAt}/></div><div className="power">Power <strong>{report.source.powerLevel}</strong></div></header>
+        <header><div><p className="eyebrow">ACCOUNT OVERVIEW</p><h1>Dashboard</h1></div></header>
         <section className="cards overviewCards">
             <Card label="Roster" value={report.summary.units} detail="synced units" href="/characters"/>
             <Card label="Characters needing attention" value={focus.length} detail="need gear or ability attention" href="/characters"/>
