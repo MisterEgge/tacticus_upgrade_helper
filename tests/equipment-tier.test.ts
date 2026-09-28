@@ -1,11 +1,16 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {epicUpgradeItemId} from "../src/domain/equipmentTier";
+import {tierUpgradeItemId} from "../src/domain/equipmentTier";
 
-test("Epic option derives only from a known lower-rarity item in the same family",()=>{
-    assert.equal(epicUpgradeItemId("Rare","I_Defensive_R001"),"I_Defensive_E001");
-    assert.equal(epicUpgradeItemId("Uncommon","I_Crit_U011"),"I_Crit_E011");
-    assert.equal(epicUpgradeItemId("Epic","I_Defensive_E001"),null);
-    assert.equal(epicUpgradeItemId("Rare",undefined),null);
-    assert.equal(epicUpgradeItemId("Rare","unrecognized"),null);
+const catalog={I_Defensive_C001:{type:"I_Defensive",rarity:"Common"},I_Defensive_U001:{type:"I_Defensive",rarity:"Uncommon"},I_Defensive_R001:{type:"I_Defensive",rarity:"Rare"},I_Defensive_E001:{type:"I_Defensive",rarity:"Epic"},I_Defensive_L001:{type:"I_Defensive",rarity:"Legendary"}};
+
+test("target rarity derives only from a catalog-proven same-family item",()=>{
+    assert.equal(tierUpgradeItemId("Common","I_Defensive_C001","Uncommon",catalog),"I_Defensive_U001");
+    assert.equal(tierUpgradeItemId("Common","I_Defensive_C001","Rare",catalog),"I_Defensive_R001");
+    assert.equal(tierUpgradeItemId("Rare","I_Defensive_R001","Epic",catalog),"I_Defensive_E001");
+    assert.equal(tierUpgradeItemId("Epic","I_Defensive_E001","Legendary",catalog),"I_Defensive_L001");
+    assert.equal(tierUpgradeItemId("Epic","I_Defensive_E001","Rare",catalog),null);
+    assert.equal(tierUpgradeItemId("Rare",undefined,"Epic",catalog),null);
+    assert.equal(tierUpgradeItemId("Rare","unrecognized","Epic",catalog),null);
+    assert.equal(tierUpgradeItemId("Rare","I_Defensive_R001","Epic",{...catalog,I_Defensive_E001:{type:"I_Crit",rarity:"Epic"}}),null);
 });
