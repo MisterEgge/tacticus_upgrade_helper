@@ -1,4 +1,29 @@
 export type WarTeamCandidate = { members: Array<{ name: string }>; used: number };
+export type DefenseCore = { name:string; core:string[]; flex:Array<{name:string;used:number}>; used:number; wins:number; score:number; defense?:number };
+export type BuiltDefenseTeam = {name:string;members:string[];used:number;wins:number;score:number; evidence:"core-flex"};
+
+/** Walk the observed cores by win rate, reserving later cores before choosing flex units. */
+export function buildDistinctDefenseTeams(cores:DefenseCore[],owned:Set<string>,limit=10):BuiltDefenseTeam[]
+{
+    const ranked=[...cores].sort((a,b)=>b.wins/b.used-a.wins/a.used||b.used-a.used);
+    const committed=new Set<string>(),result:BuiltDefenseTeam[]=[];
+    for(let index=0;index<ranked.length&&result.length<limit;index++){
+        const team=ranked[index]!;
+        if(team.core.length!==3||new Set(team.core).size!==3||team.core.some(name=>!owned.has(name)||committed.has(name)))continue;
+        const futureCores=new Set(ranked.slice(index+1).filter(other=>other.core.every(name=>owned.has(name)&&!committed.has(name))).flatMap(other=>other.core));
+        const seenFlex=new Set<string>();
+        const flex=team.flex.filter(member=>{
+            if(!owned.has(member.name)||committed.has(member.name)||team.core.includes(member.name)||seenFlex.has(member.name))return false;
+            seenFlex.add(member.name);return true;
+        }).sort((a,b)=>b.used-a.used);
+        const available=[...flex.filter(member=>!futureCores.has(member.name)),...flex.filter(member=>futureCores.has(member.name))];
+        if(available.length<2)continue;
+        const members=[...team.core,...available.slice(0,2).map(member=>member.name)];
+        members.forEach(name=>committed.add(name));
+        result.push({name:members.join(" / "),members,used:team.used,wins:team.wins,score:team.score,evidence:"core-flex"});
+    }
+    return result;
+}
 const hasDistinctMembers=(team:WarTeamCandidate)=>new Set(team.members.map(member=>member.name)).size===team.members.length;
 
 export function distinctWarSlots(teams:WarTeamCandidate[],slots:number[]):boolean
