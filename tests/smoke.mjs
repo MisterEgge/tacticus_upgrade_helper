@@ -93,6 +93,7 @@ try
     const roadmap = await get('/guild-raid');
     assert.match(roadmap, /LAVISCUS BUILD ORDER/);
     assert.match(roadmap, /Checkpoint 1: Core to Gold I/);
+    assert.match(roadmap, /Do next · checkpoint/);
     assert.match(roadmap, /Biovore is a separate machine of war/);
     assert.match(await get('/review-status'), /Every owned character/);
     assert.match(await get('/sources'), /Shops &amp; Sources/);
