@@ -90,6 +90,10 @@ try
     assert.match(savedHtml, /MAIN RAID TEAM.*?Custodes.*?Magnus · Kariyan · Kharn · Trajann · Dante/s);
     const savedPlanner = await fetch('http://127.0.0.1:3197/guild-raid', { headers: { Cookie: cookie } });
     assert.match((await savedPlanner.text()).replace(/<!--.*?-->/gs, ''), /Custodes vs Magnus/);
+    const roadmap = await get('/guild-raid');
+    assert.match(roadmap, /LAVISCUS BUILD ORDER/);
+    assert.match(roadmap, /Checkpoint 1: Core to Gold I/);
+    assert.match(roadmap, /Biovore is a separate machine of war/);
     assert.match(await get('/review-status'), /Every owned character/);
     assert.match(await get('/sources'), /Shops &amp; Sources/);
     assert.match(await get('/farming'), /Expected \/ battle/);
