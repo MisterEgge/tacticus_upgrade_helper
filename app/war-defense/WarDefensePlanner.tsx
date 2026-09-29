@@ -5,12 +5,12 @@ import CharacterName from "../components/CharacterName";
 import { rankName } from "../../src/domain/ranks";
 import { warGearLabel } from "../../src/domain/warGear";
 import { uniqueWarTeamIndexes, reflowWarTeamIndexes, selectableWarTeamIndexes, restoreWarTeamIndexes } from "../../src/domain/warTeams";
+import { WAR_PLAN_STORAGE_KEY } from "../../src/domain/warBadgeTargets";
 
 type Member={id:string;name:string;icon:string|undefined;rank:number|null;activeLevel:number|null;passiveLevel:number|null;items:Array<{slotId:string;rarity?:string;level:number;name?:string}>};
 type Team={name:string;used:number;wins:number;members:Member[];fieldable:boolean;missing:string[]};
 type Target=keyof typeof targets;
 const targets={gold:{label:"Gold I · 35 / 35",rank:12,ability:35},silver:{label:"Silver I · 26 / 26",rank:9,ability:26}} as const;
-const storageKey="tacticus-war-plan-v1";
 
 export default function WarDefensePlanner({teams,offenseTeams}:{teams:Team[];offenseTeams:Team[]})
 {
@@ -23,7 +23,7 @@ export default function WarDefensePlanner({teams,offenseTeams}:{teams:Team[];off
  const [restored,setRestored]=useState(false);
  useEffect(()=>{
     try{
-        const saved=JSON.parse(window.localStorage.getItem(storageKey)??"null");
+        const saved=JSON.parse(window.localStorage.getItem(WAR_PLAN_STORAGE_KEY)??"null");
         if(saved&&typeof saved==="object"){
             setDefenseSlots(restoreWarTeamIndexes(defense,saved.defense,5));
             setOffenseSlots(restoreWarTeamIndexes(offense,saved.offense,10));
@@ -37,7 +37,7 @@ export default function WarDefensePlanner({teams,offenseTeams}:{teams:Team[];off
  },[]);
  useEffect(()=>{
     if(!restored)return;
-    try{window.localStorage.setItem(storageKey,JSON.stringify({defense:defenseSlots.map(index=>defense[index]!.name),offense:offenseSlots.map(index=>offense[index]!.name),offenseTiers,mode}));}catch{/* Planning still works if storage is blocked. */}
+    try{window.localStorage.setItem(WAR_PLAN_STORAGE_KEY,JSON.stringify({defense:defenseSlots.map(index=>defense[index]!.name),offense:offenseSlots.map(index=>offense[index]!.name),offenseTiers,mode}));}catch{/* Planning still works if storage is blocked. */}
  },[restored,defenseSlots,offenseSlots,offenseTiers,mode,defense,offense]);
  const defenseSelectable=selectableWarTeamIndexes(defense,defenseSlots.length);
  const offenseSelectable=selectableWarTeamIndexes(offense,offenseSlots.length);
