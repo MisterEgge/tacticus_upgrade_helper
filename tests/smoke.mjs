@@ -66,7 +66,10 @@ try
     const catalog = JSON.parse(await readFile(path.join(root, 'data/character_catalog.json'), 'utf8'));
     assert.match(dashboard, /ACCOUNT OVERVIEW/);
     assert.match(dashboard, /Recommended next characters/);
-    for (const route of ['/', '/equipment', '/equipment-demand', '/abilities', '/characters', '/characters/necroSpyder', '/inventory', '/guild-raid', '/war-defense'])
+    const ratings = await get('/ratings');
+    assert.match(ratings, new RegExp(`${catalog.characters.length}<strong> catalog characters`));
+    assert.match(ratings, /No tracked signal/);
+    for (const route of ['/', '/equipment', '/equipment-demand', '/abilities', '/ratings', '/characters', '/characters/necroSpyder', '/inventory', '/guild-raid', '/war-defense'])
     {
 
         const html = await get(route);
