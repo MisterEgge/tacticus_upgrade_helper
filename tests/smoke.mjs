@@ -116,6 +116,16 @@ try
     delete report.upgradeInventory;
     await writeFile(reportPath, JSON.stringify(report));
     assert.match(await get('/farming'), /Upgrade inventory unavailable/);
+    for (const name of ['Imospekh', 'Anuphet', 'Thutmose', 'Makhotep'])
+    {
+        const character = catalog.characters.find(row => row.name === name);
+        assert.ok(character);
+        report.roster.push({ ...report.roster[0], id: character.id, name });
+    }
+    await writeFile(reportPath, JSON.stringify(report));
+    const lineup = await get('/war-defense');
+    assert.match(lineup, /class="warTeamTitle"[^>]*>Imospekh \/ Anuphet \/ Thutmose \/ Aleph-Null \/ Makhotep/);
+    assert.match(lineup, /class="warTeamPortraits"[^>]*>.*?alt="Imospekh".*?alt="Makhotep"/s);
     console.log('PASS: production routes, report refresh, Mirror Elite planner, multi-rank farming, invalid goal and missing inventory states');
 
 }
