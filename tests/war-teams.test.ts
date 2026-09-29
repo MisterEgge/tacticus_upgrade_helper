@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { uniqueWarTeamIndexes, restoreWarTeamIndexes, warSlotChoices, chooseWarTeamForSlot, distinctWarSlots } from "../src/domain/warTeams";
+import { uniqueWarTeamIndexes, restoreWarTeamIndexes, warSlotChoices, chooseWarTeamForSlot, distinctWarSlots, buildDistinctDefenseTeams, type DefenseCore } from "../src/domain/warTeams";
 import {readFileSync} from "node:fs";
 
 test("War defaults choose five distinct teams instead of the five first options", () =>
@@ -41,6 +41,34 @@ test("actual sourced defense assignments use each character only once",()=>{
     const selected=uniqueWarTeamIndexes(teams,5).flatMap(index=>teams[index]!.members.map(member=>member.name));
     assert.equal(selected.length,25);
     assert.equal(new Set(selected).size,25);
+});
+
+test("owned defense cores yield ten separate five-character teams with no reused core or flex",()=>{
+    const source=JSON.parse(readFileSync("config/war_defense_teams.json","utf8")) as {teams:DefenseCore[]};
+    const report=JSON.parse(readFileSync("output/upgrade-report.json","utf8")) as {roster:Array<{name:string}>};
+    const teams=buildDistinctDefenseTeams(source.teams,new Set(report.roster.map(unit=>unit.name)));
+    const names=teams.flatMap(team=>team.members);
+    assert.equal(teams.length,10);
+    assert.equal(names.length,50);
+    assert.equal(new Set(names).size,50);
+    assert.ok(teams.every(team=>team.evidence==="core-flex"));
+    assert.ok(teams.every(team=>source.teams.some(core=>core.core.every(name=>team.members.includes(name)))));
+    const candidates=teams.map(team=>({...team,members:team.members.map(name=>({name}))}));
+    const slots=candidates.map((_,index)=>index);
+    assert.equal(warSlotChoices(candidates,slots,0).assigned.length,10);
+    const swapped=chooseWarTeamForSlot(candidates,slots,0,9)!;
+    assert.equal(swapped[0],9);
+    assert.equal(swapped[9],0);
+    assert.equal(distinctWarSlots(candidates,swapped),true);
+});
+
+test("defense skips incomplete cores and flex pools without consuming any members",()=>{
+    const cores:DefenseCore[]=[
+        {name:"missing",core:["A","B","unowned"],flex:[{name:"D",used:30},{name:"E",used:20}],used:100,wins:90,score:1},
+        {name:"short",core:["A","B","C"],flex:[{name:"D",used:30}],used:100,wins:80,score:1},
+        {name:"full",core:["A","B","C"],flex:[{name:"D",used:30},{name:"E",used:20}],used:100,wins:70,score:1}
+    ];
+    assert.deepEqual(buildDistinctDefenseTeams(cores,new Set(["A","B","C","D","E"])).map(team=>team.members),[["A","B","C","D","E"]]);
 });
 
 test("swapping a defense team into a Gold slot keeps all five assignments and their unique members",()=>{
