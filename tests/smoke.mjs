@@ -126,6 +126,25 @@ try
     const lineup = await get('/war-defense');
     assert.match(lineup, /class="warTeamTitle"[^>]*>Imospekh \/ Aleph-Null \/ Makhotep \/ Thutmose \/ Anuphet/);
     assert.match(lineup, /class="warTeamPortraits"[^>]*>.*?alt="Imospekh".*?alt="Makhotep"/s);
+    report.equipmentAllocation.equipNow=[{character:"Aleph-Null",characterId:"necroSpyder",slotId:"Slot1",currentItem:"Old test item",currentRarity:"Epic",currentLevel:5,accountPriority:90,recommendedItemId:"I_Crit_L001",recommendedItem:"Grand Combat Knife"}];
+    report.equipmentAllocation.buyWatch=[{character:"Makhotep",characterId:catalog.characters.find(character=>character.name==="Makhotep").id,slotId:"Slot1",currentItem:"Other test item",currentRarity:"Epic",currentLevel:4,accountPriority:80,recommendedItemId:"I_Crit_L001",recommendedItem:"Grand Combat Knife"}];
+    report.unequippedInventory=[{id:"I_Crit_L001",amount:1,level:1}];
+    await writeFile(reportPath,JSON.stringify(report));
+    const readyEquipment=await get('/equipment');
+    assert.match(readyEquipment,/aria-label="Equip now".*?<h2>Equip now.*?<td>.*?Aleph-Null.*?<\/td>.*?Grand Combat Knife.*?Old test item/s);
+    assert.doesNotMatch(readyEquipment,/>Slot[123]</);
+    assert.doesNotMatch(readyEquipment,/Recipients and focus|Character Upgrade Queue|total needed item options/);
+    assert.doesNotMatch(readyEquipment,/Inventory upgrade choices/);
+    report.unequippedInventory[0].amount=2;
+    await writeFile(reportPath,JSON.stringify(report));
+    assert.match(await get('/equipment'),/Inventory upgrade choices.*?Makhotep.*?Grand Combat Knife/s);
+    report.unequippedInventory[0].amount=1;
+    await writeFile(reportPath,JSON.stringify(report));
+    const shopEquipment=await get('/equipment');
+    assert.match(shopEquipment,/Where and when/);
+    assert.match(shopEquipment,/Makhotep.*?Grand Combat Knife.*?(Guild Shop|Crusade Shop|Rogue Trader)/s);
+    assert.match(shopEquipment,/UTC/);
+    assert.match(shopEquipment,/Random item pool · check stock/);
     console.log('PASS: production routes, report refresh, Mirror Elite planner, multi-rank farming, invalid goal and missing inventory states');
 
 }
