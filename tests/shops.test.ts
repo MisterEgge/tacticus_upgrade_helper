@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { currencyClass, isActionableOffer, offerEligibility, recordState, refreshesLoggedToday, scheduleLabel, scheduledOn, sourceMatch, sourcesForItem, validateRecord, type ShopCatalog, type ShopOffer, type ShopRecord } from "../src/domain/shops";
+import { currencyClass, isActionableOffer, offerEligibility, recordState, refreshesLoggedToday, scheduleLabel, scheduledOn, sourceMatch, sourcesForItem, equipmentOffersForItem, validateRecord, type ShopCatalog, type ShopOffer, type ShopRecord } from "../src/domain/shops";
 
 const offer = (itemId = "I_Test_L001"): ShopOffer => ({ id: "guild:1:1", slot: 1, itemId, quantity: 1, schedule: "0 0 0 ? * MON,WED *", cost: { currency: "guildCredits", amount: 100 }, maxPurchases: 1, conditions: {}, weight: null });
 const catalog: ShopCatalog = { schemaVersion: 1, reviewedAt: "2026-09-22T00:00:00.000Z", sourceCommit: "a".repeat(40), sourceKind: "community", equipment: { I_Test_L001: { name: "Test item", rarity: "Legendary", type: "I_Test" } }, shops: [{ id: "guild", name: "Guild Shop", coverage: "catalog", sourceUrl: "", notes: "", adRefresh: true, refreshLimit: 1, refreshCost: null, offers: [offer(), offer("itemsLegendary_I_Test")] }] };
@@ -18,6 +18,29 @@ test("shop sources distinguish exact items from random compatible pools", () =>
     assert.equal(sourceMatch("I_Test_L001", offer(), catalog.equipment), "exact");
     assert.equal(sourceMatch("I_Test_L001", offer("itemsLegendary_I_Test"), catalog.equipment), "pool");
     assert.equal(sourceMatch("I_Other_L001", offer("itemsLegendary_I_Test"), catalog.equipment), null);
+});
+
+test("equipment opportunities retain exact versus pool, weekday, price and ad refresh evidence",()=>{
+    const offers=equipmentOffersForItem("I_Test_L001",catalog,52);
+    assert.equal(offers.length,2);
+    assert.equal(offers[0]?.rotation,"Monday / Wednesday (UTC)");
+    assert.equal(offers[0]?.price,"100 Guild Credits");
+    assert.equal(offers[0]?.adRefresh,true);
+    assert.equal(offers[0]?.match,"exact");
+    assert.equal(offers[1]?.match,"pool");
+    assert.deepEqual(equipmentOffersForItem("unknown",catalog,52),[]);
+});
+
+test("equipment opportunities omit locked offers and mark unknown access and rotations",()=>{
+    const source:ShopCatalog={...catalog,shops:[{...catalog.shops[0]!,offers:[
+        {...offer(),conditions:{minPowerLevel:70}},
+        {...offer(),id:"unknown",conditions:{lockId:"season"},schedule:"unknown"},
+        {...offer(),id:"premium",cost:{currency:"gems",amount:50}}
+    ]}]};
+    const offers=equipmentOffersForItem("I_Test_L001",source,52);
+    assert.equal(offers.length,1);
+    assert.equal(offers[0]?.access,"unknown");
+    assert.equal(offers[0]?.rotation,"Unknown rotation");
 });
 
 test("premium and real-money offers never become actionable acquisition sources", () =>
