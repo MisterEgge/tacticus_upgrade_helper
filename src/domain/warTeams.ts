@@ -1,4 +1,5 @@
 export type WarTeamCandidate = { members: Array<{ name: string }>; used: number };
+const hasDistinctMembers=(team:WarTeamCandidate)=>new Set(team.members.map(member=>member.name)).size===team.members.length;
 
 /** Restore saved source team names only when every team is still owned and distinct. */
 export function restoreWarTeamIndexes<T extends WarTeamCandidate & {name:string}>(teams:T[],saved:unknown,count:number):number[]
@@ -6,7 +7,7 @@ export function restoreWarTeamIndexes<T extends WarTeamCandidate & {name:string}
     const defaults=uniqueWarTeamIndexes(teams,count);
     if(!Array.isArray(saved)||saved.length!==defaults.length||saved.some(name=>typeof name!=="string"))return defaults;
     const indexes=saved.map(name=>teams.findIndex(team=>team.name===name));
-    if(indexes.some(index=>index<0)||new Set(indexes).size!==indexes.length)return defaults;
+    if(indexes.some(index=>index<0)||new Set(indexes).size!==indexes.length||indexes.some(index=>!hasDistinctMembers(teams[index]!)))return defaults;
     const members=indexes.flatMap(index=>teams[index]!.members.map(member=>member.name));
     return new Set(members).size===members.length?indexes:defaults;
 }
@@ -22,7 +23,7 @@ export function uniqueWarTeamIndexes(teams: WarTeamCandidate[], count: number): 
         for (let index = start; index < teams.length; index++)
         {
             const team = teams[index]!;
-            if (team.members.some((member) => members.has(member.name))) continue;
+            if (!hasDistinctMembers(team) || team.members.some((member) => members.has(member.name))) continue;
             visit(index + 1, [...picks, index], new Set([...members, ...team.members.map((member) => member.name)]), used + team.used);
         }
     };
@@ -34,7 +35,7 @@ export function uniqueWarTeamIndexes(teams: WarTeamCandidate[], count: number): 
 export function reflowWarTeamIndexes(teams:WarTeamCandidate[],slot:number,choice:number,count:number):number[]|null
 {
     const chosen=teams[choice];
-    if(!chosen||slot<0||slot>=count||count<1)return null;
+    if(!chosen||!hasDistinctMembers(chosen)||slot<0||slot>=count||count<1)return null;
     const names=new Set(chosen.members.map(member=>member.name));
     const remainder=teams.map((team,index)=>({team,index})).filter(({team,index})=>index!==choice&&!team.members.some(member=>names.has(member.name)));
     const picks=uniqueWarTeamIndexes(remainder.map(row=>row.team),count-1).map(index=>remainder[index]!.index);
