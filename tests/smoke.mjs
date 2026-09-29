@@ -124,7 +124,7 @@ try
     }
     await writeFile(reportPath, JSON.stringify(report));
     const lineup = await get('/war-defense');
-    assert.match(lineup, /class="warTeamTitle"[^>]*>Imospekh \/ Anuphet \/ Thutmose \/ Aleph-Null \/ Makhotep/);
+    assert.match(lineup, /class="warTeamTitle"[^>]*>Imospekh \/ Aleph-Null \/ Makhotep \/ Thutmose \/ Anuphet/);
     assert.match(lineup, /class="warTeamPortraits"[^>]*>.*?alt="Imospekh".*?alt="Makhotep"/s);
     console.log('PASS: production routes, report refresh, Mirror Elite planner, multi-rank farming, invalid goal and missing inventory states');
 
