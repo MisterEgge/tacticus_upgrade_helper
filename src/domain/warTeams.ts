@@ -1,5 +1,16 @@
 export type WarTeamCandidate = { members: Array<{ name: string }>; used: number };
 
+/** Restore saved source team names only when every team is still owned and distinct. */
+export function restoreWarTeamIndexes<T extends WarTeamCandidate & {name:string}>(teams:T[],saved:unknown,count:number):number[]
+{
+    const defaults=uniqueWarTeamIndexes(teams,count);
+    if(!Array.isArray(saved)||saved.length!==defaults.length||saved.some(name=>typeof name!=="string"))return defaults;
+    const indexes=saved.map(name=>teams.findIndex(team=>team.name===name));
+    if(indexes.some(index=>index<0)||new Set(indexes).size!==indexes.length)return defaults;
+    const members=indexes.flatMap(index=>teams[index]!.members.map(member=>member.name));
+    return new Set(members).size===members.length?indexes:defaults;
+}
+
 /** Choose the highest-observed set of distinct teams; a character can appear once. */
 export function uniqueWarTeamIndexes(teams: WarTeamCandidate[], count: number): number[]
 {
