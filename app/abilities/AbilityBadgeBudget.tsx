@@ -6,6 +6,7 @@ import { budgetForRow, eligibleForBudget, type BudgetRow, type BudgetScope } fro
 import { rankName } from "../../src/domain/ranks";
 import { formatAbilityTarget } from "../../src/domain/targetDisplay";
 import { WAR_PLAN_STORAGE_KEY, warBadgeTargets, type WarBadgeTeam, type WarBudgetScope } from "../../src/domain/warBadgeTargets";
+import {badgeShortfalls,type AbilityBadgeInventory} from "../../src/domain/badgeInventory";
 
 const caps = [{level:17,label:"Uncommon · 17"},{level:26,label:"Rare · 26"},{level:35,label:"Epic · 35"},{level:50,label:"Legendary · 50"}];
 const rarities:BadgeRarity[] = ["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
@@ -14,7 +15,7 @@ const rankFloors = [{level:0,label:"Any rank"},{level:9,label:"Silver I+"},{leve
 type Scope=BudgetScope|WarBudgetScope;
 const isWarScope=(scope:Scope):scope is WarBudgetScope=>scope.startsWith("war-");
 
-export default function AbilityBadgeBudget({rows,defenseTeams,offenseTeams}:{rows:BudgetRow[];defenseTeams:WarBadgeTeam[];offenseTeams:WarBadgeTeam[]})
+export default function AbilityBadgeBudget({rows,badgeInventory,defenseTeams,offenseTeams}:{rows:BudgetRow[];badgeInventory:AbilityBadgeInventory|null|undefined;defenseTeams:WarBadgeTeam[];offenseTeams:WarBadgeTeam[]})
 {
     const [cap,setCap] = useState(17);
     const [scope,setScope] = useState<Scope>("useful");
@@ -30,8 +31,9 @@ export default function AbilityBadgeBudget({rows,defenseTeams,offenseTeams}:{row
         const members = rows.filter(row => row.alliance === alliance && (isWarScope(scope)?selectedWarTargets.has(row.name):eligibleForBudget(row,scope,minRank)))
             .map(row => {const warTarget=selectedWarTargets.get(row.name);const goal=warTarget?{...row,activeTarget:warTarget,passiveTarget:warTarget}:row;return {...goal,...budgetForRow(goal,warTarget??cap),warTarget};})
             .filter(row => Object.values(row.planned).some(amount => amount > 0));
-        return {alliance,members,planned:totalBadgeCosts(members.map(row => row.planned)),eligible:totalBadgeCosts(members.map(row => row.eligible))};
-    }),[rows,cap,scope,minRank,selectedWarTargets]);
+        const planned=totalBadgeCosts(members.map(row => row.planned)),eligible=totalBadgeCosts(members.map(row => row.eligible));
+        return {alliance,members,planned,eligible,badges:badgeShortfalls(badgeInventory,alliance,planned,eligible)};
+    }),[rows,cap,scope,minRank,selectedWarTargets,badgeInventory]);
 
     return <><div className="abilityViews">
         <label>Include<select value={scope} onChange={event => setScope(event.target.value as Scope)}>
@@ -45,11 +47,10 @@ export default function AbilityBadgeBudget({rows,defenseTeams,offenseTeams}:{row
         <div className="campaignInvestmentList">{groups.map(group => <section className="campaignInvestmentGroup" key={group.alliance}>
             <button className="campaignSectionToggle" aria-expanded={open === group.alliance} onClick={() => setOpen(open === group.alliance ? null : group.alliance)}>
                 <div><p className="eyebrow">{group.members.length} CHARACTERS</p><h2>{group.alliance}</h2>
-                    <p className="warSource"><strong>{group.planned.Uncommon??0} uncommon badges</strong> planned · {group.eligible.Uncommon??0} level eligible now</p>
-                    <p className="warSource">{rarities.filter(rarity => rarity!=="Uncommon" && (group.planned[rarity]??0)>0).map(rarity => `${group.planned[rarity]} ${rarity}`).join(" · ") || "No other badges"}</p></div>
+                    {group.badges.length?group.badges.map(badge=><p className="warSource" key={badge.rarity}><strong>{badge.rarity}: {badge.owned??"?"} owned</strong> · {badge.needed} needed · {badge.shortfall??"?"} short</p>):<p className="warSource">No badges needed for this goal</p>}</div>
                 <div className="campaignSectionStatus"><span className="campaignChevron">{open === group.alliance ? "▴" : "▾"}</span></div>
             </button>
-            {open === group.alliance ? <div className="campaignSectionBody">{group.members.length ? <div className="tableWrap"><table>
+            {open === group.alliance ? <div className="campaignSectionBody"><div className="tableWrap"><table><thead><tr><th>Badge</th><th>Owned</th><th>Needed for goal</th><th>Still needed</th><th>Level eligible now</th></tr></thead><tbody>{group.badges.map(badge=><tr key={badge.rarity}><td><strong>{badge.rarity}</strong></td><td>{badge.owned??"Sync account"}</td><td>{badge.needed}</td><td><strong>{badge.shortfall??"—"}</strong></td><td>{badge.neededNow} needed · {badge.shortfallNow??"—"} short</td></tr>)}</tbody></table></div>{group.members.length ? <div className="tableWrap"><table>
                 <thead><tr><th>Character</th><th>Active</th><th>Passive</th><th>Badges to target</th></tr></thead>
                 <tbody>{group.members.map(row => <tr key={row.id}>
                     <td><CharacterName name={row.name} id={row.id}/><small>{rankName(row.rank)} · {row.rarity} · {row.warTarget ? `War target ${row.warTarget}/${row.warTarget}` : `${row.utilityTier} · ${row.utilitySignals.join(" · ")}`}</small>{!row.warTarget?<small>{row.reviewed ? "Community ability target" : row.recommended ? "Planning recommendation" : "Provisional ability target"}</small>:null}</td>
@@ -58,6 +59,6 @@ export default function AbilityBadgeBudget({rows,defenseTeams,offenseTeams}:{row
                 </tr>)}</tbody>
             </table></div> : <p className="sub">No selected characters need badges through this tier.</p>}</div> : null}
         </section>)}</div>
-        <p className="sub">Level eligible uses current XP and rarity caps. It does not check badge or coin inventory. Higher targets stay in the planned total for later.</p>
+        <p className="sub">Shortfall is the selected goal minus owned badges, floored at zero. Level eligible uses current XP and rarity caps; coins are not checked. Badge inventory is shared within each alliance, so individual rows show costs without assigning your badges to a specific character.</p>
     </>;
 }
