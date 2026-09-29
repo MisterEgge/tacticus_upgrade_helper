@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import {getCharacterCatalog} from "./catalog";
+import type {AbilityBadgeInventory} from "../../src/domain/badgeInventory";
 
 export type EquipmentRow = {
   character: string; characterId?: string; slotId: string; currentItem: string; currentRarity: string;
@@ -24,6 +25,7 @@ export type Report = {
   equipmentAllocation:{equipNow:EquipmentRow[];buyWatch:EquipmentRow[];compatibilityUnknown:EquipmentRow[]};
   campaignProgress?:Array<{id:string;name:string;type:"Standard"|"Mirror"|"Elite"|"EliteMirror";highestUnlockedBattle:number|null;highestCompletedBattle?:number|null;highestConfirmedThreeStarBattle?:number|null;battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number}>}>;
   upgradeInventory?:Array<{id:string;name?:string;amount:number}>;
+  abilityBadges?:AbilityBadgeInventory|null;
 };
 export async function getReport():Promise<Report|null>{
   try{
