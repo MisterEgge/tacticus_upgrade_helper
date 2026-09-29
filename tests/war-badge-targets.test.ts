@@ -26,3 +26,14 @@ test("stale War selections fall back to current buildable options",()=>{
     assert.equal(targets.get("Trajann"),35);
     assert.equal(targets.get("Bellator"),35);
 });
+
+test("ten defense options budget only the five active slots and follow swaps with reserves",()=>{
+    const teams=Array.from({length:10},(_,index)=>({name:`Team ${index}`,used:100-index,members:[{name:`Character ${index}`}]}));
+    const names=teams.map(team=>team.name);
+    [names[0],names[9]]=[names[9]!,names[0]!];
+    const targets=warBadgeTargets(teams,offense,{defense:names},"war-defense");
+    assert.equal(targets.size,5);
+    assert.equal(targets.get("Character 9"),35);
+    assert.equal(targets.has("Character 0"),false);
+    assert.equal(targets.get("Character 4"),26);
+});
