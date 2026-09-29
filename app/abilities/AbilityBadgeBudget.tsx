@@ -35,13 +35,13 @@ export default function AbilityBadgeBudget({rows,defenseTeams,offenseTeams}:{row
 
     return <><div className="abilityViews">
         <label>Include<select value={scope} onChange={event => setScope(event.target.value as Scope)}>
-            <option value="useful">Pretty good and above</option><option value="top">Top tier and main raid</option><option value="raid">Main raid team only</option>
+            <option value="useful">Useful and above</option><option value="situational">Situational and above</option><option value="top">Core only</option><option value="raid">Main raid team only</option>
             <option value="war-defense">Selected War defense</option><option value="war-offense">Selected War offense</option><option value="war-both">War defense + offense</option>
         </select></label>
         {!isWarScope(scope)?<><label>Current rank<select value={minRank} onChange={event => setMinRank(Number(event.target.value))}>{rankFloors.map(option => <option key={option.level} value={option.level}>{option.label}</option>)}</select></label>
         <label>Plan through<select value={cap} onChange={event => setCap(Number(event.target.value))}>{caps.map(option => <option key={option.level} value={option.level}>{option.label}</option>)}</select></label></>:null}
     </div>
-        <p className="sub">{isWarScope(scope)?"War totals use your saved buildable lineups. Defense slots 1–2 target 35/35; later slots target 26/26. Offense uses each slot’s Gold or Silver target. A character selected on both sides counts once at the higher target. If no plan is saved, the War planner’s default distinct teams are used.":"Pretty good includes characters in your community priority table (score 2.7+) or account priority 68+, plus the selected main raid team. The top tier uses score 3.5+ or priority 90+, plus that team. Characters without these signals are excluded. Rank narrows the current roster; it does not gate ability levels."}</p>
+        <p className="sub">{isWarScope(scope)?"War totals use your saved buildable lineups. Defense slots 1–2 target 35/35; later slots target 26/26. Offense uses each slot’s Gold or Silver target. A character selected on both sides counts once at the higher target. If no plan is saved, the War planner’s default distinct teams are used.":"Useful includes relevant raid roles, unfinished campaign requirements, account priorities and the supplied community table. Situational also includes buildable War options and raid flex roles. See Character Ratings for every character and the exact signals. Rank narrows the current roster; it does not gate ability levels."}</p>
         <div className="campaignInvestmentList">{groups.map(group => <section className="campaignInvestmentGroup" key={group.alliance}>
             <button className="campaignSectionToggle" aria-expanded={open === group.alliance} onClick={() => setOpen(open === group.alliance ? null : group.alliance)}>
                 <div><p className="eyebrow">{group.members.length} CHARACTERS</p><h2>{group.alliance}</h2>
@@ -52,7 +52,7 @@ export default function AbilityBadgeBudget({rows,defenseTeams,offenseTeams}:{row
             {open === group.alliance ? <div className="campaignSectionBody">{group.members.length ? <div className="tableWrap"><table>
                 <thead><tr><th>Character</th><th>Active</th><th>Passive</th><th>Badges to target</th></tr></thead>
                 <tbody>{group.members.map(row => <tr key={row.id}>
-                    <td><CharacterName name={row.name} id={row.id}/><small>{rankName(row.rank)} · {row.rarity} · {row.warTarget ? `War target ${row.warTarget}/${row.warTarget}` : row.mainRaid ? "Main raid" : row.communityScore!==null ? `Community ${row.communityScore}` : `Account priority ${row.accountPriority}`}</small>{!row.warTarget?<small>{row.reviewed ? "Community ability target" : row.recommended ? "Planning recommendation" : "Provisional ability target"}</small>:null}</td>
+                    <td><CharacterName name={row.name} id={row.id}/><small>{rankName(row.rank)} · {row.rarity} · {row.warTarget ? `War target ${row.warTarget}/${row.warTarget}` : `${row.utilityTier} · ${row.utilitySignals.join(" · ")}`}</small>{!row.warTarget?<small>{row.reviewed ? "Community ability target" : row.recommended ? "Planning recommendation" : "Provisional ability target"}</small>:null}</td>
                     <td>{formatAbilityTarget(row.activeLevel,row.activeTarget)}</td><td>{formatAbilityTarget(row.passiveLevel,row.passiveTarget)}</td>
                     <td>{rarities.filter(rarity => (row.planned[rarity]??0)>0).map(rarity => <small key={rarity}>{row.planned[rarity]} {rarity} · {row.eligible[rarity]??0} level eligible</small>)}</td>
                 </tr>)}</tbody>
