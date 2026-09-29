@@ -46,6 +46,7 @@ type PlayerResponse = {
         units: Unit[];
         progress?: { campaigns?: Array<{ id:string; name:string; type:"Standard"|"Mirror"|"Elite"|"EliteMirror"; battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number;stars?:number;medals?:number;score?:number;completed?:boolean}> }> };
         inventory: {
+            abilityBadges?: Record<string,Array<{rarity:string;amount:number;name?:string}>>;
             upgrades?: Array<{id:string;name?:string;amount:number}>;
             items: Array<{
                 id: string;
@@ -220,6 +221,7 @@ async function main()
             battles: campaign.battles
         })),
         upgradeInventory: playerResponse.player.inventory.upgrades,
+        abilityBadges: playerResponse.player.inventory.abilityBadges ?? null,
         unequippedInventory: playerResponse.player.inventory.items
     };
 
