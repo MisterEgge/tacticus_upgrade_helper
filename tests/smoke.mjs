@@ -56,6 +56,10 @@ try
     report.roster.push({ ...report.roster[0], id: 'test-machine-outside-character-catalog', name: 'Synthetic excluded unit' });
     const reportPath = path.join(cwd, 'output/upgrade-report.json');
     await writeFile(reportPath, JSON.stringify(report));
+    assert.match(await get('/abilities'), /Uncommon: \? owned/);
+    report.abilityBadges = { Xenos: [{ rarity: 'Uncommon', amount: 7 }] };
+    await writeFile(reportPath, JSON.stringify(report));
+    assert.match(await get('/abilities'), /Uncommon: 7 owned/);
     const campaigns = await get('/campaigns');
     assert.match(campaigns, /Indomitus Mirror Elite/);
     assert.match(campaigns, /<h2>Indomitus Mirror Elite<\/h2>.*?class="power">38/s);
