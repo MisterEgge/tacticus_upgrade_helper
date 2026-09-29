@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { uniqueWarTeamIndexes, reflowWarTeamIndexes, selectableWarTeamIndexes, restoreWarTeamIndexes } from "../src/domain/warTeams";
+import {readFileSync} from "node:fs";
 
 test("War defaults choose five distinct teams instead of the five first options", () =>
 {
@@ -37,4 +38,19 @@ test("saved War teams restore by name and reject missing or duplicate characters
     assert.deepEqual(restoreWarTeamIndexes(teams,["C","A"],2),[0,1]);
     assert.deepEqual(restoreWarTeamIndexes(teams,["missing","B"],2),[0,1]);
     assert.deepEqual(restoreWarTeamIndexes(teams,"broken",2),[0,1]);
+});
+
+test("a source lineup repeating a character cannot enter any assigned slot",()=>{
+    const teams=[{name:"Invalid",used:100,members:[{name:"Typhus"},{name:"Typhus"}]},{name:"Valid",used:50,members:[{name:"Typhus"}]},{name:"Other",used:40,members:[{name:"Maladus"}]}];
+    assert.deepEqual(uniqueWarTeamIndexes(teams,2),[1,2]);
+    assert.equal(reflowWarTeamIndexes(teams,0,0,2),null);
+    assert.deepEqual(restoreWarTeamIndexes(teams,["Invalid","Other"],2),[1,2]);
+});
+
+test("actual sourced defense assignments use each character only once",()=>{
+    const source=JSON.parse(readFileSync("config/war_defense_teams.json","utf8")) as {validatedFullLineups:Array<{used:number;members:string[]}>};
+    const teams=source.validatedFullLineups.map(team=>({used:team.used,members:team.members.map(name=>({name}))}));
+    const selected=uniqueWarTeamIndexes(teams,5).flatMap(index=>teams[index]!.members.map(member=>member.name));
+    assert.equal(selected.length,25);
+    assert.equal(new Set(selected).size,25);
 });
