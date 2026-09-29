@@ -52,3 +52,10 @@ export function firstPendingCheckpoint(checkpoints: RoadmapCheckpoint[], units: 
     const byName = new Map(units.map(unit => [unit.name, unit]));
     return checkpoints.find(checkpoint => checkpoint.targets.length === 0 || checkpoint.targets.some(target => !roadmapTargetMet(target, byName.get(target.name))))?.number ?? null;
 }
+
+export function nextRoadmapTargets(checkpoints: RoadmapCheckpoint[], units: Unit[]): { checkpoint: number; targets: RoadmapTarget[] } | null
+{
+    const byName = new Map(units.map(unit => [unit.name, unit]));
+    const pending = checkpoints.find(checkpoint => checkpoint.targets.length === 0 || checkpoint.targets.some(target => !roadmapTargetMet(target, byName.get(target.name))));
+    return pending ? { checkpoint: pending.number, targets: pending.targets.filter(target => !roadmapTargetMet(target, byName.get(target.name))) } : null;
+}
