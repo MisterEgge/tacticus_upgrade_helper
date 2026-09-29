@@ -69,6 +69,26 @@ branch. Git preserves unrelated local edits and refuses an update that would
 overwrite them. VS Code sees updated files automatically. The task uses the Windows
 certificate store for Git HTTPS verification; it does not disable SSL checks.
 
+To pause or resume auto-pull, run either command in PowerShell. Pausing keeps
+the task and its settings, and does not stop a pull already in progress:
+
+```powershell
+Disable-ScheduledTask -TaskName 'Tacticus Upgrade Helper - Auto Pull Main'
+Enable-ScheduledTask -TaskName 'Tacticus Upgrade Helper - Auto Pull Main'
+```
+
+To change the interval, run the installer again from the repository folder.
+For example, check every 15 minutes:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-auto-pull.ps1 -IntervalMinutes 15
+```
+
+The installer accepts 1–1440 minutes and runs one pull immediately. Reinstalling
+also enables the task; use the pause command afterward if you want it off.
+Check its current state with
+`Get-ScheduledTask -TaskName 'Tacticus Upgrade Helper - Auto Pull Main'`.
+
 If the one-time pull fails with a certificate error, set the Windows TLS backend
 for this checkout and retry:
 
