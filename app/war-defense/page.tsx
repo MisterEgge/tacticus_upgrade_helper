@@ -19,6 +19,6 @@ export default async function WarDefense()
     const byWinRate=(a:ReturnType<typeof build>,b:ReturnType<typeof build>)=>b.wins/b.used-a.wins/a.used||b.used-a.used;
     const defense=(defensePlan.validatedFullLineups??[]).map(build).filter(team=>team.fieldable).sort(byWinRate);
     const offense=(offensePlan.validatedFullLineups??[]).map(build).filter(team=>team.fieldable).sort(byWinRate);
-    return <main><Nav/><header><div><p className="eyebrow">GUILD WAR</p><h1>Guild War team options</h1><p className="sub">Only exact five-character source lineups you can build are shown, ordered by observed win percentage.</p></div><div className="power">{defense.length}<strong> buildable defense options</strong></div></header><WarDefensePlanner teams={defense} offenseTeams={offense}/></main>;
+    return <main><Nav/><header><div><p className="eyebrow">GUILD WAR</p><h1>Guild War lineups</h1><p className="sub">The assigned teams use each character once. Source lineups are alternatives in the slot selectors, ordered by observed win percentage.</p></div><div className="power">{defense.length}<strong> source candidates</strong></div></header><WarDefensePlanner teams={defense} offenseTeams={offense}/></main>;
 
 }

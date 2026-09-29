@@ -67,6 +67,9 @@ try
     assert.match(campaigns, /completed through/);
     assert.doesNotMatch(campaigns, /Tyranids Elite/);
     const dashboard = await get('/');
+    const war = await get('/war-defense');
+    assert.match(war, /distinct defense teams/);
+    assert.doesNotMatch(war, /DEFENSE SOURCE OPTIONS/);
     const catalog = JSON.parse(await readFile(path.join(root, 'data/character_catalog.json'), 'utf8'));
     assert.match(dashboard, /ACCOUNT OVERVIEW/);
     assert.match(dashboard, /Recommended next characters/);
