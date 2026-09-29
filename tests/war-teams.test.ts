@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { uniqueWarTeamIndexes, reflowWarTeamIndexes, selectableWarTeamIndexes, restoreWarTeamIndexes } from "../src/domain/warTeams";
+import { uniqueWarTeamIndexes, restoreWarTeamIndexes, warSlotChoices, chooseWarTeamForSlot, distinctWarSlots } from "../src/domain/warTeams";
 import {readFileSync} from "node:fs";
 
 test("War defaults choose five distinct teams instead of the five first options", () =>
@@ -14,18 +14,6 @@ test("War defaults choose five distinct teams instead of the five first options"
         { used: 50, members: [{ name: "J" }, { name: "K" }] }
     ];
     assert.deepEqual(uniqueWarTeamIndexes(teams, 5), [0, 2, 3, 4, 5]);
-});
-
-test("choosing a later War slot keeps the chosen team and all slots distinct",()=>{
-    const teams=[
-        {used:100,members:[{name:"A"}]},
-        {used:90,members:[{name:"B"}]},
-        {used:80,members:[{name:"C"}]},
-        {used:70,members:[{name:"A"},{name:"B"}]}
-    ];
-    assert.deepEqual(reflowWarTeamIndexes(teams,2,1,3),[0,2,1]);
-    assert.equal(reflowWarTeamIndexes(teams,2,3,3),null);
-    assert.deepEqual([...selectableWarTeamIndexes(teams,3)],[0,1,2]);
 });
 
 test("saved War teams restore by name and reject missing or duplicate characters",()=>{
@@ -43,7 +31,7 @@ test("saved War teams restore by name and reject missing or duplicate characters
 test("a source lineup repeating a character cannot enter any assigned slot",()=>{
     const teams=[{name:"Invalid",used:100,members:[{name:"Typhus"},{name:"Typhus"}]},{name:"Valid",used:50,members:[{name:"Typhus"}]},{name:"Other",used:40,members:[{name:"Maladus"}]}];
     assert.deepEqual(uniqueWarTeamIndexes(teams,2),[1,2]);
-    assert.equal(reflowWarTeamIndexes(teams,0,0,2),null);
+    assert.equal(chooseWarTeamForSlot(teams,[1,2],0,0),null);
     assert.deepEqual(restoreWarTeamIndexes(teams,["Invalid","Other"],2),[1,2]);
 });
 
@@ -53,4 +41,27 @@ test("actual sourced defense assignments use each character only once",()=>{
     const selected=uniqueWarTeamIndexes(teams,5).flatMap(index=>teams[index]!.members.map(member=>member.name));
     assert.equal(selected.length,25);
     assert.equal(new Set(selected).size,25);
+});
+
+test("swapping a defense team into a Gold slot keeps all five assignments and their unique members",()=>{
+    const teams=["A","B","C","D","E"].map((name,index)=>({used:100-index,members:[{name}]}));
+    const selected=[0,1,2,3,4];
+    assert.deepEqual(chooseWarTeamForSlot(teams,selected,0,3),[3,1,2,0,4]);
+    assert.equal(distinctWarSlots(teams,[3,1,2,0,4]),true);
+    assert.equal(selected[0],0);
+});
+
+test("slot alternatives exclude another assigned team's Typhus and preserve other slots",()=>{
+    const teams=[
+        {used:100,members:[{name:"Typhus"},{name:"Maladus"}]},
+        {used:90,members:[{name:"Bellator"}]},
+        {used:80,members:[{name:"Typhus"},{name:"Corrodius"}]},
+        {used:70,members:[{name:"Isabella"}]}
+    ];
+    const slots=[0,1];
+    assert.deepEqual(warSlotChoices(teams,slots,1).alternatives,[3]);
+    assert.deepEqual(warSlotChoices(teams,slots,0).alternatives,[2,3]);
+    assert.equal(chooseWarTeamForSlot(teams,slots,1,2),null);
+    assert.deepEqual(chooseWarTeamForSlot(teams,slots,1,3),[0,3]);
+    assert.deepEqual(chooseWarTeamForSlot(teams,slots,1,0),[1,0]);
 });

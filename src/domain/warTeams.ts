@@ -1,6 +1,35 @@
 export type WarTeamCandidate = { members: Array<{ name: string }>; used: number };
 const hasDistinctMembers=(team:WarTeamCandidate)=>new Set(team.members.map(member=>member.name)).size===team.members.length;
 
+export function distinctWarSlots(teams:WarTeamCandidate[],slots:number[]):boolean
+{
+    if(new Set(slots).size!==slots.length)return false;
+    const chosen=slots.map(index=>teams[index]);
+    if(chosen.some(team=>!team||!hasDistinctMembers(team)))return false;
+    const members=chosen.flatMap(team=>team!.members.map(member=>member.name));
+    return new Set(members).size===members.length;
+}
+
+/** Assigned teams can swap slots; unused options must not overlap the other assigned teams. */
+export function warSlotChoices(teams:WarTeamCandidate[],slots:number[],slot:number)
+{
+    if(!distinctWarSlots(teams,slots)||slot<0||slot>=slots.length)return {assigned:[],alternatives:[]};
+    const assigned=slots.map((index,assignedSlot)=>({index,slot:assignedSlot}));
+    const occupied=new Set(slots.filter((_,assignedSlot)=>assignedSlot!==slot).flatMap(index=>teams[index]!.members.map(member=>member.name)));
+    const alternatives=teams.flatMap((team,index)=>!slots.includes(index)&&hasDistinctMembers(team)&&team.members.every(member=>!occupied.has(member.name))?[index]:[]);
+    return {assigned,alternatives};
+}
+
+/** Do not silently replace any other assigned team when comparing slot targets. */
+export function chooseWarTeamForSlot(teams:WarTeamCandidate[],slots:number[],slot:number,choice:number):number[]|null
+{
+    if(!distinctWarSlots(teams,slots)||slot<0||slot>=slots.length||!teams[choice])return null;
+    const next=[...slots],other=slots.indexOf(choice);
+    if(other>=0){next[slot]=choice;next[other]=slots[slot]!;}
+    else next[slot]=choice;
+    return distinctWarSlots(teams,next)?next:null;
+}
+
 /** Restore saved source team names only when every team is still owned and distinct. */
 export function restoreWarTeamIndexes<T extends WarTeamCandidate & {name:string}>(teams:T[],saved:unknown,count:number):number[]
 {
@@ -29,22 +58,4 @@ export function uniqueWarTeamIndexes(teams: WarTeamCandidate[], count: number): 
     };
     visit(0, [], new Set(), 0);
     return best.picks;
-}
-
-/** Preserve the selected slot while filling every other slot with distinct teams. */
-export function reflowWarTeamIndexes(teams:WarTeamCandidate[],slot:number,choice:number,count:number):number[]|null
-{
-    const chosen=teams[choice];
-    if(!chosen||!hasDistinctMembers(chosen)||slot<0||slot>=count||count<1)return null;
-    const names=new Set(chosen.members.map(member=>member.name));
-    const remainder=teams.map((team,index)=>({team,index})).filter(({team,index})=>index!==choice&&!team.members.some(member=>names.has(member.name)));
-    const picks=uniqueWarTeamIndexes(remainder.map(row=>row.team),count-1).map(index=>remainder[index]!.index);
-    if(picks.length!==count-1)return null;
-    let cursor=0;
-    return Array.from({length:count},(_,index)=>index===slot?choice:picks[cursor++]!);
-}
-
-export function selectableWarTeamIndexes(teams:WarTeamCandidate[],count:number):Set<number>
-{
-    return new Set(teams.flatMap((_,index)=>reflowWarTeamIndexes(teams,0,index,count)?[index]:[]));
 }
