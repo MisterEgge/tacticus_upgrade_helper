@@ -12,7 +12,14 @@ export function warBadgeTargets(defense:WarBadgeTeam[],offense:WarBadgeTeam[],sa
     const add=(team:WarBadgeTeam,level:number)=>{
         for(const member of team.members)targets.set(member.name,Math.max(level,targets.get(member.name)??0));
     };
-    if(scope!=="war-offense")restoreWarTeamIndexes(defense,plan.defense,5).forEach((choice,slot)=>add(defense[choice]!,slot<2?35:26));
+    if(scope!=="war-offense"){
+        const count=Math.min(10,defense.length);
+        const previous=plan.defense;
+        const savedDefense=Array.isArray(previous)&&previous.length===5&&count===10
+            ? [...previous,...defense.filter(team=>!previous.includes(team.name)).map(team=>team.name)].slice(0,10)
+            :previous;
+        restoreWarTeamIndexes(defense,savedDefense,count).slice(0,5).forEach((choice,slot)=>add(defense[choice]!,slot<2?35:26));
+    }
     if(scope!=="war-defense"){
         const tiers=Array.isArray(plan.offenseTiers)&&plan.offenseTiers.length===10&&plan.offenseTiers.every(tier=>tier==="gold"||tier==="silver")?plan.offenseTiers:[];
         restoreWarTeamIndexes(offense,plan.offense,10).forEach((choice,slot)=>add(offense[choice]!,tiers[slot]==="gold"?35:26));
