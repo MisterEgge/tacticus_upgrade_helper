@@ -43,6 +43,8 @@ Do not ask for routine approval. Ask only when blocked by missing access, an irr
 - Reuse approved visual language: if Campaigns uses a chevron collapsible control, another expandable section should use the same treatment rather than inventing a text button.
 - Match structure to task: vertical lists for expandable sequences, tables for comparable rows, cards for independent summaries.
 - Keep summaries visible when details collapse. Make controls local to the item they affect.
+- Equipment must show confirmed equip-now actions with the character and item directly, before planning filters. A count without the named action is insufficient. Keep inventory alternatives distinct from allocated copies; a shared copy cannot be promised to multiple characters.
+- Keep equipment overviews compact: omit internal slot numbers and long future-recipient lists. Show shop opportunities as character, upgrade item, shop, rotation and price. Preserve pool versus exact-item distinctions, unknown access, and unknown schedules; catalog availability does not confirm current stock. Put transfer references and audits behind details.
 - Preserve responsive behavior and use accessible controls (`button`, `label`, `aria-expanded`, useful names for icon buttons).
 - Browser-exercise meaningful UI changes. A production build does not prove an interaction works.
 
