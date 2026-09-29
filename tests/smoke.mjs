@@ -45,7 +45,7 @@ try
     assert.match(await get('/campaigns'), /Account data unavailable/);
     assert.match(await get('/abilities'), /npm run refresh/);
     const report = {
-        generatedAt: 'SYNTHETIC TEST FIXTURE — NOT ACCOUNT DATA',
+        generatedAt: '2026-09-01T12:00:00.000Z',
         source: { player: 'SYNTHETIC TEST FIXTURE', powerLevel: 52 },
         summary: { units: 1, charactersWithAbilitiesBelow17: 0, individualAbilityUpgradesTo17: 0, legendaryUnderTierSlots: 0 },
         roster: [{ id: 'necroSpyder', name: 'Aleph-Null', faction: 'Necrons', grandAlliance: 'Xenos', rank: 0, upgrades: [0], rarity: 'Common', progressionIndex: 0, xpLevel: 1, shards: 0, mythicShards: 0, abilities: [{ id: 'a', level: 1 }, { id: 'p', level: 1 }], items: [] }],
@@ -79,6 +79,17 @@ try
         assert.match(html, /Last synced:/);
 
     }
+    const invalid = await fetch('http://127.0.0.1:3197/api/raid-selection', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ boss: 'Magnus', teamName: 'Custodes', flex: ['Ragnar', 'Ragnar'] }) });
+    assert.equal(invalid.status, 400);
+    const saved = await fetch('http://127.0.0.1:3197/api/raid-selection', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ boss: 'Magnus', teamName: 'Custodes', flex: ['Dante'] }) });
+    assert.equal(saved.status, 200);
+    const cookie = saved.headers.get('set-cookie')?.split(';')[0];
+    assert.ok(cookie);
+    const savedDashboard = await fetch('http://127.0.0.1:3197/', { headers: { Cookie: cookie } });
+    const savedHtml = (await savedDashboard.text()).replace(/<!--.*?-->/gs, '');
+    assert.match(savedHtml, /MAIN RAID TEAM.*?Custodes.*?Magnus · Kariyan · Kharn · Trajann · Dante/s);
+    const savedPlanner = await fetch('http://127.0.0.1:3197/guild-raid', { headers: { Cookie: cookie } });
+    assert.match((await savedPlanner.text()).replace(/<!--.*?-->/gs, ''), /Custodes vs Magnus/);
     assert.match(await get('/review-status'), /Every owned character/);
     assert.match(await get('/sources'), /Shops &amp; Sources/);
     assert.match(await get('/farming'), /Expected \/ battle/);
