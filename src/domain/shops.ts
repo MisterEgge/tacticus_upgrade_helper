@@ -79,6 +79,23 @@ export function sourcesForItem(itemId: string, catalog: ShopCatalog): string[]
 
 }
 
+export type EquipmentShopOffer = {
+    id:string;shop:string;match:"exact"|"pool";rotation:string;price:string;
+    access:"eligible"|"unknown";adRefresh:boolean|null;
+};
+
+/** Catalog routes are potential offers, never confirmation of live shop stock. */
+export function equipmentOffersForItem(itemId:string,catalog:ShopCatalog,powerLevel:number|null):EquipmentShopOffer[]
+{
+    return catalog.shops.filter(shop=>shop.coverage==="catalog").flatMap(shop=>shop.offers.flatMap(offer=>{
+        const match=sourceMatch(itemId,offer,catalog.equipment),access=offerEligibility(offer,powerLevel);
+        if(!match||!isActionableOffer(offer)||access==="locked")return [];
+        const days:Record<string,string>={SUN:"Sunday",MON:"Monday",TUE:"Tuesday",WED:"Wednesday",THU:"Thursday",FRI:"Friday",SAT:"Saturday"};
+        const rotation=scheduleLabel(offer.schedule).replace(/SUN|MON|TUE|WED|THU|FRI|SAT/g,day=>days[day]!);
+        return [{id:offer.id,shop:shop.name,match,rotation,price:`${offer.cost.amount.toLocaleString("en-US")} ${currencyName(offer.cost.currency)}`,access,adRefresh:shop.adRefresh}];
+    }));
+}
+
 export function itemCategory(id: string): "upgrade" | "equipment" | "other"
 {
 
