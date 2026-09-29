@@ -48,15 +48,18 @@ Do not ask for routine approval. Ask only when blocked by missing access, an irr
 
 ### Team planners: source fidelity and usable assignments
 
-- A partial team pattern (for example, a three-character core plus separate flex usage) is not an actual five-character team. Never fill its remaining slots by faction, screen order, or highest individual flex usage and present the result as source-backed.
+- A partial team pattern (for example, a three-character core plus separate flex usage) is not an observed five-character team. When explicitly asked to assemble teams from cores, use only source-listed flex characters and label the resulting five as assembled. Core win rate must not be presented as the assembled team's measured win rate.
 - Keep three-person core evidence and exact five-person lineup evidence separate. Cross-reference them before recommending a finished team; show the matched five-person record, its observed use count, and its win/defense result.
 - Rank finished teams from the full-lineup record, not from faction identity or the core's popularity alone. If the recorded five is weak, use a better supported recorded lineup—or label the core as needing more evidence.
 - When the product goal is to field multiple teams, enforce the real constraint: each selected lineup must be distinct and no character may appear in more than one active team. A duplicate warning is not an acceptable substitute for preventing invalid selections.
-- Default team slots must be computed as a maximum-quality non-overlapping set, not simply the first N candidates. Dropdown choices that conflict with already selected teams must be unavailable.
+- Defense and offense are independent plans with separate source catalogues, assignments, and saved selections. A defense correction must never replace offense team composition or copy defense teams into offense.
+- For the defense list, aim for ten teams of five owned characters, with fifty distinct characters across the entire list, including reserves. Walk cores in observed win-rate order, skip unavailable or already consumed cores, and use source-listed flex ranked by usage. Protect later available cores when selecting flex so early picks do not unnecessarily prevent completing the list. Skip a core when fewer than two eligible flex characters remain; never invent replacements.
+- The five active defense slots and five reserves are positions in one unique ten-team list. Swapping into an active slot swaps whole teams and retains all fifty unique members. Never rebuild the other teams from overlapping alternatives.
+- If the source and owned roster cannot produce the requested count, report the actual count and limitation. Do not fill out the count with duplicated, unowned, or unsupported characters.
 - Do not display unowned characters as active upgrade work. If a source lineup cannot be fielded from the account roster, exclude it from the current assignment and keep it only as a clearly labelled future/reference record.
 - Treat a user correction about a source or lineup as a data-model problem first. Re-read the supplied source, repair the extraction/selection rule, add a regression test, and only then adjust the UI.
 - Source-name variants may be normalized only with stable-ID evidence (for example, a source portrait/internal ID matching the catalog ID). Store that proof in an alias table, test every mapping, and report unresolved names instead of guessing.
-- Retain every exact source lineup row in the catalogue. A lineup with an unowned member is not deleted or silently filtered: show it as “Can’t build” and name every missing member. Selection constraints must reflow the other slots, never make the team selector unusable.
+- Retain exact source rows in the underlying catalogue. The user's current planner shows buildable teams only. Selection swaps positions explicitly; it must not silently reflow other team compositions or make the selector unusable.
 
 ## Git and merge discipline
 
