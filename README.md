@@ -51,6 +51,39 @@ Use Node 24 and `npm ci`. Set `TACTICUS_API_KEY` in a local `.env`, then run
 production server picks up refreshed reports without rebuilding. A missing export
 or API key is not replaced with demonstration or historical account values.
 
+### Automatic local updates on Windows
+
+After getting the latest scripts once, run this in the **VS Code PowerShell terminal**
+from your local repository folder:
+
+```powershell
+git switch main
+git pull --ff-only origin main
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-auto-pull.ps1
+```
+
+This installs a Windows task that checks every two minutes while you are signed
+in. It updates **only local `main`**, using `git pull --ff-only`; it never
+switches branches, commits changes, discards edits, or merges into a feature
+branch. Git preserves unrelated local edits and refuses an update that would
+overwrite them. VS Code sees updated files automatically. The task uses the Windows
+certificate store for Git HTTPS verification; it does not disable SSL checks.
+
+If the one-time pull fails with a certificate error, set the Windows TLS backend
+for this checkout and retry:
+
+```powershell
+git config --local http.sslBackend schannel
+git pull --ff-only origin main
+```
+
+If the certificate is not trusted by Windows, it must be installed into the
+Windows trust store by whoever manages that certificate. The scheduled task
+records successful updates and failures in
+`$env:LOCALAPPDATA\TacticusUpgradeHelper\auto-pull.log`. It quietly skips a
+branch other than `main`. Remove the task with
+`Unregister-ScheduledTask -TaskName 'Tacticus Upgrade Helper - Auto Pull Main' -Confirm:$false`.
+
 Validation (no account key required):
 
 ```bash
