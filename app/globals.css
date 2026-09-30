@@ -23,7 +23,7 @@ th { color:#8794a7; font-size:11px; letter-spacing:.1em; text-transform:uppercas
 .empty { margin-top:30px; padding:30px; } code { background:#1b2330; padding:3px 6px; border-radius:5px; } footer { margin-top:20px; font-size:12px; text-align:right; }
 @media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)} main{width:min(100% - 24px,1180px)} th,td{padding:12px 10px}}
 
-.nav { display:flex; gap:8px; align-items:center; margin-bottom:42px; padding:8px; border:1px solid #27303d; background:#111720; border-radius:14px; overflow-x:auto; }
+.nav { display:flex; gap:8px; align-items:center; margin-bottom:42px; padding:8px; border:1px solid #27303d; background:#111720; border-radius:14px; flex-wrap:wrap; overflow:visible; position:relative; z-index:10; }
 .nav a,.nav span { color:#9da9ba; text-decoration:none; white-space:nowrap; padding:9px 13px; border-radius:9px; font-size:13px; font-weight:700; }
 .nav a:hover { color:#edf1f7; background:#1b2330; }
 .nav a.active { color:#edf1f7; background:#273344; box-shadow:inset 0 0 0 1px #65758b; }
@@ -95,7 +95,30 @@ th { color:#8794a7; font-size:11px; letter-spacing:.1em; text-transform:uppercas
 .referenceDetails > summary { cursor: pointer; color: var(--muted, #9daabe); font-weight: 500; }
 .referenceDetails > div { padding: .45rem 0; }
 .referenceDetails p { margin: .3rem 0; }
-.navMore { position: relative; align-self: center; }
-.navMore > summary { cursor: pointer; padding: .5rem .7rem; white-space: nowrap; }
-.navMore > div { position: absolute; right: 0; top: 100%; z-index: 20; display: flex; flex-direction: column; min-width: 180px; padding: .4rem; border: 1px solid #334155; border-radius: 8px; background: #111827; }
-.navMore > div a { white-space: nowrap; }
+/* Group menus must escape the navigation border without a clipping scroller. */
+.navGroup { position: relative; min-width: 0; }
+.navGroup > summary { cursor: pointer; padding: 9px 13px; border-radius: 9px; font-size: 13px; font-weight: 700; color: #9da9ba; }
+.navGroup > summary:hover, .navGroup > summary.active { color: #edf1f7; background: #273344; }
+.navGroup > div { position: absolute; left: 0; top: calc(100% + 8px); z-index: 20; display: flex; flex-direction: column; width: 210px; padding: 6px; border: 1px solid #334155; border-radius: 10px; background: #111720; box-shadow: 0 12px 28px #0008; }
+.nav a:focus-visible, .nav summary:focus-visible { outline: 2px solid #9ccaff; outline-offset: 2px; }
+/* Insets protect text from rounded panel corners. Flex children can shrink. */
+.detailPanel > .referenceDetails { margin: 0; padding: 14px 24px; }
+.detailPanel > .abilityViews { padding: 14px 24px 0; }
+.detailPanel > .tableWrap + .referenceDetails { border-top: 1px solid #27303d; }
+header > div, .sectionTitle > div, .card, .detailCopy, .accountBarInner > div { min-width: 0; }
+h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflow-wrap: anywhere; }
+.characterCell strong, .itemName a { min-width: 0; overflow-wrap: anywhere; }
+.portrait { flex-shrink: 0; }
+.abilityViews label { min-width: 0; max-width: 100%; }
+.abilityViews select, .warTeam select, .abilityViews input { max-width: 100%; min-width: 0; }
+.raidTeamSummary, .roadmapNowGrid { grid-template-columns: repeat(auto-fit,minmax(min(240px,100%),1fr)); }
+@media(max-width:600px) {
+ .nav { gap: 4px; }
+ .nav a, .navGroup > summary { padding: 9px 10px; }
+ .navGroup { position: static; }
+ .navGroup > div { left: 0; right: 0; top: 100%; width: auto; }
+ .detailPanel > .referenceDetails { padding: 12px 16px; }
+ .detailPanel > .abilityViews { padding: 12px 16px 0; }
+ .sectionTitle { padding: 18px 16px; gap: 12px; }
+ .detailCopy { padding: 16px; }
+}
