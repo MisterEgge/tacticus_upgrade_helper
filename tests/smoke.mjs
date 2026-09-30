@@ -102,6 +102,15 @@ try
     assert.match((await savedPlanner.text()).replace(/<!--.*?-->/gs, ''), /Custodes vs Magnus/);
     const roadmap = await get('/guild-raid');
     assert.match(roadmap, /LAVISCUS BUILD ORDER/);
+    assert.match(roadmap, /<th>Rank \/ level<\/th>/);
+    assert.doesNotMatch(roadmap, /<th>Role<\/th>|<th>XP level<\/th>|CORE OWNED/);
+    assert.match(roadmap, /<details class="referenceDetails"><summary>Meta source<\/summary>/);
+    assert.doesNotMatch(roadmap, /<details[^>]*class="referenceDetails"[^>]*open/);
+    assert.match(roadmap, /<details class="navMore"><summary>More<\/summary>/);
+    assert.match(roadmap, /href="\/review-status"/);
+    assert.match(ratings, /<summary>Rating criteria<\/summary>/);
+    for(const route of ['/inventory-cleanout','/reallocation']) assert.match(await get(route), /class="accountBar"/);
+
     assert.match(roadmap, /Checkpoint 1: Core to Gold I/);
     assert.match(roadmap, /Do next · checkpoint/);
     assert.match(roadmap, /Biovore is a separate machine of war/);
