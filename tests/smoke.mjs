@@ -106,7 +106,10 @@ try
     assert.doesNotMatch(roadmap, /<th>Role<\/th>|<th>XP level<\/th>|CORE OWNED/);
     assert.match(roadmap, /<details class="referenceDetails"><summary>Meta source<\/summary>/);
     assert.doesNotMatch(roadmap, /<details[^>]*class="referenceDetails"[^>]*open/);
-    assert.match(roadmap, /<details class="navMore"><summary>More<\/summary>/);
+    assert.match(roadmap, /<details class="navGroup"><summary[^>]*>Equipment<\/summary>/);
+    assert.match(roadmap, /<summary[^>]*>Resources<\/summary>/);
+    assert.match(roadmap, /<summary[^>]*>Roster<\/summary>/);
+    assert.doesNotMatch(roadmap, /class="navMore"/);
     assert.match(roadmap, /href="\/review-status"/);
     assert.match(ratings, /<summary>Rating criteria<\/summary>/);
     for(const route of ['/inventory-cleanout','/reallocation']) assert.match(await get(route), /class="accountBar"/);
