@@ -130,3 +130,9 @@ If any command fails, investigate and fix it before committing. A partial gate i
 - Consolidate related table columns (rank and XP level); preserve all source evidence and explicit uncertainty behind accessible disclosures.
 - Secondary audit pages belong under More; mode planning remains directly accessible.
 - Cleanup must preserve equipment eligibility, donor protection, separate offense/defense assignments and unique defense lineups.
+
+### Menus and panel edges
+- A dropdown inside an overflow scroller will be clipped even with a high z-index. Keep navigation overflow visible and wrap its top-level entries; place related tools in Equipment, Resources and Roster groups.
+- On narrow screens, anchor dropdowns to the full navigation width rather than an edge item. Support Escape, outside-click dismissal and one open menu at a time.
+- Shared reference disclosures placed directly inside rounded panels need their own padding. Check all insertion contexts, not only table cells.
+- Let flex/grid children shrink and long content wrap. Keep horizontal scrolling on tables, not the enclosing navigation or page.
