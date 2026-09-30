@@ -1,3 +1,4 @@
+import ReferenceDetails from "../components/ReferenceDetails";
 import Link from "next/link";
 import { getShopCatalog } from "../lib/shops";
 import { sourcesForItem } from "../../src/domain/shops";
@@ -58,11 +59,9 @@ export default async function Farming({ searchParams }: { searchParams: Promise<
 
     }).filter(x => x.shortage > 0).sort((a, b) => b.topPriority - a.topPriority || b.shortage - a.shortage);
     return <main><Nav/><header><div><p className="eyebrow">FARMING</p><h1>Personal Farming Queue</h1>
-        <p className="sub">Plan a character across multiple ranks, or the roster’s next ranks. Equipped upgrades and owned crafted materials are deducted before base-material shortages.</p>
-        <p className="sub"><Link className="sourceLink" href="/sources">Shop catalogs, rotations and refresh tracking</Link>. Per-material links include shop offers, recipes and all campaign sources.</p>
-        <p className="sub">Account report: {report.generatedAt}. Unlocked sources are accessible battles; raid eligibility and three-star completion are unknown.</p>
+        <p className="sub">Materials still needed for your selected rank goals.</p>
+        <ReferenceDetails label="Calculation and source details"><p>Equipped upgrades and owned crafted materials are deducted before base-material shortages. Unlocked sources are accessible battles; raid eligibility and three-star completion are unknown.</p><Link className="sourceLink" href="/sources">Shop rotations and refresh tracking</Link>{excluded.length?<p>Outside the character rank catalog: {excluded.map(u=>u.name).join(", ")}. No rank costs assumed.</p>:null}</ReferenceDetails>
     </div><div className="power">{error ? "Unknown" : rows.length}<strong> shortages</strong></div></header>
-        {excluded.length ? <p className="sub">Excluded from character rank planning (outside synced character catalog): {excluded.map(u => u.name).join(", ")}. No rank costs are assumed for these units.</p> : null}
         <form className="goalForm panel" action="/farming">
             <label>Plan<select name="plan" defaultValue={query.plan ?? "next"}><option value="next">Roster next ranks</option><option value="campaign">Campaign recommendation gaps</option></select></label>
             <label>Character<select name="character" defaultValue={query.character ?? ""}><option value="">All characters — next rank</option>{rankRoster.map(u => <option key={u.id} value={u.id}>{u.name} ({rankName(u.rank)})</option>)}</select></label>
