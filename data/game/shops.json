@@ -8969,1072 +8969,3590 @@
     "I_Crit_C001": {
       "name": "Combat Knife",
       "rarity": "Common",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "BlackTemplars",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 20,
+        "critDamage": 22
+      }
     },
     "I_Crit_U001": {
       "name": "Balanced Combat Knife",
       "rarity": "Uncommon",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "BlackTemplars",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 20,
+        "critDamage": 55
+      }
     },
     "I_Crit_R001": {
       "name": "Powered Combat Knife",
       "rarity": "Rare",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "BlackTemplars",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 20,
+        "critDamage": 138
+      }
     },
     "I_Crit_E001": {
       "name": "Advanced Combat Knife",
       "rarity": "Epic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "BlackTemplars",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 20,
+        "critDamage": 352
+      }
     },
     "I_Crit_L001": {
       "name": "Grand Combat Knife",
       "rarity": "Legendary",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "BlackTemplars",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 20,
+        "critDamage": 1144
+      }
     },
     "I_Crit_M001": {
       "name": "Ancient Combat Knife",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "BlackTemplars",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 20,
+        "critDamage": 1835
+      }
     },
     "I_Crit_C002": {
       "name": "Standard-Issue Bolt Pistol",
       "rarity": "Common",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 13
+      }
     },
     "I_Crit_U002": {
       "name": "Battle-Hardened Bolt Pistol",
       "rarity": "Uncommon",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 32
+      }
     },
     "I_Crit_R002": {
       "name": "Sanctified Bolt Pistol",
       "rarity": "Rare",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 80
+      }
     },
     "I_Crit_E002": {
       "name": "Master-Crafted Bolt Pistol",
       "rarity": "Epic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 202
+      }
     },
     "I_Crit_L002": {
       "name": "Artificer Bolt Pistol",
       "rarity": "Legendary",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 648
+      }
     },
     "I_Crit_M002": {
       "name": "Archeotech Bolt Pistol",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "I_Crit_C003": {
       "name": "Void Blade",
       "rarity": "Common",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChance": 20,
+        "critDamage": 22
+      }
     },
     "I_Crit_U003": {
       "name": "Subjugating Void Blade",
       "rarity": "Uncommon",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChance": 20,
+        "critDamage": 55
+      }
     },
     "I_Crit_R003": {
       "name": "Royal Void Blade",
       "rarity": "Rare",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChance": 20,
+        "critDamage": 138
+      }
     },
     "I_Crit_E003": {
       "name": "Hyperphasing Void Blade",
       "rarity": "Epic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChance": 20,
+        "critDamage": 352
+      }
     },
     "I_Crit_L003": {
       "name": "Transdimensional Void Blade",
       "rarity": "Legendary",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChance": 20,
+        "critDamage": 1144
+      }
     },
     "I_Crit_U004": {
       "name": "Heirloom Bolt Pistol",
       "rarity": "Uncommon",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChance": 30,
+        "critDamage": 40
+      }
     },
     "I_Crit_C005": {
       "name": "Particle Casters",
       "rarity": "Common",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 13
+      }
     },
     "I_Crit_U005": {
       "name": "Subjugating Particle Casters",
       "rarity": "Uncommon",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 32
+      }
     },
     "I_Crit_R005": {
       "name": "Royal Particle Casters",
       "rarity": "Rare",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 80
+      }
     },
     "I_Crit_E005": {
       "name": "Hyperphasing Particle Casters",
       "rarity": "Epic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 202
+      }
     },
     "I_Crit_L005": {
       "name": "Transdimensional Particle Casters",
       "rarity": "Legendary",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 648
+      }
     },
     "I_Crit_M005": {
       "name": "Eternal Particle Casters",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "I_Crit_C006": {
       "name": "Blemished Bolt Pistol",
       "rarity": "Common",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 13
+      }
     },
     "I_Crit_U006": {
       "name": "Twisted Bolt Pistol",
       "rarity": "Uncommon",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 32
+      }
     },
     "I_Crit_R006": {
       "name": "Heretical Bolt Pistol",
       "rarity": "Rare",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 80
+      }
     },
     "I_Crit_E006": {
       "name": "Malefic Bolt Pistol",
       "rarity": "Epic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 202
+      }
     },
     "I_Crit_L006": {
       "name": "Warpforged Bolt Pistol",
       "rarity": "Legendary",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 648
+      }
     },
     "I_Crit_M006": {
       "name": "Daemonic Bolt Pistol",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "I_Crit_C007": {
       "name": "Slugga",
       "rarity": "Common",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Orks"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 13
+      }
     },
     "I_Crit_U007": {
       "name": "Killy Slugga",
       "rarity": "Uncommon",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Orks"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 32
+      }
     },
     "I_Crit_R007": {
       "name": "Speshul Killy Slugga",
       "rarity": "Rare",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Orks"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 80
+      }
     },
     "I_Crit_E007": {
       "name": "Ded Killy Slugga",
       "rarity": "Epic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Orks"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 202
+      }
     },
     "I_Crit_L007": {
       "name": "Ded Shiny Slugga",
       "rarity": "Legendary",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Orks"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 648
+      }
     },
     "I_Crit_M007": {
       "name": "Supa-Killy Slugga",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Orks"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "I_Crit_C008": {
       "name": "Shuriken Pistol",
       "rarity": "Common",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Aeldari"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 13
+      }
     },
     "I_Crit_U008": {
       "name": "Aspect Shuriken Pistol",
       "rarity": "Uncommon",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Aeldari"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 32
+      }
     },
     "I_Crit_R008": {
       "name": "Wraithbone Shuriken Pistol",
       "rarity": "Rare",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Aeldari"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 80
+      }
     },
     "I_Crit_E008": {
       "name": "Mind-Linked Shuriken Pistol",
       "rarity": "Epic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Aeldari"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 202
+      }
     },
     "I_Crit_L008": {
       "name": "Soul-Linked Shuriken Pistol",
       "rarity": "Legendary",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Aeldari"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 648
+      }
     },
     "I_Crit_M008": {
       "name": "Prophesied Shuriken Pistol",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Aeldari"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "I_Crit_C009": {
       "name": "Pulse Pistol",
       "rarity": "Common",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tau"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 13
+      }
     },
     "I_Crit_U009": {
       "name": "Fire Caste Pulse Pistol",
       "rarity": "Uncommon",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tau"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 32
+      }
     },
     "I_Crit_R009": {
       "name": "Overcharged Pulse Pistol",
       "rarity": "Rare",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tau"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 80
+      }
     },
     "I_Crit_E009": {
       "name": "Advanced Pulse Pistol",
       "rarity": "Epic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tau"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 202
+      }
     },
     "I_Crit_L009": {
       "name": "Prototype Pulse Pistol",
       "rarity": "Legendary",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tau"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 648
+      }
     },
     "I_Crit_M009": {
       "name": "Signature Pulse Pistol",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tau"
+      ],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "I_Crit_C010": {
       "name": "Ceremonial Knife",
       "rarity": "Common",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "AstraMilitarum",
+        "Aeldari",
+        "Tau",
+        "ThousandSons",
+        "Custodes"
+      ],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 18
+      }
     },
     "I_Crit_U010": {
       "name": "Good Ceremonial Knife",
       "rarity": "Uncommon",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "AstraMilitarum",
+        "Aeldari",
+        "Tau",
+        "ThousandSons",
+        "Custodes"
+      ],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 44
+      }
     },
     "I_Crit_R010": {
       "name": "Fine Ceremonial Knife",
       "rarity": "Rare",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "AstraMilitarum",
+        "Aeldari",
+        "Tau",
+        "ThousandSons",
+        "Custodes"
+      ],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 110
+      }
     },
     "I_Crit_E010": {
       "name": "Adorned Ceremonial Knife",
       "rarity": "Epic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "AstraMilitarum",
+        "Aeldari",
+        "Tau",
+        "ThousandSons",
+        "Custodes"
+      ],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 279
+      }
     },
     "I_Crit_L010": {
       "name": "Grand Ceremonial Knife",
       "rarity": "Legendary",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "AstraMilitarum",
+        "Aeldari",
+        "Tau",
+        "ThousandSons",
+        "Custodes"
+      ],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 915
+      }
     },
     "I_Crit_M010": {
       "name": "Ancient Ceremonial Knife",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "AstraMilitarum",
+        "Aeldari",
+        "Tau",
+        "ThousandSons",
+        "Custodes"
+      ],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 1470
+      }
     },
     "I_Crit_C011": {
       "name": "Bonesword",
       "rarity": "Common",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 18
+      }
     },
     "I_Crit_U011": {
       "name": "Evolved Bonesword",
       "rarity": "Uncommon",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 44
+      }
     },
     "I_Crit_R011": {
       "name": "Augmented Bonesword",
       "rarity": "Rare",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 110
+      }
     },
     "I_Crit_E011": {
       "name": "Symbiotic Bonesword",
       "rarity": "Epic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 279
+      }
     },
     "I_Crit_L011": {
       "name": "Monstrous Bonesword",
       "rarity": "Legendary",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 915
+      }
     },
     "I_Crit_M011": {
       "name": "Apex Bonesword",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 1470
+      }
     },
     "I_Crit_L132": {
       "name": "Heavenfall Blade",
       "rarity": "Legendary",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "DarkAngels"
+      ],
+      "baseStats": {
+        "critChance": 40,
+        "critDamage": 572
+      }
     },
     "I_Booster_Crit_C001": {
       "name": "Standard-Issue Frag Grenades",
       "rarity": "Common",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "BloodAngels",
+        "Custodes",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChanceBonus": 1,
+        "critDamageBonus": 5
+      }
     },
     "I_Booster_Crit_U001": {
       "name": "Battle Hardened Frag Grenades",
       "rarity": "Uncommon",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "BloodAngels",
+        "Custodes",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChanceBonus": 2,
+        "critDamageBonus": 13
+      }
     },
     "I_Booster_Crit_R001": {
       "name": "Sanctified Frag Grenades",
       "rarity": "Rare",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "BloodAngels",
+        "Custodes",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChanceBonus": 3,
+        "critDamageBonus": 30
+      }
     },
     "I_Booster_Crit_E001": {
       "name": "Master-Crafted Frag Grenades",
       "rarity": "Epic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "BloodAngels",
+        "Custodes",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChanceBonus": 4,
+        "critDamageBonus": 69
+      }
     },
     "I_Booster_Crit_L001": {
       "name": "Artificer Frag Grenades",
       "rarity": "Legendary",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "BloodAngels",
+        "Custodes",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChanceBonus": 5,
+        "critDamageBonus": 210
+      }
     },
     "I_Booster_Crit_M001": {
       "name": "Archeotech Frag Grenades",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "BloodAngels",
+        "Custodes",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "I_Booster_Crit_C002": {
       "name": "Disruption Fields",
       "rarity": "Common",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChanceBonus": 1,
+        "critDamageBonus": 5
+      }
     },
     "I_Booster_Crit_U002": {
       "name": "Subjugating Disruption Fields",
       "rarity": "Uncommon",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChanceBonus": 2,
+        "critDamageBonus": 13
+      }
     },
     "I_Booster_Crit_R002": {
       "name": "Royal Disruption Fields",
       "rarity": "Rare",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChanceBonus": 3,
+        "critDamageBonus": 30
+      }
     },
     "I_Booster_Crit_E002": {
       "name": "Hyperphasing Disruption Fields",
       "rarity": "Epic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChanceBonus": 4,
+        "critDamageBonus": 69
+      }
     },
     "I_Booster_Crit_L002": {
       "name": "Transdimensional Disruption Fields",
       "rarity": "Legendary",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChanceBonus": 5,
+        "critDamageBonus": 210
+      }
     },
     "I_Booster_Crit_M002": {
       "name": "Eternal Disruption Fields",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons"
+      ],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "I_Booster_Crit_C003": {
       "name": "Blemished Frag Grenades",
       "rarity": "Common",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "critChanceBonus": 1,
+        "critDamageBonus": 5
+      }
     },
     "I_Booster_Crit_U003": {
       "name": "Twisted Frag Grenades",
       "rarity": "Uncommon",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "critChanceBonus": 2,
+        "critDamageBonus": 13
+      }
     },
     "I_Booster_Crit_R003": {
       "name": "Heretical Frag Grenades",
       "rarity": "Rare",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "critChanceBonus": 3,
+        "critDamageBonus": 30
+      }
     },
     "I_Booster_Crit_E003": {
       "name": "Malefic Frag Grenades",
       "rarity": "Epic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "critChanceBonus": 4,
+        "critDamageBonus": 69
+      }
     },
     "I_Booster_Crit_L003": {
       "name": "Warpforged Frag Grenades",
       "rarity": "Legendary",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "critChanceBonus": 5,
+        "critDamageBonus": 210
+      }
     },
     "I_Booster_Crit_M003": {
       "name": "Daemonic Frag Grenades",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "I_Booster_Crit_C004": {
       "name": "Stikkbomz",
       "rarity": "Common",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Orks"
+      ],
+      "baseStats": {
+        "critChanceBonus": 1,
+        "critDamageBonus": 5
+      }
     },
     "I_Booster_Crit_U004": {
       "name": "Killy Stikkbomz",
       "rarity": "Uncommon",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Orks"
+      ],
+      "baseStats": {
+        "critChanceBonus": 2,
+        "critDamageBonus": 13
+      }
     },
     "I_Booster_Crit_R004": {
       "name": "Speshul Killy Stikkbomz",
       "rarity": "Rare",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Orks"
+      ],
+      "baseStats": {
+        "critChanceBonus": 3,
+        "critDamageBonus": 30
+      }
     },
     "I_Booster_Crit_E004": {
       "name": "Ded Killy Stikkbomz",
       "rarity": "Epic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Orks"
+      ],
+      "baseStats": {
+        "critChanceBonus": 4,
+        "critDamageBonus": 69
+      }
     },
     "I_Booster_Crit_L004": {
       "name": "Ded Shiny Stikkbomz",
       "rarity": "Legendary",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Orks"
+      ],
+      "baseStats": {
+        "critChanceBonus": 5,
+        "critDamageBonus": 210
+      }
     },
     "I_Booster_Crit_M004": {
       "name": "Supa-Killy Stikkbomz",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Orks"
+      ],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "I_Booster_Crit_C005": {
       "name": "Fusion Charges",
       "rarity": "Common",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Aeldari",
+        "Tau"
+      ],
+      "baseStats": {
+        "critChanceBonus": 1,
+        "critDamageBonus": 5
+      }
     },
     "I_Booster_Crit_U005": {
       "name": "Improved Fusion Charges",
       "rarity": "Uncommon",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Aeldari",
+        "Tau"
+      ],
+      "baseStats": {
+        "critChanceBonus": 2,
+        "critDamageBonus": 13
+      }
     },
     "I_Booster_Crit_R005": {
       "name": "Refined Fusion Charges",
       "rarity": "Rare",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Aeldari",
+        "Tau"
+      ],
+      "baseStats": {
+        "critChanceBonus": 3,
+        "critDamageBonus": 30
+      }
     },
     "I_Booster_Crit_E005": {
       "name": "Advanced Fusion Charges",
       "rarity": "Epic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Aeldari",
+        "Tau"
+      ],
+      "baseStats": {
+        "critChanceBonus": 4,
+        "critDamageBonus": 69
+      }
     },
     "I_Booster_Crit_L005": {
       "name": "Optimal Fusion Charges",
       "rarity": "Legendary",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Aeldari",
+        "Tau"
+      ],
+      "baseStats": {
+        "critChanceBonus": 5,
+        "critDamageBonus": 210
+      }
     },
     "I_Booster_Crit_M005": {
       "name": "Perfected Fusion Charges",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Aeldari",
+        "Tau"
+      ],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "I_Booster_Crit_C006": {
       "name": "Lash-Whip",
       "rarity": "Common",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "critChanceBonus": 1,
+        "critDamageBonus": 5
+      }
     },
     "I_Booster_Crit_U006": {
       "name": "Evolved Lash-Whip",
       "rarity": "Uncommon",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "critChanceBonus": 2,
+        "critDamageBonus": 13
+      }
     },
     "I_Booster_Crit_R006": {
       "name": "Augmented Lash-Whip",
       "rarity": "Rare",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "critChanceBonus": 3,
+        "critDamageBonus": 30
+      }
     },
     "I_Booster_Crit_E006": {
       "name": "Symbiotic Lash-Whip",
       "rarity": "Epic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "critChanceBonus": 4,
+        "critDamageBonus": 69
+      }
     },
     "I_Booster_Crit_L006": {
       "name": "Monstrous Lash-Whip",
       "rarity": "Legendary",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "critChanceBonus": 5,
+        "critDamageBonus": 210
+      }
     },
     "I_Booster_Crit_M006": {
       "name": "Apex Lash-Whip",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "I_Defensive_C001": {
       "name": "_I_Defensive_C001",
       "rarity": "Common",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "hp": 12,
+        "armor": 3
+      }
     },
     "I_Defensive_U001": {
       "name": "_I_Defensive_U001",
       "rarity": "Uncommon",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "hp": 29,
+        "armor": 8
+      }
     },
     "I_Defensive_R001": {
       "name": "_I_Defensive_R001",
       "rarity": "Rare",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "hp": 72,
+        "armor": 20
+      }
     },
     "I_Defensive_E001": {
       "name": "_I_Defensive_E001",
       "rarity": "Epic",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "hp": 187,
+        "armor": 46
+      }
     },
     "I_Defensive_L001": {
       "name": "_I_Defensive_L001",
       "rarity": "Legendary",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "hp": 610,
+        "armor": 153
+      }
     },
     "I_Defensive_C002": {
       "name": "Standard-Issue MK X Pauldron",
       "rarity": "Common",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "hp": 7,
+        "armor": 4
+      }
     },
     "I_Defensive_U002": {
       "name": "Battle-Hardened MK X Pauldron",
       "rarity": "Uncommon",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "hp": 17,
+        "armor": 10
+      }
     },
     "I_Defensive_R002": {
       "name": "Sanctified MK X Pauldron",
       "rarity": "Rare",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "hp": 46,
+        "armor": 25
+      }
     },
     "I_Defensive_E002": {
       "name": "Master-Crafted MK X Pauldron",
       "rarity": "Epic",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "armor": 62
+      }
     },
     "I_Defensive_L002": {
       "name": "Artificer MK X Pauldron",
       "rarity": "Legendary",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "hp": 359,
+        "armor": 201
+      }
     },
     "I_Defensive_C003": {
       "name": "Plated Greaves",
       "rarity": "Common",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "armor": 6
+      }
     },
     "I_Defensive_U003": {
       "name": "Good Plated Greaves",
       "rarity": "Uncommon",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "armor": 14
+      }
     },
     "I_Defensive_R003": {
       "name": "Fine Plated Greaves",
       "rarity": "Rare",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "armor": 34
+      }
     },
     "I_Defensive_E003": {
       "name": "Adorned Plated Greaves",
       "rarity": "Epic",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "armor": 87
+      }
     },
     "I_Defensive_L003": {
       "name": "Grand Plated Greaves",
       "rarity": "Legendary",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "armor": 277
+      }
     },
     "I_Defensive_M003": {
       "name": "Ancient Plated Greaves",
       "rarity": "Mythic",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "armor": 440
+      }
     },
     "I_Defensive_C004": {
       "name": "Mantle",
       "rarity": "Common",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Sisterhood",
+        "AstraMilitarum",
+        "AdeptusMechanicus",
+        "Custodes"
+      ],
+      "baseStats": {
+        "hp": 7,
+        "armor": 4
+      }
     },
     "I_Defensive_U004": {
       "name": "Good Mantle",
       "rarity": "Uncommon",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Sisterhood",
+        "AstraMilitarum",
+        "AdeptusMechanicus",
+        "Custodes"
+      ],
+      "baseStats": {
+        "hp": 17,
+        "armor": 10
+      }
     },
     "I_Defensive_R004": {
       "name": "Fine Mantle",
       "rarity": "Rare",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Sisterhood",
+        "AstraMilitarum",
+        "AdeptusMechanicus",
+        "Custodes"
+      ],
+      "baseStats": {
+        "hp": 46,
+        "armor": 25
+      }
     },
     "I_Defensive_E004": {
       "name": "Adorned Mantle",
       "rarity": "Epic",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Sisterhood",
+        "AstraMilitarum",
+        "AdeptusMechanicus",
+        "Custodes"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "armor": 62
+      }
     },
     "I_Defensive_L004": {
       "name": "Grand Mantle",
       "rarity": "Legendary",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Sisterhood",
+        "AstraMilitarum",
+        "AdeptusMechanicus",
+        "Custodes"
+      ],
+      "baseStats": {
+        "hp": 359,
+        "armor": 201
+      }
     },
     "I_Defensive_C005": {
       "name": "Nanocrystalline Plating",
       "rarity": "Common",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons",
+        "Tau"
+      ],
+      "baseStats": {
+        "hp": 7,
+        "armor": 4
+      }
     },
     "I_Defensive_U005": {
       "name": "Improved Nanocrystalline Plating",
       "rarity": "Uncommon",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons",
+        "Tau"
+      ],
+      "baseStats": {
+        "hp": 17,
+        "armor": 10
+      }
     },
     "I_Defensive_R005": {
       "name": "Refined Nanocrystalline Plating",
       "rarity": "Rare",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons",
+        "Tau"
+      ],
+      "baseStats": {
+        "hp": 46,
+        "armor": 25
+      }
     },
     "I_Defensive_E005": {
       "name": "Advanced Nanocrystalline Plating",
       "rarity": "Epic",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons",
+        "Tau"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "armor": 62
+      }
     },
     "I_Defensive_L005": {
       "name": "Optimal Nanocrystalline Plating",
       "rarity": "Legendary",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons",
+        "Tau"
+      ],
+      "baseStats": {
+        "hp": 359,
+        "armor": 201
+      }
     },
     "I_Defensive_M005": {
       "name": "Perfected Nanocrystalline Plating",
       "rarity": "Mythic",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons",
+        "Tau"
+      ],
+      "baseStats": {
+        "hp": 600,
+        "armor": 320
+      }
     },
     "I_Defensive_C006": {
       "name": "Exoskeleton",
       "rarity": "Common",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "hp": 7,
+        "armor": 4
+      }
     },
     "I_Defensive_U006": {
       "name": "Evolved Exoskeleton",
       "rarity": "Uncommon",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "hp": 17,
+        "armor": 10
+      }
     },
     "I_Defensive_R006": {
       "name": "Augmented Exoskeleton",
       "rarity": "Rare",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "hp": 46,
+        "armor": 25
+      }
     },
     "I_Defensive_E006": {
       "name": "Symbiotic Exoskeleton",
       "rarity": "Epic",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "armor": 62
+      }
     },
     "I_Defensive_L006": {
       "name": "Monstrous Exoskeleton",
       "rarity": "Legendary",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "hp": 359,
+        "armor": 201
+      }
     },
     "I_Defensive_M006": {
       "name": "Apex Symbiotic Exoskeleton",
       "rarity": "Mythic",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Tyranids",
+        "Genestealers"
+      ],
+      "baseStats": {
+        "hp": 600,
+        "armor": 320
+      }
     },
     "I_Defensive_C007": {
       "name": "Blooded Spiked Pauldron",
       "rarity": "Common",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "hp": 7,
+        "armor": 4
+      }
     },
     "I_Defensive_U007": {
       "name": "Savage Spiked Pauldron",
       "rarity": "Uncommon",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "hp": 17,
+        "armor": 10
+      }
     },
     "I_Defensive_R007": {
       "name": "Brutal Spiked Pauldron",
       "rarity": "Rare",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "hp": 46,
+        "armor": 25
+      }
     },
     "I_Defensive_E007": {
       "name": "Merciless Spiked Pauldron",
       "rarity": "Epic",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "armor": 62
+      }
     },
     "I_Defensive_L007": {
       "name": "Monstrous Spiked Pauldron",
       "rarity": "Legendary",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "Orks",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "hp": 359,
+        "armor": 201
+      }
     },
     "I_Block_C002": {
       "name": "Refractor Field",
       "rarity": "Common",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Sisterhood",
+        "AstraMilitarum",
+        "AdeptusMechanicus",
+        "Custodes"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 23
+      }
     },
     "I_Block_U002": {
       "name": "Battle-Hardened Refractor Field",
       "rarity": "Uncommon",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Sisterhood",
+        "AstraMilitarum",
+        "AdeptusMechanicus",
+        "Custodes"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 55
+      }
     },
     "I_Block_R002": {
       "name": "Sanctified Field",
       "rarity": "Rare",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Sisterhood",
+        "AstraMilitarum",
+        "AdeptusMechanicus",
+        "Custodes"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 138
+      }
     },
     "I_Block_E002": {
       "name": "Master-Crafted Refractor Field",
       "rarity": "Epic",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Sisterhood",
+        "AstraMilitarum",
+        "AdeptusMechanicus",
+        "Custodes"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 352
+      }
     },
     "I_Block_L002": {
       "name": "Artificer Refractor Field",
       "rarity": "Legendary",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Sisterhood",
+        "AstraMilitarum",
+        "AdeptusMechanicus",
+        "Custodes"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 1144
+      }
     },
     "I_Block_C003": {
       "name": "Force Field",
       "rarity": "Common",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Tyranids",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChance": 30,
+        "blockDamage": 15
+      }
     },
     "I_Block_U003": {
       "name": "Improved Force Field",
       "rarity": "Uncommon",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Tyranids",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChance": 30,
+        "blockDamage": 37
+      }
     },
     "I_Block_R003": {
       "name": "Refined Force Field",
       "rarity": "Rare",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Tyranids",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChance": 30,
+        "blockDamage": 93
+      }
     },
     "I_Block_E003": {
       "name": "Advanced Force Field",
       "rarity": "Epic",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Tyranids",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChance": 30,
+        "blockDamage": 238
+      }
     },
     "I_Block_L003": {
       "name": "Optimal Force Field",
       "rarity": "Legendary",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Tyranids",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChance": 30,
+        "blockDamage": 762
+      }
     },
     "I_Block_M003": {
       "name": "Perfected Force Field",
       "rarity": "Mythic",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Tyranids",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChance": 30,
+        "blockDamage": 1230
+      }
     },
     "I_Block_C004": {
       "name": "Iron Halo",
       "rarity": "Common",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChance": 35,
+        "blockDamage": 13
+      }
     },
     "I_Block_U004": {
       "name": "Battle-Hardened Iron Halo",
       "rarity": "Uncommon",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChance": 35,
+        "blockDamage": 32
+      }
     },
     "I_Block_R004": {
       "name": "Sanctified Iron Halo",
       "rarity": "Rare",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChance": 35,
+        "blockDamage": 80
+      }
     },
     "I_Block_E004": {
       "name": "Master-Crafted Iron Halo",
       "rarity": "Epic",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChance": 35,
+        "blockDamage": 202
+      }
     },
     "I_Block_L004": {
       "name": "Artificer Iron Halo",
       "rarity": "Legendary",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "BlackTemplars",
+        "SpaceWolves",
+        "DarkAngels",
+        "BloodAngels",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChance": 35,
+        "blockDamage": 648
+      }
     },
     "I_Block_C005": {
       "name": "_I_Block_C005",
       "rarity": "Common",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChance": 25,
+        "blockDamage": 18
+      }
     },
     "I_Block_U005": {
       "name": "_I_Block_U005",
       "rarity": "Uncommon",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChance": 25,
+        "blockDamage": 44
+      }
     },
     "I_Block_R005": {
       "name": "Power Field",
       "rarity": "Rare",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "AstraMilitarum"
+      ],
+      "baseStats": {
+        "blockChance": 25,
+        "blockDamage": 108
+      }
     },
     "I_Block_E005": {
       "name": "Master-Crafted Power Field",
       "rarity": "Epic",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChance": 25,
+        "blockDamage": 287
+      }
     },
     "I_Block_L005": {
       "name": "Artificer Power Field",
       "rarity": "Legendary",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChance": 25,
+        "blockDamage": 954
+      }
     },
     "I_Block_C006": {
       "name": "Blemished Sigil of Corruption",
       "rarity": "Common",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 23
+      }
     },
     "I_Block_U006": {
       "name": "Twisted Sigil of Corruption",
       "rarity": "Uncommon",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 55
+      }
     },
     "I_Block_R006": {
       "name": "Heretical Sigil of Corruption",
       "rarity": "Rare",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 138
+      }
     },
     "I_Block_E006": {
       "name": "Malefic Sigil of Corruption",
       "rarity": "Epic",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 352
+      }
     },
     "I_Block_L006": {
       "name": "Warpforged Sigil of Corruption",
       "rarity": "Legendary",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "BlackLegion",
+        "DeathGuard",
+        "ThousandSons",
+        "WorldEaters",
+        "EmperorsChildren"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 1144
+      }
     },
     "I_Block_C007": {
       "name": "Quantum Shield",
       "rarity": "Common",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChance": 35,
+        "blockDamage": 13
+      }
     },
     "I_Block_U007": {
       "name": "Royal Quantum Shield",
       "rarity": "Uncommon",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChance": 35,
+        "blockDamage": 32
+      }
     },
     "I_Block_R007": {
       "name": "Phasing Quantum Shield",
       "rarity": "Rare",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChance": 35,
+        "blockDamage": 80
+      }
     },
     "I_Block_E007": {
       "name": "Ancient Quantum Shield",
       "rarity": "Epic",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChance": 35,
+        "blockDamage": 202
+      }
     },
     "I_Block_L007": {
       "name": "Transdimensional Quantum Shield",
       "rarity": "Legendary",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChance": 35,
+        "blockDamage": 648
+      }
     },
     "I_Block_C008": {
       "name": "Illusion Imagafier",
       "rarity": "Common",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons",
+        "Aeldari",
+        "Tau"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 23
+      }
     },
     "I_Block_U008": {
       "name": "Improved Illusion Imagafier",
       "rarity": "Uncommon",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons",
+        "Aeldari",
+        "Tau"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 55
+      }
     },
     "I_Block_R008": {
       "name": "Refined Illusion Imagafier",
       "rarity": "Rare",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons",
+        "Aeldari",
+        "Tau"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 138
+      }
     },
     "I_Block_E008": {
       "name": "Advanced Illusion Imagafier",
       "rarity": "Epic",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons",
+        "Aeldari",
+        "Tau"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 352
+      }
     },
     "I_Block_L008": {
       "name": "Optimal Illusion Imagafier",
       "rarity": "Legendary",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Necrons",
+        "Aeldari",
+        "Tau"
+      ],
+      "baseStats": {
+        "blockChance": 20,
+        "blockDamage": 1144
+      }
     },
     "I_Booster_Block_C001": {
       "name": "_I_Booster_Block_C001",
       "rarity": "Common",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChanceBonus": 1,
+        "blockDamageBonus": 5
+      }
     },
     "I_Booster_Block_U001": {
       "name": "_I_Booster_Block_U001",
       "rarity": "Uncommon",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChanceBonus": 2,
+        "blockDamageBonus": 13
+      }
     },
     "I_Booster_Block_R001": {
       "name": "_I_Booster_Block_R001",
       "rarity": "Rare",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChanceBonus": 3,
+        "blockDamageBonus": 31
+      }
     },
     "I_Booster_Block_E001": {
       "name": "_I_Booster_Block_E001",
       "rarity": "Epic",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChanceBonus": 4,
+        "blockDamageBonus": 69
+      }
     },
     "I_Booster_Block_L001": {
       "name": "_I_Booster_Block_L001",
       "rarity": "Legendary",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChanceBonus": 5,
+        "blockDamageBonus": 210
+      }
     },
     "I_Booster_Block_C002": {
       "name": "Basic Forcefield Amplifier",
       "rarity": "Common",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Tyranids",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChanceBonus": 1,
+        "blockDamageBonus": 5
+      }
     },
     "I_Booster_Block_U002": {
       "name": "Improved Force Field Amplifier",
       "rarity": "Uncommon",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Tyranids",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChanceBonus": 2,
+        "blockDamageBonus": 13
+      }
     },
     "I_Booster_Block_R002": {
       "name": "Refined Force Field Amplifier",
       "rarity": "Rare",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Tyranids",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChanceBonus": 3,
+        "blockDamageBonus": 31
+      }
     },
     "I_Booster_Block_E002": {
       "name": "Advanced Force Field Amplifier",
       "rarity": "Epic",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Tyranids",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChanceBonus": 4,
+        "blockDamageBonus": 69
+      }
     },
     "I_Booster_Block_L002": {
       "name": "Optimal Force Field Amplifier",
       "rarity": "Legendary",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Tyranids",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChanceBonus": 5,
+        "blockDamageBonus": 210
+      }
     },
     "I_Booster_Block_M002": {
       "name": "Perfected Force Field Amplifier",
       "rarity": "Mythic",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [],
+      "allowedFactions": [
+        "Ultramarines",
+        "Necrons",
+        "Sisterhood",
+        "AstraMilitarum",
+        "BlackLegion",
+        "DeathGuard",
+        "Tyranids",
+        "Orks",
+        "BlackTemplars",
+        "Aeldari",
+        "Tau",
+        "SpaceWolves",
+        "ThousandSons",
+        "DarkAngels",
+        "AdeptusMechanicus",
+        "WorldEaters",
+        "BloodAngels",
+        "Genestealers",
+        "Custodes",
+        "EmperorsChildren",
+        "LeaguesOfVotann",
+        "AdeptusAstartes"
+      ],
+      "baseStats": {
+        "blockChanceBonus": 6,
+        "blockDamageBonus": 350
+      }
     },
     "R_Crit_RelicBoltPistol": {
       "name": "Relic Bolt Pistol",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "ultraInceptorSgt",
+        "ultraTitus",
+        "templSwordBrother",
+        "darkaHellblaster",
+        "spaceHound",
+        "astarCyrus",
+        "darkaSternguard"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Crit_RelicPowerFist": {
       "name": "Relic Power Fist",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "templAggressor",
+        "bloodIntercessor",
+        "darkaTerminator"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Crit_MawClawsOfThyrax": {
       "name": "Maw-Claws of Thyrax",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "tyranTyrantGuard",
+        "tyranWingedPrime",
+        "tyranParasite",
+        "genesPatriarch"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Crit_Vitarus": {
       "name": "Vitarus",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "bloodMephiston"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Crit_TheArdentBlade": {
       "name": "The Ardent Blade",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "adeptCelestine"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Crit_Dw02AdvancedBurstCannon": {
       "name": "DW-02 Advanced Burst Cannon",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "tauCrisis"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Crit_TalonOfHorus": {
       "name": "Talon of Horus",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "blackAbaddon"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Crit_Maugetar": {
       "name": "Maugetar",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "eldarMauganRa"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Crit_ParagonSpear": {
       "name": "Paragon Spear",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "custoKyrus"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 1470
+      }
     },
     "R_Crit_DawnBlade": {
       "name": "Dawn Blade",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "tauFarsight"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Crit_BladeOfTheAncestors": {
       "name": "Blade of the Ancestors",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "votanUthar"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 1470
+      }
     },
     "R_Crit_VolummsMasterArtifice": {
       "name": "Volumm's Master Artifice",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "votanIronmaster"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 25,
+        "critDamage": 1470
+      }
     },
     "R_Crit_MonsterSlayerOfCaliban": {
       "name": "Monster Slayer of Caliban",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "darkaCompanion"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 40,
+        "critDamage": 920
+      }
     },
     "R_Crit_SabreOfSacrifice": {
       "name": "Sabre of Sacrifice",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "astraDreir"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Crit_Lakrimae": {
       "name": "Lakrimae",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "deathTyphus"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Crit_HeadwoppasKillchoppa": {
       "name": "Headwoppa's Killchoppa",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "orksWarboss"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Crit_Helspear": {
       "name": "Helspear",
       "rarity": "Mythic",
-      "type": "I_Crit"
+      "type": "I_Crit",
+      "allowedUnits": [
+        "blackHaarken"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChance": 35,
+        "critDamage": 1050
+      }
     },
     "R_Booster_Crit_KardiocoreGalvanus": {
       "name": "Kardiocore Galvanus",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [
+        "admecDestroyer",
+        "admecRuststalker",
+        "admecMarshall"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "R_Booster_Crit_AmuletOfTheVoidwyrm": {
       "name": "Amulet of the Voidwyrm",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [
+        "genesBiophagus",
+        "genesPrimus",
+        "genesKelermorph"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "R_Booster_Crit_BookOfFate": {
       "name": "Book of Fate",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [
+        "blackPossession",
+        "thousInfernalMaster",
+        "thousSorcerer"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "R_Booster_Crit_TalismanOfRage": {
       "name": "Talisman of Rage",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [
+        "worldJakhal",
+        "worldEightbound",
+        "worldExecutions"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "R_Booster_Crit_NetherRealmCasket": {
       "name": "Nether-Realm Casket",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [
+        "necroWarden",
+        "necroSpyder",
+        "necroDestroyer"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "R_Booster_Crit_IntoxicatingElixir": {
       "name": "Intoxicating Elixir",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [
+        "emperNoiseMarine",
+        "emperKakophonist",
+        "emperFlawlessBlade",
+        "emperExultant"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "R_Booster_Crit_OrbsOfDecay": {
       "name": "Orbs of Decay",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [
+        "deathRotbone",
+        "deathPutrifier",
+        "deathBlightbringer"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "R_Booster_Crit_WyrdmakersHelm": {
       "name": "Wyrdmaker's Helm",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [
+        "spaceWolfPriest"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "R_Booster_Crit_ChaliceOfBaal": {
       "name": "Chalice of Baal",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [
+        "bloodSanguinary"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "R_Booster_Crit_PhasalSubjugator": {
       "name": "Phasal Subjugator",
       "rarity": "Mythic",
-      "type": "I_Booster_Crit"
+      "type": "I_Booster_Crit",
+      "allowedUnits": [
+        "necroOverlord"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "critChanceBonus": 6,
+        "critDamageBonus": 350
+      }
     },
     "R_Defensive_RelicOfLostCadia": {
       "name": "Relic of Lost Cadia",
       "rarity": "Mythic",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [
+        "astraPrimarisPsy",
+        "astraBullgryn",
+        "astraOrdnance"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "hp": 600,
+        "armor": 320
+      }
     },
     "R_Defensive_SupaCyborkBody": {
       "name": "Supa-Cybork Body",
       "rarity": "Mythic",
-      "type": "I_Defensive"
+      "type": "I_Defensive",
+      "allowedUnits": [
+        "orksRuntherd",
+        "orksBigMek",
+        "orksNob"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "hp": 600,
+        "armor": 320
+      }
     },
     "R_Block_DaemonfleshPlate": {
       "name": "Daemonflesh Plate",
       "rarity": "Mythic",
-      "type": "I_Block"
+      "type": "I_Block",
+      "allowedUnits": [
+        "blackTerminator",
+        "deathBlightlord",
+        "thousTerminator",
+        "worldTerminator"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChance": 30,
+        "blockDamage": 1230
+      }
     },
     "R_Booster_Block_PhoenixGem": {
       "name": "Phoenix Gem",
       "rarity": "Mythic",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [
+        "eldarAutarch"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChanceBonus": 6,
+        "blockDamageBonus": 350
+      }
     },
     "R_Booster_Block_NornCrown": {
       "name": "Norn Crown",
       "rarity": "Mythic",
-      "type": "I_Booster_Block"
+      "type": "I_Booster_Block",
+      "allowedUnits": [
+        "tyranNeurothrope"
+      ],
+      "allowedFactions": [],
+      "baseStats": {
+        "blockChanceBonus": 6,
+        "blockDamageBonus": 350
+      }
     }
   }
 }

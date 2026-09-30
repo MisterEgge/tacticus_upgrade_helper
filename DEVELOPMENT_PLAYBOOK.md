@@ -44,6 +44,9 @@ Do not ask for routine approval. Ask only when blocked by missing access, an irr
 - Match structure to task: vertical lists for expandable sequences, tables for comparable rows, cards for independent summaries.
 - Keep summaries visible when details collapse. Make controls local to the item they affect.
 - Equipment must show confirmed equip-now actions with the character and item directly, before planning filters. A count without the named action is insufficient. Keep inventory alternatives distinct from allocated copies; a shared copy cannot be promised to multiple characters.
+- Default equipment work to the selected main raid and saved active War teams. Respect defense reserves, independent offense selection and slot gear caps; War-only characters must not receive unnecessary Legendary goals once their capped stats are met. Keep a manual full-roster scope available.
+- Choose defensive item types from verified stats and faction/unit restrictions. Names such as pauldron or greaves do not establish health/armor stats. Respect the user's Gravis exception and keep missing compatibility evidence explicit.
+- Badge summaries should show owned, goal cost and shortfall. Put useful XP/rarity gating beside each character as a concrete next step; do not add aggregate eligibility columns that fail to identify an action.
 - Keep equipment overviews compact: omit internal slot numbers and long future-recipient lists. Show shop opportunities as character, upgrade item, shop, rotation and price. Preserve pool versus exact-item distinctions, unknown access, and unknown schedules; catalog availability does not confirm current stock. Put transfer references and audits behind details.
 - Preserve responsive behavior and use accessible controls (`button`, `label`, `aria-expanded`, useful names for icon buttons).
 - Browser-exercise meaningful UI changes. A production build does not prove an interaction works.

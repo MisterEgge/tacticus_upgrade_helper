@@ -8,6 +8,8 @@ import { formatAbilityTarget } from "../../src/domain/targetDisplay";
 import { WAR_PLAN_STORAGE_KEY, warBadgeTargets, type WarBadgeTeam, type WarBudgetScope } from "../../src/domain/warBadgeTargets";
 import {badgeShortfalls,type AbilityBadgeInventory} from "../../src/domain/badgeInventory";
 
+import {abilityBudgetNextStep} from "../../src/domain/abilityBudgetNextStep";
+
 const caps = [{level:17,label:"Uncommon · 17"},{level:26,label:"Rare · 26"},{level:35,label:"Epic · 35"},{level:50,label:"Legendary · 50"}];
 const rarities:BadgeRarity[] = ["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
 const rankFloors = [{level:0,label:"Any rank"},{level:9,label:"Silver I+"},{level:12,label:"Gold I+"},{level:15,label:"Diamond I+"}];
@@ -50,15 +52,15 @@ export default function AbilityBadgeBudget({rows,badgeInventory,defenseTeams,off
                     {group.badges.length?group.badges.map(badge=><p className="warSource" key={badge.rarity}><strong>{badge.rarity}: {badge.owned??"?"} owned</strong> · {badge.needed} needed · {badge.shortfall??"?"} short</p>):<p className="warSource">No badges needed for this goal</p>}</div>
                 <div className="campaignSectionStatus"><span className="campaignChevron">{open === group.alliance ? "▴" : "▾"}</span></div>
             </button>
-            {open === group.alliance ? <div className="campaignSectionBody"><div className="tableWrap"><table><thead><tr><th>Badge</th><th>Owned</th><th>Needed for goal</th><th>Still needed</th><th>Level eligible now</th></tr></thead><tbody>{group.badges.map(badge=><tr key={badge.rarity}><td><strong>{badge.rarity}</strong></td><td>{badge.owned??"Sync account"}</td><td>{badge.needed}</td><td><strong>{badge.shortfall??"—"}</strong></td><td>{badge.neededNow} needed · {badge.shortfallNow??"—"} short</td></tr>)}</tbody></table></div>{group.members.length ? <div className="tableWrap"><table>
-                <thead><tr><th>Character</th><th>Active</th><th>Passive</th><th>Badges to target</th></tr></thead>
+            {open === group.alliance ? <div className="campaignSectionBody"><div className="tableWrap"><table><thead><tr><th>Badge</th><th>Owned</th><th>Needed for goal</th><th>Still needed</th></tr></thead><tbody>{group.badges.map(badge=><tr key={badge.rarity}><td><strong>{badge.rarity}</strong></td><td>{badge.owned??"Sync account"}</td><td>{badge.needed}</td><td><strong>{badge.shortfall??"—"}</strong></td></tr>)}</tbody></table></div>{group.members.length ? <div className="tableWrap"><table>
+                <thead><tr><th>Character</th><th>Active</th><th>Passive</th><th>Badges to target</th><th>Next step</th></tr></thead>
                 <tbody>{group.members.map(row => <tr key={row.id}>
                     <td><CharacterName name={row.name} id={row.id}/><small>{rankName(row.rank)} · {row.rarity} · {row.warTarget ? `War target ${row.warTarget}/${row.warTarget}` : `${row.utilityTier} · ${row.utilitySignals.join(" · ")}`}</small>{!row.warTarget?<small>{row.reviewed ? "Community ability target" : row.recommended ? "Planning recommendation" : "Provisional ability target"}</small>:null}</td>
                     <td>{formatAbilityTarget(row.activeLevel,row.activeTarget)}</td><td>{formatAbilityTarget(row.passiveLevel,row.passiveTarget)}</td>
-                    <td>{rarities.filter(rarity => (row.planned[rarity]??0)>0).map(rarity => <small key={rarity}>{row.planned[rarity]} {rarity} · {row.eligible[rarity]??0} level eligible</small>)}</td>
+                    <td>{rarities.filter(rarity => (row.planned[rarity]??0)>0).map(rarity => <small key={rarity}>{row.planned[rarity]} {rarity}</small>)}</td><td>{abilityBudgetNextStep(row)}</td>
                 </tr>)}</tbody>
             </table></div> : <p className="sub">No selected characters need badges through this tier.</p>}</div> : null}
         </section>)}</div>
-        <p className="sub">Shortfall is the selected goal minus owned badges, floored at zero. Level eligible uses current XP and rarity caps; coins are not checked. Badge inventory is shared within each alliance, so individual rows show costs without assigning your badges to a specific character.</p>
+        <p className="sub">Shortfall is the selected goal minus owned badges, floored at zero. Next step respects current XP and rarity caps. Check badges and coins before spending. Badge inventory is shared within each alliance, so individual rows show costs without assigning your badges to a specific character.</p>
     </>;
 }

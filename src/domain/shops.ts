@@ -14,7 +14,7 @@ export type Shop = {
 };
 export type ShopCatalog = {
     schemaVersion: 1; reviewedAt: string; sourceCommit: string; sourceKind: "community";
-    shops: Shop[]; equipment: Record<string, { name: string; rarity: string; type: string }>;
+    shops: Shop[]; equipment: Record<string, { name: string; rarity: string; type: string; allowedUnits?:string[];allowedFactions?:string[];baseStats?:{hp?:number;armor?:number} }>;
 };
 export const CURRENCIES: Record<string, string> = {
     gems: "Blackstone", gold: "Coins", guildCredits: "Guild Credits", guildWarCurrency: "War Credits",

@@ -47,7 +47,7 @@ for (const [id, name, url, notes] of [
     ["web", "Official web store", "https://hub.tacticusgame.com/store", "Official storefront verified. Exact equipment/material bundles, account eligibility and expiry require checking the current offer. No fixed item catalog inferred."]
 ]) shops.push({ id: id!, name: name!, sourceUrl: url!, notes: notes!, coverage: "researching", adRefresh: null, refreshLimit: null, refreshCost: null, offers: [] });
 const equipmentRaw = await readSource("src/fsd/4-entities/equipment/data/new-equipment-data.json");
-const equipment = Object.fromEntries(Object.entries(equipmentRaw).map(([id, item]: [string, any]) => [id, { name: item.name, rarity: item.rarity, type: item.type }]));
+const equipment = Object.fromEntries(Object.entries(equipmentRaw).map(([id, item]: [string, any]) => [id, { name: item.name, rarity: item.rarity, type: item.type, allowedUnits:item.allowedUnits,allowedFactions:item.allowedFactions,baseStats:item.levels[0]?.stats }]));
 const catalog: ShopCatalog = { schemaVersion: 1, reviewedAt: new Date().toISOString(), sourceCommit: commit, sourceKind: "community", shops, equipment };
 await mkdir("data/game", { recursive: true });
 await writeFile("data/game/shops.json.tmp", JSON.stringify(catalog, null, 2) + "\n");
