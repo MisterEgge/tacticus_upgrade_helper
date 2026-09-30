@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
+import ReferenceDetails from "../components/ReferenceDetails";
 import CharacterName from "../components/CharacterName";
 import { totalBadgeCosts, type BadgeRarity } from "../../src/domain/abilityCosts";
 import { budgetForRow, eligibleForBudget, type BudgetRow, type BudgetScope } from "../../src/domain/abilityBudget";
@@ -45,7 +46,7 @@ export default function AbilityBadgeBudget({rows,badgeInventory,defenseTeams,off
         {!isWarScope(scope)?<><label>Current rank<select value={minRank} onChange={event => setMinRank(Number(event.target.value))}>{rankFloors.map(option => <option key={option.level} value={option.level}>{option.label}</option>)}</select></label>
         <label>Plan through<select value={cap} onChange={event => setCap(Number(event.target.value))}>{caps.map(option => <option key={option.level} value={option.level}>{option.label}</option>)}</select></label></>:null}
     </div>
-        <p className="sub">{isWarScope(scope)?"War totals use your saved buildable lineups. Defense slots 1–2 target 35/35; later slots target 26/26. Offense uses each slot’s Gold or Silver target. A character selected on both sides counts once at the higher target. If no plan is saved, the War planner’s default distinct teams are used.":"Useful includes relevant raid roles, unfinished campaign requirements, account priorities and the supplied community table. Situational also includes buildable War options and raid flex roles. See Character Ratings for every character and the exact signals. Rank narrows the current roster; it does not gate ability levels."}</p>
+        <ReferenceDetails label="How badge goals are calculated"><p>{isWarScope(scope)?"War totals use your saved buildable lineups. Defense slots 1–2 target 35/35; later slots target 26/26. Offense uses each slot’s Gold or Silver target. A character selected on both sides counts once at the higher target. If no plan is saved, the War planner’s default distinct teams are used.":"Useful includes relevant raid roles, unfinished campaign requirements, account priorities and the supplied community table. Situational also includes buildable War options and raid flex roles. See Character Ratings for every character and the exact signals. Rank narrows the current roster; it does not gate ability levels."}</p></ReferenceDetails>
         <div className="campaignInvestmentList">{groups.map(group => <section className="campaignInvestmentGroup" key={group.alliance}>
             <button className="campaignSectionToggle" aria-expanded={open === group.alliance} onClick={() => setOpen(open === group.alliance ? null : group.alliance)}>
                 <div><p className="eyebrow">{group.members.length} CHARACTERS</p><h2>{group.alliance}</h2>
@@ -55,12 +56,12 @@ export default function AbilityBadgeBudget({rows,badgeInventory,defenseTeams,off
             {open === group.alliance ? <div className="campaignSectionBody"><div className="tableWrap"><table><thead><tr><th>Badge</th><th>Owned</th><th>Needed for goal</th><th>Still needed</th></tr></thead><tbody>{group.badges.map(badge=><tr key={badge.rarity}><td><strong>{badge.rarity}</strong></td><td>{badge.owned??"Sync account"}</td><td>{badge.needed}</td><td><strong>{badge.shortfall??"—"}</strong></td></tr>)}</tbody></table></div>{group.members.length ? <div className="tableWrap"><table>
                 <thead><tr><th>Character</th><th>Active</th><th>Passive</th><th>Badges to target</th><th>Next step</th></tr></thead>
                 <tbody>{group.members.map(row => <tr key={row.id}>
-                    <td><CharacterName name={row.name} id={row.id}/><small>{rankName(row.rank)} · {row.rarity} · {row.warTarget ? `War target ${row.warTarget}/${row.warTarget}` : `${row.utilityTier} · ${row.utilitySignals.join(" · ")}`}</small>{!row.warTarget?<small>{row.reviewed ? "Community ability target" : row.recommended ? "Planning recommendation" : "Provisional ability target"}</small>:null}</td>
+                    <td><CharacterName name={row.name} id={row.id}/><small>{rankName(row.rank)} · {row.rarity} · {row.warTarget ? `War target ${row.warTarget}/${row.warTarget}` : row.utilityTier}</small>{!row.warTarget?<ReferenceDetails label="Target basis"><p>{row.reviewed ? "Community ability target" : row.recommended ? "Planning recommendation" : "Provisional ability target"}</p><p>{row.utilitySignals.join(" · ")}</p></ReferenceDetails>:null}</td>
                     <td>{formatAbilityTarget(row.activeLevel,row.activeTarget)}</td><td>{formatAbilityTarget(row.passiveLevel,row.passiveTarget)}</td>
                     <td>{rarities.filter(rarity => (row.planned[rarity]??0)>0).map(rarity => <small key={rarity}>{row.planned[rarity]} {rarity}</small>)}</td><td>{abilityBudgetNextStep(row)}</td>
                 </tr>)}</tbody>
             </table></div> : <p className="sub">No selected characters need badges through this tier.</p>}</div> : null}
         </section>)}</div>
-        <p className="sub">Shortfall is the selected goal minus owned badges, floored at zero. Next step respects current XP and rarity caps. Check badges and coins before spending. Badge inventory is shared within each alliance, so individual rows show costs without assigning your badges to a specific character.</p>
+        <p className="sub">Next steps respect XP and rarity. Check badges and coins before spending.</p>
     </>;
 }

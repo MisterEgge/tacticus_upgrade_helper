@@ -1,3 +1,4 @@
+import ReferenceDetails from "../components/ReferenceDetails";
 import Nav from "../components/Nav";
 import CharacterName from "../components/CharacterName";
 import { getAbilityBreakpoints, getCampaignTargets, getCharacterCatalog } from "../lib/catalog";
@@ -41,7 +42,7 @@ export default async function ReviewStatus()
         </section>
         {report ? <section className="panel detailPanel"><div className="sectionTitle"><div>
             <p className="eyebrow">ABILITY RECOMMENDATIONS</p><h2>Every owned character</h2>
-            <p className="sub">All owned characters appear here, including those already at their targets. Planning numbers are account calls; community reviews and their source records are marked separately.</p>
+            <p className="sub">Expand a source record to inspect the recommendation.</p>
         </div><div className="power">{planningRows.length}<strong> planning calls</strong></div></div>
             <div className="tableWrap"><table><thead><tr><th>Character</th><th>Active</th><th>Passive</th><th>Reason and evidence</th><th>Status</th></tr></thead>
                 <tbody>{rows.map(row => {
@@ -52,8 +53,8 @@ export default async function ReviewStatus()
                         <td><CharacterName name={row.name} id={row.id}/></td>
                         <td>{formatAbilityName(row.active)}<small>{formatAbilityTarget(row.activeLevel,row.activeTarget ?? reviewedTarget?.active?.practical)}</small></td>
                         <td>{formatAbilityName(row.passive)}<small>{formatAbilityTarget(row.passiveLevel,row.passiveTarget ?? reviewedTarget?.passive?.practical)}</small></td>
-                        <td>{entry?.note ?? ([...row.campaigns,...row.modes].join(" · ") || "Character-specific guidance")}{entry?.source ? <small><a href={entry.source} target="_blank" rel="noreferrer">Community discussion</a></small> : evidence?.[0]?.url ? <small><a href={evidence[0].url} target="_blank" rel="noreferrer">Breakpoint evidence</a></small> : null}</td>
-                        <td className="below">{row.status}<small>{row.status === "Evidence needed" ? "Verify the existing breakpoint" : row.status === "Planning recommendation" ? "Editorial target; validate against community evidence" : "No recommendation recorded"}</small></td>
+                        <td><ReferenceDetails label="Reason and evidence">{entry?.note ?? ([...row.campaigns,...row.modes].join(" · ") || "Character-specific guidance")}{entry?.source ? <small><a href={entry.source} target="_blank" rel="noreferrer">Community discussion</a></small> : evidence?.[0]?.url ? <small><a href={evidence[0].url} target="_blank" rel="noreferrer">Breakpoint evidence</a></small> : null}</ReferenceDetails></td>
+                        <td className="below">{row.status}</td>
                     </tr>;
                 })}</tbody>
             </table></div>

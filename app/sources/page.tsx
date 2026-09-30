@@ -1,3 +1,4 @@
+import ReferenceDetails from "../components/ReferenceDetails";
 import Nav from "../components/Nav";
 import ShopBrowser from "./ShopBrowser";
 import { getShopCatalog } from "../lib/shops";
@@ -24,7 +25,7 @@ export default async function Sources({ searchParams }: { searchParams: Promise<
     const nodes = query.item && data ? farmNodesFor(query.item, data.battles, progressFromReport(report?.campaignProgress ?? [])) : [];
     return <main><Nav/><header><div><p className="eyebrow">ACQUISITION</p><h1>Shops &amp; Sources</h1>
         <p className="sub">Shop catalogs, weekday rotations, prices and refresh rules. Scheduled offers are possibilities; actual stock must be checked in-game.</p>
-        <p className="sub">Community data reviewed {catalog.reviewedAt.slice(0, 10)}. Account power level: {report?.source.powerLevel ?? "unknown"}. Shop access and live offers are unknown in the player API.</p>
+        <ReferenceDetails label="Catalog coverage"><p>Community data reviewed {catalog.reviewedAt.slice(0, 10)}. Account power level: {report?.source.powerLevel ?? "unknown"}. Shop access and live offers are unknown in the player API.</p></ReferenceDetails>
     </div></header>
         {query.item ? <section className="panel shopSection"><h2>{labels[query.item] ?? query.item}: other acquisition routes</h2>
             {recipe?.craftable ? <p>Crafting recipe: {recipe.recipe?.map((part, i) => <span key={part.material}>{i ? " + " : ""}<Link className="sourceLink" href={`/sources?item=${encodeURIComponent(part.material)}`}>{part.count} × {labels[part.material] ?? part.material}</Link></span>) ?? "Unavailable"}. Owned materials are deducted by the Farming planner.</p> : recipe ? <p>No crafting recipe in the synced material catalog.</p> : <p>Equipment forging and random reward/chest pools are not yet fully cataloged. No exact drop or forge cost is assumed.</p>}

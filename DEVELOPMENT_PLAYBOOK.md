@@ -123,3 +123,10 @@ If any command fails, investigate and fix it before committing. A partial gate i
 - [ ] Regression coverage exists for changed rules or fixed bugs.
 - [ ] Only task-related files are staged.
 - [ ] Remote merge/update succeeded.
+
+### Keep upgrade screens concise
+- Keep next upgrades, shortages, targets and material blockers visible. Put repeated methodology, source notes and target rationale in closed shared reference disclosures.
+- Do not repeat roster names, sync timestamps or checkpoint actions across adjacent sections.
+- Consolidate related table columns (rank and XP level); preserve all source evidence and explicit uncertainty behind accessible disclosures.
+- Secondary audit pages belong under More; mode planning remains directly accessible.
+- Cleanup must preserve equipment eligibility, donor protection, separate offense/defense assignments and unique defense lineups.
