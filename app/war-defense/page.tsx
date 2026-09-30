@@ -20,6 +20,6 @@ export default async function WarDefense()
     const byWinRate=(a:ReturnType<typeof build>,b:ReturnType<typeof build>)=>b.wins/b.used-a.wins/a.used||b.used-a.used;
     const defense=buildDistinctDefenseTeams(defensePlan.teams??[],new Set(units.keys()),10).map(build);
     const offense=(offensePlan.validatedFullLineups??[]).map(build).filter(team=>team.fieldable).sort(byWinRate);
-    return <main><Nav/><header><div><p className="eyebrow">GUILD WAR</p><h1>Guild War lineups</h1><p className="sub">Defense and offense use separate source data and separate character assignments. Defense cores follow observed win rate; flex picks follow observed usage while protecting later cores.</p></div><div className="power">{defense.length}<strong> defense teams</strong></div></header><WarDefensePlanner teams={defense} offenseTeams={offense}/></main>;
+    return <main><Nav/><header><div><p className="eyebrow">GUILD WAR</p><h1>Guild War lineups</h1></div></header><WarDefensePlanner teams={defense} offenseTeams={offense}/></main>;
 
 }
