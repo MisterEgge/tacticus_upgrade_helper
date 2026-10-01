@@ -125,3 +125,6 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 
 .equipmentSources { margin-top: 8px; font-size: 12px; line-height: 1.5; }
 .equipmentSources > div + div { margin-top: 10px; }
+
+.campaignInvestmentGroup > .campaignSectionToggle h3 { padding: 0; background: transparent; }
+.campaignInvestmentGroup > .campaignSectionToggle small { margin: 0; }

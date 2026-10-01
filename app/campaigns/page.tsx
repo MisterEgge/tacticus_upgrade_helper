@@ -1,3 +1,4 @@
+import CampaignRecommendationGroup from "./CampaignRecommendationGroup";
 import CampaignRecommendations from "./CampaignRecommendations";
 import Nav from "../components/Nav";
 import CharacterName from "../components/CharacterName";
@@ -23,7 +24,7 @@ export default async function Campaigns()
         <header><div><p className="eyebrow">CAMPAIGNS</p><h1>Elite 3★ Upgrade Planner</h1>
             <p className="sub">Account data as of report {report.generatedAt}. Community targets remain RESEARCHING until supported by campaign-specific evidence.</p>
         </div></header>
-        {recommendations.length ? <CampaignRecommendations count={recommendations.length}>{Object.entries(Object.groupBy(recommendations.slice(0, 12), row => row.campaign)).map(([campaignName, rows]) => <div className="campaignInvestmentGroup" key={campaignName}><h3>{campaignName} Elite</h3><div className="tableWrap"><table><thead><tr><th>Character</th><th>Target</th><th>Gap</th><th>Why</th></tr></thead><tbody>{rows?.map(row => <tr key={row.campaign + row.characterId}><td><CharacterName name={row.characterName} id={row.characterId}/></td><td><strong>{row.targetRank}</strong></td><td><strong>{row.rankStepsRemaining}</strong><small>rank step(s)</small></td><td><strong>{row.reason}</strong></td></tr>)}</tbody></table></div></div>)}</CampaignRecommendations> : null}
+        {recommendations.length ? <CampaignRecommendations count={recommendations.length}>{Object.entries(Object.groupBy(recommendations.slice(0, 12), row => row.campaign)).map(([campaignName, rows]) => <CampaignRecommendationGroup key={campaignName} name={campaignName} count={rows?.length??0}><div className="tableWrap"><table><thead><tr><th>Character</th><th>Target</th><th>Gap</th><th>Why</th></tr></thead><tbody>{rows?.map(row => <tr key={row.campaign + row.characterId}><td><CharacterName name={row.characterName} id={row.characterId}/></td><td><strong>{row.targetRank}</strong></td><td><strong>{row.rankStepsRemaining}</strong><small>rank step(s)</small></td><td><strong>{row.reason}</strong></td></tr>)}</tbody></table></div></CampaignRecommendationGroup>)}</CampaignRecommendations> : null}
         {Object.entries(targets.campaigns).map(([name, campaign]) =>
         {
 

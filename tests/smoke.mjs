@@ -64,6 +64,7 @@ try
     assert.match(campaigns, /Indomitus Mirror Elite/);
     assert.match(campaigns, /<h2>Indomitus Mirror Elite<\/h2>.*?class="power">38/s);
     assert.match(campaigns, /Elite 3★ Upgrade Planner/);
+    assert.match(campaigns, /class="campaignInvestmentGroup"><button type="button" class="campaignSectionToggle" aria-expanded="true" aria-controls="[^"]+"><h3>Indomitus Mirror Elite<\/h3>/);
     assert.match(campaigns, /class="campaignSectionToggle" aria-expanded="true" aria-controls="[^"]+".*?Account-specific campaign priorities/s);
     assert.match(campaigns, /completed through/);
     assert.doesNotMatch(campaigns, /Tyranids Elite/);
