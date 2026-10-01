@@ -73,3 +73,11 @@ test("manual shop records require valid future observations and expire safely", 
     assert.equal(validateRecord({ ...record, expiresAt: now }, catalog), false);
     assert.equal(refreshesLoggedToday([{ ...record, id: "refresh", kind: "refresh", itemId: "", quantity: 0, expiresAt: now + 3600000 }], "guild", now), 1);
 });
+
+ test("Grand Ceremonial Knife has a Crusade pool route without claiming exact stock",async()=>{
+ const {readFile}=await import("node:fs/promises");
+ const live=JSON.parse(await readFile("data/game/shops.json","utf8")) as ShopCatalog;
+ const rows=equipmentOffersForItem("I_Crit_L010",live,52);
+ assert.ok(rows.some(row=>row.shop==="Crusade Shop"&&row.match==="pool"&&row.rotation==="Daily (UTC)"&&row.price==="715 Crusade Credits"&&row.adRefresh));
+ assert.ok(rows.filter(row=>row.shop==="Crusade Shop").every(row=>row.access==="unknown"));
+ });
