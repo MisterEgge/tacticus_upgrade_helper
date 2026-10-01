@@ -122,3 +122,6 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
  .sectionTitle { padding: 18px 16px; gap: 12px; }
  .detailCopy { padding: 16px; }
 }
+
+.equipmentSources { margin-top: 8px; font-size: 12px; line-height: 1.5; }
+.equipmentSources > div + div { margin-top: 10px; }
