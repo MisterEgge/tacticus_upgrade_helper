@@ -1,0 +1,55 @@
+{
+  "reviewedAt": "2026-10-01",
+  "catalogFile": "data/game/shops.json",
+  "method": "Compared each normalized upstream product with local offer, conditions, costs, schedules, weights, purchase limits and refresh metadata.",
+  "results": [
+    {
+      "id": "crusade",
+      "file": "new-crusade-shop-data.json",
+      "sha": "47e3439cad51b674f2d7772d30da41589de94cb0",
+      "url": "https://github.com/svehera/tacticusplanner/blob/develop/src/fsd/4-entities/shops/data/new-crusade-shop-data.json",
+      "offerCount": 115,
+      "offersUnchanged": true
+    },
+    {
+      "id": "guild",
+      "file": "new-guild-shop.json",
+      "sha": "95c184c2dce25e5b035910a3dc6d3d600fa66da2",
+      "url": "https://github.com/svehera/tacticusplanner/blob/develop/src/fsd/4-entities/shops/data/new-guild-shop.json",
+      "offerCount": 46,
+      "offersUnchanged": true
+    },
+    {
+      "id": "war",
+      "file": "new-war-shop.json",
+      "sha": "eca18adee535deb5dd485f7a04e73369126c2a92",
+      "url": "https://github.com/svehera/tacticusplanner/blob/develop/src/fsd/4-entities/shops/data/new-war-shop.json",
+      "offerCount": 52,
+      "offersUnchanged": true
+    },
+    {
+      "id": "rogue",
+      "file": "new-rogue-trader.json",
+      "sha": "b16a8f8e30ef7ec561dc3ba4b55d66f8845b101e",
+      "url": "https://github.com/svehera/tacticusplanner/blob/develop/src/fsd/4-entities/shops/data/new-rogue-trader.json",
+      "offerCount": 352,
+      "offersUnchanged": true
+    }
+  ],
+  "finding": {
+    "itemId": "I_Crit_L010",
+    "name": "Grand Ceremonial Knife",
+    "shop": "Crusade Shop",
+    "match": "Legendary I_Crit pool, not guaranteed named stock",
+    "rotation": "Daily UTC",
+    "cost": 715,
+    "currency": "Crusade Credits",
+    "adRefresh": true,
+    "access": "Seasonal locks unknown"
+  },
+  "gaps": [
+    "Main Daily Deals exact stock pool and refresh limits remain unverified.",
+    "Limited-time event inventories vary; no stale seasonal offers added.",
+    "Official webstore contents and account eligibility require live inspection."
+  ]
+}

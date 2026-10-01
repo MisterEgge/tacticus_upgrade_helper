@@ -163,6 +163,14 @@ try
     assert.match(shopEquipment,/Kariyan.*?Grand Combat Knife.*?(Guild Shop|Crusade Shop|Rogue Trader)/s);
     assert.match(shopEquipment,/UTC/);
     assert.match(shopEquipment,/Random item pool · check stock/);
+    const tyrith=catalog.characters.find(character=>character.name==='Tyrith');
+    assert.ok(tyrith);
+    report.roster.push({...report.roster[0],id:tyrith.id,name:'Tyrith',items:[{slotId:'Slot1',id:'I_Crit_E010',name:'Adorned Ceremonial Knife',rarity:'Epic',level:1}]});
+    report.equipmentAllocation.buyWatch.push({character:'Tyrith',characterId:tyrith.id,slotId:'Slot1',preferredLegendaryItemIds:['I_Crit_L010'],preferredLegendaryItems:['Grand Ceremonial Knife']});
+    await writeFile(reportPath,JSON.stringify(report));
+    const tyrithPage=await get('/characters/'+tyrith.id);
+    assert.match(tyrithPage,/href="\/sources\?item=I_Crit_L010"/);
+    assert.match(tyrithPage,/Crusade Shop.*?Daily \(UTC\).*?715 Crusade Credits.*?Random item pool.*?Ad refresh/s);
     console.log('PASS: production routes, report refresh, Mirror Elite planner, multi-rank farming, invalid goal and missing inventory states');
 
 }
