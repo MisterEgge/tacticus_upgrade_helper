@@ -7,7 +7,7 @@ import type {EquipmentRow} from "../lib/report";
 import {equipmentTargetRarities,type EquipmentTargetRarity} from "../../src/domain/equipmentTier";
 import type {EquipmentShopOffer} from "../../src/domain/shops";
 
-import {equipmentTeamGoal,selectedWarGearGoals,type EquipmentScope,type EquipmentWarTeam} from "../../src/domain/equipmentGoals";
+import {equipmentTeamGoal,equipmentOptionFitsGoal,selectedWarGearGoals,type EquipmentScope,type EquipmentWarTeam} from "../../src/domain/equipmentGoals";
 import {WAR_PLAN_STORAGE_KEY} from "../../src/domain/warBadgeTargets";
 
 type Source={id:string;name:string;shops:string[];offers:EquipmentShopOffer[]};
@@ -35,7 +35,7 @@ export default function EquipmentTable({rows,needs,raidNames,campaignNames,defen
  const scopedRows=rows.flatMap(row=>{
    const goal=equipmentTeamGoal(row.character,row.rarity,raid,warGoals,scope);
    if(goalScope&&!goal||scope==="campaign"&&!campaign.has(row.character))return [];
-   const slots=row.slots.filter(slot=>goal?slot.itemRarity===goal.rarity&&(goal.priority!==100||["Common",...equipmentTargetRarities,"Mythic"].indexOf(slot.itemRarity)>=["Common",...equipmentTargetRarities,"Mythic"].indexOf(slot.currentRarity)):slot.state==="EQUIP NOW"||slot.state!=="LEVEL UP"&&selected[slot.itemRarity]&&["Common",...equipmentTargetRarities,"Mythic"].indexOf(slot.itemRarity)>=["Common",...equipmentTargetRarities,"Mythic"].indexOf(slot.currentRarity)).map(slot=>goal?{...slot,goalLabel:`${goal.label} · ${goal.rarity} ${goal.level}`}:slot);
+   const slots=row.slots.filter(slot=>goal?equipmentOptionFitsGoal(slot.currentRarity,slot.itemRarity,row.rarity,goal):slot.state==="EQUIP NOW"||slot.state!=="LEVEL UP"&&selected[slot.itemRarity]&&["Common",...equipmentTargetRarities,"Mythic"].indexOf(slot.itemRarity)>=["Common",...equipmentTargetRarities,"Mythic"].indexOf(slot.currentRarity)).map(slot=>goal?{...slot,goalLabel:`${goal.label} · ${goal.rarity} ${goal.level}`}:slot);
    return [{...row,slots,goal}];
  }).sort((a,b)=>(b.goal?.priority??0)-(a.goal?.priority??0));
  const [view,setView]=useState<"shops"|"needed"|"characters">("shops");
@@ -56,7 +56,7 @@ export default function EquipmentTable({rows,needs,raidNames,campaignNames,defen
  const levelActions=scopedRows.flatMap(row=>row.slots.filter(slot=>slot.state==="LEVEL UP").map(slot=>({row,slot})));
  return <>
   <div className="abilityViews"><label>Upgrade focus<select aria-label="Equipment upgrade focus" value={scope} onChange={event=>setScope(event.target.value as EquipmentScope)}><option value="teams">Main raid + active War teams</option><option value="raid">Main raid team</option><option value="war">Active War teams</option><option value="campaign">Incomplete campaigns</option><option value="all">Full roster · manual rarity goals</option></select></label></div>
-  <ReferenceDetails label="Equipment goals and caps"><p>{goalScope?"Raid targets follow character rarity, up to Legendary. Gold War targets Epic 9; Silver War targets Rare 7. Higher-rarity equipped gear already meets the War stat cap. Defense reserves are excluded.":"Choose target rarities for this planning view."}</p></ReferenceDetails>
+  <ReferenceDetails label="Equipment goals and caps"><p>{goalScope?"Raid shows useful Epic and Legendary alternatives where compatible. Gold War minimum is Epic 9; Silver War minimum is Rare 7. These are minimum goals, not downgrade instructions. Higher tiers remain alternatives, not additional required copies. Defense reserves are excluded.":"Choose target rarities for this planning view."}</p></ReferenceDetails>
   <section className="equipmentActions" aria-label="Equip now">
    <h2>Equip now <span className="inlineDetail">{ready.length}</span></h2>
    {ready.length?<div className="tableWrap"><table><thead><tr><th>Character</th><th>Equip this</th><th>Replace</th></tr></thead><tbody>{readyRows.map(row=><tr key={row.character}><td><CharacterName name={row.character} id={row.characterId}/></td><td>{row.slots.map(slot=><div key={slot.slotId}><UpgradeItem slot={slot}/></div>)}</td><td>{row.slots.map(slot=><div key={slot.slotId}>{slot.currentItem}<small>{slot.currentRarity} · level {slot.currentLevel}</small></div>)}</td></tr>)}</tbody></table></div>:<p className="sub">No confirmed equipment allocations ready for this focus.</p>}{outsideReady>0?<button className="sourceLink" onClick={()=>setScope("all")}>{outsideReady} equip-now actions outside this focus · View full roster</button>:null}

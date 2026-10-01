@@ -141,3 +141,5 @@ If any command fails, investigate and fix it before committing. A partial gate i
 - Every stable equipment target must link to its item-specific acquisition page. Show shop, rotation, cost, pool vs exact item and access uncertainty beside character targets.
 - A catalogued rarity/type pool is not guaranteed stock of a named item. Preserve that distinction when deduplicating shop summaries.
 - Recheck upstream shop records before adding guessed schedules; record verified gaps and source versions.
+
+- War gear tiers are minimum goals, never exact-tier replacement instructions. Keep useful Epic/Legendary alternatives visible and check inventory for each; do not suggest Rare armor type corrections for equipped Legendary gear. Alternatives are choices, not additive purchase requirements.
