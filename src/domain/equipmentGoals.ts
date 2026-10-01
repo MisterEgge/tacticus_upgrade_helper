@@ -27,7 +27,19 @@ export function preferredDefensiveItemId(unit:{id:string;faction:string},traits:
 {
  if(!equipmentTypes.includes("I_Defensive")||equipment[currentId]?.type!=="I_Defensive"||traits.includes("MkXGravis"))return null;
  const current=equipment[currentId]?.baseStats;
+ const tiers=["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
+ // Type corrections may offer Epic as well as Legendary, but never Rare for equipped Legendary gear.
+ if(tiers.indexOf(rarity)<Math.min(tiers.indexOf(equipment[currentId]!.rarity),tiers.indexOf("Epic")))return null;
  const order=["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
  if(current&&current.hp&&current.armor&&order.indexOf(rarity)<=order.indexOf(equipment[currentId]!.rarity))return null;
  return Object.entries(equipment).find(([,item])=>item.type==="I_Defensive"&&item.rarity===rarity&&!!item.baseStats?.hp&&!!item.baseStats.armor&&(item.allowedUnits?.includes(unit.id)||item.allowedFactions?.includes(unit.faction)))?.[0]??null;
+}
+
+/** A mode target is a minimum, not an instruction to replace gear with that exact tier. */
+export function equipmentOptionFitsGoal(currentRarity:string,targetRarity:string,characterRarity:string,goal:{rarity:string;priority:number}):boolean
+{
+ const tiers=["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
+ const current=tiers.indexOf(currentRarity),target=tiers.indexOf(targetRarity),character=tiers.indexOf(characterRarity);
+ if(current<0||target<0||character<0)return false;
+ return target<=character&&target>=Math.min(current,tiers.indexOf("Epic"))&&(goal.priority===100||target>=tiers.indexOf(goal.rarity));
 }
