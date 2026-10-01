@@ -136,3 +136,8 @@ If any command fails, investigate and fix it before committing. A partial gate i
 - On narrow screens, anchor dropdowns to the full navigation width rather than an edge item. Support Escape, outside-click dismissal and one open menu at a time.
 - Shared reference disclosures placed directly inside rounded panels need their own padding. Check all insertion contexts, not only table cells.
 - Let flex/grid children shrink and long content wrap. Keep horizontal scrolling on tables, not the enclosing navigation or page.
+
+### Equipment acquisition links
+- Every stable equipment target must link to its item-specific acquisition page. Show shop, rotation, cost, pool vs exact item and access uncertainty beside character targets.
+- A catalogued rarity/type pool is not guaranteed stock of a named item. Preserve that distinction when deduplicating shop summaries.
+- Recheck upstream shop records before adding guessed schedules; record verified gaps and source versions.
