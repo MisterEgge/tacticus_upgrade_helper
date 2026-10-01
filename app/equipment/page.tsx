@@ -1,3 +1,4 @@
+import {equipmentUpgradeOptions} from "../../src/domain/equipmentOptions";
 import Link from "next/link";
 import {getShopCatalog}from "../lib/shops";
 import {getCharacterCatalog}from "../lib/catalog";
@@ -31,13 +32,10 @@ export default async function Equipment()
    return {...row,...(better?{target:shops!.equipment[better]!.name}:{}),...(changed&&row.state==="EQUIP NOW"?{state:inventory.get(better!)?"IN INVENTORY · allocation not assigned":"NEED"}:{}),itemRarity:"Legendary" as const,acquisition:ids.map(id=>({id,name:shops?.equipment[id]?.name??id,shops:shops?sourcesForItem(id,shops):[],offers:shops?equipmentOffersForItem(id,shops,report.source.powerLevel):[]})),available:ids.reduce((total,id)=>total+(inventory.get(id)??0),0),holders:report.roster.flatMap(unit=>unit.items.filter(item=>ids.includes(item.id)&&unit.name!==row.character).map(item=>({character:unit.name,characterId:unit.id,slotId:item.slotId,level:item.level})))};
  });
  const catalogEquipment=shops?.equipment??{};
- const genericSlots=report.roster.flatMap(unit=>unit.items.flatMap(item=>equipmentTargetRarities.flatMap(itemRarity=>
+ const genericSlots=report.roster.flatMap(unit=>unit.items.flatMap(item=>equipmentUpgradeOptions(unit,catalogByName.get(unit.name)??{traits:[],equipment:[]},item,catalogEquipment).flatMap(({id,rarity:itemRarity,reason})=>
  {
-   const bestType=item.slotId==="Slot2"?preferred(unit.name,itemRarity,item.id):null;
-   const id=bestType??tierUpgradeItemId(item.rarity??"",item.id,itemRarity,catalogEquipment);
-   if(!id)return [];
    const available=inventory.get(id)??0;
-   return [{character:unit.name,characterId:unit.id,slotId:item.slotId,currentItem:item.name??item.id,currentRarity:item.rarity??"Unknown",currentLevel:item.level,accountPriority:0,itemRarity,reason:bestType?"Preferred health + armor":"Rarity upgrade",target:catalogEquipment[id]!.name,state:available?"IN INVENTORY · allocation not assigned":"NEED",acquisition:[{id,name:catalogEquipment[id]!.name,shops:shops?sourcesForItem(id,shops):[],offers:shops?equipmentOffersForItem(id,shops,report.source.powerLevel):[]}],available,holders:report.roster.flatMap(holder=>holder.items.filter(held=>held.id===id&&holder.id!==unit.id).map(held=>({character:holder.name,characterId:holder.id,slotId:held.slotId,level:held.level})))}];
+   return [{character:unit.name,characterId:unit.id,slotId:item.slotId,currentItem:item.name??item.id,currentRarity:item.rarity??"Unknown",currentLevel:item.level,accountPriority:0,itemRarity,reason,target:catalogEquipment[id]!.name,state:available?"IN INVENTORY · allocation not assigned":"NEED",acquisition:[{id,name:catalogEquipment[id]!.name,shops:shops?sourcesForItem(id,shops):[],offers:shops?equipmentOffersForItem(id,shops,report.source.powerLevel):[]}],available,holders:report.roster.flatMap(holder=>holder.items.filter(held=>held.id===id&&holder.id!==unit.id).map(held=>({character:holder.name,characterId:holder.id,slotId:held.slotId,level:held.level})))}];
  })));
  const levelSlots=report.roster.flatMap(unit=>unit.items.flatMap(item=>[{rarity:"Rare" as const,level:7},{rarity:"Epic" as const,level:9}].flatMap(goal=>item.rarity===goal.rarity&&item.level<goal.level&&!preferred(unit.name,goal.rarity,item.id)?[{character:unit.name,characterId:unit.id,slotId:item.slotId,currentItem:item.name??item.id,currentRarity:item.rarity,currentLevel:item.level,accountPriority:0,itemRarity:goal.rarity,target:`${item.name??item.id} · level ${goal.level}`,state:"LEVEL UP",acquisition:[],available:0,holders:[]}]:[])));
  const tieredSlots=[...slots,...levelSlots,...genericSlots.filter(option=>!slots.some(slot=>slot.characterId===option.characterId&&slot.slotId===option.slotId&&slot.itemRarity===option.itemRarity))];

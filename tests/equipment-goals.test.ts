@@ -1,3 +1,4 @@
+import {equipmentUpgradeOptions} from "../src/domain/equipmentOptions";
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
@@ -43,4 +44,23 @@ test("Legendary Rho armor correction offers Epic and Legendary but never Rare",(
  assert.equal(equipmentOptionFitsGoal("Legendary","Epic","Legendary",goal),true);
  assert.equal(equipmentOptionFitsGoal("Legendary","Legendary","Legendary",goal),true);
  assert.equal(equipmentOptionFitsGoal("Rare","Epic","Legendary",{rarity:"Legendary",priority:100}),true);
+});
+
+test("shared equipment alternatives audit every owned character without exceeding character rarity",()=>{
+ const report=JSON.parse(readFileSync("output/upgrade-report.json","utf8"));
+ const catalog=JSON.parse(readFileSync("data/character_catalog.json","utf8"));
+ const equipment=JSON.parse(readFileSync("data/game/shops.json","utf8")).equipment;
+ const tiers=["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
+ let checked=0;
+ for(const unit of report.roster){const meta=catalog.characters.find((row:any)=>row.id===unit.id);if(!meta)continue;
+ for(const item of unit.items){checked++;for(const option of equipmentUpgradeOptions(unit,meta,item,equipment)){
+ assert.ok(tiers.indexOf(option.rarity)<=tiers.indexOf(unit.rarity),unit.name);
+ assert.ok(tiers.indexOf(option.rarity)>=Math.min(tiers.indexOf(item.rarity),3),unit.name);
+ assert.equal(equipment[option.id].type,equipment[item.id].type,unit.name);
+ }} }
+ assert.ok(checked>200);
+ const rho=report.roster.find((unit:any)=>unit.name==="Exitor-Rho");
+ const meta=catalog.characters.find((row:any)=>row.id===rho.id);
+ const options=equipmentUpgradeOptions(rho,meta,rho.items.find((item:any)=>item.slotId==="Slot2"),equipment);
+ assert.deepEqual(options.map(option=>option.rarity),["Epic","Legendary"]);
 });
