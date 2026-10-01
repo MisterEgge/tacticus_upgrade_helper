@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
-import {selectedWarGearGoals,equipmentTeamGoal,preferredDefensiveItemId} from "../src/domain/equipmentGoals";
+import {selectedWarGearGoals,equipmentTeamGoal,equipmentOptionFitsGoal,preferredDefensiveItemId} from "../src/domain/equipmentGoals";
 
 test("equipment follows five active defense slots, excludes reserves, and retains independent offense targets",()=>{
  const defense=Array.from({length:10},(_,i)=>({name:`Defense${i}`,used:100-i,members:[{name:`D${i}`}]}));
@@ -29,4 +29,18 @@ test("preferred armor uses verified stats and faction compatibility rather than 
  assert.equal(preferredDefensiveItemId({id:"bellator",faction:"Ultramarines"},["MkXGravis"],["I_Defensive"],"Epic","I_Defensive_E003",equipment),null);
  assert.equal(preferredDefensiveItemId({id:"unknown",faction:"unknown"},[],["I_Defensive"],"Epic","I_Defensive_E003",equipment),null);
  assert.equal(preferredDefensiveItemId(ork,[],["I_Defensive"],"Epic","I_Crit_E001",equipment),null);
+});
+
+test("Legendary Rho armor correction offers Epic and Legendary but never Rare",()=>{
+ const equipment=JSON.parse(readFileSync("data/game/shops.json","utf8")).equipment;
+ const unit={id:"admechRho",faction:"AdeptusMechanicus"};
+ assert.equal(preferredDefensiveItemId(unit,[],["I_Defensive"],"Rare","I_Defensive_L003",equipment),null);
+ const epic=preferredDefensiveItemId(unit,[],["I_Defensive"],"Epic","I_Defensive_L003",equipment);
+ const legendary=preferredDefensiveItemId(unit,[],["I_Defensive"],"Legendary","I_Defensive_L003",equipment);
+ assert.ok(epic);assert.ok(legendary);
+ const goal={rarity:"Rare",priority:60};
+ assert.equal(equipmentOptionFitsGoal("Legendary","Rare","Legendary",goal),false);
+ assert.equal(equipmentOptionFitsGoal("Legendary","Epic","Legendary",goal),true);
+ assert.equal(equipmentOptionFitsGoal("Legendary","Legendary","Legendary",goal),true);
+ assert.equal(equipmentOptionFitsGoal("Rare","Epic","Legendary",{rarity:"Legendary",priority:100}),true);
 });
