@@ -145,3 +145,5 @@ If any command fails, investigate and fix it before committing. A partial gate i
 - War gear tiers are minimum goals, never exact-tier replacement instructions. Keep useful Epic/Legendary alternatives visible and check inventory for each; do not suggest Rare armor type corrections for equipped Legendary gear. Alternatives are choices, not additive purchase requirements.
 
 - Equipment and character detail pages must use the same shared replacement generator. Audit the entire synced roster with invariant checks; never assume a fix on one page repairs independently generated recommendations elsewhere. Character rarity limits equip eligibility, but does not force every upgrade to that rarity. War status compares capped readiness; it does not recommend replacements.
+
+- Campaign recommendation summaries should collapse independently, retain their title/count, and reuse the campaign chevron button with expanded state and a controlled body.
