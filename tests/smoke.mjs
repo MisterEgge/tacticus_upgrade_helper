@@ -165,12 +165,22 @@ try
     assert.match(shopEquipment,/Random item pool · check stock/);
     const tyrith=catalog.characters.find(character=>character.name==='Tyrith');
     assert.ok(tyrith);
-    report.roster.push({...report.roster[0],id:tyrith.id,name:'Tyrith',items:[{slotId:'Slot1',id:'I_Crit_E010',name:'Adorned Ceremonial Knife',rarity:'Epic',level:1}]});
+    report.roster.push({...report.roster[0],id:tyrith.id,name:'Tyrith',rarity:'Legendary',items:[{slotId:'Slot1',id:'I_Crit_E010',name:'Adorned Ceremonial Knife',rarity:'Epic',level:1}]});
     report.equipmentAllocation.buyWatch.push({character:'Tyrith',characterId:tyrith.id,slotId:'Slot1',preferredLegendaryItemIds:['I_Crit_L010'],preferredLegendaryItems:['Grand Ceremonial Knife']});
     await writeFile(reportPath,JSON.stringify(report));
     const tyrithPage=await get('/characters/'+tyrith.id);
     assert.match(tyrithPage,/href="\/sources\?item=I_Crit_L010"/);
     assert.match(tyrithPage,/Crusade Shop.*?Daily \(UTC\).*?715 Crusade Credits.*?Random item pool.*?Ad refresh/s);
+    const rho=catalog.characters.find(character=>character.name==='Exitor-Rho');
+    assert.ok(rho);
+    report.roster.push({...report.roster[0],id:rho.id,name:rho.name,faction:'AdeptusMechanicus',rarity:'Legendary',items:[{slotId:'Slot2',id:'I_Defensive_L003',name:'Grand Plated Greaves',rarity:'Legendary',level:1}]});
+    report.unequippedInventory.push({id:'I_Defensive_L004',amount:1,level:1});
+    await writeFile(reportPath,JSON.stringify(report));
+    const rhoPage=await get('/characters/'+rho.id);
+    assert.match(rhoPage,/sources\?item=I_Defensive_E004/);
+    assert.match(rhoPage,/sources\?item=I_Defensive_L004/);
+    assert.match(rhoPage,/Legendary · 1 spare copies in synced inventory/);
+    assert.doesNotMatch(rhoPage,/Fine Mantle|sources\?item=I_Defensive_R004/);
     console.log('PASS: production routes, report refresh, Mirror Elite planner, multi-rank farming, invalid goal and missing inventory states');
 
 }
