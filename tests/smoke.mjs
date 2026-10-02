@@ -44,6 +44,7 @@ try
     };
     assert.match(await get('/campaigns'), /Account data unavailable/);
     assert.match(await get('/abilities'), /npm run refresh/);
+    assert.match(await get('/orbs'), /npm run refresh/);
     assert.match(await get('/material-completion'), /Account or farming data unavailable/);
     assert.match(await get('/elite-farming-gaps'), /Elite access unknown/);
     const report = {
@@ -59,6 +60,13 @@ try
     const reportPath = path.join(cwd, 'output/upgrade-report.json');
     await writeFile(reportPath, JSON.stringify(report));
     assert.match(await get('/abilities'), /Uncommon: \? owned/);
+    assert.match(await get('/orbs'), /Orb inventory unavailable/);
+    report.orbInventory = { Xenos: [{ rarity: 'Uncommon', amount: 7 }] };
+    await writeFile(reportPath, JSON.stringify(report));
+    const orbs = await get('/orbs');
+    assert.match(orbs, /Orb priorities/);
+    assert.match(orbs, /Xenos · Uncommon<\/strong><\/td><td>7<\/td><td>10<\/td><td><strong>3/);
+    assert.doesNotMatch(orbs, /Synthetic excluded unit/);
     report.abilityBadges = { Xenos: [{ rarity: 'Uncommon', amount: 7 }] };
     await writeFile(reportPath, JSON.stringify(report));
     assert.match(await get('/abilities'), /Uncommon: 7 owned/);
@@ -81,7 +89,7 @@ try
     const ratings = await get('/ratings');
     assert.match(ratings, new RegExp(`${catalog.characters.length}<strong> catalog characters`));
     assert.match(ratings, /No tracked signal/);
-    for (const route of ['/', '/equipment', '/equipment-demand', '/abilities', '/ratings', '/characters', '/characters/necroSpyder', '/inventory', '/guild-raid', '/war-defense'])
+    for (const route of ['/', '/equipment', '/equipment-demand', '/abilities', '/orbs', '/ratings', '/characters', '/characters/necroSpyder', '/inventory', '/guild-raid', '/war-defense'])
     {
 
         const html = await get(route);
@@ -177,9 +185,10 @@ try
     const lineup = await get('/war-defense');
     assert.match(lineup, /class="warTeamTitle"[^>]*>Imospekh \/ Aleph-Null \/ Makhotep \/ Thutmose \/ Anuphet/);
     assert.match(lineup, /class="warTeamPortraits"[^>]*>.*?alt="Imospekh".*?alt="Makhotep"/s);
-    for(const name of ['Trajann','Kariyan']){const character=catalog.characters.find(row=>row.name===name);report.roster.push({...report.roster[0],id:character.id,name,rarity:'Legendary'});}
+    for(const name of ['Trajann','Kariyan']){const character=catalog.characters.find(row=>row.name===name);report.roster.push({...report.roster[0],id:character.id,name,rarity:'Legendary',progressionIndex:12});}
     report.roster.find(unit=>unit.name==='Imospekh').items=[{slotId:'Slot1',id:'I_Crit_E001',name:'War test weapon',rarity:'Epic',level:5}];
     report.roster.find(unit=>unit.name==='Imospekh').rarity='Legendary';
+    report.roster.find(unit=>unit.name==='Imospekh').progressionIndex=12;
     report.equipmentAllocation.equipNow=[{character:"Trajann",characterId:catalog.characters.find(character=>character.name==="Trajann").id,slotId:"Slot1",currentItem:"Old test item",currentRarity:"Epic",currentLevel:5,accountPriority:90,recommendedItemId:"I_Crit_L001",recommendedItem:"Grand Combat Knife"}];
     report.equipmentAllocation.buyWatch=[{character:"Kariyan",characterId:catalog.characters.find(character=>character.name==="Kariyan").id,slotId:"Slot1",currentItem:"Other test item",currentRarity:"Epic",currentLevel:4,accountPriority:80,recommendedItemId:"I_Crit_L001",recommendedItem:"Grand Combat Knife"}];
     report.unequippedInventory=[{id:"I_Crit_L001",amount:1,level:1}];
@@ -204,7 +213,7 @@ try
     assert.match(shopEquipment,/Random item pool · check stock/);
     const tyrith=catalog.characters.find(character=>character.name==='Tyrith');
     assert.ok(tyrith);
-    report.roster.push({...report.roster[0],id:tyrith.id,name:'Tyrith',rarity:'Legendary',items:[{slotId:'Slot1',id:'I_Crit_E010',name:'Adorned Ceremonial Knife',rarity:'Epic',level:1}]});
+    report.roster.push({...report.roster[0],id:tyrith.id,name:'Tyrith',rarity:'Legendary',progressionIndex:12,items:[{slotId:'Slot1',id:'I_Crit_E010',name:'Adorned Ceremonial Knife',rarity:'Epic',level:1}]});
     report.equipmentAllocation.buyWatch.push({character:'Tyrith',characterId:tyrith.id,slotId:'Slot1',preferredLegendaryItemIds:['I_Crit_L010'],preferredLegendaryItems:['Grand Ceremonial Knife']});
     await writeFile(reportPath,JSON.stringify(report));
     const tyrithPage=await get('/characters/'+tyrith.id);
@@ -212,7 +221,7 @@ try
     assert.match(tyrithPage,/Crusade Shop.*?Daily \(UTC\).*?715 Crusade Credits.*?Random item pool.*?Ad refresh/s);
     const rho=catalog.characters.find(character=>character.name==='Exitor-Rho');
     assert.ok(rho);
-    report.roster.push({...report.roster[0],id:rho.id,name:rho.name,faction:'AdeptusMechanicus',rarity:'Legendary',items:[{slotId:'Slot2',id:'I_Defensive_L003',name:'Grand Plated Greaves',rarity:'Legendary',level:1}]});
+    report.roster.push({...report.roster[0],id:rho.id,name:rho.name,faction:'AdeptusMechanicus',rarity:'Legendary',progressionIndex:12,items:[{slotId:'Slot2',id:'I_Defensive_L003',name:'Grand Plated Greaves',rarity:'Legendary',progressionIndex:12,level:1}]});
     report.unequippedInventory.push({id:'I_Defensive_L004',amount:1,level:1});
     await writeFile(reportPath,JSON.stringify(report));
     const rhoPage=await get('/characters/'+rho.id);
@@ -223,7 +232,7 @@ try
     // Automatic saved Raid focus resolves against the current roster on every route.
     for (const name of ['Laviscus', 'Gulgortz', 'Aesoth']) {
         const character = catalog.characters.find(row => row.name === name);
-        report.roster.push({ ...report.roster[0], id: character.id, name, rarity: 'Legendary', rank: 12, xpLevel: 36,
+        report.roster.push({ ...report.roster[0], id: character.id, name, rarity: 'Legendary', progressionIndex: 12, rank: 12, xpLevel: 36,
             abilities: [{ id: 'a', level: 36 }, { id: 'p', level: 36 }] });
     }
     await writeFile(reportPath, JSON.stringify(report));
@@ -238,7 +247,7 @@ try
     };
     assert.match(await withAutoFocus('/guild-raid'), /Mortarion · Kariyan · Laviscus · Trajann · Gulgortz · Aesoth/);
     const atlacoya = catalog.characters.find(row => row.name === 'Atlacoya');
-    report.roster.push({ ...report.roster[0], id: atlacoya.id, name: atlacoya.name, rarity: 'Rare', rank: 0, xpLevel: 1 });
+    report.roster.push({ ...report.roster[0], id: atlacoya.id, name: atlacoya.name, rarity: 'Rare', progressionIndex: 6, rank: 0, xpLevel: 1 });
     report.generatedAt = '2026-10-02T12:00:00.000Z';
     await writeFile(reportPath, JSON.stringify(report));
     const updatedRaid = await withAutoFocus('/guild-raid');
