@@ -15,11 +15,13 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
         descriptors.set(key, Object.getOwnPropertyDescriptor(globalThis, key));
         Object.defineProperty(globalThis, key, { configurable: true, value: dom.window[key as keyof typeof dom.window] });
     }
-    const { render, fireEvent, cleanup, within, waitFor } = await import("@testing-library/react");
+    const { render, fireEvent, cleanup, within, waitFor, act } = await import("@testing-library/react");
     const oldFetch = globalThis.fetch;
-    suite.after(() => {
+    suite.after(async () => {
+        // Unmount work must settle while its browser globals still exist.
+        await act(async () => { cleanup(); });
         globalThis.fetch = oldFetch;
-        cleanup(); dom.window.close();
+        dom.window.close();
         for (const [key, descriptor] of descriptors) {
             if (descriptor) Object.defineProperty(globalThis, key, descriptor);
             else Reflect.deleteProperty(globalThis, key);
@@ -85,5 +87,4 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     assert.deepEqual([1, 2].map(slot => (view.getByLabelText(`Flex slot ${slot}`) as HTMLSelectElement).value), ["Ragnar", "Helbrecht"]);
     assert.ok(view.getByText("RAID BUILD ORDER"));
     assert.ok(upgradeTable().getByRole("link", { name: /^Helbrecht(?: Helbrecht)?$/ }));
-    cleanup();
 });

@@ -14,9 +14,9 @@ test("Elite gap interactions work with synthetic account data", async suite => {
         descriptors.set(key, Object.getOwnPropertyDescriptor(globalThis, key));
         Object.defineProperty(globalThis, key, { configurable: true, value: dom.window[key as keyof typeof dom.window] });
     }
-    const { render, fireEvent, cleanup } = await import("@testing-library/react");
-    suite.after(() => {
-        cleanup();
+    const { render, fireEvent, cleanup, act } = await import("@testing-library/react");
+    suite.after(async () => {
+        await act(async () => { cleanup(); });
         dom.window.close();
         for (const [key, descriptor] of descriptors) {
             if (descriptor) Object.defineProperty(globalThis, key, descriptor);
