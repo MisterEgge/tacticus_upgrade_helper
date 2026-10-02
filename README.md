@@ -50,6 +50,12 @@ Resources → Material completion shows lifetime upgrade demand through a select
 
 “Done — owned” means no remaining owned-character uses through the ceiling; “Done — catalog” also has no unowned-character uses in the synced catalog. “Stocked” means inventory covers remaining uses. New characters, future ranks, Machines of War and other sinks remain outside this calculation. Unknown progress or recipes cannot prove completion; unallocated inventory is not a salvage recommendation.
 
+### Elite farming gaps
+
+Resources → Elite farming gaps lists every farmable upgrade material without a confirmed unlocked Elite source. Any unlocked Elite alternative removes the material. Locked nodes, unknown progress, and absent Elite sources are separate states. Mythic materials are hidden by default; stocked/finished materials can also be hidden. The selected rank ceiling controls owned demand, while the source audit always covers the full synced material catalog.
+
+Campaign opportunities show each material's earliest locked Elite unlock and compare expected farming energy with the best confirmed unlocked alternative. Each campaign is an independent option, so overlapping savings cannot be added together. Estimates exclude campaign-clear energy, character investment and daily attempt limits. Unknown coverage/demand never produces a guessed campaign recommendation.
+
 ## Dashboard development
 
 Use Node 24 and `npm ci`. Set `TACTICUS_API_KEY` in a local `.env`, then run
