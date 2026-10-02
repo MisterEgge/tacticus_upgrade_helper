@@ -149,3 +149,5 @@ If any command fails, investigate and fix it before committing. A partial gate i
 - Campaign recommendation summaries should collapse independently, retain their title/count, and reuse the campaign chevron button with expanded state and a controlled body.
 
 - Grouped campaign recommendations need independent collapse controls at both section and campaign level. Preserve each group’s expanded state when collapsing its parent.
+
+- Material completion must distinguish no remaining uses from inventory covering those uses. Expand every crafting level, allocate shared stock once, and separate unowned exposure. Limit completion to a named catalog and rank ceiling; missing recipes, progress and future placeholders never prove permanent completion. Rank rows contain costs to leave that rank, so a target ceiling excludes its own row.

@@ -1,4 +1,5 @@
 import ReferenceDetails from "../components/ReferenceDetails";
+import Link from "next/link";
 import Nav from "../components/Nav";
 import { getReport } from "../lib/report";
 import { getCharacterCatalog } from "../lib/catalog";
@@ -14,6 +15,7 @@ export default async function InventoryCleanout()
     const unknown = rows.filter(row => row.status === "UNKNOWN — DO NOT SCRAP");
     return <main><Nav/><header><div><p className="eyebrow">INVENTORY</p><h1>Inventory Cleanout</h1><p className="sub">Review excess copies. Unknown compatibility is never scrap-safe.</p></div><div className="power">{safe.reduce((sum,row)=>sum+row.scrap,0)}<strong> copies identified</strong></div></header>
         <section className="cards compact"><div className="card"><strong>{safe.length}</strong><span>Items with excess copies</span></div><div className="card"><strong>{unknown.length}</strong><span>Compatibility unresolved</span><small>Do not scrap these yet</small></div></section>
+        <p className="sub"><Link className="sourceLink" href="/material-completion">Review lifetime upgrade-material demand</Link> to see remaining uses and stock coverage.</p>
         <section className="panel tablePanel"><div className="tableWrap"><table><thead><tr><th>Item</th><th>Owned</th><th>Keep</th><th>Scrap</th><th>Status / reason</th></tr></thead><tbody>{rows.map(row=><tr key={row.id}><td><strong>{row.name??row.id}</strong></td><td>{row.amount}</td><td>{row.keep}</td><td><strong>{row.scrap||"—"}</strong></td><td><strong>{row.status}</strong><small>{row.reason}</small></td></tr>)}</tbody></table></div></section>
         <ReferenceDetails label="Salvage safety checks"><p>Items are only marked scrap-safe when every verified same-family recipient meets or exceeds that rarity. The recipient pool comes from the synced game-wide character equipment types. If any compatible character is still locked, or an equipped slot cannot be proven, the item remains UNKNOWN rather than being suggested for salvage.</p></ReferenceDetails>
     </main>;

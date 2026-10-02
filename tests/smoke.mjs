@@ -44,6 +44,7 @@ try
     };
     assert.match(await get('/campaigns'), /Account data unavailable/);
     assert.match(await get('/abilities'), /npm run refresh/);
+    assert.match(await get('/material-completion'), /Account or farming data unavailable/);
     const report = {
         generatedAt: '2026-09-01T12:00:00.000Z',
         source: { player: 'SYNTHETIC TEST FIXTURE', powerLevel: 52 },
@@ -122,6 +123,15 @@ try
     assert.match(await get('/review-status'), /Every owned character/);
     assert.match(await get('/sources'), /Shops &amp; Sources/);
     assert.match(await get('/farming'), /Expected \/ battle/);
+    const completion = await get('/material-completion');
+    assert.match(completion, /Material Completion/);
+    assert.match(completion, /current character catalog through Adamantine II/);
+    assert.match(completion, /Engram Neurochip/);
+    assert.match(completion, /Done for owned roster/);
+    assert.match(completion, /Unowned demand/);
+    assert.doesNotMatch(completion, /Unknown future recipe/);
+    assert.match(await get('/material-completion?target=17'), /current character catalog through Diamond III/);
+    assert.match(await get('/material-completion?target=999'), /Choose a supported rank ceiling/);
     const farming = await get('/farming?character=necroSpyder&target=3');
     assert.match(farming, /Synthetic excluded unit/);
     assert.match(farming, /Calculate materials/);
@@ -130,6 +140,7 @@ try
     delete report.upgradeInventory;
     await writeFile(reportPath, JSON.stringify(report));
     assert.match(await get('/farming'), /Upgrade inventory unavailable/);
+    assert.match(await get('/material-completion'), /Upgrade inventory unavailable/);
     for (const name of ['Imospekh', 'Anuphet', 'Thutmose', 'Makhotep'])
     {
         const character = catalog.characters.find(row => row.name === name);

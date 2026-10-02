@@ -44,6 +44,12 @@ This separation lets a new player export regenerate the report without rewriting
 
 `npm run refresh` fetches Player, Guild, and Guild Raid data. Guild Raid hero details provide the latest observed per-character raid power when the Player API response supplies the account user ID.
 
+### Material completion
+
+Resources → Material completion shows lifetime upgrade demand through a selected rank ceiling (Adamantine II by default). It includes nested crafting ingredients, skips equipped slots, and shares finished/intermediate/base inventory once across the owned roster. Search by material or recipient and filter for finished materials, stocked requirements, shortages, or unowned users.
+
+“Done — owned” means no remaining owned-character uses through the ceiling; “Done — catalog” also has no unowned-character uses in the synced catalog. “Stocked” means inventory covers remaining uses. New characters, future ranks, Machines of War and other sinks remain outside this calculation. Unknown progress or recipes cannot prove completion; unallocated inventory is not a salvage recommendation.
+
 ## Dashboard development
 
 Use Node 24 and `npm ci`. Set `TACTICUS_API_KEY` in a local `.env`, then run
