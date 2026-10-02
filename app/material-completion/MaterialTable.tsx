@@ -1,26 +1,13 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import Recipients from "../components/MaterialRecipients";
 import DataTable, { type Column, type Filter } from "../components/DataTable";
-import type { MaterialCompletionRow, MaterialRecipient } from "../../src/domain/materialCompletion";
+import type { MaterialCompletionRow } from "../../src/domain/materialCompletion";
 
 export const STATUS_LABELS = {
     "done-catalog": "Done — catalog", "done-owned": "Done — owned",
     stocked: "Stocked", farming: "Still needed", untracked: "No recorded use"
 } as const;
-
-function Recipients({ recipients }: { recipients: MaterialRecipient[] }) {
-    const [expanded, setExpanded] = useState(false);
-    return <details className="referenceDetails" onToggle={event => setExpanded(event.currentTarget.open)}>
-        <summary>{recipients.length} characters</summary>
-        {expanded && <ul>{recipients.map(recipient => <li key={recipient.id}>
-            <Link href={`/characters/${encodeURIComponent(recipient.id)}`}>{recipient.name}</Link>
-            <small>{recipient.owned ? "Owned" : "Unowned"} · {recipient.remaining.toLocaleString()} remaining
-                {recipient.remaining > 0 && ` (${recipient.direct.toLocaleString()} direct + ${recipient.crafting.toLocaleString()} through crafting)`}
-                {` · ${recipient.lifetime.toLocaleString()} total through ceiling`}</small>
-        </li>)}</ul>}
-    </details>;
-}
 
 export default function MaterialTable({ rows }: { rows: MaterialCompletionRow[] }) {
     const columns: Column<MaterialCompletionRow>[] = [

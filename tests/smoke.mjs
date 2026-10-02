@@ -45,6 +45,7 @@ try
     assert.match(await get('/campaigns'), /Account data unavailable/);
     assert.match(await get('/abilities'), /npm run refresh/);
     assert.match(await get('/material-completion'), /Account or farming data unavailable/);
+    assert.match(await get('/elite-farming-gaps'), /Elite access unknown/);
     const report = {
         generatedAt: '2026-09-01T12:00:00.000Z',
         source: { player: 'SYNTHETIC TEST FIXTURE', powerLevel: 52 },
@@ -132,6 +133,29 @@ try
     assert.doesNotMatch(completion, /Unknown future recipe/);
     assert.match(await get('/material-completion?target=17'), /current character catalog through Diamond III/);
     assert.match(await get('/material-completion?target=999'), /Choose a supported rank ceiling/);
+    const eliteGaps = await get('/elite-farming-gaps');
+    assert.match(eliteGaps, /Elite Farming Gaps/);
+    assert.match(eliteGaps, /Campaign unlock opportunities/);
+    assert.match(eliteGaps, /Include Mythic materials/);
+    assert.doesNotMatch(eliteGaps, /type="checkbox" name="mythic"[^>]*checked/);
+    assert.doesNotMatch(eliteGaps, /<small>Mythic<\/small>/);
+    assert.match(await get('/elite-farming-gaps?mythic=1'), /<small>Mythic<\/small>/);
+    assert.match(eliteGaps, /Unknown|No Elite source in synced data/);
+    assert.match(await get('/elite-farming-gaps?mythic=1&needed=1&target=17'), /Owned demand through Diamond III/);
+    assert.match(await get('/elite-farming-gaps?target=999'), /Choose a supported rank ceiling/);
+    assert.match(await get('/farming'), /href="\/elite-farming-gaps"/);
+    assert.match(completion, /href="\/elite-farming-gaps\?target=19"/);
+    const savedProgress = report.campaignProgress;
+    const battleData = JSON.parse(await readFile(path.join(root, 'data/game/campaign-battles.json'), 'utf8'));
+    const eliteNames = [...new Set(Object.values(battleData).filter(battle => battle.campaignType === 'Elite').map(battle => battle.campaign))];
+    report.campaignProgress = eliteNames.map(name => ({ id: name, name, type: 'Elite', highestUnlockedBattle: 0, highestCompletedBattle: 0, battles: [] }));
+    await writeFile(reportPath, JSON.stringify(report));
+    const lockedGaps = await get('/elite-farming-gaps');
+    assert.match(lockedGaps, /Elite nodes locked/);
+    assert.match(lockedGaps, /class="campaignSectionToggle" aria-expanded="false" aria-controls="[^"]+"/);
+    assert.match(lockedGaps, /next useful unlock: battle/);
+    report.campaignProgress = savedProgress;
+    await writeFile(reportPath, JSON.stringify(report));
     const farming = await get('/farming?character=necroSpyder&target=3');
     assert.match(farming, /Synthetic excluded unit/);
     assert.match(farming, /Calculate materials/);
@@ -141,6 +165,7 @@ try
     await writeFile(reportPath, JSON.stringify(report));
     assert.match(await get('/farming'), /Upgrade inventory unavailable/);
     assert.match(await get('/material-completion'), /Upgrade inventory unavailable/);
+    assert.match(await get('/elite-farming-gaps'), /Upgrade inventory unavailable/);
     for (const name of ['Imospekh', 'Anuphet', 'Thutmose', 'Makhotep'])
     {
         const character = catalog.characters.find(row => row.name === name);

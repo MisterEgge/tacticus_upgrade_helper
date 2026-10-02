@@ -151,3 +151,5 @@ If any command fails, investigate and fix it before committing. A partial gate i
 - Grouped campaign recommendations need independent collapse controls at both section and campaign level. Preserve each group’s expanded state when collapsing its parent.
 
 - Material completion must distinguish no remaining uses from inventory covering those uses. Expand every crafting level, allocate shared stock once, and separate unowned exposure. Limit completion to a named catalog and rank ceiling; missing recipes, progress and future placeholders never prove permanent completion. Rank rows contain costs to leave that rank, so a target ceiling excludes its own row.
+
+- Elite material audits cover all farmable materials, rather than only today's shortages. Any unlocked Elite source removes a material; missing progress is unknown, while a recorded zero is locked. Keep absent Elite sources distinct. Rank campaign opportunities only from known shortages and known access, deduplicate each material per campaign, and keep alternative campaigns' overlapping benefits separate. Expected farming savings exclude campaign-clear costs and do not prove raid eligibility.

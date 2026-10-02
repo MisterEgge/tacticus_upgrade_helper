@@ -23,6 +23,7 @@ export default async function MaterialCompletion({ searchParams }: { searchParam
     return <main><Nav/><header><div><p className="eyebrow">LIFETIME MATERIALS</p><h1>Material Completion</h1>
         <p className="sub">See which materials your owned characters have finished using, and which you already have enough of.</p>
         <p className="sub">Scope: current character catalog through {RANK_NAMES[target] ?? "unknown rank"}. New characters and future upgrades can add demand.</p>
+        <Link className="sourceLink" href={`/elite-farming-gaps?target=${target}`}>Find missing Elite farming unlocks</Link>
         <ReferenceDetails label="How completion is calculated">
             <p>{catalog.characters.length} catalog characters. Recipe data last synced: {source?.syncedAt ?? "Unknown"}. Sync game data to include newly added characters and recipes.</p>
             <p>Remaining uses include every unequipped upgrade before the selected ceiling, expanded recursively through all crafting ingredients. Rarity and XP gates do not remove future rank costs.</p>
