@@ -1,7 +1,8 @@
 import ReferenceDetails from "../components/ReferenceDetails";
 import Link from "next/link";
 import { rankName } from "../../src/domain/ranks";
-import { laviscusBuffer, laviscusRoadmap, LAVISCUS_ROADMAP_SOURCE, nextRoadmapTargets, roadmapTargetMet, type RoadmapTarget } from "../../src/domain/laviscusRoadmap";
+import { LAVISCUS_ROADMAP_SOURCE, nextRoadmapTargets, roadmapTargetMet, type RoadmapTarget } from "../../src/domain/laviscusRoadmap";
+import { selectedRaidRoadmap, type RaidUpgradeMember } from "../../src/domain/raidRoadmap";
 import { raidAbilityStep } from "../../src/domain/raidAbilityStep";
 import type { RosterUnit } from "../lib/report";
 
@@ -22,21 +23,22 @@ function targetDetails(target: RoadmapTarget, unit: RosterUnit | undefined): str
     return lines;
 }
 
-export default function LaviscusRoadmap({ roster }: { roster: RosterUnit[] })
+export default function LaviscusRoadmap({ roster, members, machine }: { roster: RosterUnit[]; members: RaidUpgradeMember[]; machine?: string | undefined })
 {
     const units = new Map(roster.map(unit => [unit.name, unit]));
-    const buffer = laviscusBuffer(new Set(units.keys()));
-    const checkpoints = laviscusRoadmap(buffer);
+    const checkpoints = selectedRaidRoadmap(members, units.has("Biovore") && (!machine || machine === "Biovore"));
+    const laviscus = members.some(member => member.name === "Laviscus");
     const work = nextRoadmapTargets(checkpoints, roster);
     const next = work?.checkpoint ?? null;
+    const hasWork = checkpoints.length > 0;
 
-    return <section className="panel detailPanel roadmapPanel"><div className="sectionTitle"><div><p className="eyebrow">LAVISCUS BUILD ORDER</p><h2>Raid team roadmap</h2><p className="sub">Complete the next checkpoint before moving to later goals.</p></div><div className="power">{next ? `Checkpoint ${next}` : "All met"}<strong> next</strong></div></div>
-        <div className="roadmapIntro">{buffer ? <>Buffer to build: <strong>{buffer}</strong> · source preference Vitruvius → Aesoth → Dante, limited to your owned roster.</> : <>No listed buffer owned. Review Vitruvius, Aesoth, or Dante before checkpoint 2.</>} <a href={LAVISCUS_ROADMAP_SOURCE} target="_blank" rel="noreferrer">Source roadmap ↗</a><ReferenceDetails label="Roadmap source and ability order"><p>Ability order in the priority box: Kariyan, Boss, and Khârn passive before active; Biovore primary before secondary. The image starts with campaign carries to Gold I and Elite nodes. Track those campaign goals on the Campaigns page. Biovore is a separate machine of war, not a sixth lineup character.</p></ReferenceDetails></div>
-        <div className="roadmapNow"><h3>Do next · checkpoint {next ?? "complete"}</h3>{work?.targets.length ? <><div className="roadmapNowGrid">{work.targets.map(target =>
+    return <section className="panel detailPanel roadmapPanel"><div className="sectionTitle"><div><p className="eyebrow">{laviscus ? "LAVISCUS BUILD ORDER" : "RAID BUILD ORDER"}</p><h2>Raid team roadmap</h2><p className="sub">Planning stages for your selected lineup. Complete the next checkpoint before moving to later goals.</p></div><div className="power">{next ? `Checkpoint ${next}` : hasWork ? "All met" : "Unlock lineup"}<strong> next</strong></div></div>
+        <div className="roadmapIntro">Build the selected owned lineup: <strong>{members.filter(member => member.owned).map(member => member.name).join(" · ") || "No selected characters owned"}</strong>.<ReferenceDetails label="Roadmap source and ability order"><p>This is an account plan adapted from <a href={LAVISCUS_ROADMAP_SOURCE} target="_blank" rel="noreferrer">the Laviscus source roadmap</a>. Selected source characters keep their documented checkpoints. Other selected characters use Gold I → Diamond I → Diamond III → Adamantine II planning stages and their own ability guidance. These ranks are planning goals, not verified boss minimums; the ability table above retains each target's evidence. Unselected and unowned characters are excluded from current upgrade work.</p><p>Kariyan, Boss, and Khârn passive before active; Biovore primary before secondary. Biovore is a separate machine of war, not a sixth lineup character. Its source checkpoints appear only when owned and compatible with the boss recommendation. {machine ? `The boss guide recommends ${machine}; upgrade targets for other machines need research.` : "No boss-specific machine recommendation recorded."}</p></ReferenceDetails></div>
+        <div className="roadmapNow"><h3>Do next · checkpoint {next ?? (hasWork ? "complete" : "unlock lineup")}</h3>{work?.targets.length ? <><div className="roadmapNowGrid">{work.targets.map(target =>
         {
             const unit = units.get(target.name);
             return <div className="roadmapNowItem" key={target.name}><strong>{target.name}</strong><span>{targetDetails(target, unit).join(" · ")}</span>{unit && target.rank !== undefined && unit.rank < target.rank && target.name !== "Biovore" ? <Link href={`/farming?character=${encodeURIComponent(unit.id)}&target=${target.rank}`}>Plan rank materials →</Link> : null}</div>;
-        })}</div></> : <p>{next === null ? "All recorded roadmap checkpoints are met." : "Choose an owned buffer to continue this checkpoint."}</p>}</div>
+        })}</div></> : <p>{hasWork ? "All selected lineup checkpoints are met." : "Unlock selected characters to begin their upgrade plan."}</p>}</div>
         <div className="roadmapList">{checkpoints.map(checkpoint =>
         {
             const complete = checkpoint.targets.length > 0 && checkpoint.targets.every(target => roadmapTargetMet(target, units.get(target.name)));

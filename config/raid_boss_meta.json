@@ -1,15 +1,55 @@
 {
-  "_meta": {"sourceUrl": "https://www.tacticuscodex.com/raid-boss-teams-meta", "reviewedOn": "2026-09-22", "note": "Core characters are expected on the team. Flex characters are boss-specific alternatives, not a required sixth through eighth slot."},
+  "_meta": {"sourceUrl": "https://www.tacticuscodex.com/raid-boss-teams-meta", "reviewedOn": "2026-09-22", "note": "Core characters are expected on the team. Flex characters are boss-specific alternatives, not a required sixth through eighth slot. Boss-specific defaults use the separately cited exact replay-guide lineup where available; remaining owned source alternatives form an assembled fallback, not a verified best five.", "nameEvidence": {"Atla": {"name": "Atlacoya", "id": "custoAtlacoya", "sourcePortrait": "https://terminusmaximus.com/images/replay-library/heroes/Atla.webp", "catalogPortrait": "public/characters/custoAtlacoya.png", "basis": "Matching character portrait checked visually against the stable catalog ID; replaces the unresolved Atloca spelling."}}},
   "bosses": {
-    "Avatar of Khaine": {"Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Gulgortz", "Kharn", "Vitruvius"]}, "Ad-Mech": {"core": ["Actus", "Exitor-Rho", "Tan Gi'da", "Vitruvius"], "flex": ["Aethana", "Gulgortz", "Sho'syl", "Trajann"]}, "Psyker": {"core": ["Abraxas", "Ahriman", "Archimatos", "Neurothrope"], "flex": ["Abaddon", "Thaumachus"]}, "Battle Suit": {"core": ["Actus", "Darkstrider", "Farsight", "Re'vas"], "flex": []}},
-    "Belisarius Cawl": {"Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Kharn"]}, "Psyker": {"core": ["Abraxas", "Ahriman", "Archimatos", "Neurothrope"], "flex": ["Abaddon", "Eldryon", "Thaumachus"]}, "Multi-Hit": {"core": ["Aun'Shi", "Eldryon", "Kharn", "Ragnar", "Snotflogga"], "flex": []}},
-    "Ghazghkull": {"Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Kharn", "Vitruvius"]}, "Battle Suit": {"core": ["Actus", "Darkstrider", "Eldryon", "Farsight", "Re'vas"], "flex": []}, "Terminus": {"core": ["Bellator", "Calgar", "Dante", "Eldryon", "Ragnar"], "flex": []}},
-    "Hive Tyrant": {"Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Gulgortz", "Helbrecht", "Kharn"]}, "Ad-Mech": {"core": ["Actus", "Exitor-Rho", "Helbrecht", "Tan Gi'da"], "flex": ["Gulgortz", "Re'vas"]}, "Battle Suit": {"core": ["Actus", "Darkstrider", "Eldryon", "Farsight", "Re'vas"], "flex": []}},
-    "Magnus": {"Custodes": {"core": ["Kariyan", "Kharn", "Trajann"], "flex": ["Abaddon", "Aun'Shi", "Dante", "Ragnar", "Vitruvius"]}, "Multi-Hit": {"core": ["Aun'Shi", "Helbrecht", "Kharn", "Ragnar", "Snotflogga"], "flex": []}},
-    "Mortarion": {"Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Gulgortz", "Helbrecht", "Kharn"]}, "Psyker": {"core": ["Abraxas", "Ahriman", "Archimatos", "Neurothrope"], "flex": ["Abaddon", "Eldryon", "Thaumachus"]}, "Ad-Mech": {"core": ["Actus", "Aleph-Null", "Exitor-Rho", "Helbrecht", "Tan Gi'da"], "flex": []}},
-    "Riptide": {"Ad-Mech": {"core": ["Actus", "Exitor-Rho", "Tan Gi'da", "Trajann", "Vitruvius"], "flex": []}},
-    "Screamer-Killer": {"Lavistodes": {"core": ["Gulgortz", "Kariyan", "Laviscus", "Trajann"], "flex": ["Aesoth", "Kharn", "Vitruvius"]}, "Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Gulgortz", "Kharn", "Vitruvius"]}, "Ad-Mech": {"core": ["Actus", "Exitor-Rho", "Tan Gi'da", "Vitruvius"], "flex": ["Gulgortz", "Sho'syl"]}, "Battle Suit": {"core": ["Actus", "Darkstrider", "Eldryon", "Farsight", "Re'vas"], "flex": []}},
-    "Szarekh": {"Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Gulgortz", "Kharn", "Vitruvius"]}, "Ad-Mech": {"core": ["Actus", "Exitor-Rho", "Tan Gi'da", "Vitruvius"], "flex": ["Gulgortz", "Sho'syl"]}, "Battle Suit": {"core": ["Actus", "Darkstrider", "Eldryon", "Farsight", "Re'vas"], "flex": []}},
-    "Tervigon": {"Lavistodes": {"core": ["Gulgortz", "Kariyan", "Laviscus", "Trajann"], "flex": ["Atloca", "Helbrecht"]}, "Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Gulgortz", "Helbrecht", "Kharn"]}, "Ad-Mech": {"core": ["Actus", "Exitor-Rho", "Helbrecht", "Tan Gi'da"], "flex": ["Aleph-Null", "Gulgortz", "Sho'syl", "Vitruvius"]}, "Battle Suit": {"core": ["Actus", "Darkstrider", "Eldryon", "Farsight", "Re'vas"], "flex": []}}
+    "Avatar of Khaine": {
+      "Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Gulgortz", "Kharn", "Vitruvius"], "recommendation": {"flex": ["Gulgortz", "Kharn"], "lineup": ["Kariyan", "Laviscus", "Trajann", "Gulgortz", "Kharn"], "replays": 26, "machine": "Biovore", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Ad-Mech": {"core": ["Actus", "Exitor-Rho", "Tan Gi'da", "Vitruvius"], "flex": ["Aethana", "Gulgortz", "Sho'syl", "Trajann"]},
+      "Psyker": {"core": ["Abraxas", "Ahriman", "Archimatos", "Neurothrope"], "flex": ["Abaddon", "Thaumachus"], "recommendation": {"flex": ["Abaddon"], "lineup": ["Abraxas", "Ahriman", "Archimatos", "Neurothrope", "Abaddon"], "replays": 12, "machine": "Forgefiend", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Battle Suit": {"core": ["Actus", "Darkstrider", "Farsight", "Re'vas"], "flex": []}
+    },
+    "Belisarius Cawl": {
+      "Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Kharn", "Dante"], "recommendation": {"flex": ["Kharn", "Dante"], "lineup": ["Kariyan", "Laviscus", "Trajann", "Kharn", "Dante"], "replays": 88, "machine": "Biovore", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Psyker": {"core": ["Abraxas", "Ahriman", "Archimatos", "Neurothrope"], "flex": ["Abaddon", "Eldryon", "Thaumachus"], "recommendation": {"flex": ["Abaddon"], "lineup": ["Abraxas", "Ahriman", "Archimatos", "Neurothrope", "Abaddon"], "replays": 21, "machine": "Forgefiend", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Multi-Hit": {"core": ["Aun'Shi", "Eldryon", "Kharn", "Ragnar", "Snotflogga"], "flex": []}
+    },
+    "Ghazghkull": {
+      "Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Kharn", "Vitruvius"], "recommendation": {"flex": ["Aesoth", "Vitruvius"], "lineup": ["Kariyan", "Laviscus", "Trajann", "Aesoth", "Vitruvius"], "replays": 68, "machine": "Biovore", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Battle Suit": {"core": ["Actus", "Darkstrider", "Eldryon", "Farsight", "Re'vas"], "flex": []},
+      "Terminus": {"core": ["Bellator", "Calgar", "Dante", "Eldryon", "Ragnar"], "flex": []}
+    },
+    "Hive Tyrant": {
+      "Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Gulgortz", "Helbrecht", "Kharn", "Atlacoya"], "recommendation": {"flex": ["Gulgortz", "Atlacoya"], "lineup": ["Kariyan", "Laviscus", "Trajann", "Gulgortz", "Atlacoya"], "replays": 5, "machine": "Plagueburst Crawler", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Ad-Mech": {"core": ["Actus", "Exitor-Rho", "Helbrecht", "Tan Gi'da"], "flex": ["Gulgortz", "Re'vas"]},
+      "Battle Suit": {"core": ["Actus", "Darkstrider", "Eldryon", "Farsight", "Re'vas"], "flex": []}
+    },
+    "Magnus": {
+      "Custodes": {"core": ["Kariyan", "Kharn", "Trajann"], "flex": ["Abaddon", "Aun'Shi", "Dante", "Ragnar", "Vitruvius", "Helbrecht"], "recommendation": {"flex": ["Ragnar", "Helbrecht"], "lineup": ["Kariyan", "Kharn", "Trajann", "Ragnar", "Helbrecht"], "replays": 30, "machine": "Biovore", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Multi-Hit": {"core": ["Aun'Shi", "Helbrecht", "Kharn", "Ragnar", "Snotflogga"], "flex": []}
+    },
+    "Mortarion": {
+      "Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Gulgortz", "Helbrecht", "Kharn", "Atlacoya"], "recommendation": {"flex": ["Gulgortz", "Atlacoya"], "lineup": ["Kariyan", "Laviscus", "Trajann", "Gulgortz", "Atlacoya"], "replays": 79, "machine": "Biovore", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Psyker": {"core": ["Abraxas", "Ahriman", "Archimatos", "Neurothrope"], "flex": ["Abaddon", "Eldryon", "Thaumachus"]},
+      "Ad-Mech": {"core": ["Actus", "Aleph-Null", "Exitor-Rho", "Helbrecht", "Tan Gi'da"], "flex": []}
+    },
+    "Riptide": {
+      "Ad-Mech": {"core": ["Actus", "Exitor-Rho", "Tan Gi'da", "Trajann", "Vitruvius"], "flex": []}
+    },
+    "Screamer-Killer": {
+      "Lavistodes": {"core": ["Gulgortz", "Kariyan", "Laviscus", "Trajann"], "flex": ["Aesoth", "Kharn", "Vitruvius"], "recommendation": {"flex": ["Aesoth"], "lineup": ["Gulgortz", "Kariyan", "Laviscus", "Trajann", "Aesoth"], "replays": 19, "machine": "Plagueburst Crawler", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Gulgortz", "Kharn", "Vitruvius"], "recommendation": {"flex": ["Gulgortz", "Aesoth"], "lineup": ["Kariyan", "Laviscus", "Trajann", "Gulgortz", "Aesoth"], "replays": 19, "machine": "Plagueburst Crawler", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Ad-Mech": {"core": ["Actus", "Exitor-Rho", "Tan Gi'da", "Vitruvius"], "flex": ["Gulgortz", "Sho'syl"]},
+      "Battle Suit": {"core": ["Actus", "Darkstrider", "Eldryon", "Farsight", "Re'vas"], "flex": []}
+    },
+    "Szarekh": {
+      "Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Gulgortz", "Kharn", "Vitruvius"], "recommendation": {"flex": ["Gulgortz", "Aesoth"], "lineup": ["Kariyan", "Laviscus", "Trajann", "Gulgortz", "Aesoth"], "replays": 71, "machine": "Biovore", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Ad-Mech": {"core": ["Actus", "Exitor-Rho", "Tan Gi'da", "Vitruvius"], "flex": ["Gulgortz", "Sho'syl"]},
+      "Battle Suit": {"core": ["Actus", "Darkstrider", "Eldryon", "Farsight", "Re'vas"], "flex": []}
+    },
+    "Tervigon": {
+      "Lavistodes": {"core": ["Gulgortz", "Kariyan", "Laviscus", "Trajann"], "flex": ["Atlacoya", "Helbrecht"], "recommendation": {"flex": ["Atlacoya"], "lineup": ["Gulgortz", "Kariyan", "Laviscus", "Trajann", "Atlacoya"], "replays": 3, "machine": "Plagueburst Crawler", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Big Hit": {"core": ["Kariyan", "Laviscus", "Trajann"], "flex": ["Abaddon", "Aesoth", "Gulgortz", "Helbrecht", "Kharn", "Atlacoya"], "recommendation": {"flex": ["Gulgortz", "Atlacoya"], "lineup": ["Kariyan", "Laviscus", "Trajann", "Gulgortz", "Atlacoya"], "replays": 3, "machine": "Plagueburst Crawler", "sourceUrl": "https://terminusmaximus.com/guild-raid/boss-meta/", "sourceUpdatedOn": "2026-09-25", "reviewedOn": "2026-10-02"}},
+      "Ad-Mech": {"core": ["Actus", "Exitor-Rho", "Helbrecht", "Tan Gi'da"], "flex": ["Aleph-Null", "Gulgortz", "Sho'syl", "Vitruvius"]},
+      "Battle Suit": {"core": ["Actus", "Darkstrider", "Eldryon", "Farsight", "Re'vas"], "flex": []}
+    }
   }
 }

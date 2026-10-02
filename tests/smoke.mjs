@@ -95,7 +95,7 @@ try
     }
     const invalid = await fetch('http://127.0.0.1:3197/api/raid-selection', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ boss: 'Magnus', teamName: 'Custodes', flex: ['Ragnar', 'Ragnar'] }) });
     assert.equal(invalid.status, 400);
-    const saved = await fetch('http://127.0.0.1:3197/api/raid-selection', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ boss: 'Magnus', teamName: 'Custodes', flex: ['Dante'] }) });
+    const saved = await fetch('http://127.0.0.1:3197/api/raid-selection', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ boss: 'Magnus', teamName: 'Custodes', flex: ['Dante'], autoFlex: false }) });
     assert.equal(saved.status, 200);
     const cookie = saved.headers.get('set-cookie')?.split(';')[0];
     assert.ok(cookie);
@@ -118,7 +118,7 @@ try
     assert.match(ratings, /<summary>Rating criteria<\/summary>/);
     for(const route of ['/inventory-cleanout','/reallocation']) assert.match(await get(route), /class="accountBar"/);
 
-    assert.match(roadmap, /Checkpoint 1: Core to Gold I/);
+    assert.match(roadmap, /Unlock selected characters to begin their upgrade plan/);
     assert.match(roadmap, /Do next · checkpoint/);
     assert.match(roadmap, /Biovore is a separate machine of war/);
     assert.match(await get('/review-status'), /Every owned character/);
@@ -219,6 +219,33 @@ try
     assert.match(rhoPage,/sources\?item=I_Defensive_L004/);
     assert.match(rhoPage,/Legendary · 1 spare copies in synced inventory/);
     assert.doesNotMatch(rhoPage,/Fine Mantle|sources\?item=I_Defensive_R004/);
+    // Automatic saved Raid focus resolves against the current roster on every route.
+    for (const name of ['Laviscus', 'Gulgortz', 'Aesoth']) {
+        const character = catalog.characters.find(row => row.name === name);
+        report.roster.push({ ...report.roster[0], id: character.id, name, rarity: 'Legendary', rank: 12, xpLevel: 36,
+            abilities: [{ id: 'a', level: 36 }, { id: 'p', level: 36 }] });
+    }
+    await writeFile(reportPath, JSON.stringify(report));
+    const autoSave = await fetch('http://127.0.0.1:3197/api/raid-selection', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ boss: 'Mortarion', teamName: 'Big Hit', flex: [], autoFlex: true }) });
+    assert.equal(autoSave.status, 200);
+    const autoCookie = autoSave.headers.get('set-cookie').split(';')[0];
+    const withAutoFocus = async route => {
+        const response = await fetch('http://127.0.0.1:3197' + route, { headers: { Cookie: autoCookie } });
+        assert.equal(response.status, 200);
+        return (await response.text()).replace(/<!--.*?-->/gs, '');
+    };
+    assert.match(await withAutoFocus('/guild-raid'), /Mortarion · Kariyan · Laviscus · Trajann · Gulgortz · Aesoth/);
+    const atlacoya = catalog.characters.find(row => row.name === 'Atlacoya');
+    report.roster.push({ ...report.roster[0], id: atlacoya.id, name: atlacoya.name, rarity: 'Rare', rank: 0, xpLevel: 1 });
+    report.generatedAt = '2026-10-02T12:00:00.000Z';
+    await writeFile(reportPath, JSON.stringify(report));
+    const updatedRaid = await withAutoFocus('/guild-raid');
+    assert.match(updatedRaid, /Mortarion · Kariyan · Laviscus · Trajann · Gulgortz · Atlacoya/);
+    assert.match(updatedRaid, /href="\/characters\/custoAtlacoya"/);
+    for (const route of ['/', '/equipment', '/abilities']) {
+        assert.match(await withAutoFocus(route), /Mortarion · Kariyan · Laviscus · Trajann · Gulgortz · Atlacoya/);
+    }
     console.log('PASS: production routes, report refresh, Mirror Elite planner, multi-rank farming, invalid goal and missing inventory states');
 
 }
