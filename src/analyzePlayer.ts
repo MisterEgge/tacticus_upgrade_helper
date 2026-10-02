@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import {progressionRarity} from "./domain/characterProgression";
 import { allocateEquipment } from "./domain/equipment";
 import { campaignProgress } from "./domain/campaigns";
 import {latestRaidPowerByUnit,type RaidPowerEntry}from "./domain/raidPower";
@@ -46,6 +47,7 @@ type PlayerResponse = {
         units: Unit[];
         progress?: { campaigns?: Array<{ id:string; name:string; type:"Standard"|"Mirror"|"Elite"|"EliteMirror"; battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number;stars?:number;medals?:number;score?:number;completed?:boolean}> }> };
         inventory: {
+            orbs?: Record<string,Array<{rarity:string;amount:number}>>;
             abilityBadges?: Record<string,Array<{rarity:string;amount:number;name?:string}>>;
             upgrades?: Array<{id:string;name?:string;amount:number}>;
             items: Array<{
@@ -98,15 +100,6 @@ type AbilityQueueRow = {
     targetConfidence: string;
 };
 
-const RARITY_BY_PROGRESSION = [
-    "Common", "Common", "Common",
-    "Uncommon", "Uncommon", "Uncommon",
-    "Rare", "Rare", "Rare",
-    "Epic", "Epic", "Epic",
-    "Legendary", "Legendary", "Legendary",
-    "Mythic"
-] as const;
-
 async function readJson<T>(path: string): Promise<T>
 {
 
@@ -117,7 +110,7 @@ async function readJson<T>(path: string): Promise<T>
 function rarityFor(unit: Unit): string
 {
 
-    return RARITY_BY_PROGRESSION[unit.progressionIndex] ?? "Unknown";
+    return progressionRarity(unit.progressionIndex) ?? "Unknown";
 
 }
 
@@ -221,6 +214,7 @@ async function main()
             battles: campaign.battles
         })),
         upgradeInventory: playerResponse.player.inventory.upgrades,
+        orbInventory: playerResponse.player.inventory.orbs ?? null,
         abilityBadges: playerResponse.player.inventory.abilityBadges ?? null,
         unequippedInventory: playerResponse.player.inventory.items
     };

@@ -1,3 +1,5 @@
+import {progressionRarity} from "../../src/domain/characterProgression";
+import type {OrbInventory} from "../../src/domain/orbPlanner";
 import fs from "node:fs/promises";
 import path from "node:path";
 import {getCharacterCatalog} from "./catalog";
@@ -25,6 +27,7 @@ export type Report = {
   equipmentAllocation:{equipNow:EquipmentRow[];buyWatch:EquipmentRow[];compatibilityUnknown:EquipmentRow[]};
   campaignProgress?:Array<{id:string;name:string;type:"Standard"|"Mirror"|"Elite"|"EliteMirror";highestUnlockedBattle:number|null;highestCompletedBattle?:number|null;highestConfirmedThreeStarBattle?:number|null;battles:Array<{battleIndex:number;attemptsLeft:number;attemptsUsed:number}>}>;
   upgradeInventory?:Array<{id:string;name?:string;amount:number}>;
+  orbInventory?:OrbInventory|null;
   abilityBadges?:AbilityBadgeInventory|null;
 };
 export async function getReport():Promise<Report|null>{
@@ -32,7 +35,7 @@ export async function getReport():Promise<Report|null>{
     const report=JSON.parse(await fs.readFile(path.join(process.cwd(),"output","upgrade-report.json"),"utf8")) as Report;
     const catalog=await getCharacterCatalog();
     const byKey=new Map(catalog.characters.flatMap(c=>[[c.id.toLowerCase(),c],[c.name.toLowerCase(),c],[c.fullName.toLowerCase(),c],[c.shortName.toLowerCase(),c]] as const));
-    report.roster=report.roster.map(u=>{const c=byKey.get(u.id.toLowerCase())??byKey.get(u.name.toLowerCase());return {...u,icon:c?.icon??""};});
+    report.roster=report.roster.map(u=>{const c=byKey.get(u.id.toLowerCase())??byKey.get(u.name.toLowerCase());return {...u,rarity:progressionRarity(u.progressionIndex)??"Unknown",icon:c?.icon??""};});
     return report;
   }catch{return null;}
 }

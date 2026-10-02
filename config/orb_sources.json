@@ -1,0 +1,22 @@
+{
+  "reviewedOn": "2026-10-02",
+  "sourceKind": "community reference, cross-checked with community shop catalog",
+  "progression": {"url":"https://tacticus.wiki.gg/wiki/Unit_Progression","indexSource":"https://github.com/svehera/tacticusplanner/blob/26e5155f7da7ec6c862f9ec2bee347af7dd865c6/src/fsd/3-features/tacticus-integration/tacticus-integration.service.ts"},
+  "dailyShop": {
+    "url":"https://tacticus.wiki.gg/wiki/Shops",
+    "offers":[{"rarity":"Uncommon","quantity":5,"blackstone":149},{"rarity":"Rare","quantity":4,"blackstone":279},{"rarity":"Epic","quantity":3,"blackstone":495},{"rarity":"Legendary","quantity":2,"blackstone":799},{"rarity":"Mythic","quantity":1,"blackstone":899}],
+    "note":"Draft offers let you choose the alliance. Check Daily Deals slot 6; offer rarity varies. Catalog availability does not confirm today's stock."
+  },
+  "forge": {
+    "url":"https://tacticus.wiki.gg/wiki/HDTW_Forge",
+    "offers":[{"rarity":"Rare","lower":"Uncommon","coins":1500},{"rarity":"Epic","lower":"Rare","coins":5000},{"rarity":"Legendary","lower":"Epic","coins":20000},{"rarity":"Mythic","lower":"Legendary","coins":35000}],
+    "note":"Each orb consumes 5 lower-rarity orbs of the same alliance and 1 forge badge of the output rarity, plus coins. Uncommon orbs cannot be forged. Forge suggestions use surplus after reserving the current plan. Forge badges and coins are not budgeted here."
+  },
+  "sources":[
+    {"name":"Onslaught · Honour Your Warriors","url":"https://tacticus.wiki.gg/wiki/Onslaught","note":"Deploy and honour a character of the required alliance at an orb-producing progression stage. Common/Uncommon/Rare/Epic characters at their last star before ascension can yield the next rarity's orb; Legendary characters below Legendary star can yield Legendary orbs. The sector determines the chance. Preview the reward before spending a token; the honouree can differ from the recipient. Legendary star itself is not a Legendary-orb farm; Legendary star and Mythic characters below Mythic wings can yield Mythic orbs."},
+    {"name":"Guild Raid → Guild Credits → Guild Shop","url":"https://tacticus.wiki.gg/wiki/Guild_Raid","note":"Earn Guild Credits through raid participation and reward crates, then buy a draft orb for the alliance you need. Orbs were removed from Guild Raid reward crates in August 2025; raids fund the shop rather than dropping orbs directly."},
+    {"name":"Mythic Journey missions","url":"https://tacticus.wiki.gg/wiki/Mythic_Missions","note":"At Legendary star, a character unlocks a five-mission chain whose total rewards cover the 20 Mythic shards and 10 Mythic orbs for first ascension. Mission completion is not supplied by the account API."},
+    {"name":"Requisitions, mission crates, Battle Pass and events","url":"https://tacticus.wiki.gg/wiki/HDTW_Requisitions","note":"Additional orbs can come from requisitions and eligible reward tracks or event offers. Random drops cannot guarantee your needed alliance or rarity; check current rewards in-game. Use draft rewards for the highest-priority shortfall. Event shops vary and old offers are not current stock."}
+  ],
+  "rewardReferences":["https://tacticus.wiki.gg/wiki/Missions","https://tacticus.wiki.gg/wiki/BattlePass","https://tacticus.wiki.gg/wiki/Campaign_Event"]
+}
