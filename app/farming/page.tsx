@@ -60,6 +60,7 @@ export default async function Farming({ searchParams }: { searchParams: Promise<
     }).filter(x => x.shortage > 0).sort((a, b) => b.topPriority - a.topPriority || b.shortage - a.shortage);
     return <main><Nav/><header><div><p className="eyebrow">FARMING</p><h1>Personal Farming Queue</h1>
         <p className="sub">Materials still needed for your selected rank goals.</p>
+        <Link className="sourceLink" href="/material-completion">Check lifetime material completion</Link>
         <ReferenceDetails label="Calculation and source details"><p>Equipped upgrades and owned crafted materials are deducted before base-material shortages. Unlocked sources are accessible battles; raid eligibility and three-star completion are unknown.</p><Link className="sourceLink" href="/sources">Shop rotations and refresh tracking</Link>{excluded.length?<p>Outside the character rank catalog: {excluded.map(u=>u.name).join(", ")}. No rank costs assumed.</p>:null}</ReferenceDetails>
     </div><div className="power">{error ? "Unknown" : rows.length}<strong> shortages</strong></div></header>
         <form className="goalForm panel" action="/farming">

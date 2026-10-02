@@ -25,6 +25,7 @@
 - [x] Harden equipment preference/compatibility invariant and tests.
 
 ## Farming follow-up
+- [x] Add material completion through a selected rank ceiling, including recursive crafting, equipped slots, shared inventory and unowned demand.
 - [x] Replace manually maintained campaign progress with official player API campaign progress.
 - [x] Use upgrade-material inventory (not equipment inventory) when calculating rank-material shortages.
 - [x] Validate campaign battle numbering/frontier semantics against the synced battle dataset and fresh live player analysis; campaign completion now derives from the synced playable endpoint.
