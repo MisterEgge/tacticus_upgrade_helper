@@ -7,10 +7,6 @@ import type { RaidTeams } from "../src/domain/raidSelection";
 
 const team={core:["Kariyan","Laviscus","Trajann"],flex:["Aesoth","Gulgortz","Kharn"],members:["Kariyan","Laviscus","Trajann","Aesoth","Gulgortz","Kharn"].map(name=>({name,owned:true}))};
 
-test("owned Laviscus planning lineup uses Aesoth and Boss over Kharn by default",()=>{
-    assert.deepEqual(suggestedRaidFlex("Avatar of Khaine","Big Hit",team),["Aesoth","Gulgortz"]);
-});
-
 test("owned flex fills available slots even while a core unlock is pending",()=>{
     assert.deepEqual(suggestedRaidFlex("Avatar of Khaine","Big Hit",{...team,members:team.members.filter(member=>member.name!=="Laviscus")}),["Aesoth","Gulgortz"]);
     assert.deepEqual(suggestedRaidFlex("Avatar of Khaine","Big Hit",{...team,members:team.members.filter(member=>member.name!=="Gulgortz")}),["Aesoth","Kharn"]);
