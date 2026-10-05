@@ -44,6 +44,14 @@ This separation lets a new player export regenerate the report without rewriting
 
 `npm run refresh` fetches Player, Guild, and Guild Raid data. Guild Raid hero details provide the latest observed per-character raid power when the Player API response supplies the account user ID.
 
+The running app automatically refreshes once per Central calendar day at **4:00 a.m. America/Chicago**, including daylight saving changes. If the server starts after a missed cutoff, it catches up immediately. A manual sync after the cutoff satisfies that day. Failed runs retry after 15 minutes. Manual and scheduled requests share a lock within the Node server, and reports are replaced atomically after successful analysis. Open pages check sync status every minute and on window focus, then reload their account data after a completed sync.
+
+Automatic sync needs `TACTICUS_API_KEY` in the server environment or local `.env` and a running Node server. Set `TACTICUS_AUTO_SYNC=false` and restart to disable it; the manual button remains available. The header shows whether auto-sync is enabled. A stopped or sleeping PC cannot run local sync; it catches up when resumed or started. Deployments that freeze serverless instances need an external scheduler instead of this in-process timer. Multiple independent server replicas require shared coordination.
+
+GitHub also schedules the existing analysis workflow at 4 a.m. Central using the repository API-key secret. It runs the full refresh and saves the report artifact; it does not overwrite the local app’s files or commit account data. GitHub may queue scheduled runs past their nominal start time. The local server remains responsible for the displayed app data.
+
+The requested time is independent of the game’s daily reset (midnight UTC: 7 p.m. CDT / 6 p.m. CST).
+
 ### Material completion
 
 Resources → Material completion shows lifetime upgrade demand through a selected rank ceiling (Adamantine II by default). It includes nested crafting ingredients, skips equipped slots, and shares finished/intermediate/base inventory once across the owned roster. Search by material or recipient and filter for finished materials, stocked requirements, shortages, or unowned users.

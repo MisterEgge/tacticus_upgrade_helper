@@ -9,6 +9,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  schedule:
+    - cron: "0 4 * * *"
+      timezone: "America/Chicago"
 
 permissions:
   contents: read
@@ -57,13 +60,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Fetch live player data
+      - name: Refresh full account data
         if: env.TACTICUS_API_KEY != ''
-        run: npm run fetch
-
-      - name: Analyze account
-        if: env.TACTICUS_API_KEY != ''
-        run: npm run analyze
+        run: npm run refresh
 
       - name: Upload analysis report
         if: success() && env.TACTICUS_API_KEY != ''

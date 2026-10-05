@@ -220,7 +220,8 @@ async function main()
     };
 
     await fs.mkdir("output", { recursive: true });
-    await fs.writeFile("output/upgrade-report.json", JSON.stringify(report, null, 2));
+    await fs.writeFile("output/upgrade-report.json.tmp", JSON.stringify(report, null, 2));
+    await fs.rename("output/upgrade-report.json.tmp", "output/upgrade-report.json");
 
     console.log(`Player: ${report.source.player} | Power: ${report.source.powerLevel}`);
     console.log(`Units: ${report.summary.units}`);
