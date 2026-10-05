@@ -16,7 +16,7 @@ try
     for (const name of ['.next', 'node_modules', 'public', 'data', 'config', 'next.config.ts']) await symlink(path.join(root, name), path.join(cwd, name));
     await writeFile(path.join(cwd, 'package.json'), '{"type":"module"}');
     await mkdir(path.join(cwd, 'output'));
-    server = spawn(process.execPath, [path.join(root, 'node_modules/next/dist/bin/next'), 'start', cwd, '--hostname', '127.0.0.1', '--port', '3197'], { cwd, stdio: ['ignore', 'pipe', 'pipe'] });
+    server = spawn(process.execPath, [path.join(root, 'node_modules/next/dist/bin/next'), 'start', cwd, '--hostname', '127.0.0.1', '--port', '3197'], { cwd, env: { ...process.env, TACTICUS_AUTO_SYNC: 'false' }, stdio: ['ignore', 'pipe', 'pipe'] });
     let logs = '';
     await new Promise((resolve, reject) =>
     {
@@ -42,6 +42,11 @@ try
         return (await response.text()).replace(/<!--.*?-->/gs, "");
 
     };
+    const initialSync = JSON.parse(await get('/api/sync'));
+    assert.equal(initialSync.automatic, false);
+    assert.equal(initialSync.running, false);
+    assert.equal(initialSync.lastSynced, null);
+    assert.equal(initialSync.timezone, 'America/Chicago');
     assert.match(await get('/campaigns'), /Account data unavailable/);
     assert.match(await get('/abilities'), /npm run refresh/);
     assert.match(await get('/orbs'), /npm run refresh/);
@@ -63,6 +68,7 @@ try
     assert.match(await get('/orbs'), /Orb inventory unavailable/);
     report.orbInventory = { Xenos: [{ rarity: 'Uncommon', amount: 7 }] };
     await writeFile(reportPath, JSON.stringify(report));
+    assert.equal(JSON.parse(await get('/api/sync')).lastSynced, report.generatedAt);
     const orbs = await get('/orbs');
     assert.match(orbs, /Orb priorities/);
     assert.match(orbs, /Xenos · Uncommon<\/strong><\/td><td>7<\/td><td>10<\/td><td><strong>3/);
