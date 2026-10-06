@@ -129,3 +129,5 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 
 .campaignInvestmentGroup > .campaignSectionToggle h3 { padding: 0; background: transparent; }
 .campaignInvestmentGroup > .campaignSectionToggle small { margin: 0; }
+
+.collapsibleSection{margin-top:14px;min-width:0}.collapsibleSection .campaignSectionToggle>div{min-width:0}.collapsibleSection .warSource{margin:5px 0 0;overflow-wrap:anywhere}.collapsibleSection .campaignSectionBody[hidden]{display:none}.collapsibleSection .campaignSectionBody>.collapsibleSection:first-child{margin-top:0}.equipmentActions h2{margin:0}.equipmentSlotAction{margin-top:10px}.equipmentPanel table{min-width:0}.equipmentPanel .tableWrap{overflow-x:auto}.equipmentPanel .tableWrap td{overflow-wrap:anywhere}@media(max-width:600px){.equipmentPanel table{min-width:560px}}
