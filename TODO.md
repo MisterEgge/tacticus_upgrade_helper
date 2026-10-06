@@ -7,6 +7,8 @@
 
 
 ## Dashboard / Equipment
+- [ ] Make every page's content sections independently collapsible, using the shared campaign chevron pattern. Keep title/count/action summaries visible and retain child expansion state when a parent is collapsed. Equipment and character equipment are the first rollout.
+- [x] Expand Equipment with independent collapsible sections and visible per-character equip-now or shop acquisition actions, sharing inventory allocations with character detail pages.
 - [ ] Review the new `/equipment-demand` view after more dashboard work. Decide whether it belongs inside Equipment, deserves its own nav entry, or should feed a dashboard card.
 - [x] Match equipment demand and owned counts by stable item IDs rather than display names.
 

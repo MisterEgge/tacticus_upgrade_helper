@@ -206,7 +206,7 @@ try
     assert.doesNotMatch(readyEquipment,/Inventory upgrade choices/);
     report.unequippedInventory[0].amount=2;
     await writeFile(reportPath,JSON.stringify(report));
-    assert.match(await get('/equipment'),/Inventory upgrade choices.*?Kariyan.*?Grand Combat Knife/s);
+    assert.match(await get('/equipment'),/aria-label="Equip now".*?Trajann.*?Grand Combat Knife.*?Kariyan.*?Grand Combat Knife/s);
     report.unequippedInventory[0].amount=1;
     await writeFile(reportPath,JSON.stringify(report));
     const shopEquipment=await get('/equipment');
@@ -233,7 +233,8 @@ try
     const rhoPage=await get('/characters/'+rho.id);
     assert.match(rhoPage,/sources\?item=I_Defensive_E004/);
     assert.match(rhoPage,/sources\?item=I_Defensive_L004/);
-    assert.match(rhoPage,/Legendary · 1 spare copies in synced inventory/);
+    assert.match(rhoPage,/Upgrade now · equip Grand Mantle from inventory/);
+    assert.match(rhoPage,/One copy reserved for Exitor-Rho/);
     assert.doesNotMatch(rhoPage,/Fine Mantle|sources\?item=I_Defensive_R004/);
     // Automatic saved Raid focus resolves against the current roster on every route.
     for (const name of ['Laviscus', 'Gulgortz', 'Aesoth']) {
