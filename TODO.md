@@ -16,8 +16,10 @@
 - [x] Track known shop rotations, refresh rules, prices and manually observed stock in a dedicated acquisition view; unknown Main/Event/Web shop catalogs remain explicitly unverified.
 - [x] Add acquisition-currency classification for equipment/shop sources.
 - [x] Suppress real-money and Blackstone item offers from actionable recommendations; only other in-game currencies can surface there.
-- [ ] Finish game-wide equipment compatibility evidence before promoting unresolved cleanout rows to scrap-safe.
-- [ ] Validate inventory cleanout against fresh live inventory after compatibility coverage is complete.
+- [x] Audit Cleanout using exact source faction/unit restrictions and slot types, protect planned and leveled copies, and make owned vs locked recipient reserves inspectable.
+- [x] Validate Cleanout against the October 6 live report, preserving copy totals and leaving uncertain or situational equipment for manual review.
+- [ ] Continue compatibility coverage as new characters and item types are added; unresolved cleanout rows must remain protected.
+- [x] Prefer compatible higher-chance block items, checking actual refinement and booster stats before showing equip-now; retain lower-chance block items as situational alternatives.
 
 ## Next enhancements
 - [ ] Add immediate/community ability targets to character detail pages.

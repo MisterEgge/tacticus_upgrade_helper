@@ -148,6 +148,9 @@ If any command fails, investigate and fix it before committing. A partial gate i
 
 - Equipment and character detail pages must use the same shared replacement generator. Audit the entire synced roster with invariant checks; never assume a fix on one page repairs independently generated recommendations elsewhere. Character rarity limits equip eligibility, but does not force every upgrade to that rarity. War status compares capped readiness; it does not recommend replacements.
 
+- Prefer verified higher-chance block items for general reliability, without declaring lower-chance larger blocks useless. Equip-now must compare actual item levels with the same verified booster stats in the documented three-hit block-chain scenario; it is not a universal survival guarantee. Inventory copies below that threshold need refinement first. Preserve lower-chance alternatives for manual review in Cleanout.
+- Cleanout must use exact source faction/unit IDs and character equipment slots from matching source snapshots. Reserve each allocated copy at its actual level before other reserves; keep leveled surplus and unresolved data protected. Show owned and locked recipient evidence and label the selected reserve scope. Never merge different refinement levels into one salvage value or imply that a snapshot proves permanent completion.
+
 - Campaign recommendation summaries should collapse independently, retain their title/count, and reuse the campaign chevron button with expanded state and a controlled body.
 
 - Grouped campaign recommendations need independent collapse controls at both section and campaign level. Preserve each group’s expanded state when collapsing its parent.

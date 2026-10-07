@@ -1,0 +1,1716 @@
+{
+  "source": "svehera/tacticusplanner",
+  "sourceCommit": "1dbeaa4a04519599be9201d1f2521bdb74c45ae4",
+  "characters": [
+    {
+      "id": "ultraTigurius",
+      "name": "Tigurius",
+      "faction": "Ultramarines",
+      "traits": [
+        "Psyker"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "ultraEliminatorSgt",
+      "name": "Certus",
+      "faction": "Ultramarines",
+      "traits": [
+        "Overwatch",
+        "HeavyWeapon",
+        "Infiltrate"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "ultraInceptorSgt",
+      "name": "Bellator",
+      "faction": "Ultramarines",
+      "traits": [
+        "Flying",
+        "MkXGravis"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "ultraApothecary",
+      "name": "Incisus",
+      "faction": "Ultramarines",
+      "traits": [
+        "Healer"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "ultraCalgar",
+      "name": "Calgar",
+      "faction": "Ultramarines",
+      "traits": [
+        "CrushingStrike",
+        "FinalJustice",
+        "MkXGravis"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "ultraTitus",
+      "name": "Titus",
+      "faction": "Ultramarines",
+      "traits": [
+        "BeastSlayer",
+        "FinalJustice"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "adeptRetributor",
+      "name": "Vindicta",
+      "faction": "Sisterhood",
+      "traits": [
+        "ActOfFaith",
+        "HeavyWeapon"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "adeptHospitaller",
+      "name": "Isabella",
+      "faction": "Sisterhood",
+      "traits": [
+        "ActOfFaith",
+        "Healer"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "adeptMorvenn",
+      "name": "Morvenn Vahl",
+      "faction": "Sisterhood",
+      "traits": [
+        "ActOfFaith",
+        "BigTarget",
+        "Explodes",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "adeptCanoness",
+      "name": "Roswitha",
+      "faction": "Sisterhood",
+      "traits": [
+        "ActOfFaith"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "adeptCelestine",
+      "name": "Celestine",
+      "faction": "Sisterhood",
+      "traits": [
+        "ActOfFaith",
+        "Flying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "necroWarden",
+      "name": "Makhotep",
+      "faction": "Necrons",
+      "traits": [
+        "LivingMetal",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "necroDestroyer",
+      "name": "Imospekh",
+      "faction": "Necrons",
+      "traits": [
+        "Overwatch",
+        "LivingMetal",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "necroSpyder",
+      "name": "Aleph-Null",
+      "faction": "Necrons",
+      "traits": [
+        "LivingMetal",
+        "Explodes",
+        "Mechanical",
+        "Flying",
+        "Mechanic"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "necroPlasmancer",
+      "name": "Thutmose",
+      "faction": "Necrons",
+      "traits": [
+        "LivingMetal",
+        "Mechanical",
+        "Flying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "necroOverlord",
+      "name": "Anuphet",
+      "faction": "Necrons",
+      "traits": [
+        "LivingMetal",
+        "Mechanical",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "necroChronomancer",
+      "name": "Thothmek",
+      "faction": "Necrons",
+      "traits": [
+        "LivingMetal",
+        "Mechanical",
+        "Flying",
+        "SuppressiveFire"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "astraPrimarisPsy",
+      "name": "Sibyll",
+      "faction": "AstraMilitarum",
+      "traits": [
+        "Psyker"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "astraYarrick",
+      "name": "Yarrick",
+      "faction": "AstraMilitarum",
+      "traits": [
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "astraBullgryn",
+      "name": "Kut",
+      "faction": "AstraMilitarum",
+      "traits": [
+        "BigTarget"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Defensive"
+      ]
+    },
+    {
+      "id": "astraOrdnance",
+      "name": "Thaddeus",
+      "faction": "AstraMilitarum",
+      "traits": [
+        "SuppressiveFire",
+        "IndirectFire"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "astraCreed",
+      "name": "Creed",
+      "faction": "AstraMilitarum",
+      "traits": [],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "astraDreir",
+      "name": "Dreir",
+      "faction": "AstraMilitarum",
+      "traits": [
+        "Resilient",
+        "Unstoppable"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "blackTerminator",
+      "name": "Angrax",
+      "faction": "BlackLegion",
+      "traits": [
+        "LetTheGalaxyBurn",
+        "TeleportStrike",
+        "TerminatorArmour"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "blackObliterator",
+      "name": "Volk",
+      "faction": "BlackLegion",
+      "traits": [
+        "LetTheGalaxyBurn",
+        "BigTarget",
+        "Daemon",
+        "HeavyWeapon",
+        "SuppressiveFire"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "blackPossession",
+      "name": "Archimatos",
+      "faction": "BlackLegion",
+      "traits": [
+        "LetTheGalaxyBurn",
+        "Psyker"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "blackHaarken",
+      "name": "Haarken",
+      "faction": "BlackLegion",
+      "traits": [
+        "LetTheGalaxyBurn",
+        "Flying",
+        "Terrifying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "blackAbaddon",
+      "name": "Abaddon",
+      "faction": "BlackLegion",
+      "traits": [
+        "LetTheGalaxyBurn",
+        "Resilient",
+        "TerminatorArmour"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "deathTyphus",
+      "name": "Typhus",
+      "faction": "DeathGuard",
+      "traits": [
+        "ContagionsOfNurgle",
+        "Resilient",
+        "Psyker",
+        "TerminatorArmour"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "deathBlightlord",
+      "name": "Maladus",
+      "faction": "DeathGuard",
+      "traits": [
+        "ContagionsOfNurgle",
+        "Resilient",
+        "TerminatorArmour"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "deathRotbone",
+      "name": "Nauseous",
+      "faction": "DeathGuard",
+      "traits": [
+        "ContagionsOfNurgle",
+        "Resilient",
+        "Healer"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "deathPutrifier",
+      "name": "Pestillian",
+      "faction": "DeathGuard",
+      "traits": [
+        "ContagionsOfNurgle",
+        "Resilient",
+        "PutridExplosion"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "deathBlightbringer",
+      "name": "Corrodius",
+      "faction": "DeathGuard",
+      "traits": [
+        "ContagionsOfNurgle",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "orksRuntherd",
+      "name": "Snotflogga",
+      "faction": "Orks",
+      "traits": [
+        "GetStuckIn",
+        "BeastSlayer"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "orksBigMek",
+      "name": "Gibbascrapz",
+      "faction": "Orks",
+      "traits": [
+        "GetStuckIn",
+        "Mechanic"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "orksKillaKan",
+      "name": "Snappawrecka",
+      "faction": "Orks",
+      "traits": [
+        "GetStuckIn",
+        "BigTarget",
+        "Explodes",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "orksNob",
+      "name": "Tanksmasha",
+      "faction": "Orks",
+      "traits": [
+        "GetStuckIn",
+        "BeastSlayer",
+        "Unstoppable"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "orksWarboss",
+      "name": "Gulgortz",
+      "faction": "Orks",
+      "traits": [
+        "GetStuckIn",
+        "BigTarget",
+        "CrushingStrike",
+        "FinalJustice",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "templSwordBrother",
+      "name": "Godswyl",
+      "faction": "BlackTemplars",
+      "traits": [
+        "Parry",
+        "RapidAssault"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "templAggressor",
+      "name": "Burchard",
+      "faction": "BlackTemplars",
+      "traits": [
+        "CrushingStrike",
+        "MkXGravis",
+        "SuppressiveFire"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "templAncient",
+      "name": "Thoread",
+      "faction": "BlackTemplars",
+      "traits": [
+        "FinalJustice",
+        "Parry"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "templChampion",
+      "name": "Jaeger",
+      "faction": "BlackTemplars",
+      "traits": [
+        "FinalJustice",
+        "Parry",
+        "RapidAssault"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "templHelbrecht",
+      "name": "Helbrecht",
+      "faction": "BlackTemplars",
+      "traits": [
+        "FinalJustice",
+        "Parry"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "eldarRanger",
+      "name": "Calandis",
+      "faction": "Aeldari",
+      "traits": [
+        "HeavyWeapon",
+        "Overwatch"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Crit",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "eldarAutarch",
+      "name": "Aethana",
+      "faction": "Aeldari",
+      "traits": [
+        "Flying",
+        "TeleportStrike"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "eldarFarseer",
+      "name": "Eldryon",
+      "faction": "Aeldari",
+      "traits": [
+        "Psyker"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "eldarMauganRa",
+      "name": "Maugan Ra",
+      "faction": "Aeldari",
+      "traits": [
+        "Terrifying",
+        "HeavyWeapon",
+        "Overwatch"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "eldarJainZar",
+      "name": "Jain Zar",
+      "faction": "Aeldari",
+      "traits": [
+        "Infiltrate"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "eldarLhykhis",
+      "name": "Lhykhis",
+      "faction": "Aeldari",
+      "traits": [
+        "Infiltrate",
+        "Flying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "tauMarksman",
+      "name": "Sho'syl",
+      "faction": "Tau",
+      "traits": [
+        "Camouflage",
+        "RangedSpecialist"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "tauCrisis",
+      "name": "Re'vas",
+      "faction": "Tau",
+      "traits": [
+        "BigTarget",
+        "Flying",
+        "Mechanical",
+        "RangedSpecialist"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "tauDarkstrider",
+      "name": "Darkstrider",
+      "faction": "Tau",
+      "traits": [
+        "Infiltrate",
+        "RangedSpecialist",
+        "SuppressiveFire"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "tauAunShi",
+      "name": "Aun'Shi",
+      "faction": "Tau",
+      "traits": [],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "tauShadowsun",
+      "name": "Shadowsun",
+      "faction": "Tau",
+      "traits": [
+        "Camouflage",
+        "Flying",
+        "Infiltrate",
+        "RangedSpecialist"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "tauFarsight",
+      "name": "Farsight",
+      "faction": "Tau",
+      "traits": [
+        "BeastSlayer",
+        "BigTarget",
+        "Flying",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "spaceWulfen",
+      "name": "Ulf",
+      "faction": "SpaceWolves",
+      "traits": [
+        "FinalJustice",
+        "Unstoppable"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "spaceHound",
+      "name": "Tjark",
+      "faction": "SpaceWolves",
+      "traits": [
+        "Infiltrate",
+        "Terrifying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "spaceRockfist",
+      "name": "Arjac",
+      "faction": "SpaceWolves",
+      "traits": [
+        "Resilient",
+        "TeleportStrike",
+        "TerminatorArmour",
+        "Unstoppable"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "spaceStormcaller",
+      "name": "Njal",
+      "faction": "SpaceWolves",
+      "traits": [
+        "Psyker",
+        "TerminatorArmour",
+        "Unstoppable"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "spaceBlackmane",
+      "name": "Ragnar",
+      "faction": "SpaceWolves",
+      "traits": [
+        "BeastSlayer",
+        "FinalJustice",
+        "RapidAssault"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "spaceWolfPriest",
+      "name": "Baldr",
+      "faction": "SpaceWolves",
+      "traits": [
+        "Healer",
+        "FinalJustice",
+        "Terrifying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "thousTzaangor",
+      "name": "Yazaghor",
+      "faction": "ThousandSons",
+      "traits": [
+        "WeaverOfFate",
+        "Flying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "thousTerminator",
+      "name": "Toth",
+      "faction": "ThousandSons",
+      "traits": [
+        "WeaverOfFate",
+        "SuppressiveFire",
+        "TerminatorArmour"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "thousInfernalMaster",
+      "name": "Abraxas",
+      "faction": "ThousandSons",
+      "traits": [
+        "WeaverOfFate",
+        "Psyker"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "thousSorcerer",
+      "name": "Thaumachus",
+      "faction": "ThousandSons",
+      "traits": [
+        "WeaverOfFate",
+        "Flying",
+        "Psyker"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "thousAhriman",
+      "name": "Ahriman",
+      "faction": "ThousandSons",
+      "traits": [
+        "WeaverOfFate",
+        "Flying",
+        "Psyker"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "thousSekhetar",
+      "name": "Sekhetar Robot",
+      "faction": "ThousandSons",
+      "traits": [
+        "WeaverOfFate",
+        "Mechanical",
+        "Camouflage",
+        "Infiltrate",
+        "Overwatch"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "darkaHellblaster",
+      "name": "Sarquael",
+      "faction": "DarkAngels",
+      "traits": [
+        "FinalJustice",
+        "Overwatch",
+        "HeavyWeapon"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "darkaTerminator",
+      "name": "Baraqiel",
+      "faction": "DarkAngels",
+      "traits": [
+        "TeleportStrike",
+        "CrushingStrike",
+        "HeavyWeapon",
+        "TerminatorArmour"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "darkaCompanion",
+      "name": "Forcas",
+      "faction": "DarkAngels",
+      "traits": [
+        "Camouflage",
+        "Parry"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "darkaAsmodai",
+      "name": "Asmodai",
+      "faction": "DarkAngels",
+      "traits": [
+        "Terrifying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "darkaAzrael",
+      "name": "Azrael",
+      "faction": "DarkAngels",
+      "traits": [
+        "FinalJustice",
+        "Overwatch"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "darkaSternguard",
+      "name": "Ramus",
+      "faction": "DarkAngels",
+      "traits": [
+        "Overwatch"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "tyranNeurothrope",
+      "name": "Neurothrope",
+      "faction": "Tyranids",
+      "traits": [
+        "RangedSpecialist",
+        "Flying",
+        "Psyker",
+        "ShadowInTheWarp",
+        "Synapse"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "tyranTyrantGuard",
+      "name": "Tyrant Guard",
+      "faction": "Tyranids",
+      "traits": [
+        "BigTarget",
+        "CrushingStrike"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Defensive"
+      ]
+    },
+    {
+      "id": "tyranWingedPrime",
+      "name": "Winged Prime",
+      "faction": "Tyranids",
+      "traits": [
+        "Synapse",
+        "Flying",
+        "FinalJustice"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "tyranDeathleaper",
+      "name": "Deathleaper",
+      "faction": "Tyranids",
+      "traits": [
+        "Camouflage",
+        "TeleportStrike",
+        "Infiltrate",
+        "Terrifying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "tyranParasite",
+      "name": "Parasite of Mortrex",
+      "faction": "Tyranids",
+      "traits": [
+        "Flying",
+        "Synapse"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "admecDominus",
+      "name": "Vitruvius",
+      "faction": "AdeptusMechanicus",
+      "traits": [
+        "Mechanical",
+        "Mechanic"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "admecManipulus",
+      "name": "Actus",
+      "faction": "AdeptusMechanicus",
+      "traits": [
+        "Mechanical",
+        "Mechanic",
+        "Flying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "admecMarshall",
+      "name": "Tan Gi'da",
+      "faction": "AdeptusMechanicus",
+      "traits": [
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "admecRuststalker",
+      "name": "Exitor-Rho",
+      "faction": "AdeptusMechanicus",
+      "traits": [
+        "Mechanical",
+        "Camouflage",
+        "Infiltrate",
+        "Unstoppable"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "admecDestroyer",
+      "name": "Sy-gex",
+      "faction": "AdeptusMechanicus",
+      "traits": [
+        "Mechanical",
+        "HeavyWeapon",
+        "Overwatch",
+        "Vehicle"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "worldTerminator",
+      "name": "Wrask",
+      "faction": "WorldEaters",
+      "traits": [
+        "BlessingsOfKhorne",
+        "TeleportStrike",
+        "RapidAssault",
+        "TerminatorArmour",
+        "Unstoppable"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "worldJakhal",
+      "name": "Macer",
+      "faction": "WorldEaters",
+      "traits": [
+        "BlessingsOfKhorne",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "worldEightbound",
+      "name": "Azkor",
+      "faction": "WorldEaters",
+      "traits": [
+        "BlessingsOfKhorne",
+        "Daemon",
+        "Resilient",
+        "Terrifying",
+        "Unstoppable"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "worldExecutions",
+      "name": "Tarvakh",
+      "faction": "WorldEaters",
+      "traits": [
+        "BlessingsOfKhorne",
+        "RapidAssault"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Crit",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "worldKharn",
+      "name": "Kharn",
+      "faction": "WorldEaters",
+      "traits": [
+        "BlessingsOfKhorne",
+        "RapidAssault",
+        "FinalJustice"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "bloodIntercessor",
+      "name": "Mataneo",
+      "faction": "BloodAngels",
+      "traits": [
+        "TeleportStrike",
+        "Flying",
+        "RapidAssault"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "bloodDeathCompany",
+      "name": "Lucien",
+      "faction": "BloodAngels",
+      "traits": [
+        "RapidAssault",
+        "Resilient",
+        "Unstoppable"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "bloodSanguinary",
+      "name": "Nicodemus",
+      "faction": "BloodAngels",
+      "traits": [
+        "Healer",
+        "RapidAssault"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "bloodMephiston",
+      "name": "Mephiston",
+      "faction": "BloodAngels",
+      "traits": [
+        "Psyker",
+        "RapidAssault",
+        "Terrifying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "bloodDante",
+      "name": "Dante",
+      "faction": "BloodAngels",
+      "traits": [
+        "TeleportStrike",
+        "FinalJustice",
+        "Flying",
+        "RapidAssault",
+        "Terrifying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "bloodTerminator",
+      "name": "Cezare",
+      "faction": "BloodAngels",
+      "traits": [
+        "TeleportStrike",
+        "TerminatorArmour",
+        "RapidAssault"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "genesBiophagus",
+      "name": "Hollan",
+      "faction": "Genestealers",
+      "traits": [
+        "Ambush",
+        "Healer"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "genesMagus",
+      "name": "Xybia",
+      "faction": "Genestealers",
+      "traits": [
+        "Ambush",
+        "Psyker"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "genesPrimus",
+      "name": "Isaak",
+      "faction": "Genestealers",
+      "traits": [
+        "Ambush"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "genesKelermorph",
+      "name": "Judh",
+      "faction": "Genestealers",
+      "traits": [
+        "Ambush",
+        "BeastSlayer"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Crit",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "genesPatriarch",
+      "name": "The Patermine",
+      "faction": "Genestealers",
+      "traits": [
+        "Infiltrate",
+        "Synapse",
+        "Terrifying",
+        "Unstoppable"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "custoVexilusPraetor",
+      "name": "Aesoth",
+      "faction": "Custodes",
+      "traits": [
+        "MartialKatah",
+        "BigTarget",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "custoAtlacoya",
+      "name": "Atlacoya",
+      "faction": "Custodes",
+      "traits": [
+        "Parry",
+        "Terrifying"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "custoKyrus",
+      "name": "Tyrith",
+      "faction": "Custodes",
+      "traits": [
+        "MartialKatah",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "custoBladeChampion",
+      "name": "Kariyan",
+      "faction": "Custodes",
+      "traits": [
+        "MartialKatah",
+        "BeastSlayer",
+        "RapidAssault",
+        "Parry",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "custoTrajann",
+      "name": "Trajann",
+      "faction": "Custodes",
+      "traits": [
+        "MartialKatah",
+        "CrushingStrike",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "emperNoiseMarine",
+      "name": "Shiron",
+      "faction": "EmperorsChildren",
+      "traits": [
+        "ThrillSeekers",
+        "HeavyWeapon",
+        "SuppressiveFire"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "emperFlawlessBlade",
+      "name": "Hascule",
+      "faction": "EmperorsChildren",
+      "traits": [
+        "ThrillSeekers",
+        "Parry"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "emperKakophonist",
+      "name": "Adamatar",
+      "faction": "EmperorsChildren",
+      "traits": [
+        "ThrillSeekers"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "emperExultant",
+      "name": "Laviscus",
+      "faction": "EmperorsChildren",
+      "traits": [
+        "ThrillSeekers",
+        "CrushingStrike"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "emperLucius",
+      "name": "Lucius",
+      "faction": "EmperorsChildren",
+      "traits": [
+        "ThrillSeekers",
+        "Parry"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "votanBeserk",
+      "name": "Havyr",
+      "faction": "LeaguesOfVotann",
+      "traits": [
+        "PrioritisedEfficiency",
+        "Resilient",
+        "CrushingStrike"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "votanIronmaster",
+      "name": "Vynn",
+      "faction": "LeaguesOfVotann",
+      "traits": [
+        "PrioritisedEfficiency",
+        "Mechanic"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "votanMemnyr",
+      "name": "Ammuk",
+      "faction": "LeaguesOfVotann",
+      "traits": [
+        "PrioritisedEfficiency",
+        "Mechanical"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "votanChampion",
+      "name": "Kimm",
+      "faction": "LeaguesOfVotann",
+      "traits": [
+        "PrioritisedEfficiency",
+        "RapidAssault",
+        "Unstoppable"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "votanUthar",
+      "name": "Uthar",
+      "faction": "LeaguesOfVotann",
+      "traits": [
+        "PrioritisedEfficiency",
+        "Resilient"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "astarCyrus",
+      "name": "Cyrus",
+      "faction": "AdeptusAstartes",
+      "traits": [
+        "Camouflage",
+        "Infiltrate",
+        "SuppressiveFire"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Crit"
+      ]
+    },
+    {
+      "id": "astarLysander",
+      "name": "Lysander",
+      "faction": "AdeptusAstartes",
+      "traits": [
+        "TeleportStrike",
+        "TerminatorArmour",
+        "Resilient",
+        "CrushingStrike"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Block",
+        "I_Booster_Block"
+      ]
+    },
+    {
+      "id": "astarEradicator",
+      "name": "Nubari",
+      "faction": "AdeptusAstartes",
+      "traits": [
+        "MkXGravis",
+        "HeavyWeapon"
+      ],
+      "equipment": [
+        "I_Crit",
+        "I_Defensive",
+        "I_Booster_Crit"
+      ]
+    }
+  ]
+}

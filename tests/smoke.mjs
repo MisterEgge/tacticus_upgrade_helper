@@ -236,6 +236,20 @@ try
     assert.match(rhoPage,/Upgrade now · equip Grand Mantle from inventory/);
     assert.match(rhoPage,/One copy reserved for Exitor-Rho/);
     assert.doesNotMatch(rhoPage,/Fine Mantle|sources\?item=I_Defensive_R004/);
+    const abraxas=catalog.characters.find(character=>character.name==='Abraxas');
+    report.roster.push({...report.roster[0],id:abraxas.id,name:'Abraxas',faction:'ThousandSons',rarity:'Legendary',progressionIndex:15,items:[{slotId:'Slot2',id:'I_Block_L006',name:'Warpforged Sigil of Corruption',rarity:'Legendary',level:11}]});
+    report.unequippedInventory.push({id:'I_Block_L003',amount:1,level:1},{id:'I_Block_E006',amount:2,level:1});
+    await writeFile(reportPath,JSON.stringify(report));
+    const blockPage=await get('/characters/'+abraxas.id);
+    assert.match(blockPage,/Level up inventory gear before equipping/);
+    assert.match(blockPage,/needs level 9/);
+    assert.doesNotMatch(blockPage,/Upgrade now · equip Optimal Force Field from inventory/);
+    const cleanout=await get('/inventory-cleanout?scope=owned');
+    assert.match(cleanout,/Owned-roster scope/);
+    assert.match(cleanout,/Copy and recipient details/);
+    assert.match(cleanout,/SITUATIONAL — REVIEW/);
+    assert.match(cleanout,/level-1 copies|Level-1 surplus copies/);
+    assert.match(cleanout,/lower-chance|Lower block chance/);
     // Automatic saved Raid focus resolves against the current roster on every route.
     for (const name of ['Laviscus', 'Gulgortz', 'Aesoth']) {
         const character = catalog.characters.find(row => row.name === name);

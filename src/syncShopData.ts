@@ -47,9 +47,12 @@ for (const [id, name, url, notes] of [
     ["web", "Official web store", "https://hub.tacticusgame.com/store", "Official storefront verified. Exact equipment/material bundles, account eligibility and expiry require checking the current offer. No fixed item catalog inferred."]
 ]) shops.push({ id: id!, name: name!, sourceUrl: url!, notes: notes!, coverage: "researching", adRefresh: null, refreshLimit: null, refreshCost: null, offers: [] });
 const equipmentRaw = await readSource("src/fsd/4-entities/equipment/data/new-equipment-data.json");
-const equipment = Object.fromEntries(Object.entries(equipmentRaw).map(([id, item]: [string, any]) => [id, { name: item.name, rarity: item.rarity, type: item.type, allowedUnits:item.allowedUnits,allowedFactions:item.allowedFactions,baseStats:item.levels[0]?.stats }]));
+const equipment = Object.fromEntries(Object.entries(equipmentRaw).map(([id, item]: [string, any]) => [id, { name: item.name, rarity: item.rarity, type: item.type, allowedUnits:item.allowedUnits,allowedFactions:item.allowedFactions,baseStats:item.levels[0]?.stats,statsByLevel:item.levels.map((level:any)=>level.stats) }]));
+const charactersRaw=await readSource("src/fsd/4-entities/character/data/new-character-data.json");
+const equipmentCharacters={source:"svehera/tacticusplanner",sourceCommit:commit,characters:charactersRaw.map((character:any)=>({id:character.id,name:character.Name,faction:character.Faction,traits:character.Traits??[],equipment:[character.Equipment1,character.Equipment2,character.Equipment3].filter(Boolean)}))};
 const catalog: ShopCatalog = { schemaVersion: 1, reviewedAt: new Date().toISOString(), sourceCommit: commit, sourceKind: "community", shops, equipment };
 await mkdir("data/game", { recursive: true });
 await writeFile("data/game/shops.json.tmp", JSON.stringify(catalog, null, 2) + "\n");
 await rename("data/game/shops.json.tmp", "data/game/shops.json");
+await writeFile("data/game/equipment-characters.json",JSON.stringify(equipmentCharacters,null,2)+"\n");
 console.log(`Synced ${shops.filter(s => s.coverage === "catalog").length} shop catalogs and ${shops.reduce((n, s) => n + s.offers.length, 0)} offer variants from ${commit}.`);

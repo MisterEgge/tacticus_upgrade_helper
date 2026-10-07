@@ -123,6 +123,9 @@ async function main()
     const targets = await readJson<Record<string, AbilityTarget>>("config/ability_targets.json");
     const compatibility = await readJson<EquipmentCompatibility>("config/equipment_compatibility.json");
     const preferences = await readJson<EquipmentPreferences>("config/equipment_preferences.json");
+    const equipmentCatalog=await readJson<import("./domain/shops").ShopCatalog>("data/game/shops.json");
+    const equipmentCharacters=await readJson<{sourceCommit:string;characters:import("./domain/equipmentCompatibility").EquipmentCharacter[]}>("data/game/equipment-characters.json");
+    if(equipmentCharacters.sourceCommit!==equipmentCatalog.sourceCommit)throw new Error("Equipment source snapshots do not match.");
     const equipmentNames = await readJson<Record<string, string>>("config/equipment_names.json");
 
     const units = playerResponse.player.units;
@@ -160,7 +163,7 @@ async function main()
         .sort((a, b) => b.accountPriority - a.accountPriority || a.character.localeCompare(b.character));
 
     const { legendaryUnderTier, equipNow, buyWatch, compatibilityUnknown } = allocateEquipment(
-        units, playerResponse.player.inventory.items, priorities, compatibility, preferences, equipmentNames
+        units, playerResponse.player.inventory.items, priorities, compatibility, preferences, equipmentNames,equipmentCatalog.equipment,equipmentCharacters.characters
     );
 
     const individualAbilityUpgradesTo17 = abilityQueue.reduce(
