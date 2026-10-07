@@ -1,7 +1,7 @@
 {
   "reviewedOn": "2026-10-02",
   "sourceKind": "community reference, cross-checked with community shop catalog",
-  "progression": {"url":"https://tacticus.wiki.gg/wiki/Unit_Progression","indexSource":"https://github.com/svehera/tacticusplanner/blob/26e5155f7da7ec6c862f9ec2bee347af7dd865c6/src/fsd/3-features/tacticus-integration/tacticus-integration.service.ts"},
+  "progression": {"url":"https://tacticus.wiki.gg/wiki/Unit_Progression","indexSource":"https://github.com/svehera/tacticusplanner/blob/26e5155f7da7ec6c862f9ec2bee347af7dd865c6/src/fsd/3-features/tacticus-integration/tacticus-integration.service.ts","starDisplaySource":"https://github.com/svehera/tacticusplanner/blob/5c5d05193038a0aadb1fd929cce877ef754f7868/src/fsd/5-shared/ui/icons/stars.icon.tsx"},
   "dailyShop": {
     "url":"https://tacticus.wiki.gg/wiki/Shops",
     "offers":[{"rarity":"Uncommon","quantity":5,"blackstone":149},{"rarity":"Rare","quantity":4,"blackstone":279},{"rarity":"Epic","quantity":3,"blackstone":495},{"rarity":"Legendary","quantity":2,"blackstone":799},{"rarity":"Mythic","quantity":1,"blackstone":899}],

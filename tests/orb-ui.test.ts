@@ -25,7 +25,7 @@ test("orb scopes restore War tiers, optional Mythic and full-goal budgets; sourc
  fireEvent.click(view.getByLabelText("Include characters still collecting shards"));
  const rows=()=>within(view.getAllByRole("table")[1]!).getAllByRole("row");
  await waitFor(()=>assert.match(view.container.textContent!,/Active War Gold slot/));
- assert.equal(rows().length,3);assert.doesNotMatch(view.container.textContent!,/Mythic · 11 stars/);
+ assert.equal(rows().length,3);assert.doesNotMatch(view.container.textContent!,/Mythic · 1 blue star/);
  fireEvent.change(view.getByLabelText("Plan"),{target:{value:"goal"}});
  assert.match(rows()[1]!.textContent!,/460 regular shards total/);
  assert.match(rows()[1]!.textContent!,/10 Xenos Legendary/);
