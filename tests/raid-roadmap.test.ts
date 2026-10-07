@@ -30,4 +30,8 @@ test("other raid lineups get owned rank stages without invented research targets
     const steps = selectedRaidRoadmap([{ ...member("Helbrecht"), activeTarget: "Research needed", passiveTarget: "35–50" }, member("Ragnar", false)], false);
     assert.deepEqual(steps.map(step => step.targets), [12, 15, 17, 19].map(rank => [{ name: "Helbrecht", rank }]));
     assert.deepEqual(selectedRaidRoadmap([member("Helbrecht", false)], false), []);
+    const withMachine = selectedRaidRoadmap([member("Anuphet")], true);
+    const machineTargets = withMachine.flatMap(step => step.targets).filter(target => target.name === "Biovore");
+    assert.deepEqual(machineTargets, [{ name: "Biovore", active: 30, passive: 30 }, { name: "Biovore", active: 50, passive: 50 }, { name: "Biovore", rarity: "Mythic", active: 60, passive: 60 }]);
+    assert.ok(machineTargets.every(target => !("rank" in target)));
 });

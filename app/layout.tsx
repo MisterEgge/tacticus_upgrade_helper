@@ -1,3 +1,4 @@
+import { selectedRaidNames } from "../src/domain/raidSelection";
 import "./globals.css";
 import AccountHeader from "./components/AccountHeader";
 import { getReport } from "./lib/report";
@@ -16,5 +17,5 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const meta = await getRaidMeta();
   const raidSelection = await getMainRaidSelection(meta.bosses, report);
   const raidTeam = meta.bosses[raidSelection.boss]![raidSelection.teamName]!;
-  return <html lang="en"><body><AccountHeader report={report} raidSelection={raidSelection} raidLineup={[...raidTeam.core, ...raidSelection.flex]}/>{children}</body></html>;
+  return <html lang="en"><body><AccountHeader report={report} raidSelection={raidSelection} raidLineup={selectedRaidNames(raidSelection,raidTeam)}/>{children}</body></html>;
 }

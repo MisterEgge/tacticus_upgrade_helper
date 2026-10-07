@@ -1,11 +1,17 @@
 import type { RaidTeam } from "./raidMeta";
 type Team = RaidTeam & { members: { name: string; owned: boolean }[] };
 
-// Prefer cited boss flex, then fill vacancies with owned source alternatives.
-// Alternatives are unranked: the fallback is assembled, not a measured best five.
-export function suggestedRaidFlex(_boss:string,_teamName:string,team:Team):string[]
+export function raidCandidates(team: RaidTeam): string[]
 {
-    const available=new Set(team.members.filter(member=>member.owned).map(member=>member.name));
-    const candidates=[...new Set([...(team.recommendation?.flex??[]),...team.flex])];
-    return candidates.filter(name=>team.flex.includes(name)&&!team.core.includes(name)&&available.has(name)).slice(0,Math.max(0,5-team.core.length));
+    return [...new Set([...team.core, ...team.flex, ...(team.fallbacks ?? [])])].filter(name => !team.excluded?.includes(name));
+}
+
+// Keep the owned core and cited flex first, then fill missing core/empty slots.
+// Fallback order is an account planning preference, not a measured meta ranking.
+export function suggestedRaidLineup(team: Team): string[]
+{
+    const owned = new Set(team.members.filter(member => member.owned).map(member => member.name));
+    const allowed = new Set(raidCandidates(team));
+    return [...new Set([...team.core, ...(team.recommendation?.flex ?? []), ...team.flex, ...(team.fallbacks ?? [])])]
+        .filter(name => owned.has(name) && allowed.has(name)).slice(0, 5);
 }

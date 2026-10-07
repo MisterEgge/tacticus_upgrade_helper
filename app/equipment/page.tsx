@@ -1,3 +1,4 @@
+import { selectedRaidNames } from "../../src/domain/raidSelection";
 import {buildEquipmentPlan} from "../lib/equipmentPlan";
 import Link from "next/link";
 import {getShopCatalog}from "../lib/shops";
@@ -34,7 +35,7 @@ export default async function Equipment()
  rows.sort((a,b)=>equipmentFocusPriority(b.character,focus,campaignRequired)-equipmentFocusPriority(a.character,focus,campaignRequired)||a.character.localeCompare(b.character));
  const selection=await getMainRaidSelection(raidMeta.bosses,report);
  const raidTeam=raidMeta.bosses[selection.boss]![selection.teamName]!;
- const raidNames=[...raidTeam.core,...selection.flex];
+ const raidNames=selectedRaidNames(selection,raidTeam);
  const owned=new Set(report.roster.map(unit=>unit.name));
  const defenseTeams=buildDistinctDefenseTeams(defensePlan.teams,owned).map(team=>({name:team.name,used:team.used,members:team.members.map(name=>({name}))}));
  const offenseTeams=offensePlan.validatedFullLineups.filter(team=>team.members.every(name=>owned.has(name))).sort((a,b)=>b.wins/b.used-a.wins/a.used||b.used-a.used).map(team=>({name:team.name,used:team.used,members:team.members.map(name=>({name}))}));

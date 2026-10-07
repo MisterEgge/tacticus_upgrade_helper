@@ -19,10 +19,15 @@ function planningTarget(member: RaidUpgradeMember, rank: number, cap: number): R
 export function selectedRaidRoadmap(members: RaidUpgradeMember[], ownedBiovore: boolean): RoadmapCheckpoint[]
 {
     const owned = members.filter(member => member.owned);
-    if (!members.some(member => member.name === "Laviscus")) return stages.map((stage, index) => ({
-        number: index + 1, title: ["Lineup to Gold I", "Lineup to Diamond I", "Lineup to Diamond III", "Lineup to Adamantine II"][index]!,
-        targets: owned.map(member => planningTarget(member, stage.rank, stage.cap))
-    })).filter(checkpoint => checkpoint.targets.length);
+    if (!members.some(member => member.name === "Laviscus")) {
+        const machineSteps = laviscusRoadmap(null).filter(step => [3, 9, 13].includes(step.number));
+        const characterStages: RoadmapCheckpoint[] = stages.map((stage, index) => ({
+            number: index + 1, title: ["Lineup to Gold I", "Lineup to Diamond I", "Lineup to Diamond III", "Lineup to Adamantine II"][index]!,
+            targets: [...owned.map(member => planningTarget(member, stage.rank, stage.cap)),
+                ...(ownedBiovore && index !== 1 ? machineSteps[index === 0 ? 0 : index - 1]!.targets : [])]
+        })).filter(checkpoint => checkpoint.targets.length);
+        return characterStages;
+    }
 
     const names = new Set(owned.map(member => member.name));
     if (ownedBiovore) names.add("Biovore");
