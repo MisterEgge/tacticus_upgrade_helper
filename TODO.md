@@ -22,6 +22,7 @@
 - [x] Prefer compatible higher-chance block items, checking actual refinement and booster stats before showing equip-now; retain lower-chance block items as situational alternatives.
 
 ## Next enhancements
+- [x] Show a concise shard-ready orb queue with per-character costs, shared owned/needed/short totals for Imperial, Xenos and Chaos by rarity, and non-premium shop routes. Recalculate on sync and account for intervening shard-only promotions.
 - [x] Include the selected Machine of War in Raid teams, fill missing meta character slots with owned substitutes, apply boss faction restrictions, and route upgrades through the actual five. Remove Trajann from account Ad-Mech choices and prefer mechanical substitutes such as Boss and Anuphet.
 - [ ] Research machine-specific ability targets beyond the documented Biovore roadmap; keep unknown targets separate from character rank/badge costs.
 - [x] Add actionable practical ability targets to character pages: next level, XP/rarity gates, badge cost/shortfall, combined demand, confidence and source records, with higher investment remaining optional.

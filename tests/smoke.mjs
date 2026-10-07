@@ -76,6 +76,17 @@ try
     assert.match(orbs, /Orb priorities/);
     assert.match(orbs, /Xenos · Uncommon<\/strong><\/td><td>7<\/td><td>10<\/td><td><strong>3/);
     assert.doesNotMatch(orbs, /Synthetic excluded unit/);
+    report.roster[0] = { ...report.roster[0], progressionIndex: 8, shards: 50, rarity: 'Rare' };
+    report.orbInventory = { Xenos: [{ rarity: 'Epic', amount: 4 }] };
+    await writeFile(reportPath, JSON.stringify(report));
+    const readyOrbs = await get('/orbs');
+    assert.match(readyOrbs, /Shard-ready orb shopping list/);
+    assert.match(readyOrbs, /aria-label="Shard-ready orb totals".*?Xenos · Epic<\/strong><\/td><td>4<\/td><td>10<\/td><td><strong>6/s);
+    assert.match(readyOrbs, /aria-label="Shard-ready character upgrades".*?Aleph-Null.*?Ascend to Epic.*?Collect 6 more orbs/s);
+    report.roster[0] = { ...report.roster[0], progressionIndex: 9, shards: 0, rarity: 'Epic' };
+    report.orbInventory = { Xenos: [{ rarity: 'Epic', amount: 0 }] };
+    await writeFile(reportPath, JSON.stringify(report));
+    assert.doesNotMatch(await get('/orbs'), /aria-label="Shard-ready character upgrades"/);
     report.abilityBadges = { Xenos: [{ rarity: 'Uncommon', amount: 7 }] };
     await writeFile(reportPath, JSON.stringify(report));
     assert.match(await get('/abilities'), /Uncommon: 7 owned/);

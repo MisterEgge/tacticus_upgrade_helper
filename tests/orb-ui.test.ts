@@ -20,6 +20,7 @@ test("orb scopes restore War tiers, optional Mythic and full-goal budgets; sourc
  const offenseTeams=[{name:"Gold offense",used:1,members:[{name:"War"}]}];
  dom.window.localStorage.setItem(WAR_PLAN_STORAGE_KEY,JSON.stringify({offense:["Gold offense"],offenseTiers:Array.from({length:10},()=>"gold")}));
  const view=render(createElement(OrbPlanner,{candidates,inventory:{Xenos:[{rarity:"Uncommon",amount:12},{rarity:"Rare",amount:20},{rarity:"Epic",amount:4}]},defenseTeams:[],offenseTeams,shops:shops as ShopCatalog}));
+ fireEvent.click(view.getByRole("button",{name:/Longer-term orb plan/}));
  const rows=()=>within(view.getAllByRole("table")[1]!).getAllByRole("row");
  await waitFor(()=>assert.match(view.container.textContent!,/Active War Gold slot/));
  assert.equal(rows().length,3);assert.doesNotMatch(view.container.textContent!,/Mythic · 11 stars/);
@@ -41,4 +42,29 @@ test("orb scopes restore War tiers, optional Mythic and full-goal budgets; sourc
  fireEvent.click(view.getByLabelText("Include Mythic upgrades"));
  assert.match(view.container.textContent!,/20 Mythic shards/);
  assert.equal(rows().length,3);
+
+ const readyCandidates=[{...make("Ready Imperial",8),alliance:"Imperial",shards:50},{...make("Other Imperial",8),alliance:"Imperial",shards:50},{...make("Ready Xenos",5),shards:20},{...make("Promote Chaos",7),alliance:"Chaos",shards:90},{...make("Blocked",8,true),alliance:"Imperial",shards:49}];
+ const inventory={Imperial:[{rarity:"Epic",amount:12}],Xenos:[{rarity:"Rare",amount:10}],Chaos:[{rarity:"Epic",amount:0}]};
+ view.rerender(createElement(OrbPlanner,{key:"ready-fixture",candidates:readyCandidates,inventory,defenseTeams:[],offenseTeams:[],shops:shops as ShopCatalog}));
+ const readySection=within(view.getByRole("region",{name:"Shard-ready orb shopping list"}));
+ const totals=within(readySection.getByRole("table",{name:"Shard-ready orb totals"}));
+ assert.deepEqual(within(totals.getAllByRole("row")[1]!).getAllByRole("cell").slice(0,4).map(cell=>cell.textContent),["Imperial · Epic","12","20","8"]);
+ assert.ok(readySection.getByText("IMPERIAL"));assert.ok(readySection.getByText("XENOS"));assert.ok(readySection.getByText("CHAOS"));
+ const queue=within(readySection.getByRole("table",{name:"Shard-ready character upgrades"}));
+ assert.equal(queue.getAllByRole("row").length,5);
+ assert.equal(queue.queryByText("Blocked"),null);
+ assert.equal(queue.getAllByText("Ready to upgrade · check coins").length,2);
+ assert.ok(queue.getByText("Collect 8 more orbs"));
+ assert.ok(queue.getByText("Promote 1 time first"));
+ assert.ok(queue.getAllByText("Ascend to Epic").length>=2);
+ assert.match(totals.getAllByRole("row")[1]!.textContent!,/Guild Shop/);
+ assert.doesNotMatch(totals.getAllByRole("row")[1]!.textContent!,/Blackstone/);
+ fireEvent.click(readySection.getByRole("button",{name:/Shard-ready orb shopping list/}));
+ assert.equal(readySection.queryByRole("table"),null);
+ fireEvent.click(readySection.getByRole("button",{name:/Shard-ready orb shopping list/}));
+ assert.equal(readySection.getAllByRole("table").length,2);
+ assert.equal(view.getByRole("button",{name:/Longer-term orb plan/}).getAttribute("aria-expanded"),"false");
+ view.rerender(createElement(OrbPlanner,{key:"synced-fixture",candidates:readyCandidates.map(row=>row.name==="Ready Imperial"?{...row,progressionIndex:9,shards:0}:row),inventory:{...inventory,Imperial:[{rarity:"Epic",amount:2}]},defenseTeams:[],offenseTeams:[],shops:shops as ShopCatalog}));
+ const synced=within(view.getByRole("table",{name:"Shard-ready orb totals"}));
+ assert.deepEqual(within(synced.getAllByRole("row")[1]!).getAllByRole("cell").slice(0,4).map(cell=>cell.textContent),["Imperial · Epic","2","10","8"]);
 });

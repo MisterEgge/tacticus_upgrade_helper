@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {nextOrbMilestone,progressionRarity,progressionStep,rarityForGoal} from "../src/domain/characterProgression";
-import {orbPlan,orbHonorees,orbsOwned,type OrbCandidate,type OrbOptions} from "../src/domain/orbPlanner";
+import {orbPlan,shardReadyOrbPlan,combinedOrbDemand,orbHonorees,orbsOwned,type OrbCandidate,type OrbOptions} from "../src/domain/orbPlanner";
 import {campaignOrbGoals} from "../src/domain/orbCampaignGoals";
 import {rateCharacter} from "../src/domain/characterUtility";
 
@@ -64,6 +64,43 @@ test("Onslaught honors use the current stage and alliance, excluding Legendary s
  assert.deepEqual(orbHonorees(rows,"Xenos","Legendary"),["Legendary donor"]);
  assert.deepEqual(orbHonorees(rows,"Xenos","Rare"),[]);
  assert.deepEqual(orbHonorees(rows,"Xenos","Mythic"),["Wing"]);
+});
+
+test("shard-ready totals include each alliance and allocate only the ready queue once",()=>{
+ const blocked=raid("Blocked Raid");
+ const ready=candidate("Ready",8,{shards:50});
+ const second=candidate("Second",8,{shards:80});
+ const imperial=candidate("Imperial",5,{shards:20,alliance:"Imperium"});
+ const chaos=candidate("Chaos",12,{shards:500,alliance:"Chaos"});
+ const result=shardReadyOrbPlan([blocked,ready,second,imperial,chaos],{Xenos:[{rarity:"Epic",amount:12}],Imperial:[{rarity:"Rare",amount:7}],Chaos:[{rarity:"Legendary",amount:10}]},new Map([["Ready",26]]),false);
+ assert.equal(result.waitingForShards,1);
+ assert.equal(result.rows.some(row=>row.name==="Blocked Raid"),false);
+ assert.deepEqual(result.rows.filter(row=>row.alliance==="Xenos").map(row=>row.allocations[0]?.reserved),[10,2]);
+ assert.deepEqual(result.pools.map(pool=>[pool.alliance,pool.rarity,pool.needed,pool.shortfall]),[["Imperial","Rare",10,3],["Xenos","Epic",20,8],["Chaos","Legendary",10,0]]);
+ assert.equal(result.rows.find(row=>row.name==="Chaos")?.end,13);
+ const future=orbPlan([ready,blocked],{},new Map(),options);
+ assert.equal(combinedOrbDemand(result,future).get("Xenos:Epic"),30);
+});
+
+test("shard-ready ascensions require the whole intervening promotion path and preserve unknown shards",()=>{
+ const result=shardReadyOrbPlan([candidate("Promote first",7,{shards:90}),candidate("Only next promotion",7,{shards:40}),candidate("Unknown",8,{shards:null}),candidate("Maxed",19,{shards:999})],null,new Map(),false);
+ assert.deepEqual(result.rows.map(row=>row.name),["Promote first"]);
+ assert.equal(result.rows[0]?.next.promotions,1);
+ assert.equal(result.rows[0]?.shardsNeeded,90);
+ assert.equal(result.rows[0]?.allocations[0]?.reserved,null);
+ assert.equal(result.pools[0]?.shortfall,null);
+ assert.equal(result.waitingForShards,1);
+ assert.deepEqual(result.unknownShards,["Unknown"]);
+});
+
+test("Mythic readiness uses Mythic shards and opt-in; spent shards remove a character from totals",()=>{
+ const row=candidate("Wing",15,{shards:null,mythicShards:20});
+ assert.equal(shardReadyOrbPlan([row],{},new Map(),false).rows.length,0);
+ assert.equal(shardReadyOrbPlan([row],{},new Map(),true).pools[0]?.needed,10);
+ assert.deepEqual(shardReadyOrbPlan([{...row,mythicShards:null}],{},new Map(),true).unknownShards,["Wing"]);
+ const before=candidate("Ascend",8,{shards:50});
+ assert.equal(shardReadyOrbPlan([before],{},new Map(),false).rows.length,1);
+ assert.equal(shardReadyOrbPlan([{...before,progressionIndex:9,shards:0}],{},new Map(),false).rows.length,0);
 });
 
 
