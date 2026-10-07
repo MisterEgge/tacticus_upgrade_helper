@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {nextOrbMilestone,progressionRarity,progressionStep,rarityForGoal} from "../src/domain/characterProgression";
+import {nextOrbMilestone,progressionLabel,progressionRarity,progressionStep,rarityForGoal} from "../src/domain/characterProgression";
 import {orbPlan,orbUpgradeAction,shardReadyOrbPlan,combinedOrbDemand,orbHonorees,orbsOwned,type OrbCandidate,type OrbOptions} from "../src/domain/orbPlanner";
 import {campaignOrbGoals} from "../src/domain/orbCampaignGoals";
 import {rateCharacter} from "../src/domain/characterUtility";
@@ -40,6 +40,18 @@ test("shard gating covers intervening promotions, full goals and the correct Myt
  const mythic=candidate("Mythic ascension",15,{shards:999,mythicShards:19});
  assert.equal(orbPlan([mythic],{},new Map(),defaults).rows.length,0);
  assert.equal(orbPlan([{...mythic,shards:null,mythicShards:20}],{},new Map(),defaults).rows.length,1);
+});
+
+test("progression labels use visible game stars and retain counts across rarity ascensions",()=>{
+ assert.deepEqual(Array.from({length:20},(_,index)=>progressionLabel(index)),[
+  "Common · no stars","Common · 1 yellow star","Common · 2 yellow stars",
+  "Uncommon · 2 yellow stars","Uncommon · 3 yellow stars","Uncommon · 4 yellow stars",
+  "Rare · 4 yellow stars","Rare · 5 yellow stars","Rare · 1 red star",
+  "Epic · 1 red star","Epic · 2 red stars","Epic · 3 red stars",
+  "Legendary · 3 red stars","Legendary · 4 red stars","Legendary · 5 red stars","Legendary · 1 blue star",
+  "Mythic · 1 blue star","Mythic · 2 blue stars","Mythic · 3 blue stars","Mythic · wings"
+ ]);
+ for(const index of [-1,20,1.5,NaN])assert.equal(progressionLabel(index),"Unknown progression");
 });
 
 test("orb milestone includes preceding shard promotions and exact Legendary/Mythic steps",()=>{

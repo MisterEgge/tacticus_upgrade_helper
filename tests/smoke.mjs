@@ -121,7 +121,9 @@ try
     const honorForcas = new JSDOM(await get('/onslaught'));
     const imperialHonors = honorForcas.window.document.querySelector('[aria-label="Imperial honor priorities"]');
     assert.ok(imperialHonors.querySelector('a[href="/characters/darkaCompanion"]'));
-    assert.match(imperialHonors.textContent, /255 shards short of Legendary/);
+    assert.match(imperialHonors.textContent, /Rare · 1 red star.*Rare → Epic.*5 shards short of Epic/s);
+    assert.match(imperialHonors.textContent, /45 \/ 50 shards for Epic/);
+    assert.doesNotMatch(imperialHonors.textContent, /6 stars/);
     honorForcas.window.close();
     report.roster.push({ ...report.roster[0], id: 'orksRuntherd', name: 'Snotflogga', faction: 'Orks', shards: 0 });
     await writeFile(reportPath, JSON.stringify(report));

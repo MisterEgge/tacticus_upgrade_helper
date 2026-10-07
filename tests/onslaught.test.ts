@@ -66,7 +66,17 @@ test("Legendary shard goals include covered intermediate steps and rank usefulne
  assert.deepEqual(group.rows.map(row=>row.id),[distant.id,near.id,intermediate.id]);
  assert.equal(group.rows[0]!.goalRarity,"Legendary");
  assert.equal(group.rows[0]!.shardsNeeded,300);assert.equal(group.rows[0]!.shardShortfall,255);
+ assert.deepEqual(group.rows[0]!.milestone,{from:"Rare",to:"Epic",shardsNeeded:50,shardShortfall:5});
+ assert.match(group.rows[0]!.reasons[0]!,/5 shards short of Epic/);
  assert.equal(group.rows[2]!.shardsNeeded,250);assert.equal(group.rows[2]!.shardShortfall,170);
+ assert.equal(group.rows[2]!.milestone?.shardShortfall,170);
+ const rarePromotions=onslaughtPriorities([{...distant,progressionIndex:6,shards:35}],{}, {},new Map(),{Xenos:{sector:"gold",tier:1}})[1]!.rows[0]!;
+ assert.deepEqual(rarePromotions.milestone,{from:"Rare",to:"Epic",shardsNeeded:120,shardShortfall:85});
+ assert.deepEqual(rarePromotions.battles,{min:13,max:15});
+ const rareCovered=onslaughtPriorities([{...distant,shards:50}],{}, {},new Map(),{Xenos:{sector:"gold",tier:1}})[1]!.rows[0]!;
+ assert.equal(rareCovered.shardShortfall,250);assert.equal(rareCovered.milestone?.shardShortfall,0);
+ assert.deepEqual(rareCovered.battles,{min:0,max:0});
+ assert.match(rareCovered.reasons[0]!,/Epic shards covered/);
  const covered=onslaughtPriorities([{...intermediate,shards:250}],{}, {},new Map(),{})[1]!;
  assert.equal(covered.rows.length,0);
  const warOnly={...untracked,progressionIndex:6,shards:0};
@@ -119,7 +129,8 @@ test("honor UI separates faction lists, persists manual sectors per account and 
  for(const key of ["window","self","document","navigator","HTMLElement","Node","Event","MutationObserver","localStorage"]){descriptors.set(key,Object.getOwnPropertyDescriptor(globalThis,key));Object.defineProperty(globalThis,key,{configurable:true,value:dom.window[key as keyof typeof dom.window]});}
  const {render,fireEvent,cleanup,act,within}=await import("@testing-library/react");
  suite.after(async()=>{await act(async()=>cleanup());dom.window.close();for(const [key,descriptor] of descriptors){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else Reflect.deleteProperty(globalThis,key);}});
- const candidates=[{...unit("Snotflogga","Xenos",11),id:"orksRuntherd"},unit("Imperial A"),unit("Imperial B"),unit("Imperial C"),unit("Imperial D"),unit("Chaos A","Chaos"),unit("Xenos A","Xenos"),unit("Blue star","Xenos",15)];
+ const rare=unit("Rare upgrade","Imperial",8,45);rare.utility={...rare.utility,mainRaidCore:true};
+ const candidates=[rare,{...unit("Snotflogga","Xenos",11),id:"orksRuntherd"},unit("Imperial A"),unit("Imperial B"),unit("Imperial C"),unit("Imperial D"),unit("Chaos A","Chaos"),unit("Xenos A","Xenos"),unit("Blue star","Xenos",15)];
  const props={candidates,orbs:{},badges:{},defenseTeams:[],offenseTeams:[],accountKey:"TEST ACCOUNT"};
  const view=render(createElement(HonorPriorities,props));
  assert.equal(within(view.getByRole("table",{name:"Imperial honor priorities"})).getAllByRole("row").length,4);
@@ -133,6 +144,14 @@ test("honor UI separates faction lists, persists manual sectors per account and 
  fireEvent.click(within(passive).getByText("Use regular shard sources instead"));
  assert.ok(within(passive).getByRole("link",{name:"Salvage Run strongboxes"}));
  assert.match(view.getByRole("table",{name:"Imperial honor priorities"}).textContent!,/250 shards short of Legendary/);
+ const rareRow=view.getByRole("link",{name:/Rare upgrade/}).closest("tr")!;
+ assert.match(rareRow.textContent!,/Rare · 1 red star/);
+ assert.match(rareRow.textContent!,/Rare → Epic/);
+ assert.match(rareRow.textContent!,/5 shards short of Epic/);
+ assert.match(rareRow.textContent!,/45 \/ 50 shards for Epic/);
+ assert.doesNotMatch(rareRow.textContent!,/6 stars/);
+ const goal=within(rareRow).getByText(/Legendary goal: 45 \/ 300 total shards/).closest("details")!;
+ assert.equal(goal.hasAttribute("open"),false);
  fireEvent.change(view.getByRole("combobox",{name:"Imperial sector"}),{target:{value:"gold"}});
  fireEvent.change(view.getByRole("combobox",{name:"Imperial sector stage"}),{target:{value:"4"}});
  assert.deepEqual(JSON.parse(localStorage.getItem("tacticus-onslaught-sectors-v1:TEST ACCOUNT")!),{Imperial:{sector:"gold",tier:4}});

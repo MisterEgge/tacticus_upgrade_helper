@@ -86,6 +86,7 @@ export function onslaughtPriorities(candidates:OnslaughtCandidate[],orbs:OrbInve
    const shardBalance=stock(reward.shardType==="Mythic"?unit.mythicShards:unit.shards);
    const shardsNeeded=growthGoal?shardsToGoal(unit.progressionIndex,goalIndex!):reward.shardType==="Mythic"?(next?.mythicShards??0):0;
    const shardShortfall=shardBalance===null?null:Math.max(0,shardsNeeded-shardBalance);
+   const milestone=growthGoal&&next?{from:rarity,to:next.orbRarity,shardsNeeded:next.shards,shardShortfall:shardBalance===null?null:Math.max(0,next.shards-shardBalance)}:null;
    const ownOrbs=next?.orbRarity?orbsOwned(orbs,alliance,next.orbRarity):null;
    const ownOrbShort=next&&ownOrbs!==null?Math.max(0,next.orbs-ownOrbs):null;
    const helpsOwnOrb=growthGoal&&reward.orb===next?.orbRarity&&ownOrbShort!==null&&ownOrbShort>0;
@@ -93,8 +94,8 @@ export function onslaughtPriorities(candidates:OnslaughtCandidate[],orbs:OrbInve
    const mythicGoal=includeMythic&&unit.progressionIndex>=15&&unit.progressionIndex<19;
    if(!needsShards&&!helpsOwnOrb&&!orbPool&&!badgeNeeds.length&&!mythicGoal)return [];
    const reasons:string[]=[];
-   if(needsShards)reasons.push(shardShortfall===null?"Shard balance unknown · sync before spending":`${shardShortfall} shards short of ${goalRarity}`);
-   if(helpsOwnOrb&&!needsShards)reasons.push(`Reach ${goalRarity} · ${ownOrbShort} ${reward.orb} orbs short`);
+   if(needsShards)reasons.push(shardShortfall===null?"Shard balance unknown · sync before spending":milestone?.shardShortfall?`${milestone.shardShortfall} shards short of ${milestone.to}`:`${milestone?.to} shards covered · building toward ${goalRarity}`);
+   if(helpsOwnOrb&&!needsShards)reasons.push(`Reach ${milestone?.to} · ${ownOrbShort} ${reward.orb} orbs short`);
    if(orbPool)reasons.push(`Farm ${reward.orb} orbs: ${orbPool.shortfall} short for ${orbPool.recipients.join(", ")}`);
    if(badgeNeeds.length)reasons.push(`Honor badges can help the eligible practical ability goal: ${badgeNeeds.map(row=>`${row.shortfall} ${row.rarity} short`).join(", ")}`);
    if(mythicGoal)reasons.push(`Optional Mythic goal · ${shardShortfall??"unknown"} Mythic shards short`);
@@ -105,8 +106,9 @@ export function onslaughtPriorities(candidates:OnslaughtCandidate[],orbs:OrbInve
    const priority=shardShortfall!==null&&(needsShards||helpsOwnOrb)?0:orbPool?1:badgeNeeds.length?2:needsShards?3:4;
    // Lack of a campaign source is a tie-breaker, never proof that Onslaught is
    // the only acquisition route. Shared pools are alternatives, not reservations.
-   return [{...unit,alliance,reward,reasons,priority,relevance:relevance(unit,war),shardsNeeded,shardBalance,shardShortfall,goalRarity,orbPool,badgeNeeds,
-    battles:reward.shards&&shardShortfall!==null?{min:Math.ceil(shardShortfall/reward.shards.max),max:Math.ceil(shardShortfall/reward.shards.min)}:null}];
+   const honorShortfall=milestone?milestone.shardShortfall:shardShortfall;
+   return [{...unit,alliance,reward,reasons,priority,relevance:relevance(unit,war),shardsNeeded,shardBalance,shardShortfall,goalRarity,milestone,orbPool,badgeNeeds,
+    battles:reward.shards&&honorShortfall!==null?{min:Math.ceil(honorShortfall/reward.shards.max),max:Math.ceil(honorShortfall/reward.shards.min)}:null}];
   }).sort((a,b)=>a.priority-b.priority||a.relevance-b.relevance||Number(a.campaignShardSource)-Number(b.campaignShardSource)||(b.utility.communityScore??0)-(a.utility.communityScore??0)||b.utility.accountPriority-a.utility.accountPriority||(a.shardShortfall??Infinity)-(b.shardShortfall??Infinity)||a.name.localeCompare(b.name)).slice(0,3);
   const passive=members.filter(unit=>honorReward(unit.progressionIndex,null)?.shardType==="regular"&&regularIncome.has(unit.id)).map(unit=>({...regularIncome.get(unit.id)!}));
   return {alliance,passive,owned:candidates.filter(unit=>normalizeAlliance(unit.alliance)===alliance).length,deployable:candidates.filter(unit=>normalizeAlliance(unit.alliance)===alliance).length>=5,waveBadges:WAVE_BADGE_ALLIANCE[alliance],rows};
