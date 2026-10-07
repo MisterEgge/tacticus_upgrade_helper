@@ -6,7 +6,7 @@ import CharacterName from "../components/CharacterName";
 import CollapsibleSection from "../components/CollapsibleSection";
 import ReferenceDetails from "../components/ReferenceDetails";
 import {orbPlan,orbUpgradeAction,shardReadyOrbPlan,combinedOrbDemand,orbHonorees,orbsOwned,type OrbCandidate,type OrbInventory,type OrbScope} from "../../src/domain/orbPlanner";
-import {CHARACTER_RARITIES,progressionLabel,progressionRarity,type CharacterRarity} from "../../src/domain/characterProgression";
+import {CHARACTER_RARITIES,progressionLabel,type CharacterRarity} from "../../src/domain/characterProgression";
 import {WAR_PLAN_STORAGE_KEY,warBadgeTargets,type WarBadgeTeam} from "../../src/domain/warBadgeTargets";
 import {currencyName,scheduleLabel,isActionableOffer,type ShopCatalog} from "../../src/domain/shops";
 import sources from "../../config/orb_sources.json";
@@ -26,14 +26,14 @@ export default function OrbPlanner({candidates,inventory,defenseTeams,offenseTea
  const rarityGroups=CHARACTER_RARITIES.map(rarity=>({rarity,pools:ready.pools.filter(pool=>pool.rarity===rarity),rows:ready.rows.filter(row=>row.next.orbRarity===rarity)})).filter(group=>group.rows.length>0);
  const protectedDemand=useMemo(()=>combinedOrbDemand(plan,ready),[plan,ready]);
  const orbOffers=(rarity:string)=>shops.shops.filter(shop=>shop.coverage==="catalog").flatMap(shop=>shop.offers.filter(offer=>offer.itemId===`draft_ascensionOrbs${rarity}`&&isActionableOffer(offer)).map(offer=>({shop,offer})));
- const acquisition=(pool:typeof plan.pools[number])=>{
+ const acquisition=(pool:typeof plan.pools[number],label=`Get ${pool.alliance} ${pool.rarity} orbs`)=>{
   const offers=orbOffers(pool.rarity);
   const forge=sources.forge.offers.find(offer=>offer.rarity===pool.rarity);
   const lowerOwned=forge?orbsOwned(inventory,pool.alliance,forge.lower as CharacterRarity):null;
   const lowerNeeded=forge?protectedDemand.get(`${pool.alliance}:${forge.lower}`)??0:0;
   const forgeCount=lowerOwned===null||pool.shortfall===null?null:Math.min(pool.shortfall,Math.floor(Math.max(0,lowerOwned-lowerNeeded)/5));
   const honorees=orbHonorees(candidates,pool.alliance,pool.rarity);
-  return <ReferenceDetails label={`Get ${pool.alliance} ${pool.rarity} orbs`}>
+  return <ReferenceDetails label={label}>
    {offers.map(({shop,offer})=><p key={offer.id}><a href={shop.sourceUrl} target="_blank" rel="noreferrer">{shop.name}</a>: <ResourceName id={`draft_ascensionOrbs${pool.rarity}`} name={`${offer.quantity} draft orb${offer.quantity===1?"":"s"}`}/> for <ResourceName id={offer.cost.currency} name={`${offer.cost.amount.toLocaleString()} ${currencyName(offer.cost.currency)}`}/> · {scheduleLabel(offer.schedule)}{offer.maxPurchases!==null?` · catalog limit ${offer.maxPurchases} purchases`:""}.{pool.shortfall!==null&&pool.shortfall>0?` Cover ${pool.shortfall} short with ${Math.ceil(pool.shortfall/offer.quantity)} pack(s): ${(Math.ceil(pool.shortfall/offer.quantity)*offer.cost.amount).toLocaleString()} ${currencyName(offer.cost.currency)}.`:""} {shop.id==="rogue"?"Requires Rogue Trader access (Legendary star or higher).":"Check shop access and stock in-game."} Choose {pool.alliance}. {offer.conditions.lockId?"Offer lock needs in-game verification.":""}</p>)}
    {<p><a href={sources.sources[0]!.url} target="_blank" rel="noreferrer">Onslaught</a>: {honorees.length?`Current orb-producing honorees: ${honorees.join(", ")}.`:`No confirmed ${pool.alliance} ${pool.rarity}-orb honouree at the required stage in this roster.`} Preview sector reward/chance; deploy and honour the chosen unit. <Link href="/onslaught">Your top honor choices</Link></p>}
    {pool.rarity==="Mythic"?<p><a href={sources.sources[2]!.url} target="_blank" rel="noreferrer">Mythic Journey</a>: check each recipient’s mission chain for first Mythic ascension at Legendary star before buying or forging.</p>:null}
@@ -49,15 +49,16 @@ export default function OrbPlanner({candidates,inventory,defenseTeams,offenseTea
     const missing=pools.filter(pool=>pool.shortfall!==0);
     return <div key={alliance}><small>{alliance.toUpperCase()}</small><strong>{pools.length?pools.map((pool,index)=><span key={pool.rarity}>{index?" · ":""}<ResourceName id={`orb:${pool.alliance}:${pool.rarity}`} name={`${pool.needed} ${pool.rarity}`}/></span>):"No orbs needed"}</strong><span>{missing.length?`Still need: ${missing.map(pool=>`${pool.shortfall??"?"} ${pool.rarity}`).join(" · ")}`:"Orb stock covers this queue"}</span></div>;
    })}</div>
-   <p className="sub">{includeStarUpgrades?"Next orb upgrades":"Rarity ascensions toward Legendary"} with enough shards. Totals update after sync. Check coins before upgrading.{!includeStarUpgrades?" Extra stars within Legendary or Mythic are optional; use the toggle above to budget them.":""}</p>
+   <p className="sub">Shards covered · check coins before upgrading.</p>
    {rarityGroups.map(group=><CollapsibleSection key={group.rarity} title={`${group.rarity} orbs`} summary={`${group.rows.length} characters · ${group.pools.reduce((total,pool)=>total+pool.needed,0)} orbs needed`}>
-    <div className="tableWrap"><table aria-label={`${group.rarity} shard-ready orb totals`}><thead><tr><th>Orbs</th><th>Owned</th><th>Needed</th><th>Still need</th><th>Watch these stores</th></tr></thead><tbody>{group.pools.map(pool=><tr key={pool.alliance}><td><strong><ResourceName id={`orb:${pool.alliance}:${pool.rarity}`} name={`${pool.alliance} · ${pool.rarity}`}/></strong></td><td>{pool.owned??"Unknown"}</td><td>{pool.needed}</td><td><strong>{pool.shortfall??"Unknown"}</strong></td><td>{orbOffers(pool.rarity).map(({shop,offer})=><small key={offer.id}><a href={shop.sourceUrl} target="_blank" rel="noreferrer">{shop.name}</a> · {offer.quantity} for <ResourceName id={offer.cost.currency} name={`${offer.cost.amount.toLocaleString()} ${currencyName(offer.cost.currency)}`}/> · {scheduleLabel(offer.schedule)}</small>)}{!orbOffers(pool.rarity).length?<small>No verified non-premium shop offer</small>:null}<small>Draft: choose {pool.alliance} · check access and current stock.</small>{acquisition(pool)}</td></tr>)}</tbody></table></div>
-    <div className="tableWrap"><table aria-label={`${group.rarity} shard-ready character upgrades`}><thead><tr><th>Character</th><th>Next upgrade</th><th>Orbs needed</th><th>Ready / next action</th></tr></thead><tbody>{group.rows.map(row=>{
-     const cost=row.allocations[0]!;
-     const status=row.next.promotions>0?`Promote ${row.next.promotions} time${row.next.promotions===1?"":"s"} first`:cost.shortfall===null?"Sync orb inventory":cost.shortfall>0?`Collect ${cost.shortfall} more orbs`:"Ready to upgrade · check coins";
-     const ascends=progressionRarity(row.next.from)!==row.next.orbRarity;
-     return <tr key={row.id}><td><Link href={`/characters/${row.id}`}><CharacterName id={row.id} name={row.name}/></Link></td><td>{ascends?`Ascend to ${row.next.orbRarity}`:row.end===15?"Legendary star":`${row.next.orbRarity} star upgrade`}</td><td><strong><ResourceName id={`orb:${row.alliance}:${cost.rarity}`} name={`${cost.needed} ${row.alliance} ${cost.rarity}`}/></strong><small>{cost.reserved??"?"} allocated · {cost.shortfall??"?"} short</small></td><td><strong>{status}</strong><small>Shards ready · {row.shardsNeeded||row.mythicShardsNeeded} needed / {(row.mythicShardsNeeded?row.mythicShards:row.shards)??"?"} owned{row.mythicShardsNeeded?" Mythic":""}</small>{row.next.promotions>0?<small>Shards cover every promotion and the orb upgrade.</small>:null}</td></tr>;
-    })}</tbody></table></div>
+    <div className="tableWrap"><table aria-label={`${group.rarity} orb shopping`}><thead><tr><th>Alliance</th><th>Characters</th><th>Owned</th><th>Needed</th><th>Short</th></tr></thead><tbody>{group.pools.map(pool=><tr key={pool.alliance}>
+     <td><strong><ResourceName id={`orb:${pool.alliance}:${pool.rarity}`} name={pool.alliance}/></strong>{acquisition(pool,"Sources")}</td>
+     <td><div className="orbRecipients">{group.rows.filter(row=>row.alliance===pool.alliance).map(row=>{
+      const cost=row.allocations[0]!;
+      return <div key={row.id}><Link href={`/characters/${row.id}`}><CharacterName id={row.id} name={row.name}/></Link>{cost.needed!==10?<small>{cost.needed} orbs</small>:null}{row.next.promotions>0?<small>Promote {row.next.promotions} time{row.next.promotions===1?"":"s"} first</small>:null}</div>;
+     })}</div></td>
+     <td>{pool.owned??"Unknown"}</td><td>{pool.needed}</td><td><strong>{pool.shortfall??"Unknown"}</strong></td>
+    </tr>)}</tbody></table></div>
    </CollapsibleSection>)}
    {!rarityGroups.length?<p>No shard-ready orb upgrades{includeMythic?"":" below Mythic"}.</p>:null}
    {ready.unknownShards.length?<p className="sub">Shard inventory unknown: {ready.unknownShards.join(", ")} · excluded from ready totals.</p>:null}
