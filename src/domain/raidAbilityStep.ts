@@ -1,4 +1,4 @@
-const rarityCaps:Record<string,number>={Common:8,Uncommon:17,Rare:26,Epic:35,Legendary:50,Mythic:60};
+import {abilityLevelCap} from "./abilityCosts";
 
 export function raidAbilityStep(level:number|null,target:string,xpLevel:number|null,rarity:string|null):string
 {
@@ -6,8 +6,8 @@ export function raidAbilityStep(level:number|null,target:string,xpLevel:number|n
     const first=Number.parseInt(target,10);
     if(!Number.isFinite(first))return "Target needs research";
     if(level>=first)return "At suggested first stop";
-    const rarityCap=rarityCaps[rarity];
-    if(rarityCap===undefined)return "Rarity cap unknown · verify in game";
+    const rarityCap=abilityLevelCap(rarity);
+    if(rarityCap===null)return "Rarity cap unknown · verify in game";
     const reachable=Math.min(first,xpLevel,rarityCap);
     if(reachable>level)return `Level eligible: ${level} → ${reachable} · check badges and coins${first>reachable?` · goal ${first} needs ${xpLevel<first?"XP":""}${xpLevel<first&&rarityCap<first?" and ":""}${rarityCap<first?"rarity":""}`:""}`;
     const blocks=[...(xpLevel<=level?[`XP for level ${level+1}`]:[]),...(rarityCap<=level?[`rarity above ${rarity}`]:[])];

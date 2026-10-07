@@ -12,6 +12,10 @@ let breakpointCache:BreakpointFile|null=null;
 export async function getAbilityBreakpoints(){if(!breakpointCache){const [reviewedText,planningText]=await Promise.all([fs.readFile(path.join(process.cwd(),"config","ability_breakpoints.json"),"utf8"),fs.readFile(path.join(process.cwd(),"config","owned_ability_recommendations.json"),"utf8")]);const reviewed=JSON.parse(reviewedText) as BreakpointFile;const planning=JSON.parse(planningText) as Record<string,{active:number;passive:number;note:string;source?:string}>;breakpointCache={...Object.fromEntries(Object.entries(planning).filter(([name])=>name!=="_meta").map(([name,entry])=>[name,{active:{practical:String(entry.active),high:String(entry.active),priority:"situational",modes:[],note:`Planning recommendation: ${entry.note}`},passive:{practical:String(entry.passive),high:String(entry.passive),priority:"situational",modes:[],note:`Planning recommendation: ${entry.note}`},confidence:"planning"}])),...reviewed};}return breakpointCache;}
 export async function getAbilityGuidance(name:string){const d=await getAbilityBreakpoints();return d[name] as CharacterAbilityGuidance|undefined;}
 
+export type AbilityEvidence={url:string;date?:string;supports?:string[]};
+let abilityEvidenceCache:Record<string,AbilityEvidence[]|unknown>|null=null;
+export async function getAbilityEvidence(name:string){if(!abilityEvidenceCache)abilityEvidenceCache=JSON.parse(await fs.readFile(path.join(process.cwd(),"config","ability_breakpoint_sources.json"),"utf8"));const entries=abilityEvidenceCache![name];return Array.isArray(entries)?entries as AbilityEvidence[]:[];}
+
 export type CampaignTarget={rank?:string;active?:string;passive?:string;role?:string;confidence?:string;note?:string;evidence?:string[]};
 export type CampaignTargetFile={_meta:Record<string,unknown>;campaigns:Record<string,{status:string;characters:Record<string,CampaignTarget>} >};
 let campaignTargetCache:CampaignTargetFile|null=null;
