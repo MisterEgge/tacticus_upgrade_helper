@@ -32,6 +32,7 @@ export default function HonorPriorities({candidates,orbs,badges,defenseTeams,off
  };
  return <>
   <section className="panel detailPanel"><p><ResourceName id="onslaughtToken" name="Onslaught tokens"/> are shared across all three tracks: one attempt costs one token, one regenerates every 16 hours, normal cap 3.</p><p>Win, then honor one unit you deployed during that battle. A defeated character is still eligible. These are honor choices; take a team that can win.</p><label><input type="checkbox" checked={includeMythic} onChange={event=>setIncludeMythic(event.target.checked)}/> Include optional Mythic honor goals</label></section>
+  <p className="sub">Useful characters to Legendary first; recurring free shard income is skipped.</p>
   {groups.map(group=>{
    const choice=choices[group.alliance];
    return <CollapsibleSection key={group.alliance} title={`${group.alliance} · top ${group.rows.length}`} summary={`Wave badges: ${group.waveBadges} · ${group.owned} owned characters`}>
@@ -45,17 +46,20 @@ export default function HonorPriorities({candidates,orbs,badges,defenseTeams,off
       {row.reward.orb?<small><ResourceName id={`orb:${group.alliance}:${row.reward.orb}`} name={`${group.alliance} ${row.reward.orb} orb`}/></small>:null}
       {row.reward.badges.map(rarity=><small key={rarity}><ResourceName id={`badge:${group.alliance}:${rarity}`} name={`${group.alliance} ${rarity} badge`}/></small>)}
       <small>Orb/badge chances depend on sector; preview rewards in-game.</small>
-      {row.shardsNeeded>0?<small>{row.shardBalance??"?"} / {row.shardsNeeded} shards for next {row.progressionIndex>=15?"Mythic step":row.progressionIndex>=12?"optional star step":"rarity ascension"}</small>:null}
-      {row.battles&&row.shardShortfall!>0?<small>{row.battles.min}–{row.battles.max} successful honors for missing shards at this sector; orb drops are separate.</small>:null}
+      {row.shardsNeeded>0?<small>{row.shardBalance??"?"} / {row.shardsNeeded} shards for {row.goalRarity??"next Mythic step"}</small>:null}
+      {row.battles&&row.shardShortfall!>0?<small>At current rewards: {row.battles.min}–{row.battles.max} honors for missing shards.</small>:null}
       {row.progressionIndex>=12&&row.progressionIndex<=14?<small>Legendary already reached. Honor to collect shared resources; no extra-star orb spending is budgeted.</small>:null}
      </td>
     </tr>)}</tbody></table></div>:<p className="sub">No verified rarity, shard-ready orb or eligible badge goal needs honoring in this track. Optional Mythic goals can be enabled above.</p>}
+    {group.passive.length?<ReferenceDetails label="Use regular shard sources instead">{group.passive.map(unit=><p key={unit.id}><Link href={`/characters/${unit.id}`}>{unit.name}</Link> · <a href={unit.url} target="_blank" rel="noreferrer">{unit.source}</a></p>)}</ReferenceDetails>:null}
    </CollapsibleSection>;
   })}
   <ReferenceDetails label="Current Onslaught rules and priority sources">
    <p>Reviewed {data.reviewedOn} · {data.rulesVersion}. Finished sectors can be replayed. Each alliance has separate sector progress and Eradication tiers; tokens are shared. Waves award badges and Tyranid Skulls. Eradication crates add <ResourceName id="gold"/>, badges, forge badges and <ResourceName id="gems"/>.</p>
    <p>Honor resource types follow the unit’s actual progression: an ascension boundary earns the next rarity’s orb; Legendary before the blue star earns Legendary badges and orbs. Blue-star Legendary and Mythic switch to Mythic shards and possible Mythic orbs, with Legendary/Mythic badges. Mythic wings no longer earns honor orbs. Shards are guaranteed after a win; their amount and orb/badge chances vary by played sector.</p>
-   <p>Ranking is an account planning rule: known shard-ready orb shortages, rarity ascension work, eligible documented ability badges, then optional Mythic goals. Within a goal, selected Raid, unfinished Elite campaigns and active War slots come first, then usefulness; scarce campaign shard sources break ties. Covered rarity goals and unverified units are excluded. Unknown inventories are never treated as proven shortages. The list recalculates on account sync and follows saved Raid and active War choices.</p>
+   <p>Ranking follows your account goal: useful characters missing shards for Legendary come before established Legendary resource farmers. Selected Raid members lead, then Core, Strong and Useful ratings; campaign shard availability breaks ties. War membership alone keeps the slot’s Rare/Epic cap. Shard goals include every promotion through the target rarity. Once shards are covered, honor only for a known orb or eligible badge shortage. Unknown balances rank below verified needs. Regular Salvage, Arena, login and daily-mission shard recipients are skipped; their regular income does not exclude optional Mythic honors. Unknown inventories are never treated as proven shortages. The list recalculates on account sync and follows saved Raid and active War choices.</p>
+   <p>{data.priorityGuidance.tradeoff}</p>
+   {data.priorityGuidance.sources.map(source=><p key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.name}</a></p>)}
    <p>Machines of War can also be honored if deployed, but are outside these character priorities because machine investment goals are separately researched. A currently running Legendary event may keep regular shards unavailable until its final installment ends; check the event before promoting.</p>
    {data.sources.map(source=><p key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.name}</a></p>)}
    <p><Link href="/orbs">Orb shopping totals</Link> · <Link href="/abilities">Badge budget</Link> · <Link href="/war-defense">Edit War teams</Link></p>

@@ -22,6 +22,7 @@
 - [x] Prefer compatible higher-chance block items, checking actual refinement and booster stats before showing equip-now; retain lower-chance block items as situational alternatives.
 
 ## Next enhancements
+- [x] Prioritize useful characters through Legendary in Onslaught over existing Legendary farmers; skip verified recurring regular shard recipients and retain source-grounded resource farming as a fallback.
 - [x] Combine orb totals and characters into one compact table per rarity; omit redundant upgrade labels and standard 10-orb costs while preserving exceptional costs, promotions, images and acquisition details.
 - [x] Gate every default orb recommendation and roster orb filter by required shard coverage, label shard blockers first, and group the ready shopping list into independently collapsible rarity tiers from lowest to highest.
 - [x] Make character screens concise: current rank/rarity, exact next action, practical ability stops and shared equipment choices; keep references and extra investment behind disclosures.

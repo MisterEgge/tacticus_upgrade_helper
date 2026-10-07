@@ -664,5 +664,45 @@
         ]
       }
     }
-  }
+  },
+  "priorityGuidance": {
+    "policy": "Build useful characters to Legendary before farming surplus resources on established Legendary characters. Usefulness and alternative shard sources determine the order; this is the account goal, not a universal efficiency optimum.",
+    "tradeoff": "Legendary honors can return more shards plus Legendary badges and orbs at higher sectors. Community advice is mixed: use important hard-to-farm upgrades when they advance the account, and established Legendary farmers when shared resources are the blocker.",
+    "sources": [
+      {
+        "name": "2026 community discussion: lower-rarity progression versus Legendary resource efficiency",
+        "url": "https://www.reddit.com/r/WH40KTacticus/comments/1vnmtr1/onslaught_for_epic_and_below_characters/"
+      },
+      {
+        "name": "2026 guide: useful characters and alternative shard sources",
+        "url": "https://note.com/tacticusguidejp/n/n245cf9a9bb7f?hl=en"
+      }
+    ]
+  },
+  "regularShardIncome": [
+    {
+      "id": "orksRuntherd",
+      "name": "Snotflogga",
+      "source": "Salvage Run strongboxes",
+      "url": "https://tacticus.wiki.gg/wiki/Salvage_Run"
+    },
+    {
+      "id": "orksKillaKan",
+      "name": "Snappawrecka",
+      "source": "Arena progression and season crates",
+      "url": "https://tacticus.wiki.gg/wiki/Arena"
+    },
+    {
+      "id": "orksBigMek",
+      "name": "Gibbascrapz",
+      "source": "Recurring login rewards",
+      "url": "https://tacticus.wiki.gg/wiki/Gibbascrapz"
+    },
+    {
+      "id": "eldarAutarch",
+      "name": "Aethana",
+      "source": "Daily mission rewards",
+      "url": "https://tacticus.wiki.gg/wiki/Missions"
+    }
+  ]
 }

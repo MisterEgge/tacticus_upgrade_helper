@@ -31,7 +31,7 @@ test("current honor rules separate stages, shard types and sector rewards",()=>{
  assert.deepEqual(readSectorChoices({Imperial:{sector:"gold",tier:4},Chaos:{sector:"fake",tier:2},Xenos:{sector:"silver",tier:0}}),{Imperial:{sector:"gold",tier:4}});
 });
 
-test("honor top threes prioritize actual shared shortages and rarity needs without extra-star spending",()=>{
+test("honor top threes prioritize useful Legendary growth before established resource farmers",()=>{
  const epic=unit("Ready Epic","Imperium",11,100);
  const farmer=unit("Legendary farmer","Imperial",13,0);
  const blue=unit("Blue star","Imperial",15,0);
@@ -42,8 +42,9 @@ test("honor top threes prioritize actual shared shortages and rarity needs witho
  const imperial=groups[0]!;
  assert.equal(imperial.rows.length,3);assert.equal(imperial.deployable,true);
  assert.equal(imperial.rows.some(row=>row.id===blue.id||row.id==="Covered"),false);
- assert.equal(imperial.rows.filter(row=>row.orbPool?.shortfall===6).length,2);
- assert.ok(imperial.rows.find(row=>row.id===farmer.id));
+ assert.equal(imperial.rows.filter(row=>row.orbPool?.shortfall===6).length,1);
+ assert.deepEqual(imperial.rows.map(row=>row.id),["Raid core","Ready Epic","Bench"]);
+ assert.equal(imperial.rows.some(row=>row.id===farmer.id),false);
  assert.ok(imperial.rows.find(row=>row.id===core.id));
  assert.equal(groups[1]!.rows[0]!.alliance,"Xenos");assert.equal(groups[1]!.deployable,false);
  assert.deepEqual(imperial.rows.find(row=>row.id===core.id)?.battles,{min:23,max:25});
@@ -53,6 +54,51 @@ test("honor top threes prioritize actual shared shortages and rarity needs witho
  assert.equal(onslaughtPriorities([blue],{},null,new Map(),{},true)[0]!.rows[0]?.reward.shardType,"Mythic");
  const unknown=onslaughtPriorities([unit("Unknown shards","Chaos",11,null)],null,null,new Map(),{});
  assert.match(unknown[2]!.rows[0]!.reasons[0]!,/unknown/);assert.equal(unknown[2]!.rows[0]!.battles,null);
+});
+
+test("Legendary shard goals include covered intermediate steps and rank usefulness before proximity",()=>{
+ const distant=unit("Useful raid member","Xenos",8,45);distant.utility={...distant.utility,mainRaidCore:true};
+ const near=unit("Near Legendary","Xenos",11,99);
+ const intermediate=unit("Next step covered","Xenos",9,80);
+ const unknown=unit("Unknown strong character","Xenos",11,null);
+ const untracked=unit("Untracked bench","Xenos",9,0);untracked.utility=rateCharacter({...untracked.utility,communityScore:null});
+ const group=onslaughtPriorities([near,unknown,intermediate,untracked,distant],{}, {},new Map(),{})[1]!;
+ assert.deepEqual(group.rows.map(row=>row.id),[distant.id,near.id,intermediate.id]);
+ assert.equal(group.rows[0]!.goalRarity,"Legendary");
+ assert.equal(group.rows[0]!.shardsNeeded,300);assert.equal(group.rows[0]!.shardShortfall,255);
+ assert.equal(group.rows[2]!.shardsNeeded,250);assert.equal(group.rows[2]!.shardShortfall,170);
+ const covered=onslaughtPriorities([{...intermediate,shards:250}],{}, {},new Map(),{})[1]!;
+ assert.equal(covered.rows.length,0);
+ const warOnly={...untracked,progressionIndex:6,shards:0};
+ assert.equal(onslaughtPriorities([warOnly],{}, {},new Map([[warOnly.name,26]]),{})[1]!.rows.length,0);
+ const gold=onslaughtPriorities([warOnly],{}, {},new Map([[warOnly.name,35]]),{})[1]!.rows[0]!;
+ assert.equal(gold.goalRarity,"Epic");assert.equal(gold.shardsNeeded,120);
+});
+
+test("Legendary farmers remain useful for known shortages after rarity growth is covered",()=>{
+ const ready=unit("Ready recipient","Imperial",11,100),farmer=unit("Established Legendary","Imperial",13,0);
+ const group=onslaughtPriorities([farmer,ready],{Imperial:[{rarity:"Legendary",amount:4}]},{},new Map(),{})[0]!;
+ assert.deepEqual(group.rows.map(row=>row.id),[ready.id,farmer.id]);
+ assert.equal(group.rows[1]!.shardsNeeded,0);assert.equal(group.rows[1]!.orbPool?.shortfall,6);
+ assert.equal(onslaughtPriorities([farmer,ready],{Imperial:[{rarity:"Legendary",amount:10}]},{},new Map(),{})[0]!.rows.length,0);
+ const unknown=unit("Unknown shards","Imperial",11,null);
+ assert.deepEqual(onslaughtPriorities([unknown,farmer,ready],{Imperial:[{rarity:"Legendary",amount:4}]},{},new Map(),{})[0]!.rows.map(row=>row.id),[ready.id,farmer.id,unknown.id]);
+});
+
+test("regular free shard sources exclude passive farmers without blocking Mythic honors",()=>{
+ const ids=["orksRuntherd","orksKillaKan","orksBigMek","eldarAutarch"];
+ const free=ids.map(id=>({...unit(id,"Xenos",11,0),utility:rateCharacter({...unit(id).utility,communityScore:4})}));
+ const chosen=unit("Scarce useful character","Xenos",9,0);
+ const groups=onslaughtPriorities([...free,chosen],{}, {},new Map(),{});
+ assert.deepEqual(groups[1]!.rows.map(row=>row.id),[chosen.id]);
+ assert.deepEqual(groups[1]!.passive.map(row=>row.id),ids);
+ assert.equal(groups[1]!.passive[0]!.source,"Salvage Run strongboxes");
+ const orbReady=unit("Orb recipient","Xenos",11,100);
+ assert.equal(onslaughtPriorities([{...free[0]!,progressionIndex:13},orbReady],{}, {},new Map(),{})[1]!.rows.some(row=>row.id==="orksRuntherd"),false);
+ assert.equal(onslaughtPriorities([{...free[0]!,progressionIndex:15}],{}, {},new Map(),{},false)[1]!.rows.length,0);
+ assert.equal(onslaughtPriorities([{...free[0]!,progressionIndex:15}],{}, {},new Map(),{},true)[1]!.rows[0]?.reward.shardType,"Mythic");
+ const limited=onslaughtPriorities([chosen],{}, {},new Map(),{})[1]!;
+ assert.equal(limited.rows.length,1); // Do not pad a top three with passive or untracked units.
 });
 
 test("badge farmers require eligible documented goals or active War slots",()=>{
@@ -73,13 +119,20 @@ test("honor UI separates faction lists, persists manual sectors per account and 
  for(const key of ["window","self","document","navigator","HTMLElement","Node","Event","MutationObserver","localStorage"]){descriptors.set(key,Object.getOwnPropertyDescriptor(globalThis,key));Object.defineProperty(globalThis,key,{configurable:true,value:dom.window[key as keyof typeof dom.window]});}
  const {render,fireEvent,cleanup,act,within}=await import("@testing-library/react");
  suite.after(async()=>{await act(async()=>cleanup());dom.window.close();for(const [key,descriptor] of descriptors){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else Reflect.deleteProperty(globalThis,key);}});
- const candidates=[unit("Imperial A"),unit("Imperial B"),unit("Imperial C"),unit("Imperial D"),unit("Chaos A","Chaos"),unit("Xenos A","Xenos"),unit("Blue star","Xenos",15)];
+ const candidates=[{...unit("Snotflogga","Xenos",11),id:"orksRuntherd"},unit("Imperial A"),unit("Imperial B"),unit("Imperial C"),unit("Imperial D"),unit("Chaos A","Chaos"),unit("Xenos A","Xenos"),unit("Blue star","Xenos",15)];
  const props={candidates,orbs:{},badges:{},defenseTeams:[],offenseTeams:[],accountKey:"TEST ACCOUNT"};
  const view=render(createElement(HonorPriorities,props));
  assert.equal(within(view.getByRole("table",{name:"Imperial honor priorities"})).getAllByRole("row").length,4);
  assert.equal(view.queryByText("Blue star"),null);
  assert.ok(view.getByText(/one regenerates every 16 hours/));
  assert.ok(view.container.querySelector('[data-resource-id="onslaughtToken"] img'));
+ const xenos=within(view.getByRole("table",{name:"Xenos honor priorities"}));
+ assert.equal(xenos.queryByRole("link",{name:/Snotflogga/}),null);
+ const passive=view.getByText("Use regular shard sources instead").closest("details")!;
+ assert.equal(passive.hasAttribute("open"),false);
+ fireEvent.click(within(passive).getByText("Use regular shard sources instead"));
+ assert.ok(within(passive).getByRole("link",{name:"Salvage Run strongboxes"}));
+ assert.match(view.getByRole("table",{name:"Imperial honor priorities"}).textContent!,/250 shards short of Legendary/);
  fireEvent.change(view.getByRole("combobox",{name:"Imperial sector"}),{target:{value:"gold"}});
  fireEvent.change(view.getByRole("combobox",{name:"Imperial sector stage"}),{target:{value:"4"}});
  assert.deepEqual(JSON.parse(localStorage.getItem("tacticus-onslaught-sectors-v1:TEST ACCOUNT")!),{Imperial:{sector:"gold",tier:4}});
