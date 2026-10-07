@@ -1,3 +1,4 @@
+import { selectedRaidNames } from "../../src/domain/raidSelection";
 import {readFile} from "node:fs/promises";
 import {getCharacterCatalog,getCampaignTargets} from "./catalog";
 import {getMainRaidSelection,getRaidMeta} from "./raidSelection";
@@ -33,7 +34,7 @@ export async function getUtilityRatings(report:Report)
     }));
     return catalog.characters.map(character=>rateCharacter({
         name:character.name,communityScore:scores.get(character.name)??null,accountPriority:priorities[character.name]?.priority??0,
-        mainRaidCore:main?.core.includes(character.name)??false,mainRaidFlex:selection.flex.includes(character.name),
+        mainRaidCore:!!main && selectedRaidNames(selection,main).includes(character.name) && main.core.includes(character.name),mainRaidFlex:!!main && selectedRaidNames(selection,main).includes(character.name) && !main.core.includes(character.name),
         raidCore:raidCore.has(character.name),raidFlex:raidFlex.has(character.name),warOption:warOption.has(character.name),
         incompleteCampaign:character.campaignsRequiredIn.some(name=>unfinished.has(name))
     }));

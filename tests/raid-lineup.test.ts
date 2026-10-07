@@ -1,39 +1,34 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { suggestedRaidFlex } from "../src/domain/raidLineup";
+import { raidCandidates, suggestedRaidLineup } from "../src/domain/raidLineup";
+import { resolveRaidSelection, type RaidTeams } from "../src/domain/raidSelection";
+import { RAID_MACHINES, suggestedRaidMachine } from "../src/domain/raidMachine";
 import meta from "../config/raid_boss_meta.json";
 import catalog from "../data/character_catalog.json";
-import type { RaidTeams } from "../src/domain/raidSelection";
 
-const team={core:["Kariyan","Laviscus","Trajann"],flex:["Aesoth","Gulgortz","Kharn"],members:["Kariyan","Laviscus","Trajann","Aesoth","Gulgortz","Kharn"].map(name=>({name,owned:true}))};
+const bosses = meta.bosses as RaidTeams;
 
-test("owned flex fills available slots even while a core unlock is pending",()=>{
-    assert.deepEqual(suggestedRaidFlex("Avatar of Khaine","Big Hit",{...team,members:team.members.filter(member=>member.name!=="Laviscus")}),["Aesoth","Gulgortz"]);
-    assert.deepEqual(suggestedRaidFlex("Avatar of Khaine","Big Hit",{...team,members:team.members.filter(member=>member.name!=="Gulgortz")}),["Aesoth","Kharn"]);
+test("missing core slots use owned substitutes, keep five unique characters and refill on unlock", () => {
+    const team = bosses.Riptide!["Ad-Mech"]!;
+    const owned = new Set(["Actus", "Exitor-Rho", "Tan Gi'da", "Gulgortz", "Anuphet", "Trajann", "Biovore", "Reanimator"]);
+    const saved = { boss: "Riptide", teamName: "Ad-Mech", flex: [], autoFlex: true };
+    const first = resolveRaidSelection(saved, bosses, owned);
+    assert.deepEqual(first.lineup, ["Actus", "Exitor-Rho", "Tan Gi'da", "Gulgortz", "Anuphet"]);
+    assert.equal(first.machine, "Reanimator");
+    assert.equal(first.lineup!.includes("Trajann"), false);
+    owned.add("Vitruvius");
+    const afterUnlock = resolveRaidSelection(first, bosses, owned);
+    assert.ok(afterUnlock.lineup!.includes("Vitruvius"));
+    assert.equal(afterUnlock.lineup!.length, 5);
+    assert.equal(new Set(afterUnlock.lineup).size, 5);
+    const sparse = suggestedRaidLineup({ ...team, members: [{ name: "Actus", owned: true }] });
+    assert.deepEqual(sparse, ["Actus"]);
 });
 
-test("boss recommendations choose the owned preferred flex rather than alphabetical alternatives", () => {
-    const bosses = meta.bosses as RaidTeams;
-    for (const [boss, name, expected] of [
-        ["Avatar of Khaine", "Big Hit", ["Gulgortz", "Kharn"]],
-        ["Belisarius Cawl", "Big Hit", ["Kharn", "Dante"]],
-        ["Ghazghkull", "Big Hit", ["Aesoth", "Vitruvius"]],
-        ["Mortarion", "Big Hit", ["Gulgortz", "Atlacoya"]],
-        ["Hive Tyrant", "Big Hit", ["Gulgortz", "Atlacoya"]],
-        ["Magnus", "Custodes", ["Ragnar", "Helbrecht"]],
-        ["Screamer-Killer", "Lavistodes", ["Aesoth"]],
-        ["Tervigon", "Lavistodes", ["Atlacoya"]]
-    ] as const) {
-        const source = bosses[boss]![name]!;
-        const members = [...source.core, ...source.flex].map(name => ({ name, owned: true }));
-        assert.deepEqual(suggestedRaidFlex(boss, name, { ...source, members }), expected);
-    }
-});
-
-test("every recommendation is exactly five eligible catalog characters and fills at most five slots", () => {
+test("all source defaults prefer cited owned flex and do not smuggle machines into character slots", () => {
     const names = new Set(catalog.characters.map(unit => unit.name));
-    for (const [boss, teams] of Object.entries(meta.bosses as RaidTeams)) for (const [name, source] of Object.entries(teams)) {
-        assert.ok([...source.core, ...source.flex].every(name => names.has(name)), `${boss}/${name}: unresolved name`);
+    for (const [boss, teams] of Object.entries(bosses)) for (const [name, source] of Object.entries(teams)) {
+        assert.ok([...source.core, ...source.flex, ...(source.fallbacks ?? [])].every(name => names.has(name)), `${boss}/${name}: unresolved name`);
         const recommendation = source.recommendation;
         if (recommendation) {
             assert.equal(new Set(recommendation.lineup).size, 5);
@@ -41,11 +36,32 @@ test("every recommendation is exactly five eligible catalog characters and fills
             assert.ok(recommendation.flex.every(name => source.flex.includes(name)));
             assert.ok(recommendation.replays > 0);
         }
-        const members = [...source.core, ...source.flex].map((name, index) => ({ name, owned: index % 2 === 0 }));
-        const flex = suggestedRaidFlex(boss, name, { ...source, members });
-        assert.ok(flex.every(name => members.some(member => member.name === name && member.owned)));
-        assert.ok(source.core.length + flex.length <= 5);
-        assert.equal(new Set(flex).size, flex.length);
+        const members = raidCandidates(source).map(name => ({ name, owned: true }));
+        const lineup = suggestedRaidLineup({ ...source, members });
+        assert.equal(lineup.length, 5, `${boss}/${name}: must field five`);
+        assert.equal(new Set(lineup).size, 5);
+        assert.ok(lineup.every(name => names.has(name) && !source.excluded?.includes(name)));
+        if (recommendation) assert.deepEqual(new Set(lineup), new Set(recommendation.lineup));
+        if (name === "Ad-Mech") assert.equal(raidCandidates(source).includes("Trajann"), false);
+        const machines = new Set<string>(RAID_MACHINES.map(machine => machine.name));
+        const machine = suggestedRaidMachine(source, machines);
+        assert.ok(machine && !source.excludedMachines?.includes(machine));
     }
     assert.equal(catalog.characters.find(unit => unit.id === meta._meta.nameEvidence.Atla.id)?.name, meta._meta.nameEvidence.Atla.name);
+});
+
+test("boss faction restrictions constrain substitutes and machine fallbacks", () => {
+    assert.equal(raidCandidates(bosses.Ghazghkull!["Big Hit"]!).includes("Gulgortz"), false);
+    assert.equal(raidCandidates(bosses.Szarekh!["Ad-Mech"]!).includes("Anuphet"), false);
+    assert.equal(raidCandidates(bosses["Avatar of Khaine"]!["Ad-Mech"]!).includes("Aethana"), false);
+    assert.equal(suggestedRaidMachine(bosses["Hive Tyrant"]!["Ad-Mech"]!, new Set(["Biovore"])), null);
+    assert.equal(suggestedRaidMachine(bosses.Riptide!["Ad-Mech"]!, new Set(["Reanimator", "Tson'ji"])), "Reanimator");
+    const source = bosses["Hive Tyrant"]!["Big Hit"]!;
+    const saved = { boss: "Hive Tyrant", teamName: "Big Hit", flex: [], autoFlex: true };
+    const fallback = resolveRaidSelection(saved, bosses, new Set([...source.core, ...source.flex, "Galatian"]));
+    assert.equal(fallback.machine, "Galatian");
+    const preferred = resolveRaidSelection(fallback, bosses, new Set([...source.core, ...source.flex, "Galatian", "Plagueburst Crawler"]));
+    assert.equal(preferred.machine, "Plagueburst Crawler");
+    const manual = resolveRaidSelection({ ...fallback, autoMachine: false }, bosses, new Set([...source.core, ...source.flex, "Galatian", "Plagueburst Crawler"]));
+    assert.equal(manual.machine, "Galatian");
 });
