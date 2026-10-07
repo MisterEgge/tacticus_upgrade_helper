@@ -36,7 +36,7 @@ export default async function Onslaught() {
  const owned=new Set(report.roster.map(unit=>unit.name));
  const defenseTeams:WarBadgeTeam[]=buildDistinctDefenseTeams(defense.teams??[],owned).map(team=>({name:team.name,used:team.used,members:team.members.map(name=>({name}))}));
  const offenseTeams:WarBadgeTeam[]=(offense.validatedFullLineups??[]).filter(team=>team.members.every(name=>owned.has(name))).sort((a,b)=>b.wins/b.used-a.wins/a.used||b.used-a.used).map(team=>({name:team.name,used:team.used,members:team.members.map(name=>({name}))}));
- return <main><Nav/><header><div><p className="eyebrow">HONOR YOUR WARRIORS</p><h1>Onslaught honor priorities</h1><p className="sub">Top three owned characters per alliance, based on your rarity goals, shard-ready orb needs and practical ability targets.</p></div></header>
+ return <main><Nav/><header><div><p className="eyebrow">HONOR YOUR WARRIORS</p><h1>Onslaught honor priorities</h1><p className="sub">Top three per alliance: useful characters toward Legendary, then resource farming.</p></div></header>
   <HonorPriorities key={`${report.source.player}:${report.generatedAt}`} candidates={candidates} orbs={report.orbInventory??null} badges={report.abilityBadges??null} defenseTeams={defenseTeams} offenseTeams={offenseTeams} accountKey={report.source.player}/>
  </main>;
 }
