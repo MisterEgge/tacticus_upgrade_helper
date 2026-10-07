@@ -135,3 +135,5 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .collapsibleSection{margin-top:14px;min-width:0}.collapsibleSection .campaignSectionToggle>div{min-width:0}.collapsibleSection .warSource{margin:5px 0 0;overflow-wrap:anywhere}.collapsibleSection .campaignSectionBody[hidden]{display:none}.collapsibleSection .campaignSectionBody>.collapsibleSection:first-child{margin-top:0}.equipmentActions h2{margin:0}.equipmentSlotAction{margin-top:10px}.equipmentPanel table{min-width:0}.equipmentPanel .tableWrap{overflow-x:auto}.equipmentPanel .tableWrap td{overflow-wrap:anywhere}@media(max-width:600px){.equipmentPanel table{min-width:560px}}
 
 .onslaughtTable{min-width:0}.onslaughtTable td:first-child{width:22%}.onslaughtTable td:first-child>strong{display:block;margin-bottom:8px}.onslaughtTable td:first-child>a{display:block}.onslaughtTable td small{margin-top:6px}@media(max-width:600px){.onslaughtTable{min-width:580px}}
+
+.orbRecipients{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-start}.orbRecipients>div{min-width:0}.orbRecipients a{display:inline-block}.orbRecipients small{margin-top:2px}
