@@ -79,6 +79,44 @@ export function orbPlan(candidates: OrbCandidate[], inventory: OrbInventory | nu
     }));
     return { rows, pools, unknown: candidates.filter(candidate => !progressionRarity(candidate.progressionIndex) || !["Imperial", "Xenos", "Chaos"].includes(normalizeAlliance(candidate.alliance))).map(candidate => candidate.name) };
 }
+
+/** Shopping budget for each owned character's next orb spend, once its full
+ * shard path is covered. Future, shard-blocked work cannot reserve this stock.
+ * This is a readiness audit of the roster, not an instruction to invest in all.
+ */
+export function shardReadyOrbPlan(candidates: OrbCandidate[], inventory: OrbInventory | null | undefined, warTargets: Map<string, number>, includeMythic: boolean) {
+    const eligible = candidates.filter(candidate => {
+        const next = nextOrbMilestone(candidate.progressionIndex);
+        return next && (includeMythic || next.orbRarity !== "Mythic") && ["Imperial", "Xenos", "Chaos"].includes(normalizeAlliance(candidate.alliance));
+    });
+    const stockKnown = (stock: number | null, cost: number) => cost === 0 || stock !== null && Number.isSafeInteger(stock) && stock >= 0;
+    const unknownShards = eligible.filter(candidate => {
+        const next = nextOrbMilestone(candidate.progressionIndex)!;
+        return !stockKnown(candidate.shards, next.shards) || !stockKnown(candidate.mythicShards, next.mythicShards);
+    });
+    const ready = eligible.filter(candidate => {
+        const next = nextOrbMilestone(candidate.progressionIndex)!;
+        return stockKnown(candidate.shards, next.shards) && stockKnown(candidate.mythicShards, next.mythicShards)
+            && (next.shards === 0 || candidate.shards! >= next.shards)
+            && (next.mythicShards === 0 || candidate.mythicShards! >= next.mythicShards);
+    });
+    return { ...orbPlan(ready, inventory, warTargets, { scope: "all", horizon: "next", includeMythic }),
+        unknownShards: unknownShards.map(candidate => candidate.name), waitingForShards: eligible.length - ready.length - unknownShards.length };
+}
+
+/** Protect the union of recipients when proposing lower-orb forge spending;
+ * the same character's next spend is already included in its longer goal.
+ */
+export function combinedOrbDemand(...plans: Array<Pick<ReturnType<typeof orbPlan>, "rows">>): Map<string, number> {
+    const recipients = new Map<string, { pool: string; amount: number }>();
+    for (const plan of plans) for (const row of plan.rows) for (const [rarity, amount] of Object.entries(row.costs)) {
+        const pool = `${row.alliance}:${rarity}`, key = `${pool}:${row.id}`;
+        recipients.set(key, { pool, amount: Math.max(recipients.get(key)?.amount ?? 0, amount) });
+    }
+    const pools = new Map<string, number>();
+    for (const { pool, amount } of recipients.values()) pools.set(pool, (pools.get(pool) ?? 0) + amount);
+    return pools;
+}
 /** Known orb-producing honor stages; sector controls the chance, not a daily guarantee. */
 export function orbHonorees(candidates: OrbCandidate[], alliance: string, rarity: CharacterRarity): string[] {
     return candidates.filter(candidate => normalizeAlliance(candidate.alliance) === alliance && (
