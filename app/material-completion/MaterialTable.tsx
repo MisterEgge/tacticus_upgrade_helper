@@ -1,4 +1,5 @@
 "use client";
+import ResourceName from "../components/ResourceName";
 import Link from "next/link";
 import Recipients from "../components/MaterialRecipients";
 import DataTable, { type Column, type Filter } from "../components/DataTable";
@@ -12,7 +13,7 @@ export const STATUS_LABELS = {
 export default function MaterialTable({ rows }: { rows: MaterialCompletionRow[] }) {
     const columns: Column<MaterialCompletionRow>[] = [
         { key: "material", label: "Material", sort: row => row.name, search: row => `${row.name} ${row.id} ${row.rarity} ${row.recipients.map(recipient => recipient.name).join(" ")}`,
-            render: row => <><strong>{row.name}</strong><small>{row.rarity} · {row.craftable ? "Crafted upgrade" : "Base material"}</small>
+            render: row => <><strong><ResourceName id={row.id} name={row.name}/></strong><small>{row.rarity} · {row.craftable ? "Crafted upgrade" : "Base material"}</small>
                 {row.recipients.length > 0 && <Recipients key={row.id} recipients={row.recipients}/>}</> },
         { key: "status", label: "Completion", sort: row => STATUS_LABELS[row.status], render: row => <>
             <span className={`status ${row.status.startsWith("done") || row.status === "stocked" ? "ready" : row.status === "untracked" ? "unknown" : "need"}`}>{STATUS_LABELS[row.status]}</span>

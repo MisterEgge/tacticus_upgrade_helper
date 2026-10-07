@@ -1,4 +1,5 @@
 "use client";
+import ResourceName from "../components/ResourceName";
 import { useEffect, useMemo, useState } from "react";
 import { CURRENCIES, DAYS, currencyName, itemCategory, nextUtcReset, offerEligibility, recordState, refreshesLoggedToday, scheduledOn, scheduleLabel, sourceMatch, validateRecord, type ShopCatalog, type ShopRecord } from "../../src/domain/shops";
 
@@ -113,7 +114,7 @@ export default function ShopBrowser({ catalog, labels, initialItem, powerLevel, 
         <section className="shopCards" aria-label="Shop refresh rules">{catalog.shops.map(shop => <article className="panel shopCard" key={shop.id}>
             <h2>{shop.name}</h2><p className="eyebrow">{shop.coverage === "catalog" ? "COMMUNITY CATALOG" : "RESEARCHING"}</p>
             <dl><dt>Ad refresh</dt><dd>{shop.adRefresh === null ? "Unknown" : shop.adRefresh ? "Yes" : "No"}</dd>
-                <dt>Paid refresh</dt><dd>{shop.refreshCost ? `${shop.refreshCost.amount} ${currencyName(shop.refreshCost.currency)}` : "Unknown"}</dd>
+                <dt>Paid refresh</dt><dd>{shop.refreshCost ? <ResourceName id={shop.refreshCost.currency} name={`${shop.refreshCost.amount} ${currencyName(shop.refreshCost.currency)}`}/> : "Unknown"}</dd>
                 <dt>Extra refresh limit</dt><dd>{shop.refreshLimit === null ? "Unknown" : `${shop.refreshLimit} / day (catalog)`}</dd>
                 <dt>Manually logged today</dt><dd>{loaded ? refreshesLoggedToday(records, shop.id, now) : "—"}. Actual remaining: unknown.</dd>
             </dl><p className="sub">{shop.notes}</p>{shop.sourceUrl ? <a href={shop.sourceUrl} target="_blank" rel="noreferrer">Source / verify rules</a> : <small>No verified rules source yet.</small>}
@@ -128,12 +129,12 @@ export default function ShopBrowser({ catalog, labels, initialItem, powerLevel, 
                 <label className="checkLabel"><input type="checkbox" checked={scheduledOnly} onChange={e => setScheduledOnly(e.target.checked)}/> Only scheduled on selected day</label>
             </div>
             <datalist id="itemNames">{Object.entries(labels).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</datalist>
-            {item ? <p>Sources for <strong>{friendlyName(item, labels)}</strong> <button type="button" onClick={() => setItem("")}>Clear item</button></p> : null}
+            {item ? <p>Sources for <strong><ResourceName id={item} name={friendlyName(item, labels)}/></strong> <button type="button" onClick={() => setItem("")}>Clear item</button></p> : null}
             <p className="sub">{rows.length} offer variants. Rows in the same shop slot are alternatives. Unknown event/roster locks stay unknown; prices and purchase limits are catalog values. Shop-wide access is not confirmed.</p>
             <div className="tableWrap"><table><thead><tr><th>Item / quantity</th><th>Shop / slot</th><th>Cost</th><th>Rotation</th><th>Eligibility / stock</th><th>Track</th></tr></thead><tbody>{rows.map(({ shop, offer }) => <tr key={offer.id}>
-                <td><strong>{friendlyName(offer.itemId, labels)} × {offer.quantity}</strong><small>{offer.itemId}</small>{offer.itemId.startsWith("items") ? <small>Random equipment pool — exact item not guaranteed</small> : null}</td>
+                <td><strong><ResourceName id={offer.itemId} name={`${friendlyName(offer.itemId, labels)} × ${offer.quantity}`}/></strong><small>{offer.itemId}</small>{offer.itemId.startsWith("items") ? <small>Random equipment pool — exact item not guaranteed</small> : null}</td>
                 <td>{shop.name}<small>Slot {offer.slot} · alternative offer</small></td>
-                <td>{offer.cost.amount} {currencyName(offer.cost.currency)}<small>Purchase limit: {offer.maxPurchases ?? "not specified"}</small></td>
+                <td><ResourceName id={offer.cost.currency} name={`${offer.cost.amount} ${currencyName(offer.cost.currency)}`}/><small>Purchase limit: {offer.maxPurchases ?? "not specified"}</small></td>
                 <td>{scheduleLabel(offer.schedule)}<small>{scheduledOn(offer.schedule, day) === null ? "Schedule unknown" : scheduledOn(offer.schedule, day) ? "Scheduled candidate" : "Other day"}</small></td>
                 <td>{offerEligibility(offer, powerLevel) === "locked" ? "Power-level locked" : offerEligibility(offer, powerLevel) === "unknown" ? "Requirements unknown" : "Power requirements met"}<small>Current stock: unconfirmed</small>{offer.conditions.minPowerLevel !== undefined ? <small>Min PL {offer.conditions.minPowerLevel}</small> : null}{offer.conditions.maxPowerLevel !== undefined ? <small>Max PL {offer.conditions.maxPowerLevel}</small> : null}{offer.conditions.lockId ? <details><summary>Additional condition</summary><small>{offer.conditions.lockId}</small></details> : null}</td>
                 <td><a href="#shop-log" onClick={() => { setRecordShop(shop.id); setRecordItem(offer.itemId.startsWith("items") ? "" : offer.itemId); setQuantity(String(offer.quantity)); setCost(String(offer.cost.amount)); setCurrency(offer.cost.currency); setExpiry(localInput(nextUtcReset(Date.now()))); }}>Record observed offer</a></td>
@@ -175,7 +176,7 @@ export default function ShopBrowser({ catalog, labels, initialItem, powerLevel, 
 
                 }}/></label>
             </div><p role="status">{message}</p>
-            <div className="tableWrap"><table><thead><tr><th>When</th><th>Shop</th><th>Observed item / action</th><th>Price</th><th>Status</th><th>Recheck by</th></tr></thead><tbody>{[...records].sort((a, b) => b.recordedAt - a.recordedAt).map(r => <tr key={r.id}><td>{new Date(r.recordedAt).toLocaleString()}</td><td>{catalog.shops.find(s => s.id === r.shopId)?.name}</td><td>{r.kind === "refresh" ? `${r.method} refresh` : `${friendlyName(r.itemId, labels)} × ${r.quantity}`}</td><td>{r.cost === null ? "Not recorded" : `${r.cost} ${currencyName(r.currency)}`}</td><td>{recordState(r, records, now)}</td><td>{new Date(r.expiresAt).toLocaleString()}</td></tr>)}</tbody></table></div>
+            <div className="tableWrap"><table><thead><tr><th>When</th><th>Shop</th><th>Observed item / action</th><th>Price</th><th>Status</th><th>Recheck by</th></tr></thead><tbody>{[...records].sort((a, b) => b.recordedAt - a.recordedAt).map(r => <tr key={r.id}><td>{new Date(r.recordedAt).toLocaleString()}</td><td>{catalog.shops.find(s => s.id === r.shopId)?.name}</td><td>{r.kind === "refresh" ? `${r.method} refresh` : <ResourceName id={r.itemId} name={`${friendlyName(r.itemId, labels)} × ${r.quantity}`}/>}</td><td>{r.cost === null ? "Not recorded" : <ResourceName id={r.currency} name={`${r.cost} ${currencyName(r.currency)}`}/>}</td><td>{recordState(r, records, now)}</td><td>{new Date(r.expiresAt).toLocaleString()}</td></tr>)}</tbody></table></div>
             {loaded && !records.length ? <p>No observations yet. Unrecorded stock and refresh usage are unknown.</p> : null}
         </section>
     </>;

@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
+import { JSDOM } from 'jsdom';
 
 const root = process.cwd();
 const cwd = await mkdtemp(path.join(tmpdir(), 'tacticus-http-test-'));
@@ -34,12 +35,20 @@ try
         server.once('exit', code => { clearTimeout(timeout); reject(new Error(`Server exited ${code}: ${logs}`)); });
 
     });
-    const get = async route =>
+    const get = async (route, raw = false) =>
     {
 
         const response = await fetch('http://127.0.0.1:3197' + route);
         assert.equal(response.status, 200, route);
-        return (await response.text()).replace(/<!--.*?-->/gs, "");
+        const html = (await response.text()).replace(/<!--.*?-->/gs, "");
+        if (raw || !response.headers.get("content-type")?.includes("text/html")) return html;
+        // Cost assertions concern visible names and numbers. Image coverage is
+        // checked against the raw response separately, independent of wrappers.
+        const dom = new JSDOM(html);
+        dom.window.document.querySelectorAll('.resourceName').forEach(node => node.replaceWith(dom.window.document.createTextNode(node.textContent)));
+        const result = dom.window.document.documentElement.outerHTML;
+        dom.window.close();
+        return result;
 
     };
     const initialSync = JSON.parse(await get('/api/sync'));
@@ -50,6 +59,7 @@ try
     assert.match(await get('/campaigns'), /Account data unavailable/);
     assert.match(await get('/abilities'), /npm run refresh/);
     assert.match(await get('/orbs'), /npm run refresh/);
+    assert.match(await get('/onslaught'), /npm run refresh/);
     assert.match(await get('/material-completion'), /Account or farming data unavailable/);
     assert.match(await get('/elite-farming-gaps'), /Elite access unknown/);
     const report = {
@@ -83,6 +93,12 @@ try
     assert.match(readyOrbs, /Shard-ready orb shopping list/);
     assert.match(readyOrbs, /aria-label="Shard-ready orb totals".*?Xenos · Epic<\/strong><\/td><td>4<\/td><td>10<\/td><td><strong>6/s);
     assert.match(readyOrbs, /aria-label="Shard-ready character upgrades".*?Aleph-Null.*?Ascend to Epic.*?Collect 6 more orbs/s);
+    const honor = await get('/onslaught');
+    assert.match(honor, /Onslaught honor priorities/);
+    assert.match(honor, /aria-label="Xenos honor priorities".*?Aleph-Null.*?Farm Epic orbs: 6 short/s);
+    assert.match(honor, /one regenerates every 16 hours/);
+    assert.match(honor, /Imperial · top 0/);
+    assert.match(await get('/onslaught', true), /data-resource-id="onslaughtToken".*?<img/s);
     report.roster[0] = { ...report.roster[0], progressionIndex: 9, shards: 0, rarity: 'Epic' };
     report.orbInventory = { Xenos: [{ rarity: 'Epic', amount: 0 }] };
     await writeFile(reportPath, JSON.stringify(report));
@@ -268,17 +284,18 @@ try
     const rhoPage=await get('/characters/'+rho.id);
     assert.match(rhoPage,/sources\?item=I_Defensive_E004/);
     assert.match(rhoPage,/sources\?item=I_Defensive_L004/);
-    assert.match(rhoPage,/Upgrade now · equip Grand Mantle from inventory/);
-    assert.match(rhoPage,/One copy reserved for Exitor-Rho/);
+    assert.match(rhoPage,/Equip Grand Mantle/);
+    assert.match(rhoPage,/Inventory copy reserved · level 1/);
+    assert.match(await get('/characters/'+rho.id,true),/data-resource-id="I_Defensive_L004".*?<img/s);
     assert.doesNotMatch(rhoPage,/Fine Mantle|sources\?item=I_Defensive_R004/);
     const abraxas=catalog.characters.find(character=>character.name==='Abraxas');
     report.roster.push({...report.roster[0],id:abraxas.id,name:'Abraxas',faction:'ThousandSons',rarity:'Legendary',progressionIndex:15,items:[{slotId:'Slot2',id:'I_Block_L006',name:'Warpforged Sigil of Corruption',rarity:'Legendary',level:11}]});
     report.unequippedInventory.push({id:'I_Block_L003',amount:1,level:1},{id:'I_Block_E006',amount:2,level:1});
     await writeFile(reportPath,JSON.stringify(report));
     const blockPage=await get('/characters/'+abraxas.id);
-    assert.match(blockPage,/Level up inventory gear before equipping/);
+    assert.match(blockPage,/Refine Optimal Force Field/);
     assert.match(blockPage,/needs level 9/);
-    assert.doesNotMatch(blockPage,/Upgrade now · equip Optimal Force Field from inventory/);
+    assert.doesNotMatch(blockPage,/Equip Optimal Force Field/);
     const bellator=catalog.characters.find(character=>character.name==='Bellator');
     const abilityUnit={...report.roster[0],id:bellator.id,name:'Bellator',progressionIndex:15,xpLevel:41,grandAlliance:'Imperial',abilities:[{id:'active',level:41},{id:'passive',level:35}],items:[]};
     report.roster.push(abilityUnit);

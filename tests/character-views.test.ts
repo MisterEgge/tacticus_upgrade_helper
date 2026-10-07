@@ -1,0 +1,73 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import {createElement} from "react";
+import {JSDOM} from "jsdom";
+import CharacterTable from "../app/characters/CharacterTable";
+import CharacterProgression from "../app/characters/[id]/CharacterProgression";
+import CharacterEquipment from "../app/characters/[id]/CharacterEquipment";
+import {characterAscension} from "../src/domain/characterAscension";
+import {characterRosterRow,orderedEquipmentChoices} from "../app/lib/characterUpgradeSummary";
+import {buildEquipmentPlan} from "../app/lib/equipmentPlan";
+import {abilityGuideRows} from "../src/domain/abilities";
+import type {Report,RosterUnit} from "../app/lib/report";
+import type {ShopCatalog} from "../src/domain/shops";
+import type {CatalogCharacter} from "../app/lib/catalog";
+import catalogData from "../data/character_catalog.json";
+import shopsData from "../data/game/shops.json";
+const unit:RosterUnit={id:"thousInfernalMaster",name:"Abraxas",faction:"ThousandSons",grandAlliance:"Chaos",rarity:"Legendary",progressionIndex:13,rank:12,xpLevel:41,shards:250,mythicShards:0,abilities:[{id:"InfernalPacts",level:41},{id:"Passive",level:17}],items:[]};
+const guidance={active:{practical:"44-50",high:"50",priority:"high",modes:["Guild Raid"]},passive:{practical:"17",priority:"low",modes:[]},confidence:"medium"};
+const guide=abilityGuideRows(catalogData.characters,[unit],{Abraxas:guidance},{}).find(row=>row.id===unit.id)!;
+
+test("character next steps use practical targets, exact ascension costs and optional extra stars",()=>{
+ const gated=characterRosterRow(unit,guide,[],{Chaos:[{rarity:"Legendary",amount:3}]},{});
+ assert.deepEqual(gated.actions.map(action=>action.kind),["ability"]);
+ assert.match(gated.actions[0]!.detail,/Level character to 42.*target 44/);
+ const ready=characterRosterRow({...unit,xpLevel:44},guide,[],{Chaos:[{rarity:"Legendary",amount:3}]},{});
+ assert.equal(ready.actions[0]?.ready,true);
+ const stars=characterAscension({progressionIndex:13,alliance:"Chaos",shards:250,mythicShards:0},{Chaos:[{rarity:"Legendary",amount:4}]});
+ assert.equal(stars.state,"OPTIONAL");assert.equal(stars.orbsNeeded,15);
+ assert.equal(characterAscension({progressionIndex:13,alliance:"Chaos",shards:250,mythicShards:0},{Chaos:[{rarity:"Legendary",amount:4}]},true).orbShortfall,11);
+ const ascends=characterAscension({progressionIndex:8,alliance:"Imperium",shards:50,mythicShards:0},{Imperial:[{rarity:"Epic",amount:4}]});
+ assert.equal(ascends.label,"Ascend to Epic");assert.equal(ascends.orbShortfall,6);
+ assert.equal(characterAscension({progressionIndex:8,alliance:"Imperial",shards:null,mythicShards:0},{}).state,"UNKNOWN");
+ assert.equal(characterAscension({progressionIndex:0,alliance:"Xenos",shards:10,mythicShards:null},null).state,"RESOURCES COVERED");
+ assert.equal(characterRosterRow(unit,undefined,[],null,null,false).actions[0]?.ready,false);
+});
+
+test("compact roster filters and character controls retain useful actions and hidden alternatives",async suite=>{
+ const dom=new JSDOM("<!doctype html><html><body></body></html>",{url:"http://localhost/"});
+ const descriptors=new Map<string,PropertyDescriptor|undefined>();
+ for(const key of ["window","self","document","navigator","HTMLElement","Node","Event","MutationObserver","localStorage"]){descriptors.set(key,Object.getOwnPropertyDescriptor(globalThis,key));Object.defineProperty(globalThis,key,{configurable:true,value:dom.window[key as keyof typeof dom.window]});}
+ const {render,fireEvent,cleanup,act,within}=await import("@testing-library/react");
+ suite.after(async()=>{await act(async()=>{cleanup();});dom.window.close();for(const [key,descriptor] of descriptors){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else Reflect.deleteProperty(globalThis,key);}});
+ const epic={...unit,id:"epic-fixture",name:"Epic fixture",rarity:"Epic",progressionIndex:11,shards:100};
+ const rows=[characterRosterRow({...unit,xpLevel:44},guide,[],{Chaos:[{rarity:"Legendary",amount:3}]},{}),characterRosterRow(epic,undefined,[],null,{Chaos:[{rarity:"Legendary",amount:4}]})];
+ const view=render(createElement(CharacterTable,{rows}));
+ assert.equal(view.getAllByRole("columnheader").length,3);
+ fireEvent.click(view.getByRole("button",{name:/Resources ready/}));
+ assert.equal(view.getAllByRole("row").length,2);assert.ok(view.getByRole("link",{name:"Active → 42"}));
+ fireEvent.click(view.getByRole("button",{name:/Orbs needed/}));
+ assert.equal(view.queryByRole("link",{name:"Active → 42"}),null);assert.ok(view.getByRole("link",{name:"Ascend to Legendary"}));
+ fireEvent.change(view.getByPlaceholderText(/Search character/),{target:{value:"6 Chaos Legendary orbs short"}});
+ assert.equal(view.getAllByRole("row").length,2);
+ view.rerender(createElement(CharacterProgression,{unit,inventory:{Chaos:[{rarity:"Legendary",amount:4}]}}));
+ assert.equal(view.queryByText("Legendary star upgrade"),null);
+ fireEvent.click(view.getByRole("checkbox",{name:"Show optional star upgrade"}));
+ assert.ok(view.getByText("Legendary star upgrade"));assert.match(view.container.textContent!,/11 Chaos Legendary orbs short/);
+ assert.equal(view.getByRole("link",{name:"Farm Gold II upgrades"}).getAttribute("href"),`/farming?character=${unit.id}&target=13`);
+ fireEvent.click(view.getByRole("checkbox",{name:"Show optional star upgrade"}));
+ assert.equal(view.queryByText("Legendary star upgrade"),null);
+ const meta=catalogData.characters.find(character=>character.name==="Exitor-Rho")!;
+ const rho={...unit,id:meta.id,name:meta.name,faction:"AdeptusMechanicus",grandAlliance:"Imperial",items:[{id:"I_Defensive_L003",name:"Grand Plated Greaves",rarity:"Legendary",level:1,slotId:"Slot2"}]};
+ const report:Report={generatedAt:"2026-10-07T12:00:00Z",source:{player:"TEST",powerLevel:52},summary:{units:1,charactersWithAbilitiesBelow17:0,individualAbilityUpgradesTo17:0,legendaryUnderTierSlots:0},abilityQueue:[],roster:[rho],unequippedInventory:[{id:"I_Defensive_L004",amount:1,level:1}],equipmentAllocation:{equipNow:[],buyWatch:[],compatibilityUnknown:[]}};
+ const slots=buildEquipmentPlan(report,catalogData as {characters:CatalogCharacter[]},shopsData as ShopCatalog).rows[0]!.slots;
+ assert.equal(orderedEquipmentChoices(slots)[0]?.state,"EQUIP NOW");
+ view.rerender(createElement(CharacterEquipment,{unit:rho,slots,shops:shopsData as ShopCatalog,powerLevel:52}));
+ const gear=within(view.getByRole("table",{name:"Character equipment upgrades"}));
+ assert.ok(gear.getByText("Equip Grand Mantle"));
+ assert.ok(gear.getByRole("link",{name:"Where to get Grand Mantle"}));
+ assert.ok(view.container.querySelector('[data-resource-id="I_Defensive_L004"] img'));
+ const alternatives=gear.queryByText(/Other upgrade options/);
+ if(alternatives){const details=alternatives.closest("details")!;assert.equal(details.open,false);fireEvent.click(alternatives);assert.equal(details.open,true);}
+ fireEvent.click(view.getByRole("button",{name:/Equipment/}));assert.equal(view.queryByRole("table"),null);
+});

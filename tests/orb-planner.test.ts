@@ -50,7 +50,7 @@ test("whole-goal totals retain every orb rarity and shard prerequisite instead o
 test("Mythic is opt-in and costs Mythic shards while invalid progression/alliance and absent inventory stay unknown",()=>{
  const wing=raid("Wing",15),mythic=raid("Mythic",16),invalid=candidate("Unknown",50),noAlliance=candidate("No alliance",8,{alliance:""});
  assert.equal(orbPlan([wing,mythic],null,new Map(),options).rows.length,0);
- const result=orbPlan([wing,mythic,invalid,noAlliance],null,new Map(),{...options,includeMythic:true});
+ const result=orbPlan([wing,mythic,invalid,noAlliance],null,new Map(),{...options,includeMythic:true,includeStarUpgrades:true});
  assert.equal(result.rows.length,2);assert.equal(result.rows[0]!.mythicShardsNeeded,30);assert.equal(result.rows[0]!.shardsNeeded,0);
  assert.equal(result.pools[0]!.owned,null);assert.equal(result.pools[0]!.shortfall,null);
  assert.deepEqual(result.unknown,["Unknown","No alliance"]);
@@ -71,13 +71,13 @@ test("shard-ready totals include each alliance and allocate only the ready queue
  const ready=candidate("Ready",8,{shards:50});
  const second=candidate("Second",8,{shards:80});
  const imperial=candidate("Imperial",5,{shards:20,alliance:"Imperium"});
- const chaos=candidate("Chaos",12,{shards:500,alliance:"Chaos"});
+ const chaos=candidate("Chaos",11,{shards:500,alliance:"Chaos"});
  const result=shardReadyOrbPlan([blocked,ready,second,imperial,chaos],{Xenos:[{rarity:"Epic",amount:12}],Imperial:[{rarity:"Rare",amount:7}],Chaos:[{rarity:"Legendary",amount:10}]},new Map([["Ready",26]]),false);
  assert.equal(result.waitingForShards,1);
  assert.equal(result.rows.some(row=>row.name==="Blocked Raid"),false);
  assert.deepEqual(result.rows.filter(row=>row.alliance==="Xenos").map(row=>row.allocations[0]?.reserved),[10,2]);
  assert.deepEqual(result.pools.map(pool=>[pool.alliance,pool.rarity,pool.needed,pool.shortfall]),[["Imperial","Rare",10,3],["Xenos","Epic",20,8],["Chaos","Legendary",10,0]]);
- assert.equal(result.rows.find(row=>row.name==="Chaos")?.end,13);
+ assert.equal(result.rows.find(row=>row.name==="Chaos")?.end,12);
  const future=orbPlan([ready,blocked],{},new Map(),options);
  assert.equal(combinedOrbDemand(result,future).get("Xenos:Epic"),30);
 });
@@ -111,4 +111,20 @@ test("campaign orb floors use practical ability stops, suppress low confidence a
  assert.deepEqual(campaignOrbGoals("Speculative",targets,undefined,battles),[]);
  assert.deepEqual(campaignOrbGoals("Carry",targets,[{name:"Test",type:"Elite",highestCompletedBattle:40}],battles),[]);
  assert.equal(campaignOrbGoals("Carry",targets,[{name:"Test",type:"Elite",highestCompletedBattle:39}],battles)[0]?.progressKnown,true);
+});
+
+test("rarity ascensions exclude extra Legendary and Mythic stars unless explicitly enabled",()=>{
+ const ascends=candidate("Epic to Legendary",11,{shards:100});
+ const stars=candidate("Legendary three stars",13,{shards:250});
+ const mythicStars=candidate("Mythic stars",16,{mythicShards:30});
+ const roster=[ascends,stars,mythicStars];
+ const defaultPlan=shardReadyOrbPlan(roster,{},new Map(),true);
+ assert.deepEqual(defaultPlan.rows.map(row=>row.name),["Epic to Legendary"]);
+ assert.equal(defaultPlan.pools[0]?.needed,10);
+ const expanded=shardReadyOrbPlan(roster,{},new Map(),true,true);
+ assert.equal(expanded.rows.length,3);
+ assert.equal(expanded.pools.find(pool=>pool.rarity==="Legendary")?.needed,25);
+ assert.equal(expanded.pools.find(pool=>pool.rarity==="Mythic")?.needed,10);
+ assert.equal(orbPlan([stars],{},new Map(),{...options,scope:"all"}).rows.length,0);
+ assert.equal(orbPlan([stars],{},new Map(),{...options,scope:"all",includeStarUpgrades:true}).rows.length,1);
 });

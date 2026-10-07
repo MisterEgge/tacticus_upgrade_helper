@@ -56,6 +56,9 @@ test("equipment sections collapse independently, retain character expansion and 
  fireEvent.click(view.getByRole("button",{name:"Shop upgrades"}));
  fireEvent.click(view.getByRole("button",{name:"Characters"}));
  assert.equal(rho.getAttribute("aria-expanded"),"true");
+ fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"Grand Plated Greaves"}});
+ assert.ok(characters.getByRole("button",{name:/^Exitor-Rho/}));
+ assert.equal(characters.queryByRole("button",{name:/^Tyrith/}),null);
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"Aleph-Null"}});
  assert.equal(characters.queryByRole("button",{name:/^Tyrith/}),null);
  assert.ok(characters.getByRole("button",{name:/^Aleph-Null/}));

@@ -20,7 +20,11 @@ test("character ability actions track gates and stock, preserve nested expansion
  const props={unit,guide,guidance,evidence:[{url:"https://example.com/evidence",date:"2026-01-01",supports:["Active scaling"]}],badgeInventory:{Chaos:[{rarity:"Legendary",amount:3}]}};
  const view=render(createElement(CharacterAbilities,props));
  assert.ok(view.getByText("Level character to 42"));assert.ok(view.getByText(/Practical target met/));
- assert.ok(view.getByText("44-50"));assert.ok(view.getByText("High investment option: 50"));
+ assert.ok(view.getByText("44"));
+ const details=view.getByText("Active target details").closest("details")!;
+ assert.equal(details.open,false);
+ fireEvent.click(view.getByText("Active target details"));
+ assert.match(details.textContent!,/Practical range: 44-50/);assert.ok(view.getByText("High investment option: 50"));
  const budget=view.getByRole("region",{name:"Badges to practical targets"});
  const budgetToggle=within(budget).getByRole("button");
  fireEvent.click(budgetToggle);
@@ -30,9 +34,9 @@ test("character ability actions track gates and stock, preserve nested expansion
  fireEvent.click(parentToggle);assert.equal(budgetToggle.getAttribute("aria-expanded"),"true");
  const eligibleProps={...props,unit:{...unit,xpLevel:44}};
  view.rerender(createElement(CharacterAbilities,eligibleProps));
- assert.ok(view.getByText("Next level 42 eligible · badges covered"));assert.ok(view.getByText("Check coins before upgrading"));
+ assert.ok(view.getByText("Next level 42 eligible · badges covered"));assert.match(view.container.textContent!,/Check coins before upgrading/);
  view.rerender(createElement(CharacterAbilities,{...eligibleProps,badgeInventory:{Chaos:[{rarity:"Legendary",amount:2}]}}));
- assert.ok(view.getByText("Collect badges for level 42"));assert.ok(view.getByText("1 Legendary short · 2 owned / 3 needed"));
+ assert.ok(view.getByText("Collect badges for level 42"));assert.match(view.getByText("1 Legendary short").closest("small")!.textContent!,/1 Legendary short · 2 owned \/ 3 needed/);
  view.rerender(createElement(CharacterAbilities,{...eligibleProps,guide:undefined,guidance:undefined,evidence:[],unit:{...unit,abilities:[{id:"a",level:1}],xpLevel:20},badgeInventory:null}));
  assert.ok(view.getByText("Provisional baseline · character research pending"));
  assert.ok(view.getByText("XP and rarity allow level 2 · sync badges"));
