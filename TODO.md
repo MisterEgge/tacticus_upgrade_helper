@@ -22,7 +22,7 @@
 - [x] Prefer compatible higher-chance block items, checking actual refinement and booster stats before showing equip-now; retain lower-chance block items as situational alternatives.
 
 ## Next enhancements
-- [ ] Add immediate/community ability targets to character detail pages.
+- [x] Add actionable practical ability targets to character pages: next level, XP/rarity gates, badge cost/shortfall, combined demand, confidence and source records, with higher investment remaining optional.
 - [ ] Add inventory demand: owned vs needed and recipient coverage.
 - [ ] Build verified campaign-node/material dataset for the farming engine.
 - [x] Add active navigation state; continue mobile polish.

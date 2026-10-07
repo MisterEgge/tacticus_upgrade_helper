@@ -1,6 +1,10 @@
 export type BadgeRarity="Common"|"Uncommon"|"Rare"|"Epic"|"Legendary"|"Mythic";
 export type BadgeCost=Partial<Record<BadgeRarity,number>>;
 
+export const abilityRarityCaps:Record<BadgeRarity,number>={Common:8,Uncommon:17,Rare:26,Epic:35,Legendary:50,Mythic:60};
+export function abilityLevelCap(rarity:string):number|null{return Object.hasOwn(abilityRarityCaps,rarity)?abilityRarityCaps[rarity as BadgeRarity]:null;}
+export function abilityRarityForLevel(level:number):BadgeRarity|null{if(!Number.isInteger(level)||level<1||level>60)return null;return (Object.entries(abilityRarityCaps).find(([,cap])=>cap>=level)?.[0] as BadgeRarity|undefined)??null;}
+
 const tierCosts:[BadgeRarity,number[]][]=[
  ["Common",[1,1,1,2,2,2,3]],
  ["Uncommon",[1,1,1,2,2,2,3,4,5]],

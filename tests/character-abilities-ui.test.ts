@@ -1,0 +1,41 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import {createElement} from "react";
+import {JSDOM} from "jsdom";
+import CharacterAbilities from "../app/characters/[id]/CharacterAbilities";
+import {abilityGuideRows} from "../src/domain/abilities";
+import catalog from "../data/character_catalog.json";
+import type {RosterUnit} from "../app/lib/report";
+import type {CharacterAbilityGuidance} from "../app/lib/catalog";
+
+test("character ability actions track gates and stock, preserve nested expansion, and label provisional guidance",async suite=>{
+ const dom=new JSDOM("<!doctype html><html><body></body></html>",{url:"http://localhost/"});
+ const descriptors=new Map<string,PropertyDescriptor|undefined>();
+ for(const key of ["window","self","document","navigator","HTMLElement","Node","Event","MutationObserver","localStorage"]){descriptors.set(key,Object.getOwnPropertyDescriptor(globalThis,key));Object.defineProperty(globalThis,key,{configurable:true,value:dom.window[key as keyof typeof dom.window]});}
+ const {render,fireEvent,cleanup,act,within}=await import("@testing-library/react");
+ suite.after(async()=>{await act(async()=>{cleanup();});dom.window.close();for(const [key,descriptor] of descriptors){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else Reflect.deleteProperty(globalThis,key);}});
+ const unit:RosterUnit={id:"thousInfernalMaster",name:"Abraxas",faction:"ThousandSons",grandAlliance:"Chaos",rarity:"Legendary",progressionIndex:15,rank:12,xpLevel:41,shards:0,mythicShards:0,abilities:[{id:"InfernalPacts",level:41},{id:"Passive",level:17}],items:[]};
+ const guidance:CharacterAbilityGuidance={active:{practical:"44-50",high:"50",priority:"high",modes:["Guild Raid"],note:"Test active target"},passive:{practical:"17",high:"26",priority:"low",modes:[],note:"Test passive target"},confidence:"medium"};
+ const guide=abilityGuideRows(catalog.characters,[unit],{Abraxas:guidance},{}).find(row=>row.id===unit.id)!;
+ const props={unit,guide,guidance,evidence:[{url:"https://example.com/evidence",date:"2026-01-01",supports:["Active scaling"]}],badgeInventory:{Chaos:[{rarity:"Legendary",amount:3}]}};
+ const view=render(createElement(CharacterAbilities,props));
+ assert.ok(view.getByText("Level character to 42"));assert.ok(view.getByText(/Practical target met/));
+ assert.ok(view.getByText("44-50"));assert.ok(view.getByText("High investment option: 50"));
+ const budget=view.getByRole("region",{name:"Badges to practical targets"});
+ const budgetToggle=within(budget).getByRole("button");
+ fireEvent.click(budgetToggle);
+ assert.equal(budgetToggle.getAttribute("aria-expanded"),"true");
+ const parentToggle=view.getByRole("region",{name:"Ability upgrades"}).querySelector("button")!;
+ fireEvent.click(parentToggle);assert.equal(parentToggle.getAttribute("aria-expanded"),"false");
+ fireEvent.click(parentToggle);assert.equal(budgetToggle.getAttribute("aria-expanded"),"true");
+ const eligibleProps={...props,unit:{...unit,xpLevel:44}};
+ view.rerender(createElement(CharacterAbilities,eligibleProps));
+ assert.ok(view.getByText("Next level 42 eligible · badges covered"));assert.ok(view.getByText("Check coins before upgrading"));
+ view.rerender(createElement(CharacterAbilities,{...eligibleProps,badgeInventory:{Chaos:[{rarity:"Legendary",amount:2}]}}));
+ assert.ok(view.getByText("Collect badges for level 42"));assert.ok(view.getByText("1 Legendary short · 2 owned / 3 needed"));
+ view.rerender(createElement(CharacterAbilities,{...eligibleProps,guide:undefined,guidance:undefined,evidence:[],unit:{...unit,abilities:[{id:"a",level:1}],xpLevel:20},badgeInventory:null}));
+ assert.ok(view.getByText("Provisional baseline · character research pending"));
+ assert.ok(view.getByText("XP and rarity allow level 2 · sync badges"));
+ assert.ok(view.getByText("Sync an unlocked ability level"));
+ assert.equal(view.queryByText(/Community guidance/),null);
+});
