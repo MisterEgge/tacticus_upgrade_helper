@@ -1,3 +1,4 @@
+import type {EquipmentDefinition} from "./equipmentCompatibility";
 export const DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"] as const;
 export type ShopOffer = {
     id: string; slot: number; itemId: string; quantity: number; schedule: string;
@@ -14,7 +15,7 @@ export type Shop = {
 };
 export type ShopCatalog = {
     schemaVersion: 1; reviewedAt: string; sourceCommit: string; sourceKind: "community";
-    shops: Shop[]; equipment: Record<string, { name: string; rarity: string; type: string; allowedUnits?:string[];allowedFactions?:string[];baseStats?:{hp?:number;armor?:number} }>;
+    shops: Shop[]; equipment: Record<string, EquipmentDefinition & {name:string}>;
 };
 export const CURRENCIES: Record<string, string> = {
     gems: "Blackstone", gold: "Coins", guildCredits: "Guild Credits", guildWarCurrency: "War Credits",

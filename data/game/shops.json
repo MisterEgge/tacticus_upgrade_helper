@@ -8993,7 +8993,21 @@
       "baseStats": {
         "critChance": 20,
         "critDamage": 22
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 20,
+          "critDamage": 22
+        },
+        {
+          "critChance": 20,
+          "critDamage": 36
+        },
+        {
+          "critChance": 20,
+          "critDamage": 50
+        }
+      ]
     },
     "I_Crit_U001": {
       "name": "Balanced Combat Knife",
@@ -9022,7 +9036,29 @@
       "baseStats": {
         "critChance": 20,
         "critDamage": 55
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 20,
+          "critDamage": 55
+        },
+        {
+          "critChance": 20,
+          "critDamage": 73
+        },
+        {
+          "critChance": 20,
+          "critDamage": 91
+        },
+        {
+          "critChance": 20,
+          "critDamage": 109
+        },
+        {
+          "critChance": 20,
+          "critDamage": 126
+        }
+      ]
     },
     "I_Crit_R001": {
       "name": "Powered Combat Knife",
@@ -9051,7 +9087,37 @@
       "baseStats": {
         "critChance": 20,
         "critDamage": 138
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 20,
+          "critDamage": 138
+        },
+        {
+          "critChance": 20,
+          "critDamage": 168
+        },
+        {
+          "critChance": 20,
+          "critDamage": 197
+        },
+        {
+          "critChance": 20,
+          "critDamage": 227
+        },
+        {
+          "critChance": 20,
+          "critDamage": 256
+        },
+        {
+          "critChance": 20,
+          "critDamage": 286
+        },
+        {
+          "critChance": 20,
+          "critDamage": 315
+        }
+      ]
     },
     "I_Crit_E001": {
       "name": "Advanced Combat Knife",
@@ -9080,7 +9146,45 @@
       "baseStats": {
         "critChance": 20,
         "critDamage": 352
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 20,
+          "critDamage": 352
+        },
+        {
+          "critChance": 20,
+          "critDamage": 440
+        },
+        {
+          "critChance": 20,
+          "critDamage": 527
+        },
+        {
+          "critChance": 20,
+          "critDamage": 615
+        },
+        {
+          "critChance": 20,
+          "critDamage": 702
+        },
+        {
+          "critChance": 20,
+          "critDamage": 789
+        },
+        {
+          "critChance": 20,
+          "critDamage": 877
+        },
+        {
+          "critChance": 20,
+          "critDamage": 964
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1052
+        }
+      ]
     },
     "I_Crit_L001": {
       "name": "Grand Combat Knife",
@@ -9109,7 +9213,53 @@
       "baseStats": {
         "critChance": 20,
         "critDamage": 1144
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 20,
+          "critDamage": 1144
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1211
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1344
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1410
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1476
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1543
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1609
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1675
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1742
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1808
+        }
+      ]
     },
     "I_Crit_M001": {
       "name": "Ancient Combat Knife",
@@ -9138,7 +9288,49 @@
       "baseStats": {
         "critChance": 20,
         "critDamage": 1835
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 20,
+          "critDamage": 1835
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1935
+        },
+        {
+          "critChance": 20,
+          "critDamage": 2034
+        },
+        {
+          "critChance": 20,
+          "critDamage": 2133
+        },
+        {
+          "critChance": 20,
+          "critDamage": 2232
+        },
+        {
+          "critChance": 20,
+          "critDamage": 2331
+        },
+        {
+          "critChance": 20,
+          "critDamage": 2430
+        },
+        {
+          "critChance": 20,
+          "critDamage": 2529
+        },
+        {
+          "critChance": 20,
+          "critDamage": 2628
+        },
+        {
+          "critChance": 20,
+          "critDamage": 2727
+        }
+      ]
     },
     "I_Crit_C002": {
       "name": "Standard-Issue Bolt Pistol",
@@ -9159,7 +9351,21 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 13
+        },
+        {
+          "critChance": 35,
+          "critDamage": 22
+        },
+        {
+          "critChance": 35,
+          "critDamage": 30
+        }
+      ]
     },
     "I_Crit_U002": {
       "name": "Battle-Hardened Bolt Pistol",
@@ -9180,7 +9386,29 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 32
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 32
+        },
+        {
+          "critChance": 35,
+          "critDamage": 43
+        },
+        {
+          "critChance": 35,
+          "critDamage": 53
+        },
+        {
+          "critChance": 35,
+          "critDamage": 63
+        },
+        {
+          "critChance": 35,
+          "critDamage": 74
+        }
+      ]
     },
     "I_Crit_R002": {
       "name": "Sanctified Bolt Pistol",
@@ -9201,7 +9429,37 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 80
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 80
+        },
+        {
+          "critChance": 35,
+          "critDamage": 98
+        },
+        {
+          "critChance": 35,
+          "critDamage": 115
+        },
+        {
+          "critChance": 35,
+          "critDamage": 132
+        },
+        {
+          "critChance": 35,
+          "critDamage": 149
+        },
+        {
+          "critChance": 35,
+          "critDamage": 166
+        },
+        {
+          "critChance": 35,
+          "critDamage": 183
+        }
+      ]
     },
     "I_Crit_E002": {
       "name": "Master-Crafted Bolt Pistol",
@@ -9222,7 +9480,45 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 202
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 202
+        },
+        {
+          "critChance": 35,
+          "critDamage": 253
+        },
+        {
+          "critChance": 35,
+          "critDamage": 303
+        },
+        {
+          "critChance": 35,
+          "critDamage": 353
+        },
+        {
+          "critChance": 35,
+          "critDamage": 403
+        },
+        {
+          "critChance": 35,
+          "critDamage": 453
+        },
+        {
+          "critChance": 35,
+          "critDamage": 503
+        },
+        {
+          "critChance": 35,
+          "critDamage": 554
+        },
+        {
+          "critChance": 35,
+          "critDamage": 604
+        }
+      ]
     },
     "I_Crit_L002": {
       "name": "Artificer Bolt Pistol",
@@ -9243,7 +9539,53 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 648
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 648
+        },
+        {
+          "critChance": 35,
+          "critDamage": 686
+        },
+        {
+          "critChance": 35,
+          "critDamage": 724
+        },
+        {
+          "critChance": 35,
+          "critDamage": 761
+        },
+        {
+          "critChance": 35,
+          "critDamage": 799
+        },
+        {
+          "critChance": 35,
+          "critDamage": 836
+        },
+        {
+          "critChance": 35,
+          "critDamage": 874
+        },
+        {
+          "critChance": 35,
+          "critDamage": 912
+        },
+        {
+          "critChance": 35,
+          "critDamage": 949
+        },
+        {
+          "critChance": 35,
+          "critDamage": 987
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1024
+        }
+      ]
     },
     "I_Crit_M002": {
       "name": "Archeotech Bolt Pistol",
@@ -9264,7 +9606,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "I_Crit_C003": {
       "name": "Void Blade",
@@ -9277,7 +9661,21 @@
       "baseStats": {
         "critChance": 20,
         "critDamage": 22
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 20,
+          "critDamage": 22
+        },
+        {
+          "critChance": 20,
+          "critDamage": 36
+        },
+        {
+          "critChance": 20,
+          "critDamage": 50
+        }
+      ]
     },
     "I_Crit_U003": {
       "name": "Subjugating Void Blade",
@@ -9290,7 +9688,29 @@
       "baseStats": {
         "critChance": 20,
         "critDamage": 55
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 20,
+          "critDamage": 55
+        },
+        {
+          "critChance": 20,
+          "critDamage": 73
+        },
+        {
+          "critChance": 20,
+          "critDamage": 91
+        },
+        {
+          "critChance": 20,
+          "critDamage": 109
+        },
+        {
+          "critChance": 20,
+          "critDamage": 126
+        }
+      ]
     },
     "I_Crit_R003": {
       "name": "Royal Void Blade",
@@ -9303,7 +9723,37 @@
       "baseStats": {
         "critChance": 20,
         "critDamage": 138
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 20,
+          "critDamage": 138
+        },
+        {
+          "critChance": 20,
+          "critDamage": 168
+        },
+        {
+          "critChance": 20,
+          "critDamage": 197
+        },
+        {
+          "critChance": 20,
+          "critDamage": 227
+        },
+        {
+          "critChance": 20,
+          "critDamage": 256
+        },
+        {
+          "critChance": 20,
+          "critDamage": 286
+        },
+        {
+          "critChance": 20,
+          "critDamage": 315
+        }
+      ]
     },
     "I_Crit_E003": {
       "name": "Hyperphasing Void Blade",
@@ -9316,7 +9766,45 @@
       "baseStats": {
         "critChance": 20,
         "critDamage": 352
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 20,
+          "critDamage": 352
+        },
+        {
+          "critChance": 20,
+          "critDamage": 440
+        },
+        {
+          "critChance": 20,
+          "critDamage": 527
+        },
+        {
+          "critChance": 20,
+          "critDamage": 615
+        },
+        {
+          "critChance": 20,
+          "critDamage": 702
+        },
+        {
+          "critChance": 20,
+          "critDamage": 789
+        },
+        {
+          "critChance": 20,
+          "critDamage": 877
+        },
+        {
+          "critChance": 20,
+          "critDamage": 964
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1052
+        }
+      ]
     },
     "I_Crit_L003": {
       "name": "Transdimensional Void Blade",
@@ -9329,7 +9817,53 @@
       "baseStats": {
         "critChance": 20,
         "critDamage": 1144
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 20,
+          "critDamage": 1144
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1211
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1344
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1410
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1476
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1543
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1609
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1675
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1742
+        },
+        {
+          "critChance": 20,
+          "critDamage": 1808
+        }
+      ]
     },
     "I_Crit_U004": {
       "name": "Heirloom Bolt Pistol",
@@ -9346,7 +9880,29 @@
       "baseStats": {
         "critChance": 30,
         "critDamage": 40
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 30,
+          "critDamage": 40
+        },
+        {
+          "critChance": 30,
+          "critDamage": 53
+        },
+        {
+          "critChance": 30,
+          "critDamage": 66
+        },
+        {
+          "critChance": 30,
+          "critDamage": 79
+        },
+        {
+          "critChance": 30,
+          "critDamage": 92
+        }
+      ]
     },
     "I_Crit_C005": {
       "name": "Particle Casters",
@@ -9359,7 +9915,21 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 13
+        },
+        {
+          "critChance": 35,
+          "critDamage": 22
+        },
+        {
+          "critChance": 35,
+          "critDamage": 30
+        }
+      ]
     },
     "I_Crit_U005": {
       "name": "Subjugating Particle Casters",
@@ -9372,7 +9942,29 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 32
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 32
+        },
+        {
+          "critChance": 35,
+          "critDamage": 43
+        },
+        {
+          "critChance": 35,
+          "critDamage": 53
+        },
+        {
+          "critChance": 35,
+          "critDamage": 63
+        },
+        {
+          "critChance": 35,
+          "critDamage": 74
+        }
+      ]
     },
     "I_Crit_R005": {
       "name": "Royal Particle Casters",
@@ -9385,7 +9977,37 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 80
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 80
+        },
+        {
+          "critChance": 35,
+          "critDamage": 98
+        },
+        {
+          "critChance": 35,
+          "critDamage": 115
+        },
+        {
+          "critChance": 35,
+          "critDamage": 132
+        },
+        {
+          "critChance": 35,
+          "critDamage": 149
+        },
+        {
+          "critChance": 35,
+          "critDamage": 166
+        },
+        {
+          "critChance": 35,
+          "critDamage": 183
+        }
+      ]
     },
     "I_Crit_E005": {
       "name": "Hyperphasing Particle Casters",
@@ -9398,7 +10020,45 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 202
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 202
+        },
+        {
+          "critChance": 35,
+          "critDamage": 253
+        },
+        {
+          "critChance": 35,
+          "critDamage": 303
+        },
+        {
+          "critChance": 35,
+          "critDamage": 353
+        },
+        {
+          "critChance": 35,
+          "critDamage": 403
+        },
+        {
+          "critChance": 35,
+          "critDamage": 453
+        },
+        {
+          "critChance": 35,
+          "critDamage": 503
+        },
+        {
+          "critChance": 35,
+          "critDamage": 554
+        },
+        {
+          "critChance": 35,
+          "critDamage": 604
+        }
+      ]
     },
     "I_Crit_L005": {
       "name": "Transdimensional Particle Casters",
@@ -9411,7 +10071,53 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 648
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 648
+        },
+        {
+          "critChance": 35,
+          "critDamage": 686
+        },
+        {
+          "critChance": 35,
+          "critDamage": 724
+        },
+        {
+          "critChance": 35,
+          "critDamage": 761
+        },
+        {
+          "critChance": 35,
+          "critDamage": 799
+        },
+        {
+          "critChance": 35,
+          "critDamage": 836
+        },
+        {
+          "critChance": 35,
+          "critDamage": 874
+        },
+        {
+          "critChance": 35,
+          "critDamage": 912
+        },
+        {
+          "critChance": 35,
+          "critDamage": 949
+        },
+        {
+          "critChance": 35,
+          "critDamage": 987
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1024
+        }
+      ]
     },
     "I_Crit_M005": {
       "name": "Eternal Particle Casters",
@@ -9424,7 +10130,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "I_Crit_C006": {
       "name": "Blemished Bolt Pistol",
@@ -9441,7 +10189,21 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 13
+        },
+        {
+          "critChance": 35,
+          "critDamage": 22
+        },
+        {
+          "critChance": 35,
+          "critDamage": 30
+        }
+      ]
     },
     "I_Crit_U006": {
       "name": "Twisted Bolt Pistol",
@@ -9458,7 +10220,29 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 32
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 32
+        },
+        {
+          "critChance": 35,
+          "critDamage": 43
+        },
+        {
+          "critChance": 35,
+          "critDamage": 53
+        },
+        {
+          "critChance": 35,
+          "critDamage": 63
+        },
+        {
+          "critChance": 35,
+          "critDamage": 74
+        }
+      ]
     },
     "I_Crit_R006": {
       "name": "Heretical Bolt Pistol",
@@ -9475,7 +10259,37 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 80
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 80
+        },
+        {
+          "critChance": 35,
+          "critDamage": 98
+        },
+        {
+          "critChance": 35,
+          "critDamage": 115
+        },
+        {
+          "critChance": 35,
+          "critDamage": 132
+        },
+        {
+          "critChance": 35,
+          "critDamage": 149
+        },
+        {
+          "critChance": 35,
+          "critDamage": 166
+        },
+        {
+          "critChance": 35,
+          "critDamage": 183
+        }
+      ]
     },
     "I_Crit_E006": {
       "name": "Malefic Bolt Pistol",
@@ -9492,7 +10306,45 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 202
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 202
+        },
+        {
+          "critChance": 35,
+          "critDamage": 253
+        },
+        {
+          "critChance": 35,
+          "critDamage": 303
+        },
+        {
+          "critChance": 35,
+          "critDamage": 353
+        },
+        {
+          "critChance": 35,
+          "critDamage": 403
+        },
+        {
+          "critChance": 35,
+          "critDamage": 453
+        },
+        {
+          "critChance": 35,
+          "critDamage": 503
+        },
+        {
+          "critChance": 35,
+          "critDamage": 554
+        },
+        {
+          "critChance": 35,
+          "critDamage": 604
+        }
+      ]
     },
     "I_Crit_L006": {
       "name": "Warpforged Bolt Pistol",
@@ -9509,7 +10361,53 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 648
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 648
+        },
+        {
+          "critChance": 35,
+          "critDamage": 686
+        },
+        {
+          "critChance": 35,
+          "critDamage": 724
+        },
+        {
+          "critChance": 35,
+          "critDamage": 761
+        },
+        {
+          "critChance": 35,
+          "critDamage": 799
+        },
+        {
+          "critChance": 35,
+          "critDamage": 836
+        },
+        {
+          "critChance": 35,
+          "critDamage": 874
+        },
+        {
+          "critChance": 35,
+          "critDamage": 912
+        },
+        {
+          "critChance": 35,
+          "critDamage": 949
+        },
+        {
+          "critChance": 35,
+          "critDamage": 987
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1024
+        }
+      ]
     },
     "I_Crit_M006": {
       "name": "Daemonic Bolt Pistol",
@@ -9526,7 +10424,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "I_Crit_C007": {
       "name": "Slugga",
@@ -9539,7 +10479,21 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 13
+        },
+        {
+          "critChance": 35,
+          "critDamage": 22
+        },
+        {
+          "critChance": 35,
+          "critDamage": 30
+        }
+      ]
     },
     "I_Crit_U007": {
       "name": "Killy Slugga",
@@ -9552,7 +10506,29 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 32
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 32
+        },
+        {
+          "critChance": 35,
+          "critDamage": 43
+        },
+        {
+          "critChance": 35,
+          "critDamage": 53
+        },
+        {
+          "critChance": 35,
+          "critDamage": 63
+        },
+        {
+          "critChance": 35,
+          "critDamage": 74
+        }
+      ]
     },
     "I_Crit_R007": {
       "name": "Speshul Killy Slugga",
@@ -9565,7 +10541,37 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 80
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 80
+        },
+        {
+          "critChance": 35,
+          "critDamage": 98
+        },
+        {
+          "critChance": 35,
+          "critDamage": 115
+        },
+        {
+          "critChance": 35,
+          "critDamage": 132
+        },
+        {
+          "critChance": 35,
+          "critDamage": 149
+        },
+        {
+          "critChance": 35,
+          "critDamage": 166
+        },
+        {
+          "critChance": 35,
+          "critDamage": 183
+        }
+      ]
     },
     "I_Crit_E007": {
       "name": "Ded Killy Slugga",
@@ -9578,7 +10584,45 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 202
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 202
+        },
+        {
+          "critChance": 35,
+          "critDamage": 253
+        },
+        {
+          "critChance": 35,
+          "critDamage": 303
+        },
+        {
+          "critChance": 35,
+          "critDamage": 353
+        },
+        {
+          "critChance": 35,
+          "critDamage": 403
+        },
+        {
+          "critChance": 35,
+          "critDamage": 453
+        },
+        {
+          "critChance": 35,
+          "critDamage": 503
+        },
+        {
+          "critChance": 35,
+          "critDamage": 554
+        },
+        {
+          "critChance": 35,
+          "critDamage": 604
+        }
+      ]
     },
     "I_Crit_L007": {
       "name": "Ded Shiny Slugga",
@@ -9591,7 +10635,53 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 648
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 648
+        },
+        {
+          "critChance": 35,
+          "critDamage": 686
+        },
+        {
+          "critChance": 35,
+          "critDamage": 724
+        },
+        {
+          "critChance": 35,
+          "critDamage": 761
+        },
+        {
+          "critChance": 35,
+          "critDamage": 799
+        },
+        {
+          "critChance": 35,
+          "critDamage": 836
+        },
+        {
+          "critChance": 35,
+          "critDamage": 874
+        },
+        {
+          "critChance": 35,
+          "critDamage": 912
+        },
+        {
+          "critChance": 35,
+          "critDamage": 949
+        },
+        {
+          "critChance": 35,
+          "critDamage": 987
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1024
+        }
+      ]
     },
     "I_Crit_M007": {
       "name": "Supa-Killy Slugga",
@@ -9604,7 +10694,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "I_Crit_C008": {
       "name": "Shuriken Pistol",
@@ -9617,7 +10749,21 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 13
+        },
+        {
+          "critChance": 35,
+          "critDamage": 22
+        },
+        {
+          "critChance": 35,
+          "critDamage": 30
+        }
+      ]
     },
     "I_Crit_U008": {
       "name": "Aspect Shuriken Pistol",
@@ -9630,7 +10776,29 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 32
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 32
+        },
+        {
+          "critChance": 35,
+          "critDamage": 43
+        },
+        {
+          "critChance": 35,
+          "critDamage": 53
+        },
+        {
+          "critChance": 35,
+          "critDamage": 63
+        },
+        {
+          "critChance": 35,
+          "critDamage": 74
+        }
+      ]
     },
     "I_Crit_R008": {
       "name": "Wraithbone Shuriken Pistol",
@@ -9643,7 +10811,37 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 80
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 80
+        },
+        {
+          "critChance": 35,
+          "critDamage": 98
+        },
+        {
+          "critChance": 35,
+          "critDamage": 115
+        },
+        {
+          "critChance": 35,
+          "critDamage": 132
+        },
+        {
+          "critChance": 35,
+          "critDamage": 149
+        },
+        {
+          "critChance": 35,
+          "critDamage": 166
+        },
+        {
+          "critChance": 35,
+          "critDamage": 183
+        }
+      ]
     },
     "I_Crit_E008": {
       "name": "Mind-Linked Shuriken Pistol",
@@ -9656,7 +10854,45 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 202
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 202
+        },
+        {
+          "critChance": 35,
+          "critDamage": 253
+        },
+        {
+          "critChance": 35,
+          "critDamage": 303
+        },
+        {
+          "critChance": 35,
+          "critDamage": 353
+        },
+        {
+          "critChance": 35,
+          "critDamage": 403
+        },
+        {
+          "critChance": 35,
+          "critDamage": 453
+        },
+        {
+          "critChance": 35,
+          "critDamage": 503
+        },
+        {
+          "critChance": 35,
+          "critDamage": 554
+        },
+        {
+          "critChance": 35,
+          "critDamage": 604
+        }
+      ]
     },
     "I_Crit_L008": {
       "name": "Soul-Linked Shuriken Pistol",
@@ -9669,7 +10905,53 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 648
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 648
+        },
+        {
+          "critChance": 35,
+          "critDamage": 686
+        },
+        {
+          "critChance": 35,
+          "critDamage": 724
+        },
+        {
+          "critChance": 35,
+          "critDamage": 761
+        },
+        {
+          "critChance": 35,
+          "critDamage": 799
+        },
+        {
+          "critChance": 35,
+          "critDamage": 836
+        },
+        {
+          "critChance": 35,
+          "critDamage": 874
+        },
+        {
+          "critChance": 35,
+          "critDamage": 912
+        },
+        {
+          "critChance": 35,
+          "critDamage": 949
+        },
+        {
+          "critChance": 35,
+          "critDamage": 987
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1024
+        }
+      ]
     },
     "I_Crit_M008": {
       "name": "Prophesied Shuriken Pistol",
@@ -9682,7 +10964,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "I_Crit_C009": {
       "name": "Pulse Pistol",
@@ -9695,7 +11019,21 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 13
+        },
+        {
+          "critChance": 35,
+          "critDamage": 22
+        },
+        {
+          "critChance": 35,
+          "critDamage": 30
+        }
+      ]
     },
     "I_Crit_U009": {
       "name": "Fire Caste Pulse Pistol",
@@ -9708,7 +11046,29 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 32
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 32
+        },
+        {
+          "critChance": 35,
+          "critDamage": 43
+        },
+        {
+          "critChance": 35,
+          "critDamage": 53
+        },
+        {
+          "critChance": 35,
+          "critDamage": 63
+        },
+        {
+          "critChance": 35,
+          "critDamage": 74
+        }
+      ]
     },
     "I_Crit_R009": {
       "name": "Overcharged Pulse Pistol",
@@ -9721,7 +11081,37 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 80
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 80
+        },
+        {
+          "critChance": 35,
+          "critDamage": 98
+        },
+        {
+          "critChance": 35,
+          "critDamage": 115
+        },
+        {
+          "critChance": 35,
+          "critDamage": 132
+        },
+        {
+          "critChance": 35,
+          "critDamage": 149
+        },
+        {
+          "critChance": 35,
+          "critDamage": 166
+        },
+        {
+          "critChance": 35,
+          "critDamage": 183
+        }
+      ]
     },
     "I_Crit_E009": {
       "name": "Advanced Pulse Pistol",
@@ -9734,7 +11124,45 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 202
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 202
+        },
+        {
+          "critChance": 35,
+          "critDamage": 253
+        },
+        {
+          "critChance": 35,
+          "critDamage": 303
+        },
+        {
+          "critChance": 35,
+          "critDamage": 353
+        },
+        {
+          "critChance": 35,
+          "critDamage": 403
+        },
+        {
+          "critChance": 35,
+          "critDamage": 453
+        },
+        {
+          "critChance": 35,
+          "critDamage": 503
+        },
+        {
+          "critChance": 35,
+          "critDamage": 554
+        },
+        {
+          "critChance": 35,
+          "critDamage": 604
+        }
+      ]
     },
     "I_Crit_L009": {
       "name": "Prototype Pulse Pistol",
@@ -9747,7 +11175,53 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 648
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 648
+        },
+        {
+          "critChance": 35,
+          "critDamage": 686
+        },
+        {
+          "critChance": 35,
+          "critDamage": 724
+        },
+        {
+          "critChance": 35,
+          "critDamage": 761
+        },
+        {
+          "critChance": 35,
+          "critDamage": 799
+        },
+        {
+          "critChance": 35,
+          "critDamage": 836
+        },
+        {
+          "critChance": 35,
+          "critDamage": 874
+        },
+        {
+          "critChance": 35,
+          "critDamage": 912
+        },
+        {
+          "critChance": 35,
+          "critDamage": 949
+        },
+        {
+          "critChance": 35,
+          "critDamage": 987
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1024
+        }
+      ]
     },
     "I_Crit_M009": {
       "name": "Signature Pulse Pistol",
@@ -9760,7 +11234,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "I_Crit_C010": {
       "name": "Ceremonial Knife",
@@ -9777,7 +11293,21 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 18
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 18
+        },
+        {
+          "critChance": 25,
+          "critDamage": 30
+        },
+        {
+          "critChance": 25,
+          "critDamage": 41
+        }
+      ]
     },
     "I_Crit_U010": {
       "name": "Good Ceremonial Knife",
@@ -9794,7 +11324,29 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 44
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 44
+        },
+        {
+          "critChance": 25,
+          "critDamage": 59
+        },
+        {
+          "critChance": 25,
+          "critDamage": 73
+        },
+        {
+          "critChance": 25,
+          "critDamage": 87
+        },
+        {
+          "critChance": 25,
+          "critDamage": 101
+        }
+      ]
     },
     "I_Crit_R010": {
       "name": "Fine Ceremonial Knife",
@@ -9811,7 +11363,37 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 110
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 110
+        },
+        {
+          "critChance": 25,
+          "critDamage": 134
+        },
+        {
+          "critChance": 25,
+          "critDamage": 157
+        },
+        {
+          "critChance": 25,
+          "critDamage": 181
+        },
+        {
+          "critChance": 25,
+          "critDamage": 204
+        },
+        {
+          "critChance": 25,
+          "critDamage": 228
+        },
+        {
+          "critChance": 25,
+          "critDamage": 251
+        }
+      ]
     },
     "I_Crit_E010": {
       "name": "Adorned Ceremonial Knife",
@@ -9828,7 +11410,45 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 279
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 279
+        },
+        {
+          "critChance": 25,
+          "critDamage": 349
+        },
+        {
+          "critChance": 25,
+          "critDamage": 418
+        },
+        {
+          "critChance": 25,
+          "critDamage": 487
+        },
+        {
+          "critChance": 25,
+          "critDamage": 557
+        },
+        {
+          "critChance": 25,
+          "critDamage": 626
+        },
+        {
+          "critChance": 25,
+          "critDamage": 695
+        },
+        {
+          "critChance": 25,
+          "critDamage": 764
+        },
+        {
+          "critChance": 25,
+          "critDamage": 834
+        }
+      ]
     },
     "I_Crit_L010": {
       "name": "Grand Ceremonial Knife",
@@ -9845,7 +11465,53 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 915
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 915
+        },
+        {
+          "critChance": 25,
+          "critDamage": 969
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1022
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1075
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1128
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1181
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1234
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1287
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1340
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1393
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1446
+        }
+      ]
     },
     "I_Crit_M010": {
       "name": "Ancient Ceremonial Knife",
@@ -9862,7 +11528,49 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 1470
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 1470
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1550
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1629
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1709
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1788
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1867
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1947
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2026
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2105
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2185
+        }
+      ]
     },
     "I_Crit_C011": {
       "name": "Bonesword",
@@ -9876,7 +11584,21 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 18
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 18
+        },
+        {
+          "critChance": 25,
+          "critDamage": 30
+        },
+        {
+          "critChance": 25,
+          "critDamage": 41
+        }
+      ]
     },
     "I_Crit_U011": {
       "name": "Evolved Bonesword",
@@ -9890,7 +11612,29 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 44
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 44
+        },
+        {
+          "critChance": 25,
+          "critDamage": 59
+        },
+        {
+          "critChance": 25,
+          "critDamage": 73
+        },
+        {
+          "critChance": 25,
+          "critDamage": 87
+        },
+        {
+          "critChance": 25,
+          "critDamage": 101
+        }
+      ]
     },
     "I_Crit_R011": {
       "name": "Augmented Bonesword",
@@ -9904,7 +11648,37 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 110
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 110
+        },
+        {
+          "critChance": 25,
+          "critDamage": 134
+        },
+        {
+          "critChance": 25,
+          "critDamage": 157
+        },
+        {
+          "critChance": 25,
+          "critDamage": 181
+        },
+        {
+          "critChance": 25,
+          "critDamage": 204
+        },
+        {
+          "critChance": 25,
+          "critDamage": 228
+        },
+        {
+          "critChance": 25,
+          "critDamage": 251
+        }
+      ]
     },
     "I_Crit_E011": {
       "name": "Symbiotic Bonesword",
@@ -9918,7 +11692,45 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 279
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 279
+        },
+        {
+          "critChance": 25,
+          "critDamage": 349
+        },
+        {
+          "critChance": 25,
+          "critDamage": 418
+        },
+        {
+          "critChance": 25,
+          "critDamage": 487
+        },
+        {
+          "critChance": 25,
+          "critDamage": 557
+        },
+        {
+          "critChance": 25,
+          "critDamage": 626
+        },
+        {
+          "critChance": 25,
+          "critDamage": 695
+        },
+        {
+          "critChance": 25,
+          "critDamage": 764
+        },
+        {
+          "critChance": 25,
+          "critDamage": 834
+        }
+      ]
     },
     "I_Crit_L011": {
       "name": "Monstrous Bonesword",
@@ -9932,7 +11744,53 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 915
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 915
+        },
+        {
+          "critChance": 25,
+          "critDamage": 969
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1022
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1075
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1128
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1181
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1234
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1287
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1340
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1393
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1446
+        }
+      ]
     },
     "I_Crit_M011": {
       "name": "Apex Bonesword",
@@ -9946,7 +11804,49 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 1470
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 1470
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1550
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1629
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1709
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1788
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1867
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1947
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2026
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2105
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2185
+        }
+      ]
     },
     "I_Crit_L132": {
       "name": "Heavenfall Blade",
@@ -9959,7 +11859,53 @@
       "baseStats": {
         "critChance": 40,
         "critDamage": 572
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 40,
+          "critDamage": 572
+        },
+        {
+          "critChance": 40,
+          "critDamage": 606
+        },
+        {
+          "critChance": 40,
+          "critDamage": 639
+        },
+        {
+          "critChance": 40,
+          "critDamage": 672
+        },
+        {
+          "critChance": 40,
+          "critDamage": 705
+        },
+        {
+          "critChance": 40,
+          "critDamage": 738
+        },
+        {
+          "critChance": 40,
+          "critDamage": 772
+        },
+        {
+          "critChance": 40,
+          "critDamage": 805
+        },
+        {
+          "critChance": 40,
+          "critDamage": 838
+        },
+        {
+          "critChance": 40,
+          "critDamage": 871
+        },
+        {
+          "critChance": 40,
+          "critDamage": 904
+        }
+      ]
     },
     "I_Booster_Crit_C001": {
       "name": "Standard-Issue Frag Grenades",
@@ -9982,7 +11928,21 @@
       "baseStats": {
         "critChanceBonus": 1,
         "critDamageBonus": 5
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 5
+        },
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 9
+        },
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 12
+        }
+      ]
     },
     "I_Booster_Crit_U001": {
       "name": "Battle Hardened Frag Grenades",
@@ -10005,7 +11965,29 @@
       "baseStats": {
         "critChanceBonus": 2,
         "critDamageBonus": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 13
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 18
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 22
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 26
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 30
+        }
+      ]
     },
     "I_Booster_Crit_R001": {
       "name": "Sanctified Frag Grenades",
@@ -10028,7 +12010,37 @@
       "baseStats": {
         "critChanceBonus": 3,
         "critDamageBonus": 30
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 30
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 37
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 43
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 50
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 56
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 62
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 69
+        }
+      ]
     },
     "I_Booster_Crit_E001": {
       "name": "Master-Crafted Frag Grenades",
@@ -10051,7 +12063,45 @@
       "baseStats": {
         "critChanceBonus": 4,
         "critDamageBonus": 69
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 69
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 87
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 104
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 121
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 138
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 155
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 172
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 189
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 207
+        }
+      ]
     },
     "I_Booster_Crit_L001": {
       "name": "Artificer Frag Grenades",
@@ -10074,7 +12124,53 @@
       "baseStats": {
         "critChanceBonus": 5,
         "critDamageBonus": 210
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 210
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 223
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 235
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 247
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 259
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 271
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 284
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 296
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 308
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 320
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 332
+        }
+      ]
     },
     "I_Booster_Crit_M001": {
       "name": "Archeotech Frag Grenades",
@@ -10097,7 +12193,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "I_Booster_Crit_C002": {
       "name": "Disruption Fields",
@@ -10110,7 +12248,21 @@
       "baseStats": {
         "critChanceBonus": 1,
         "critDamageBonus": 5
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 5
+        },
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 9
+        },
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 12
+        }
+      ]
     },
     "I_Booster_Crit_U002": {
       "name": "Subjugating Disruption Fields",
@@ -10123,7 +12275,29 @@
       "baseStats": {
         "critChanceBonus": 2,
         "critDamageBonus": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 13
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 18
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 22
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 26
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 30
+        }
+      ]
     },
     "I_Booster_Crit_R002": {
       "name": "Royal Disruption Fields",
@@ -10136,7 +12310,37 @@
       "baseStats": {
         "critChanceBonus": 3,
         "critDamageBonus": 30
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 30
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 37
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 43
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 50
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 56
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 62
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 69
+        }
+      ]
     },
     "I_Booster_Crit_E002": {
       "name": "Hyperphasing Disruption Fields",
@@ -10149,7 +12353,45 @@
       "baseStats": {
         "critChanceBonus": 4,
         "critDamageBonus": 69
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 69
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 87
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 104
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 121
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 138
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 155
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 172
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 189
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 207
+        }
+      ]
     },
     "I_Booster_Crit_L002": {
       "name": "Transdimensional Disruption Fields",
@@ -10162,7 +12404,53 @@
       "baseStats": {
         "critChanceBonus": 5,
         "critDamageBonus": 210
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 210
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 223
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 235
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 247
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 259
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 271
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 284
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 296
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 308
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 320
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 332
+        }
+      ]
     },
     "I_Booster_Crit_M002": {
       "name": "Eternal Disruption Fields",
@@ -10175,7 +12463,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "I_Booster_Crit_C003": {
       "name": "Blemished Frag Grenades",
@@ -10192,7 +12522,21 @@
       "baseStats": {
         "critChanceBonus": 1,
         "critDamageBonus": 5
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 5
+        },
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 9
+        },
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 12
+        }
+      ]
     },
     "I_Booster_Crit_U003": {
       "name": "Twisted Frag Grenades",
@@ -10209,7 +12553,29 @@
       "baseStats": {
         "critChanceBonus": 2,
         "critDamageBonus": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 13
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 18
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 22
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 26
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 30
+        }
+      ]
     },
     "I_Booster_Crit_R003": {
       "name": "Heretical Frag Grenades",
@@ -10226,7 +12592,37 @@
       "baseStats": {
         "critChanceBonus": 3,
         "critDamageBonus": 30
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 30
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 37
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 43
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 50
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 56
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 62
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 69
+        }
+      ]
     },
     "I_Booster_Crit_E003": {
       "name": "Malefic Frag Grenades",
@@ -10243,7 +12639,45 @@
       "baseStats": {
         "critChanceBonus": 4,
         "critDamageBonus": 69
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 69
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 87
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 104
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 121
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 138
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 155
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 172
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 189
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 207
+        }
+      ]
     },
     "I_Booster_Crit_L003": {
       "name": "Warpforged Frag Grenades",
@@ -10260,7 +12694,53 @@
       "baseStats": {
         "critChanceBonus": 5,
         "critDamageBonus": 210
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 210
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 223
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 235
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 247
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 259
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 271
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 284
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 296
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 308
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 320
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 332
+        }
+      ]
     },
     "I_Booster_Crit_M003": {
       "name": "Daemonic Frag Grenades",
@@ -10277,7 +12757,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "I_Booster_Crit_C004": {
       "name": "Stikkbomz",
@@ -10290,7 +12812,21 @@
       "baseStats": {
         "critChanceBonus": 1,
         "critDamageBonus": 5
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 5
+        },
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 9
+        },
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 12
+        }
+      ]
     },
     "I_Booster_Crit_U004": {
       "name": "Killy Stikkbomz",
@@ -10303,7 +12839,29 @@
       "baseStats": {
         "critChanceBonus": 2,
         "critDamageBonus": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 13
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 18
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 22
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 26
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 30
+        }
+      ]
     },
     "I_Booster_Crit_R004": {
       "name": "Speshul Killy Stikkbomz",
@@ -10316,7 +12874,37 @@
       "baseStats": {
         "critChanceBonus": 3,
         "critDamageBonus": 30
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 30
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 37
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 43
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 50
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 56
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 62
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 69
+        }
+      ]
     },
     "I_Booster_Crit_E004": {
       "name": "Ded Killy Stikkbomz",
@@ -10329,7 +12917,45 @@
       "baseStats": {
         "critChanceBonus": 4,
         "critDamageBonus": 69
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 69
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 87
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 104
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 121
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 138
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 155
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 172
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 189
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 207
+        }
+      ]
     },
     "I_Booster_Crit_L004": {
       "name": "Ded Shiny Stikkbomz",
@@ -10342,7 +12968,53 @@
       "baseStats": {
         "critChanceBonus": 5,
         "critDamageBonus": 210
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 210
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 223
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 235
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 247
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 259
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 271
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 284
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 296
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 308
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 320
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 332
+        }
+      ]
     },
     "I_Booster_Crit_M004": {
       "name": "Supa-Killy Stikkbomz",
@@ -10355,7 +13027,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "I_Booster_Crit_C005": {
       "name": "Fusion Charges",
@@ -10369,7 +13083,21 @@
       "baseStats": {
         "critChanceBonus": 1,
         "critDamageBonus": 5
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 5
+        },
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 9
+        },
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 12
+        }
+      ]
     },
     "I_Booster_Crit_U005": {
       "name": "Improved Fusion Charges",
@@ -10383,7 +13111,29 @@
       "baseStats": {
         "critChanceBonus": 2,
         "critDamageBonus": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 13
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 18
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 22
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 26
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 30
+        }
+      ]
     },
     "I_Booster_Crit_R005": {
       "name": "Refined Fusion Charges",
@@ -10397,7 +13147,37 @@
       "baseStats": {
         "critChanceBonus": 3,
         "critDamageBonus": 30
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 30
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 37
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 43
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 50
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 56
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 62
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 69
+        }
+      ]
     },
     "I_Booster_Crit_E005": {
       "name": "Advanced Fusion Charges",
@@ -10411,7 +13191,45 @@
       "baseStats": {
         "critChanceBonus": 4,
         "critDamageBonus": 69
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 69
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 87
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 104
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 121
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 138
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 155
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 172
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 189
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 207
+        }
+      ]
     },
     "I_Booster_Crit_L005": {
       "name": "Optimal Fusion Charges",
@@ -10425,7 +13243,53 @@
       "baseStats": {
         "critChanceBonus": 5,
         "critDamageBonus": 210
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 210
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 223
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 235
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 247
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 259
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 271
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 284
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 296
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 308
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 320
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 332
+        }
+      ]
     },
     "I_Booster_Crit_M005": {
       "name": "Perfected Fusion Charges",
@@ -10439,7 +13303,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "I_Booster_Crit_C006": {
       "name": "Lash-Whip",
@@ -10453,7 +13359,21 @@
       "baseStats": {
         "critChanceBonus": 1,
         "critDamageBonus": 5
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 5
+        },
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 9
+        },
+        {
+          "critChanceBonus": 1,
+          "critDamageBonus": 12
+        }
+      ]
     },
     "I_Booster_Crit_U006": {
       "name": "Evolved Lash-Whip",
@@ -10467,7 +13387,29 @@
       "baseStats": {
         "critChanceBonus": 2,
         "critDamageBonus": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 13
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 18
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 22
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 26
+        },
+        {
+          "critChanceBonus": 2,
+          "critDamageBonus": 30
+        }
+      ]
     },
     "I_Booster_Crit_R006": {
       "name": "Augmented Lash-Whip",
@@ -10481,7 +13423,37 @@
       "baseStats": {
         "critChanceBonus": 3,
         "critDamageBonus": 30
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 30
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 37
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 43
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 50
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 56
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 62
+        },
+        {
+          "critChanceBonus": 3,
+          "critDamageBonus": 69
+        }
+      ]
     },
     "I_Booster_Crit_E006": {
       "name": "Symbiotic Lash-Whip",
@@ -10495,7 +13467,45 @@
       "baseStats": {
         "critChanceBonus": 4,
         "critDamageBonus": 69
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 69
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 87
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 104
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 121
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 138
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 155
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 172
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 189
+        },
+        {
+          "critChanceBonus": 4,
+          "critDamageBonus": 207
+        }
+      ]
     },
     "I_Booster_Crit_L006": {
       "name": "Monstrous Lash-Whip",
@@ -10509,7 +13519,53 @@
       "baseStats": {
         "critChanceBonus": 5,
         "critDamageBonus": 210
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 210
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 223
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 235
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 247
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 259
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 271
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 284
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 296
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 308
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 320
+        },
+        {
+          "critChanceBonus": 5,
+          "critDamageBonus": 332
+        }
+      ]
     },
     "I_Booster_Crit_M006": {
       "name": "Apex Lash-Whip",
@@ -10523,7 +13579,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "I_Defensive_C001": {
       "name": "_I_Defensive_C001",
@@ -10534,7 +13632,21 @@
       "baseStats": {
         "hp": 12,
         "armor": 3
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 12,
+          "armor": 3
+        },
+        {
+          "hp": 20,
+          "armor": 5
+        },
+        {
+          "hp": 28,
+          "armor": 7
+        }
+      ]
     },
     "I_Defensive_U001": {
       "name": "_I_Defensive_U001",
@@ -10545,7 +13657,29 @@
       "baseStats": {
         "hp": 29,
         "armor": 8
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 29,
+          "armor": 8
+        },
+        {
+          "hp": 39,
+          "armor": 11
+        },
+        {
+          "hp": 48,
+          "armor": 14
+        },
+        {
+          "hp": 58,
+          "armor": 16
+        },
+        {
+          "hp": 67,
+          "armor": 19
+        }
+      ]
     },
     "I_Defensive_R001": {
       "name": "_I_Defensive_R001",
@@ -10556,7 +13690,37 @@
       "baseStats": {
         "hp": 72,
         "armor": 20
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 72,
+          "armor": 20
+        },
+        {
+          "hp": 88,
+          "armor": 25
+        },
+        {
+          "hp": 103,
+          "armor": 29
+        },
+        {
+          "hp": 119,
+          "armor": 33
+        },
+        {
+          "hp": 134,
+          "armor": 38
+        },
+        {
+          "hp": 149,
+          "armor": 42
+        },
+        {
+          "hp": 165,
+          "armor": 46
+        }
+      ]
     },
     "I_Defensive_E001": {
       "name": "_I_Defensive_E001",
@@ -10567,7 +13731,45 @@
       "baseStats": {
         "hp": 187,
         "armor": 46
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 187,
+          "armor": 46
+        },
+        {
+          "hp": 234,
+          "armor": 58
+        },
+        {
+          "hp": 280,
+          "armor": 69
+        },
+        {
+          "hp": 327,
+          "armor": 81
+        },
+        {
+          "hp": 373,
+          "armor": 92
+        },
+        {
+          "hp": 420,
+          "armor": 104
+        },
+        {
+          "hp": 466,
+          "armor": 115
+        },
+        {
+          "hp": 512,
+          "armor": 126
+        },
+        {
+          "hp": 559,
+          "armor": 138
+        }
+      ]
     },
     "I_Defensive_L001": {
       "name": "_I_Defensive_L001",
@@ -10578,7 +13780,53 @@
       "baseStats": {
         "hp": 610,
         "armor": 153
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 610,
+          "armor": 153
+        },
+        {
+          "hp": 646,
+          "armor": 162
+        },
+        {
+          "hp": 681,
+          "armor": 171
+        },
+        {
+          "hp": 717,
+          "armor": 180
+        },
+        {
+          "hp": 752,
+          "armor": 189
+        },
+        {
+          "hp": 787,
+          "armor": 198
+        },
+        {
+          "hp": 823,
+          "armor": 207
+        },
+        {
+          "hp": 858,
+          "armor": 216
+        },
+        {
+          "hp": 894,
+          "armor": 224
+        },
+        {
+          "hp": 929,
+          "armor": 233
+        },
+        {
+          "hp": 964,
+          "armor": 242
+        }
+      ]
     },
     "I_Defensive_C002": {
       "name": "Standard-Issue MK X Pauldron",
@@ -10596,7 +13844,21 @@
       "baseStats": {
         "hp": 7,
         "armor": 4
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 7,
+          "armor": 4
+        },
+        {
+          "hp": 12,
+          "armor": 7
+        },
+        {
+          "hp": 16,
+          "armor": 10
+        }
+      ]
     },
     "I_Defensive_U002": {
       "name": "Battle-Hardened MK X Pauldron",
@@ -10614,7 +13876,29 @@
       "baseStats": {
         "hp": 17,
         "armor": 10
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 17,
+          "armor": 10
+        },
+        {
+          "hp": 23,
+          "armor": 14
+        },
+        {
+          "hp": 28,
+          "armor": 17
+        },
+        {
+          "hp": 34,
+          "armor": 20
+        },
+        {
+          "hp": 39,
+          "armor": 23
+        }
+      ]
     },
     "I_Defensive_R002": {
       "name": "Sanctified MK X Pauldron",
@@ -10632,7 +13916,37 @@
       "baseStats": {
         "hp": 46,
         "armor": 25
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 46,
+          "armor": 25
+        },
+        {
+          "hp": 56,
+          "armor": 31
+        },
+        {
+          "hp": 66,
+          "armor": 36
+        },
+        {
+          "hp": 76,
+          "armor": 41
+        },
+        {
+          "hp": 86,
+          "armor": 47
+        },
+        {
+          "hp": 96,
+          "armor": 52
+        },
+        {
+          "hp": 105,
+          "armor": 57
+        }
+      ]
     },
     "I_Defensive_E002": {
       "name": "Master-Crafted MK X Pauldron",
@@ -10650,7 +13964,45 @@
       "baseStats": {
         "hp": 111,
         "armor": 62
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 111,
+          "armor": 62
+        },
+        {
+          "hp": 139,
+          "armor": 78
+        },
+        {
+          "hp": 167,
+          "armor": 93
+        },
+        {
+          "hp": 194,
+          "armor": 109
+        },
+        {
+          "hp": 222,
+          "armor": 124
+        },
+        {
+          "hp": 249,
+          "armor": 139
+        },
+        {
+          "hp": 277,
+          "armor": 155
+        },
+        {
+          "hp": 304,
+          "armor": 170
+        },
+        {
+          "hp": 332,
+          "armor": 186
+        }
+      ]
     },
     "I_Defensive_L002": {
       "name": "Artificer MK X Pauldron",
@@ -10668,7 +14020,53 @@
       "baseStats": {
         "hp": 359,
         "armor": 201
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 359,
+          "armor": 201
+        },
+        {
+          "hp": 380,
+          "armor": 213
+        },
+        {
+          "hp": 401,
+          "armor": 225
+        },
+        {
+          "hp": 422,
+          "armor": 236
+        },
+        {
+          "hp": 443,
+          "armor": 248
+        },
+        {
+          "hp": 464,
+          "armor": 260
+        },
+        {
+          "hp": 484,
+          "armor": 271
+        },
+        {
+          "hp": 505,
+          "armor": 283
+        },
+        {
+          "hp": 526,
+          "armor": 295
+        },
+        {
+          "hp": 547,
+          "armor": 306
+        },
+        {
+          "hp": 568,
+          "armor": 318
+        }
+      ]
     },
     "I_Defensive_C003": {
       "name": "Plated Greaves",
@@ -10700,7 +14098,18 @@
       ],
       "baseStats": {
         "armor": 6
-      }
+      },
+      "statsByLevel": [
+        {
+          "armor": 6
+        },
+        {
+          "armor": 10
+        },
+        {
+          "armor": 14
+        }
+      ]
     },
     "I_Defensive_U003": {
       "name": "Good Plated Greaves",
@@ -10732,7 +14141,24 @@
       ],
       "baseStats": {
         "armor": 14
-      }
+      },
+      "statsByLevel": [
+        {
+          "armor": 14
+        },
+        {
+          "armor": 19
+        },
+        {
+          "armor": 24
+        },
+        {
+          "armor": 28
+        },
+        {
+          "armor": 33
+        }
+      ]
     },
     "I_Defensive_R003": {
       "name": "Fine Plated Greaves",
@@ -10764,7 +14190,30 @@
       ],
       "baseStats": {
         "armor": 34
-      }
+      },
+      "statsByLevel": [
+        {
+          "armor": 34
+        },
+        {
+          "armor": 42
+        },
+        {
+          "armor": 49
+        },
+        {
+          "armor": 56
+        },
+        {
+          "armor": 64
+        },
+        {
+          "armor": 71
+        },
+        {
+          "armor": 78
+        }
+      ]
     },
     "I_Defensive_E003": {
       "name": "Adorned Plated Greaves",
@@ -10796,7 +14245,36 @@
       ],
       "baseStats": {
         "armor": 87
-      }
+      },
+      "statsByLevel": [
+        {
+          "armor": 87
+        },
+        {
+          "armor": 109
+        },
+        {
+          "armor": 131
+        },
+        {
+          "armor": 152
+        },
+        {
+          "armor": 174
+        },
+        {
+          "armor": 195
+        },
+        {
+          "armor": 217
+        },
+        {
+          "armor": 239
+        },
+        {
+          "armor": 260
+        }
+      ]
     },
     "I_Defensive_L003": {
       "name": "Grand Plated Greaves",
@@ -10828,7 +14306,42 @@
       ],
       "baseStats": {
         "armor": 277
-      }
+      },
+      "statsByLevel": [
+        {
+          "armor": 277
+        },
+        {
+          "armor": 294
+        },
+        {
+          "armor": 310
+        },
+        {
+          "armor": 326
+        },
+        {
+          "armor": 342
+        },
+        {
+          "armor": 358
+        },
+        {
+          "armor": 374
+        },
+        {
+          "armor": 390
+        },
+        {
+          "armor": 406
+        },
+        {
+          "armor": 422
+        },
+        {
+          "armor": 438
+        }
+      ]
     },
     "I_Defensive_M003": {
       "name": "Ancient Plated Greaves",
@@ -10860,7 +14373,39 @@
       ],
       "baseStats": {
         "armor": 440
-      }
+      },
+      "statsByLevel": [
+        {
+          "armor": 440
+        },
+        {
+          "armor": 464
+        },
+        {
+          "armor": 488
+        },
+        {
+          "armor": 512
+        },
+        {
+          "armor": 536
+        },
+        {
+          "armor": 559
+        },
+        {
+          "armor": 583
+        },
+        {
+          "armor": 607
+        },
+        {
+          "armor": 631
+        },
+        {
+          "armor": 654
+        }
+      ]
     },
     "I_Defensive_C004": {
       "name": "Mantle",
@@ -10876,7 +14421,21 @@
       "baseStats": {
         "hp": 7,
         "armor": 4
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 7,
+          "armor": 4
+        },
+        {
+          "hp": 12,
+          "armor": 7
+        },
+        {
+          "hp": 16,
+          "armor": 10
+        }
+      ]
     },
     "I_Defensive_U004": {
       "name": "Good Mantle",
@@ -10892,7 +14451,29 @@
       "baseStats": {
         "hp": 17,
         "armor": 10
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 17,
+          "armor": 10
+        },
+        {
+          "hp": 23,
+          "armor": 14
+        },
+        {
+          "hp": 28,
+          "armor": 17
+        },
+        {
+          "hp": 34,
+          "armor": 20
+        },
+        {
+          "hp": 39,
+          "armor": 23
+        }
+      ]
     },
     "I_Defensive_R004": {
       "name": "Fine Mantle",
@@ -10908,7 +14489,37 @@
       "baseStats": {
         "hp": 46,
         "armor": 25
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 46,
+          "armor": 25
+        },
+        {
+          "hp": 56,
+          "armor": 31
+        },
+        {
+          "hp": 66,
+          "armor": 36
+        },
+        {
+          "hp": 76,
+          "armor": 41
+        },
+        {
+          "hp": 86,
+          "armor": 47
+        },
+        {
+          "hp": 96,
+          "armor": 52
+        },
+        {
+          "hp": 105,
+          "armor": 57
+        }
+      ]
     },
     "I_Defensive_E004": {
       "name": "Adorned Mantle",
@@ -10924,7 +14535,45 @@
       "baseStats": {
         "hp": 111,
         "armor": 62
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 111,
+          "armor": 62
+        },
+        {
+          "hp": 139,
+          "armor": 78
+        },
+        {
+          "hp": 167,
+          "armor": 93
+        },
+        {
+          "hp": 194,
+          "armor": 109
+        },
+        {
+          "hp": 222,
+          "armor": 124
+        },
+        {
+          "hp": 249,
+          "armor": 139
+        },
+        {
+          "hp": 277,
+          "armor": 155
+        },
+        {
+          "hp": 304,
+          "armor": 170
+        },
+        {
+          "hp": 332,
+          "armor": 186
+        }
+      ]
     },
     "I_Defensive_L004": {
       "name": "Grand Mantle",
@@ -10940,7 +14589,53 @@
       "baseStats": {
         "hp": 359,
         "armor": 201
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 359,
+          "armor": 201
+        },
+        {
+          "hp": 380,
+          "armor": 213
+        },
+        {
+          "hp": 401,
+          "armor": 225
+        },
+        {
+          "hp": 422,
+          "armor": 236
+        },
+        {
+          "hp": 443,
+          "armor": 248
+        },
+        {
+          "hp": 464,
+          "armor": 260
+        },
+        {
+          "hp": 484,
+          "armor": 271
+        },
+        {
+          "hp": 505,
+          "armor": 283
+        },
+        {
+          "hp": 526,
+          "armor": 295
+        },
+        {
+          "hp": 547,
+          "armor": 306
+        },
+        {
+          "hp": 568,
+          "armor": 318
+        }
+      ]
     },
     "I_Defensive_C005": {
       "name": "Nanocrystalline Plating",
@@ -10954,7 +14649,21 @@
       "baseStats": {
         "hp": 7,
         "armor": 4
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 7,
+          "armor": 4
+        },
+        {
+          "hp": 12,
+          "armor": 7
+        },
+        {
+          "hp": 16,
+          "armor": 10
+        }
+      ]
     },
     "I_Defensive_U005": {
       "name": "Improved Nanocrystalline Plating",
@@ -10968,7 +14677,29 @@
       "baseStats": {
         "hp": 17,
         "armor": 10
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 17,
+          "armor": 10
+        },
+        {
+          "hp": 23,
+          "armor": 14
+        },
+        {
+          "hp": 28,
+          "armor": 17
+        },
+        {
+          "hp": 34,
+          "armor": 20
+        },
+        {
+          "hp": 39,
+          "armor": 23
+        }
+      ]
     },
     "I_Defensive_R005": {
       "name": "Refined Nanocrystalline Plating",
@@ -10982,7 +14713,37 @@
       "baseStats": {
         "hp": 46,
         "armor": 25
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 46,
+          "armor": 25
+        },
+        {
+          "hp": 56,
+          "armor": 31
+        },
+        {
+          "hp": 66,
+          "armor": 36
+        },
+        {
+          "hp": 76,
+          "armor": 41
+        },
+        {
+          "hp": 86,
+          "armor": 47
+        },
+        {
+          "hp": 96,
+          "armor": 52
+        },
+        {
+          "hp": 105,
+          "armor": 57
+        }
+      ]
     },
     "I_Defensive_E005": {
       "name": "Advanced Nanocrystalline Plating",
@@ -10996,7 +14757,45 @@
       "baseStats": {
         "hp": 111,
         "armor": 62
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 111,
+          "armor": 62
+        },
+        {
+          "hp": 139,
+          "armor": 78
+        },
+        {
+          "hp": 167,
+          "armor": 93
+        },
+        {
+          "hp": 194,
+          "armor": 109
+        },
+        {
+          "hp": 222,
+          "armor": 124
+        },
+        {
+          "hp": 249,
+          "armor": 139
+        },
+        {
+          "hp": 277,
+          "armor": 155
+        },
+        {
+          "hp": 304,
+          "armor": 170
+        },
+        {
+          "hp": 332,
+          "armor": 186
+        }
+      ]
     },
     "I_Defensive_L005": {
       "name": "Optimal Nanocrystalline Plating",
@@ -11010,7 +14809,53 @@
       "baseStats": {
         "hp": 359,
         "armor": 201
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 359,
+          "armor": 201
+        },
+        {
+          "hp": 380,
+          "armor": 213
+        },
+        {
+          "hp": 401,
+          "armor": 225
+        },
+        {
+          "hp": 422,
+          "armor": 236
+        },
+        {
+          "hp": 443,
+          "armor": 248
+        },
+        {
+          "hp": 464,
+          "armor": 260
+        },
+        {
+          "hp": 484,
+          "armor": 271
+        },
+        {
+          "hp": 505,
+          "armor": 283
+        },
+        {
+          "hp": 526,
+          "armor": 295
+        },
+        {
+          "hp": 547,
+          "armor": 306
+        },
+        {
+          "hp": 568,
+          "armor": 318
+        }
+      ]
     },
     "I_Defensive_M005": {
       "name": "Perfected Nanocrystalline Plating",
@@ -11024,7 +14869,49 @@
       "baseStats": {
         "hp": 600,
         "armor": 320
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 600,
+          "armor": 320
+        },
+        {
+          "hp": 633,
+          "armor": 338
+        },
+        {
+          "hp": 665,
+          "armor": 355
+        },
+        {
+          "hp": 698,
+          "armor": 372
+        },
+        {
+          "hp": 730,
+          "armor": 390
+        },
+        {
+          "hp": 762,
+          "armor": 407
+        },
+        {
+          "hp": 795,
+          "armor": 424
+        },
+        {
+          "hp": 827,
+          "armor": 441
+        },
+        {
+          "hp": 860,
+          "armor": 459
+        },
+        {
+          "hp": 892,
+          "armor": 476
+        }
+      ]
     },
     "I_Defensive_C006": {
       "name": "Exoskeleton",
@@ -11038,7 +14925,21 @@
       "baseStats": {
         "hp": 7,
         "armor": 4
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 7,
+          "armor": 4
+        },
+        {
+          "hp": 12,
+          "armor": 7
+        },
+        {
+          "hp": 16,
+          "armor": 10
+        }
+      ]
     },
     "I_Defensive_U006": {
       "name": "Evolved Exoskeleton",
@@ -11052,7 +14953,29 @@
       "baseStats": {
         "hp": 17,
         "armor": 10
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 17,
+          "armor": 10
+        },
+        {
+          "hp": 23,
+          "armor": 14
+        },
+        {
+          "hp": 28,
+          "armor": 17
+        },
+        {
+          "hp": 34,
+          "armor": 20
+        },
+        {
+          "hp": 39,
+          "armor": 23
+        }
+      ]
     },
     "I_Defensive_R006": {
       "name": "Augmented Exoskeleton",
@@ -11066,7 +14989,37 @@
       "baseStats": {
         "hp": 46,
         "armor": 25
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 46,
+          "armor": 25
+        },
+        {
+          "hp": 56,
+          "armor": 31
+        },
+        {
+          "hp": 66,
+          "armor": 36
+        },
+        {
+          "hp": 76,
+          "armor": 41
+        },
+        {
+          "hp": 86,
+          "armor": 47
+        },
+        {
+          "hp": 96,
+          "armor": 52
+        },
+        {
+          "hp": 105,
+          "armor": 57
+        }
+      ]
     },
     "I_Defensive_E006": {
       "name": "Symbiotic Exoskeleton",
@@ -11080,7 +15033,45 @@
       "baseStats": {
         "hp": 111,
         "armor": 62
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 111,
+          "armor": 62
+        },
+        {
+          "hp": 139,
+          "armor": 78
+        },
+        {
+          "hp": 167,
+          "armor": 93
+        },
+        {
+          "hp": 194,
+          "armor": 109
+        },
+        {
+          "hp": 222,
+          "armor": 124
+        },
+        {
+          "hp": 249,
+          "armor": 139
+        },
+        {
+          "hp": 277,
+          "armor": 155
+        },
+        {
+          "hp": 304,
+          "armor": 170
+        },
+        {
+          "hp": 332,
+          "armor": 186
+        }
+      ]
     },
     "I_Defensive_L006": {
       "name": "Monstrous Exoskeleton",
@@ -11094,7 +15085,53 @@
       "baseStats": {
         "hp": 359,
         "armor": 201
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 359,
+          "armor": 201
+        },
+        {
+          "hp": 380,
+          "armor": 213
+        },
+        {
+          "hp": 401,
+          "armor": 225
+        },
+        {
+          "hp": 422,
+          "armor": 236
+        },
+        {
+          "hp": 443,
+          "armor": 248
+        },
+        {
+          "hp": 464,
+          "armor": 260
+        },
+        {
+          "hp": 484,
+          "armor": 271
+        },
+        {
+          "hp": 505,
+          "armor": 283
+        },
+        {
+          "hp": 526,
+          "armor": 295
+        },
+        {
+          "hp": 547,
+          "armor": 306
+        },
+        {
+          "hp": 568,
+          "armor": 318
+        }
+      ]
     },
     "I_Defensive_M006": {
       "name": "Apex Symbiotic Exoskeleton",
@@ -11108,7 +15145,49 @@
       "baseStats": {
         "hp": 600,
         "armor": 320
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 600,
+          "armor": 320
+        },
+        {
+          "hp": 633,
+          "armor": 338
+        },
+        {
+          "hp": 665,
+          "armor": 355
+        },
+        {
+          "hp": 698,
+          "armor": 372
+        },
+        {
+          "hp": 730,
+          "armor": 390
+        },
+        {
+          "hp": 762,
+          "armor": 407
+        },
+        {
+          "hp": 795,
+          "armor": 424
+        },
+        {
+          "hp": 827,
+          "armor": 441
+        },
+        {
+          "hp": 860,
+          "armor": 459
+        },
+        {
+          "hp": 892,
+          "armor": 476
+        }
+      ]
     },
     "I_Defensive_C007": {
       "name": "Blooded Spiked Pauldron",
@@ -11126,7 +15205,21 @@
       "baseStats": {
         "hp": 7,
         "armor": 4
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 7,
+          "armor": 4
+        },
+        {
+          "hp": 12,
+          "armor": 7
+        },
+        {
+          "hp": 16,
+          "armor": 10
+        }
+      ]
     },
     "I_Defensive_U007": {
       "name": "Savage Spiked Pauldron",
@@ -11144,7 +15237,29 @@
       "baseStats": {
         "hp": 17,
         "armor": 10
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 17,
+          "armor": 10
+        },
+        {
+          "hp": 23,
+          "armor": 14
+        },
+        {
+          "hp": 28,
+          "armor": 17
+        },
+        {
+          "hp": 34,
+          "armor": 20
+        },
+        {
+          "hp": 39,
+          "armor": 23
+        }
+      ]
     },
     "I_Defensive_R007": {
       "name": "Brutal Spiked Pauldron",
@@ -11162,7 +15277,37 @@
       "baseStats": {
         "hp": 46,
         "armor": 25
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 46,
+          "armor": 25
+        },
+        {
+          "hp": 56,
+          "armor": 31
+        },
+        {
+          "hp": 66,
+          "armor": 36
+        },
+        {
+          "hp": 76,
+          "armor": 41
+        },
+        {
+          "hp": 86,
+          "armor": 47
+        },
+        {
+          "hp": 96,
+          "armor": 52
+        },
+        {
+          "hp": 105,
+          "armor": 57
+        }
+      ]
     },
     "I_Defensive_E007": {
       "name": "Merciless Spiked Pauldron",
@@ -11180,7 +15325,45 @@
       "baseStats": {
         "hp": 111,
         "armor": 62
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 111,
+          "armor": 62
+        },
+        {
+          "hp": 139,
+          "armor": 78
+        },
+        {
+          "hp": 167,
+          "armor": 93
+        },
+        {
+          "hp": 194,
+          "armor": 109
+        },
+        {
+          "hp": 222,
+          "armor": 124
+        },
+        {
+          "hp": 249,
+          "armor": 139
+        },
+        {
+          "hp": 277,
+          "armor": 155
+        },
+        {
+          "hp": 304,
+          "armor": 170
+        },
+        {
+          "hp": 332,
+          "armor": 186
+        }
+      ]
     },
     "I_Defensive_L007": {
       "name": "Monstrous Spiked Pauldron",
@@ -11198,7 +15381,53 @@
       "baseStats": {
         "hp": 359,
         "armor": 201
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 359,
+          "armor": 201
+        },
+        {
+          "hp": 380,
+          "armor": 213
+        },
+        {
+          "hp": 401,
+          "armor": 225
+        },
+        {
+          "hp": 422,
+          "armor": 236
+        },
+        {
+          "hp": 443,
+          "armor": 248
+        },
+        {
+          "hp": 464,
+          "armor": 260
+        },
+        {
+          "hp": 484,
+          "armor": 271
+        },
+        {
+          "hp": 505,
+          "armor": 283
+        },
+        {
+          "hp": 526,
+          "armor": 295
+        },
+        {
+          "hp": 547,
+          "armor": 306
+        },
+        {
+          "hp": 568,
+          "armor": 318
+        }
+      ]
     },
     "I_Block_C002": {
       "name": "Refractor Field",
@@ -11214,7 +15443,21 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 23
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 23
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 38
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 53
+        }
+      ]
     },
     "I_Block_U002": {
       "name": "Battle-Hardened Refractor Field",
@@ -11230,7 +15473,29 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 55
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 55
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 73
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 91
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 109
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 126
+        }
+      ]
     },
     "I_Block_R002": {
       "name": "Sanctified Field",
@@ -11246,7 +15511,37 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 138
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 138
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 168
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 197
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 227
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 256
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 286
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 315
+        }
+      ]
     },
     "I_Block_E002": {
       "name": "Master-Crafted Refractor Field",
@@ -11262,7 +15557,45 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 352
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 352
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 440
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 527
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 615
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 702
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 789
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 877
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 964
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1052
+        }
+      ]
     },
     "I_Block_L002": {
       "name": "Artificer Refractor Field",
@@ -11278,7 +15611,53 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 1144
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 1144
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1211
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1277
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1344
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1410
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1476
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1543
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1609
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1675
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1742
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1808
+        }
+      ]
     },
     "I_Block_C003": {
       "name": "Force Field",
@@ -11312,7 +15691,21 @@
       "baseStats": {
         "blockChance": 30,
         "blockDamage": 15
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 30,
+          "blockDamage": 15
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 25
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 34
+        }
+      ]
     },
     "I_Block_U003": {
       "name": "Improved Force Field",
@@ -11346,7 +15739,29 @@
       "baseStats": {
         "blockChance": 30,
         "blockDamage": 37
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 30,
+          "blockDamage": 37
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 49
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 61
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 73
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 85
+        }
+      ]
     },
     "I_Block_R003": {
       "name": "Refined Force Field",
@@ -11380,7 +15795,37 @@
       "baseStats": {
         "blockChance": 30,
         "blockDamage": 93
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 30,
+          "blockDamage": 93
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 113
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 133
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 153
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 173
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 193
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 213
+        }
+      ]
     },
     "I_Block_E003": {
       "name": "Advanced Force Field",
@@ -11414,7 +15859,45 @@
       "baseStats": {
         "blockChance": 30,
         "blockDamage": 238
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 30,
+          "blockDamage": 238
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 298
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 357
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 416
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 475
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 534
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 593
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 652
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 711
+        }
+      ]
     },
     "I_Block_L003": {
       "name": "Optimal Force Field",
@@ -11448,7 +15931,53 @@
       "baseStats": {
         "blockChance": 30,
         "blockDamage": 762
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 30,
+          "blockDamage": 762
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 807
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 851
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 895
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 939
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 983
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1028
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1072
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1116
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1160
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1204
+        }
+      ]
     },
     "I_Block_M003": {
       "name": "Perfected Force Field",
@@ -11482,7 +16011,49 @@
       "baseStats": {
         "blockChance": 30,
         "blockDamage": 1230
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 30,
+          "blockDamage": 1230
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1297
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1363
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1430
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1496
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1562
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1629
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1695
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1762
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1828
+        }
+      ]
     },
     "I_Block_C004": {
       "name": "Iron Halo",
@@ -11500,7 +16071,21 @@
       "baseStats": {
         "blockChance": 35,
         "blockDamage": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 35,
+          "blockDamage": 13
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 22
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 30
+        }
+      ]
     },
     "I_Block_U004": {
       "name": "Battle-Hardened Iron Halo",
@@ -11518,7 +16103,29 @@
       "baseStats": {
         "blockChance": 35,
         "blockDamage": 32
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 35,
+          "blockDamage": 32
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 43
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 53
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 63
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 74
+        }
+      ]
     },
     "I_Block_R004": {
       "name": "Sanctified Iron Halo",
@@ -11536,7 +16143,37 @@
       "baseStats": {
         "blockChance": 35,
         "blockDamage": 80
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 35,
+          "blockDamage": 80
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 98
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 115
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 132
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 149
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 166
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 183
+        }
+      ]
     },
     "I_Block_E004": {
       "name": "Master-Crafted Iron Halo",
@@ -11554,7 +16191,45 @@
       "baseStats": {
         "blockChance": 35,
         "blockDamage": 202
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 35,
+          "blockDamage": 202
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 253
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 303
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 353
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 403
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 453
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 503
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 554
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 604
+        }
+      ]
     },
     "I_Block_L004": {
       "name": "Artificer Iron Halo",
@@ -11572,7 +16247,53 @@
       "baseStats": {
         "blockChance": 35,
         "blockDamage": 648
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 35,
+          "blockDamage": 648
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 686
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 724
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 761
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 799
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 836
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 874
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 912
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 949
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 987
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 1024
+        }
+      ]
     },
     "I_Block_C005": {
       "name": "_I_Block_C005",
@@ -11583,7 +16304,21 @@
       "baseStats": {
         "blockChance": 25,
         "blockDamage": 18
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 25,
+          "blockDamage": 18
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 30
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 41
+        }
+      ]
     },
     "I_Block_U005": {
       "name": "_I_Block_U005",
@@ -11594,7 +16329,29 @@
       "baseStats": {
         "blockChance": 25,
         "blockDamage": 44
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 25,
+          "blockDamage": 44
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 59
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 73
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 87
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 101
+        }
+      ]
     },
     "I_Block_R005": {
       "name": "Power Field",
@@ -11607,7 +16364,37 @@
       "baseStats": {
         "blockChance": 25,
         "blockDamage": 108
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 25,
+          "blockDamage": 108
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 132
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 155
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 178
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 201
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 224
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 247
+        }
+      ]
     },
     "I_Block_E005": {
       "name": "Master-Crafted Power Field",
@@ -11618,7 +16405,45 @@
       "baseStats": {
         "blockChance": 25,
         "blockDamage": 287
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 25,
+          "blockDamage": 287
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 359
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 430
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 501
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 573
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 644
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 715
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 786
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 858
+        }
+      ]
     },
     "I_Block_L005": {
       "name": "Artificer Power Field",
@@ -11629,7 +16454,53 @@
       "baseStats": {
         "blockChance": 25,
         "blockDamage": 954
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 25,
+          "blockDamage": 954
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 1010
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 1065
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 1121
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 1176
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 1231
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 1287
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 1342
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 1397
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 1453
+        },
+        {
+          "blockChance": 25,
+          "blockDamage": 1508
+        }
+      ]
     },
     "I_Block_C006": {
       "name": "Blemished Sigil of Corruption",
@@ -11646,7 +16517,21 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 23
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 23
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 38
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 53
+        }
+      ]
     },
     "I_Block_U006": {
       "name": "Twisted Sigil of Corruption",
@@ -11663,7 +16548,29 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 55
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 55
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 73
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 91
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 109
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 126
+        }
+      ]
     },
     "I_Block_R006": {
       "name": "Heretical Sigil of Corruption",
@@ -11680,7 +16587,37 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 138
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 138
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 168
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 197
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 227
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 256
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 286
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 315
+        }
+      ]
     },
     "I_Block_E006": {
       "name": "Malefic Sigil of Corruption",
@@ -11697,7 +16634,45 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 352
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 352
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 440
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 527
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 615
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 702
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 789
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 877
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 964
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1052
+        }
+      ]
     },
     "I_Block_L006": {
       "name": "Warpforged Sigil of Corruption",
@@ -11714,7 +16689,53 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 1144
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 1144
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1211
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1277
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1344
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1410
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1476
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1543
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1609
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1675
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1742
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1808
+        }
+      ]
     },
     "I_Block_C007": {
       "name": "Quantum Shield",
@@ -11725,7 +16746,21 @@
       "baseStats": {
         "blockChance": 35,
         "blockDamage": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 35,
+          "blockDamage": 13
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 22
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 30
+        }
+      ]
     },
     "I_Block_U007": {
       "name": "Royal Quantum Shield",
@@ -11736,7 +16771,29 @@
       "baseStats": {
         "blockChance": 35,
         "blockDamage": 32
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 35,
+          "blockDamage": 32
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 43
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 53
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 63
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 74
+        }
+      ]
     },
     "I_Block_R007": {
       "name": "Phasing Quantum Shield",
@@ -11747,7 +16804,37 @@
       "baseStats": {
         "blockChance": 35,
         "blockDamage": 80
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 35,
+          "blockDamage": 80
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 98
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 115
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 132
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 149
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 166
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 183
+        }
+      ]
     },
     "I_Block_E007": {
       "name": "Ancient Quantum Shield",
@@ -11758,7 +16845,45 @@
       "baseStats": {
         "blockChance": 35,
         "blockDamage": 202
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 35,
+          "blockDamage": 202
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 253
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 303
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 353
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 403
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 453
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 503
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 554
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 604
+        }
+      ]
     },
     "I_Block_L007": {
       "name": "Transdimensional Quantum Shield",
@@ -11769,7 +16894,53 @@
       "baseStats": {
         "blockChance": 35,
         "blockDamage": 648
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 35,
+          "blockDamage": 648
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 686
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 724
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 761
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 799
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 836
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 874
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 912
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 949
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 987
+        },
+        {
+          "blockChance": 35,
+          "blockDamage": 1024
+        }
+      ]
     },
     "I_Block_C008": {
       "name": "Illusion Imagafier",
@@ -11784,7 +16955,21 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 23
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 23
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 38
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 53
+        }
+      ]
     },
     "I_Block_U008": {
       "name": "Improved Illusion Imagafier",
@@ -11799,7 +16984,29 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 55
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 55
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 73
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 91
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 109
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 126
+        }
+      ]
     },
     "I_Block_R008": {
       "name": "Refined Illusion Imagafier",
@@ -11814,7 +17021,37 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 138
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 138
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 168
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 197
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 227
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 256
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 286
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 315
+        }
+      ]
     },
     "I_Block_E008": {
       "name": "Advanced Illusion Imagafier",
@@ -11829,7 +17066,45 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 352
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 352
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 440
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 527
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 615
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 702
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 789
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 877
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 964
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1052
+        }
+      ]
     },
     "I_Block_L008": {
       "name": "Optimal Illusion Imagafier",
@@ -11844,7 +17119,53 @@
       "baseStats": {
         "blockChance": 20,
         "blockDamage": 1144
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 20,
+          "blockDamage": 1144
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1211
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1277
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1344
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1410
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1476
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1543
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1609
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1675
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1742
+        },
+        {
+          "blockChance": 20,
+          "blockDamage": 1808
+        }
+      ]
     },
     "I_Booster_Block_C001": {
       "name": "_I_Booster_Block_C001",
@@ -11855,7 +17176,21 @@
       "baseStats": {
         "blockChanceBonus": 1,
         "blockDamageBonus": 5
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 1,
+          "blockDamageBonus": 5
+        },
+        {
+          "blockChanceBonus": 1,
+          "blockDamageBonus": 9
+        },
+        {
+          "blockChanceBonus": 1,
+          "blockDamageBonus": 12
+        }
+      ]
     },
     "I_Booster_Block_U001": {
       "name": "_I_Booster_Block_U001",
@@ -11866,7 +17201,29 @@
       "baseStats": {
         "blockChanceBonus": 2,
         "blockDamageBonus": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 2,
+          "blockDamageBonus": 13
+        },
+        {
+          "blockChanceBonus": 2,
+          "blockDamageBonus": 18
+        },
+        {
+          "blockChanceBonus": 2,
+          "blockDamageBonus": 22
+        },
+        {
+          "blockChanceBonus": 2,
+          "blockDamageBonus": 26
+        },
+        {
+          "blockChanceBonus": 2,
+          "blockDamageBonus": 30
+        }
+      ]
     },
     "I_Booster_Block_R001": {
       "name": "_I_Booster_Block_R001",
@@ -11877,7 +17234,37 @@
       "baseStats": {
         "blockChanceBonus": 3,
         "blockDamageBonus": 31
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 31
+        },
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 38
+        },
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 45
+        },
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 51
+        },
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 58
+        },
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 65
+        },
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 71
+        }
+      ]
     },
     "I_Booster_Block_E001": {
       "name": "_I_Booster_Block_E001",
@@ -11888,7 +17275,45 @@
       "baseStats": {
         "blockChanceBonus": 4,
         "blockDamageBonus": 69
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 69
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 87
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 104
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 121
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 138
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 155
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 172
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 189
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 207
+        }
+      ]
     },
     "I_Booster_Block_L001": {
       "name": "_I_Booster_Block_L001",
@@ -11899,7 +17324,53 @@
       "baseStats": {
         "blockChanceBonus": 5,
         "blockDamageBonus": 210
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 210
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 223
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 235
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 247
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 259
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 271
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 284
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 296
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 308
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 320
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 332
+        }
+      ]
     },
     "I_Booster_Block_C002": {
       "name": "Basic Forcefield Amplifier",
@@ -11933,7 +17404,21 @@
       "baseStats": {
         "blockChanceBonus": 1,
         "blockDamageBonus": 5
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 1,
+          "blockDamageBonus": 5
+        },
+        {
+          "blockChanceBonus": 1,
+          "blockDamageBonus": 9
+        },
+        {
+          "blockChanceBonus": 1,
+          "blockDamageBonus": 12
+        }
+      ]
     },
     "I_Booster_Block_U002": {
       "name": "Improved Force Field Amplifier",
@@ -11967,7 +17452,29 @@
       "baseStats": {
         "blockChanceBonus": 2,
         "blockDamageBonus": 13
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 2,
+          "blockDamageBonus": 13
+        },
+        {
+          "blockChanceBonus": 2,
+          "blockDamageBonus": 18
+        },
+        {
+          "blockChanceBonus": 2,
+          "blockDamageBonus": 22
+        },
+        {
+          "blockChanceBonus": 2,
+          "blockDamageBonus": 26
+        },
+        {
+          "blockChanceBonus": 2,
+          "blockDamageBonus": 30
+        }
+      ]
     },
     "I_Booster_Block_R002": {
       "name": "Refined Force Field Amplifier",
@@ -12001,7 +17508,37 @@
       "baseStats": {
         "blockChanceBonus": 3,
         "blockDamageBonus": 31
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 31
+        },
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 38
+        },
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 45
+        },
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 51
+        },
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 58
+        },
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 65
+        },
+        {
+          "blockChanceBonus": 3,
+          "blockDamageBonus": 71
+        }
+      ]
     },
     "I_Booster_Block_E002": {
       "name": "Advanced Force Field Amplifier",
@@ -12035,7 +17572,45 @@
       "baseStats": {
         "blockChanceBonus": 4,
         "blockDamageBonus": 69
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 69
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 87
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 104
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 121
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 138
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 155
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 172
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 189
+        },
+        {
+          "blockChanceBonus": 4,
+          "blockDamageBonus": 207
+        }
+      ]
     },
     "I_Booster_Block_L002": {
       "name": "Optimal Force Field Amplifier",
@@ -12069,7 +17644,53 @@
       "baseStats": {
         "blockChanceBonus": 5,
         "blockDamageBonus": 210
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 210
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 223
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 235
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 247
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 259
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 271
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 284
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 296
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 308
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 320
+        },
+        {
+          "blockChanceBonus": 5,
+          "blockDamageBonus": 332
+        }
+      ]
     },
     "I_Booster_Block_M002": {
       "name": "Perfected Force Field Amplifier",
@@ -12103,7 +17724,49 @@
       "baseStats": {
         "blockChanceBonus": 6,
         "blockDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 350
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 369
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 388
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 407
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 426
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 445
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 464
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 483
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 502
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 521
+        }
+      ]
     },
     "R_Crit_RelicBoltPistol": {
       "name": "Relic Bolt Pistol",
@@ -12122,7 +17785,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Crit_RelicPowerFist": {
       "name": "Relic Power Fist",
@@ -12137,7 +17842,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Crit_MawClawsOfThyrax": {
       "name": "Maw-Claws of Thyrax",
@@ -12153,7 +17900,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Crit_Vitarus": {
       "name": "Vitarus",
@@ -12166,7 +17955,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Crit_TheArdentBlade": {
       "name": "The Ardent Blade",
@@ -12179,7 +18010,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Crit_Dw02AdvancedBurstCannon": {
       "name": "DW-02 Advanced Burst Cannon",
@@ -12192,7 +18065,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Crit_TalonOfHorus": {
       "name": "Talon of Horus",
@@ -12205,7 +18120,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Crit_Maugetar": {
       "name": "Maugetar",
@@ -12218,7 +18175,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Crit_ParagonSpear": {
       "name": "Paragon Spear",
@@ -12231,7 +18230,49 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 1470
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 1470
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1550
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1629
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1709
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1788
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1867
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1947
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2026
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2105
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2185
+        }
+      ]
     },
     "R_Crit_DawnBlade": {
       "name": "Dawn Blade",
@@ -12244,7 +18285,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Crit_BladeOfTheAncestors": {
       "name": "Blade of the Ancestors",
@@ -12257,7 +18340,49 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 1470
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 1470
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1550
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1629
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1709
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1788
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1867
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1947
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2026
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2105
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2185
+        }
+      ]
     },
     "R_Crit_VolummsMasterArtifice": {
       "name": "Volumm's Master Artifice",
@@ -12270,7 +18395,49 @@
       "baseStats": {
         "critChance": 25,
         "critDamage": 1470
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 25,
+          "critDamage": 1470
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1550
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1629
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1709
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1788
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1867
+        },
+        {
+          "critChance": 25,
+          "critDamage": 1947
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2026
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2105
+        },
+        {
+          "critChance": 25,
+          "critDamage": 2185
+        }
+      ]
     },
     "R_Crit_MonsterSlayerOfCaliban": {
       "name": "Monster Slayer of Caliban",
@@ -12283,7 +18450,49 @@
       "baseStats": {
         "critChance": 40,
         "critDamage": 920
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 40,
+          "critDamage": 920
+        },
+        {
+          "critChance": 40,
+          "critDamage": 970
+        },
+        {
+          "critChance": 40,
+          "critDamage": 1020
+        },
+        {
+          "critChance": 40,
+          "critDamage": 1069
+        },
+        {
+          "critChance": 40,
+          "critDamage": 1119
+        },
+        {
+          "critChance": 40,
+          "critDamage": 1169
+        },
+        {
+          "critChance": 40,
+          "critDamage": 1218
+        },
+        {
+          "critChance": 40,
+          "critDamage": 1268
+        },
+        {
+          "critChance": 40,
+          "critDamage": 1318
+        },
+        {
+          "critChance": 40,
+          "critDamage": 1367
+        }
+      ]
     },
     "R_Crit_SabreOfSacrifice": {
       "name": "Sabre of Sacrifice",
@@ -12296,7 +18505,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Crit_Lakrimae": {
       "name": "Lakrimae",
@@ -12309,7 +18560,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Crit_HeadwoppasKillchoppa": {
       "name": "Headwoppa's Killchoppa",
@@ -12322,7 +18615,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Crit_Helspear": {
       "name": "Helspear",
@@ -12335,7 +18670,49 @@
       "baseStats": {
         "critChance": 35,
         "critDamage": 1050
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChance": 35,
+          "critDamage": 1050
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1107
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1164
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1221
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1277
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1334
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1391
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1447
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1504
+        },
+        {
+          "critChance": 35,
+          "critDamage": 1561
+        }
+      ]
     },
     "R_Booster_Crit_KardiocoreGalvanus": {
       "name": "Kardiocore Galvanus",
@@ -12350,7 +18727,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "R_Booster_Crit_AmuletOfTheVoidwyrm": {
       "name": "Amulet of the Voidwyrm",
@@ -12365,7 +18784,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "R_Booster_Crit_BookOfFate": {
       "name": "Book of Fate",
@@ -12380,7 +18841,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "R_Booster_Crit_TalismanOfRage": {
       "name": "Talisman of Rage",
@@ -12395,7 +18898,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "R_Booster_Crit_NetherRealmCasket": {
       "name": "Nether-Realm Casket",
@@ -12410,7 +18955,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "R_Booster_Crit_IntoxicatingElixir": {
       "name": "Intoxicating Elixir",
@@ -12426,7 +19013,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "R_Booster_Crit_OrbsOfDecay": {
       "name": "Orbs of Decay",
@@ -12441,7 +19070,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "R_Booster_Crit_WyrdmakersHelm": {
       "name": "Wyrdmaker's Helm",
@@ -12454,7 +19125,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "R_Booster_Crit_ChaliceOfBaal": {
       "name": "Chalice of Baal",
@@ -12467,7 +19180,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "R_Booster_Crit_PhasalSubjugator": {
       "name": "Phasal Subjugator",
@@ -12480,7 +19235,49 @@
       "baseStats": {
         "critChanceBonus": 6,
         "critDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 350
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 369
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 388
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 407
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 426
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 445
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 464
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 483
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 502
+        },
+        {
+          "critChanceBonus": 6,
+          "critDamageBonus": 521
+        }
+      ]
     },
     "R_Defensive_RelicOfLostCadia": {
       "name": "Relic of Lost Cadia",
@@ -12495,7 +19292,49 @@
       "baseStats": {
         "hp": 600,
         "armor": 320
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 600,
+          "armor": 320
+        },
+        {
+          "hp": 633,
+          "armor": 338
+        },
+        {
+          "hp": 665,
+          "armor": 355
+        },
+        {
+          "hp": 698,
+          "armor": 372
+        },
+        {
+          "hp": 730,
+          "armor": 390
+        },
+        {
+          "hp": 762,
+          "armor": 407
+        },
+        {
+          "hp": 795,
+          "armor": 424
+        },
+        {
+          "hp": 827,
+          "armor": 441
+        },
+        {
+          "hp": 860,
+          "armor": 459
+        },
+        {
+          "hp": 892,
+          "armor": 476
+        }
+      ]
     },
     "R_Defensive_SupaCyborkBody": {
       "name": "Supa-Cybork Body",
@@ -12510,7 +19349,49 @@
       "baseStats": {
         "hp": 600,
         "armor": 320
-      }
+      },
+      "statsByLevel": [
+        {
+          "hp": 600,
+          "armor": 320
+        },
+        {
+          "hp": 633,
+          "armor": 338
+        },
+        {
+          "hp": 665,
+          "armor": 355
+        },
+        {
+          "hp": 698,
+          "armor": 372
+        },
+        {
+          "hp": 730,
+          "armor": 390
+        },
+        {
+          "hp": 762,
+          "armor": 407
+        },
+        {
+          "hp": 795,
+          "armor": 424
+        },
+        {
+          "hp": 827,
+          "armor": 441
+        },
+        {
+          "hp": 860,
+          "armor": 459
+        },
+        {
+          "hp": 892,
+          "armor": 476
+        }
+      ]
     },
     "R_Block_DaemonfleshPlate": {
       "name": "Daemonflesh Plate",
@@ -12526,7 +19407,49 @@
       "baseStats": {
         "blockChance": 30,
         "blockDamage": 1230
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChance": 30,
+          "blockDamage": 1230
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1297
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1363
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1430
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1496
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1562
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1629
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1695
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1762
+        },
+        {
+          "blockChance": 30,
+          "blockDamage": 1828
+        }
+      ]
     },
     "R_Booster_Block_PhoenixGem": {
       "name": "Phoenix Gem",
@@ -12539,7 +19462,49 @@
       "baseStats": {
         "blockChanceBonus": 6,
         "blockDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 350
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 369
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 388
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 407
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 426
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 445
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 464
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 483
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 502
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 521
+        }
+      ]
     },
     "R_Booster_Block_NornCrown": {
       "name": "Norn Crown",
@@ -12552,7 +19517,49 @@
       "baseStats": {
         "blockChanceBonus": 6,
         "blockDamageBonus": 350
-      }
+      },
+      "statsByLevel": [
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 350
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 369
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 388
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 407
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 426
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 445
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 464
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 483
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 502
+        },
+        {
+          "blockChanceBonus": 6,
+          "blockDamageBonus": 521
+        }
+      ]
     }
   }
 }

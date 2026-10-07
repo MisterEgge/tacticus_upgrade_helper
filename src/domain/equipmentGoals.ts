@@ -1,5 +1,6 @@
 import {restoreWarTeamIndexes,type WarTeamCandidate} from "./warTeams";
 import type {EquipmentTargetRarity} from "./equipmentTier";
+import type {EquipmentDefinition} from "./equipmentCompatibility";
 export type EquipmentWarTeam=WarTeamCandidate & {name:string};
 export type EquipmentScope="teams"|"raid"|"war"|"campaign"|"all";
 export function selectedWarGearGoals(defense:EquipmentWarTeam[],offense:EquipmentWarTeam[],saved:unknown):Map<string,"silver"|"gold">
@@ -22,7 +23,7 @@ export function equipmentTeamGoal(name:string,rarity:string,raid:Set<string>,war
  const capped=order[Math.min(order.indexOf(desired),Math.max(0,order.indexOf(rarity)))]!;
  return {rarity:capped,level:raidSelected?1:capped==="Epic"?9:capped==="Rare"?7:capped==="Uncommon"?5:3,priority:raidSelected?100:warTier==="gold"?80:60,label:raidSelected?"Main raid team":`War · ${warTier==="gold"?"Gold":"Silver"} target`};
 }
-export type DefensiveEquipment={type:string;rarity:string;allowedUnits?:string[];allowedFactions?:string[];baseStats?:{hp?:number;armor?:number}};
+export type DefensiveEquipment=EquipmentDefinition;
 export function preferredDefensiveItemId(unit:{id:string;faction:string},traits:string[],equipmentTypes:string[],rarity:string,currentId:string,equipment:Record<string,DefensiveEquipment>):string|null
 {
  if(!equipmentTypes.includes("I_Defensive")||equipment[currentId]?.type!=="I_Defensive"||traits.includes("MkXGravis"))return null;

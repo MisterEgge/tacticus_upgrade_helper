@@ -10,6 +10,7 @@ test("analysis exports official orb stacks and preserves Legendary star / Mythic
  const root=process.cwd(),cwd=await mkdtemp(path.join(tmpdir(),"tacticus-orb-ingestion-"));
  try{
   await symlink(path.join(root,"config"),path.join(cwd,"config"));await mkdir(path.join(cwd,"data"));
+  await symlink(path.join(root,"data/game"),path.join(cwd,"data/game"));
   const units=[15,16].map(index=>({id:`synthetic-${index}`,name:`Synthetic ${index}`,grandAlliance:"Xenos",progressionIndex:index,rank:0,xpLevel:1,shards:0,mythicShards:0,abilities:[],items:[]}));
   const player={metaData:{configHash:"synthetic",lastUpdatedOn:0,scopes:[]},player:{details:{name:"SYNTHETIC",powerLevel:1},units,inventory:{items:[],orbs:{Xenos:[{rarity:"Legendary",amount:7},{rarity:"Mythic",amount:2}]}}}};
   await writeFile(path.join(cwd,"data/player.json"),JSON.stringify(player));

@@ -15,3 +15,10 @@ export async function getShopCatalog(): Promise<ShopCatalog | null>
     catch { return null; }
 
 }
+
+export async function getEquipmentCharacters() {
+ try {
+  const data=JSON.parse(await readFile("data/game/equipment-characters.json","utf8")) as {sourceCommit:string;characters:import("../../src/domain/equipmentCompatibility").EquipmentCharacter[]};
+  return data;
+ } catch {return null;}
+}
