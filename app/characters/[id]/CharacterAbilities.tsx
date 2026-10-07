@@ -1,3 +1,4 @@
+import ResourceName,{ResourceText} from "../../components/ResourceName";
 import Link from "next/link";
 import CollapsibleSection from "../../components/CollapsibleSection";
 import ReferenceDetails from "../../components/ReferenceDetails";
@@ -8,12 +9,12 @@ import {badgeShortfalls,type AbilityBadgeInventory} from "../../../src/domain/ba
 import type {RosterUnit} from "../../lib/report";
 import type {AbilityEvidence,CharacterAbilityGuidance} from "../../lib/catalog";
 
-function NextAction({plan}:{plan:AbilityReadiness}) {
+function NextAction({plan,alliance}:{plan:AbilityReadiness;alliance:string}) {
  if(plan.state==="TARGET MET")return <strong>Practical target met · no further upgrade required</strong>;
  if(plan.state==="UNKNOWN"||plan.state==="GATED")return <strong>{plan.gates.join(" · ")}</strong>;
- if(plan.state==="BADGES NEEDED")return <><strong>Collect badges for level {plan.nextLevel}</strong>{plan.badges.filter(badge=>(badge.shortfall??0)>0).map(badge=><small key={badge.rarity}>{badge.shortfall} {badge.rarity} short · {badge.owned} owned / {badge.needed} needed</small>)}</>;
+ if(plan.state==="BADGES NEEDED")return <><strong>Collect badges for level {plan.nextLevel}</strong>{plan.badges.filter(badge=>(badge.shortfall??0)>0).map(badge=><small key={badge.rarity}><ResourceName id={`badge:${alliance==="Imperium"?"Imperial":alliance}:${badge.rarity}`} name={`${badge.shortfall} ${badge.rarity} short`}/> · {badge.owned} owned / {badge.needed} needed</small>)}</>;
  if(plan.state==="CHECK BADGES")return <><strong>XP and rarity allow level {plan.nextLevel} · sync badges</strong><small>Badge balance unknown · check coins</small></>;
- return <><strong className="ready">Next level {plan.nextLevel} eligible · badges covered</strong><small>Check coins before upgrading</small></>;
+ return <><strong className="ready">Next level {plan.nextLevel} eligible · badges covered</strong><small><ResourceText text="Check coins before upgrading"/></small></>;
 }
 
 export default function CharacterAbilities({unit,guide,guidance,evidence,badgeInventory}:{unit:RosterUnit;guide:AbilityGuideRow|undefined;guidance:CharacterAbilityGuidance|undefined;evidence:AbilityEvidence[];badgeInventory:AbilityBadgeInventory|null|undefined}) {
@@ -29,21 +30,21 @@ export default function CharacterAbilities({unit,guide,guidance,evidence,badgeIn
  const badges=badgeShortfalls(validAlliance?badgeInventory:null,unit.grandAlliance==="Imperium"?"Imperial":unit.grandAlliance,planned,eligible);
  const knownCosts=rows.every(row=>row.plan.state!=="UNKNOWN");
  const basis=guide?.reviewed?`Community guidance · ${guide.targetConfidence} confidence`:guide?.recommended?"Planning recommendation · community validation pending":"Provisional baseline · character research pending";
- const summary=rows.map(row=>`${row.label}: ${row.current??"?"} → ${row.target}${row.plan.state==="TARGET MET"?" · met":row.plan.state==="GATED"?" · progression needed":row.plan.state==="BADGES NEEDED"?" · badges needed":row.plan.state==="UNKNOWN"?" · review":row.plan.state==="CHECK BADGES"?" · sync badges":" · next level eligible"}`).join(" | ");
- return <CollapsibleSection title="Ability upgrades" summary={summary} className="panel detailPanel">
+ const remaining=rows.filter(row=>row.plan.state!=="TARGET MET").length;
+ const summary=remaining?`${remaining} practical target${remaining===1?"":"s"} need work` : "Both practical targets met";
+ return <div id="abilities"><CollapsibleSection title="Ability upgrades" summary={summary} className="panel detailPanel compactCharacterTable">
   <p className="sub">{basis}</p>
-  <div className="tableWrap"><table><thead><tr><th>Ability</th><th>Practical target</th><th>Next level cost</th><th>Next action</th></tr></thead><tbody>{rows.map(row=><tr key={row.label}>
+  <div className="tableWrap"><table aria-label="Character ability upgrades"><thead><tr><th>Ability</th><th>First stop</th><th>Next action / cost</th></tr></thead><tbody>{rows.map(row=><tr key={row.label}>
    <td><strong>{row.label} · level {row.current??"unknown"}</strong><small>{row.name}</small></td>
-   <td><strong>{row.practical}</strong>{row.high!=="Not researched"&&row.high!==String(row.target)?<small>High investment option: {row.high}</small>:null}{row.plan.reachable!==null&&row.plan.state!=="TARGET MET"&&row.plan.reachable>=(row.current??0)?<small>XP / rarity allow up to {row.plan.reachable}</small>:null}</td>
-   <td>{row.plan.state==="TARGET MET"?"—":Object.entries(row.plan.nextCost).length?Object.entries(row.plan.nextCost).map(([rarity,amount])=><small key={rarity}>{amount} {unit.grandAlliance} {rarity} badge{amount===1?"":"s"}</small>):"Unknown"}</td>
-   <td><NextAction plan={row.plan}/><ReferenceDetails label={`${row.label} target rationale`}><p>{row.note}</p>{row.modes.length?<small>{row.modes.join(" · ")}</small>:null}</ReferenceDetails></td>
+   <td><strong>{row.target}</strong><ReferenceDetails label={`${row.label} target details`}><p>Practical range: {row.practical}</p>{row.high!=="Not researched"&&row.high!==String(row.target)?<p>High investment option: {row.high}</p>:null}<p>{row.note}</p>{row.modes.length?<small>{row.modes.join(" · ")}</small>:null}</ReferenceDetails></td>
+   <td><NextAction plan={row.plan} alliance={unit.grandAlliance}/>{row.plan.state!=="TARGET MET"&&Object.entries(row.plan.nextCost).length?Object.entries(row.plan.nextCost).map(([rarity,amount])=><small key={rarity}>Level {row.plan.nextLevel}: <ResourceName id={`badge:${unit.grandAlliance==="Imperium"?"Imperial":unit.grandAlliance}:${rarity}`} name={`${amount} ${unit.grandAlliance} ${rarity} badge${amount===1?"":"s"}`}/></small>):null}</td>
   </tr>)}</tbody></table></div>
-  <p className="sub">Next-level checks share the same badge stock. Choose a step and check coins before spending.</p>
+  <small className="characterBudgetNote">Both abilities use shared badge stock; choose one step before spending.</small>
   <CollapsibleSection title="Badges to practical targets" summary={knownCosts?Object.entries(planned).map(([rarity,amount])=>`${amount} ${rarity}`).join(" · ")||"Targets met":"Incomplete ability data · costs need review"} defaultOpen={false}>
-   {badges.length?<div className="tableWrap"><table><thead><tr><th>{unit.grandAlliance} badge</th><th>Owned</th><th>Needed for both targets</th><th>Shortfall</th></tr></thead><tbody>{badges.map(badge=><tr key={badge.rarity}><td>{badge.rarity}</td><td>{badge.owned??"Unknown"}</td><td>{badge.needed}</td><td>{badge.shortfall??"Unknown"}</td></tr>)}</tbody></table></div>:<p className="sub">{knownCosts?"No remaining badge demand at the practical stops.":"Sync ability data before calculating complete costs."}</p>}
+   {badges.length?<div className="tableWrap"><table><thead><tr><th>{unit.grandAlliance} badge</th><th>Owned</th><th>Needed for both targets</th><th>Shortfall</th></tr></thead><tbody>{badges.map(badge=><tr key={badge.rarity}><td><ResourceName id={`badge:${unit.grandAlliance==="Imperium"?"Imperial":unit.grandAlliance}:${badge.rarity}`} name={badge.rarity}/></td><td>{badge.owned??"Unknown"}</td><td>{badge.needed}</td><td>{badge.shortfall??"Unknown"}</td></tr>)}</tbody></table></div>:<p className="sub">{knownCosts?"No remaining badge demand at the practical stops.":"Sync ability data before calculating complete costs."}</p>}
    {!knownCosts&&badges.length?<p className="sub">Partial costs only; unresolved ability demand is excluded.</p>:null}
    <p className="sub">Combined demand counts both practical targets once. Badges are not reserved here.</p>
   </CollapsibleSection>
   <ReferenceDetails label="Target evidence and limits"><p>Targets use the same practical first stop as Badge Budget. Higher investment is an optional future choice. Progression eligibility is separate from affordability; character rank does not gate ability levels.</p>{evidence.length&&guide?.reviewed?<ul>{evidence.map((source,index)=><li key={`${source.url}:${index}`}><a className="sourceLink" href={source.url} target="_blank" rel="noreferrer">Community evidence{source.date?` · ${source.date}`:""}</a><small>{source.supports?.join(" · ")}</small></li>)}</ul>:<p>Character-specific source records are still pending.</p>}<Link className="sourceLink" href="/review-status">Review target coverage</Link> · <Link className="sourceLink" href="/abilities">Open shared badge budget</Link></ReferenceDetails>
- </CollapsibleSection>;
+ </CollapsibleSection></div>;
 }

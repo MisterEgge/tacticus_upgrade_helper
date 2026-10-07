@@ -22,6 +22,10 @@
 - [x] Prefer compatible higher-chance block items, checking actual refinement and booster stats before showing equip-now; retain lower-chance block items as situational alternatives.
 
 ## Next enhancements
+- [x] Make character screens concise: current rank/rarity, exact next action, practical ability stops and shared equipment choices; keep references and extra investment behind disclosures.
+- [x] Default orb totals to rarity ascensions toward Legendary, retaining optional Legendary/Mythic star upgrades through a toggle.
+- [x] Use verified, pinned in-game artwork beside resource names across equipment, materials, currencies, orbs, badges and shop offers; explicitly label unavailable exact equipment artwork.
+- [x] Add top-three Onslaught honor choices per alliance using current reworked rewards, shard-ready orb shortages, rarity goals and active account plans. Keep sectors manual/unknown and Mythic optional.
 - [x] Show a concise shard-ready orb queue with per-character costs, shared owned/needed/short totals for Imperial, Xenos and Chaos by rarity, and non-premium shop routes. Recalculate on sync and account for intervening shard-only promotions.
 - [x] Include the selected Machine of War in Raid teams, fill missing meta character slots with owned substitutes, apply boss faction restrictions, and route upgrades through the actual five. Remove Trajann from account Ad-Mech choices and prefer mechanical substitutes such as Boss and Anuphet.
 - [ ] Research machine-specific ability targets beyond the documented Biovore roadmap; keep unknown targets separate from character rank/badge costs.

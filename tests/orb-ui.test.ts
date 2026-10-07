@@ -43,13 +43,19 @@ test("orb scopes restore War tiers, optional Mythic and full-goal budgets; sourc
  assert.match(view.container.textContent!,/20 Mythic shards/);
  assert.equal(rows().length,3);
 
- const readyCandidates=[{...make("Ready Imperial",8),alliance:"Imperial",shards:50},{...make("Other Imperial",8),alliance:"Imperial",shards:50},{...make("Ready Xenos",5),shards:20},{...make("Promote Chaos",7),alliance:"Chaos",shards:90},{...make("Blocked",8,true),alliance:"Imperial",shards:49}];
+ const extraStars={...make("Legendary extra stars",13),alliance:"Imperial",shards:250};
+ const readyCandidates=[extraStars,{...make("Ready Imperial",8),alliance:"Imperial",shards:50},{...make("Other Imperial",8),alliance:"Imperial",shards:50},{...make("Ready Xenos",5),shards:20},{...make("Promote Chaos",7),alliance:"Chaos",shards:90},{...make("Blocked",8,true),alliance:"Imperial",shards:49}];
  const inventory={Imperial:[{rarity:"Epic",amount:12}],Xenos:[{rarity:"Rare",amount:10}],Chaos:[{rarity:"Epic",amount:0}]};
  view.rerender(createElement(OrbPlanner,{key:"ready-fixture",candidates:readyCandidates,inventory,defenseTeams:[],offenseTeams:[],shops:shops as ShopCatalog}));
  const readySection=within(view.getByRole("region",{name:"Shard-ready orb shopping list"}));
  const totals=within(readySection.getByRole("table",{name:"Shard-ready orb totals"}));
  assert.deepEqual(within(totals.getAllByRole("row")[1]!).getAllByRole("cell").slice(0,4).map(cell=>cell.textContent),["Imperial · Epic","12","20","8"]);
  assert.ok(readySection.getByText("IMPERIAL"));assert.ok(readySection.getByText("XENOS"));assert.ok(readySection.getByText("CHAOS"));
+ fireEvent.click(view.getByLabelText("Include star upgrades within a rarity"));
+ assert.ok(readySection.getByText("Legendary extra stars"));
+ assert.match(readySection.getByRole("table",{name:"Shard-ready orb totals"}).textContent!,/Imperial · Legendary.*15/s);
+ fireEvent.click(view.getByLabelText("Include star upgrades within a rarity"));
+ assert.equal(readySection.queryByText("Legendary extra stars"),null);
  const queue=within(readySection.getByRole("table",{name:"Shard-ready character upgrades"}));
  assert.equal(queue.getAllByRole("row").length,5);
  assert.equal(queue.queryByText("Blocked"),null);

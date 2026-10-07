@@ -1,4 +1,5 @@
 "use client";
+import ResourceName from "../components/ResourceName";
 import Link from "next/link";
 import DataTable, { type Column, type Filter } from "../components/DataTable";
 import MaterialRecipients from "../components/MaterialRecipients";
@@ -12,7 +13,7 @@ export default function GapTable({ rows }: { rows: EliteGap[] }) {
     const columns: Column<EliteGap>[] = [
         { key: "material", label: "Material / recipients", sort: row => row.name,
             search: row => `${row.name} ${row.id} ${row.rarity} ${row.characters.map(character => character.name).join(" ")}`,
-            render: row => <><Link className="sourceLink" href={`/sources?item=${encodeURIComponent(row.id)}`}><strong>{row.name}</strong></Link><small>{row.rarity}</small>
+            render: row => <><Link className="sourceLink" href={`/sources?item=${encodeURIComponent(row.id)}`}><strong><ResourceName id={row.id} name={row.name}/></strong></Link><small>{row.rarity}</small>
                 {row.characters.length > 0 && <MaterialRecipients key={row.id} recipients={row.characters}/>}</> },
         { key: "elite", label: "Elite gap", sort: row => labels[row.coverage], search: row => row.eliteNodes.map(node => `${node.id} ${campaignKey(node.campaign, node.campaignType)}`).join(" "),
             render: row => <><span className={`status ${row.coverage === "locked" ? "need" : "unknown"}`}>{labels[row.coverage]}</span>

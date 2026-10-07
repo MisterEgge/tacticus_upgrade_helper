@@ -1,0 +1,668 @@
+{
+  "reviewedOn": "2026-10-07",
+  "rulesVersion": "March 2026 rework; April 2026 guaranteed Mythic-shard update",
+  "sources": [
+    {
+      "name": "Current mode and honor reward rules",
+      "url": "https://tacticus.wiki.gg/wiki/Onslaught"
+    },
+    {
+      "name": "Pinned shard reward tables",
+      "url": "https://github.com/svehera/tacticusplanner/blob/5c5d05193038a0aadb1fd929cce877ef754f7868/src/fsd/1-pages/input-onslaught/onslaught-rewards.ts"
+    },
+    {
+      "name": "Developer release history",
+      "url": "https://apps.apple.com/us/app/warhammer-40-000-tacticus/id1599937506"
+    },
+    {
+      "name": "Legendary event shard restriction",
+      "url": "https://tacticus.help.snowprintstudios.com/hc/en-us/articles/34244149530653-Why-can-t-I-promote-my-Legendary-character-or-see-their-shards"
+    }
+  ],
+  "shards": {
+    "stone": {
+      "1": {
+        "common": [
+          2,
+          3
+        ],
+        "uncommon": [
+          2,
+          3
+        ],
+        "rare": [
+          2,
+          3
+        ],
+        "epic": [
+          2,
+          3
+        ],
+        "legendary": [
+          2,
+          3
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      },
+      "2": {
+        "common": [
+          2,
+          4
+        ],
+        "uncommon": [
+          2,
+          4
+        ],
+        "rare": [
+          2,
+          4
+        ],
+        "epic": [
+          2,
+          4
+        ],
+        "legendary": [
+          2,
+          4
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      },
+      "3": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          3,
+          4
+        ],
+        "rare": [
+          3,
+          4
+        ],
+        "epic": [
+          3,
+          4
+        ],
+        "legendary": [
+          3,
+          4
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      }
+    },
+    "iron": {
+      "1": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          3,
+          4
+        ],
+        "rare": [
+          3,
+          4
+        ],
+        "epic": [
+          3,
+          4
+        ],
+        "legendary": [
+          3,
+          4
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      },
+      "2": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          3,
+          5
+        ],
+        "rare": [
+          3,
+          5
+        ],
+        "epic": [
+          3,
+          5
+        ],
+        "legendary": [
+          3,
+          5
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      },
+      "3": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          4,
+          5
+        ],
+        "epic": [
+          4,
+          5
+        ],
+        "legendary": [
+          4,
+          5
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      }
+    },
+    "bronze": {
+      "1": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          5,
+          6
+        ],
+        "epic": [
+          5,
+          6
+        ],
+        "legendary": [
+          5,
+          6
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      },
+      "2": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          5,
+          7
+        ],
+        "epic": [
+          5,
+          7
+        ],
+        "legendary": [
+          5,
+          7
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      },
+      "3": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          6,
+          7
+        ],
+        "legendary": [
+          6,
+          7
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      }
+    },
+    "silver": {
+      "1": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          8,
+          9
+        ],
+        "legendary": [
+          8,
+          9
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      },
+      "2": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          9,
+          10
+        ],
+        "legendary": [
+          9,
+          10
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      },
+      "3": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          10,
+          11
+        ],
+        "legendary": [
+          10,
+          11
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      }
+    },
+    "gold": {
+      "1": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          10,
+          11
+        ],
+        "legendary": [
+          14,
+          16
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      },
+      "2": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          10,
+          11
+        ],
+        "legendary": [
+          15,
+          17
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      },
+      "3": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          10,
+          11
+        ],
+        "legendary": [
+          16,
+          18
+        ],
+        "legendaryBlue": [
+          1,
+          1
+        ],
+        "mythicShards": [
+          1,
+          1
+        ]
+      }
+    },
+    "diamond": {
+      "1": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          10,
+          11
+        ],
+        "legendary": [
+          16,
+          20
+        ],
+        "legendaryBlue": [
+          1,
+          2
+        ],
+        "mythicShards": [
+          1,
+          2
+        ]
+      },
+      "2": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          10,
+          11
+        ],
+        "legendary": [
+          17,
+          21
+        ],
+        "legendaryBlue": [
+          1,
+          2
+        ],
+        "mythicShards": [
+          1,
+          2
+        ]
+      },
+      "3": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          10,
+          11
+        ],
+        "legendary": [
+          18,
+          22
+        ],
+        "legendaryBlue": [
+          1,
+          2
+        ],
+        "mythicShards": [
+          1,
+          2
+        ]
+      }
+    },
+    "adamantine": {
+      "1": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          10,
+          11
+        ],
+        "legendary": [
+          18,
+          22
+        ],
+        "legendaryBlue": [
+          1,
+          2
+        ],
+        "mythicShards": [
+          1,
+          2
+        ]
+      },
+      "2": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          10,
+          11
+        ],
+        "legendary": [
+          18,
+          22
+        ],
+        "legendaryBlue": [
+          1,
+          2
+        ],
+        "mythicShards": [
+          1,
+          3
+        ]
+      },
+      "3": {
+        "common": [
+          3,
+          4
+        ],
+        "uncommon": [
+          4,
+          5
+        ],
+        "rare": [
+          6,
+          7
+        ],
+        "epic": [
+          10,
+          11
+        ],
+        "legendary": [
+          18,
+          22
+        ],
+        "legendaryBlue": [
+          1,
+          2
+        ],
+        "mythicShards": [
+          2,
+          3
+        ]
+      }
+    }
+  }
+}

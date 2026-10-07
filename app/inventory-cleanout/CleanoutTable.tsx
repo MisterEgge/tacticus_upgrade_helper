@@ -1,4 +1,5 @@
 "use client";
+import ResourceName from "../components/ResourceName";
 import {useState} from "react";
 import Link from "next/link";
 import CollapsibleSection from "../components/CollapsibleSection";
@@ -19,7 +20,7 @@ export default function CleanoutTable({rows,reserveLocked}:{rows:CleanoutRow[];r
    const entries=matches.filter(row=>group(row)===section.id);
    return entries.length?<CollapsibleSection key={section.id} title={section.title} summary={`${entries.length} item types`} defaultOpen={section.open}>
     <div className="tableWrap"><table><thead><tr><th>Equipment</th><th>Inventory</th><th>Keep</th><th>Salvage candidates</th><th>Decision</th></tr></thead><tbody>{entries.map(row=><tr key={row.id}>
-     <td><Link className="sourceLink" href={`/sources?item=${encodeURIComponent(row.id)}`}>{row.name}</Link><small>{row.rarity}</small></td>
+     <td><Link className="sourceLink" href={`/sources?item=${encodeURIComponent(row.id)}`}><ResourceName id={row.id} name={row.name}/></Link><small>{row.rarity}</small></td>
      <td>{row.amount}<small>{row.stacks.map(stack=>`${stack.amount} × level ${stack.level}`).join(" · ")}</small></td><td>{row.keep}<small>{row.ownedReserve} owned · {row.futureReserve} future reserves</small></td><td><strong className={row.scrap?"ready":""}>{row.scrap||"—"}</strong></td><td><strong>{row.status}</strong><small>{row.reason}</small>
       <ReferenceDetails label={`Copy and recipient details · ${row.name}`}>
        <div className="tableWrap"><table><thead><tr><th>Level</th><th>Copies</th><th>Keep</th><th>Salvage candidates</th><th>Allocated</th></tr></thead><tbody>{row.stacks.map(stack=><tr key={stack.level}><td>{stack.level}</td><td>{stack.amount}</td><td>{stack.keep}</td><td>{stack.scrap}</td><td>{stack.allocated}</td></tr>)}</tbody></table></div>

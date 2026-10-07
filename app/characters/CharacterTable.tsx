@@ -1,9 +1,22 @@
-"use client"; import Link from "next/link"; import DataTable,{Column} from "../components/DataTable";import CharacterName from "../components/CharacterName";import type{RosterUnit}from "../lib/report";import{rankName}from"../../src/domain/ranks";
-type Row=RosterUnit&{gearTargets:number;gearReview:boolean;abilityGaps:number};
-export default function CharacterTable({rows}:{rows:Row[]}){const c:Column<Row>[]=[
-{key:"name",label:"Character",sort:r=>r.name,search:r=>r.name,render:r=><Link className="characterLink" href={"/characters/"+encodeURIComponent(r.id)}><CharacterName name={r.name} id={r.id} icon={r.icon}/></Link>},
-{key:"faction",label:"Faction",sort:r=>r.faction,search:r=>r.faction+" "+r.grandAlliance,render:r=><>{r.faction}<small>{r.grandAlliance}</small></>},
-{key:"rarity",label:"Rarity",sort:r=>r.progressionIndex,search:r=>r.rarity,render:r=><span className={"rarity "+r.rarity.toLowerCase()}>{r.rarity}</span>},
-{key:"rank",label:"Rank",sort:r=>r.rank,render:r=>rankName(r.rank)},
-{key:"power",label:"Raid power",sort:r=>r.power??-1,render:r=><>{r.power?.toLocaleString()??"—"}<small>{r.power===undefined?"Not observed in raid data":"Latest observed Guild Raid loadout"}</small></>},
-{key:"status",label:"Upgrade status",sort:r=>r.gearTargets+r.abilityGaps,render:r=><>{r.gearTargets?<strong>{r.gearTargets} gear target{r.gearTargets===1?"":"s"}</strong>:null}{r.abilityGaps?<small>{r.abilityGaps} ability gap{r.abilityGaps===1?"":"s"}</small>:null}{r.gearReview?<small>Gear compatibility needs review</small>:null}{!r.gearTargets&&!r.abilityGaps&&!r.gearReview?"No current upgrade target":""}</>}];return <DataTable rows={rows} columns={c} placeholder="Search character, faction, or upgrade status…"/>;}
+"use client";
+import ResourceName,{ResourceText} from "../components/ResourceName";
+import Link from "next/link";
+import DataTable,{type Column,type Filter} from "../components/DataTable";
+import CharacterName from "../components/CharacterName";
+import {rankName} from "../../src/domain/ranks";
+import type {CharacterRosterRow} from "../lib/characterUpgradeSummary";
+
+export default function CharacterTable({rows}:{rows:CharacterRosterRow[]}) {
+ const columns:Column<CharacterRosterRow>[]=[
+  {key:"name",label:"Character",sort:row=>row.name,search:row=>`${row.name} ${row.faction} ${row.grandAlliance}`,render:row=><><Link className="characterLink" href={`/characters/${encodeURIComponent(row.id)}`}><CharacterName name={row.name} id={row.id} icon={row.icon}/></Link><small>{row.faction} · {row.grandAlliance}</small></>},
+  {key:"progress",label:"Progress",sort:row=>row.rank,search:row=>`${row.rarity} ${rankName(row.rank)}`,render:row=><><strong>{rankName(row.rank)}</strong><small><span className={`rarity ${row.rarity.toLowerCase()}`}>{row.rarity}</span> · level {row.xpLevel}</small></>},
+  {key:"actions",label:"Next upgrades",sort:row=>row.actions.filter(action=>action.ready).length,search:row=>row.actions.map(action=>`${action.label} ${action.detail}`).join(" "),render:row=>row.actions.length?row.actions.map(action=><div className="rosterAction" key={action.kind}><Link className={action.ready?"sourceLink":"characterLink"} href={action.href}>{action.resourceId?<ResourceName id={action.resourceId} name={action.label}/>:<ResourceText text={action.label}/>}</Link><small><ResourceText text={action.detail}/></small></div>):<Link className="sourceLink" href={`/characters/${encodeURIComponent(row.id)}#progression`}>Plan rank upgrades</Link>},
+ ];
+ const filters:Filter<CharacterRosterRow>[]=[
+  {key:"ready",label:"Resources ready",matches:row=>row.actions.some(action=>action.ready)},
+  {key:"gear",label:"Gear work",matches:row=>row.gearWork},
+  {key:"badges",label:"Badges needed",matches:row=>row.badgesNeeded},
+  {key:"orbs",label:"Orbs needed",matches:row=>row.orbsNeeded},
+ ];
+ return <DataTable rows={rows} columns={columns} filters={filters} placeholder="Search character, faction, rank, or next action…"/>;
+}

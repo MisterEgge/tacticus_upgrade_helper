@@ -1,4 +1,5 @@
 "use client";
+import ResourceName from "../components/ResourceName";
 import { useEffect, useMemo, useState } from "react";
 import ReferenceDetails from "../components/ReferenceDetails";
 import CharacterName from "../components/CharacterName";
@@ -50,15 +51,15 @@ export default function AbilityBadgeBudget({rows,badgeInventory,defenseTeams,off
         <div className="campaignInvestmentList">{groups.map(group => <section className="campaignInvestmentGroup" key={group.alliance}>
             <button className="campaignSectionToggle" aria-expanded={open === group.alliance} onClick={() => setOpen(open === group.alliance ? null : group.alliance)}>
                 <div><p className="eyebrow">{group.members.length} CHARACTERS</p><h2>{group.alliance}</h2>
-                    {group.badges.length?group.badges.map(badge=><p className="warSource" key={badge.rarity}><strong>{badge.rarity}: {badge.owned??"?"} owned</strong> · {badge.needed} needed · {badge.shortfall??"?"} short</p>):<p className="warSource">No badges needed for this goal</p>}</div>
+                    {group.badges.length?group.badges.map(badge=><p className="warSource" key={badge.rarity}><strong><ResourceName id={`badge:${group.alliance}:${badge.rarity}`} name={`${badge.rarity}: ${badge.owned??"?"} owned`}/></strong> · {badge.needed} needed · {badge.shortfall??"?"} short</p>):<p className="warSource">No badges needed for this goal</p>}</div>
                 <div className="campaignSectionStatus"><span className="campaignChevron">{open === group.alliance ? "▴" : "▾"}</span></div>
             </button>
-            {open === group.alliance ? <div className="campaignSectionBody"><div className="tableWrap"><table><thead><tr><th>Badge</th><th>Owned</th><th>Needed for goal</th><th>Still needed</th></tr></thead><tbody>{group.badges.map(badge=><tr key={badge.rarity}><td><strong>{badge.rarity}</strong></td><td>{badge.owned??"Sync account"}</td><td>{badge.needed}</td><td><strong>{badge.shortfall??"—"}</strong></td></tr>)}</tbody></table></div>{group.members.length ? <div className="tableWrap"><table>
+            {open === group.alliance ? <div className="campaignSectionBody"><div className="tableWrap"><table><thead><tr><th>Badge</th><th>Owned</th><th>Needed for goal</th><th>Still needed</th></tr></thead><tbody>{group.badges.map(badge=><tr key={badge.rarity}><td><strong><ResourceName id={`badge:${group.alliance}:${badge.rarity}`} name={badge.rarity}/></strong></td><td>{badge.owned??"Sync account"}</td><td>{badge.needed}</td><td><strong>{badge.shortfall??"—"}</strong></td></tr>)}</tbody></table></div>{group.members.length ? <div className="tableWrap"><table>
                 <thead><tr><th>Character</th><th>Active</th><th>Passive</th><th>Badges to target</th><th>Next step</th></tr></thead>
                 <tbody>{group.members.map(row => <tr key={row.id}>
                     <td><CharacterName name={row.name} id={row.id}/><small>{rankName(row.rank)} · {row.rarity} · {row.warTarget ? `War target ${row.warTarget}/${row.warTarget}` : row.utilityTier}</small>{!row.warTarget?<ReferenceDetails label="Target basis"><p>{row.reviewed ? "Community ability target" : row.recommended ? "Planning recommendation" : "Provisional ability target"}</p><p>{row.utilitySignals.join(" · ")}</p></ReferenceDetails>:null}</td>
                     <td>{formatAbilityTarget(row.activeLevel,row.activeTarget)}</td><td>{formatAbilityTarget(row.passiveLevel,row.passiveTarget)}</td>
-                    <td>{rarities.filter(rarity => (row.planned[rarity]??0)>0).map(rarity => <small key={rarity}>{row.planned[rarity]} {rarity}</small>)}</td><td>{abilityBudgetNextStep(row)}</td>
+                    <td>{rarities.filter(rarity => (row.planned[rarity]??0)>0).map(rarity => <small key={rarity}><ResourceName id={`badge:${group.alliance}:${rarity}`} name={`${row.planned[rarity]} ${rarity}`}/></small>)}</td><td>{abilityBudgetNextStep(row)}</td>
                 </tr>)}</tbody>
             </table></div> : <p className="sub">No selected characters need badges through this tier.</p>}</div> : null}
         </section>)}</div>

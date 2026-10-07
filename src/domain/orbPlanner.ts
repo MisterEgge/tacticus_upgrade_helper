@@ -6,7 +6,7 @@ export type OrbCandidate = { id: string; name: string; alliance: string; progres
     shards: number | null; mythicShards: number | null; utility: UtilityRating;
     campaignGoals: Array<{ campaign: string; rank: number | null; ability: number | null; progressKnown: boolean }> };
 export type OrbScope = "priorities" | "raid" | "campaign" | "war" | "all";
-export type OrbOptions = { scope: OrbScope; includeMythic: boolean; horizon: "next" | "goal" };
+export type OrbOptions = { scope: OrbScope; includeMythic: boolean; includeStarUpgrades?: boolean; horizon: "next" | "goal" };
 export const normalizeAlliance = (value: string) => value.toLowerCase() === "imperium" || value.toLowerCase() === "imperial" ? "Imperial" : value.toLowerCase() === "chaos" ? "Chaos" : value.toLowerCase() === "xenos" ? "Xenos" : value;
 export function orbsOwned(inventory: OrbInventory | null | undefined, alliance: string, rarity: CharacterRarity): number | null {
     if (!inventory) return null;
@@ -20,6 +20,7 @@ export function orbPriority(candidate: OrbCandidate, warTarget: number | undefin
     const current = progressionRarity(candidate.progressionIndex);
     const next = nextOrbMilestone(candidate.progressionIndex);
     if (!current || !next || (!options.includeMythic && next.orbRarity === "Mythic")) return null;
+    if (!options.includeStarUpgrades && current === next.orbRarity) return null;
     const raid = candidate.utility.mainRaidCore || candidate.utility.mainRaidFlex;
     const campaigns = candidate.campaignGoals.filter(goal => CHARACTER_RARITIES.indexOf(rarityForGoal(goal.rank, goal.ability)) > CHARACTER_RARITIES.indexOf(current));
     const war = warTarget !== undefined && CHARACTER_RARITIES.indexOf(rarityForGoal(null, warTarget)) > CHARACTER_RARITIES.indexOf(current);
@@ -84,10 +85,10 @@ export function orbPlan(candidates: OrbCandidate[], inventory: OrbInventory | nu
  * shard path is covered. Future, shard-blocked work cannot reserve this stock.
  * This is a readiness audit of the roster, not an instruction to invest in all.
  */
-export function shardReadyOrbPlan(candidates: OrbCandidate[], inventory: OrbInventory | null | undefined, warTargets: Map<string, number>, includeMythic: boolean) {
+export function shardReadyOrbPlan(candidates: OrbCandidate[], inventory: OrbInventory | null | undefined, warTargets: Map<string, number>, includeMythic: boolean, includeStarUpgrades = false) {
     const eligible = candidates.filter(candidate => {
         const next = nextOrbMilestone(candidate.progressionIndex);
-        return next && (includeMythic || next.orbRarity !== "Mythic") && ["Imperial", "Xenos", "Chaos"].includes(normalizeAlliance(candidate.alliance));
+        return next && (includeMythic || next.orbRarity !== "Mythic") && (includeStarUpgrades || progressionRarity(candidate.progressionIndex) !== next.orbRarity) && ["Imperial", "Xenos", "Chaos"].includes(normalizeAlliance(candidate.alliance));
     });
     const stockKnown = (stock: number | null, cost: number) => cost === 0 || stock !== null && Number.isSafeInteger(stock) && stock >= 0;
     const unknownShards = eligible.filter(candidate => {
@@ -100,7 +101,7 @@ export function shardReadyOrbPlan(candidates: OrbCandidate[], inventory: OrbInve
             && (next.shards === 0 || candidate.shards! >= next.shards)
             && (next.mythicShards === 0 || candidate.mythicShards! >= next.mythicShards);
     });
-    return { ...orbPlan(ready, inventory, warTargets, { scope: "all", horizon: "next", includeMythic }),
+    return { ...orbPlan(ready, inventory, warTargets, { scope: "all", horizon: "next", includeMythic, includeStarUpgrades }),
         unknownShards: unknownShards.map(candidate => candidate.name), waitingForShards: eligible.length - ready.length - unknownShards.length };
 }
 

@@ -1,4 +1,5 @@
 "use client";
+import ResourceName from "../components/ResourceName";
 import Link from "next/link";
 import { useId, useState } from "react";
 import type { EliteOpportunity } from "../../src/domain/eliteFarmingGaps";
@@ -15,7 +16,7 @@ function Unlock({ opportunity }: { opportunity: EliteOpportunity }) {
             <p>Recorded unlocked through battle {opportunity.frontier}. Unlocking through battle {opportunity.targetNode} would cover these materials.</p>
             <Link className="sourceLink" href="/campaigns">Review campaign characters and upgrade gaps</Link>
             <div className="tableWrap"><table><thead><tr><th>Material</th><th>Unlock battle</th><th>Shortage</th><th>Potential energy saved</th></tr></thead><tbody>
-                {opportunity.materials.map(material => <tr key={material.id}><td><Link className="sourceLink" href={`/sources?item=${encodeURIComponent(material.id)}`}>{material.name}</Link></td><td>{material.node.nodeNumber}<small>{material.node.id}</small></td><td>{material.shortage.toLocaleString()}</td><td>{material.estimatedSavings === null ? "No unlocked alternative to compare" : `~${Math.round(material.estimatedSavings).toLocaleString()}`}</td></tr>)}
+                {opportunity.materials.map(material => <tr key={material.id}><td><Link className="sourceLink" href={`/sources?item=${encodeURIComponent(material.id)}`}><ResourceName id={material.id} name={material.name}/></Link></td><td>{material.node.nodeNumber}<small>{material.node.id}</small></td><td>{material.shortage.toLocaleString()}</td><td>{material.estimatedSavings === null ? "No unlocked alternative to compare" : `~${Math.round(material.estimatedSavings).toLocaleString()}`}</td></tr>)}
             </tbody></table></div>
         </div>}
     </section>;

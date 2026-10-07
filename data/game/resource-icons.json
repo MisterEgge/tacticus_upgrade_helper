@@ -1,0 +1,3543 @@
+{
+  "source": "https://github.com/svehera/tacticusplanner",
+  "commit": "5c5d05193038a0aadb1fd929cce877ef754f7868",
+  "icons": {
+    "upgHpC001": {
+      "name": "Field Ration",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC001.png"
+    },
+    "upgHpC002": {
+      "name": "Minor Bionic Enhancement",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC002.png"
+    },
+    "upgHpC003": {
+      "name": "Lesser Reliquary of Protection",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC003.png"
+    },
+    "upgHpC004": {
+      "name": "The Iron Phoenix",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC004.png"
+    },
+    "upgHpC005": {
+      "name": "The Silver Aquila",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC005.png"
+    },
+    "upgHpC006": {
+      "name": "Standard-Issue Tourniquet",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC006.png"
+    },
+    "upgHpC007": {
+      "name": "Healing Ointment",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC007.png"
+    },
+    "upgHpC008": {
+      "name": "Thick Skin",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC008.png"
+    },
+    "upgHpC009": {
+      "name": "Nano Swarm",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC009.png"
+    },
+    "upgHpC010": {
+      "name": "Mutation: Warped Muscles",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC010.png"
+    },
+    "upgHpC013": {
+      "name": "Chip Damage",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC013.png"
+    },
+    "upgHpC014": {
+      "name": "Wires",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC014.png"
+    },
+    "upgHpC015": {
+      "name": "Ropes and Chains",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC015.png"
+    },
+    "upgHpC016": {
+      "name": "Scrolls",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC016.png"
+    },
+    "upgHpC017": {
+      "name": "Mission Assignment",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC017.png"
+    },
+    "upgHpU001": {
+      "name": "Enriched Rations",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU001.png"
+    },
+    "upgHpU002": {
+      "name": "Reliquary of Protection",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU002.png"
+    },
+    "upgHpU003": {
+      "name": "The Silver Scope",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU003.png"
+    },
+    "upgHpU004C": {
+      "name": "Bionic Enhancement",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU004C.png"
+    },
+    "upgHpU005C": {
+      "name": "First Aid Kit",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU005C.png"
+    },
+    "upgHpU006": {
+      "name": "The Gold Phoenix",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU006.png"
+    },
+    "upgHpU007": {
+      "name": "Purifier",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU007.png"
+    },
+    "upgHpU008": {
+      "name": "The Silver Eagle with Swords",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU008.png"
+    },
+    "upgHpU009": {
+      "name": "Mutation: Warped Lungs",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU009.png"
+    },
+    "upgHpU010C": {
+      "name": "Regenerating Nano Swarm",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU010C.png"
+    },
+    "upgHpU012": {
+      "name": "Helmet Trophy",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU012.png"
+    },
+    "upgHpU013": {
+      "name": "Artificial Vertebrae",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU013.png"
+    },
+    "upgHpU014": {
+      "name": "Reinforced Cables",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU014.png"
+    },
+    "upgHpU015": {
+      "name": "Satchel",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU015.png"
+    },
+    "upgHpU016": {
+      "name": "Writings",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU016.png"
+    },
+    "upgHpU017": {
+      "name": "Mission Objective",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU017.png"
+    },
+    "upgHpU018C": {
+      "name": "Holster and Pockets",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU018C.png"
+    },
+    "upgHpR001": {
+      "name": "Repair Tool",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR001.png"
+    },
+    "upgHpR002": {
+      "name": "Metal Decorative Skull",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR002.png"
+    },
+    "upgHpR003C": {
+      "name": "Box of Rations",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR003C.png"
+    },
+    "upgHpR004C": {
+      "name": "Refined Bionics",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR004C.png"
+    },
+    "upgHpR005": {
+      "name": "The Phoenix Ascendant",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR005.png"
+    },
+    "upgHpR006C": {
+      "name": "Medical Supply Crate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR006C.png"
+    },
+    "upgHpR007": {
+      "name": "Zeidos Ribbon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR007.png"
+    },
+    "upgHpR008": {
+      "name": "Mutation: Warped Heart",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR008.png"
+    },
+    "upgHpR009C": {
+      "name": "Otherworldly Nano Swarm",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR009C.png"
+    },
+    "upgHpR010": {
+      "name": "Bad Moon Teef",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR010.png"
+    },
+    "upgHpR011": {
+      "name": "Reconstitution Protocols",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR011.png"
+    },
+    "upgHpR012C": {
+      "name": "Electromantic Cable Bundle",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR012C.png"
+    },
+    "upgHpR013C": {
+      "name": "Utilitarian Belt",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR013C.png"
+    },
+    "upgHpR014": {
+      "name": "Ancient Runes",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR014.png"
+    },
+    "upgHpR015C": {
+      "name": "Grand Skull Trophy",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR015C.png"
+    },
+    "upgHpR016C": {
+      "name": "Grandiloquent Litanical",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR016C.png"
+    },
+    "upgHpR017C": {
+      "name": "Battle Plan",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR017C.png"
+    },
+    "upgHpR018": {
+      "name": "Kill Count",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR018.png"
+    },
+    "upgHpR019": {
+      "name": "Battle Scar",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR019.png"
+    },
+    "upgHpR020C": {
+      "name": "Sanctified Reliquary of Protection",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR020C.png"
+    },
+    "upgHpR043": {
+      "name": "Service Studs",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR043.png"
+    },
+    "upgHpR021": {
+      "name": "Righteous Candle",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR021.png"
+    },
+    "upgHpR022": {
+      "name": "Rose of Martyrs",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR022.png"
+    },
+    "upgHpR023": {
+      "name": "Eye of Horus",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR023.png"
+    },
+    "upgHpR024": {
+      "name": "Plague Bell",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR024.png"
+    },
+    "upgHpR027": {
+      "name": "Stimm Injector",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR027.png"
+    },
+    "upgHpR028": {
+      "name": "Waystone",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR028.png"
+    },
+    "upgHpR029": {
+      "name": "Tainted Text",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR029.png"
+    },
+    "upgHpR031": {
+      "name": "Wolf Tail Talisman",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR031.png"
+    },
+    "upgHpR032": {
+      "name": "Key of Ignorance",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR032.png"
+    },
+    "upgHpR033": {
+      "name": "Adrenal Glands",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR033.png"
+    },
+    "upgHpR035": {
+      "name": "Bloodstone Tear",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR035.png"
+    },
+    "upgHpR036": {
+      "name": "Wyrm-form Sigil",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR036.png"
+    },
+    "upgHpR037": {
+      "name": "Flawless Terran Gem",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR037.png"
+    },
+    "upgHpR038": {
+      "name": "Brazen Jaws",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR038.png"
+    },
+    "upgHpR039": {
+      "name": "Outrageous Padding",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR039.png"
+    },
+    "upgHpR040": {
+      "name": "Kindred Weavefield Crest",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR040.png"
+    },
+    "upgHpE001C": {
+      "name": "Advanced Bionics",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE001C.png"
+    },
+    "upgHpE002C": {
+      "name": "Greater Reliquary of Protection",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE002C.png"
+    },
+    "upgHpE003": {
+      "name": "Terminator Honours",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE003.png"
+    },
+    "upgHpE004C": {
+      "name": "Necrodermis Nano Scarab Swarm",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE004C.png"
+    },
+    "upgHpE005C": {
+      "name": "Nob Teef",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE005C.png"
+    },
+    "upgHpE006C": {
+      "name": "Exquisite Medical Supplies",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE006C.png"
+    },
+    "upgHpE007C": {
+      "name": "Grand Helmet Trophy",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE007C.png"
+    },
+    "upgHpE008C": {
+      "name": "Mutation: Regenerative Blood",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE008C.png"
+    },
+    "upgHpE009C": {
+      "name": "Resurrection Protocols",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE009C.png"
+    },
+    "upgHpE011C": {
+      "name": "Royal Phylactery",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE011C.png"
+    },
+    "upgHpE012": {
+      "name": "Golden Ornamental Skull",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE012.png"
+    },
+    "upgHpE013C": {
+      "name": "Exospine",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE013C.png"
+    },
+    "upgHpE014C": {
+      "name": "Ominous Xenos Glyphs",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE014C.png"
+    },
+    "upgHpE015": {
+      "name": "Weathering",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE015.png"
+    },
+    "upgHpE017": {
+      "name": "Secret Agenda",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE017.png"
+    },
+    "upgHpE020C": {
+      "name": "Honour Markings",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE020C.png"
+    },
+    "upgHpE021C": {
+      "name": "Lights of Purgation",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE021C.png"
+    },
+    "upgHpE022C": {
+      "name": "Roses of Sacrifice",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE022C.png"
+    },
+    "upgHpE025C": {
+      "name": "Epaulettes",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE025C.png"
+    },
+    "upgHpE023C": {
+      "name": "Warp Touched Eye of Horus",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE023C.png"
+    },
+    "upgHpE024C": {
+      "name": "Death Bell",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE024C.png"
+    },
+    "upgHpE027C": {
+      "name": "Advanced Stimm Injector",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE027C.png"
+    },
+    "upgHpE028C": {
+      "name": "Spirit Stone",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE028C.png"
+    },
+    "upgHpE029C": {
+      "name": "Malefic Scroll",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE029C.png"
+    },
+    "upgHpE031C": {
+      "name": "Runic Talisman",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE031C.png"
+    },
+    "upgHpE032C": {
+      "name": "Key of Knowledge",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE032C.png"
+    },
+    "upgHpE033C": {
+      "name": "Adaptive Adrenal Glands",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE033C.png"
+    },
+    "upgHpE034C": {
+      "name": "Servo-Arc Claw",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE034C.png"
+    },
+    "upgHpE035C": {
+      "name": "Bloodstone Pendant",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE035C.png"
+    },
+    "upgHpE036C": {
+      "name": "Wyrm-form Icon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE036C.png"
+    },
+    "upgHpE037C": {
+      "name": "Flawless Gem Embellishment",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE037C.png"
+    },
+    "upgHpE038C": {
+      "name": "Blessed Brazen Jaws",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE038C.png"
+    },
+    "upgHpE039C": {
+      "name": "Outrageous Adornment",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE039C.png"
+    },
+    "upgHpE040C": {
+      "name": "Champion Weavefield Crest",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE040C.png"
+    },
+    "upgHpE120C": {
+      "name": "Symbol of the Ultramarines",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE120C.png"
+    },
+    "upgHpE121C": {
+      "name": "Symbol of the Black Templars",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE121C.png"
+    },
+    "upgHpE122C": {
+      "name": "Symbol of the Adepta Sororitas",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE122C.png"
+    },
+    "upgHpE123C": {
+      "name": "Symbol of the Black Legion",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE123C.png"
+    },
+    "upgHpE124C": {
+      "name": "Symbol of the Death Guard",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE124C.png"
+    },
+    "upgHpE125C": {
+      "name": "Symbol of the Astra Militarum",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE125C.png"
+    },
+    "upgHpE126C": {
+      "name": "Symbol of the Orks",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE126C.png"
+    },
+    "upgHpE127C": {
+      "name": "Symbol of the T'au Empire",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE127C.png"
+    },
+    "upgHpE128C": {
+      "name": "Symbol of the Aeldari",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE128C.png"
+    },
+    "upgHpE129C": {
+      "name": "Symbol of the Thousand Sons",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE129C.png"
+    },
+    "upgHpE130C": {
+      "name": "Symbol of the Necrons",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE130C.png"
+    },
+    "upgHpE131C": {
+      "name": "Symbol of the Space Wolves",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE131C.png"
+    },
+    "upgHpE132C": {
+      "name": "Symbol of the Dark Angels",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE132C.png"
+    },
+    "upgHpE133C": {
+      "name": "Symbol of the Tyranids",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE133C.png"
+    },
+    "upgHpE134C": {
+      "name": "Symbol of the Adeptus Mechanicus",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE134C.png"
+    },
+    "upgHpE135C": {
+      "name": "Symbol of the Blood Angels",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE135C.png"
+    },
+    "upgHpE136C": {
+      "name": "Symbol of the Genestealer Cults",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE136C.png"
+    },
+    "upgHpE137C": {
+      "name": "Symbol of the Adeptus Custodes",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE137C.png"
+    },
+    "upgHpE138C": {
+      "name": "Symbol of the World Eaters",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE138C.png"
+    },
+    "upgHpE139C": {
+      "name": "Symbol of the Emperor's Children",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE139C.png"
+    },
+    "upgHpE140C": {
+      "name": "Symbol of the Leagues of Votann",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE140C.png"
+    },
+    "upgHpE143C": {
+      "name": "Symbol of the Adeptus Astartes",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE143C.png"
+    },
+    "upgHpL001C": {
+      "name": "Optimal Bionic Enhancement",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL001C.png"
+    },
+    "upgHpL002C": {
+      "name": "Legendary Reliquary of Protection",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL002C.png"
+    },
+    "upgHpL005C": {
+      "name": "Ancient Nano Scarab Swarm",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL005C.png"
+    },
+    "upgHpL006C": {
+      "name": "Shiny Boss Teef",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL006C.png"
+    },
+    "upgHpL007C": {
+      "name": "Protocol of the Eternal Guardian",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL007C.png"
+    },
+    "upgHpL008C": {
+      "name": "Phylacterine Hive",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL008C.png"
+    },
+    "upgHpL009C": {
+      "name": "Grandiose Skull Ornament",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL009C.png"
+    },
+    "upgHpL010": {
+      "name": "Engrammatic Entangler",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL010.png"
+    },
+    "upgHpL011C": {
+      "name": "Tome of Arcane Knowledge",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL011C.png"
+    },
+    "upgHpL012C": {
+      "name": "Mutation: Otherworldly Power",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL012C.png"
+    },
+    "upgHpL013C": {
+      "name": "Advanced Exospine",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL013C.png"
+    },
+    "upgHpL014C": {
+      "name": "Portentous Xenos Glyphs",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL014C.png"
+    },
+    "upgHpL017C": {
+      "name": "Grand Strategy",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL017C.png"
+    },
+    "upgHpL020C": {
+      "name": "Honorifics of Command",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL020C.png"
+    },
+    "upgHpL021C": {
+      "name": "Candelabrum of Burning Wrath",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL021C.png"
+    },
+    "upgHpL022C": {
+      "name": "Roses of the Divine",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL022C.png"
+    },
+    "upgHpL025C": {
+      "name": "Epaulettes of Renown",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL025C.png"
+    },
+    "upgHpL023C": {
+      "name": "Infernal Eye of Horus",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL023C.png"
+    },
+    "upgHpL024C": {
+      "name": "Bell of Despair",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL024C.png"
+    },
+    "upgHpL027C": {
+      "name": "Auto-Reactive Stimm Injector",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL027C.png"
+    },
+    "upgHpL028C": {
+      "name": "Resplendent Spirit Stone",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL028C.png"
+    },
+    "upgHpL029C": {
+      "name": "Athenaean Scroll",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL029C.png"
+    },
+    "upgHpL031C": {
+      "name": "Talisman of Storms",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL031C.png"
+    },
+    "upgHpL032C": {
+      "name": "Key of Achrabael",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL032C.png"
+    },
+    "upgHpL033C": {
+      "name": "Hyper-Adaptive Adrenal Glands",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL033C.png"
+    },
+    "upgHpL034C": {
+      "name": "Mechadendrite Hive",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL034C.png"
+    },
+    "upgHpL035C": {
+      "name": "Bloodstone Icon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL035C.png"
+    },
+    "upgHpL036C": {
+      "name": "Wyrm-form Banner",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL036C.png"
+    },
+    "upgHpL037C": {
+      "name": "Flawless Gem Adornment",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL037C.png"
+    },
+    "upgHpL038C": {
+      "name": "Exalted Brazen Jaws",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL038C.png"
+    },
+    "upgHpL039C": {
+      "name": "Outrageous Grimace",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL039C.png"
+    },
+    "upgHpL040C": {
+      "name": "Ancestor Ward Crest",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL040C.png"
+    },
+    "upgHpL100": {
+      "name": "Codex Astartes Page",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL100.png"
+    },
+    "upgHpL101": {
+      "name": "Bones of the Paragons",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL101.png"
+    },
+    "upgHpL102": {
+      "name": "Holy Chaplet",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL102.png"
+    },
+    "upgHpL103": {
+      "name": "Boon of the Dark Gods",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL103.png"
+    },
+    "upgHpL104": {
+      "name": "Boon of Nurgle",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL104.png"
+    },
+    "upgHpL105": {
+      "name": "Honourifica Imperialis",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL105.png"
+    },
+    "upgHpL106": {
+      "name": "Kustom Gubbinz",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL106.png"
+    },
+    "upgHpL107": {
+      "name": "Engram Neurochip",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL107.png"
+    },
+    "upgHpL108": {
+      "name": "Runes of Fate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL108.png"
+    },
+    "upgHpL109": {
+      "name": "Boon of Tzeentch",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL109.png"
+    },
+    "upgHpL111": {
+      "name": "Mjød",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL111.png"
+    },
+    "upgHpL112": {
+      "name": "Stone Guardian Fragment",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL112.png"
+    },
+    "upgHpL113": {
+      "name": "Synaptic Augmentation",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL113.png"
+    },
+    "upgHpL114": {
+      "name": "Blessed Cogitator",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL114.png"
+    },
+    "upgHpL115": {
+      "name": "Blood Vial",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL115.png"
+    },
+    "upgHpL116": {
+      "name": "Gifts of the Star Children",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL116.png"
+    },
+    "upgHpL117": {
+      "name": "Arcane Genetic Alchemy",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL117.png"
+    },
+    "upgHpL118": {
+      "name": "Boon of Khorne",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL118.png"
+    },
+    "upgHpL119": {
+      "name": "Boon of Slaanesh",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL119.png"
+    },
+    "upgHpL099": {
+      "name": "Cyberstimm Infusion",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL099.png"
+    },
+    "upgHpL120C": {
+      "name": "Codex Astartes",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL120C.png"
+    },
+    "upgHpL121C": {
+      "name": "Tännhauser's Bones",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL121C.png"
+    },
+    "upgHpL122C": {
+      "name": "Simulacrum Sanctorum",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL122C.png"
+    },
+    "upgHpL123C": {
+      "name": "Mark of Chaos Undivided",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL123C.png"
+    },
+    "upgHpL124C": {
+      "name": "Mark of Nurgle",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL124C.png"
+    },
+    "upgHpL125C": {
+      "name": "Sash of Honors",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL125C.png"
+    },
+    "upgHpL126C": {
+      "name": "Cybork Body Parts",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL126C.png"
+    },
+    "upgHpL127C": {
+      "name": "Ta'lissera Bond",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL127C.png"
+    },
+    "upgHpL128C": {
+      "name": "Scriptures of Fate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL128C.png"
+    },
+    "upgHpL129C": {
+      "name": "Mark of Tzeentch",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL129C.png"
+    },
+    "upgHpL131C": {
+      "name": "Personal Saga",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL131C.png"
+    },
+    "upgHpL132C": {
+      "name": "Perfidious Relic of the Unforgiven",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL132C.png"
+    },
+    "upgHpL133C": {
+      "name": "Hypermetabolic Acceleration",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL133C.png"
+    },
+    "upgHpL134C": {
+      "name": "Sanctus Canister",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL134C.png"
+    },
+    "upgHpL135C": {
+      "name": "Icon of the Angel",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL135C.png"
+    },
+    "upgHpL136C": {
+      "name": "Biomorph Adaption",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL136C.png"
+    },
+    "upgHpL137C": {
+      "name": "Defensor Refractor Generator",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL137C.png"
+    },
+    "upgHpL138C": {
+      "name": "Mark of Khorne",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL138C.png"
+    },
+    "upgHpL139C": {
+      "name": "Mark of Slaanesh",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL139C.png"
+    },
+    "upgHpL140C": {
+      "name": "Forgewrought Maintainers Kit",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL140C.png"
+    },
+    "upgHpL211C": {
+      "name": "Monstrous Constitution",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL211C.png"
+    },
+    "upgHpL212C": {
+      "name": "Preternatural Constitution",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL212C.png"
+    },
+    "upgHpL213C": {
+      "name": "Superaugmented Constitution",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL213C.png"
+    },
+    "upgHpL214C": {
+      "name": "Technocrafted Constitution",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL214C.png"
+    },
+    "upgHpM001": {
+      "name": "Imperial Aquila",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM001.png"
+    },
+    "upgHpM002": {
+      "name": "Mutant Form",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM002.png"
+    },
+    "upgHpM003": {
+      "name": "Ancient Inscription",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM003.png"
+    },
+    "upgHpM004": {
+      "name": "Venerable Battle Mark",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM004.png"
+    },
+    "upgHpM120C": {
+      "name": "Grand Symbol of the Ultramarines",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM120C.png"
+    },
+    "upgHpM121C": {
+      "name": "Grand Symbol of the Black Templars",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM121C.png"
+    },
+    "upgHpM122C": {
+      "name": "Grand Symbol of the Adepta Sororitas",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM122C.png"
+    },
+    "upgHpM123C": {
+      "name": "Grand Symbol of the Black Legion",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM123C.png"
+    },
+    "upgHpM124C": {
+      "name": "Grand Symbol of the Death Guard",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM124C.png"
+    },
+    "upgHpM125C": {
+      "name": "Grand Symbol of the Astra Militarum",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM125C.png"
+    },
+    "upgHpM126C": {
+      "name": "Grand Symbol of the Orks",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM126C.png"
+    },
+    "upgHpM127C": {
+      "name": "Grand Symbol of the T'au Empire",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM127C.png"
+    },
+    "upgHpM128C": {
+      "name": "Grand Symbol of the Aeldari",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM128C.png"
+    },
+    "upgHpM129C": {
+      "name": "Grand Symbol of the Thousand Sons",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM129C.png"
+    },
+    "upgHpM130C": {
+      "name": "Grand Symbol of the Necrons",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM130C.png"
+    },
+    "upgHpM131C": {
+      "name": "Grand Symbol of the Space Wolves",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM131C.png"
+    },
+    "upgHpM132C": {
+      "name": "Grand Symbol of the Dark Angels",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM132C.png"
+    },
+    "upgHpM133C": {
+      "name": "Grand Symbol of the Tyranids",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM133C.png"
+    },
+    "upgHpM134C": {
+      "name": "Grand Symbol of the Adeptus Mechanicus",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM134C.png"
+    },
+    "upgHpM135C": {
+      "name": "Grand Symbol of the Blood Angels",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM135C.png"
+    },
+    "upgHpM136C": {
+      "name": "Grand Symbol of the Genestealer Cults",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM136C.png"
+    },
+    "upgHpM137C": {
+      "name": "Grand Symbol of the Adeptus Custodes",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM137C.png"
+    },
+    "upgHpM138C": {
+      "name": "Grand Symbol of the World Eaters",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM138C.png"
+    },
+    "upgHpM139C": {
+      "name": "Grand Symbol of the Emperor's Children",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM139C.png"
+    },
+    "upgHpM140C": {
+      "name": "Grand Symbol of the Leagues of Votann",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM140C.png"
+    },
+    "upgHpM143C": {
+      "name": "Grand Symbol of the Adeptus Astartes",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM143C.png"
+    },
+    "upgDmgC001": {
+      "name": "Round of Ammo",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC001.png"
+    },
+    "upgDmgC002": {
+      "name": "Frag Grenade",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC002.png"
+    },
+    "upgDmgC003": {
+      "name": "Canister of Chemicals",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC003.png"
+    },
+    "upgDmgC004": {
+      "name": "Can of Promethium",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC004.png"
+    },
+    "upgDmgC005": {
+      "name": "Ballistics Data",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC005.png"
+    },
+    "upgDmgC006": {
+      "name": "Lesser Reliquary of Vengeance",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC006.png"
+    },
+    "upgDmgC007": {
+      "name": "Single Power Pack",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC007.png"
+    },
+    "upgDmgC008": {
+      "name": "Otherworldly Energy",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC008.png"
+    },
+    "upgDmgC009": {
+      "name": "Basic Auxiliary Core",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC009.png"
+    },
+    "upgDmgC010": {
+      "name": "Auspex",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC010.png"
+    },
+    "upgDmgC011": {
+      "name": "Weapon Anointment Oils",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC011.png"
+    },
+    "upgDmgC012": {
+      "name": "Weapon parts",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC012.png"
+    },
+    "upgDmgC013": {
+      "name": "Vox-Caster",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC013.png"
+    },
+    "upgDmgC014": {
+      "name": "Nasty Spikes",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC014.png"
+    },
+    "upgDmgC015": {
+      "name": "Targeting Link",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC015.png"
+    },
+    "upgDmgU001C": {
+      "name": "Magazine",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU001C.png"
+    },
+    "upgDmgU002C": {
+      "name": "Belt of Frag Grenades",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU002C.png"
+    },
+    "upgDmgU003": {
+      "name": "Barrel of Promethium",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU003.png"
+    },
+    "upgDmgU004": {
+      "name": "Attack Vector Data-slate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU004.png"
+    },
+    "upgDmgU005": {
+      "name": "Chapter Reliquary",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU005.png"
+    },
+    "upgDmgU006": {
+      "name": "Marksman's Honour",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU006.png"
+    },
+    "upgDmgU007C": {
+      "name": "Power Pack Bundle",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU007C.png"
+    },
+    "upgDmgU008C": {
+      "name": "Otherworldly Energy Reservoir",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU008C.png"
+    },
+    "upgDmgU009": {
+      "name": "Plasma Cell",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU009.png"
+    },
+    "upgDmgU010": {
+      "name": "Fine Micro-Generator",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU010.png"
+    },
+    "upgDmgU011": {
+      "name": "Divinator Class Auspex",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU011.png"
+    },
+    "upgDmgU012": {
+      "name": "Locator Beacon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU012.png"
+    },
+    "upgDmgU013C": {
+      "name": "Fine Auxiliary Core",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU013C.png"
+    },
+    "upgDmgU014": {
+      "name": "Combat Stimms",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU014.png"
+    },
+    "upgDmgU015C": {
+      "name": "Blessed Weapon Oils",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU015C.png"
+    },
+    "upgDmgU016C": {
+      "name": "Razor-sharp Spikes",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU016C.png"
+    },
+    "upgDmgU017C": {
+      "name": "Targeting Matrix",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU017C.png"
+    },
+    "upgDmgU018C": {
+      "name": "Adamantium Blades",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU018C.png"
+    },
+    "upgDmgU019": {
+      "name": "Slicing Claws",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU019.png"
+    },
+    "upgDmgR001C": {
+      "name": "Box of Ammo",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR001C.png"
+    },
+    "upgDmgR002": {
+      "name": "Krak Grenade",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR002.png"
+    },
+    "upgDmgR003": {
+      "name": "Tank of Promethium",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR003.png"
+    },
+    "upgDmgR004C": {
+      "name": "Plasma Cell Bundle",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR004C.png"
+    },
+    "upgDmgR005": {
+      "name": "Classified Data-slate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR005.png"
+    },
+    "upgDmgR006": {
+      "name": "Bionic Eye",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR006.png"
+    },
+    "upgDmgR007": {
+      "name": "Bladesman's Honour",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR007.png"
+    },
+    "upgDmgR008C": {
+      "name": "High-capacity Power Pack",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR008C.png"
+    },
+    "upgDmgR009": {
+      "name": "Viridian Energy Tesseract",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR009.png"
+    },
+    "upgDmgR010C": {
+      "name": "Powerful Micro-Generator",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR010C.png"
+    },
+    "upgDmgR011C": {
+      "name": "Powerful Auxiliary Core",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR011C.png"
+    },
+    "upgDmgR012C": {
+      "name": "Advanced Combat Stimms",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR012C.png"
+    },
+    "upgDmgR13C": {
+      "name": "Prey-Sight",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR13C.png"
+    },
+    "upgDmgR14C": {
+      "name": "Supernatural Sight",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR14C.png"
+    },
+    "upgDmgR015C": {
+      "name": "Sanctified Weapon Oils",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR015C.png"
+    },
+    "upgDmgR016C": {
+      "name": "Murderous Spikes",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR016C.png"
+    },
+    "upgDmgR017C": {
+      "name": "Ratiocination Targeting",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR017C.png"
+    },
+    "upgDmgR021": {
+      "name": "Chain of Zeal",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR021.png"
+    },
+    "upgDmgR022": {
+      "name": "Hymn of Martyrs",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR022.png"
+    },
+    "upgDmgR025": {
+      "name": "Entrenching Tool",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR025.png"
+    },
+    "upgDmgR023": {
+      "name": "Icon of Vengeance",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR023.png"
+    },
+    "upgDmgR024": {
+      "name": "Sigil of Decay",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR024.png"
+    },
+    "upgDmgR026": {
+      "name": "Iron Jaw",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR026.png"
+    },
+    "upgDmgR027": {
+      "name": "Sensor Suite",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR027.png"
+    },
+    "upgDmgR028": {
+      "name": "Psytronome",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR028.png"
+    },
+    "upgDmgR029": {
+      "name": "Inferno Bolts",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR029.png"
+    },
+    "upgDmgR031": {
+      "name": "Wolf Tooth Necklace",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR031.png"
+    },
+    "upgDmgR032": {
+      "name": "Chapter Pendant",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR032.png"
+    },
+    "upgDmgR033": {
+      "name": "Toxin Sacs",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR033.png"
+    },
+    "upgDmgR034": {
+      "name": "Motive Force Capacitator",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR034.png"
+    },
+    "upgDmgR035": {
+      "name": "Blood Shard Bolt",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR035.png"
+    },
+    "upgDmgR036": {
+      "name": "Proclamation Receiver",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR036.png"
+    },
+    "upgDmgR037": {
+      "name": "Integrated Bolt Feeder",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR037.png"
+    },
+    "upgDmgR038": {
+      "name": "Chainaxe Teeth",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR038.png"
+    },
+    "upgDmgR039": {
+      "name": "Vox Grill Amplifier",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR039.png"
+    },
+    "upgDmgR040": {
+      "name": "Personal Scanner",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR040.png"
+    },
+    "upgDmgE001": {
+      "name": "Special Issue Ammo",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE001.png"
+    },
+    "upgDmgE002C": {
+      "name": "Belt of Krak Grenades",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE002C.png"
+    },
+    "upgDmgE003": {
+      "name": "Blessed Promethium Canister",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE003.png"
+    },
+    "upgDmgE004": {
+      "name": "Bionic Neural Pathways",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE004.png"
+    },
+    "upgDmgE005": {
+      "name": "Greater Reliquary of Vengeance",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE005.png"
+    },
+    "upgDmgE006C": {
+      "name": "Anointed Micro-Generator",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE006C.png"
+    },
+    "upgDmgE007C": {
+      "name": "Plasma Cell Crate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE007C.png"
+    },
+    "upgDmgE008C": {
+      "name": "Anointed Auxiliary Core",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE008C.png"
+    },
+    "upgDmgE009C": {
+      "name": "Refined Combat Stimms",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE009C.png"
+    },
+    "upgDmgE010": {
+      "name": "Warp Locus",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE010.png"
+    },
+    "upgDmgE011": {
+      "name": "Elaborate Hilt",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE011.png"
+    },
+    "upgDmgE020C": {
+      "name": "Reliquary of Vengeance",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE020C.png"
+    },
+    "upgDmgE021C": {
+      "name": "Chain of Righteous Zeal",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE021C.png"
+    },
+    "upgDmgE022C": {
+      "name": "Hymn of Sacrifice",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE022C.png"
+    },
+    "upgDmgE025C": {
+      "name": "Veteran's Entrenching Tool",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE025C.png"
+    },
+    "upgDmgE023C": {
+      "name": "Icon of Daemonic Vengeance",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE023C.png"
+    },
+    "upgDmgE024C": {
+      "name": "Sigil of Inevitable Decay",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE024C.png"
+    },
+    "upgDmgE026C": {
+      "name": "Brutal Iron Jaw",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE026C.png"
+    },
+    "upgDmgE027C": {
+      "name": "Advanced Sensor Suite",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE027C.png"
+    },
+    "upgDmgE028C": {
+      "name": "Filigrane Psytronome",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE028C.png"
+    },
+    "upgDmgE029C": {
+      "name": "Ensorcelled Infusion",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE029C.png"
+    },
+    "upgDmgE030C": {
+      "name": "Protocol of the Hungry Void",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE030C.png"
+    },
+    "upgDmgE031C": {
+      "name": "Thunderwolf Tooth Necklace",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE031C.png"
+    },
+    "upgDmgE032C": {
+      "name": "Bolts of Judgement",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE032C.png"
+    },
+    "upgDmgE033C": {
+      "name": "Adaptive Toxin Sacs",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE033C.png"
+    },
+    "upgDmgE034C": {
+      "name": "Enhanced Motive Force Capacitator",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE034C.png"
+    },
+    "upgDmgE035C": {
+      "name": "Quake Bolts",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE035C.png"
+    },
+    "upgDmgE036C": {
+      "name": "Proclamation Caster",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE036C.png"
+    },
+    "upgDmgE037C": {
+      "name": "Embellished Bolt Feeder",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE037C.png"
+    },
+    "upgDmgE038C": {
+      "name": "Blessed Chainaxe Teeth",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE038C.png"
+    },
+    "upgDmgE039C": {
+      "name": "Sonic Greave Amplifier",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE039C.png"
+    },
+    "upgDmgE040C": {
+      "name": "ECog Scanner",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE040C.png"
+    },
+    "upgDmgL001": {
+      "name": "Master-crafted Ammo",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL001.png"
+    },
+    "upgDmgL002C": {
+      "name": "Blessed Promethium Tank",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL002C.png"
+    },
+    "upgDmgL003": {
+      "name": "Archeotech Bionics",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL003.png"
+    },
+    "upgDmgL004C": {
+      "name": "Legendary Reliquary of Vengeance",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL004C.png"
+    },
+    "upgDmgL005C": {
+      "name": "Optimal Micro-Generator",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL005C.png"
+    },
+    "upgDmgL006C": {
+      "name": "Optimal Auxiliary Core",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL006C.png"
+    },
+    "upgDmgL007C": {
+      "name": "Autoloader",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL007C.png"
+    },
+    "upgDmgL008C": {
+      "name": "Powered Blade",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL008C.png"
+    },
+    "upgDmgL009C": {
+      "name": "Hyperstim",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL009C.png"
+    },
+    "upgDmgL010C": {
+      "name": "Psychic Focus",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL010C.png"
+    },
+    "upgDmgL012C": {
+      "name": "Plasma Coil",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL012C.png"
+    },
+    "upgDmgL015C": {
+      "name": "Digital Weapons",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL015C.png"
+    },
+    "upgDmgL016C": {
+      "name": "Imposing Horns",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL016C.png"
+    },
+    "upgDmgL017C": {
+      "name": "Overcapacitator",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL017C.png"
+    },
+    "upgDmgL021C": {
+      "name": "Chain of Zealous Wrath",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL021C.png"
+    },
+    "upgDmgL022C": {
+      "name": "Hymn of the Divine",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL022C.png"
+    },
+    "upgDmgL025C": {
+      "name": "Heirloom Entrenching Tool",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL025C.png"
+    },
+    "upgDmgL023C": {
+      "name": "Icon of Infernal Vengeance",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL023C.png"
+    },
+    "upgDmgL024C": {
+      "name": "Sigil of Eternal Decay",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL024C.png"
+    },
+    "upgDmgL026C": {
+      "name": "Ded Brutal Iron Jaw",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL026C.png"
+    },
+    "upgDmgL027C": {
+      "name": "Multi-Spectrum Sensor Suite",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL027C.png"
+    },
+    "upgDmgL028C": {
+      "name": "Soul-Bonded Psytronome",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL028C.png"
+    },
+    "upgDmgL029C": {
+      "name": "Warpflame Infusion",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL029C.png"
+    },
+    "upgDmgL030C": {
+      "name": "Extermination Protocols",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL030C.png"
+    },
+    "upgDmgL031C": {
+      "name": "Kraken Tooth Necklace",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL031C.png"
+    },
+    "upgDmgL032C": {
+      "name": "Bolts of Furious Vengeance",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL032C.png"
+    },
+    "upgDmgL033C": {
+      "name": "Hyper-Adaptive Toxin Sacs",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL033C.png"
+    },
+    "upgDmgL034C": {
+      "name": "Optimal Motive Force Capacitator",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL034C.png"
+    },
+    "upgDmgL035C": {
+      "name": "Decimator Bolts",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL035C.png"
+    },
+    "upgDmgL036C": {
+      "name": "Proclamation Hailer",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL036C.png"
+    },
+    "upgDmgL037C": {
+      "name": "Adorned Bolt Feeder",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL037C.png"
+    },
+    "upgDmgL038C": {
+      "name": "Exalted Chainaxe Teeth",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL038C.png"
+    },
+    "upgDmgL039C": {
+      "name": "Siren Amplifier",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL039C.png"
+    },
+    "upgDmgL040C": {
+      "name": "Panspectral Scanner",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL040C.png"
+    },
+    "upgDmgL120C": {
+      "name": "Hellfury Bolts",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL120C.png"
+    },
+    "upgDmgL121C": {
+      "name": "Witchseeker Bolts",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL121C.png"
+    },
+    "upgDmgL122C": {
+      "name": "Blessed Bolts",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL122C.png"
+    },
+    "upgDmgL125C": {
+      "name": "Medallion Resolute",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL125C.png"
+    },
+    "upgDmgL123C": {
+      "name": "Daemon Shells",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL123C.png"
+    },
+    "upgDmgL124C": {
+      "name": "Virulent Rounds",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL124C.png"
+    },
+    "upgDmgL126C": {
+      "name": "Snazzy Dakka",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL126C.png"
+    },
+    "upgDmgL127C": {
+      "name": "Target Lock",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL127C.png"
+    },
+    "upgDmgL128C": {
+      "name": "Scriptures of Battle",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL128C.png"
+    },
+    "upgDmgL129C": {
+      "name": "Boonstone",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL129C.png"
+    },
+    "upgDmgL130C": {
+      "name": "Molecular Vaporiser",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL130C.png"
+    },
+    "upgDmgL131C": {
+      "name": "Frostblade",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL131C.png"
+    },
+    "upgDmgL132C": {
+      "name": "Arbiter's Gaze",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL132C.png"
+    },
+    "upgDmgL133C": {
+      "name": "Implant Attack",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL133C.png"
+    },
+    "upgDmgL134C": {
+      "name": "Prehensile Dataspike",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL134C.png"
+    },
+    "upgDmgL135C": {
+      "name": "Archangel's Shard",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL135C.png"
+    },
+    "upgDmgL136C": {
+      "name": "Gene-twisted Muscle",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL136C.png"
+    },
+    "upgDmgL137C": {
+      "name": "Panoptispex",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL137C.png"
+    },
+    "upgDmgL138C": {
+      "name": "Butcher's Nails",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL138C.png"
+    },
+    "upgDmgL139C": {
+      "name": "Amplified Senses",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL139C.png"
+    },
+    "upgDmgL140C": {
+      "name": "Experimental Kin Technology",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL140C.png"
+    },
+    "upgDmgL202": {
+      "name": "Psychic Force Conduit",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL202.png"
+    },
+    "upgDmgL204": {
+      "name": "Ancient Power Cell",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL204.png"
+    },
+    "upgDmgL211C": {
+      "name": "Monstrous Strength",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL211C.png"
+    },
+    "upgDmgL212C": {
+      "name": "Preternatural Strength",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL212C.png"
+    },
+    "upgDmgL213C": {
+      "name": "Superaugmented Strength",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL213C.png"
+    },
+    "upgDmgL214C": {
+      "name": "Technocrafted Strength",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL214C.png"
+    },
+    "upgDmgM211C": {
+      "name": "Arcane Substances",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgM211C.png"
+    },
+    "upgDmgM212C": {
+      "name": "Sundering Talons",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgM212C.png"
+    },
+    "upgDmgM213C": {
+      "name": "Ancient Weapon Augmentation",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgM213C.png"
+    },
+    "upgDmgM214C": {
+      "name": "Ancient Power Source",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgM214C.png"
+    },
+    "upgArmC001": {
+      "name": "Purity Seal",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC001.png"
+    },
+    "upgArmC002": {
+      "name": "Fine Purity Seal",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC002.png"
+    },
+    "upgArmC003": {
+      "name": "Pile of Salvage",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC003.png"
+    },
+    "upgArmC004": {
+      "name": "Adamantium Ore",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC004.png"
+    },
+    "upgArmC005": {
+      "name": "Sophisticated Material",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC005.png"
+    },
+    "upgArmC006": {
+      "name": "Rebreather",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC006.png"
+    },
+    "upgArmC007": {
+      "name": "Mutation: Tough Skin",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC007.png"
+    },
+    "upgArmC011": {
+      "name": "Filaments",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC011.png"
+    },
+    "upgArmC012": {
+      "name": "Metal Joints",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC012.png"
+    },
+    "upgArmC013": {
+      "name": "Armor Trim",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC013.png"
+    },
+    "upgArmU001": {
+      "name": "Oath Seal",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU001.png"
+    },
+    "upgArmU002": {
+      "name": "Box of Salvage",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU002.png"
+    },
+    "upgArmU003C": {
+      "name": "Adamantium Lump",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU003C.png"
+    },
+    "upgArmU004C": {
+      "name": "Sophisticated Material Ingot",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU004C.png"
+    },
+    "upgArmU005": {
+      "name": "Ceramite Lump",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU005.png"
+    },
+    "upgArmU006": {
+      "name": "Advanced Filaments",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU006.png"
+    },
+    "upgArmU007": {
+      "name": "Mutation: Scaly Skin",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU007.png"
+    },
+    "upgArmU008": {
+      "name": "Advanced Rebreather",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU008.png"
+    },
+    "upgArmU009": {
+      "name": "Blessed Tasset Plate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU009.png"
+    },
+    "upgArmU010C": {
+      "name": "Blessed Ceramite",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU010C.png"
+    },
+    "upgArmU012": {
+      "name": "Scale-Plates",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU012.png"
+    },
+    "upgArmU012C": {
+      "name": "Sturdy Pieces",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU012C.png"
+    },
+    "upgArmU013": {
+      "name": "Cloak",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU013.png"
+    },
+    "upgArmU014": {
+      "name": "Mesh Weave",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU014.png"
+    },
+    "upgArmR001C": {
+      "name": "Blessed Purity Seal",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR001C.png"
+    },
+    "upgArmR002C": {
+      "name": "Sophisticated Material Bar",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR002C.png"
+    },
+    "upgArmR003C": {
+      "name": "Ceramite Bar",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR003C.png"
+    },
+    "upgArmR004C": {
+      "name": "Mutation: Warped Skin",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR004C.png"
+    },
+    "upgArmR005": {
+      "name": "Artificer Tasset Plate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR005.png"
+    },
+    "upgArmR006": {
+      "name": "Crate of Salvage",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR006.png"
+    },
+    "upgArmR007C": {
+      "name": "Adamantium Bar",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR007C.png"
+    },
+    "upgArmR008C": {
+      "name": "Sturdy Parts",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR008C.png"
+    },
+    "upgArmR009": {
+      "name": "Unnatural Vapour Dispenser",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR009.png"
+    },
+    "upgArmR010": {
+      "name": "Valuable Fabric",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR010.png"
+    },
+    "upgArmR012C": {
+      "name": "Impressive Armor Trim",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR012C.png"
+    },
+    "upgArmR013C": {
+      "name": "Fine Cloak",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR013C.png"
+    },
+    "upgArmR014C": {
+      "name": "Mesh Weave Garment",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR014C.png"
+    },
+    "upgArmR015": {
+      "name": "Subdermal Plating",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR015.png"
+    },
+    "upgArmR021": {
+      "name": "Blessed Tabard",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR021.png"
+    },
+    "upgArmR022": {
+      "name": "Blessed Corset Armor",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR022.png"
+    },
+    "upgArmR025": {
+      "name": "Flak Plates",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR025.png"
+    },
+    "upgArmR023": {
+      "name": "Blasphemous Armor Trim",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR023.png"
+    },
+    "upgArmR026": {
+      "name": "'ard Plate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR026.png"
+    },
+    "upgArmR027": {
+      "name": "Drone Controller",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR027.png"
+    },
+    "upgArmR028": {
+      "name": "Wraithbone Plate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR028.png"
+    },
+    "upgArmR029": {
+      "name": "Ritual Implements",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR029.png"
+    },
+    "upgArmR030": {
+      "name": "Reinforced Scale-Plates",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR030.png"
+    },
+    "upgArmR031": {
+      "name": "Beast Hide",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR031.png"
+    },
+    "upgArmR032": {
+      "name": "Dark Hood",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR032.png"
+    },
+    "upgArmR033": {
+      "name": "Reinforced Chitin",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR033.png"
+    },
+    "upgArmR034": {
+      "name": "Cogwheel Crest",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR034.png"
+    },
+    "upgArmR035": {
+      "name": "Artisan Plating",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR035.png"
+    },
+    "upgArmR036": {
+      "name": "Industrial Padding",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR036.png"
+    },
+    "upgArmR037": {
+      "name": "Auramite Wing",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR037.png"
+    },
+    "upgArmR038": {
+      "name": "Cadaere Renissum",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR038.png"
+    },
+    "upgArmR039": {
+      "name": "Lavish Helmet Crest",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR039.png"
+    },
+    "upgArmR040": {
+      "name": "Void Armour Plating",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR040.png"
+    },
+    "upgArmE001C": {
+      "name": "Grand Purity Seal",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE001C.png"
+    },
+    "upgArmE002C": {
+      "name": "Adamantium Sheet",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE002C.png"
+    },
+    "upgArmE003C": {
+      "name": "Sophisticated Material Sheet",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE003C.png"
+    },
+    "upgArmE004C": {
+      "name": "Ceramite Sheet",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE004C.png"
+    },
+    "upgArmE005C": {
+      "name": "Mutation: Metallic Skin",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE005C.png"
+    },
+    "upgArmE006C": {
+      "name": "Ancient Tasset Plate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE006C.png"
+    },
+    "upgArmE007C": {
+      "name": "Death Shroud",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE007C.png"
+    },
+    "upgArmE008": {
+      "name": "Hypermaterial Shifter",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE008.png"
+    },
+    "upgArmE009": {
+      "name": "Revered Talisman",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE009.png"
+    },
+    "upgArmE010": {
+      "name": "Unyielding Rivets",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE010.png"
+    },
+    "upgArmE011C": {
+      "name": "Decorated Cloak",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE011C.png"
+    },
+    "upgArmE012C": {
+      "name": "Sturdy Segments",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE012C.png"
+    },
+    "upgArmE013": {
+      "name": "Duplicate Organ",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE013.png"
+    },
+    "upgArmE014C": {
+      "name": "Advanced Mesh Weave Garment",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE014C.png"
+    },
+    "upgArmE020C": {
+      "name": "Layered Ceramite Plating",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE020C.png"
+    },
+    "upgArmE021C": {
+      "name": "Crusader's Tabard",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE021C.png"
+    },
+    "upgArmE022C": {
+      "name": "Sanctified Corset Armor",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE022C.png"
+    },
+    "upgArmE025C": {
+      "name": "High-grade Flak Plates",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE025C.png"
+    },
+    "upgArmE023C": {
+      "name": "Daemonic Armor Trim",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE023C.png"
+    },
+    "upgArmE026C": {
+      "name": "Ded 'ard Plate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE026C.png"
+    },
+    "upgArmE027C": {
+      "name": "Advanced Drone Controller",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE027C.png"
+    },
+    "upgArmE028C": {
+      "name": "Filigrane Wraithbone Plate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE028C.png"
+    },
+    "upgArmE029C": {
+      "name": "Cabalistic Implements",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE029C.png"
+    },
+    "upgArmE030C": {
+      "name": "Scale-Plate Strand",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE030C.png"
+    },
+    "upgArmE031C": {
+      "name": "Ice Troll Hide",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE031C.png"
+    },
+    "upgArmE032C": {
+      "name": "Calibanite Hood",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE032C.png"
+    },
+    "upgArmE033C": {
+      "name": "Adaptive Chitin Carapace",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE033C.png"
+    },
+    "upgArmE034C": {
+      "name": "Enhanced Cogwheel Crest",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE034C.png"
+    },
+    "upgArmE035C": {
+      "name": "Artisan of War Plating",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE035C.png"
+    },
+    "upgArmE036C": {
+      "name": "Industrial Protection Suit",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE036C.png"
+    },
+    "upgArmE037C": {
+      "name": "Auramite Wing Embellishment",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE037C.png"
+    },
+    "upgArmE038C": {
+      "name": "Blessed Cadaere Renissum",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE038C.png"
+    },
+    "upgArmE039C": {
+      "name": "Lavish Helmet Spike",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE039C.png"
+    },
+    "upgArmE040C": {
+      "name": "Exoarmour Plating",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE040C.png"
+    },
+    "upgArmL001": {
+      "name": "Purity Seal of the Primarch",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL001.png"
+    },
+    "upgArmL002C": {
+      "name": "Adamantium Plates",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL002C.png"
+    },
+    "upgArmL003C": {
+      "name": "Sophisticated Material Plates",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL003C.png"
+    },
+    "upgArmL004C": {
+      "name": "Ceramite Plates",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL004C.png"
+    },
+    "upgArmL005C": {
+      "name": "Mutation: Impervious Skin",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL005C.png"
+    },
+    "upgArmL006C": {
+      "name": "Grand Tasset Plate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL006C.png"
+    },
+    "upgArmL007C": {
+      "name": "Immaterial Shroud",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL007C.png"
+    },
+    "upgArmL008C": {
+      "name": "Sturdy Plates",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL008C.png"
+    },
+    "upgArmL009C": {
+      "name": "Mysterious Device",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL009C.png"
+    },
+    "upgArmL010C": {
+      "name": "Seal of the Emperor's Protection",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL010C.png"
+    },
+    "upgArmL011C": {
+      "name": "Divine Cloak",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL011C.png"
+    },
+    "upgArmL020C": {
+      "name": "Adamantine Blast Plating",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL020C.png"
+    },
+    "upgArmL021C": {
+      "name": "Tabard of Righteous Wrath",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL021C.png"
+    },
+    "upgArmL022C": {
+      "name": "Holy Corset Armor",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL022C.png"
+    },
+    "upgArmL025C": {
+      "name": "Artificer Flak Plates",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL025C.png"
+    },
+    "upgArmL023C": {
+      "name": "Infernal Armor Trim",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL023C.png"
+    },
+    "upgArmL026C": {
+      "name": "Ded Shiny 'ard Plate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL026C.png"
+    },
+    "upgArmL027C": {
+      "name": "Sentry AI Drone Controller",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL027C.png"
+    },
+    "upgArmL028C": {
+      "name": "Soul-Bonded Wraithbone Plate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL028C.png"
+    },
+    "upgArmL029C": {
+      "name": "Great Cult Implements",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL029C.png"
+    },
+    "upgArmL030C": {
+      "name": "Scale-Plate Mantle",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL030C.png"
+    },
+    "upgArmL031C": {
+      "name": "Ice Wyrm Hide",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL031C.png"
+    },
+    "upgArmL032C": {
+      "name": "Inner Circle Hood",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL032C.png"
+    },
+    "upgArmL033C": {
+      "name": "Hyper-Adaptive Chitin Carapace",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL033C.png"
+    },
+    "upgArmL034C": {
+      "name": "Artificer Cogwheel Crest",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL034C.png"
+    },
+    "upgArmL035C": {
+      "name": "Angelic Plating",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL035C.png"
+    },
+    "upgArmL036C": {
+      "name": "Industrial Carapace",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL036C.png"
+    },
+    "upgArmL037C": {
+      "name": "Auramite Wing Adornment",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL037C.png"
+    },
+    "upgArmL038C": {
+      "name": "Exalted Cadaere Renissum",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL038C.png"
+    },
+    "upgArmL039C": {
+      "name": "Lavish Helmet Plume",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL039C.png"
+    },
+    "upgArmL040C": {
+      "name": "Forge Wrought Plating",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL040C.png"
+    },
+    "upgArmL120C": {
+      "name": "Adamantine Mantle",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL120C.png"
+    },
+    "upgArmL121C": {
+      "name": "Octarian Crusade Seal",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL121C.png"
+    },
+    "upgArmL122C": {
+      "name": "Sabbat-Pattern Visor",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL122C.png"
+    },
+    "upgArmL125C": {
+      "name": "Bastion Honour",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL125C.png"
+    },
+    "upgArmL123C": {
+      "name": "Black Rune",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL123C.png"
+    },
+    "upgArmL124C": {
+      "name": "Cloud of Flies",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL124C.png"
+    },
+    "upgArmL126C": {
+      "name": "Bosspole",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL126C.png"
+    },
+    "upgArmL127C": {
+      "name": "Iridium Plating",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL127C.png"
+    },
+    "upgArmL128C": {
+      "name": "Scriptures of Fortune",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL128C.png"
+    },
+    "upgArmL129C": {
+      "name": "Warpweave Robe",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL129C.png"
+    },
+    "upgArmL130C": {
+      "name": "Transdimensional Sanctum",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL130C.png"
+    },
+    "upgArmL131C": {
+      "name": "Runic Tasset Plate",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL131C.png"
+    },
+    "upgArmL132C": {
+      "name": "Shroud of Heroes",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL132C.png"
+    },
+    "upgArmL133C": {
+      "name": "Symbiotic Carapace",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL133C.png"
+    },
+    "upgArmL134C": {
+      "name": "Kataphron Armour",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL134C.png"
+    },
+    "upgArmL135C": {
+      "name": "Visage of Death",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL135C.png"
+    },
+    "upgArmL136C": {
+      "name": "Gene-sire's Reliquant",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL136C.png"
+    },
+    "upgArmL137C": {
+      "name": "Adamantine Thread Cloak",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL137C.png"
+    },
+    "upgArmL138C": {
+      "name": "Collar of Khorne",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL138C.png"
+    },
+    "upgArmL139C": {
+      "name": "Abhorrent Plating",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL139C.png"
+    },
+    "upgArmL140C": {
+      "name": "RAM Shield Technology",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL140C.png"
+    },
+    "upgArmL202": {
+      "name": "Psyk-Conductive Material",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL202.png"
+    },
+    "upgArmL203": {
+      "name": "Archeotech Remnant",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL203.png"
+    },
+    "upgArmL204": {
+      "name": "Ancient Alloy",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL204.png"
+    },
+    "upgArmL211C": {
+      "name": "Monstrous Defences",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL211C.png"
+    },
+    "upgArmL212C": {
+      "name": "Preternatural Defences",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL212C.png"
+    },
+    "upgArmL213C": {
+      "name": "Superaugmented Defences",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL213C.png"
+    },
+    "upgArmL214C": {
+      "name": "Technocrafted Defences",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL214C.png"
+    },
+    "upgArmM211C": {
+      "name": "Seal of Indomitability",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmM211C.png"
+    },
+    "upgArmM212C": {
+      "name": "Mutation: Impenetrable Skin",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmM212C.png"
+    },
+    "upgArmM213C": {
+      "name": "Magnificient Garment",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmM213C.png"
+    },
+    "upgArmM214C": {
+      "name": "Warforged Safeguard",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmM214C.png"
+    },
+    "upgHpRCS": {
+      "name": "Coming soon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpRCS.png"
+    },
+    "upgDmgRCS": {
+      "name": "Coming soon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgRCS.png"
+    },
+    "upgArmRCS": {
+      "name": "Coming soon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmRCS.png"
+    },
+    "upgHpECS": {
+      "name": "Coming soon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpECS.png"
+    },
+    "upgDmgECS": {
+      "name": "Coming soon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgECS.png"
+    },
+    "upgArmECS": {
+      "name": "Coming soon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmECS.png"
+    },
+    "upgHpCS": {
+      "name": "Coming soon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpCS.png"
+    },
+    "upgDmgCS": {
+      "name": "Coming soon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgCS.png"
+    },
+    "upgArmCS": {
+      "name": "Coming soon",
+      "image": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmCS.png"
+    },
+    "I_Crit_C001": {
+      "name": "Combat Knife",
+      "image": "equipment/ui_icon_item_I_Crit_C001.png"
+    },
+    "I_Crit_U001": {
+      "name": "Balanced Combat Knife",
+      "image": "equipment/ui_icon_item_I_Crit_U001.png"
+    },
+    "I_Crit_R001": {
+      "name": "Powered Combat Knife",
+      "image": "equipment/ui_icon_item_I_Crit_R001.png"
+    },
+    "I_Crit_E001": {
+      "name": "Advanced Combat Knife",
+      "image": "equipment/ui_icon_item_I_Crit_E001.png"
+    },
+    "I_Crit_L001": {
+      "name": "Grand Combat Knife",
+      "image": "equipment/ui_icon_item_I_Crit_L001.png"
+    },
+    "I_Crit_M001": {
+      "name": "Ancient Combat Knife",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Crit_M001.png"
+    },
+    "I_Crit_C002": {
+      "name": "Standard-Issue Bolt Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_C002.png"
+    },
+    "I_Crit_U002": {
+      "name": "Battle-Hardened Bolt Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_U002.png"
+    },
+    "I_Crit_R002": {
+      "name": "Sanctified Bolt Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_R002.png"
+    },
+    "I_Crit_E002": {
+      "name": "Master-Crafted Bolt Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_E002.png"
+    },
+    "I_Crit_L002": {
+      "name": "Artificer Bolt Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_L002.png"
+    },
+    "I_Crit_M002": {
+      "name": "Archeotech Bolt Pistol",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Crit_M002.png"
+    },
+    "I_Crit_C003": {
+      "name": "Void Blade",
+      "image": "equipment/ui_icon_item_I_Crit_C003.png"
+    },
+    "I_Crit_U003": {
+      "name": "Subjugating Void Blade",
+      "image": "equipment/ui_icon_item_I_Crit_U003.png"
+    },
+    "I_Crit_R003": {
+      "name": "Royal Void Blade",
+      "image": "equipment/ui_icon_item_I_Crit_R003.png"
+    },
+    "I_Crit_E003": {
+      "name": "Hyperphasing Void Blade",
+      "image": "equipment/ui_icon_item_I_Crit_E003.png"
+    },
+    "I_Crit_L003": {
+      "name": "Transdimensional Void Blade",
+      "image": "equipment/ui_icon_item_I_Crit_L003.png"
+    },
+    "I_Crit_U004": {
+      "name": "Heirloom Bolt Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_U004.png"
+    },
+    "I_Crit_C005": {
+      "name": "Particle Casters",
+      "image": "equipment/ui_icon_item_I_Crit_C005.png"
+    },
+    "I_Crit_U005": {
+      "name": "Subjugating Particle Casters",
+      "image": "equipment/ui_icon_item_I_Crit_U005.png"
+    },
+    "I_Crit_R005": {
+      "name": "Royal Particle Casters",
+      "image": "equipment/ui_icon_item_I_Crit_R005.png"
+    },
+    "I_Crit_E005": {
+      "name": "Hyperphasing Particle Casters",
+      "image": "equipment/ui_icon_item_I_Crit_E005.png"
+    },
+    "I_Crit_L005": {
+      "name": "Transdimensional Particle Casters",
+      "image": "equipment/ui_icon_item_I_Crit_L005.png"
+    },
+    "I_Crit_M005": {
+      "name": "Eternal Particle Casters",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Crit_M005.png"
+    },
+    "I_Crit_C006": {
+      "name": "Blemished Bolt Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_C006.png"
+    },
+    "I_Crit_U006": {
+      "name": "Twisted Bolt Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_U006.png"
+    },
+    "I_Crit_R006": {
+      "name": "Heretical Bolt Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_R006.png"
+    },
+    "I_Crit_E006": {
+      "name": "Malefic Bolt Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_E006.png"
+    },
+    "I_Crit_L006": {
+      "name": "Warpforged Bolt Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_L006.png"
+    },
+    "I_Crit_M006": {
+      "name": "Daemonic Bolt Pistol",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Crit_M006.png"
+    },
+    "I_Crit_C007": {
+      "name": "Slugga",
+      "image": "equipment/ui_icon_item_I_Crit_C007.png"
+    },
+    "I_Crit_U007": {
+      "name": "Killy Slugga",
+      "image": "equipment/ui_icon_item_I_Crit_U007.png"
+    },
+    "I_Crit_R007": {
+      "name": "Speshul Killy Slugga",
+      "image": "equipment/ui_icon_item_I_Crit_R007.png"
+    },
+    "I_Crit_E007": {
+      "name": "Ded Killy Slugga",
+      "image": "equipment/ui_icon_item_I_Crit_E007.png"
+    },
+    "I_Crit_L007": {
+      "name": "Ded Shiny Slugga",
+      "image": "equipment/ui_icon_item_I_Crit_L007.png"
+    },
+    "I_Crit_M007": {
+      "name": "Supa-Killy Slugga",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Crit_M007.png"
+    },
+    "I_Crit_C008": {
+      "name": "Shuriken Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_C008.png"
+    },
+    "I_Crit_U008": {
+      "name": "Aspect Shuriken Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_U008.png"
+    },
+    "I_Crit_R008": {
+      "name": "Wraithbone Shuriken Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_R008.png"
+    },
+    "I_Crit_E008": {
+      "name": "Mind-Linked Shuriken Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_E008.png"
+    },
+    "I_Crit_L008": {
+      "name": "Soul-Linked Shuriken Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_L008.png"
+    },
+    "I_Crit_M008": {
+      "name": "Prophesied Shuriken Pistol",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Crit_M008.png"
+    },
+    "I_Crit_C009": {
+      "name": "Pulse Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_C009.png"
+    },
+    "I_Crit_U009": {
+      "name": "Fire Caste Pulse Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_U009.png"
+    },
+    "I_Crit_R009": {
+      "name": "Overcharged Pulse Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_R009.png"
+    },
+    "I_Crit_E009": {
+      "name": "Advanced Pulse Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_E009.png"
+    },
+    "I_Crit_L009": {
+      "name": "Prototype Pulse Pistol",
+      "image": "equipment/ui_icon_item_I_Crit_L009.png"
+    },
+    "I_Crit_M009": {
+      "name": "Signature Pulse Pistol",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Crit_M009.png"
+    },
+    "I_Crit_C010": {
+      "name": "Ceremonial Knife",
+      "image": "equipment/ui_icon_item_I_Crit_C010.png"
+    },
+    "I_Crit_U010": {
+      "name": "Good Ceremonial Knife",
+      "image": "equipment/ui_icon_item_I_Crit_U010.png"
+    },
+    "I_Crit_R010": {
+      "name": "Fine Ceremonial Knife",
+      "image": "equipment/ui_icon_item_I_Crit_R010.png"
+    },
+    "I_Crit_E010": {
+      "name": "Adorned Ceremonial Knife",
+      "image": "equipment/ui_icon_item_I_Crit_E010.png"
+    },
+    "I_Crit_L010": {
+      "name": "Grand Ceremonial Knife",
+      "image": "equipment/ui_icon_item_I_Crit_L010.png"
+    },
+    "I_Crit_M010": {
+      "name": "Ancient Ceremonial Knife",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Crit_M010.png"
+    },
+    "I_Crit_C011": {
+      "name": "Bonesword",
+      "image": "equipment/ui_icon_item_I_Crit_C011.png"
+    },
+    "I_Crit_U011": {
+      "name": "Evolved Bonesword",
+      "image": "equipment/ui_icon_item_I_Crit_U011.png"
+    },
+    "I_Crit_R011": {
+      "name": "Augmented Bonesword",
+      "image": "equipment/ui_icon_item_I_Crit_R011.png"
+    },
+    "I_Crit_E011": {
+      "name": "Symbiotic Bonesword",
+      "image": "equipment/ui_icon_item_I_Crit_E011.png"
+    },
+    "I_Crit_L011": {
+      "name": "Monstrous Bonesword",
+      "image": "equipment/ui_icon_item_I_Crit_L011.png"
+    },
+    "I_Crit_M011": {
+      "name": "Apex Bonesword",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Crit_M011.png"
+    },
+    "I_Crit_L132": {
+      "name": "Heavenfall Blade",
+      "image": "equipment/ui_icon_item_I_Crit_L132.png"
+    },
+    "I_Booster_Crit_C001": {
+      "name": "Standard-Issue Frag Grenades",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_C001.png"
+    },
+    "I_Booster_Crit_U001": {
+      "name": "Battle Hardened Frag Grenades",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_U001.png"
+    },
+    "I_Booster_Crit_R001": {
+      "name": "Sanctified Frag Grenades",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_R001.png"
+    },
+    "I_Booster_Crit_E001": {
+      "name": "Master-Crafted Frag Grenades",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_E001.png"
+    },
+    "I_Booster_Crit_L001": {
+      "name": "Artificer Frag Grenades",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_L001.png"
+    },
+    "I_Booster_Crit_M001": {
+      "name": "Archeotech Frag Grenades",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Booster_Crit_M001.png"
+    },
+    "I_Booster_Crit_C002": {
+      "name": "Disruption Fields",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_C002.png"
+    },
+    "I_Booster_Crit_U002": {
+      "name": "Subjugating Disruption Fields",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_U002.png"
+    },
+    "I_Booster_Crit_R002": {
+      "name": "Royal Disruption Fields",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_R002.png"
+    },
+    "I_Booster_Crit_E002": {
+      "name": "Hyperphasing Disruption Fields",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_E002.png"
+    },
+    "I_Booster_Crit_L002": {
+      "name": "Transdimensional Disruption Fields",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_L002.png"
+    },
+    "I_Booster_Crit_M002": {
+      "name": "Eternal Disruption Fields",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Booster_Crit_M002.png"
+    },
+    "I_Booster_Crit_C003": {
+      "name": "Blemished Frag Grenades",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_C003.png"
+    },
+    "I_Booster_Crit_U003": {
+      "name": "Twisted Frag Grenades",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_U003.png"
+    },
+    "I_Booster_Crit_R003": {
+      "name": "Heretical Frag Grenades",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_R003.png"
+    },
+    "I_Booster_Crit_E003": {
+      "name": "Malefic Frag Grenades",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_E003.png"
+    },
+    "I_Booster_Crit_L003": {
+      "name": "Warpforged Frag Grenades",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_L003.png"
+    },
+    "I_Booster_Crit_M003": {
+      "name": "Daemonic Frag Grenades",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Booster_Crit_M003.png"
+    },
+    "I_Booster_Crit_C004": {
+      "name": "Stikkbomz",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_C004.png"
+    },
+    "I_Booster_Crit_U004": {
+      "name": "Killy Stikkbomz",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_U004.png"
+    },
+    "I_Booster_Crit_R004": {
+      "name": "Speshul Killy Stikkbomz",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_R004.png"
+    },
+    "I_Booster_Crit_E004": {
+      "name": "Ded Killy Stikkbomz",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_E004.png"
+    },
+    "I_Booster_Crit_L004": {
+      "name": "Ded Shiny Stikkbomz",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_L004.png"
+    },
+    "I_Booster_Crit_M004": {
+      "name": "Supa-Killy Stikkbomz",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Booster_Crit_M004.png"
+    },
+    "I_Booster_Crit_C005": {
+      "name": "Fusion Charges",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_C005.png"
+    },
+    "I_Booster_Crit_U005": {
+      "name": "Improved Fusion Charges",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_U005.png"
+    },
+    "I_Booster_Crit_R005": {
+      "name": "Refined Fusion Charges",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_R005.png"
+    },
+    "I_Booster_Crit_E005": {
+      "name": "Advanced Fusion Charges",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_E005.png"
+    },
+    "I_Booster_Crit_L005": {
+      "name": "Optimal Fusion Charges",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_L005.png"
+    },
+    "I_Booster_Crit_M005": {
+      "name": "Perfected Fusion Charges",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Booster_Crit_M005.png"
+    },
+    "I_Booster_Crit_C006": {
+      "name": "Lash-Whip",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_C006.png"
+    },
+    "I_Booster_Crit_U006": {
+      "name": "Evolved Lash-Whip",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_U006.png"
+    },
+    "I_Booster_Crit_R006": {
+      "name": "Augmented Lash-Whip",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_R006.png"
+    },
+    "I_Booster_Crit_E006": {
+      "name": "Symbiotic Lash-Whip",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_E006.png"
+    },
+    "I_Booster_Crit_L006": {
+      "name": "Monstrous Lash-Whip",
+      "image": "equipment/ui_icon_item_I_Booster_Crit_L006.png"
+    },
+    "I_Booster_Crit_M006": {
+      "name": "Apex Lash-Whip",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Booster_Crit_M006.png"
+    },
+    "I_Defensive_C001": {
+      "name": "_I_Defensive_C001",
+      "image": "equipment/Defensive_Item_Icon.webp",
+      "fallback": true
+    },
+    "I_Defensive_U001": {
+      "name": "_I_Defensive_U001",
+      "image": "equipment/Defensive_Item_Icon.webp",
+      "fallback": true
+    },
+    "I_Defensive_R001": {
+      "name": "_I_Defensive_R001",
+      "image": "equipment/Defensive_Item_Icon.webp",
+      "fallback": true
+    },
+    "I_Defensive_E001": {
+      "name": "_I_Defensive_E001",
+      "image": "equipment/Defensive_Item_Icon.webp",
+      "fallback": true
+    },
+    "I_Defensive_L001": {
+      "name": "_I_Defensive_L001",
+      "image": "equipment/Defensive_Item_Icon.webp",
+      "fallback": true
+    },
+    "I_Defensive_C002": {
+      "name": "Standard-Issue MK X Pauldron",
+      "image": "equipment/ui_icon_item_I_Defensive_C002.png"
+    },
+    "I_Defensive_U002": {
+      "name": "Battle-Hardened MK X Pauldron",
+      "image": "equipment/ui_icon_item_I_Defensive_U002.png"
+    },
+    "I_Defensive_R002": {
+      "name": "Sanctified MK X Pauldron",
+      "image": "equipment/ui_icon_item_I_Defensive_R002.png"
+    },
+    "I_Defensive_E002": {
+      "name": "Master-Crafted MK X Pauldron",
+      "image": "equipment/ui_icon_item_I_Defensive_E002.png"
+    },
+    "I_Defensive_L002": {
+      "name": "Artificer MK X Pauldron",
+      "image": "equipment/ui_icon_item_I_Defensive_L002.png"
+    },
+    "I_Defensive_C003": {
+      "name": "Plated Greaves",
+      "image": "equipment/ui_icon_item_I_Defensive_C003.png"
+    },
+    "I_Defensive_U003": {
+      "name": "Good Plated Greaves",
+      "image": "equipment/ui_icon_item_I_Defensive_U003.png"
+    },
+    "I_Defensive_R003": {
+      "name": "Fine Plated Greaves",
+      "image": "equipment/ui_icon_item_I_Defensive_R003.png"
+    },
+    "I_Defensive_E003": {
+      "name": "Adorned Plated Greaves",
+      "image": "equipment/ui_icon_item_I_Defensive_E003.png"
+    },
+    "I_Defensive_L003": {
+      "name": "Grand Plated Greaves",
+      "image": "equipment/ui_icon_item_I_Defensive_L003.png"
+    },
+    "I_Defensive_M003": {
+      "name": "Ancient Plated Greaves",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Defensive_M003.png"
+    },
+    "I_Defensive_C004": {
+      "name": "Mantle",
+      "image": "equipment/ui_icon_item_I_Defensive_C004.png"
+    },
+    "I_Defensive_U004": {
+      "name": "Good Mantle",
+      "image": "equipment/ui_icon_item_I_Defensive_U004.png"
+    },
+    "I_Defensive_R004": {
+      "name": "Fine Mantle",
+      "image": "equipment/ui_icon_item_I_Defensive_R004.png"
+    },
+    "I_Defensive_E004": {
+      "name": "Adorned Mantle",
+      "image": "equipment/ui_icon_item_I_Defensive_E004.png"
+    },
+    "I_Defensive_L004": {
+      "name": "Grand Mantle",
+      "image": "equipment/ui_icon_item_I_Defensive_L004.png"
+    },
+    "I_Defensive_C005": {
+      "name": "Nanocrystalline Plating",
+      "image": "equipment/ui_icon_item_I_Defensive_C005.png"
+    },
+    "I_Defensive_U005": {
+      "name": "Improved Nanocrystalline Plating",
+      "image": "equipment/ui_icon_item_I_Defensive_U005.png"
+    },
+    "I_Defensive_R005": {
+      "name": "Refined Nanocrystalline Plating",
+      "image": "equipment/ui_icon_item_I_Defensive_R005.png"
+    },
+    "I_Defensive_E005": {
+      "name": "Advanced Nanocrystalline Plating",
+      "image": "equipment/ui_icon_item_I_Defensive_E005.png"
+    },
+    "I_Defensive_L005": {
+      "name": "Optimal Nanocrystalline Plating",
+      "image": "equipment/ui_icon_item_I_Defensive_L005.png"
+    },
+    "I_Defensive_M005": {
+      "name": "Perfected Nanocrystalline Plating",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Defensive_M005.png"
+    },
+    "I_Defensive_C006": {
+      "name": "Exoskeleton",
+      "image": "equipment/ui_icon_item_I_Defensive_C006.png"
+    },
+    "I_Defensive_U006": {
+      "name": "Evolved Exoskeleton",
+      "image": "equipment/ui_icon_item_I_Defensive_U006.png"
+    },
+    "I_Defensive_R006": {
+      "name": "Augmented Exoskeleton",
+      "image": "equipment/ui_icon_item_I_Defensive_R006.png"
+    },
+    "I_Defensive_E006": {
+      "name": "Symbiotic Exoskeleton",
+      "image": "equipment/ui_icon_item_I_Defensive_E006.png"
+    },
+    "I_Defensive_L006": {
+      "name": "Monstrous Exoskeleton",
+      "image": "equipment/ui_icon_item_I_Defensive_L006.png"
+    },
+    "I_Defensive_M006": {
+      "name": "Apex Symbiotic Exoskeleton",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Defensive_M006.png"
+    },
+    "I_Defensive_C007": {
+      "name": "Blooded Spiked Pauldron",
+      "image": "equipment/ui_icon_item_I_Defensive_C007.png"
+    },
+    "I_Defensive_U007": {
+      "name": "Savage Spiked Pauldron",
+      "image": "equipment/ui_icon_item_I_Defensive_U007.png"
+    },
+    "I_Defensive_R007": {
+      "name": "Brutal Spiked Pauldron",
+      "image": "equipment/ui_icon_item_I_Defensive_R007.png"
+    },
+    "I_Defensive_E007": {
+      "name": "Merciless Spiked Pauldron",
+      "image": "equipment/ui_icon_item_I_Defensive_E007.png"
+    },
+    "I_Defensive_L007": {
+      "name": "Monstrous Spiked Pauldron",
+      "image": "equipment/ui_icon_item_I_Defensive_L007.png"
+    },
+    "I_Block_C002": {
+      "name": "Refractor Field",
+      "image": "equipment/ui_icon_item_I_Block_C002.png"
+    },
+    "I_Block_U002": {
+      "name": "Battle-Hardened Refractor Field",
+      "image": "equipment/ui_icon_item_I_Block_U002.png"
+    },
+    "I_Block_R002": {
+      "name": "Sanctified Field",
+      "image": "equipment/ui_icon_item_I_Block_R002.png"
+    },
+    "I_Block_E002": {
+      "name": "Master-Crafted Refractor Field",
+      "image": "equipment/ui_icon_item_I_Block_E002.png"
+    },
+    "I_Block_L002": {
+      "name": "Artificer Refractor Field",
+      "image": "equipment/ui_icon_item_I_Block_L002.png"
+    },
+    "I_Block_C003": {
+      "name": "Force Field",
+      "image": "equipment/ui_icon_item_I_Block_C003.png"
+    },
+    "I_Block_U003": {
+      "name": "Improved Force Field",
+      "image": "equipment/ui_icon_item_I_Block_U003.png"
+    },
+    "I_Block_R003": {
+      "name": "Refined Force Field",
+      "image": "equipment/ui_icon_item_I_Block_R003.png"
+    },
+    "I_Block_E003": {
+      "name": "Advanced Force Field",
+      "image": "equipment/ui_icon_item_I_Block_E003.png"
+    },
+    "I_Block_L003": {
+      "name": "Optimal Force Field",
+      "image": "equipment/ui_icon_item_I_Block_L003.png"
+    },
+    "I_Block_M003": {
+      "name": "Perfected Force Field",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Block_M003.png"
+    },
+    "I_Block_C004": {
+      "name": "Iron Halo",
+      "image": "equipment/ui_icon_item_I_Block_C004.png"
+    },
+    "I_Block_U004": {
+      "name": "Battle-Hardened Iron Halo",
+      "image": "equipment/ui_icon_item_I_Block_U004.png"
+    },
+    "I_Block_R004": {
+      "name": "Sanctified Iron Halo",
+      "image": "equipment/ui_icon_item_I_Block_R004.png"
+    },
+    "I_Block_E004": {
+      "name": "Master-Crafted Iron Halo",
+      "image": "equipment/ui_icon_item_I_Block_E004.png"
+    },
+    "I_Block_L004": {
+      "name": "Artificer Iron Halo",
+      "image": "equipment/ui_icon_item_I_Block_L004.png"
+    },
+    "I_Block_C005": {
+      "name": "_I_Block_C005",
+      "image": "equipment/Block_Item_Icon.webp",
+      "fallback": true
+    },
+    "I_Block_U005": {
+      "name": "_I_Block_U005",
+      "image": "equipment/Block_Item_Icon.webp",
+      "fallback": true
+    },
+    "I_Block_R005": {
+      "name": "Power Field",
+      "image": "equipment/ui_icon_item_I_Block_R005.png"
+    },
+    "I_Block_E005": {
+      "name": "Master-Crafted Power Field",
+      "image": "equipment/Block_Item_Icon.webp",
+      "fallback": true
+    },
+    "I_Block_L005": {
+      "name": "Artificer Power Field",
+      "image": "equipment/Block_Item_Icon.webp",
+      "fallback": true
+    },
+    "I_Block_C006": {
+      "name": "Blemished Sigil of Corruption",
+      "image": "equipment/ui_icon_item_I_Block_C006.png"
+    },
+    "I_Block_U006": {
+      "name": "Twisted Sigil of Corruption",
+      "image": "equipment/ui_icon_item_I_Block_U006.png"
+    },
+    "I_Block_R006": {
+      "name": "Heretical Sigil of Corruption",
+      "image": "equipment/ui_icon_item_I_Block_R006.png"
+    },
+    "I_Block_E006": {
+      "name": "Malefic Sigil of Corruption",
+      "image": "equipment/ui_icon_item_I_Block_E006.png"
+    },
+    "I_Block_L006": {
+      "name": "Warpforged Sigil of Corruption",
+      "image": "equipment/ui_icon_item_I_Block_L006.png"
+    },
+    "I_Block_C007": {
+      "name": "Quantum Shield",
+      "image": "equipment/ui_icon_item_I_Block_C007.png"
+    },
+    "I_Block_U007": {
+      "name": "Royal Quantum Shield",
+      "image": "equipment/ui_icon_item_I_Block_U007.png"
+    },
+    "I_Block_R007": {
+      "name": "Phasing Quantum Shield",
+      "image": "equipment/ui_icon_item_I_Block_R007.png"
+    },
+    "I_Block_E007": {
+      "name": "Ancient Quantum Shield",
+      "image": "equipment/ui_icon_item_I_Block_E007.png"
+    },
+    "I_Block_L007": {
+      "name": "Transdimensional Quantum Shield",
+      "image": "equipment/ui_icon_item_I_Block_L007.png"
+    },
+    "I_Block_C008": {
+      "name": "Illusion Imagafier",
+      "image": "equipment/ui_icon_item_I_Block_C008.png"
+    },
+    "I_Block_U008": {
+      "name": "Improved Illusion Imagafier",
+      "image": "equipment/ui_icon_item_I_Block_U008.png"
+    },
+    "I_Block_R008": {
+      "name": "Refined Illusion Imagafier",
+      "image": "equipment/ui_icon_item_I_Block_R008.png"
+    },
+    "I_Block_E008": {
+      "name": "Advanced Illusion Imagafier",
+      "image": "equipment/ui_icon_item_I_Block_E008.png"
+    },
+    "I_Block_L008": {
+      "name": "Optimal Illusion Imagafier",
+      "image": "equipment/ui_icon_item_I_Block_L008.png"
+    },
+    "I_Booster_Block_C001": {
+      "name": "_I_Booster_Block_C001",
+      "image": "equipment/Block_Booster_Icon.webp",
+      "fallback": true
+    },
+    "I_Booster_Block_U001": {
+      "name": "_I_Booster_Block_U001",
+      "image": "equipment/Block_Booster_Icon.webp",
+      "fallback": true
+    },
+    "I_Booster_Block_R001": {
+      "name": "_I_Booster_Block_R001",
+      "image": "equipment/Block_Booster_Icon.webp",
+      "fallback": true
+    },
+    "I_Booster_Block_E001": {
+      "name": "_I_Booster_Block_E001",
+      "image": "equipment/Block_Booster_Icon.webp",
+      "fallback": true
+    },
+    "I_Booster_Block_L001": {
+      "name": "_I_Booster_Block_L001",
+      "image": "equipment/Block_Booster_Icon.webp",
+      "fallback": true
+    },
+    "I_Booster_Block_C002": {
+      "name": "Basic Forcefield Amplifier",
+      "image": "equipment/ui_icon_item_I_Booster_Block_C002.png"
+    },
+    "I_Booster_Block_U002": {
+      "name": "Improved Force Field Amplifier",
+      "image": "equipment/ui_icon_item_I_Booster_Block_U002.png"
+    },
+    "I_Booster_Block_R002": {
+      "name": "Refined Force Field Amplifier",
+      "image": "equipment/ui_icon_item_I_Booster_Block_R002.png"
+    },
+    "I_Booster_Block_E002": {
+      "name": "Advanced Force Field Amplifier",
+      "image": "equipment/ui_icon_item_I_Booster_Block_E002.png"
+    },
+    "I_Booster_Block_L002": {
+      "name": "Optimal Force Field Amplifier",
+      "image": "equipment/ui_icon_item_I_Booster_Block_L002.png"
+    },
+    "I_Booster_Block_M002": {
+      "name": "Perfected Force Field Amplifier",
+      "image": "snowprint_assets/equipment/ui_icon_item_I_Booster_Block_M002.png"
+    },
+    "R_Crit_RelicBoltPistol": {
+      "name": "Relic Bolt Pistol",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_RelicBoltPistol.png"
+    },
+    "R_Crit_RelicPowerFist": {
+      "name": "Relic Power Fist",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_RelicPowerFist.png"
+    },
+    "R_Crit_MawClawsOfThyrax": {
+      "name": "Maw-Claws of Thyrax",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_MawClawsOfThyrax.png"
+    },
+    "R_Crit_Vitarus": {
+      "name": "Vitarus",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_Vitarus.png"
+    },
+    "R_Crit_TheArdentBlade": {
+      "name": "The Ardent Blade",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_TheArdentBlade.png"
+    },
+    "R_Crit_Dw02AdvancedBurstCannon": {
+      "name": "DW-02 Advanced Burst Cannon",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_DW02AdvancedBurstCannon.png"
+    },
+    "R_Crit_TalonOfHorus": {
+      "name": "Talon of Horus",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_TalonOfHorus.png"
+    },
+    "R_Crit_Maugetar": {
+      "name": "Maugetar",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_Maugetar.png"
+    },
+    "R_Crit_ParagonSpear": {
+      "name": "Paragon Spear",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_ParagonSpear.png"
+    },
+    "R_Crit_DawnBlade": {
+      "name": "Dawn Blade",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_DawnBlade.png"
+    },
+    "R_Crit_BladeOfTheAncestors": {
+      "name": "Blade of the Ancestors",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_BladeOfTheAncestors.png"
+    },
+    "R_Crit_VolummsMasterArtifice": {
+      "name": "Volumm's Master Artifice",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_VolummsMasterArtifice.png"
+    },
+    "R_Crit_MonsterSlayerOfCaliban": {
+      "name": "Monster Slayer of Caliban",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_MonsterSlayerOfCaliban.png"
+    },
+    "R_Crit_SabreOfSacrifice": {
+      "name": "Sabre of Sacrifice",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_SabreOfSacrifice.png"
+    },
+    "R_Crit_Lakrimae": {
+      "name": "Lakrimae",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_Lakrimae.png"
+    },
+    "R_Crit_HeadwoppasKillchoppa": {
+      "name": "Headwoppa's Killchoppa",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_HeadwoppasKillchoppa.png"
+    },
+    "R_Crit_Helspear": {
+      "name": "Helspear",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Crit_Helspear.png"
+    },
+    "R_Booster_Crit_KardiocoreGalvanus": {
+      "name": "Kardiocore Galvanus",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Booster_Crit_KardiocoreGalvanus.png"
+    },
+    "R_Booster_Crit_AmuletOfTheVoidwyrm": {
+      "name": "Amulet of the Voidwyrm",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Booster_Crit_AmuletOfTheVoidwyrm.png"
+    },
+    "R_Booster_Crit_BookOfFate": {
+      "name": "Book of Fate",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Booster_Crit_BookOfFate.png"
+    },
+    "R_Booster_Crit_TalismanOfRage": {
+      "name": "Talisman of Rage",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Booster_Crit_TalismanOfRage.png"
+    },
+    "R_Booster_Crit_NetherRealmCasket": {
+      "name": "Nether-Realm Casket",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Booster_Crit_NetherRealmCasket.png"
+    },
+    "R_Booster_Crit_IntoxicatingElixir": {
+      "name": "Intoxicating Elixir",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Booster_Crit_IntoxicatingElixir.png"
+    },
+    "R_Booster_Crit_OrbsOfDecay": {
+      "name": "Orbs of Decay",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Booster_Crit_OrbsOfDecay.png"
+    },
+    "R_Booster_Crit_WyrdmakersHelm": {
+      "name": "Wyrdmaker's Helm",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Booster_Crit_WyrdmakersHelm.png"
+    },
+    "R_Booster_Crit_ChaliceOfBaal": {
+      "name": "Chalice of Baal",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Booster_Crit_ChaliceOfBaal.png"
+    },
+    "R_Booster_Crit_PhasalSubjugator": {
+      "name": "Phasal Subjugator",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Booster_Crit_PhasalSubjugator.png"
+    },
+    "R_Defensive_RelicOfLostCadia": {
+      "name": "Relic of Lost Cadia",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Defensive_RelicOfLostCadia.png"
+    },
+    "R_Defensive_SupaCyborkBody": {
+      "name": "Supa-Cybork Body",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Defensive_SupaCyborkBody.png"
+    },
+    "R_Block_DaemonfleshPlate": {
+      "name": "Daemonflesh Plate",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Block_DaemonFleshPlate.png"
+    },
+    "R_Booster_Block_PhoenixGem": {
+      "name": "Phoenix Gem",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Booster_Block_PhoenixGem.png"
+    },
+    "R_Booster_Block_NornCrown": {
+      "name": "Norn Crown",
+      "image": "snowprint_assets/equipment/ui_icon_item_R_Booster_Block_NornCrown.png"
+    },
+    "xpCommon": {
+      "name": "Common XP books",
+      "image": "snowprint_assets/books/ui_icon_consumable_xp_book_0.png"
+    },
+    "badge:Imperial:Common": {
+      "name": "Imperial Common badges",
+      "image": "badges/imperial-common.png"
+    },
+    "badge:Xenos:Common": {
+      "name": "Xenos Common badges",
+      "image": "badges/xenos-common.png"
+    },
+    "badge:Chaos:Common": {
+      "name": "Chaos Common badges",
+      "image": "badges/chaos-common.png"
+    },
+    "itemAscensionResource_Common": {
+      "name": "Common forge badges",
+      "image": "snowprint_assets/resources/ui_forge_badges_common.png"
+    },
+    "draft_abilityTokensCommon": {
+      "name": "Common draft badges",
+      "image": "snowprint_assets/resources/ui_icon_droptable_draft_abilityTokensCommon.png"
+    },
+    "xpUncommon": {
+      "name": "Uncommon XP books",
+      "image": "snowprint_assets/books/ui_icon_consumable_xp_book_1.png"
+    },
+    "badge:Imperial:Uncommon": {
+      "name": "Imperial Uncommon badges",
+      "image": "badges/imperial-uncommon.png"
+    },
+    "orb:Imperial:Uncommon": {
+      "name": "Imperial Uncommon orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_imperial.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_uncommon.png"
+    },
+    "badge:Xenos:Uncommon": {
+      "name": "Xenos Uncommon badges",
+      "image": "badges/xenos-uncommon.png"
+    },
+    "orb:Xenos:Uncommon": {
+      "name": "Xenos Uncommon orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_xenos.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_uncommon.png"
+    },
+    "badge:Chaos:Uncommon": {
+      "name": "Chaos Uncommon badges",
+      "image": "badges/chaos-uncommon.png"
+    },
+    "orb:Chaos:Uncommon": {
+      "name": "Chaos Uncommon orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_chaos.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_uncommon.png"
+    },
+    "itemAscensionResource_Uncommon": {
+      "name": "Uncommon forge badges",
+      "image": "snowprint_assets/resources/ui_forge_badges_uncommon.png"
+    },
+    "draft_abilityTokensUncommon": {
+      "name": "Uncommon draft badges",
+      "image": "snowprint_assets/resources/ui_icon_droptable_draft_abilityTokensUncommon.png"
+    },
+    "draft_ascensionOrbsUncommon": {
+      "name": "Uncommon draft orbs",
+      "image": "snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsUncommon.png"
+    },
+    "xpRare": {
+      "name": "Rare XP books",
+      "image": "snowprint_assets/books/ui_icon_consumable_xp_book_2.png"
+    },
+    "badge:Imperial:Rare": {
+      "name": "Imperial Rare badges",
+      "image": "badges/imperial-rare.png"
+    },
+    "orb:Imperial:Rare": {
+      "name": "Imperial Rare orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_imperial.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_rare.png"
+    },
+    "badge:Xenos:Rare": {
+      "name": "Xenos Rare badges",
+      "image": "badges/xenos-rare.png"
+    },
+    "orb:Xenos:Rare": {
+      "name": "Xenos Rare orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_xenos.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_rare.png"
+    },
+    "badge:Chaos:Rare": {
+      "name": "Chaos Rare badges",
+      "image": "badges/chaos-rare.png"
+    },
+    "orb:Chaos:Rare": {
+      "name": "Chaos Rare orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_chaos.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_rare.png"
+    },
+    "itemAscensionResource_Rare": {
+      "name": "Rare forge badges",
+      "image": "snowprint_assets/resources/ui_forge_badges_rare.png"
+    },
+    "draft_abilityTokensRare": {
+      "name": "Rare draft badges",
+      "image": "snowprint_assets/resources/ui_icon_droptable_draft_abilityTokensRare.png"
+    },
+    "draft_ascensionOrbsRare": {
+      "name": "Rare draft orbs",
+      "image": "snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsRare.png"
+    },
+    "xpEpic": {
+      "name": "Epic XP books",
+      "image": "snowprint_assets/books/ui_icon_consumable_xp_book_3.png"
+    },
+    "badge:Imperial:Epic": {
+      "name": "Imperial Epic badges",
+      "image": "badges/imperial-epic.png"
+    },
+    "orb:Imperial:Epic": {
+      "name": "Imperial Epic orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_imperial.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_epic.png"
+    },
+    "badge:Xenos:Epic": {
+      "name": "Xenos Epic badges",
+      "image": "badges/xenos-epic.png"
+    },
+    "orb:Xenos:Epic": {
+      "name": "Xenos Epic orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_xenos.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_epic.png"
+    },
+    "badge:Chaos:Epic": {
+      "name": "Chaos Epic badges",
+      "image": "badges/chaos-epic.png"
+    },
+    "orb:Chaos:Epic": {
+      "name": "Chaos Epic orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_chaos.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_epic.png"
+    },
+    "itemAscensionResource_Epic": {
+      "name": "Epic forge badges",
+      "image": "snowprint_assets/resources/ui_forge_badges_epic.png"
+    },
+    "draft_abilityTokensEpic": {
+      "name": "Epic draft badges",
+      "image": "snowprint_assets/resources/ui_icon_droptable_draft_abilityTokensEpic.png"
+    },
+    "draft_ascensionOrbsEpic": {
+      "name": "Epic draft orbs",
+      "image": "snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsEpic.png"
+    },
+    "xpLegendary": {
+      "name": "Legendary XP books",
+      "image": "snowprint_assets/books/ui_icon_consumable_xp_book_4.png"
+    },
+    "badge:Imperial:Legendary": {
+      "name": "Imperial Legendary badges",
+      "image": "badges/imperial-legendary.png"
+    },
+    "orb:Imperial:Legendary": {
+      "name": "Imperial Legendary orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_imperial.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_legendary.png"
+    },
+    "badge:Xenos:Legendary": {
+      "name": "Xenos Legendary badges",
+      "image": "badges/xenos-legendary.png"
+    },
+    "orb:Xenos:Legendary": {
+      "name": "Xenos Legendary orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_xenos.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_legendary.png"
+    },
+    "badge:Chaos:Legendary": {
+      "name": "Chaos Legendary badges",
+      "image": "badges/chaos-legendary.png"
+    },
+    "orb:Chaos:Legendary": {
+      "name": "Chaos Legendary orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_chaos.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_legendary.png"
+    },
+    "itemAscensionResource_Legendary": {
+      "name": "Legendary forge badges",
+      "image": "snowprint_assets/resources/ui_forge_badges_legendary.png"
+    },
+    "draft_abilityTokensLegendary": {
+      "name": "Legendary draft badges",
+      "image": "snowprint_assets/resources/ui_icon_droptable_draft_abilityTokensLegendary.png"
+    },
+    "draft_ascensionOrbsLegendary": {
+      "name": "Legendary draft orbs",
+      "image": "snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsLegendary.png"
+    },
+    "xpMythic": {
+      "name": "Mythic XP books",
+      "image": "snowprint_assets/books/ui_icon_consumable_xp_book_5.png"
+    },
+    "badge:Imperial:Mythic": {
+      "name": "Imperial Mythic badges",
+      "image": "badges/imperial-mythic.png"
+    },
+    "orb:Imperial:Mythic": {
+      "name": "Imperial Mythic orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_imperial.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_mythic.png"
+    },
+    "badge:Xenos:Mythic": {
+      "name": "Xenos Mythic badges",
+      "image": "badges/xenos-mythic.png"
+    },
+    "orb:Xenos:Mythic": {
+      "name": "Xenos Mythic orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_xenos.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_mythic.png"
+    },
+    "badge:Chaos:Mythic": {
+      "name": "Chaos Mythic badges",
+      "image": "badges/chaos-mythic.png"
+    },
+    "orb:Chaos:Mythic": {
+      "name": "Chaos Mythic orbs",
+      "image": "snowprint_assets/resources/ui_hero_ascension_orbs_chaos.png",
+      "background": "snowprint_assets/resources/ui_hero_ascension_orbs_mythic.png"
+    },
+    "itemAscensionResource_Mythic": {
+      "name": "Mythic forge badges",
+      "image": "snowprint_assets/resources/ui_forge_badges_mythic.png"
+    },
+    "draft_abilityTokensMythic": {
+      "name": "Mythic draft badges",
+      "image": "snowprint_assets/resources/ui_icon_droptable_draft_abilityTokensMythic.png"
+    },
+    "draft_ascensionOrbsMythic": {
+      "name": "Mythic draft orbs",
+      "image": "snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsMythic.png"
+    },
+    "gold": {
+      "name": "Coins",
+      "image": "snowprint_assets/resources/ui_icon_resource_coin_large.png"
+    },
+    "guildCredits": {
+      "name": "Guild Credits",
+      "image": "snowprint_assets/resources/ui_icon_resource_guild_credits_large.png"
+    },
+    "guildWarCurrency": {
+      "name": "War Credits",
+      "image": "snowprint_assets/resources/ui_icon_resource_guild_war_currency_large.png"
+    },
+    "crusadeCurrency": {
+      "name": "Crusade Credits",
+      "image": "snowprint_assets/resources/ui_icon_resource_crusade_currency_large.png"
+    },
+    "elderShopCurrency": {
+      "name": "Archeotech",
+      "image": "snowprint_assets/resources/ui_icon_resource_elder_shop_currency_large.png"
+    },
+    "gems": {
+      "name": "Blackstone",
+      "image": "snowprint_assets/resources/ui_icon_resource_blackstone.png"
+    },
+    "dust": {
+      "name": "Salvage",
+      "image": "snowprint_assets/resources/ui_icon_resource_salvage.png"
+    },
+    "mythicDust": {
+      "name": "Mythic salvage",
+      "image": "snowprint_assets/resources/ui_icon_resource_mythic_salvage.png"
+    },
+    "energy": {
+      "name": "Energy",
+      "image": "snowprint_assets/resources/ui_icon_resource_stamina_large.png"
+    },
+    "shards": {
+      "name": "Regular shards",
+      "image": "snowprint_assets/frames/ui_icon_character_shard_empty.png"
+    },
+    "mythicShards": {
+      "name": "Mythic shards",
+      "image": "snowprint_assets/frames/ui_icon_character_shard_mythic.png"
+    },
+    "onslaughtToken": {
+      "name": "Onslaught tokens",
+      "image": "snowprint_assets/misc/ui_icon_resource_token_onslaught.png"
+    },
+    "draft_machinesOfWarTokens": {
+      "name": "Draft machine components",
+      "image": "snowprint_assets/resources/ui_icon_droptable_draft_machinesOfWarToken.png"
+    },
+    "machineComponents:Imperial": {
+      "name": "Imperial machine components",
+      "image": "snowprint_assets/resources/ui_machines_of_war_tokens_imperial.png"
+    },
+    "machineComponents:Xenos": {
+      "name": "Xenos machine components",
+      "image": "snowprint_assets/resources/ui_machines_of_war_tokens_xenos.png"
+    },
+    "machineComponents:Chaos": {
+      "name": "Chaos machine components",
+      "image": "snowprint_assets/resources/ui_machines_of_war_tokens_chaos.png"
+    },
+    "itemsCommon_I_Crit": {
+      "name": "Common Crit equipment pool",
+      "image": "equipment/Crit_Item_Icon.webp"
+    },
+    "itemsCommon_I_Block": {
+      "name": "Common Block equipment pool",
+      "image": "equipment/Block_Item_Icon.webp"
+    },
+    "itemsCommon_I_Defensive": {
+      "name": "Common Defensive equipment pool",
+      "image": "equipment/Defensive_Item_Icon.webp"
+    },
+    "itemsCommon_I_Booster_Crit": {
+      "name": "Common Booster Crit equipment pool",
+      "image": "equipment/Crit_Booster_Icon.webp"
+    },
+    "itemsCommon_I_Booster_Block": {
+      "name": "Common Booster Block equipment pool",
+      "image": "equipment/Block_Booster_Icon.webp"
+    },
+    "itemsUncommon_I_Crit": {
+      "name": "Uncommon Crit equipment pool",
+      "image": "equipment/Crit_Item_Icon.webp"
+    },
+    "itemsUncommon_I_Block": {
+      "name": "Uncommon Block equipment pool",
+      "image": "equipment/Block_Item_Icon.webp"
+    },
+    "itemsUncommon_I_Defensive": {
+      "name": "Uncommon Defensive equipment pool",
+      "image": "equipment/Defensive_Item_Icon.webp"
+    },
+    "itemsUncommon_I_Booster_Crit": {
+      "name": "Uncommon Booster Crit equipment pool",
+      "image": "equipment/Crit_Booster_Icon.webp"
+    },
+    "itemsUncommon_I_Booster_Block": {
+      "name": "Uncommon Booster Block equipment pool",
+      "image": "equipment/Block_Booster_Icon.webp"
+    },
+    "itemsRare_I_Crit": {
+      "name": "Rare Crit equipment pool",
+      "image": "equipment/Crit_Item_Icon.webp"
+    },
+    "itemsRare_I_Block": {
+      "name": "Rare Block equipment pool",
+      "image": "equipment/Block_Item_Icon.webp"
+    },
+    "itemsRare_I_Defensive": {
+      "name": "Rare Defensive equipment pool",
+      "image": "equipment/Defensive_Item_Icon.webp"
+    },
+    "itemsRare_I_Booster_Crit": {
+      "name": "Rare Booster Crit equipment pool",
+      "image": "equipment/Crit_Booster_Icon.webp"
+    },
+    "itemsRare_I_Booster_Block": {
+      "name": "Rare Booster Block equipment pool",
+      "image": "equipment/Block_Booster_Icon.webp"
+    },
+    "itemsEpic_I_Crit": {
+      "name": "Epic Crit equipment pool",
+      "image": "equipment/Crit_Item_Icon.webp"
+    },
+    "itemsEpic_I_Block": {
+      "name": "Epic Block equipment pool",
+      "image": "equipment/Block_Item_Icon.webp"
+    },
+    "itemsEpic_I_Defensive": {
+      "name": "Epic Defensive equipment pool",
+      "image": "equipment/Defensive_Item_Icon.webp"
+    },
+    "itemsEpic_I_Booster_Crit": {
+      "name": "Epic Booster Crit equipment pool",
+      "image": "equipment/Crit_Booster_Icon.webp"
+    },
+    "itemsEpic_I_Booster_Block": {
+      "name": "Epic Booster Block equipment pool",
+      "image": "equipment/Block_Booster_Icon.webp"
+    },
+    "itemsLegendary_I_Crit": {
+      "name": "Legendary Crit equipment pool",
+      "image": "equipment/Crit_Item_Icon.webp"
+    },
+    "itemsLegendary_I_Block": {
+      "name": "Legendary Block equipment pool",
+      "image": "equipment/Block_Item_Icon.webp"
+    },
+    "itemsLegendary_I_Defensive": {
+      "name": "Legendary Defensive equipment pool",
+      "image": "equipment/Defensive_Item_Icon.webp"
+    },
+    "itemsLegendary_I_Booster_Crit": {
+      "name": "Legendary Booster Crit equipment pool",
+      "image": "equipment/Crit_Booster_Icon.webp"
+    },
+    "itemsLegendary_I_Booster_Block": {
+      "name": "Legendary Booster Block equipment pool",
+      "image": "equipment/Block_Booster_Icon.webp"
+    },
+    "itemsMythic_I_Crit": {
+      "name": "Mythic Crit equipment pool",
+      "image": "equipment/Crit_Item_Icon.webp"
+    },
+    "itemsMythic_I_Block": {
+      "name": "Mythic Block equipment pool",
+      "image": "equipment/Block_Item_Icon.webp"
+    },
+    "itemsMythic_I_Defensive": {
+      "name": "Mythic Defensive equipment pool",
+      "image": "equipment/Defensive_Item_Icon.webp"
+    },
+    "itemsMythic_I_Booster_Crit": {
+      "name": "Mythic Booster Crit equipment pool",
+      "image": "equipment/Crit_Booster_Icon.webp"
+    },
+    "itemsMythic_I_Booster_Block": {
+      "name": "Mythic Booster Block equipment pool",
+      "image": "equipment/Block_Booster_Icon.webp"
+    }
+  },
+  "missing": [
+    "I_Defensive_C001",
+    "I_Defensive_U001",
+    "I_Defensive_R001",
+    "I_Defensive_E001",
+    "I_Defensive_L001",
+    "I_Block_C005",
+    "I_Block_U005",
+    "I_Block_E005",
+    "I_Block_L005",
+    "I_Booster_Block_C001",
+    "I_Booster_Block_U001",
+    "I_Booster_Block_R001",
+    "I_Booster_Block_E001",
+    "I_Booster_Block_L001"
+  ]
+}
