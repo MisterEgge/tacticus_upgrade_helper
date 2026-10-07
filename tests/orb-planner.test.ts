@@ -1,13 +1,46 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {nextOrbMilestone,progressionRarity,progressionStep,rarityForGoal} from "../src/domain/characterProgression";
-import {orbPlan,shardReadyOrbPlan,combinedOrbDemand,orbHonorees,orbsOwned,type OrbCandidate,type OrbOptions} from "../src/domain/orbPlanner";
+import {orbPlan,orbUpgradeAction,shardReadyOrbPlan,combinedOrbDemand,orbHonorees,orbsOwned,type OrbCandidate,type OrbOptions} from "../src/domain/orbPlanner";
 import {campaignOrbGoals} from "../src/domain/orbCampaignGoals";
 import {rateCharacter} from "../src/domain/characterUtility";
 
 export const candidate=(name:string,index=8,overrides:Partial<OrbCandidate>={}):OrbCandidate=>({id:name,name,alliance:"Xenos",progressionIndex:index,rank:9,shards:0,mythicShards:0,campaignGoals:[],utility:rateCharacter({name,communityScore:3,accountPriority:80,mainRaidCore:false,mainRaidFlex:false,raidCore:false,raidFlex:false,warOption:false,incompleteCampaign:false}),...overrides});
-const options:OrbOptions={scope:"priorities",horizon:"next",includeMythic:false};
+const options:OrbOptions={scope:"priorities",horizon:"next",includeMythic:false,includeShardBlocked:true};
 const raid=(name:string,index=8)=>{const row=candidate(name,index);row.utility=rateCharacter({...row.utility,mainRaidCore:true});return row;};
+
+test("Forcas cannot enter an orb recommendation or reserve a shared pool until the full shard cost is covered",()=>{
+ const forcas=candidate("Forcas",8,{id:"darkaCompanion",alliance:"Imperial",shards:45});
+ const covered=candidate("Covered Imperial",8,{alliance:"Imperial",shards:50});
+ const defaultOptions:OrbOptions={scope:"all",horizon:"next",includeMythic:false};
+ const inventory={Imperial:[{rarity:"Epic",amount:10}]};
+ const result=orbPlan([forcas,covered],inventory,new Map(),defaultOptions);
+ assert.deepEqual(result.rows.map(row=>row.name),["Covered Imperial"]);
+ assert.deepEqual(result.deferred,["Forcas"]);
+ assert.equal(result.pools[0]?.needed,10);assert.equal(result.pools[0]?.shortfall,0);
+ assert.equal(result.rows[0]?.allocations[0]?.reserved,10);
+ assert.equal(shardReadyOrbPlan([forcas],inventory,new Map(),false).rows.length,0);
+ const future=orbPlan([forcas],{},new Map(),{...defaultOptions,includeShardBlocked:true});
+ assert.equal(future.rows[0]?.shardShortfall,5);
+ assert.equal(orbUpgradeAction(future.rows[0]!),"Collect missing shards first.");
+ const unlocked=orbPlan([{...forcas,shards:50}],{},new Map(),defaultOptions);
+ assert.equal(unlocked.rows.length,1);assert.equal(orbUpgradeAction(unlocked.rows[0]!),"Collect missing orbs.");
+ for(const shards of [null,NaN,-1])assert.equal(orbPlan([{...forcas,shards}],inventory,new Map(),defaultOptions).rows.length,0);
+ const unknown=orbPlan([{...forcas,shards:null}],{},new Map(),{...defaultOptions,includeShardBlocked:true});
+ assert.equal(orbUpgradeAction(unknown.rows[0]!),"Sync shard inventory first.");
+});
+
+test("shard gating covers intervening promotions, full goals and the correct Mythic shard balance",()=>{
+ const defaults:OrbOptions={scope:"all",horizon:"next",includeMythic:true};
+ assert.equal(orbPlan([candidate("Only promotion ready",7,{shards:40})],{},new Map(),defaults).rows.length,0);
+ assert.equal(orbPlan([candidate("Whole path ready",7,{shards:90})],{},new Map(),defaults).rows.length,1);
+ const legend=raid("Whole goal",8);legend.shards=50;
+ assert.equal(orbPlan([legend],{},new Map(),{...defaults,horizon:"goal"}).rows.length,0);
+ assert.equal(orbPlan([{...legend,shards:300}],{},new Map(),{...defaults,horizon:"goal"}).rows.length,1);
+ const mythic=candidate("Mythic ascension",15,{shards:999,mythicShards:19});
+ assert.equal(orbPlan([mythic],{},new Map(),defaults).rows.length,0);
+ assert.equal(orbPlan([{...mythic,shards:null,mythicShards:20}],{},new Map(),defaults).rows.length,1);
+});
 
 test("orb milestone includes preceding shard promotions and exact Legendary/Mythic steps",()=>{
  assert.deepEqual(nextOrbMilestone(0),{from:2,to:3,shards:40,mythicShards:0,orbs:10,orbRarity:"Uncommon",promotions:2});

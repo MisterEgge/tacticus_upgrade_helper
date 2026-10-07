@@ -6,7 +6,7 @@ import CharacterTable from "../app/characters/CharacterTable";
 import CharacterProgression from "../app/characters/[id]/CharacterProgression";
 import CharacterEquipment from "../app/characters/[id]/CharacterEquipment";
 import {characterAscension} from "../src/domain/characterAscension";
-import {characterRosterRow,orderedEquipmentChoices} from "../app/lib/characterUpgradeSummary";
+import {ascensionAction,characterRosterRow,orderedEquipmentChoices} from "../app/lib/characterUpgradeSummary";
 import {buildEquipmentPlan} from "../app/lib/equipmentPlan";
 import {abilityGuideRows} from "../src/domain/abilities";
 import type {Report,RosterUnit} from "../app/lib/report";
@@ -17,6 +17,18 @@ import shopsData from "../data/game/shops.json";
 const unit:RosterUnit={id:"thousInfernalMaster",name:"Abraxas",faction:"ThousandSons",grandAlliance:"Chaos",rarity:"Legendary",progressionIndex:13,rank:12,xpLevel:41,shards:250,mythicShards:0,abilities:[{id:"InfernalPacts",level:41},{id:"Passive",level:17}],items:[]};
 const guidance={active:{practical:"44-50",high:"50",priority:"high",modes:["Guild Raid"]},passive:{practical:"17",priority:"low",modes:[]},confidence:"medium"};
 const guide=abilityGuideRows(catalogData.characters,[unit],{Abraxas:guidance},{}).find(row=>row.id===unit.id)!;
+const forcas:RosterUnit={...unit,id:"darkaCompanion",name:"Forcas",grandAlliance:"Imperial",rarity:"Rare",progressionIndex:8,shards:45,abilities:[{id:"a",level:26},{id:"p",level:26}]};
+
+test("Forcas's shard blocker precedes orb recommendations on roster and detail summaries",()=>{
+ const row=characterRosterRow(forcas,undefined,[],{},{});
+ assert.equal(row.orbsNeeded,false);
+ assert.equal(row.actions.find(action=>action.kind==="ascension")?.label,"Collect shards for Epic");
+ assert.match(row.actions.find(action=>action.kind==="ascension")!.detail,/5 regular shards short · 45 \/ 50 owned/);
+ assert.equal(characterAscension({progressionIndex:8,alliance:"Imperial",shards:45,mythicShards:0},null).state,"SHARDS NEEDED");
+ const unknown=characterAscension({progressionIndex:8,alliance:"Imperial",shards:null,mythicShards:0},{});
+ assert.equal(ascensionAction(unknown).label,"Check shard inventory");
+ assert.equal(characterRosterRow({...forcas,shards:50},undefined,[],{},{}).orbsNeeded,true);
+});
 
 test("character next steps use practical targets, exact ascension costs and optional extra stars",()=>{
  const gated=characterRosterRow(unit,guide,[],{Chaos:[{rarity:"Legendary",amount:3}]},{});
@@ -41,15 +53,23 @@ test("compact roster filters and character controls retain useful actions and hi
  const {render,fireEvent,cleanup,act,within}=await import("@testing-library/react");
  suite.after(async()=>{await act(async()=>{cleanup();});dom.window.close();for(const [key,descriptor] of descriptors){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else Reflect.deleteProperty(globalThis,key);}});
  const epic={...unit,id:"epic-fixture",name:"Epic fixture",rarity:"Epic",progressionIndex:11,shards:100};
- const rows=[characterRosterRow({...unit,xpLevel:44},guide,[],{Chaos:[{rarity:"Legendary",amount:3}]},{}),characterRosterRow(epic,undefined,[],null,{Chaos:[{rarity:"Legendary",amount:4}]})];
+ const rows=[characterRosterRow({...unit,xpLevel:44},guide,[],{Chaos:[{rarity:"Legendary",amount:3}]},{}),characterRosterRow(epic,undefined,[],null,{Chaos:[{rarity:"Legendary",amount:4}]}),characterRosterRow(forcas,undefined,[],{}, {})];
  const view=render(createElement(CharacterTable,{rows}));
  assert.equal(view.getAllByRole("columnheader").length,3);
  fireEvent.click(view.getByRole("button",{name:/Resources ready/}));
  assert.equal(view.getAllByRole("row").length,2);assert.ok(view.getByRole("link",{name:"Active → 42"}));
  fireEvent.click(view.getByRole("button",{name:/Orbs needed/}));
+ assert.equal(view.queryByText("Forcas"),null);
  assert.equal(view.queryByRole("link",{name:"Active → 42"}),null);assert.ok(view.getByRole("link",{name:"Ascend to Legendary"}));
  fireEvent.change(view.getByPlaceholderText(/Search character/),{target:{value:"6 Chaos Legendary orbs short"}});
  assert.equal(view.getAllByRole("row").length,2);
+ view.rerender(createElement(CharacterProgression,{unit:forcas,inventory:{}}));
+ assert.ok(view.getByText("Collect shards for Epic"));
+ assert.match(view.container.textContent!,/5 regular shards short · 45 \/ 50 owned/);
+ assert.equal(view.queryByRole("link",{name:"Orb totals and stores"}),null);
+ view.rerender(createElement(CharacterProgression,{unit:{...forcas,shards:50},inventory:{}}));
+ assert.ok(view.getByText("Ascend to Epic"));
+ assert.ok(view.getByRole("link",{name:"Orb totals and stores"}));
  view.rerender(createElement(CharacterProgression,{unit,inventory:{Chaos:[{rarity:"Legendary",amount:4}]}}));
  assert.equal(view.queryByText("Legendary star upgrade"),null);
  fireEvent.click(view.getByRole("checkbox",{name:"Show optional star upgrade"}));

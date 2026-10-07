@@ -26,6 +26,8 @@ export function equipmentAction(slot:CharacterEquipmentSlot):{label:string;detai
 export function ascensionAction(plan:AscensionStep):{label:string;detail:string;ready:boolean} {
  const costs=[`${plan.shardsNeeded} ${plan.shardType==="Mythic"?"Mythic ":""}shards`,...(plan.orbsNeeded?[`${plan.orbsNeeded} ${plan.alliance} ${plan.orbRarity} orbs`]:[])].join(" + ");
  if(plan.state==="MAXED")return {label:plan.label,detail:"",ready:false};
+ if(plan.shardsNeeded&&plan.shardShortfall===null)return {label:"Check shard inventory",detail:`${plan.shardsNeeded} ${plan.shardType} shards required · sync missing stock`,ready:false};
+ if((plan.shardShortfall??0)>0)return {label:`Collect shards for ${plan.label.replace(/^Ascend to /,"").replace(/^Promote next star$/,"next star")}`,detail:`${plan.shardShortfall} ${plan.shardType} shards short · ${plan.shardsOwned} / ${plan.shardsNeeded} owned`,ready:false};
  if(plan.state==="UNKNOWN")return {label:plan.label,detail:plan.shardsNeeded?`${costs} · sync missing stock`:"Sync progression",ready:false};
  const missing=[...(plan.shardShortfall?[`${plan.shardShortfall} ${plan.shardType==="Mythic"?"Mythic ":""}shards short`]:[]),...(plan.orbShortfall?[`${plan.orbShortfall} ${plan.alliance} ${plan.orbRarity} orbs short`]:[])];
  return {label:plan.label,detail:missing.length?missing.join(" · "):"Shards and orbs covered · check coins",ready:plan.state==="RESOURCES COVERED"};
@@ -50,5 +52,5 @@ export function characterRosterRow(unit:RosterUnit,guide:AbilityGuideRow|undefin
  }
  const ascension=characterAscension({progressionIndex:unit.progressionIndex,alliance:unit.grandAlliance,shards:unit.shards,mythicShards:unit.mythicShards},orbs);
  if(ascension.state!=="MAXED"&&ascension.state!=="OPTIONAL")actions.push({kind:"ascension",...ascensionAction(ascension),href:`${href}#progression`});
- return {...unit,actions,gearWork:slots.length>0,badgesNeeded:abilities.some(row=>row.plan.state==="BADGES NEEDED"),orbsNeeded:ascension.state!=="OPTIONAL"&&(ascension.orbShortfall??0)>0};
+ return {...unit,actions,gearWork:slots.length>0,badgesNeeded:abilities.some(row=>row.plan.state==="BADGES NEEDED"),orbsNeeded:ascension.state!=="OPTIONAL"&&ascension.shardShortfall===0&&(ascension.orbShortfall??0)>0};
 }

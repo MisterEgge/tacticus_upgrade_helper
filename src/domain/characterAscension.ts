@@ -25,7 +25,7 @@ export function characterAscension(progress:Progress,inventory:OrbInventory|null
  result.orbRarity=step.orbRarity;result.orbsNeeded=step.orbs;
  result.orbsOwned=step.orbRarity&&["Imperial","Xenos","Chaos"].includes(alliance)?orbsOwned(inventory,alliance,step.orbRarity):step.orbs===0?0:null;
  result.orbShortfall=result.orbsOwned===null?null:Math.max(0,step.orbs-result.orbsOwned);
- result.state=result.shardShortfall===null||result.orbShortfall===null?"UNKNOWN":result.shardShortfall>0?"SHARDS NEEDED":result.orbShortfall>0?"ORBS NEEDED":"RESOURCES COVERED";
+ result.state=result.shardShortfall===null?"UNKNOWN":result.shardShortfall>0?"SHARDS NEEDED":result.orbShortfall===null?"UNKNOWN":result.orbShortfall>0?"ORBS NEEDED":"RESOURCES COVERED";
  if(step.orbs&&current===next&&!includeStarUpgrades)result.state="OPTIONAL";
  return result;
 }

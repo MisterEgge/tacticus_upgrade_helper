@@ -6,7 +6,9 @@ export type OrbCandidate = { id: string; name: string; alliance: string; progres
     shards: number | null; mythicShards: number | null; utility: UtilityRating;
     campaignGoals: Array<{ campaign: string; rank: number | null; ability: number | null; progressKnown: boolean }> };
 export type OrbScope = "priorities" | "raid" | "campaign" | "war" | "all";
-export type OrbOptions = { scope: OrbScope; includeMythic: boolean; includeStarUpgrades?: boolean; horizon: "next" | "goal" };
+export type OrbOptions = { scope: OrbScope; includeMythic: boolean; includeStarUpgrades?: boolean; includeShardBlocked?: boolean; horizon: "next" | "goal" };
+const validShardStock = (stock: number | null) => stock !== null && Number.isSafeInteger(stock) && stock >= 0;
+const shardShortfallFor = (stock: number | null, cost: number) => cost === 0 ? 0 : validShardStock(stock) ? Math.max(0, cost - stock!) : null;
 export const normalizeAlliance = (value: string) => value.toLowerCase() === "imperium" || value.toLowerCase() === "imperial" ? "Imperial" : value.toLowerCase() === "chaos" ? "Chaos" : value.toLowerCase() === "xenos" ? "Xenos" : value;
 export function orbsOwned(inventory: OrbInventory | null | undefined, alliance: string, rarity: CharacterRarity): number | null {
     if (!inventory) return null;
@@ -40,7 +42,7 @@ export function orbPriority(candidate: OrbCandidate, warTarget: number | undefin
     return { tier, goalIndex, reasons };
 }
 export function orbPlan(candidates: OrbCandidate[], inventory: OrbInventory | null | undefined, warTargets: Map<string, number>, options: OrbOptions) {
-    const planned = candidates.flatMap(candidate => {
+    const projected = candidates.flatMap(candidate => {
         const priority = orbPriority(candidate, warTargets.get(candidate.name), options);
         const next = nextOrbMilestone(candidate.progressionIndex);
         if (!priority || !next) return [];
@@ -52,10 +54,15 @@ export function orbPlan(candidates: OrbCandidate[], inventory: OrbInventory | nu
             shards += step.shards; mythicShards += step.mythicShards;
             if (step.orbRarity) costs[step.orbRarity] = (costs[step.orbRarity] ?? 0) + step.orbs;
         }
-        const shardShortfall = shards === 0 ? 0 : candidate.shards === null ? null : Math.max(0, shards - candidate.shards);
-        const mythicShardShortfall = mythicShards === 0 ? 0 : candidate.mythicShards === null ? null : Math.max(0, mythicShards - candidate.mythicShards);
+        const shardShortfall = shardShortfallFor(candidate.shards, shards);
+        const mythicShardShortfall = shardShortfallFor(candidate.mythicShards, mythicShards);
         return [{ ...candidate, alliance: normalizeAlliance(candidate.alliance), ...priority, next, end, costs, shardsNeeded: shards, mythicShardsNeeded: mythicShards, shardShortfall, mythicShardShortfall }];
-    }).sort((a, b) => a.tier - b.tier || Number(b.next.promotions === 0) - Number(a.next.promotions === 0)
+    });
+    const deferred = projected.filter(row => row.shardShortfall !== 0 || row.mythicShardShortfall !== 0);
+    // Shards are a prerequisite for an orb recommendation. Future estimates
+    // must be explicitly enabled, before reserving stock or computing totals.
+    const planned = projected.filter(row => options.includeShardBlocked || row.shardShortfall === 0 && row.mythicShardShortfall === 0)
+        .sort((a, b) => a.tier - b.tier || Number(b.next.promotions === 0) - Number(a.next.promotions === 0)
         || (b.utility.communityScore ?? 0) - (a.utility.communityScore ?? 0) || b.utility.accountPriority - a.utility.accountPriority
         || (a.shardShortfall ?? Infinity) - (b.shardShortfall ?? Infinity) || a.name.localeCompare(b.name));
     const remaining = new Map<string, number | null>();
@@ -78,7 +85,17 @@ export function orbPlan(candidates: OrbCandidate[], inventory: OrbInventory | nu
         const owned = orbsOwned(inventory, alliance, rarity);
         return [{ alliance, rarity, needed, owned, shortfall: owned === null ? null : Math.max(0, needed - owned), recipients: recipients.map(row => row.name) }];
     }));
-    return { rows, pools, unknown: candidates.filter(candidate => !progressionRarity(candidate.progressionIndex) || !["Imperial", "Xenos", "Chaos"].includes(normalizeAlliance(candidate.alliance))).map(candidate => candidate.name) };
+    return { rows, pools, deferred: deferred.map(row => row.name), unknown: candidates.filter(candidate => !progressionRarity(candidate.progressionIndex) || !["Imperial", "Xenos", "Chaos"].includes(normalizeAlliance(candidate.alliance))).map(candidate => candidate.name) };
+}
+
+/** Display the blocking prerequisite before asking for any orb purchase. */
+export function orbUpgradeAction(row: ReturnType<typeof orbPlan>["rows"][number]): string {
+    if (row.shardShortfall === null || row.mythicShardShortfall === null) return "Sync shard inventory first.";
+    if (row.shardShortfall > 0 || row.mythicShardShortfall > 0) return "Collect missing shards first.";
+    if (row.next.promotions > 0) return `Next: promote with ${progressionStep(row.progressionIndex)!.shards} shards.`;
+    if (row.allocations.some(cost => cost.shortfall === null)) return "Sync orb inventory.";
+    if (row.allocations.some(cost => cost.shortfall! > 0)) return "Collect missing orbs.";
+    return "Orbs and shards reserved · check coins, then upgrade.";
 }
 
 /** Shopping budget for each owned character's next orb spend, once its full
@@ -90,7 +107,7 @@ export function shardReadyOrbPlan(candidates: OrbCandidate[], inventory: OrbInve
         const next = nextOrbMilestone(candidate.progressionIndex);
         return next && (includeMythic || next.orbRarity !== "Mythic") && (includeStarUpgrades || progressionRarity(candidate.progressionIndex) !== next.orbRarity) && ["Imperial", "Xenos", "Chaos"].includes(normalizeAlliance(candidate.alliance));
     });
-    const stockKnown = (stock: number | null, cost: number) => cost === 0 || stock !== null && Number.isSafeInteger(stock) && stock >= 0;
+    const stockKnown = (stock: number | null, cost: number) => cost === 0 || validShardStock(stock);
     const unknownShards = eligible.filter(candidate => {
         const next = nextOrbMilestone(candidate.progressionIndex)!;
         return !stockKnown(candidate.shards, next.shards) || !stockKnown(candidate.mythicShards, next.mythicShards);
