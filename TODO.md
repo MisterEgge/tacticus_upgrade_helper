@@ -22,6 +22,7 @@
 - [x] Prefer compatible higher-chance block items, checking actual refinement and booster stats before showing equip-now; retain lower-chance block items as situational alternatives.
 
 ## Next enhancements
+- [x] Gate every default orb recommendation and roster orb filter by required shard coverage, label shard blockers first, and group the ready shopping list into independently collapsible rarity tiers from lowest to highest.
 - [x] Make character screens concise: current rank/rarity, exact next action, practical ability stops and shared equipment choices; keep references and extra investment behind disclosures.
 - [x] Default orb totals to rarity ascensions toward Legendary, retaining optional Legendary/Mythic star upgrades through a toggle.
 - [x] Use verified, pinned in-game artwork beside resource names across equipment, materials, currencies, orbs, badges and shop offers; explicitly label unavailable exact equipment artwork.
