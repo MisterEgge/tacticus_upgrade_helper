@@ -46,7 +46,7 @@ export function readSectorChoices(value:unknown):Partial<Record<Alliance,SectorC
 }
 
 const stock=(value:number|null)=>value!==null&&Number.isSafeInteger(value)&&value>=0?value:null;
-const relevance=(unit:OnslaughtCandidate,war:Map<string,number>)=>unit.utility.mainRaidCore?0:unit.utility.mainRaidFlex?1:unit.utility.tier==="Core"?2:unit.utility.tier==="Strong"?3:unit.utility.incompleteCampaign?4:unit.utility.tier==="Useful"?5:war.has(unit.name)?6:7;
+const relevance=(unit:OnslaughtCandidate,war:Map<string,number>)=>unit.utility.mainRaidCore?0:unit.utility.mainRaidFlex?1:unit.utility.tier==="Core"?2:unit.utility.tier==="Strong"?3:unit.utility.incompleteCampaign?4:unit.utility.tier==="Useful"?5:unit.utility.tier==="Situational"||war.has(unit.name)?6:7;
 const regularIncome=new Map(rewards.regularShardIncome.map(source=>[source.id,source]));
 function rarityGoal(unit:OnslaughtCandidate,war:Map<string,number>):number|null {
  // Broad usefulness justifies Legendary. War membership alone keeps its cap.
@@ -80,7 +80,12 @@ export function onslaughtPriorities(candidates:OnslaughtCandidate[],orbs:OrbInve
     abilityReadiness({level:unit.passiveLevel,target:target??unit.passiveTarget,xpLevel:unit.xpLevel,rarity,alliance},badges).eligible
    ]);
    const badgeNeeds=badgeShortfalls(badges,alliance,abilityCosts,abilityCosts).filter(row=>reward.badges.includes(row.rarity)&&(row.shortfall??0)>0);
-   const goalIndex=rarityGoal(unit,war);
+   const trackedGoal=rarityGoal(unit,war);
+   // A quiet track still needs useful choices. Lower-rated owned characters
+   // can be next-rarity projects without turning them into automatic budgets.
+   // Respect an active War cap and keep blue-star/Mythic honors optional.
+   const futureGoal=trackedGoal===null&&warTarget===undefined&&unit.progressionIndex<12?next?.to??null:null;
+   const goalIndex=trackedGoal??futureGoal;
    const growthGoal=goalIndex!==null&&unit.progressionIndex<goalIndex;
    const goalRarity=growthGoal?progressionRarity(goalIndex!):null;
    const shardBalance=stock(reward.shardType==="Mythic"?unit.mythicShards:unit.shards);
@@ -90,26 +95,34 @@ export function onslaughtPriorities(candidates:OnslaughtCandidate[],orbs:OrbInve
    const ownOrbs=next?.orbRarity?orbsOwned(orbs,alliance,next.orbRarity):null;
    const ownOrbShort=next&&ownOrbs!==null?Math.max(0,next.orbs-ownOrbs):null;
    const helpsOwnOrb=growthGoal&&reward.orb===next?.orbRarity&&ownOrbShort!==null&&ownOrbShort>0;
-   const needsShards=growthGoal&&(shardShortfall===null||shardShortfall>0);
+   const needsShards=trackedGoal!==null&&growthGoal&&(shardShortfall===null||shardShortfall>0);
    const mythicGoal=includeMythic&&unit.progressionIndex>=15&&unit.progressionIndex<19;
-   if(!needsShards&&!helpsOwnOrb&&!orbPool&&!badgeNeeds.length&&!mythicGoal)return [];
+   const immediate=needsShards||(helpsOwnOrb&&trackedGoal!==null)||!!orbPool||!!badgeNeeds.length||mythicGoal;
+   const futureRarity=!immediate&&growthGoal;
+   const resourceBanking=!immediate&&!futureRarity&&unit.progressionIndex>=12&&unit.progressionIndex<=14&&
+    (utilityAtLeast(unit.utility.tier,"Situational")||unit.utility.communityScore!==null||unit.utility.accountPriority>0);
+   if(!immediate&&!futureRarity&&!resourceBanking)return [];
    const reasons:string[]=[];
+   if(futureRarity)reasons.push(shardShortfall===null?"Next rarity project · sync shard balance":milestone?.shardShortfall?`Next rarity project · ${milestone.shardShortfall} shards short of ${milestone.to}`:`${milestone?.to} shards covered · check upgrade costs before honoring`);
+   if(resourceBanking)reasons.push("Resource banking · no verified current shortage");
    if(needsShards)reasons.push(shardShortfall===null?"Shard balance unknown · sync before spending":milestone?.shardShortfall?`${milestone.shardShortfall} shards short of ${milestone.to}`:`${milestone?.to} shards covered · building toward ${goalRarity}`);
-   if(helpsOwnOrb&&!needsShards)reasons.push(`Reach ${milestone?.to} · ${ownOrbShort} ${reward.orb} orbs short`);
+   if(helpsOwnOrb&&!needsShards&&!futureRarity)reasons.push(`Reach ${milestone?.to} · ${ownOrbShort} ${reward.orb} orbs short`);
    if(orbPool)reasons.push(`Farm ${reward.orb} orbs: ${orbPool.shortfall} short for ${orbPool.recipients.join(", ")}`);
    if(badgeNeeds.length)reasons.push(`Honor badges can help the eligible practical ability goal: ${badgeNeeds.map(row=>`${row.shortfall} ${row.rarity} short`).join(", ")}`);
    if(mythicGoal)reasons.push(`Optional Mythic goal · ${shardShortfall??"unknown"} Mythic shards short`);
    if(unit.utility.mainRaidCore||unit.utility.mainRaidFlex)reasons.push("Selected Raid team");
    else if(unit.utility.incompleteCampaign)reasons.push("Required in unfinished Elite campaign");
    else if(war.has(unit.name))reasons.push(`Active War slot · ability target ${warTarget}`);
-   else reasons.push(`${unit.utility.tier} account usefulness`);
-   const priority=shardShortfall!==null&&(needsShards||helpsOwnOrb)?0:orbPool?1:badgeNeeds.length?2:needsShards?3:4;
+   else if(unit.utility.tier!=="No tracked signal")reasons.push(`${unit.utility.tier} account usefulness`);
+   else reasons.push("Usefulness unranked · compare before investing");
+   const priority=futureRarity?5:resourceBanking?6:shardShortfall!==null&&(needsShards||helpsOwnOrb)?0:orbPool?1:badgeNeeds.length?2:needsShards?3:4;
    // Lack of a campaign source is a tie-breaker, never proof that Onslaught is
    // the only acquisition route. Shared pools are alternatives, not reservations.
    const honorShortfall=milestone?milestone.shardShortfall:shardShortfall;
-   return [{...unit,alliance,reward,reasons,priority,relevance:relevance(unit,war),shardsNeeded,shardBalance,shardShortfall,goalRarity,milestone,orbPool,badgeNeeds,
+   return [{...unit,alliance,reward,reasons,priority,relevance:relevance(unit,war),futureRarity,resourceBanking,shardsNeeded,shardBalance,shardShortfall,goalRarity,milestone,orbPool,badgeNeeds,
     battles:reward.shards&&honorShortfall!==null?{min:Math.ceil(honorShortfall/reward.shards.max),max:Math.ceil(honorShortfall/reward.shards.min)}:null}];
-  }).sort((a,b)=>a.priority-b.priority||a.relevance-b.relevance||Number(a.campaignShardSource)-Number(b.campaignShardSource)||(b.utility.communityScore??0)-(a.utility.communityScore??0)||b.utility.accountPriority-a.utility.accountPriority||(a.shardShortfall??Infinity)-(b.shardShortfall??Infinity)||a.name.localeCompare(b.name)).slice(0,3);
+  }).sort((a,b)=>a.priority-b.priority||a.relevance-b.relevance||(a.futureRarity&&b.futureRarity?
+   (b.utility.communityScore??0)-(a.utility.communityScore??0)||b.utility.accountPriority-a.utility.accountPriority||(a.milestone?.shardShortfall??Infinity)-(b.milestone?.shardShortfall??Infinity):0)||Number(a.campaignShardSource)-Number(b.campaignShardSource)||(b.utility.communityScore??0)-(a.utility.communityScore??0)||b.utility.accountPriority-a.utility.accountPriority||(a.shardShortfall??Infinity)-(b.shardShortfall??Infinity)||a.name.localeCompare(b.name)).slice(0,3);
   const passive=members.filter(unit=>honorReward(unit.progressionIndex,null)?.shardType==="regular"&&regularIncome.has(unit.id)).map(unit=>({...regularIncome.get(unit.id)!}));
   return {alliance,passive,owned:candidates.filter(unit=>normalizeAlliance(unit.alliance)===alliance).length,deployable:candidates.filter(unit=>normalizeAlliance(unit.alliance)===alliance).length>=5,waveBadges:WAVE_BADGE_ALLIANCE[alliance],rows};
  });

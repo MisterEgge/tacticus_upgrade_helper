@@ -22,6 +22,7 @@
 - [x] Prefer compatible higher-chance block items, checking actual refinement and booster stats before showing equip-now; retain lower-chance block items as situational alternatives.
 
 ## Next enhancements
+- [x] Fill quiet Onslaught tracks with owned next-rarity projects ranked by usefulness and shard proximity, then clearly labelled resource banking, without creating automatic shopping demand.
 - [x] Use visible star colours/counts across the app and show Onslaught’s next rarity milestone with immediate shard needs while preserving full-path Legendary priorities.
 - [x] Prioritize useful characters through Legendary in Onslaught over existing Legendary farmers; skip verified recurring regular shard recipients and retain source-grounded resource farming as a fallback.
 - [x] Combine orb totals and characters into one compact table per rarity; omit redundant upgrade labels and standard 10-orb costs while preserving exceptional costs, promotions, images and acquisition details.

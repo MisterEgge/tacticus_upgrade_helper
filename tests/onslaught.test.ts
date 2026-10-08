@@ -49,8 +49,8 @@ test("honor top threes prioritize useful Legendary growth before established res
  assert.equal(groups[1]!.rows[0]!.alliance,"Xenos");assert.equal(groups[1]!.deployable,false);
  assert.deepEqual(imperial.rows.find(row=>row.id===core.id)?.battles,{min:23,max:25});
  const covered=onslaughtPriorities(rows,{Imperial:[{rarity:"Legendary",amount:10}]},{},new Map(),{});
- assert.equal(covered[0]!.rows.some(row=>row.id===epic.id||row.id===farmer.id),false);
- assert.equal(onslaughtPriorities([farmer],null,{},new Map(),{})[0]!.rows.length,0);
+ assert.equal(covered[0]!.rows.some(row=>row.id===epic.id||row.id===farmer.id),false); // Other immediate growth needs still lead.
+ assert.equal(onslaughtPriorities([farmer],null,{},new Map(),{})[0]!.rows[0]?.resourceBanking,true);
  assert.equal(onslaughtPriorities([blue],{},null,new Map(),{},true)[0]!.rows[0]?.reward.shardType,"Mythic");
  const unknown=onslaughtPriorities([unit("Unknown shards","Chaos",11,null)],null,null,new Map(),{});
  assert.match(unknown[2]!.rows[0]!.reasons[0]!,/unknown/);assert.equal(unknown[2]!.rows[0]!.battles,null);
@@ -78,7 +78,8 @@ test("Legendary shard goals include covered intermediate steps and rank usefulne
  assert.deepEqual(rareCovered.battles,{min:0,max:0});
  assert.match(rareCovered.reasons[0]!,/Epic shards covered/);
  const covered=onslaughtPriorities([{...intermediate,shards:250}],{}, {},new Map(),{})[1]!;
- assert.equal(covered.rows.length,0);
+ assert.equal(covered.rows[0]?.futureRarity,true);
+ assert.match(covered.rows[0]!.reasons[0]!,/check upgrade costs before honoring/);
  const warOnly={...untracked,progressionIndex:6,shards:0};
  assert.equal(onslaughtPriorities([warOnly],{}, {},new Map([[warOnly.name,26]]),{})[1]!.rows.length,0);
  const gold=onslaughtPriorities([warOnly],{}, {},new Map([[warOnly.name,35]]),{})[1]!.rows[0]!;
@@ -90,9 +91,40 @@ test("Legendary farmers remain useful for known shortages after rarity growth is
  const group=onslaughtPriorities([farmer,ready],{Imperial:[{rarity:"Legendary",amount:4}]},{},new Map(),{})[0]!;
  assert.deepEqual(group.rows.map(row=>row.id),[ready.id,farmer.id]);
  assert.equal(group.rows[1]!.shardsNeeded,0);assert.equal(group.rows[1]!.orbPool?.shortfall,6);
- assert.equal(onslaughtPriorities([farmer,ready],{Imperial:[{rarity:"Legendary",amount:10}]},{},new Map(),{})[0]!.rows.length,0);
+ const covered=onslaughtPriorities([farmer,ready],{Imperial:[{rarity:"Legendary",amount:10}]},{},new Map(),{})[0]!;
+ assert.deepEqual(covered.rows.map(row=>[row.id,row.futureRarity,row.resourceBanking]),[[ready.id,true,false],[farmer.id,false,true]]);
+ assert.ok(covered.rows.every(row=>!row.orbPool));
  const unknown=unit("Unknown shards","Imperial",11,null);
  assert.deepEqual(onslaughtPriorities([unknown,farmer,ready],{Imperial:[{rarity:"Legendary",amount:4}]},{},new Map(),{})[0]!.rows.map(row=>row.id),[ready.id,farmer.id,unknown.id]);
+});
+
+test("quiet Chaos tracks suggest owned next-rarity projects before optional resource banking",()=>{
+ const situational=(name:string,index:number,shards:number|null)=>{
+  const row=unit(name,"Chaos",index,shards);
+  row.utility=rateCharacter({...row.utility,communityScore:null,warOption:true});
+  return row;
+ };
+ const near=situational("Yazaghor",11,95),far=situational("Wrask",9,0);
+ const ready=situational("Macer",8,50),unknown=situational("Unknown",8,null);
+ const legendary=unit("Abraxas","Chaos",12,0);
+ const groups=onslaughtPriorities([far,unknown,legendary,near,ready],null,null,new Map(),{Chaos:{sector:"gold",tier:1}});
+ const chaos=groups[2]!;
+ assert.deepEqual(chaos.rows.map(row=>row.id),[ready.id,near.id,far.id]);
+ assert.ok(chaos.rows.every(row=>row.futureRarity&&!row.resourceBanking&&!row.orbPool&&!row.badgeNeeds.length));
+ assert.deepEqual(chaos.rows[0]!.milestone,{from:"Rare",to:"Epic",shardsNeeded:50,shardShortfall:0});
+ assert.match(chaos.rows[0]!.reasons[0]!,/Epic shards covered · check upgrade costs before honoring/);
+ assert.equal(chaos.rows[1]!.goalRarity,"Legendary");
+ assert.deepEqual(chaos.rows[1]!.battles,{min:1,max:1});
+ const banking=onslaughtPriorities([legendary],{Chaos:[{rarity:"Legendary",amount:100}]},{},new Map(),{})[2]!.rows[0]!;
+ assert.equal(banking.resourceBanking,true);assert.equal(banking.shardsNeeded,0);
+ assert.match(banking.reasons[0]!,/no verified current shortage/);assert.equal(banking.orbPool,undefined);
+ const strong={...far,utility:rateCharacter({...far.utility,communityScore:3})};
+ assert.equal(onslaughtPriorities([near,ready,strong],null,null,new Map(),{})[2]!.rows[0]!.id,strong.id);
+ const warCapped=onslaughtPriorities([ready],{}, {},new Map([[ready.name,26]]),{})[2]!;
+ assert.equal(warCapped.rows.length,0); // No fallback growth beyond an active War cap.
+ const unranked={...near,utility:rateCharacter({...near.utility,warOption:false})};
+ assert.match(onslaughtPriorities([unranked],null,null,new Map(),{})[2]!.rows[0]!.reasons.join(" "),/Usefulness unranked/);
+ assert.equal(onslaughtPriorities([{...unranked,shards:100},far],null,null,new Map(),{})[2]!.rows[0]!.id,far.id); // Tracked usefulness beats an unranked easy upgrade.
 });
 
 test("regular free shard sources exclude passive farmers without blocking Mythic honors",()=>{
@@ -108,18 +140,18 @@ test("regular free shard sources exclude passive farmers without blocking Mythic
  assert.equal(onslaughtPriorities([{...free[0]!,progressionIndex:15}],{}, {},new Map(),{},false)[1]!.rows.length,0);
  assert.equal(onslaughtPriorities([{...free[0]!,progressionIndex:15}],{}, {},new Map(),{},true)[1]!.rows[0]?.reward.shardType,"Mythic");
  const limited=onslaughtPriorities([chosen],{}, {},new Map(),{})[1]!;
- assert.equal(limited.rows.length,1); // Do not pad a top three with passive or untracked units.
+ assert.equal(limited.rows.length,1); // Passive sources still cannot pad the list.
 });
 
 test("badge farmers require eligible documented goals or active War slots",()=>{
  const member={...unit("Ability farmer","Imperial",12,1000),activeLevel:34,activeTarget:35};
- assert.equal(onslaughtPriorities([member],{}, {},new Map(),{})[0]!.rows.length,0); // Current honor yields Legendary, not needed Epic badges.
+ assert.equal(onslaughtPriorities([member],{}, {},new Map(),{})[0]!.rows[0]?.resourceBanking,true); // Banking is distinct from an ineligible badge goal.
  const legend={...member,activeLevel:41,activeTarget:44,xpLevel:44};
  assert.equal(onslaughtPriorities([legend],{}, {},new Map(),{})[0]!.rows.length,1);
- assert.equal(onslaughtPriorities([{...legend,xpLevel:41}],{}, {},new Map(),{})[0]!.rows.length,0);
- assert.equal(onslaughtPriorities([{...legend,targetsReviewed:false}],{}, {},new Map(),{})[0]!.rows.length,0);
+ assert.equal(onslaughtPriorities([{...legend,xpLevel:41}],{}, {},new Map(),{})[0]!.rows[0]?.badgeNeeds.length,0);
+ assert.equal(onslaughtPriorities([{...legend,targetsReviewed:false}],{}, {},new Map(),{})[0]!.rows[0]?.badgeNeeds.length,0);
  const epic={...unit("War badge farmer"),activeLevel:26,passiveLevel:26,targetsReviewed:false,shards:1000};
- assert.equal(onslaughtPriorities([epic],{}, {},new Map(),{})[0]!.rows.length,0);
+ assert.equal(onslaughtPriorities([epic],{}, {},new Map(),{})[0]!.rows[0]?.futureRarity,true);
  assert.equal(onslaughtPriorities([epic],{}, {},new Map([[epic.name,35]]),{})[0]!.rows.length,1);
 });
 
@@ -130,13 +162,19 @@ test("honor UI separates faction lists, persists manual sectors per account and 
  const {render,fireEvent,cleanup,act,within}=await import("@testing-library/react");
  suite.after(async()=>{await act(async()=>cleanup());dom.window.close();for(const [key,descriptor] of descriptors){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else Reflect.deleteProperty(globalThis,key);}});
  const rare=unit("Rare upgrade","Imperial",8,45);rare.utility={...rare.utility,mainRaidCore:true};
- const candidates=[rare,{...unit("Snotflogga","Xenos",11),id:"orksRuntherd"},unit("Imperial A"),unit("Imperial B"),unit("Imperial C"),unit("Imperial D"),unit("Chaos A","Chaos"),unit("Xenos A","Xenos"),unit("Blue star","Xenos",15)];
+ const chaosProject=unit("Chaos project","Chaos",8,45);
+ chaosProject.utility=rateCharacter({...chaosProject.utility,communityScore:null,warOption:true});
+ const candidates=[rare,{...unit("Snotflogga","Xenos",11),id:"orksRuntherd"},unit("Imperial A"),unit("Imperial B"),unit("Imperial C"),unit("Imperial D"),unit("Chaos A","Chaos"),chaosProject,unit("Chaos farmer","Chaos",12),unit("Xenos A","Xenos"),unit("Blue star","Xenos",15)];
  const props={candidates,orbs:{},badges:{},defenseTeams:[],offenseTeams:[],accountKey:"TEST ACCOUNT"};
  const view=render(createElement(HonorPriorities,props));
  assert.equal(within(view.getByRole("table",{name:"Imperial honor priorities"})).getAllByRole("row").length,4);
  assert.equal(view.queryByText("Blue star"),null);
  assert.ok(view.getByText(/one regenerates every 16 hours/));
  assert.ok(view.container.querySelector('[data-resource-id="onslaughtToken"] img'));
+ const chaosTable=view.getByRole("table",{name:"Chaos honor priorities"});
+ assert.equal(within(chaosTable).getAllByRole("row").length,4);
+ assert.match(chaosTable.textContent!,/Next rarity project · 5 shards short of Epic/);
+ assert.match(chaosTable.textContent!,/Resource banking · no verified current shortage/);
  const xenos=within(view.getByRole("table",{name:"Xenos honor priorities"}));
  assert.equal(xenos.queryByRole("link",{name:/Snotflogga/}),null);
  const passive=view.getByText("Use regular shard sources instead").closest("details")!;
