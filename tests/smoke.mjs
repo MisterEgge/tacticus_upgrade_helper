@@ -125,6 +125,25 @@ try
     assert.match(imperialHonors.textContent, /45 \/ 50 shards for Epic/);
     assert.doesNotMatch(imperialHonors.textContent, /6 stars/);
     honorForcas.window.close();
+    const beforeChaos = report.roster.length;
+    report.roster.push(
+      { ...report.roster[0], id: 'thousTzaangor', name: 'Yazaghor', faction: 'ThousandSons', grandAlliance: 'Chaos', progressionIndex: 11, shards: 95 },
+      { ...report.roster[0], id: 'worldTerminator', name: 'Wrask', faction: 'WorldEaters', grandAlliance: 'Chaos', progressionIndex: 9, shards: 0 },
+      { ...report.roster[0], id: 'thousInfernalMaster', name: 'Abraxas', faction: 'ThousandSons', grandAlliance: 'Chaos', progressionIndex: 12, shards: 0 }
+    );
+    report.orbInventory.Chaos = [{ rarity: 'Legendary', amount: 100 }];
+    await writeFile(reportPath, JSON.stringify(report));
+    const quietChaos = new JSDOM(await get('/onslaught'));
+    const chaosHonors = quietChaos.window.document.querySelector('[aria-label="Chaos honor priorities"]');
+    assert.equal(chaosHonors.querySelectorAll('tbody tr').length, 3);
+    assert.ok(chaosHonors.querySelector('a[href="/characters/thousTzaangor"]'));
+    assert.match(chaosHonors.textContent, /Epic → Legendary/);
+    assert.match(chaosHonors.textContent, /5 shards short of Legendary/);
+    assert.match(chaosHonors.textContent, /Next rarity project · 250 shards short of Legendary/);
+    assert.match(chaosHonors.textContent, /Resource banking · no verified current shortage/);
+    quietChaos.window.close();
+    report.roster.length = beforeChaos;
+    delete report.orbInventory.Chaos;
     report.roster.push({ ...report.roster[0], id: 'orksRuntherd', name: 'Snotflogga', faction: 'Orks', shards: 0 });
     await writeFile(reportPath, JSON.stringify(report));
     const passiveHonor = new JSDOM(await get('/onslaught'));
