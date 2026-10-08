@@ -137,3 +137,10 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .onslaughtTable{min-width:0}.onslaughtTable td:first-child{width:22%}.onslaughtTable td:first-child>strong{display:block;margin-bottom:8px}.onslaughtTable td:first-child>a{display:block}.onslaughtTable td small{margin-top:6px}@media(max-width:600px){.onslaughtTable{min-width:580px}}
 
 .orbRecipients{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-start}.orbRecipients>div{min-width:0}.orbRecipients a{display:inline-block}.orbRecipients small{margin-top:2px}
+
+/* Character rarity palette and actual game star artwork. */
+.rarity.common{color:#bdc3cf}.rarity.mythic{color:#ff9670}
+.progressionBadge{display:inline-flex;align-items:center;gap:6px;vertical-align:middle;white-space:nowrap}
+.progressionStars{display:inline-flex;align-items:center;gap:1px;flex-shrink:0;height:20px}
+.progressionStars img{display:block;object-fit:contain;width:18px;height:18px}
+.progressionStars.blue img{width:40px}.progressionStars.wings img{width:50px}

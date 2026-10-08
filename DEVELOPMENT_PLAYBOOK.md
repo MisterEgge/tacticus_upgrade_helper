@@ -109,7 +109,7 @@ If any command fails, investigate and fix it before committing. A partial gate i
 | Setting | Value |
 | --- | --- |
 | Approved baseline | `main` |
-| Merge policy | Continuous merge authorization for tested coherent changes unless the owner says otherwise |
+| Merge policy | Continuous authorization to publish feature branches, open PRs and merge tested coherent changes into `main` unless the owner says otherwise; reaffirmed 2026-10-08: “Approved now and forever” |
 | Validation commands | `npm run typecheck && npm test && npm run build && npm run test:smoke && git diff --check` |
 | Data rule | Never fabricate account, source, or recommendation data; label uncertainty clearly |
 | UI rule | Reuse established page patterns before creating new controls or layouts |
@@ -182,3 +182,5 @@ If any command fails, investigate and fix it before committing. A partial gate i
 - Display the game’s visible star count and colour, never cumulative/API star numbers: yellow stars, red stars, blue stars and Mythic wings. Ascending can retain the same visible stars while changing rarity. Share one verified mapping across views. Onslaught should name the next rarity milestone and show its shard requirement; keep the full Legendary path for ranking and put its longer-term counts in the existing evidence disclosure.
 
 - An empty immediate-needs queue does not mean an alliance has no upgrade opportunities. Fill remaining Onslaught places with owned next-rarity projects, ranked by usefulness then known shard proximity, and useful Legendary resource banking. Label future projects and banking honestly; neither creates a verified shortage or automatic orb budget. Keep passive shard exclusions, active War caps and optional Mythic gates. Say to check upgrade costs before honoring a shard-covered project; unranked usefulness and unknown stock remain explicit.
+
+- Character progression uses the shared rarity-colored game-art badge, with visible star count/color (never cumulative counts). Keep exact pinned artwork local, preserve accessible text, and reuse it across Onslaught, Orbs and roster views instead of written star descriptions.

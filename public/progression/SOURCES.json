@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/svehera/tacticusplanner",
+  "commit": "5c5d05193038a0aadb1fd929cce877ef754f7868",
+  "assets": {
+    "yellow-star.png": "src/assets/images/stars/star.png",
+    "red-star.png": "src/assets/images/stars/red star.png",
+    "blue-star.png": "src/assets/images/stars/blue star.png",
+    "mythic-wings.png": "src/assets/images/snowprint_assets/stars/ui_icon_star_mythic.png"
+  }
+}

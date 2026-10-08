@@ -183,7 +183,8 @@ test("honor UI separates faction lists, persists manual sectors per account and 
  assert.ok(within(passive).getByRole("link",{name:"Salvage Run strongboxes"}));
  assert.match(view.getByRole("table",{name:"Imperial honor priorities"}).textContent!,/250 shards short of Legendary/);
  const rareRow=view.getByRole("link",{name:/Rare upgrade/}).closest("tr")!;
- assert.match(rareRow.textContent!,/Rare · 1 red star/);
+ assert.ok(within(rareRow).getByRole("img",{name:"Rare · 1 red star"}));
+ assert.equal(rareRow.querySelectorAll('[src="/progression/red-star.png"]').length,1);
  assert.match(rareRow.textContent!,/Rare → Epic/);
  assert.match(rareRow.textContent!,/5 shards short of Epic/);
  assert.match(rareRow.textContent!,/45 \/ 50 shards for Epic/);

@@ -11,14 +11,17 @@ export function progressionRarity(index: number): CharacterRarity | null {
 }
 // Visible star colours/counts, verified against Tacticus Planner at
 // 5c5d05193038a0aadb1fd929cce877ef754f7868 (RarityStars and StarsIcon).
-const STAR_LABELS = [
-    "no stars", "1 yellow star", "2 yellow stars", "2 yellow stars", "3 yellow stars", "4 yellow stars",
-    "4 yellow stars", "5 yellow stars", "1 red star", "1 red star", "2 red stars", "3 red stars",
-    "3 red stars", "4 red stars", "5 red stars", "1 blue star", "1 blue star", "2 blue stars", "3 blue stars", "wings"
-] as const;
+const STAR_COUNTS = [0,1,2,2,3,4,4,5,1,1,2,3,3,4,5,1,1,2,3,1] as const;
+export function progressionStars(index: number) {
+    if (!progressionRarity(index)) return null;
+    const count = STAR_COUNTS[index]!;
+    const color = index === 19 ? "wings" : index >= 15 ? "blue" : index >= 8 ? "red" : "yellow";
+    const label = color === "wings" ? "wings" : count === 0 ? "no stars" : `${count} ${color} star${count === 1 ? "" : "s"}`;
+    return {count, color, label} as const;
+}
 export function progressionLabel(index: number): string {
     const rarity = progressionRarity(index);
-    return rarity ? `${rarity} · ${STAR_LABELS[index]}` : "Unknown progression";
+    return rarity ? `${rarity} · ${progressionStars(index)!.label}` : "Unknown progression";
 }
 export type ProgressionStep = { from: number; to: number; shards: number; mythicShards: number; orbRarity: CharacterRarity | null; orbs: number };
 // Costs to leave each index. Unlock costs are deliberately excluded.
