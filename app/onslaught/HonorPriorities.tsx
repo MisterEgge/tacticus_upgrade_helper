@@ -6,7 +6,7 @@ import ResourceName,{ResourceText} from "../components/ResourceName";
 import CollapsibleSection from "../components/CollapsibleSection";
 import ReferenceDetails from "../components/ReferenceDetails";
 import {onslaughtPriorities,readSectorChoices,SECTORS,type Alliance,type Sector,type SectorChoice,type OnslaughtCandidate} from "../../src/domain/onslaught";
-import {progressionLabel} from "../../src/domain/characterProgression";
+import ProgressionBadge from "../components/ProgressionBadge";
 import {WAR_PLAN_STORAGE_KEY,warBadgeTargets,type WarBadgeTeam} from "../../src/domain/warBadgeTargets";
 import type {OrbInventory} from "../../src/domain/orbPlanner";
 import type {AbilityBadgeInventory} from "../../src/domain/badgeInventory";
@@ -40,7 +40,7 @@ export default function HonorPriorities({candidates,orbs,badges,defenseTeams,off
     {!group.deployable?<p className="sub">At least five owned characters from {group.alliance} are needed to enter this track. This roster has {group.owned}.</p>:null}
     <p className="sub">Wave clears and Eradication crates give {group.waveBadges} badges; honor rewards use {group.alliance}. {choice?"Sector is your manual selection; confirm it before each run.":"Sector is not exported by the API. Shard amounts stay unknown until you choose it."}</p>
     {group.rows.length?<div className="tableWrap"><table className="onslaughtTable" aria-label={`${group.alliance} honor priorities`}><thead><tr><th>Honor order</th><th>Why this character</th><th>Honor rewards / goal</th></tr></thead><tbody>{group.rows.map((row,index)=><tr key={row.id}>
-     <td><strong>#{index+1}</strong><Link href={`/characters/${row.id}`}><CharacterName id={row.id} name={row.name}/></Link><small>{progressionLabel(row.progressionIndex)}</small></td>
+     <td><strong>#{index+1}</strong><Link href={`/characters/${row.id}`}><CharacterName id={row.id} name={row.name}/></Link><small><ProgressionBadge index={row.progressionIndex}/></small></td>
      <td>{row.milestone?<strong>{row.milestone.from} → {row.milestone.to}</strong>:null}{row.reasons.map(reason=><small key={reason}><ResourceText text={reason}/></small>)}<ReferenceDetails label="Priority evidence">{row.milestone&&row.milestone.to!==row.goalRarity?<p>{row.goalRarity} goal: {row.shardBalance??"?"} / {row.shardsNeeded} total shards · {row.shardShortfall??"?"} short.</p>:null}<p>{row.utility.signals.join(" · ")||"No tracked utility signal; roster rarity goal only."}</p><p>{row.campaignShardSource?"Campaign shard sources exist in the synced catalog; check their access and costs.":"No repeatable campaign shard source in the synced catalog; other shops and event sources may exist."}</p><p>Alternatives share resource pools; these three choices do not reserve the same stock three times.</p></ReferenceDetails></td>
      <td><ResourceName id={row.reward.shardType==="Mythic"?"mythicShards":"shards"} name={`${row.reward.shards?row.reward.shards.min===row.reward.shards.max?row.reward.shards.min:`${row.reward.shards.min}–${row.reward.shards.max}`:"Amount unknown"} ${row.reward.shardType} shards`}/>
       {row.reward.orb?<small><ResourceName id={`orb:${group.alliance}:${row.reward.orb}`} name={`${group.alliance} ${row.reward.orb} orb`}/></small>:null}

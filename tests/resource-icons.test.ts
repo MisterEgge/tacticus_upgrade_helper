@@ -1,3 +1,6 @@
+import {readFileSync} from "node:fs";
+import ProgressionBadge from "../app/components/ProgressionBadge";
+import {JSDOM} from "jsdom";
 import assert from "node:assert/strict";
 import test from "node:test";
 import {renderToStaticMarkup} from "react-dom/server";
@@ -28,4 +31,23 @@ test("resource labels retain names and text, use pinned game art, and combine or
  assert.match(text,/data-resource-id="orb:Imperial:Epic"/);assert.match(text,/data-resource-id="guildCredits"/);assert.match(text,/data-resource-id="gold"/);
  const unknown=renderToStaticMarkup(createElement(ResourceName,{id:"missing-fixture",name:"Unknown material"}));
  assert.match(unknown,/Unknown material/);assert.doesNotMatch(unknown,/<img /);
+});
+
+test("progression badges show visible game stars, rarity color and accessible labels at every color boundary",()=>{
+ for(const [index,label,color,count] of [[0,"Common · no stars","yellow",0],[8,"Rare · 1 red star","red",1],[11,"Epic · 3 red stars","red",3],[14,"Legendary · 5 red stars","red",5],[15,"Legendary · 1 blue star","blue",1],[18,"Mythic · 3 blue stars","blue",3],[19,"Mythic · wings","wings",1]] as const){
+  const dom=new JSDOM(renderToStaticMarkup(createElement(ProgressionBadge,{index})));
+  const badge=dom.window.document.querySelector('[role="img"]')!;
+  assert.equal(badge.getAttribute("aria-label"),label);
+  assert.ok(badge.querySelector(`.rarity.${label.split(" · ")[0]!.toLowerCase()}`));
+  const images=badge.querySelectorAll("img");assert.equal(images.length,count);
+  for(const image of images){
+   assert.equal(image.getAttribute("alt"),"");
+   assert.equal(image.getAttribute("src"),`/progression/${color==="wings"?"mythic-wings":`${color}-star`}.png`);
+   const bytes=readFileSync(`public${image.getAttribute("src")}`);
+   assert.equal(bytes.subarray(1,4).toString(),"PNG");
+  }
+  assert.doesNotMatch(badge.textContent!,/red stars|blue star|yellow star|wings/);
+  dom.window.close();
+ }
+ for(const index of [-1,20,NaN])assert.equal(renderToStaticMarkup(createElement(ProgressionBadge,{index})),"<span>Unknown progression</span>");
 });

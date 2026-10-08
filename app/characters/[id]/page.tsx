@@ -1,3 +1,4 @@
+import ProgressionBadge from "../../components/ProgressionBadge";
 import ResourceName from "../../components/ResourceName";
 import Link from "next/link";
 import Nav from "../../components/Nav";
@@ -26,7 +27,7 @@ export default async function CharacterDetail({params}:{params:Promise<{id:strin
  const slots=buildEquipmentPlan(report,catalog,shops).rows.find(row=>row.characterId===unit.id)?.slots??[];
  const snapshot=report.abilityQueue.find(row=>row.character===unit.name);
  return <main><Nav/><Link className="viewLink" href="/characters">← Characters</Link>
-  <header className="detailHeader"><div><p className="eyebrow">{unit.faction}</p><h1><CharacterName name={unit.name} id={unit.id} icon={unit.icon}/></h1><p className="sub">{unit.rarity} · {rankName(unit.rank)} · level {unit.xpLevel}</p></div></header>
+  <header className="detailHeader"><div><p className="eyebrow">{unit.faction}</p><h1><CharacterName name={unit.name} id={unit.id} icon={unit.icon}/></h1><p className="sub"><ProgressionBadge index={unit.progressionIndex}/> · {rankName(unit.rank)} · level {unit.xpLevel}</p></div></header>
   {meta?<><CharacterProgression unit={unit} inventory={report.orbInventory}/><CharacterAbilities unit={unit} guide={guide} guidance={guidance} evidence={evidence} badgeInventory={report.abilityBadges}/><CharacterEquipment unit={unit} slots={slots} shops={shops} powerLevel={report.source.powerLevel??null}/></>:<CollapsibleSection title="Ability upgrades" summary="Character planning unavailable · unit type needs verification" className="panel detailPanel"><p className="sub">This unit is outside the verified character catalog. Character badge costs and provisional targets are not applied to Machines of War or unverified units.</p></CollapsibleSection>}
   <ReferenceDetails label="Character reference"><p><ResourceName id="shards" name={`${unit.shards??"Unknown"} regular shards`}/> · <ResourceName id="mythicShards" name={`${unit.mythicShards??"Unknown"} Mythic shards`}/></p>{meta?.traits?.length?<p>Traits: {meta.traits.join(" · ")}</p>:null}{unit.power!==undefined?<p>Latest observed Guild Raid loadout power: {unit.power.toLocaleString()}</p>:null}{snapshot?<details><summary>Ability guidance at last report generation</summary><p>{snapshot.focus} · {snapshot.basis}</p><p>Active: {snapshot.communityActiveTarget} · Passive: {snapshot.communityPassiveTarget}</p><small>Snapshot reference. Current targets and next actions appear above.</small></details>:null}</ReferenceDetails>
  </main>;

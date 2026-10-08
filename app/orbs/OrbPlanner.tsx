@@ -6,7 +6,8 @@ import CharacterName from "../components/CharacterName";
 import CollapsibleSection from "../components/CollapsibleSection";
 import ReferenceDetails from "../components/ReferenceDetails";
 import {orbPlan,orbUpgradeAction,shardReadyOrbPlan,combinedOrbDemand,orbHonorees,orbsOwned,type OrbCandidate,type OrbInventory,type OrbScope} from "../../src/domain/orbPlanner";
-import {CHARACTER_RARITIES,progressionLabel,type CharacterRarity} from "../../src/domain/characterProgression";
+import ProgressionBadge from "../components/ProgressionBadge";
+import {CHARACTER_RARITIES,type CharacterRarity} from "../../src/domain/characterProgression";
 import {WAR_PLAN_STORAGE_KEY,warBadgeTargets,type WarBadgeTeam} from "../../src/domain/warBadgeTargets";
 import {currencyName,scheduleLabel,isActionableOffer,type ShopCatalog} from "../../src/domain/shops";
 import sources from "../../config/orb_sources.json";
@@ -75,7 +76,7 @@ export default function OrbPlanner({candidates,inventory,defenseTeams,offenseTea
   <h2>{includeShardBlocked?"Future goals":"Shard-covered upgrades"} · {plan.rows.length} characters</h2>
   {plan.rows.length?<div className="tableWrap"><table><thead><tr><th>Priority / character</th><th>Upgrade</th><th>Orbs / reservation</th><th>Shards and next action</th></tr></thead><tbody>{plan.rows.map((row,index)=>{
    return <tr key={row.id}><td><Link href={`/characters/${row.id}`}><CharacterName id={row.id} name={row.name}/></Link><small>#{index+1} · {row.reasons.join(" · ")}</small><ReferenceDetails label="Usefulness evidence"><p>{row.utility.signals.join(" · ")}</p><p>Account planning relevance, not a measured damage ranking.</p></ReferenceDetails></td>
-    <td>{progressionLabel(row.progressionIndex)} → <strong>{progressionLabel(row.end)}</strong><small>Planning goal: {progressionLabel(row.goalIndex)}</small>{row.next.promotions>0?<small>{row.next.promotions} shard-only promotion(s) before the next orb spend.</small>:null}</td>
+    <td><ProgressionBadge index={row.progressionIndex}/> → <strong><ProgressionBadge index={row.end}/></strong><small>Planning goal: <ProgressionBadge index={row.goalIndex}/></small>{row.next.promotions>0?<small>{row.next.promotions} shard-only promotion(s) before the next orb spend.</small>:null}</td>
     <td>{row.allocations.map(cost=><small key={cost.rarity}><strong><ResourceName id={`orb:${row.alliance}:${cost.rarity}`} name={`${cost.needed} ${row.alliance} ${cost.rarity}`}/></strong> · {cost.reserved??"?"} reserved · {cost.shortfall??"?"} short</small>)}</td>
     <td>{row.shardsNeeded>0?<small><ResourceName id="shards" name={`${row.shardsNeeded} regular shards`}/> total · {row.shards??"?"} owned · {row.shardShortfall??"?"} short</small>:null}{row.mythicShardsNeeded>0?<small><ResourceName id="mythicShards" name={`${row.mythicShardsNeeded} Mythic shards`}/> · {row.mythicShards??"?"} owned · {row.mythicShardShortfall??"?"} short</small>:null}
      <strong>{orbUpgradeAction(row)}</strong></td></tr>;

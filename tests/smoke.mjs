@@ -121,7 +121,8 @@ try
     const honorForcas = new JSDOM(await get('/onslaught'));
     const imperialHonors = honorForcas.window.document.querySelector('[aria-label="Imperial honor priorities"]');
     assert.ok(imperialHonors.querySelector('a[href="/characters/darkaCompanion"]'));
-    assert.match(imperialHonors.textContent, /Rare · 1 red star.*Rare → Epic.*5 shards short of Epic/s);
+    assert.ok(imperialHonors.querySelector('[aria-label="Rare · 1 red star"] img[src="/progression/red-star.png"]'));
+    assert.match(imperialHonors.textContent, /Rare → Epic.*5 shards short of Epic/s);
     assert.match(imperialHonors.textContent, /45 \/ 50 shards for Epic/);
     assert.doesNotMatch(imperialHonors.textContent, /6 stars/);
     honorForcas.window.close();
