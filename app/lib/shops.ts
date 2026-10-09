@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
-import type { ShopCatalog } from "../../src/domain/shops";
+import {shopAccountContext,type ShopCatalog} from "../../src/domain/shops";
+import {getReport} from "./report";
 
 export async function getShopCatalog(): Promise<ShopCatalog | null>
 {
@@ -7,9 +8,10 @@ export async function getShopCatalog(): Promise<ShopCatalog | null>
     try
     {
 
-        const catalog = JSON.parse(await readFile("data/game/shops.json", "utf8")) as ShopCatalog;
+        const [text,report]=await Promise.all([readFile("data/game/shops.json", "utf8"),getReport()]);
+        const catalog = JSON.parse(text) as ShopCatalog;
         if (catalog.schemaVersion !== 1 || !Array.isArray(catalog.shops)) return null;
-        return catalog;
+        return {...catalog,accountContext:shopAccountContext(report?.roster??null,report?.source.powerLevel??null)};
 
     }
     catch { return null; }

@@ -3,13 +3,14 @@ import {equipmentUpgradeOptions,preferredEquipmentItemId} from "../../src/domain
 import {allocateEquipmentActions} from "../../src/domain/equipmentActions";
 import {minimumBlockReplacementLevel} from "../../src/domain/blockEquipment";
 import {equipmentStatsAtLevel} from "../../src/domain/equipmentCompatibility";
-import {sourcesForItem,equipmentOffersForItem,type ShopCatalog} from "../../src/domain/shops";
+import {sourcesForItem,equipmentOffersForItem,shopAccountContext,type ShopCatalog} from "../../src/domain/shops";
 import {targetName,type Report} from "./report";
 import type {CatalogCharacter} from "./catalog";
 
 /** One replacement and inventory allocation model for Equipment and character details. */
 export function buildEquipmentPlan(report:Report,catalog:{characters:CatalogCharacter[]},shops:ShopCatalog|null)
 {
+ if(shops)shops={...shops,accountContext:shopAccountContext(report.roster,report.source.powerLevel)};
  const unitByName=new Map(report.roster.map(unit=>[unit.name,unit]));
  const catalogByName=new Map(catalog.characters.map(character=>[character.name,character]));
  const preferred=(name:string,rarity:string,currentId:string)=>{const unit=unitByName.get(name),character=catalogByName.get(name);return unit&&character&&shops?preferredEquipmentItemId(unit,character.traits,character.equipment,rarity,currentId,shops.equipment):null;};

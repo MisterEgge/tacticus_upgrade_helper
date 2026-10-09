@@ -74,3 +74,5 @@
 - [x] Make low-confidence campaign targets display-only unless explicitly marked eligible for automatic farming.
 - [ ] Consolidate duplicated campaign rank-name constants.
 - [ ] Replace dense one-line page/component source where it materially hurts maintainability.
+
+- [ ] Verify Crusade equipment slot/relic fallback conditions against observed Mythic-account shops; current wiki and community catalogs conflict. Keep unverified lower tiers as reference rather than purchase advice.
