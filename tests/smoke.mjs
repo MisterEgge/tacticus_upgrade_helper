@@ -151,6 +151,18 @@ try
     assert.equal(passiveHonor.window.document.querySelector('[aria-label="Xenos honor priorities"] a[href="/characters/orksRuntherd"]'), null);
     assert.match(passiveHonor.window.document.querySelector('main').textContent, /Snotflogga · Salvage Run strongboxes/);
     passiveHonor.window.close();
+    const snot = report.roster.at(-1);
+    snot.progressionIndex = 15;
+    await writeFile(reportPath, JSON.stringify(report));
+    const legendarySources = new JSDOM(await get('/sources?item=I_Crit_L010'));
+    assert.match(legendarySources.window.document.querySelector('table tbody').textContent, /Crusade Shop/);
+    legendarySources.window.close();
+    snot.progressionIndex = 16;
+    await writeFile(reportPath, JSON.stringify(report));
+    const mythicSources = new JSDOM(await get('/sources?item=I_Crit_L010'));
+    assert.doesNotMatch(mythicSources.window.document.querySelector('table tbody').textContent, /Crusade Shop/);
+    assert.match(mythicSources.window.document.querySelector('main').textContent, /Show unverified Crusade tiers \(reference\)/);
+    mythicSources.window.close();
     report.roster.pop();
     await writeFile(reportPath, JSON.stringify(report));
     const forcasDetail = await get('/characters/darkaCompanion');

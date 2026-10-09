@@ -1,4 +1,10 @@
 import type {EquipmentDefinition} from "./equipmentCompatibility";
+import {progressionRarity} from "./characterProgression";
+export type ShopAccountContext = {powerLevel:number|null;hasMythic:boolean|null};
+export function shopAccountContext(roster:readonly {progressionIndex:number}[]|null,powerLevel:number|null):ShopAccountContext {
+    const rarities=roster?.map(unit=>progressionRarity(unit.progressionIndex));
+    return {powerLevel,hasMythic:!rarities?null:rarities.includes("Mythic")?true:rarities.some(rarity=>rarity===null)?null:false};
+}
 export const DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"] as const;
 export type ShopOffer = {
     id: string; slot: number; itemId: string; quantity: number; schedule: string;
@@ -16,6 +22,7 @@ export type Shop = {
 export type ShopCatalog = {
     schemaVersion: 1; reviewedAt: string; sourceCommit: string; sourceKind: "community";
     shops: Shop[]; equipment: Record<string, EquipmentDefinition & {name:string}>;
+    accountContext?:ShopAccountContext;
 };
 export const CURRENCIES: Record<string, string> = {
     gems: "Blackstone", gold: "Coins", guildCredits: "Guild Credits", guildWarCurrency: "War Credits",
@@ -52,15 +59,27 @@ export function scheduleLabel(schedule: string): string
 
 }
 
-export function offerEligibility(offer: ShopOffer, powerLevel: number | null): "eligible" | "locked" | "unknown"
+export function offerEligibility(offer: ShopOffer, powerLevel: number | null,account?:ShopAccountContext): "eligible" | "locked" | "unknown"
 {
 
     const c = offer.conditions;
     if (powerLevel !== null && ((c.minPowerLevel !== undefined && powerLevel < c.minPowerLevel) || (c.maxPowerLevel !== undefined && powerLevel > c.maxPowerLevel))) return "locked";
-    // Do not assume unrecognized seasonal/roster locks are open.
-    if (c.lockId || (powerLevel === null && (c.minPowerLevel !== undefined || c.maxPowerLevel !== undefined))) return "unknown";
+    let rosterLock:boolean|undefined;
+    if(account?.hasMythic!==null&&account?.hasMythic!==undefined){
+        if(c.lockId==="lock_crusade_shop_owns_unit_at_mythic")rosterLock=account.hasMythic;
+        if(c.lockId==="lock_crusade_shop_does_not_own_unit_at_mythic")rosterLock=!account.hasMythic;
+    }
+    if(rosterLock===false)return "locked";
+    // Slot/relic fallback locks remain unresolved: a Mythic unit does not prove a specific offer exists.
+    if ((c.lockId&&rosterLock===undefined) || (powerLevel === null && (c.minPowerLevel !== undefined || c.maxPowerLevel !== undefined))) return "unknown";
     return "eligible";
 
+}
+
+/** Conflicting catalog tiers are references, not purchase advice after the first Mythic unit. */
+export function unverifiedCrusadeTier(shopId:string,offer:ShopOffer,account?:ShopAccountContext):boolean {
+    return shopId==="crusade"&&account?.hasMythic===true&&/^items(?:Common|Uncommon|Rare|Epic|Legendary)_/.test(offer.itemId)
+        &&offerEligibility(offer,account.powerLevel,account)==="unknown";
 }
 
 export function sourceMatch(itemId: string, offer: ShopOffer, equipment: ShopCatalog["equipment"]): "exact" | "pool" | null
@@ -76,7 +95,8 @@ export function sourceMatch(itemId: string, offer: ShopOffer, equipment: ShopCat
 export function sourcesForItem(itemId: string, catalog: ShopCatalog): string[]
 {
 
-    return catalog.shops.filter(s => s.coverage === "catalog" && s.offers.some(o => isActionableOffer(o) && sourceMatch(itemId, o, catalog.equipment))).map(s => s.name);
+    return catalog.shops.filter(s => s.coverage === "catalog" && s.offers.some(o => isActionableOffer(o) && sourceMatch(itemId, o, catalog.equipment)
+        &&offerEligibility(o,catalog.accountContext?.powerLevel??null,catalog.accountContext)!=="locked"&&!unverifiedCrusadeTier(s.id,o,catalog.accountContext))).map(s => s.name);
 
 }
 
@@ -89,8 +109,8 @@ export type EquipmentShopOffer = {
 export function equipmentOffersForItem(itemId:string,catalog:ShopCatalog,powerLevel:number|null):EquipmentShopOffer[]
 {
     return catalog.shops.filter(shop=>shop.coverage==="catalog").flatMap(shop=>shop.offers.flatMap(offer=>{
-        const match=sourceMatch(itemId,offer,catalog.equipment),access=offerEligibility(offer,powerLevel);
-        if(!match||!isActionableOffer(offer)||access==="locked")return [];
+        const match=sourceMatch(itemId,offer,catalog.equipment),access=offerEligibility(offer,powerLevel,catalog.accountContext);
+        if(!match||!isActionableOffer(offer)||access==="locked"||unverifiedCrusadeTier(shop.id,offer,catalog.accountContext))return [];
         const days:Record<string,string>={SUN:"Sunday",MON:"Monday",TUE:"Tuesday",WED:"Wednesday",THU:"Thursday",FRI:"Friday",SAT:"Saturday"};
         const rotation=scheduleLabel(offer.schedule).replace(/SUN|MON|TUE|WED|THU|FRI|SAT/g,day=>days[day]!);
         return [{id:offer.id,shop:shop.name,match,rotation,price:`${offer.cost.amount.toLocaleString("en-US")} ${currencyName(offer.cost.currency)}`,access,adRefresh:shop.adRefresh}];

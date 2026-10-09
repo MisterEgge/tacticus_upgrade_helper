@@ -1,7 +1,7 @@
 "use client";
 import ResourceName from "../components/ResourceName";
 import { useEffect, useMemo, useState } from "react";
-import { CURRENCIES, DAYS, currencyName, itemCategory, nextUtcReset, offerEligibility, recordState, refreshesLoggedToday, scheduledOn, scheduleLabel, sourceMatch, validateRecord, type ShopCatalog, type ShopRecord } from "../../src/domain/shops";
+import { CURRENCIES, DAYS, currencyName, itemCategory, nextUtcReset, offerEligibility, unverifiedCrusadeTier, recordState, refreshesLoggedToday, scheduledOn, scheduleLabel, sourceMatch, validateRecord, type ShopCatalog, type ShopRecord } from "../../src/domain/shops";
 
 function friendlyName(id: string, labels: Record<string, string>): string
 {
@@ -35,6 +35,7 @@ export default function ShopBrowser({ catalog, labels, initialItem, powerLevel, 
     const [loaded, setLoaded] = useState(false);
     const [now, setNow] = useState(0);
     const [message, setMessage] = useState("");
+    const [showUnverifiedTiers,setShowUnverifiedTiers]=useState(false);
     const [recordShop, setRecordShop] = useState(catalog.shops[0]!.id);
     const [recordItem, setRecordItem] = useState(initialItem);
     const [quantity, setQuantity] = useState("1");
@@ -73,13 +74,14 @@ export default function ShopBrowser({ catalog, labels, initialItem, powerLevel, 
     const rows = useMemo(() => catalog.shops.flatMap(shop => shop.offers.map(offer => ({ shop, offer }))).filter(({ shop, offer }) =>
     {
 
-        return (shopId === "all" || shop.id === shopId)
+        return (showUnverifiedTiers||!unverifiedCrusadeTier(shop.id,offer,catalog.accountContext))
+            && (shopId === "all" || shop.id === shopId)
             && (!item || sourceMatch(item, offer, catalog.equipment))
             && (category === "all" || itemCategory(offer.itemId) === category)
             && (!scheduledOnly || scheduledOn(offer.schedule, day) === true)
             && (!query || `${friendlyName(offer.itemId, labels)} ${offer.itemId} ${shop.name}`.toLowerCase().includes(query.toLowerCase()));
 
-    }), [catalog, day, shopId, item, category, scheduledOnly, query, labels]);
+    }), [catalog, day, shopId, item, category, scheduledOnly, query, labels,showUnverifiedTiers]);
     function save(next: ShopRecord[])
     {
 
@@ -128,6 +130,7 @@ export default function ShopBrowser({ catalog, labels, initialItem, powerLevel, 
                 <label>Exact item / compatible pool<input list="itemNames" value={item} onChange={e => setItem(e.target.value)} placeholder="Stable item ID"/></label>
                 <label className="checkLabel"><input type="checkbox" checked={scheduledOnly} onChange={e => setScheduledOnly(e.target.checked)}/> Only scheduled on selected day</label>
             </div>
+            {catalog.accountContext?.hasMythic===true?<p className="sub">Mythic roster: unverified lower-tier Crusade gear is excluded from purchase suggestions. <label><input type="checkbox" checked={showUnverifiedTiers} onChange={event=>setShowUnverifiedTiers(event.target.checked)}/> Show unverified Crusade tiers (reference)</label></p>:null}
             <datalist id="itemNames">{Object.entries(labels).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</datalist>
             {item ? <p>Sources for <strong><ResourceName id={item} name={friendlyName(item, labels)}/></strong> <button type="button" onClick={() => setItem("")}>Clear item</button></p> : null}
             <p className="sub">{rows.length} offer variants. Rows in the same shop slot are alternatives. Unknown event/roster locks stay unknown; prices and purchase limits are catalog values. Shop-wide access is not confirmed.</p>
@@ -136,7 +139,7 @@ export default function ShopBrowser({ catalog, labels, initialItem, powerLevel, 
                 <td>{shop.name}<small>Slot {offer.slot} · alternative offer</small></td>
                 <td><ResourceName id={offer.cost.currency} name={`${offer.cost.amount} ${currencyName(offer.cost.currency)}`}/><small>Purchase limit: {offer.maxPurchases ?? "not specified"}</small></td>
                 <td>{scheduleLabel(offer.schedule)}<small>{scheduledOn(offer.schedule, day) === null ? "Schedule unknown" : scheduledOn(offer.schedule, day) ? "Scheduled candidate" : "Other day"}</small></td>
-                <td>{offerEligibility(offer, powerLevel) === "locked" ? "Power-level locked" : offerEligibility(offer, powerLevel) === "unknown" ? "Requirements unknown" : "Power requirements met"}<small>Current stock: unconfirmed</small>{offer.conditions.minPowerLevel !== undefined ? <small>Min PL {offer.conditions.minPowerLevel}</small> : null}{offer.conditions.maxPowerLevel !== undefined ? <small>Max PL {offer.conditions.maxPowerLevel}</small> : null}{offer.conditions.lockId ? <details><summary>Additional condition</summary><small>{offer.conditions.lockId}</small></details> : null}</td>
+                <td>{offerEligibility(offer, powerLevel,catalog.accountContext) === "locked" ? "Account requirements not met" : offerEligibility(offer, powerLevel,catalog.accountContext) === "unknown" ? "Requirements unknown" : "Known requirements met"}<small>Current stock: unconfirmed</small>{offer.conditions.minPowerLevel !== undefined ? <small>Min PL {offer.conditions.minPowerLevel}</small> : null}{offer.conditions.maxPowerLevel !== undefined ? <small>Max PL {offer.conditions.maxPowerLevel}</small> : null}{offer.conditions.lockId ? <details><summary>Additional condition</summary><small>{offer.conditions.lockId}</small></details> : null}</td>
                 <td><a href="#shop-log" onClick={() => { setRecordShop(shop.id); setRecordItem(offer.itemId.startsWith("items") ? "" : offer.itemId); setQuantity(String(offer.quantity)); setCost(String(offer.cost.amount)); setCurrency(offer.cost.currency); setExpiry(localInput(nextUtcReset(Date.now()))); }}>Record observed offer</a></td>
             </tr>)}</tbody></table></div>
             {!rows.length ? <p className="empty">No verified catalog match for these filters. This does not prove the item is never sold. Check Main shop / Daily Deals and active event offers; their catalogs remain under research.</p> : null}
