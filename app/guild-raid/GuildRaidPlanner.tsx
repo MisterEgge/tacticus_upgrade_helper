@@ -14,6 +14,7 @@ import { abilityTargetMet, formatAbilityTarget } from "../../src/domain/targetDi
 import { selectedRaidNames, type RaidSelection } from "../../src/domain/raidSelection";
 import type { RosterUnit } from "../lib/report";
 import LaviscusRoadmap from "./LaviscusRoadmap";
+import RaidBattleGuide from "./RaidBattleGuide";
 
 type Member = { name: string; id: string; icon?: string | undefined; owned: boolean; rarity: string | null; rank: number | null; xpLevel: number | null; activeLevel: number | null; passiveLevel: number | null; activeTarget: string; passiveTarget: string; activeBasis: string; passiveBasis: string };
 type Team = RaidTeam & { members: Member[] };
@@ -101,6 +102,7 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, roster 
                 </ReferenceDetails>
             </div>
         </CollapsibleSection>
+        <RaidBattleGuide key={`${boss}-${teamName}-${lineup.join("|")}-${machine}`} boss={boss} teamName={teamName} members={members} machine={machine}/>
         <CollapsibleSection title={`${teamName} vs ${boss}`} summary="Raid character upgrades · targets follow the selected five" className="panel detailPanel">
             <p className="sub">Upgrade steps respect current XP and rarity. Check badges and coins before spending.</p>
             <div className="tableWrap"><table><thead><tr><th>Character</th><th>Rank / level</th><th>Ability steps and targets</th></tr></thead><tbody>{members.map(member => <tr key={member.name}>

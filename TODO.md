@@ -5,6 +5,12 @@
 - New feature ideas go to TODO; non-blocking cleanup/refactors go to Technical debt; fix hard correctness bugs immediately.
 - Store/equipment recommendations must never treat real-money or Blackstone purchases as actionable. Only recommend acquisition through other in-game currencies/sources.
 
+## Raid battle guides
+- [x] Add collapsible, selected-lineup battle guides for Big Hit, Lavistodes and Custodes: six-turn rotation, numbered actions, relative positioning, boss constraints, cooldown-safe variants and explicit substitute gaps.
+- [ ] Transcribe exact deployment hexes and turn-by-turn movement from creator replays for each map/tier/lineup; record timestamps and prime state before calling a tile sequence verified. Current rotations are mechanics-derived suggestions, not transcribed replays.
+- [ ] Research selected flex active timing and Machine of War placement/cooldowns; add archetype-specific Ad-Mech, Psyker and Battle Suit playbooks. Never inherit a missing unit's ability or a different lineup's measured performance.
+- [ ] Visually inspect battle-guide desktop/mobile layout in a browser that can reach the app; interaction and production route checks do not replace that review.
+
 
 ## Dashboard / Equipment
 - [ ] Make every page's content sections independently collapsible, using the shared campaign chevron pattern. Keep title/count/action summaries visible and retain child expansion state when a parent is collapsed. Equipment and character equipment are the first rollout.

@@ -1,0 +1,67 @@
+{
+  "reviewedOn": "2026-10-09",
+  "basis": "Suggested rotations derived from ability mechanics. Replay lineups, tiers and maps are reference metadata, not transcribed turn orders or verified deployment tiles.",
+  "sources": {
+    "commander": { "title": "Legendary Commander mechanics", "url": "https://tacticus.wiki.gg/wiki/HDTW_LegComm" },
+    "kariyan": { "title": "Kariyan abilities and cooldown", "url": "https://tacticus.wiki.gg/wiki/Kariyan" },
+    "aesoth": { "title": "Aesoth aura and cooldown", "url": "https://tacticus.wiki.gg/wiki/Aesoth" },
+    "laviscus": { "title": "Laviscus abilities", "url": "https://tacticus.wiki.gg/wiki/Laviscus" },
+    "outrage": { "title": "Outrage mechanics", "url": "https://tacticus.wiki.gg/wiki/HDTW_Outdone" },
+    "boss": { "title": "Boss Gulgortz WAAAGH!", "url": "https://tacticus.wiki.gg/wiki/Boss_Gulgortz" },
+    "replays": { "title": "Boss and map replay library", "url": "https://terminusmaximus.com/guild-raid/boss-meta/" },
+    "maps": { "title": "Guild Raid map variants", "url": "https://tacticus.wiki.gg/wiki/Guild_Raid_Maps" }
+  },
+  "bosses": {
+    "Avatar of Khaine": {
+      "rule": "Leave the marked fire lane before the delayed strike. Wrath can push adjacent characters away; rebuild the buff formation afterward.",
+      "position": "Reserve a safe exit from fire for each melee character; survival takes priority over holding high ground.",
+      "url": "https://tacticus.wiki.gg/wiki/Avatar_of_Khaine",
+      "replay": { "url": "https://www.youtube.com/watch?v=7wltu4R6hbE", "creator": "Painhawk", "tier": "L5", "map": "Avatar_05", "lineup": ["Laviscus", "Kariyan", "Trajann", "Gulgortz", "Kharn"], "machine": "Biovore" }
+    },
+    "Belisarius Cawl": {
+      "rule": "Exit Solar Atomizer's marked lane. Arc Scourge chains through adjacent units and gains Machine Vengeance for Mechanical units hit.",
+      "position": "Keep an escape lane from the two-hex-wide beam; bringing Mechanical substitutes changes the risk of this formation.",
+      "url": "https://tacticus.wiki.gg/wiki/Belisarius_Cawl",
+      "replay": { "url": "https://www.youtube.com/watch?v=R-kYZJeIKSE", "creator": "Un4given", "tier": "L5", "map": "Cawl_03", "lineup": ["Laviscus", "Kariyan", "Trajann", "Kharn", "Dante"], "machine": "Biovore" }
+    },
+    "Ghazghkull": {
+      "rule": "Prophet of Gork and Mork counts attacks, not individual hits. Spend the remaining allowance on Kariyan and Laviscus before low-value attacks; supporting battles can change that allowance.",
+      "position": "Move out of marked charge and firing lanes. Do not crowd the highest-health melee target with fragile allies.",
+      "url": "https://tacticus.wiki.gg/wiki/Ghazghkull",
+      "replay": { "url": "https://www.youtube.com/watch?v=5T67YOUBLPo", "creator": "UltraBrother", "tier": "L5", "map": "Ghaz_04", "lineup": ["Laviscus", "Kariyan", "Trajann", "Aesoth", "Vitruvius"], "machine": "Biovore" }
+    },
+    "Hive Tyrant": {
+      "rule": "Check the hive-fleet variant: Gorgon erodes armour, Kronos punishes nearby Psyker abilities, and Leviathan can revive adjacent allies. Catalyst temporarily raises defence.",
+      "position": "Keep the melee route clear of adds; reassess survival after armour loss rather than following the rotation blindly.",
+      "url": "https://tacticus.wiki.gg/wiki/Hive_Tyrant",
+      "replay": { "url": "https://www.youtube.com/watch?v=FSQwxqDFTv4", "creator": "Lyell", "tier": "L3", "map": "Hive Tyrant_01", "lineup": ["Laviscus", "Kariyan", "Trajann", "Gulgortz", "Atlacoya"], "machine": "Plagueburst Crawler" }
+    },
+    "Magnus": {
+      "rule": "Check Gaze before attacking: its marked character takes damage if it attacks Magnus, and Psykers are punished regardless. Every ninth attack also faces Impossible Form.",
+      "position": "Rebuild adjacency when Magnus moves; the marked character may need to skip its boss attack to survive.",
+      "url": "https://tacticus.wiki.gg/wiki/Magnus",
+      "replay": { "url": "https://www.youtube.com/watch?v=TAmCzsGsyzw", "creator": "Mawg", "tier": "L5", "map": "Magnus_02", "lineup": ["Kariyan", "Trajann", "Kharn", "Ragnar", "Helbrecht"], "machine": "Biovore" }
+    },
+    "Mortarion": {
+      "rule": "His aura damages adjacent units at the start of his turn, and summons take double damage. Reaping Scythe splashes around its target and prefers Psykers; later hits in an attack suffer diminishing damage.",
+      "position": "Avoid placing fragile characters beside the likely Scythe target. Check remaining health before keeping anyone in melee for another round.",
+      "url": "https://tacticus.wiki.gg/wiki/Mortarion",
+      "replay": { "url": "https://www.youtube.com/watch?v=w1aaDpkM9fA", "creator": "Mawg", "tier": "M2", "map": "Mortarion_04", "lineup": ["Laviscus", "Kariyan", "Trajann", "Gulgortz", "Atlacoya"], "machine": "Biovore" }
+    },
+    "Screamer-Killer": {
+      "rule": "Normal attacks splash around their target. Death Scream and Living Battering Ram can stun or displace the formation; the defeated supporting battles affect those stuns.",
+      "position": "Keep fragile damage dealers away from the intended tank's neighbouring hexes where possible. Recheck Aesoth range and boss adjacency after a throw.",
+      "url": "https://tacticus.wiki.gg/wiki/Screamer-Killer"
+    },
+    "Szarekh": {
+      "rule": "Charging loses hits through Obeisance Generators. Keep your damage dealers in contact when safe, and leave the lit Annihilator Beam hexes before his next turn.",
+      "position": "Limited throne-side melee hexes make access important. Reserve legal adjacent hexes for Kariyan, Trajann and Laviscus; a throne-exit bait is map-specific, not guaranteed.",
+      "url": "https://tacticus.wiki.gg/wiki/Szarekh"
+    },
+    "Tervigon": {
+      "rule": "Critical hits on the boss also damage nearby Termagants through Synaptic Backlash. Catalyst temporarily raises defence; the hive-fleet variant changes the other hazards.",
+      "position": "Keep the boss's neighbouring hexes accessible. Clear a blocking add when needed, while leaving Laviscus beside the enemy your high-damage characters will hit.",
+      "url": "https://tacticus.wiki.gg/wiki/Tervigon"
+    }
+  }
+}

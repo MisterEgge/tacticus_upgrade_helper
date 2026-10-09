@@ -59,7 +59,24 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     assert.match(now().getByText("Atlacoya").parentElement!.textContent!, /Active 1 → 35/);
     assert.ok(now().getAllByRole("link", { name: "Plan rank materials →" }).some(link => link.getAttribute("href") === "/farming?character=synthetic-Atlacoya&target=12"));
 
+    const guide = () => within(view.getByRole("region", { name: "Raid battle guide" }));
+    fireEvent.click(guide().getByRole("button", { name: "Show turn 3" }));
+    assert.match(guide().getByRole("region", { name: "Turn 3 actions" }).querySelector("ol li")!.textContent!, /^Kariyan.*Martial Inspiration/);
+    fireEvent.change(guide().getByLabelText("Kariyan active rotation"), { target: { value: "2" } });
+    fireEvent.click(guide().getByRole("button", { name: "Show turn 2" }));
+    assert.match(guide().getByRole("region", { name: "Turn 2 actions" }).querySelector("ol li")!.textContent!, /Martial Inspiration/);
+    fireEvent.click(guide().getByRole("button", { name: /^Positioning/ }));
+    fireEvent.click(guide().getByRole("button", { name: /^Battle guide/ }));
+    assert.equal(view.getByRole("region", { name: "Raid battle guide" }).querySelector(".campaignSectionBody")!.hasAttribute("hidden"), true);
+    fireEvent.click(guide().getByRole("button", { name: /^Battle guide/ }));
+    assert.equal(guide().getByRole("button", { name: "Show turn 2" }).getAttribute("aria-pressed"), "true");
+    assert.equal(guide().getByRole("button", { name: /^Positioning/ }).getAttribute("aria-expanded"), "true");
+    assert.equal((guide().getByLabelText("Kariyan active rotation") as HTMLSelectElement).value, "2");
+
     fireEvent.change(view.getByLabelText("Character slot 5"), { target: { value: "Helbrecht" } });
+    assert.equal(guide().getByRole("button", { name: "Show turn 1" }).getAttribute("aria-pressed"), "true");
+    assert.equal((guide().getByLabelText("Kariyan active rotation") as HTMLSelectElement).value, "3");
+    assert.equal(guide().queryByText(/^Atlacoya$/), null);
     assert.ok(view.getByText("MANUAL LINEUP"));
     assert.equal(now().queryByText("Atlacoya"), null);
     assert.ok(now().getByText("Helbrecht"));
@@ -106,6 +123,8 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     assert.ok(now().getByText("Anuphet"));
     assert.ok(now().getAllByRole("link", { name: "Plan rank materials →" }).some(link => link.getAttribute("href") === "/farming?character=synthetic-Anuphet&target=12"));
     assert.equal((view.getByLabelText("Machine of War") as HTMLSelectElement).value, "Reanimator");
+    assert.match(guide().getByRole("status").textContent!, /this archetype still need research/);
+    assert.equal(guide().queryByRole("group", { name: "Battle turn" }), null);
     fireEvent.change(view.getByLabelText("Machine of War"), { target: { value: "Galatian" } });
     fireEvent.click(view.getByRole("button", { name: "Set as main Raid team" }));
     await waitFor(() => assert.equal((saved as { machine: string }).machine, "Galatian"));

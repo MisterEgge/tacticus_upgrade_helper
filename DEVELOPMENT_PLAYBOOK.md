@@ -24,6 +24,7 @@ Do not ask for routine approval. Ask only when blocked by missing access, an irr
 - When evidence is insufficient, show `UNKNOWN`, `RESEARCHING`, or manual review. Explain the uncertainty rather than fabricating a recommendation.
 - Keep live state, historical observations, research guidance, and derived recommendations visibly separate.
 - Keep source, confidence, and limitations with recommendations where practical.
+- Raid action guides must distinguish checked ability mechanics, suggested rotations and replay-transcribed tile sequences. Boss attack counters are not hit counters. Keep active-resolution order, cooldowns, aura/target adjacency, immune bosses, prime effects and missing selected buffers explicit. Do not assign absent characters' actives to substitutes, guarantee boss AI bait, or claim exact hex placement from replay metadata alone.
 
 ## Architecture and implementation
 
