@@ -238,6 +238,8 @@ try
     assert.match(selectedHtml, /Ad-Mech vs Riptide/);
     assert.match(selectedHtml, /5\/5 owned characters \+ 1 Machine of War/);
     assert.match(selectedHtml, /Machine of War plan/);
+    assert.match(selectedHtml, /Rotation needs research/);
+    assert.doesNotMatch(selectedHtml, /aria-label="Battle turn"/);
     assert.match(selectedHtml, /Anuphet.*?Plan rank materials/s);
     const selectedRows = selectedHtml.match(/<tbody>(.*?)<\/tbody>/s)?.[1];
     assert.ok(selectedRows);
@@ -425,7 +427,18 @@ try
         assert.equal(response.status, 200);
         return (await response.text()).replace(/<!--.*?-->/gs, '');
     };
-    assert.match(await withAutoFocus('/guild-raid'), /Mortarion · Kariyan · Laviscus · Trajann · Gulgortz · Aesoth/);
+    const battleGuideHtml = await withAutoFocus('/guild-raid');
+    assert.match(battleGuideHtml, /Mortarion · Kariyan · Laviscus · Trajann · Gulgortz · Aesoth/);
+    const battleDom = new JSDOM(battleGuideHtml);
+    const battleGuide = battleDom.window.document.querySelector('[aria-label="Raid battle guide"]');
+    assert.ok(battleGuide);
+    assert.equal(battleGuide.querySelectorAll('[aria-label^="Show turn "]').length, 6);
+    assert.match(battleGuide.querySelector('[aria-label="Turn 1 actions"]').textContent, /Reach legal melee hexes/);
+    assert.match(battleGuide.textContent, /summons take double damage/);
+    const aesothId = catalog.characters.find(character => character.name === 'Aesoth').id;
+    assert.ok(battleGuide.querySelector(`img[src="/characters/${aesothId}.png"]`));
+    assert.match(battleGuide.textContent, /Exact hexes depend on the map/);
+    battleDom.window.close();
     const atlacoya = catalog.characters.find(row => row.name === 'Atlacoya');
     report.roster.push({ ...report.roster[0], id: atlacoya.id, name: atlacoya.name, rarity: 'Rare', progressionIndex: 6, rank: 0, xpLevel: 1 });
     report.generatedAt = '2026-10-02T12:00:00.000Z';
@@ -433,6 +446,7 @@ try
     const updatedRaid = await withAutoFocus('/guild-raid');
     assert.match(updatedRaid, /Mortarion · Kariyan · Laviscus · Trajann · Gulgortz · Atlacoya/);
     assert.match(updatedRaid, /href="\/characters\/custoAtlacoya"/);
+    assert.match(updatedRaid, /Aesoth is absent: no Stand Vigil aura/);
     for (const route of ['/', '/equipment', '/abilities']) {
         assert.match(await withAutoFocus(route), /Mortarion · Kariyan · Laviscus · Trajann · Gulgortz · Atlacoya/);
     }

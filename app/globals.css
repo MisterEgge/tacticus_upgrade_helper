@@ -144,3 +144,11 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .progressionStars{display:inline-flex;align-items:center;gap:1px;flex-shrink:0;height:20px}
 .progressionStars img{display:block;object-fit:contain;width:18px;height:18px}
 .progressionStars.blue img{width:40px}.progressionStars.wings img{width:50px}
+
+.raidBattleGuide{padding:16px 20px;min-width:0}.raidBossRule{margin-top:0;line-height:1.6}
+.raidTurnControls{display:flex;flex-wrap:wrap;gap:14px;align-items:center}.raidTurnControls label{display:flex;align-items:center;gap:8px;font-size:13px}.raidTurnControls select{max-width:100%}
+.raidTurnButtons{display:flex;flex-wrap:wrap;gap:6px}.raidTurnButtons button{min-width:40px;min-height:40px}.raidTurnButtons button[aria-pressed=true]{background:var(--accent,#d2ab65);color:#10131a}
+.raidTurn h3{padding:0;background:none;margin:20px 0 8px}.raidTurn p{line-height:1.5}
+.raidActionOrder{padding-left:28px}.raidActionOrder li{padding:10px 0 10px 4px}.raidActionOrder .characterCell{margin-bottom:5px}.raidActionOrder small{display:block;line-height:1.5;margin-top:4px;color:var(--muted,#a3adbd)}
+.raidPositions{list-style:none;padding:0}.raidPositions li{display:flex;align-items:flex-start;gap:14px;margin:14px 0;line-height:1.5}.raidPositions .characterCell{flex:0 0 150px}.raidGuideWarning{line-height:1.5}
+@media(max-width:600px){.raidBattleGuide{padding:12px 16px}.raidPositions li{display:block}.raidPositions .characterCell{margin-bottom:6px}.raidTurnControls label{display:block}.raidTurnControls select{display:block;margin-top:5px}.raidActionOrder{padding-left:23px}}
