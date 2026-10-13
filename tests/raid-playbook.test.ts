@@ -5,6 +5,22 @@ import meta from "../config/raid_boss_meta.json";
 import { raidCandidates, suggestedRaidLineup } from "../src/domain/raidLineup";
 
 const lineup = ["Kariyan", "Laviscus", "Trajann", "Gulgortz", "Aesoth"];
+test("Rogal Dorn rotation checks the firing lane before movement and keeps replay context", () => {
+    const sourceFive = ["Kariyan", "Laviscus", "Trajann", "Gulgortz", "Vitruvius"];
+    const plan = raidPlaybook("Rogal Dorn", "Big Hit", sourceFive, "Biovore");
+    assert.equal(plan.available, true);
+    assert.equal(plan.replayMatches, true);
+    assert.equal(plan.bossGuide!.replay!.map, "Dorn_06");
+    assert.match(plan.bossGuide!.rule, /three attacks score a crit/);
+    assert.match(plan.bossGuide!.position, /summons can trigger/);
+    assert.ok(plan.turns.every(turn => /before moving/.test(turn.setup)));
+    assert.ok(plan.warnings.some(warning => /crit is not guaranteed/.test(warning)));
+    assert.equal(raidPlaybook("Rogal Dorn", "Big Hit", lineup, "Biovore").replayMatches, false);
+    const adMech = raidPlaybook("Rogal Dorn", "Ad-Mech", ["Actus", "Exitor-Rho", "Tan Gi'da", "Gulgortz", "Anuphet"], "Biovore");
+    assert.ok(adMech.bossGuide);
+    assert.equal(adMech.available, false);
+    assert.deepEqual(adMech.turns, []);
+});
 test("default rotation puts Kariyan first on 3/6 and uses cooldown-safe Aesoth 2/5", () => {
     const plan = raidPlaybook("Screamer-Killer", "Lavistodes", lineup, "Plagueburst Crawler");
     assert.equal(plan.available, true);

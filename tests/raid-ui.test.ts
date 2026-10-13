@@ -60,6 +60,15 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     assert.ok(now().getAllByRole("link", { name: "Plan rank materials →" }).some(link => link.getAttribute("href") === "/farming?character=synthetic-Atlacoya&target=12"));
 
     const guide = () => within(view.getByRole("region", { name: "Raid battle guide" }));
+    fireEvent.change(view.getByLabelText("Raid boss"), { target: { value: "Rogal Dorn" } });
+    assert.deepEqual(view.getAllByLabelText(/Character slot/).map(select => (select as HTMLSelectElement).value), ["Kariyan", "Laviscus", "Trajann", "Gulgortz", "Vitruvius"]);
+    assert.equal((view.getByLabelText("Machine of War") as HTMLSelectElement).value, "Biovore");
+    assert.match(guide().getByRole("region", { name: "Turn 1 actions" }).textContent!, /Gunners lane before moving/);
+    assert.ok(upgradeTable().getByRole("link", { name: /^Vitruvius(?: Vitruvius)?$/ }));
+    fireEvent.change(view.getByLabelText("Meta team"), { target: { value: "Ad-Mech" } });
+    assert.equal(view.queryByRole("option", { name: /^Trajann/ }), null);
+    assert.match(guide().getByText(/Below 60% pierce/).textContent!, /Rear-arc/);
+    fireEvent.change(view.getByLabelText("Raid boss"), { target: { value: "Tervigon" } });
     fireEvent.click(guide().getByRole("button", { name: "Show turn 3" }));
     assert.match(guide().getByRole("region", { name: "Turn 3 actions" }).querySelector("ol li")!.textContent!, /^Kariyan.*Martial Inspiration/);
     fireEvent.change(guide().getByLabelText("Kariyan active rotation"), { target: { value: "2" } });

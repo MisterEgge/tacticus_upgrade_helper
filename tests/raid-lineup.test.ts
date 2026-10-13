@@ -1,12 +1,36 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { raidCandidates, suggestedRaidLineup } from "../src/domain/raidLineup";
-import { resolveRaidSelection, type RaidTeams } from "../src/domain/raidSelection";
+import { resolveRaidSelection, validateRaidSelection, type RaidTeams } from "../src/domain/raidSelection";
 import { RAID_MACHINES, suggestedRaidMachine } from "../src/domain/raidMachine";
 import meta from "../config/raid_boss_meta.json";
 import catalog from "../data/character_catalog.json";
 
 const bosses = meta.bosses as RaidTeams;
+
+test("Rogal Dorn retains source fives, fills missing cores and rejects Astra Militarum", () => {
+    const teams = bosses["Rogal Dorn"]!;
+    assert.deepEqual(Object.keys(teams), ["Big Hit", "Ad-Mech"]);
+    for (const [teamName, team] of Object.entries(teams)) {
+        const owned = new Set([...raidCandidates(team), "Biovore", "Malleus Rocket Launcher"]);
+        const choice = resolveRaidSelection({ boss: "Rogal Dorn", teamName, flex: [], autoFlex: true }, bosses, owned);
+        assert.deepEqual(choice.lineup, team.recommendation!.lineup);
+        assert.equal(choice.machine, "Biovore");
+        for (const name of ["Sibyll", "Yarrick", "Kut", "Thaddeus", "Creed", "Dreir"]) {
+            assert.equal(raidCandidates(team).includes(name), false);
+            const lineup = [...team.core.slice(0, 3), team.flex[0]!, name];
+            assert.equal(validateRaidSelection({ boss: "Rogal Dorn", teamName, lineup, flex: lineup.filter(unit => !team.core.includes(unit)) }, bosses), null);
+        }
+        assert.equal(validateRaidSelection({ ...choice, machine: "Malleus Rocket Launcher" }, bosses), null);
+        assert.equal(suggestedRaidMachine(team, new Set(["Malleus Rocket Launcher"])), null);
+        owned.delete("Vitruvius");
+        const substitute = resolveRaidSelection(choice, bosses, owned);
+        assert.equal(substitute.lineup!.length, 5);
+        assert.equal(new Set(substitute.lineup).size, 5);
+        assert.ok(substitute.lineup!.every(name => owned.has(name)));
+        if (teamName === "Ad-Mech") assert.equal(substitute.lineup!.includes("Trajann"), false);
+    }
+});
 
 test("missing core slots use owned substitutes, keep five unique characters and refill on unlock", () => {
     const team = bosses.Riptide!["Ad-Mech"]!;

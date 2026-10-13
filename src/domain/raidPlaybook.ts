@@ -3,7 +3,7 @@ import data from "../../config/raid_playbooks.json";
 export type RaidAction = { character: string; kind: "active" | "attack"; text: string; condition: string };
 export type RaidTurn = { turn: number; title: string; setup: string; actions: RaidAction[]; note: string };
 type Replay = { url: string; creator: string; tier: string; map: string; lineup: string[]; machine: string };
-type BossGuide = { rule: string; position: string; url: string; replay?: Replay };
+type BossGuide = { rule: string; position: string; url: string; replay?: Replay; reviewedOn?: string };
 export type RaidPlaybook = {
     available: boolean; reason: string; warnings: string[]; positions: { character: string; text: string }[];
     turns: RaidTurn[]; bossGuide: BossGuide | null; machineNote: string; replayMatches: boolean;
@@ -31,6 +31,7 @@ export function raidPlaybook(boss: string, teamName: string, lineup: string[], m
     if (available && !has("Laviscus") && teamName !== "Custodes") warnings.push("Laviscus is absent: this is a Kariyan/Trajann rotation without Outrage or a Laviscus finisher.");
     if (available && !has("Aesoth")) warnings.push("Aesoth is absent: no Stand Vigil aura, and fewer repeatable actives to maintain Commander.");
     if (available && boss === "Magnus") warnings.push("The Gaze target may need to skip its listed attack; check survival before the burst.");
+    if (available && boss === "Rogal Dorn") warnings.push("Gunners lane active: use safe crit attempts before moving exposed units. The numbered buff order is conditional; a crit is not guaranteed, and summons can trigger area fire.");
     const positions = available ? [
         { character: "Trajann", text: "Adjacent to the boss before the damage sequence. His extra hits require this adjacency, even when another character activates Commander." },
         { character: "Kariyan", text: "Adjacent to the boss; favour safe high ground. Stay within Aesoth's aura when he is selected." },
@@ -67,7 +68,8 @@ export function raidPlaybook(boss: string, teamName: string, lineup: string[], m
                     condition: character === "Laviscus" ? boss === "Ghazghkull" ? "Finish before low-value attacks use up the boss's allowance." : "Finisher: do not reset Outrage early." : character === "Kariyan" ? "Boss adjacent for the passive." : ["Trajann", "Aesoth"].includes(character) ? "" : "Flex active timing needs the matching replay." });
             }
             turns.push({ turn, title: burst ? "Kariyan burst" : turn === 1 ? "Reach the boss" : turn === 6 ? "Final attacks" : "Build damage / maintain buffs",
-                setup: turn === 1 ? "Reach legal melee hexes. Attack with Kariyan if safe to begin his attack-turn ramp." : "Check boss telegraphs, then restore boss adjacency and aura range before activating abilities.",
+                setup: boss === "Rogal Dorn" ? "Check the rear arc, bombardment and Gunners lane before moving. Use safe crit attempts until Gunners ends; then restore boss adjacency and aura range. Skip unsafe actions or delay the burst."
+                    : turn === 1 ? "Reach legal melee hexes. Attack with Kariyan if safe to begin his attack-turn ramp." : "Check boss telegraphs, then restore boss adjacency and aura range before activating abilities.",
                 actions,
                 note: turn === 1 ? "The opening may only allow positioning. If an active is delayed, adjust later cooldowns; this rotation assumes the scheduled actions actually happened."
                     : activator ? "Commander starts after the setup active resolves. If it cannot be used, this turn's extra-hit setup is not guaranteed."

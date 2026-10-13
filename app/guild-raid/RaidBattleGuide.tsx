@@ -42,7 +42,7 @@ export default function RaidBattleGuide({ boss, teamName, members, machine }: { 
                 {replay ? <p><a href={replay.url} target="_blank" rel="noreferrer">{replay.creator} replay · {replay.tier} · {replay.map}</a><br/>{plan.replayMatches ? "Same five characters and Machine of War; confirm your map and tier." : "Reference lineup differs from your selection; its turn order cannot be copied unchanged."}<br/>{replay.lineup.join(" · ")} + {replay.machine}.</p> : null}
                 <p><a href={RAID_PLAYBOOK_SOURCES.replays.url} target="_blank" rel="noreferrer">Find the matching boss / map / tier replay</a> · <a href={RAID_PLAYBOOK_SOURCES.maps.url} target="_blank" rel="noreferrer">Map gallery</a></p>
                 <p>{plan.machineNote}</p>
-                <p>Checked {RAID_PLAYBOOK_REVIEWED}. Ability rules support this suggested rotation; linked replay footage has not been transcribed into exact tile instructions. Unresearched flex actives remain manual.</p>
+                <p>Ability mechanics checked {RAID_PLAYBOOK_REVIEWED}.{plan.bossGuide?.reviewedOn ? ` Boss guidance checked ${plan.bossGuide.reviewedOn}.` : ""} Ability rules support this suggested rotation; linked replay footage has not been transcribed into exact tile instructions. Unresearched flex actives remain manual.</p>
                 <ul>{Object.entries(RAID_PLAYBOOK_SOURCES).filter(([key]) => !["replays", "maps"].includes(key)).map(([key, source]) => <li key={key}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></li>)}{plan.bossGuide ? <li><a href={plan.bossGuide.url} target="_blank" rel="noreferrer">{boss} mechanics</a></li> : null}</ul>
             </ReferenceDetails>
         </div>

@@ -25,6 +25,7 @@ Do not ask for routine approval. Ask only when blocked by missing access, an irr
 - Keep live state, historical observations, research guidance, and derived recommendations visibly separate.
 - Keep source, confidence, and limitations with recommendations where practical.
 - Raid action guides must distinguish checked ability mechanics, suggested rotations and replay-transcribed tile sequences. Boss attack counters are not hit counters. Keep active-resolution order, cooldowns, aura/target adjacency, immune bosses, prime effects and missing selected buffers explicit. Do not assign absent characters' actives to substitutes, guarantee boss AI bait, or claim exact hex placement from replay metadata alone.
+- Audit boss-selector coverage against the current Guild Raid catalog when adding guides; a guide cannot help if its boss is absent from the selector. Exercise selection, owned substitutions, faction bans, machine choice and saved routes. Rogal Dorn's firing lane must be checked before generic formation movement; clearing it requires crit-scoring attacks, not a guaranteed single crit.
 
 ## Architecture and implementation
 

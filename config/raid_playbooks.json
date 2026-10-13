@@ -48,6 +48,26 @@
       "url": "https://tacticus.wiki.gg/wiki/Mortarion",
       "replay": { "url": "https://www.youtube.com/watch?v=w1aaDpkM9fA", "creator": "Mawg", "tier": "M2", "map": "Mortarion_04", "lineup": ["Laviscus", "Kariyan", "Trajann", "Gulgortz", "Atlacoya"], "machine": "Biovore" }
     },
+    "Rogal Dorn": {
+      "rule": "Below 60% pierce, non-critical damage faces armour three times. Rear-arc attacks gain +30% crit chance before support effects. Gunners ends after three attacks score a crit (two after the relevant Thaddeus effect); do not assume one crit clears the lane.",
+      "position": "Approach from the rear when safe and leave the delayed bombardment hexes. While Gunners is active, moving into or out of its marked area can hit the whole area; summons can trigger it too. Check facing after each tank move and restore melee adjacency without crossing a live firing lane. Armoured Might pushes characters and destroys summons in its path.",
+      "url": "https://tacticus.wiki.gg/wiki/Rogal_Dorn",
+      "reviewedOn": "2026-10-13",
+      "replay": {
+        "url": "https://www.youtube.com/watch?v=Ibcf8tFkAeA",
+        "creator": "Mawg",
+        "tier": "L4",
+        "map": "Dorn_06",
+        "lineup": [
+          "Laviscus",
+          "Kariyan",
+          "Trajann",
+          "Gulgortz",
+          "Vitruvius"
+        ],
+        "machine": "Biovore"
+      }
+    },
     "Screamer-Killer": {
       "rule": "Normal attacks splash around their target. Death Scream and Living Battering Ram can stun or displace the formation; the defeated supporting battles affect those stuns.",
       "position": "Keep fragile damage dealers away from the intended tank's neighbouring hexes where possible. Recheck Aesoth range and boss adjacency after a throw.",
