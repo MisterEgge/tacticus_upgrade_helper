@@ -69,6 +69,8 @@
 - [x] Feed campaign target rank gaps into multi-rank farming demand.
 
 ## Remaining verification and evidence
+- [x] Restore Rogal Dorn to the raid selector with source-backed Big Hit / Ad-Mech fives, Biovore, Astra Militarum bans and conditional battle guidance.
+- [ ] Complete current boss-catalog coverage: Lion El'Jonson still needs researched teams and guide data. Transcribe map-specific Rogal Dorn movement and Ad-Mech / Machine of War action timing from replays.
 - [x] Verify account analysis via the existing CI API secret and exercise production routes/farming calculations using its fresh report. Player exports and generated reports remain untracked.
 - [ ] Complete interactive desktop/mobile browser checks; isolated production HTTP smoke tests pass, but the remote browser could not reach the local app.
 - [ ] Research campaign-specific targets with cited sources before enabling automatic campaign-to-farming goals. Unverified numeric targets were removed.
