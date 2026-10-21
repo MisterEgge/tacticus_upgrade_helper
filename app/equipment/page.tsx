@@ -1,12 +1,10 @@
-import { selectedRaidNames } from "../../src/domain/raidSelection";
-import {buildEquipmentPlan} from "../lib/equipmentPlan";
+import {getAccountEquipmentPlan} from "../lib/accountEquipmentPlan";
 import Link from "next/link";
 import {getShopCatalog}from "../lib/shops";
 import {getCharacterCatalog}from "../lib/catalog";
 import {readFile}from "node:fs/promises";
 import {campaignIsComplete,requiredCampaignName,type CampaignBattleDefinition}from "../../src/domain/campaigns";
 import {equipmentFocusLabels,equipmentFocusPriority,type EquipmentFocus}from "../../src/domain/equipmentFocus";
-import {getMainRaidSelection,getRaidMeta} from "../lib/raidSelection";
 import {buildDistinctDefenseTeams,type DefenseCore} from "../../src/domain/warTeams";
 import Nav from "../components/Nav";
 import {getReport}from "../lib/report";
@@ -14,13 +12,14 @@ import EquipmentTable from "./EquipmentTable";
 
 export default async function Equipment()
 {
- const[report,shops,catalog,focus,battleText,raidMeta,defensePlan,offensePlan]=await Promise.all([getReport(),getShopCatalog(),getCharacterCatalog(),readFile("config/character_priorities.json","utf8").then(value=>JSON.parse(value)as Record<string,EquipmentFocus>),readFile("data/game/campaign-battles.json","utf8"),getRaidMeta(),readFile("config/war_defense_teams.json","utf8").then(JSON.parse) as Promise<{teams:DefenseCore[]}>,readFile("config/war_offense_teams.json","utf8").then(JSON.parse) as Promise<{validatedFullLineups:Array<{name:string;members:string[];used:number;wins:number}>}>]);
+ const[report,shops,catalog,focus,battleText,defensePlan,offensePlan]=await Promise.all([getReport(),getShopCatalog(),getCharacterCatalog(),readFile("config/character_priorities.json","utf8").then(value=>JSON.parse(value)as Record<string,EquipmentFocus>),readFile("data/game/campaign-battles.json","utf8"),readFile("config/war_defense_teams.json","utf8").then(JSON.parse) as Promise<{teams:DefenseCore[]}>,readFile("config/war_offense_teams.json","utf8").then(JSON.parse) as Promise<{validatedFullLineups:Array<{name:string;members:string[];used:number;wins:number}>}>]);
  if(!report)return <main><Nav/><div className="empty">Run <code>npm run refresh</code>.</div></main>;
- const {rows,tieredSlots,catalogEquipment,unitByName,catalogByName,inventory}=buildEquipmentPlan(report,catalog,shops);
+ const {rows,tieredSlots,catalogEquipment,unitByName,catalogByName,inventory,raidNames}=(await getAccountEquipmentPlan(report,catalog,shops));
+ const raid=new Set(raidNames);
  const battles=Object.values(JSON.parse(battleText))as CampaignBattleDefinition[];
  const incomplete=new Set((report.campaignProgress??[]).filter(progress=>!campaignIsComplete(progress,battles)).map(requiredCampaignName));
  const campaignRequired=new Set(catalog.characters.filter(character=>character.campaignsRequiredIn.some(name=>incomplete.has(name))).map(character=>character.name));
- const candidates=tieredSlots.filter(slot=>slot.state!=="UNKNOWN").flatMap(slot=>slot.acquisition.map(source=>({slotId:slot.slotId,itemId:source.id,character:slot.character,characterId:slot.characterId,focus:equipmentFocusLabels(slot.character,focus,campaignRequired),priority:equipmentFocusPriority(slot.character,focus,campaignRequired)})));
+ const candidates=tieredSlots.filter(slot=>slot.state!=="UNKNOWN").flatMap(slot=>slot.acquisition.map(source=>({slotId:slot.slotId,itemId:source.id,character:slot.character,characterId:slot.characterId,focus:equipmentFocusLabels(slot.character,focus,campaignRequired,raid),priority:equipmentFocusPriority(slot.character,focus,campaignRequired,raid)})));
  const needs=[...candidates.reduce<Map<string,{slotId:string;itemId:string;name:string;available:number;priority:number;characters:Array<{name:string;id?:string;focus:string[];priority:number}>}>>((groups,candidate)=>{const key=`${candidate.slotId}:${candidate.itemId}`,existing=groups.get(key)??{slotId:candidate.slotId,itemId:candidate.itemId,name:shops?.equipment[candidate.itemId]?.name??candidate.itemId,available:inventory.get(candidate.itemId)??0,priority:0,characters:[]};existing.characters.push({name:candidate.character,...(candidate.characterId?{id:candidate.characterId}:{}),focus:candidate.focus,priority:candidate.priority});existing.priority=Math.max(existing.priority,candidate.priority);groups.set(key,existing);return groups;},new Map()).values()].sort((a,b)=>b.priority-a.priority||a.itemId.localeCompare(b.itemId));
  const defensiveAudit=report.roster.flatMap(unit=>
  {
@@ -32,10 +31,7 @@ export default async function Equipment()
  });
  const defensiveIssues=defensiveAudit.filter(row=>row.status!=="CORRECT");
  const defensiveCorrect=defensiveAudit.length-defensiveIssues.length;
- rows.sort((a,b)=>equipmentFocusPriority(b.character,focus,campaignRequired)-equipmentFocusPriority(a.character,focus,campaignRequired)||a.character.localeCompare(b.character));
- const selection=await getMainRaidSelection(raidMeta.bosses,report);
- const raidTeam=raidMeta.bosses[selection.boss]![selection.teamName]!;
- const raidNames=selectedRaidNames(selection,raidTeam);
+ rows.sort((a,b)=>equipmentFocusPriority(b.character,focus,campaignRequired,raid)-equipmentFocusPriority(a.character,focus,campaignRequired,raid)||a.character.localeCompare(b.character));
  const owned=new Set(report.roster.map(unit=>unit.name));
  const defenseTeams=buildDistinctDefenseTeams(defensePlan.teams,owned).map(team=>({name:team.name,used:team.used,members:team.members.map(name=>({name}))}));
  const offenseTeams=offensePlan.validatedFullLineups.filter(team=>team.members.every(name=>owned.has(name))).sort((a,b)=>b.wins/b.used-a.wins/a.used||b.used-a.used).map(team=>({name:team.name,used:team.used,members:team.members.map(name=>({name}))}));

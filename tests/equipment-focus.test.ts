@@ -2,6 +2,14 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {equipmentFocusLabels,equipmentFocusPriority}from "../src/domain/equipmentFocus";
 
+test("saved Raid lineup overrides stale mode labels and static priorities",()=>{
+ const focus={Veteran:{priority:99,modes:["Guild Raid"]},War:{priority:95,modes:["Guild War"]}};
+ const raid=new Set(["New Raid member"]);
+ assert.deepEqual(equipmentFocusLabels("Veteran",focus,new Set(),raid),[]);
+ assert.deepEqual(equipmentFocusLabels("New Raid member",focus,new Set(),raid),["Guild Raid"]);
+ assert.ok(equipmentFocusPriority("New Raid member",focus,new Set(),raid)>equipmentFocusPriority("War",focus,new Set(),raid));
+});
+
 test("equipment focus keeps active War and Raid labels separate from incomplete campaign work",()=>
 {
     const focus={Trajann:{priority:94,modes:["Guild Raid","Guild War"]},Bellator:{priority:70,modes:["Campaign"]}};

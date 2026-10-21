@@ -6,7 +6,7 @@ import Nav from "../components/Nav";
 import {getReport} from "../lib/report";
 import {getCharacterCatalog} from "../lib/catalog";
 import {getShopCatalog,getEquipmentCharacters} from "../lib/shops";
-import {buildEquipmentPlan} from "../lib/equipmentPlan";
+import {getAccountEquipmentPlan} from "../lib/accountEquipmentPlan";
 import {inventoryCleanout} from "../../src/domain/inventoryCleanout";
 import CleanoutTable from "./CleanoutTable";
 
@@ -14,7 +14,7 @@ export default async function InventoryCleanout({searchParams}:{searchParams:Pro
  const [report,catalog,shops,pool,params]=await Promise.all([getReport(),getCharacterCatalog(),getShopCatalog(),getEquipmentCharacters(),searchParams]);
  if(!report)return <main><Nav/><div className="empty">Run <code>npm run refresh</code>.</div></main>;
  const reserveLocked=params.scope!=="owned";
- const ready=buildEquipmentPlan(report,catalog,shops).tieredSlots.filter(slot=>slot.state==="EQUIP NOW");
+ const ready=(await getAccountEquipmentPlan(report,catalog,shops)).tieredSlots.filter(slot=>slot.state==="EQUIP NOW");
  const sourceMatches=pool&&shops&&pool.sourceCommit===shops.sourceCommit;
  const recipients=sourceMatches?[...pool.characters]:[];
  // The live equipped slots prove equipment types for newly released owned characters.
