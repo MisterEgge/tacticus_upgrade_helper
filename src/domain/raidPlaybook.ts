@@ -34,7 +34,7 @@ export function raidPlaybook(boss: string, teamName: string, lineup: string[], m
     if (available && boss === "Rogal Dorn") warnings.push("Gunners lane active: use safe crit attempts before moving exposed units. The numbered buff order is conditional; a crit is not guaranteed, and summons can trigger area fire.");
     const positions = available ? [
         { character: "Trajann", text: "Adjacent to the boss before the damage sequence. His extra hits require this adjacency, even when another character activates Commander." },
-        { character: "Kariyan", text: "Adjacent to the boss; favour safe high ground. Stay within Aesoth's aura when he is selected." },
+        { character: "Kariyan", text: `Adjacent to the boss; favour safe high ground.${has("Aesoth") ? " Stay within Aesoth's aura." : ""}` },
         ...(has("Laviscus") ? [{ character: "Laviscus", text: "Beside the boss before allies' non-psychic hits build Outrage. Preserve his normal attack until the finisher; favour safe high ground." }] : []),
         ...(has("Aesoth") ? [{ character: "Aesoth", text: "Next to Kariyan for the base aura. After a Custodes active, keep the damage dealers within 2 hexes of Aesoth. On his active turns he also needs an adjacent enemy." }] : []),
         ...(has("Gulgortz") ? [{ character: "Gulgortz", text: `${has("Laviscus") ? "Have Laviscus" : "Have the remaining melee attackers"} adjacent to Boss when WAAAGH! activates and a legal charge target. Leave Boss unmoved first if you want the Boyz summons.` }] : [])
