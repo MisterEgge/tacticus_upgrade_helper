@@ -8,7 +8,7 @@ import {targetName,type Report} from "./report";
 import type {CatalogCharacter} from "./catalog";
 
 /** One replacement and inventory allocation model for Equipment and character details. */
-export function buildEquipmentPlan(report:Report,catalog:{characters:CatalogCharacter[]},shops:ShopCatalog|null)
+export function buildEquipmentPlan(report:Report,catalog:{characters:CatalogCharacter[]},shops:ShopCatalog|null,raidNames:ReadonlySet<string>=new Set())
 {
  if(shops)shops={...shops,accountContext:shopAccountContext(report.roster,report.source.powerLevel)};
  const unitByName=new Map(report.roster.map(unit=>[unit.name,unit]));
@@ -39,7 +39,7 @@ export function buildEquipmentPlan(report:Report,catalog:{characters:CatalogChar
   const booster=unit?.items.find(item=>catalogEquipment[item.id]?.type==="I_Booster_Block");
   const bonus=booster?equipmentStatsAtLevel(catalogEquipment[booster.id],booster.level):null;
   const minimumLevel=current&&target&&catalogEquipment[current.id]?.type==="I_Block"&&current.id!==target?(booster&&!bonus?null:minimumBlockReplacementLevel(current,target,catalogEquipment,{chance:bonus?.blockChanceBonus??0,damage:bonus?.blockDamageBonus??0})):1;
-  return {...slot,currentItemId:current?.id,minimumLevel:minimumLevel??1,...(minimumLevel===null?{state:"UNKNOWN"}:{}),reason:"reason" in slot?slot.reason:catalogEquipment[target??""]?.type==="I_Block"?"Preferred block chance · general reliability":"Rarity upgrade"};
+  return {...slot,raidPriority:raidNames.has(slot.character),currentItemId:current?.id,minimumLevel:minimumLevel??1,...(minimumLevel===null?{state:"UNKNOWN"}:{}),reason:"reason" in slot?slot.reason:catalogEquipment[target??""]?.type==="I_Block"?"Preferred block chance · general reliability":"Rarity upgrade"};
  });
  const assigned=allocateEquipmentActions(candidates,report.unequippedInventory).map(slot=>({...slot,target:slot.acquisition.find(source=>source.id===slot.allocatedItemId)?.name??slot.target}));
  const occupied=new Set(assigned.filter(slot=>slot.state==="EQUIP NOW").map(slot=>`${slot.character}:${slot.slotId}`));

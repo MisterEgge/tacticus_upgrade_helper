@@ -3,7 +3,7 @@ import ReferenceDetails from "../components/ReferenceDetails";
 import {getReport} from "../lib/report";
 import {getShopCatalog} from "../lib/shops";
 import {getCharacterCatalog,getAbilityBreakpoints} from "../lib/catalog";
-import {buildEquipmentPlan} from "../lib/equipmentPlan";
+import {getAccountEquipmentPlan} from "../lib/accountEquipmentPlan";
 import {characterRosterRow} from "../lib/characterUpgradeSummary";
 import {abilityGuideRows} from "../../src/domain/abilities";
 import CharacterTable from "./CharacterTable";
@@ -12,7 +12,7 @@ export default async function Characters() {
  const report=await getReport();
  if(!report)return <main><Nav/><div className="empty">Run <code>npm run refresh</code>.</div></main>;
  const [shops,catalog,breakpoints]=await Promise.all([getShopCatalog(),getCharacterCatalog(),getAbilityBreakpoints()]);
- const equipment=buildEquipmentPlan(report,catalog,shops);
+ const equipment=(await getAccountEquipmentPlan(report,catalog,shops));
  const guides=new Map(abilityGuideRows(catalog.characters,report.roster,breakpoints,{}).map(row=>[row.id,row]));
  const ids=new Set(catalog.characters.map(character=>character.id));
  const rows=report.roster.map(unit=>characterRosterRow(unit,guides.get(unit.id),equipment.rows.find(row=>row.characterId===unit.id)?.slots??[],report.abilityBadges,report.orbInventory,ids.has(unit.id)));

@@ -161,3 +161,7 @@ Onslaught, Orb priorities, and Badge Budget use Imperial, Xenos, and Chaos tabs.
 Orb shopping defaults to shard-ready account priorities: selected Raid members, unfinished campaign goals, active War targets, and useful planning floors. War-only characters at their cap and untracked bench investments are excluded. Use **Show all shard-ready characters** for the full-roster readiness audit. Mythic and extra-star upgrades remain optional. Each tab shows only its own alliance totals; inventory allocation and forge protection still use the complete plans.
 
 See [PROJECT_REVIEW.md](PROJECT_REVIEW.md) for the targeted functionality and efficiency review and verified follow-up gaps.
+
+### Equipment priority
+
+Equipment opens on your main Raid team. Save that lineup on the Guild Raid page to change which characters get first choice of shared inventory. Equipment, character pages, roster actions and Cleanout use the same assignments. The combined Raid/War view and full-roster view remain available; Raid members stay first. Search applies to every equipment action list.

@@ -8,6 +8,7 @@ import type {Report} from "../app/lib/report";
 import type {ShopCatalog} from "../src/domain/shops";
 import type {CatalogCharacter} from "../app/lib/catalog";
 import catalogData from "../data/character_catalog.json";
+import {WAR_PLAN_STORAGE_KEY} from "../src/domain/warBadgeTargets";
 import shopsData from "../data/game/shops.json";
 
 const catalog=catalogData as {characters:CatalogCharacter[]};
@@ -25,6 +26,8 @@ test("equipment sections collapse independently, retain character expansion and 
  suite.after(async()=>{await act(async()=>{cleanup();});dom.window.close();for(const [key,descriptor] of descriptors){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else Reflect.deleteProperty(globalThis,key);}});
  const report:Report={generatedAt:"2026-10-06T00:00:00Z",source:{player:"TEST",powerLevel:52},summary:{units:5,charactersWithAbilitiesBelow17:0,individualAbilityUpgradesTo17:0,legendaryUnderTierSlots:2},abilityQueue:[],roster:[unit("Trajann","I_Crit_E001","Old Knife"),unit("Kariyan","I_Crit_E001","Other Knife"),unit("Exitor-Rho","I_Defensive_L003","Grand Plated Greaves","AdeptusMechanicus"),unit("Tyrith","I_Crit_E010","Adorned Ceremonial Knife"),unit("Aleph-Null","","")],unequippedInventory:[{id:"I_Crit_L001",amount:1,level:1},{id:"I_Defensive_L004",amount:1,level:1}],equipmentAllocation:{equipNow:[{character:"Trajann",characterId:catalog.characters.find(row=>row.name==="Trajann")!.id,slotId:"Slot1",currentItem:"Old Knife",currentRarity:"Epic",currentLevel:1,accountPriority:100,recommendedItemId:"I_Crit_L001",recommendedItem:"Grand Combat Knife"}],buyWatch:[],compatibilityUnknown:[]}};
  const {rows}=buildEquipmentPlan(report,catalog,shops);
+ const raidPlan=buildEquipmentPlan(report,catalog,shops,new Set(["Kariyan"]));
+ assert.deepEqual(raidPlan.tieredSlots.filter(slot=>slot.allocatedItemId==="I_Crit_L001").map(slot=>slot.character),["Kariyan"]);
  assert.equal(rows.length,5);
  assert.equal(rows.find(row=>row.character==="Exitor-Rho")!.slots.find(slot=>slot.state==="EQUIP NOW")!.allocatedItemId,"I_Defensive_L004");
  const view=render(createElement(EquipmentTable,{rows,needs:[],raidNames:["Trajann","Kariyan","Exitor-Rho","Tyrith","Aleph-Null"],campaignNames:[],defenseTeams:[],offenseTeams:[]}));
@@ -62,4 +65,21 @@ test("equipment sections collapse independently, retain character expansion and 
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"Aleph-Null"}});
  assert.equal(characters.queryByRole("button",{name:/^Tyrith/}),null);
  assert.ok(characters.getByRole("button",{name:/^Aleph-Null/}));
+ view.rerender(createElement(EquipmentTable,{key:"raid-first",rows:raidPlan.rows,needs:[],raidNames:["Kariyan"],campaignNames:[],defenseTeams:[{name:"Defense",used:1,members:[{name:"Trajann"}]}],offenseTeams:[{name:"Offense",used:1,members:[{name:"Exitor-Rho"}]}]}));
+ assert.equal((view.getByLabelText("Equipment upgrade focus") as HTMLSelectElement).value,"raid");
+ const currentReady=()=>within(view.getByRole("region",{name:"Equip now"}));
+ assert.match(currentReady().getByRole("table").textContent!,/Kariyan/);
+ assert.doesNotMatch(currentReady().getByRole("table").textContent!,/Exitor-Rho/);
+ fireEvent.change(view.getByLabelText("Equipment upgrade focus"),{target:{value:"teams"}});
+ assert.match(currentReady().getByRole("table").textContent!,/Kariyan.*Exitor-Rho/s);
+ fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"Kariyan"}});
+ assert.doesNotMatch(currentReady().getByRole("table").textContent!,/Exitor-Rho/);
+ assert.equal(view.queryByRole("button",{name:/outside this focus/}),null);
+ fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"no such equipment"}});
+ assert.equal(currentReady().queryByRole("table"),null);
+ assert.equal(view.queryByRole("button",{name:/outside this focus/}),null);
+ fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:""}});
+ localStorage.setItem(WAR_PLAN_STORAGE_KEY,JSON.stringify({offense:["Offense"],offenseTiers:Array(10).fill("gold")}));
+ fireEvent.focus(window);
+ assert.match(currentReady().getByRole("table").textContent!,/War.*Gold target/s);
 });

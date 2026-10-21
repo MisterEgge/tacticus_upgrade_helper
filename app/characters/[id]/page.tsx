@@ -8,7 +8,7 @@ import ReferenceDetails from "../../components/ReferenceDetails";
 import CharacterAbilities from "./CharacterAbilities";
 import CharacterEquipment from "./CharacterEquipment";
 import CharacterProgression from "./CharacterProgression";
-import {buildEquipmentPlan} from "../../lib/equipmentPlan";
+import {getAccountEquipmentPlan} from "../../lib/accountEquipmentPlan";
 import {getShopCatalog} from "../../lib/shops";
 import {getReport} from "../../lib/report";
 import {getCatalogCharacter,getCharacterCatalog,getAbilityBreakpoints,getAbilityEvidence,type CharacterAbilityGuidance} from "../../lib/catalog";
@@ -24,7 +24,7 @@ export default async function CharacterDetail({params}:{params:Promise<{id:strin
  const canonicalName=guide?.character??meta?.name??unit.name;
  const guidance=breakpoints[canonicalName] as CharacterAbilityGuidance|undefined;
  const evidence=await getAbilityEvidence(canonicalName);
- const slots=buildEquipmentPlan(report,catalog,shops).rows.find(row=>row.characterId===unit.id)?.slots??[];
+ const slots=(await getAccountEquipmentPlan(report,catalog,shops)).rows.find(row=>row.characterId===unit.id)?.slots??[];
  const snapshot=report.abilityQueue.find(row=>row.character===unit.name);
  return <main><Nav/><Link className="viewLink" href="/characters">← Characters</Link>
   <header className="detailHeader"><div><p className="eyebrow">{unit.faction}</p><h1><CharacterName name={unit.name} id={unit.id} icon={unit.icon}/></h1><p className="sub"><ProgressionBadge index={unit.progressionIndex}/> · {rankName(unit.rank)} · level {unit.xpLevel}</p></div></header>
