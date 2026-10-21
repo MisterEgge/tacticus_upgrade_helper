@@ -10,7 +10,7 @@ import type {RosterUnit} from "../../lib/report";
 import type {AbilityEvidence,CharacterAbilityGuidance} from "../../lib/catalog";
 
 function NextAction({plan,alliance}:{plan:AbilityReadiness;alliance:string}) {
- if(plan.state==="TARGET MET")return <strong>Practical target met · no further upgrade required</strong>;
+ if(plan.state==="TARGET MET")return <strong>Target met</strong>;
  if(plan.state==="UNKNOWN"||plan.state==="GATED")return <strong>{plan.gates.join(" · ")}</strong>;
  if(plan.state==="BADGES NEEDED")return <><strong>Collect badges for level {plan.nextLevel}</strong>{plan.badges.filter(badge=>(badge.shortfall??0)>0).map(badge=><small key={badge.rarity}><ResourceName id={`badge:${alliance==="Imperium"?"Imperial":alliance}:${badge.rarity}`} name={`${badge.shortfall} ${badge.rarity} short`}/> · {badge.owned} owned / {badge.needed} needed</small>)}</>;
  if(plan.state==="CHECK BADGES")return <><strong>XP and rarity allow level {plan.nextLevel} · sync badges</strong><small>Badge balance unknown · check coins</small></>;
@@ -29,19 +29,19 @@ export default function CharacterAbilities({unit,guide,guidance,evidence,badgeIn
  const validAlliance=["Imperial","Imperium","Chaos","Xenos"].includes(unit.grandAlliance);
  const badges=badgeShortfalls(validAlliance?badgeInventory:null,unit.grandAlliance==="Imperium"?"Imperial":unit.grandAlliance,planned,eligible);
  const knownCosts=rows.every(row=>row.plan.state!=="UNKNOWN");
- const basis=guide?.reviewed?`Community guidance · ${guide.targetConfidence} confidence`:guide?.recommended?"Planning recommendation · community validation pending":"Provisional baseline · character research pending";
+ const basis=guide?.reviewed?`Community guide · ${guide.targetConfidence} confidence`:guide?.recommended?"Suggested targets · not yet reviewed":"Suggested level 17 · not yet reviewed";
  const remaining=rows.filter(row=>row.plan.state!=="TARGET MET").length;
- const summary=remaining?`${remaining} practical target${remaining===1?"":"s"} need work` : "Both practical targets met";
+ const summary=remaining?`${remaining} target${remaining===1?"":"s"} to reach` : "Both targets met";
  return <div id="abilities"><CollapsibleSection title="Ability upgrades" summary={summary} className="panel detailPanel compactCharacterTable">
   <p className="sub">{basis}</p>
-  <div className="tableWrap"><table aria-label="Character ability upgrades"><thead><tr><th>Ability</th><th>First stop</th><th>Next action / cost</th></tr></thead><tbody>{rows.map(row=><tr key={row.label}>
+  <div className="tableWrap"><table aria-label="Character ability upgrades"><thead><tr><th>Ability</th><th>Target level</th><th>Next action / cost</th></tr></thead><tbody>{rows.map(row=><tr key={row.label}>
    <td><strong>{row.label} · level {row.current??"unknown"}</strong><small>{row.name}</small></td>
-   <td><strong>{row.target}</strong><ReferenceDetails label={`${row.label} target details`}><p>Practical range: {row.practical}</p>{row.high!=="Not researched"&&row.high!==String(row.target)?<p>High investment option: {row.high}</p>:null}<p>{row.note}</p>{row.modes.length?<small>{row.modes.join(" · ")}</small>:null}</ReferenceDetails></td>
+   <td><strong>{row.target}</strong><ReferenceDetails label={`${row.label} target details`}><p>Suggested range: {row.practical}</p>{row.high!=="Not researched"&&row.high!==String(row.target)?<p>Optional higher target: {row.high}</p>:null}<p>{row.note}</p>{row.modes.length?<small>{row.modes.join(" · ")}</small>:null}</ReferenceDetails></td>
    <td><NextAction plan={row.plan} alliance={unit.grandAlliance}/>{row.plan.state!=="TARGET MET"&&Object.entries(row.plan.nextCost).length?Object.entries(row.plan.nextCost).map(([rarity,amount])=><small key={rarity}>Level {row.plan.nextLevel}: <ResourceName id={`badge:${unit.grandAlliance==="Imperium"?"Imperial":unit.grandAlliance}:${rarity}`} name={`${amount} ${unit.grandAlliance} ${rarity} badge${amount===1?"":"s"}`}/></small>):null}</td>
   </tr>)}</tbody></table></div>
-  <small className="characterBudgetNote">Both abilities use shared badge stock; choose one step before spending.</small>
-  <CollapsibleSection title="Badges to practical targets" summary={knownCosts?Object.entries(planned).map(([rarity,amount])=>`${amount} ${rarity}`).join(" · ")||"Targets met":"Incomplete ability data · costs need review"} defaultOpen={false}>
-   {badges.length?<div className="tableWrap"><table><thead><tr><th>{unit.grandAlliance} badge</th><th>Owned</th><th>Needed for both targets</th><th>Shortfall</th></tr></thead><tbody>{badges.map(badge=><tr key={badge.rarity}><td><ResourceName id={`badge:${unit.grandAlliance==="Imperium"?"Imperial":unit.grandAlliance}:${badge.rarity}`} name={badge.rarity}/></td><td>{badge.owned??"Unknown"}</td><td>{badge.needed}</td><td>{badge.shortfall??"Unknown"}</td></tr>)}</tbody></table></div>:<p className="sub">{knownCosts?"No remaining badge demand at the practical stops.":"Sync ability data before calculating complete costs."}</p>}
+  <small className="characterBudgetNote">Both abilities use the same badge stock.</small>
+  <CollapsibleSection title="Badges to reach targets" summary={knownCosts?Object.entries(planned).map(([rarity,amount])=>`${amount} ${rarity}`).join(" · ")||"Targets met":"Incomplete ability data · costs need review"} defaultOpen={false}>
+   {badges.length?<div className="tableWrap"><table><thead><tr><th>{unit.grandAlliance} badge</th><th>Owned</th><th>Needed for both targets</th><th>Shortfall</th></tr></thead><tbody>{badges.map(badge=><tr key={badge.rarity}><td><ResourceName id={`badge:${unit.grandAlliance==="Imperium"?"Imperial":unit.grandAlliance}:${badge.rarity}`} name={badge.rarity}/></td><td>{badge.owned??"Unknown"}</td><td>{badge.needed}</td><td>{badge.shortfall??"Unknown"}</td></tr>)}</tbody></table></div>:<p className="sub">{knownCosts?"No more badges needed for these targets.":"Sync ability data before calculating complete costs."}</p>}
    {!knownCosts&&badges.length?<p className="sub">Partial costs only; unresolved ability demand is excluded.</p>:null}
    <p className="sub">Combined demand counts both practical targets once. Badges are not reserved here.</p>
   </CollapsibleSection>

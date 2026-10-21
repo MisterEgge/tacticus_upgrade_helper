@@ -29,8 +29,14 @@ test("orb scopes restore War tiers, optional Mythic and full-goal budgets; sourc
  await waitFor(()=>assert.match(view.container.textContent!,/Active War Gold slot/));
  assert.equal(rows().length,3);assert.equal(view.queryByRole("img",{name:"Mythic · 1 blue star"}),null);
  fireEvent.change(active().getByLabelText("Plan"),{target:{value:"goal"}});
- assert.match(rows()[1]!.textContent!,/460 regular shards total/);
- assert.match(rows()[1]!.textContent!,/10 Xenos Legendary/);
+ assert.match(rows()[1]!.textContent!,/0 \/ 460 shards/);
+ const upgradeCell=within(rows()[1]!).getAllByRole("cell")[1]!;
+ assert.equal(within(upgradeCell).getAllByRole("img",{name:/Legendary/}).length,1);
+ assert.doesNotMatch(rows()[1]!.textContent!,/Planning goal|Manual full-roster scope/);
+ const costDetails=within(rows()[1]!).getByText("Details").closest("details")!;
+ assert.equal(costDetails.open,false);
+ assert.match(costDetails.textContent!,/set aside/);
+ assert.match(rows()[1]!.textContent!,/10 Legendary/);
  fireEvent.change(active().getByLabelText("Include"),{target:{value:"war"}});
  assert.equal(rows().length,2);assert.match(rows()[1]!.textContent!,/War/);
  const sources=view.getByText("Get Xenos Epic orbs").closest("details")!;
@@ -41,7 +47,7 @@ test("orb scopes restore War tiers, optional Mythic and full-goal budgets; sourc
  // Editing tiers changes the actual target; a Rare-capped offense does not need Epic.
  dom.window.localStorage.setItem(WAR_PLAN_STORAGE_KEY,JSON.stringify({offense:["Gold offense"],offenseTiers:Array.from({length:10},()=>"silver")}));
  fireEvent(window,new Event("storage"));
- await waitFor(()=>assert.match(view.container.textContent!,/No shard-covered orb upgrades in this scope/));
+ await waitFor(()=>assert.match(view.container.textContent!,/No upgrades with enough shards/));
  fireEvent.change(active().getByLabelText("Include"),{target:{value:"raid"}});
  fireEvent.click(view.getByLabelText("Include Mythic upgrades"));
  assert.match(view.container.textContent!,/20 Mythic shards/);
@@ -55,7 +61,7 @@ test("orb scopes restore War tiers, optional Mythic and full-goal budgets; sourc
  const shoppingCellText=(cell:HTMLElement)=>cell.querySelector("strong .resourceName")?.textContent??cell.textContent;
  const totals=within(readySection.getByRole("table",{name:"Epic orb shopping"}));
  assert.deepEqual(within(totals.getAllByRole("row")[1]!).getAllByRole("cell").filter((_,index)=>index!==1).map(cell=>shoppingCellText(cell)),["Imperial","12","20","8"]);
- assert.ok(readySection.getByText("IMPERIAL"));
+ assert.equal(view.getByRole("tab",{name:"Imperial"}).getAttribute("aria-selected"),"true");
  assert.equal(view.queryByRole("table",{name:"Rare orb shopping"}),null);
  fireEvent.click(view.getByLabelText("Show all shard-ready characters"));
  fireEvent.click(view.getByLabelText("Include star upgrades within a rarity"));

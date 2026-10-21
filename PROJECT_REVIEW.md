@@ -49,3 +49,9 @@ The primary shopping list previously used the full-roster readiness audit. This 
 | Guild War | Keep independent offense and defense team assignments. |
 
 Real-browser checks at a 390px viewport covered these 20 page routes, including a representative character detail. No page-level horizontal overflow was observed. Tab clicks were exercised on all three resource pages, with only one visible panel each. Desktop Onslaught and mobile resource-page screenshots were inspected locally. Keyboard navigation and preservation of nested expansion and sector settings are covered by interaction tests. This is a layout and orb-rule review, not verification of every game mechanic or every possible roster state.
+
+## Player-facing copy cleanup - 2026-10-21
+
+Removed duplicate Planning goal labels from orb rows; the progression badge comparison is the only visible target. A different longer-term target remains in Details, alongside priority reasons and stock allocations. Visible costs retain required orbs, shortfalls, shard balances and the blocking next action. Removed the repeated alliance summary card above rarity totals.
+
+Consolidated Onslaught instructions and reward-chance notes, moved campaign methodology out of repeated rows, removed repeated Raid ability levels and dashboard timestamps, shortened ability target labels, simplified unrated-character language, and removed duplicate material/cleanout counters and internal battle IDs beside visible battle numbers. Equipment reasons remain available under Why this item; shop stock uncertainty is stated once above the offer list. The changes affect presentation only: recommendation scoring, resource allocation, inventory protection, upgrade costs and eligibility are unchanged.

@@ -97,7 +97,7 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     assert.equal(refreshed, 1);
     fireEvent.click(view.getByRole("button", { name: "Use recommended owned team" }));
     assert.equal((view.getByLabelText("Character slot 5") as HTMLSelectElement).value, "Atlacoya");
-    assert.ok(view.getByText("AUTOMATIC OWNED TEAM"));
+    assert.ok(view.getByText("AUTO-SELECTED"));
 
     fireEvent.change(view.getByLabelText("Meta team"), { target: { value: "Big Hit" } });
     assert.equal((view.getByLabelText("Character slot 4") as HTMLSelectElement).value, "Gulgortz");

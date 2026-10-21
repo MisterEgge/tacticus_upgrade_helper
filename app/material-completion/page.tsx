@@ -22,7 +22,7 @@ export default async function MaterialCompletion({ searchParams }: { searchParam
     const done = rows.filter(row => row.status.startsWith("done")).length;
     return <main><Nav/><header><div><p className="eyebrow">LIFETIME MATERIALS</p><h1>Material Completion</h1>
         <p className="sub">See which materials your owned characters have finished using, and which you already have enough of.</p>
-        <p className="sub">Scope: current character catalog through {RANK_NAMES[target] ?? "unknown rank"}. New characters and future upgrades can add demand.</p>
+        <p className="sub">Through {RANK_NAMES[target] ?? "unknown rank"}. New characters and upgrades can add more uses.</p>
         <Link className="sourceLink" href={`/elite-farming-gaps?target=${target}`}>Find missing Elite farming unlocks</Link>
         <ReferenceDetails label="How completion is calculated">
             <p>{catalog.characters.length} catalog characters. Recipe data last synced: {source?.syncedAt ?? "Unknown"}. Sync game data to include newly added characters and recipes.</p>
@@ -32,7 +32,7 @@ export default async function MaterialCompletion({ searchParams }: { searchParam
             <p>The ceiling is a rank to reach; upgrades equipped at that rank for the next rank are excluded. This page never labels materials permanently finished or recommends salvage.</p>
             <Link className="sourceLink" href="/farming">Plan shorter farming goals</Link>
         </ReferenceDetails>
-    </div><div className="power">{error ? "Unknown" : done}<strong> done for owned roster</strong></div></header>
+    </div></header>
         <form className="goalForm panel" action="/material-completion"><label>Calculate through rank<select name="target" defaultValue={String(target)}>
             {RANK_NAMES.map((name, index) => index > 0 ? <option key={name} value={index}>{name}</option> : null)}
         </select></label><button type="submit">Calculate completion</button></form>

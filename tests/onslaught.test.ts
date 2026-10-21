@@ -180,8 +180,8 @@ test("honor UI separates faction lists, persists manual sectors per account and 
  assert.equal(view.queryByRole("table",{name:"Imperial Epic honor priorities"}),null);
  const chaosTable=view.getByRole("region",{name:"Chaos honor priorities"});
  assert.equal(within(chaosTable).getAllByRole("row").length,6);
- assert.match(chaosTable.textContent!,/Next rarity project · 5 shards short of Epic/);
- assert.match(chaosTable.textContent!,/Resource banking · no verified current shortage/);
+ assert.match(chaosTable.textContent!,/Next rarity · 5 shards short of Epic/);
+ assert.match(chaosTable.textContent!,/Optional resource farming/);
  fireEvent.click(view.getByRole("tab",{name:"Xenos"}));
  const xenos=within(view.getByRole("table",{name:"Xenos Epic honor priorities"}));
  assert.equal(xenos.queryByRole("link",{name:/Snotflogga/}),null);
