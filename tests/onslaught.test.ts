@@ -176,16 +176,20 @@ test("honor UI separates faction lists, persists manual sectors per account and 
  assert.equal(view.queryByText("Blue star"),null);
  assert.ok(view.getByText(/one regenerates every 16 hours/));
  assert.ok(view.container.querySelector('[data-resource-id="onslaughtToken"] img'));
+ fireEvent.click(view.getByRole("tab",{name:"Chaos"}));
+ assert.equal(view.queryByRole("table",{name:"Imperial Epic honor priorities"}),null);
  const chaosTable=view.getByRole("region",{name:"Chaos honor priorities"});
  assert.equal(within(chaosTable).getAllByRole("row").length,6);
  assert.match(chaosTable.textContent!,/Next rarity project · 5 shards short of Epic/);
  assert.match(chaosTable.textContent!,/Resource banking · no verified current shortage/);
+ fireEvent.click(view.getByRole("tab",{name:"Xenos"}));
  const xenos=within(view.getByRole("table",{name:"Xenos Epic honor priorities"}));
  assert.equal(xenos.queryByRole("link",{name:/Snotflogga/}),null);
  const passive=view.getByText("Use regular shard sources instead").closest("details")!;
  assert.equal(passive.hasAttribute("open"),false);
  fireEvent.click(within(passive).getByText("Use regular shard sources instead"));
  assert.ok(within(passive).getByRole("link",{name:"Salvage Run strongboxes"}));
+ fireEvent.click(view.getByRole("tab",{name:"Imperial"}));
  assert.match(view.getByRole("region",{name:"Imperial honor priorities"}).textContent!,/250 shards short of Legendary/);
  const rareRow=view.getByRole("link",{name:/Rare upgrade/}).closest("tr")!;
  assert.ok(within(rareRow).getByRole("img",{name:"Rare · 1 red star"}));
@@ -199,11 +203,15 @@ test("honor UI separates faction lists, persists manual sectors per account and 
  fireEvent.change(view.getByRole("combobox",{name:"Imperial sector"}),{target:{value:"gold"}});
  fireEvent.change(view.getByRole("combobox",{name:"Imperial sector stage"}),{target:{value:"4"}});
  assert.deepEqual(JSON.parse(localStorage.getItem("tacticus-onslaught-sectors-v1:TEST ACCOUNT")!),{Imperial:{sector:"gold",tier:4}});
- assert.equal(view.getByRole("combobox",{name:"Chaos sector"}).getAttribute("value"),null);
+ fireEvent.click(view.getByRole("tab",{name:"Chaos"}));
+ assert.equal((view.getByRole("combobox",{name:"Chaos sector"}) as HTMLSelectElement).value,"");
+ fireEvent.click(view.getByRole("tab",{name:"Imperial"}));
  assert.match(view.getByRole("region",{name:"Imperial honor priorities"}).textContent!,/10–11 regular shards/);
  fireEvent.click(view.getByRole("checkbox",{name:"Include optional Mythic honor goals"}));
+ fireEvent.click(view.getByRole("tab",{name:"Xenos"}));
  assert.ok(view.getByRole("link",{name:/Blue star/}));
- fireEvent.click(view.getByRole("button",{name:/Imperial · 4 recommendations/}));assert.equal(view.queryByRole("table",{name:"Imperial Epic honor priorities"}),null);
+ fireEvent.click(view.getByRole("tab",{name:"Imperial"}));
+ assert.equal((view.getByRole("combobox",{name:"Imperial sector"}) as HTMLSelectElement).value,"gold");
  // An account change remounts the component on the page; settings stay scoped.
  view.unmount();
  const other=render(createElement(HonorPriorities,{...props,accountKey:"OTHER ACCOUNT"}));

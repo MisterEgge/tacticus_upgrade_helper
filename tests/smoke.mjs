@@ -78,7 +78,10 @@ try
     const machineDetail=await get('/characters/test-machine-outside-character-catalog');
     assert.match(machineDetail,/Character planning unavailable · unit type needs verification/);
     assert.doesNotMatch(machineDetail,/Next level \d+ eligible|provisional baseline|Next level cost/);
-    assert.match(await get('/abilities'), /Uncommon: \? owned/);
+    const unknownBadges=new JSDOM(await get('/abilities'));
+    const unknownBadgeRow=[...unknownBadges.window.document.querySelectorAll('[aria-label="Xenos badge totals"] tbody tr')].find(row=>row.cells[0].textContent==='Uncommon');
+    assert.match(unknownBadgeRow.textContent,/UncommonSync account/);
+    unknownBadges.window.close();
     assert.match(await get('/orbs'), /Orb inventory unavailable/);
     report.roster[0].shards = 40;
     report.orbInventory = { Xenos: [{ rarity: 'Uncommon', amount: 7 }] };
@@ -109,7 +112,8 @@ try
     assert.match(honor, /Onslaught honor priorities/);
     assert.match(honor, /aria-label="Xenos honor priorities".*?Aleph-Null.*?Farm Epic orbs: 6 short/s);
     assert.match(honor, /one regenerates every 16 hours/);
-    assert.match(honor, /Imperial · 0 recommendations/);
+    assert.match(honor, /role="tablist" aria-label="Onslaught alliance"/);
+    assert.match(honor, /aria-label="Imperial honor priorities".*?0 recommendations/s);
     assert.match(await get('/onslaught', true), /data-resource-id="onslaughtToken".*?<img/s);
     const forcas = { ...report.roster[0], id: 'darkaCompanion', name: 'Forcas', faction: 'DarkAngels', grandAlliance: 'Imperial', shards: 45 };
     report.roster.push(forcas);
@@ -186,7 +190,10 @@ try
     assert.doesNotMatch(await get('/orbs'), /aria-label="Epic orb shopping"/);
     report.abilityBadges = { Xenos: [{ rarity: 'Uncommon', amount: 7 }] };
     await writeFile(reportPath, JSON.stringify(report));
-    assert.match(await get('/abilities'), /Uncommon: 7 owned/);
+    const knownBadges=new JSDOM(await get('/abilities'));
+    const knownBadgeRow=[...knownBadges.window.document.querySelectorAll('[aria-label="Xenos badge totals"] tbody tr')].find(row=>row.cells[0].textContent==='Uncommon');
+    assert.equal(knownBadgeRow.cells[1].textContent,'7');
+    knownBadges.window.close();
     const campaigns = await get('/campaigns');
     assert.match(campaigns, /Indomitus Mirror Elite/);
     assert.match(campaigns, /Stone I/);

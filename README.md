@@ -156,6 +156,8 @@ targets without campaign-specific evidence remain under research.
 
 ### Onslaught recommendations
 
-Onslaught shows Imperial, Xenos and Chaos tracks, each with independently collapsible Common through Mythic sections. Each section ranks up to three eligible characters at their current rarity. Enable optional Mythic goals to include those investments; empty sections explain when no eligible choices exist. Sector selections remain separate for each alliance.
+Onslaught, Orb priorities, and Badge Budget use Imperial, Xenos, and Chaos tabs. Onslaught keeps independently collapsible rarity sections inside each tab, with up to three choices per current character rarity; rarities without eligible choices appear in a compact summary. Enable optional Mythic goals to include those investments. Sector choices and rarity expansion state survive switching tabs.
+
+Orb shopping defaults to shard-ready account priorities: selected Raid members, unfinished campaign goals, active War targets, and useful planning floors. War-only characters at their cap and untracked bench investments are excluded. Use **Show all shard-ready characters** for the full-roster readiness audit. Mythic and extra-star upgrades remain optional. Each tab shows only its own alliance totals; inventory allocation and forge protection still use the complete plans.
 
 See [PROJECT_REVIEW.md](PROJECT_REVIEW.md) for the targeted functionality and efficiency review and verified follow-up gaps.

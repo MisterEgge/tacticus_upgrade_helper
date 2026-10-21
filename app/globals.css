@@ -152,3 +152,13 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .raidActionOrder{padding-left:28px}.raidActionOrder li{padding:10px 0 10px 4px}.raidActionOrder .characterCell{margin-bottom:5px}.raidActionOrder small{display:block;line-height:1.5;margin-top:4px;color:var(--muted,#a3adbd)}
 .raidPositions{list-style:none;padding:0}.raidPositions li{display:flex;align-items:flex-start;gap:14px;margin:14px 0;line-height:1.5}.raidPositions .characterCell{flex:0 0 150px}.raidGuideWarning{line-height:1.5}
 @media(max-width:600px){.raidBattleGuide{padding:12px 16px}.raidPositions li{display:block}.raidPositions .characterCell{margin-bottom:6px}.raidTurnControls label{display:block}.raidTurnControls select{display:block;margin-top:5px}.raidActionOrder{padding-left:23px}}
+
+/* Alliance navigation: one visible resource track, with stable nested state. */
+.allianceTabList{display:flex;gap:4px;border-bottom:1px solid var(--border,#38404d);margin:16px 0}
+.allianceTabList [role=tab]{flex:1;min-width:0;min-height:44px;border:0;border-radius:6px 6px 0 0;background:transparent;padding:10px 12px;color:var(--muted,#a3adbd);font-weight:700}
+.allianceTabList [role=tab][aria-selected=true]{color:var(--accent,#d2ab65);background:rgba(210,171,101,.10);box-shadow:inset 0 -3px var(--accent,#d2ab65)}
+.allianceTabList [role=tab]:focus-visible,[role=tabpanel]:focus-visible{outline:2px solid var(--accent,#d2ab65);outline-offset:3px}
+.allianceTabs [role=tabpanel][hidden]{display:none}
+.allianceContent{min-width:0}.allianceContent>h2{margin-top:0}
+
+.abilityViews .checkLabel{flex-direction:row;align-items:center;gap:8px}.abilityViews .checkLabel input{flex:none;margin:0}
