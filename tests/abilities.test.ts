@@ -83,7 +83,8 @@ test("stable IDs resolve owned units; locked abilities do not enter baseline que
 
 test("every owned catalog character has a real planning floor without fabricating a researched target", () =>
 {
-    const report = JSON.parse(readFileSync("output/upgrade-report.json", "utf8")) as { roster:RosterUnit[] };
+    // Synthetic ownership across the catalog; no personal account report needed.
+    const report={roster:catalog.map(character=>({...roster[0]!,id:character.id,name:character.name}))};
     const guidance = JSON.parse(readFileSync("config/ability_breakpoints.json", "utf8")) as Record<string,unknown>;
     const rows = abilityGuideRows(catalog, report.roster, guidance, {}).filter(row => row.owned);
     const catalogIds = new Set(catalog.map(unit => unit.id));

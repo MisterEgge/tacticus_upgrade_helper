@@ -23,7 +23,9 @@ python src/build_report.py data/player.json
 
 ## Data model
 
-`player.json`, Guild data, and generated reports are account state. This is a personal-use repository, so they may be committed to keep the site portable and current. The API key itself remains in `.env` and is never committed.
+Player and Guild exports, campaign history, and `output/upgrade-report.json` are local account state and are ignored by Git. Keep them on your PC: the app reads the local report, and `npm run refresh` fetches the exports and regenerates it. Refreshing does not require committing anything. Campaign history preserves past observations and should be backed up separately if you want to retain it.
+
+A fresh checkout starts without account data. Install dependencies with `npm ci`, set `TACTICUS_API_KEY` in local `.env`, then run `npm run refresh` and `npm run dev`. The app can start without a report, but account dashboards show an unavailable state until refresh succeeds. `.env` remains ignored. Shared game catalogs under `data/game/`, the character catalog, and recommendation configuration stay committed; tests use synthetic account inputs rather than personal exports. GitHub Actions may generate a report artifact, but does not commit account data or update your local files.
 
 Maintained recommendation data lives under `config/`:
 - `character_priorities.json` — account/value weighting and notes.

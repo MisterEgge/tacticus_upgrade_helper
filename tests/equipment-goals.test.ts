@@ -1,3 +1,4 @@
+import {equipmentCompatibility,type EquipmentCharacter,type EquipmentDefinition} from "../src/domain/equipmentCompatibility";
 import {equipmentUpgradeOptions} from "../src/domain/equipmentOptions";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -46,21 +47,27 @@ test("Legendary Rho armor correction offers Epic and Legendary but never Rare",(
  assert.equal(equipmentOptionFitsGoal("Rare","Epic","Legendary",{rarity:"Legendary",priority:100}),true);
 });
 
-test("shared equipment alternatives audit every owned character without exceeding character rarity",()=>{
- const report=JSON.parse(readFileSync("output/upgrade-report.json","utf8"));
- const catalog=JSON.parse(readFileSync("data/character_catalog.json","utf8"));
- const equipment=JSON.parse(readFileSync("data/game/shops.json","utf8")).equipment;
+test("shared equipment alternatives audit synthetic catalog ownership without exceeding character rarity",()=>{
+ const catalog=JSON.parse(readFileSync("data/game/equipment-characters.json","utf8")) as {characters:EquipmentCharacter[]};
+ const equipment=JSON.parse(readFileSync("data/game/shops.json","utf8")).equipment as Record<string,EquipmentDefinition>;
  const tiers=["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
  let checked=0;
- for(const unit of report.roster){const meta=catalog.characters.find((row:any)=>row.id===unit.id);if(!meta)continue;
- for(const item of unit.items){checked++;for(const option of equipmentUpgradeOptions(unit,meta,item,equipment)){
- assert.ok(tiers.indexOf(option.rarity)<=tiers.indexOf(unit.rarity),unit.name);
- assert.ok(tiers.indexOf(option.rarity)>=Math.min(tiers.indexOf(item.rarity),3),unit.name);
- assert.equal(equipment[option.id].type,equipment[item.id].type,unit.name);
- }} }
+ for(const meta of catalog.characters){
+  for(const [id,item] of Object.entries(equipment)){
+   if(equipmentCompatibility(item,meta)!=="compatible")continue;
+   for(const rarity of tiers.slice(tiers.indexOf(item.rarity))){
+    const unit={...meta,rarity};checked++;
+    for(const option of equipmentUpgradeOptions(unit,{...meta,traits:meta.traits??[]},{id,rarity:item.rarity},equipment)){
+     assert.ok(tiers.indexOf(option.rarity)<=tiers.indexOf(unit.rarity),unit.name);
+     assert.ok(tiers.indexOf(option.rarity)>=Math.min(tiers.indexOf(item.rarity),3),unit.name);
+     assert.equal(equipment[option.id]!.type,item.type,unit.name);
+    }
+   }
+  }
+ }
  assert.ok(checked>200);
  const rho={id:"admecRuststalker",faction:"AdeptusMechanicus",rarity:"Legendary"};
- const meta=catalog.characters.find((row:any)=>row.id===rho.id);
- const options=equipmentUpgradeOptions(rho,meta,{id:"I_Defensive_L003",rarity:"Legendary"},equipment);
+ const meta=catalog.characters.find(row=>row.id===rho.id)!;
+ const options=equipmentUpgradeOptions(rho,{...meta,traits:meta.traits??[]},{id:"I_Defensive_L003",rarity:"Legendary"},equipment);
  assert.deepEqual(options.map(option=>option.rarity),["Epic","Legendary"]);
 });
