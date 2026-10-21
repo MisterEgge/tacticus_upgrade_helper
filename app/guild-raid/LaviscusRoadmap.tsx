@@ -1,4 +1,6 @@
 import RankText from "../components/RankText";
+import RaidRarityPlan from "./RaidRarityPlan";
+import type {OrbInventory} from "../../src/domain/orbPlanner";
 import ReferenceDetails from "../components/ReferenceDetails";
 import CollapsibleSection from "../components/CollapsibleSection";
 import Link from "next/link";
@@ -25,7 +27,7 @@ function targetDetails(target: RoadmapTarget, unit: RosterUnit | undefined): str
     return lines;
 }
 
-export default function LaviscusRoadmap({ roster, members, machine }: { roster: RosterUnit[]; members: RaidUpgradeMember[]; machine?: string | undefined })
+export default function LaviscusRoadmap({ roster, members, machine, orbInventory }: { roster: RosterUnit[]; members: RaidUpgradeMember[]; machine?: string | undefined;orbInventory?:OrbInventory|null|undefined })
 {
     const units = new Map(roster.map(unit => [unit.name, unit]));
     const checkpoints = selectedRaidRoadmap(members, roster.some(unit => unit.id === "tyranBiovore") && machine === "Biovore");
@@ -41,6 +43,7 @@ export default function LaviscusRoadmap({ roster, members, machine }: { roster: 
             const unit = units.get(target.name);
             return <div className="roadmapNowItem" key={target.name}><strong>{target.name}</strong><span><RankText text={targetDetails(target, unit).join(" · ")}/></span>{unit && target.rank !== undefined && unit.rank < target.rank && target.name !== "Biovore" ? <Link href={`/farming?character=${encodeURIComponent(unit.id)}&target=${target.rank}`}>Plan rank materials →</Link> : null}</div>;
         })}</div></> : <p>{hasWork ? "All selected lineup checkpoints are met." : "Unlock selected characters to begin their upgrade plan."}</p>}</div>
+        <RaidRarityPlan roster={roster} members={members} checkpoints={checkpoints} inventory={orbInventory}/>
         <div className="roadmapList">{checkpoints.map(checkpoint =>
         {
             const complete = checkpoint.targets.length > 0 && checkpoint.targets.every(target => roadmapTargetMet(target, units.get(target.name)));

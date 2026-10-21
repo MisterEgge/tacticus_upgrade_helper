@@ -7,6 +7,7 @@ Keep the page focused on the player's current task:
 - Give **Turn order** and **Positioning** separate tabs. Boss positioning must remain available when a lineup has no researched rotation.
 - Preserve turn, rotation, and disclosure state when switching views; reset battle guidance when the boss or lineup changes.
 - Lead upgrades with the next roadmap work. Collapse detailed ability targets, machine plans, and later checkpoints.
+- Include selected-character rarity actions: first-Mythic priority, next promotion costs, and checkpoint timing. Keep full-path budgets and reasoning behind details; separate alliance pools and never reserve a shared copy of an orb twice within the plan.
 - Show actions, blockers, and relevant boss hazards. Avoid repeated lineup summaries, methodology labels, and instructions to leave things unchanged.
 - Use local character/rank artwork with accessible names. Support keyboard tabs and phone layouts.
 

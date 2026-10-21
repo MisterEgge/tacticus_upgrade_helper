@@ -1,4 +1,5 @@
 "use client";
+import type {OrbInventory} from "../../src/domain/orbPlanner";
 import ViewTabs from "../components/ViewTabs";
 import RankBadge from "../components/RankBadge";
 
@@ -22,7 +23,7 @@ type Member = { name: string; id: string; icon?: string | undefined; owned: bool
 type Team = RaidTeam & { members: Member[] };
 type Teams = Record<string, Record<string, Team>>;
 
-export default function GuildRaidPlanner({ teams, source, mainSelection, roster }: { teams: Teams; source: { sourceUrl: string; reviewedOn: string; note: string }; mainSelection: RaidSelection; roster: RosterUnit[] })
+export default function GuildRaidPlanner({ teams, source, mainSelection, roster, orbInventory }: { teams: Teams; source: { sourceUrl: string; reviewedOn: string; note: string }; mainSelection: RaidSelection; roster: RosterUnit[];orbInventory?:OrbInventory|null|undefined })
 {
     const router = useRouter();
     const [boss, setBoss] = useState(mainSelection.boss);
@@ -109,10 +110,10 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, roster 
         </section>
 </>},
             {label:"Battle guide",content:<RaidBattleGuide key={`${boss}-${teamName}-${lineup.join("|")}-${machine}`} boss={boss} teamName={teamName} members={members} machine={machine}/>},
-            {label:"Upgrades",content:<>        <LaviscusRoadmap roster={roster} members={members} machine={machine ?? undefined}/>
+            {label:"Upgrades",content:<>        <LaviscusRoadmap roster={roster} members={members} machine={machine ?? undefined} orbInventory={orbInventory}/>
         <CollapsibleSection title="Character ability targets" defaultOpen={false} className="panel detailPanel">
             <p className="sub">Upgrade steps respect current XP and rarity. Check badges and coins before spending.</p>
-            <div className="tableWrap"><table><thead><tr><th>Character</th><th>Rank / level</th><th>Ability steps and targets</th></tr></thead><tbody>{members.map(member => <tr key={member.name}>
+            <div className="tableWrap"><table aria-label="Raid ability targets"><thead><tr><th>Character</th><th>Rank / level</th><th>Ability steps and targets</th></tr></thead><tbody>{members.map(member => <tr key={member.name}>
                 <td><Link className="characterLink" href={`/characters/${member.id}`}><CharacterName name={member.name} id={member.id} icon={member.icon}/></Link><small>{team.core.includes(member.name) ? "Core" : team.flex.includes(member.name) ? "Flex" : "Substitute"}</small></td>
                 <td>{member.rank === null ? "—" : <RankBadge rank={member.rank}/>}<small>Level {member.xpLevel ?? "—"}</small></td>
                 <td><strong>Active {formatAbilityTarget(member.activeLevel, member.activeTarget)}</strong><small>{abilityTargetMet(member.activeLevel, member.activeTarget) ? null : raidAbilityStep(member.activeLevel, member.activeTarget, member.xpLevel, member.rarity)}</small>
