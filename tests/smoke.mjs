@@ -145,8 +145,8 @@ try
     assert.ok(chaosHonors.querySelector('a[href="/characters/thousTzaangor"]'));
     assert.match(chaosHonors.textContent, /Epic → Legendary/);
     assert.match(chaosHonors.textContent, /5 shards short of Legendary/);
-    assert.match(chaosHonors.textContent, /Next rarity project · 250 shards short of Legendary/);
-    assert.match(chaosHonors.textContent, /Resource banking · no verified current shortage/);
+    assert.match(chaosHonors.textContent, /Next rarity · 250 shards short of Legendary/);
+    assert.match(chaosHonors.textContent, /Optional resource farming/);
     quietChaos.window.close();
     report.roster.length = beforeChaos;
     delete report.orbInventory.Chaos;
@@ -299,12 +299,12 @@ try
     assert.match(await get('/farming'), /Expected \/ battle/);
     const completion = await get('/material-completion');
     assert.match(completion, /Material Completion/);
-    assert.match(completion, /current character catalog through Adamantine II/);
+    assert.match(completion, /Through Adamantine II/);
     assert.match(completion, /Engram Neurochip/);
     assert.match(completion, /Done for owned roster/);
     assert.match(completion, /Unowned demand/);
     assert.doesNotMatch(completion, /Unknown future recipe/);
-    assert.match(await get('/material-completion?target=17'), /current character catalog through Diamond III/);
+    assert.match(await get('/material-completion?target=17'), /Through Diamond III/);
     assert.match(await get('/material-completion?target=999'), /Choose a supported rank ceiling/);
     const eliteGaps = await get('/elite-farming-gaps');
     assert.match(eliteGaps, /Elite Farming Gaps/);
@@ -313,7 +313,7 @@ try
     assert.doesNotMatch(eliteGaps, /type="checkbox" name="mythic"[^>]*checked/);
     assert.doesNotMatch(eliteGaps, /<small>Mythic<\/small>/);
     assert.match(await get('/elite-farming-gaps?mythic=1'), /<small>Mythic<\/small>/);
-    assert.match(eliteGaps, /Unknown|No Elite source in synced data/);
+    assert.match(eliteGaps, /Unknown|No Elite source found/);
     assert.match(await get('/elite-farming-gaps?mythic=1&needed=1&target=17'), /Owned demand through Diamond III/);
     assert.match(await get('/elite-farming-gaps?target=999'), /Choose a supported rank ceiling/);
     assert.match(await get('/farming'), /href="\/elite-farming-gaps"/);
@@ -412,8 +412,8 @@ try
     const gatedAbility=await get('/characters/'+bellator.id);
     assert.match(gatedAbility,/Ability upgrades/);
     assert.match(gatedAbility,/Level character to 42/);
-    assert.match(gatedAbility,/Practical target met · no further upgrade required/);
-    assert.match(gatedAbility,/Badges to practical targets/);
+    assert.match(gatedAbility,/Target met/);
+    assert.match(gatedAbility,/Badges to reach targets/);
     abilityUnit.xpLevel=44;
     await writeFile(reportPath,JSON.stringify(report));
     assert.match(await get('/characters/'+bellator.id),/XP and rarity allow level 42 · sync badges/);

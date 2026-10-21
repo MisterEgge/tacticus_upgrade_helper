@@ -27,7 +27,7 @@ export default async function EliteFarmingGaps({ searchParams }: { searchParams:
     const rows = filterEliteGaps(allGaps, { includeMythic, onlyNeeded });
     const opportunities = eliteUnlockOpportunities(rows, progress);
     return <main><Nav/><header><div><p className="eyebrow">FARMING ACCESS</p><h1>Elite Farming Gaps</h1>
-        <p className="sub">Every farmable upgrade material without a confirmed unlocked Elite source. Mythic materials are hidden by default.</p>
+        <p className="sub">Materials with locked, missing, or unknown Elite farming routes.</p>
         <p className="sub">Owned demand through {RANK_NAMES[target] ?? "unknown rank"}. The full gap list includes materials you do not currently need.</p>
         <ReferenceDetails label="Coverage and savings details">
             <p>Any confirmed unlocked Elite node removes a material from this list. Missing or invalid campaign progress stays unknown; zero is a recorded locked campaign. No Elite source means none exists in the synced battle dataset.</p>
@@ -44,7 +44,7 @@ export default async function EliteFarmingGaps({ searchParams }: { searchParams:
             <button type="submit">Update gaps</button>
         </form>
         {demandError && <div className="empty" role="alert">Demand unavailable: {demandError} Source coverage remains visible with unknown demand.</div>}
-        <section className="cards compact"><div className="card"><strong>{rows.filter(row => row.coverage === "locked").length}</strong><span>Locked Elite sources</span></div><div className="card"><strong>{rows.filter(row => row.coverage === "no-elite").length}</strong><span>No Elite source in synced data</span></div><div className="card"><strong>{rows.filter(row => row.coverage === "unknown").length}</strong><span>Elite progress unknown</span></div></section>
+        <section className="cards compact"><div className="card"><strong>{rows.filter(row => row.coverage === "locked").length}</strong><span>Locked Elite sources</span></div><div className="card"><strong>{rows.filter(row => row.coverage === "no-elite").length}</strong><span>No Elite source found</span></div><div className="card"><strong>{rows.filter(row => row.coverage === "unknown").length}</strong><span>Elite progress unknown</span></div></section>
         <CampaignUnlocks opportunities={opportunities}/>
         <section className="eliteGapMaterials"><h2>Materials without unlocked Elite sources</h2>
             {rows.length ? <div className="panel tablePanel"><GapTable rows={rows}/></div> : <div className="empty">No material gaps for these filters.</div>}

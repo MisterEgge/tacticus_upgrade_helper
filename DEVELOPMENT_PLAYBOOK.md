@@ -38,6 +38,8 @@ Do not ask for routine approval. Ask only when blocked by missing access, an irr
 
 ## Product and UI rules
 
+- Owner copy preference: show the next action, costs and clean progression badges first. Do not repeat a target already shown by the upgrade badges, a level already shown in its row, or totals already shown nearby. Put methodology, allocation bookkeeping and source explanations in existing closed details. Use plain player language; retain missing-data labels, investment confidence and real upgrade blockers.
+
 - Confirm whether a list is an assignment, a set of alternatives, a ranked queue, or historical reference before imposing uniqueness, limits, or ordering.
 - Do not turn an example into a universal rule. Identify the underlying goal.
 - Keep views focused on decisions and next actions; remove filler that does not help the user act.

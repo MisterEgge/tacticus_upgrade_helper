@@ -6,7 +6,7 @@ import MaterialRecipients from "../components/MaterialRecipients";
 import { campaignKey } from "../../src/domain/campaigns";
 import type { EliteGap } from "../../src/domain/eliteFarmingGaps";
 
-const labels = { locked: "Elite nodes locked", unknown: "Elite access unknown", "no-elite": "No Elite source in synced data" };
+const labels = { locked: "Elite nodes locked", unknown: "Elite access unknown", "no-elite": "No Elite source found" };
 const amount = (value: number | null) => value === null ? "Unknown" : value.toLocaleString();
 
 export default function GapTable({ rows }: { rows: EliteGap[] }) {
@@ -29,7 +29,7 @@ export default function GapTable({ rows }: { rows: EliteGap[] }) {
         { key: "alternative", label: "Best unlocked alternative", sort: row => row.alternative ? row.alternative.energyCost / row.alternative.rate : Number.MAX_SAFE_INTEGER,
             search: row => row.alternative ? `${row.alternative.id} ${row.alternative.campaign}` : "", render: row => row.alternative ? <>
                 <strong>{campaignKey(row.alternative.campaign, row.alternative.campaignType)} · battle {row.alternative.nodeNumber}</strong>
-                <small>{row.alternative.id} · {(row.alternative.energyCost / row.alternative.rate).toFixed(1)} expected energy / drop</small>
+                <small>~{(row.alternative.energyCost / row.alternative.rate).toFixed(1)} energy / drop</small>
             </> : <span className="status unknown">No confirmed unlocked alternative</span> }
     ];
     const filters: Filter<EliteGap>[] = [
