@@ -245,10 +245,15 @@ try
     assert.match(savedHtml, /MAIN RAID TEAM.*?Ad-Mech.*?5\/5 owned.*?Riptide · Actus · Exitor-Rho · Tan Gi&#x27;da · Gulgortz · Anuphet · MoW: Galatian/s);
     const savedPlanner = await fetch('http://127.0.0.1:3197/guild-raid', { headers: { Cookie: cookie } });
     const selectedHtml = (await savedPlanner.text()).replace(/<!--.*?-->/gs, '');
-    assert.match(selectedHtml, /Ad-Mech vs Riptide/);
-    assert.match(selectedHtml, /5\/5 owned characters \+ 1 Machine of War/);
+    const raidSelectionDom = new JSDOM(selectedHtml);
+    const raidSelectors = raidSelectionDom.window.document.querySelectorAll('.raidOverview select');
+    assert.deepEqual([...raidSelectors].map(select => select.value), ['Riptide', 'Ad-Mech']);
+    assert.match(raidSelectionDom.window.document.querySelector('.raidLineupStrip').textContent, /Actus.*Exitor-Rho.*Tan Gi'da.*Gulgortz.*Anuphet.*Galatian/);
+    assert.equal(raidSelectionDom.window.document.querySelector('[role="tablist"][aria-label="Guild Raid views"] [aria-selected="true"]').textContent, 'Battle guide');
+    raidSelectionDom.window.close();
     assert.match(selectedHtml, /Machine of War plan/);
-    assert.match(selectedHtml, /Rotation needs research/);
+    assert.match(selectedHtml, /Turn orders for this archetype still need research/);
+    assert.match(selectedHtml, /aria-label="Positioning guidance"/);
     assert.doesNotMatch(selectedHtml, /aria-label="Battle turn"/);
     assert.match(selectedHtml, /Anuphet.*?Plan rank materials/s);
     const selectedRows = selectedHtml.match(/<tbody>(.*?)<\/tbody>/s)?.[1];
@@ -294,7 +299,8 @@ try
     assert.equal(dornResponse.status, 200);
     const dornDom = new JSDOM(await dornResponse.text());
     const dornGuide = dornDom.window.document.querySelector('[aria-label="Raid battle guide"]');
-    assert.match(dornGuide.textContent, /Ad-Mech vs Rogal Dorn/);
+    assert.match(dornGuide.textContent, /Rogal Dorn:/);
+    assert.equal(dornDom.window.document.querySelectorAll('.raidOverview select')[1].value, 'Ad-Mech');
     assert.match(dornGuide.textContent, /Rear-arc attacks/);
     const dornLabels = [...dornDom.window.document.querySelectorAll('label')];
     assert.equal(dornLabels.find(label => label.textContent.startsWith('Raid boss')).querySelector('select').value, 'Rogal Dorn');
@@ -305,8 +311,8 @@ try
     report.roster = originalRoster;
     await writeFile(reportPath, JSON.stringify(report));
     const roadmap = await get('/guild-raid');
-    assert.match(roadmap, /RAID BUILD ORDER/);
-    assert.match(roadmap, /5 character slots still unfilled/);
+    assert.match(roadmap, /Raid team roadmap/);
+    assert.match(roadmap, /Choose 5 more characters in Team/);
     assert.match(roadmap, /<th>Rank \/ level<\/th>/);
     assert.doesNotMatch(roadmap, /<th>Role<\/th>|<th>XP level<\/th>|CORE OWNED/);
     assert.match(roadmap, /<details class="referenceDetails"><summary>Meta source<\/summary>/);
@@ -490,7 +496,7 @@ try
     assert.match(battleGuide.textContent, /summons take double damage/);
     const aesothId = catalog.characters.find(character => character.name === 'Aesoth').id;
     assert.ok(battleGuide.querySelector(`img[src="/characters/${aesothId}.png"]`));
-    assert.match(battleGuide.textContent, /Exact hexes depend on the map/);
+    assert.match(battleGuide.textContent, /Check the matching map and tier for exact hexes/);
     battleDom.window.close();
     const atlacoya = catalog.characters.find(row => row.name === 'Atlacoya');
     report.roster.push({ ...report.roster[0], id: atlacoya.id, name: atlacoya.name, rarity: 'Rare', progressionIndex: 6, rank: 0, xpLevel: 1 });
