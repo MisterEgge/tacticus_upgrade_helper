@@ -1,3 +1,4 @@
+import RankBadge from "../components/RankBadge";
 import CampaignRecommendationGroup from "./CampaignRecommendationGroup";
 import CampaignRecommendations from "./CampaignRecommendations";
 import Nav from "../components/Nav";
@@ -9,7 +10,6 @@ import { getReport } from "../lib/report";
 import { getCampaignEvidence, getCampaignTargets, getCharacterCatalog } from "../lib/catalog";
 import { campaignIsComplete, campaignRankGap, campaignRecommendationPriority, finalCampaignBattle, requiredCampaignName, type CampaignBattleDefinition } from "../../src/domain/campaigns";
 import { readFile } from "node:fs/promises";
-import { rankName } from "../../src/domain/ranks";
 import { formatAbilityTarget } from "../../src/domain/targetDisplay";
 
 export default async function Campaigns()
@@ -26,7 +26,7 @@ export default async function Campaigns()
             <p className="sub">Upgrades for your next Elite clears.</p>
             <ReferenceDetails label="About campaign targets"><p>Targets marked RESEARCHING still need campaign-specific evidence.</p><p>Current ranks do not show which upgrades were used for earlier clears. Campaign history records progress alongside roster changes; it cannot prove which upgrade caused a clear.</p></ReferenceDetails>
         </div></header>
-        {recommendations.length ? <CampaignRecommendations count={recommendations.length}>{Object.entries(Object.groupBy(recommendations.slice(0, 12), row => row.campaign)).map(([campaignName, rows]) => <CampaignRecommendationGroup key={campaignName} name={campaignName} count={rows?.length??0}><div className="tableWrap"><table><thead><tr><th>Character</th><th>Target</th><th>Gap</th><th>Why</th></tr></thead><tbody>{rows?.map(row => <tr key={row.campaign + row.characterId}><td><CharacterName name={row.characterName} id={row.characterId}/></td><td><strong>{row.targetRank}</strong></td><td><strong>{row.rankStepsRemaining}</strong><small>rank step(s)</small></td><td><strong>{row.reason}</strong></td></tr>)}</tbody></table></div></CampaignRecommendationGroup>)}</CampaignRecommendations> : null}
+        {recommendations.length ? <CampaignRecommendations count={recommendations.length}>{Object.entries(Object.groupBy(recommendations.slice(0, 12), row => row.campaign)).map(([campaignName, rows]) => <CampaignRecommendationGroup key={campaignName} name={campaignName} count={rows?.length??0}><div className="tableWrap"><table><thead><tr><th>Character</th><th>Target</th><th>Gap</th><th>Why</th></tr></thead><tbody>{rows?.map(row => <tr key={row.campaign + row.characterId}><td><CharacterName name={row.characterName} id={row.characterId}/></td><td><strong><RankBadge rank={row.targetRank}/></strong></td><td><strong>{row.rankStepsRemaining}</strong><small>rank step(s)</small></td><td><strong>{row.reason}</strong></td></tr>)}</tbody></table></div></CampaignRecommendationGroup>)}</CampaignRecommendations> : null}
         {Object.entries(targets.campaigns).map(([name, campaign]) =>
         {
 
@@ -48,8 +48,8 @@ export default async function Campaigns()
                         const rankMet = Boolean(unit && (campaignComplete || campaignRankGap(unit.rank,target?.rank)===0));
                         return <tr key={character.id}>
                             <td><CharacterName name={character.name} id={character.id}/></td>
-                            <td><strong>{unit ? rankName(unit.rank) : "Not in account roster"}</strong></td>
-                            <td><strong>{rankMet ? "Target met" : target?.rank ?? "RESEARCHING"}</strong>{!campaignComplete && !rankMet && target?.rank ? <small>{target.confidence ?? "Unknown"} confidence · {unit ? `${campaignRankGap(unit.rank, target.rank) ?? "?"} rank step(s) remaining` : "current rank unavailable"}</small> : null}</td>
+                            <td><strong>{unit ? <RankBadge rank={unit.rank}/> : "Not in account roster"}</strong></td>
+                            <td><strong>{rankMet ? "Target met" : target?.rank ? <RankBadge rank={target.rank}/> : "RESEARCHING"}</strong>{!campaignComplete && !rankMet && target?.rank ? <small>{target.confidence ?? "Unknown"} confidence · {unit ? `${campaignRankGap(unit.rank, target.rank) ?? "?"} rank step(s) remaining` : "current rank unavailable"}</small> : null}</td>
                             <td><strong>A {formatAbilityTarget(unit?.abilities[0]?.level,campaignComplete && unit ? unit.abilities[0]?.level : target?.active)}</strong><small>P {formatAbilityTarget(unit?.abilities[1]?.level,campaignComplete && unit ? unit.abilities[1]?.level : target?.passive)}</small></td>
                             <td><strong>{target?.role ?? "Unreviewed"}</strong><ReferenceDetails label="Target details"><p>{target?.note ?? "Campaign-specific Elite 3★ research pending."}</p>{target?.evidence?.length ? <small>Evidence: {target.evidence.map((id, index) => { const source = evidence.sources[id]; return source ? <span key={id}>{index ? " · " : ""}<a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></span> : null; })}</small> : null}</ReferenceDetails></td>
                         </tr>;

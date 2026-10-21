@@ -1,4 +1,6 @@
 "use client";
+import RarityBadge from "../components/RarityBadge";
+
 import ResourceName,{ResourceText} from "../components/ResourceName";
 import {useEffect,useMemo,useState} from "react";
 import Link from "next/link";
@@ -54,7 +56,7 @@ export default function OrbPlanner({candidates,inventory,defenseTeams,offenseTea
    return <>
   <CollapsibleSection title="Shard-ready orb shopping list" summary={`${ready.rows.length} characters have the shards · ${ready.waitingForShards} still collecting shards`}>
    <p className="sub">Shards covered · check coins before upgrading. {allReady?"Includes optional bench upgrades.":""}</p>
-   {rarityGroups.map(group=><CollapsibleSection key={group.rarity} title={`${group.rarity} orbs`} summary={`${group.rows.length} characters · ${group.pools.reduce((total,pool)=>total+pool.needed,0)} orbs needed`}>
+   {rarityGroups.map(group=><CollapsibleSection key={group.rarity} label={`${group.rarity} orbs`} title={<><RarityBadge rarity={group.rarity}/> orbs</>} summary={`${group.rows.length} characters · ${group.pools.reduce((total,pool)=>total+pool.needed,0)} orbs needed`}>
     <div className="tableWrap"><table aria-label={`${group.rarity} orb shopping`}><thead><tr><th>Alliance</th><th>Characters</th><th>Owned</th><th>Needed</th><th>Short</th></tr></thead><tbody>{group.pools.map(pool=><tr key={pool.alliance}>
      <td><strong><ResourceName id={`orb:${pool.alliance}:${pool.rarity}`} name={pool.alliance}/></strong>{acquisition(pool,"Sources")}</td>
      <td><div className="orbRecipients">{group.rows.filter(row=>row.alliance===pool.alliance).map(row=>{

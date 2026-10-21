@@ -1,0 +1,36 @@
+{
+  "repository": "https://github.com/svehera/tacticusplanner",
+  "commit": "5c5d05193038a0aadb1fd929cce877ef754f7868",
+  "assets": {
+    "common.png": {
+      "path": "src/assets/images/rarity/resized/common.png",
+      "blob": "0772cefe3893abf07c98405c6abd9d94e07e47ec",
+      "sha256": "91cea396fdd464a0887433716f88d2201e91debf01abcaf8b60a79a003235a47"
+    },
+    "uncommon.png": {
+      "path": "src/assets/images/rarity/resized/uncommon.png",
+      "blob": "5a971fa2e67580fef280480e5ae10d93ba5a1962",
+      "sha256": "8953983adfe360b445ae9fe1cb21ec050057f91568e27836e920cf0a6f342c05"
+    },
+    "rare.png": {
+      "path": "src/assets/images/rarity/resized/rare.png",
+      "blob": "833e5ff75c7d3cfa47b2829c15743a525f7d350f",
+      "sha256": "c56194e05560853029095045513061766d17c01791c868be7d9a4635a8c635d5"
+    },
+    "epic.png": {
+      "path": "src/assets/images/rarity/resized/epic.png",
+      "blob": "c0a04bf1eca8a39877e4acb5c14c8a630366f32d",
+      "sha256": "2c0af400b174a6c277dab149ad9f85e52a69224f5a26fb5b4e3d7a945a20acdd"
+    },
+    "legendary.png": {
+      "path": "src/assets/images/rarity/resized/legendary.png",
+      "blob": "e4299cb3ee8f07747803ee80bf45621e64c879ca",
+      "sha256": "59a87b3b797370d380ebd11772920ce493f4135d22dbafb7319f5d58e2b36832"
+    },
+    "mythic.png": {
+      "path": "src/assets/images/rarity/resized/mythic.png",
+      "blob": "082bd0315f066811a164cfcfac808df7808bb392",
+      "sha256": "ec60b3e1382ae685c849899d7673ed12d8c214f21c3703d6bd6cb807a7e131b6"
+    }
+  }
+}

@@ -39,7 +39,7 @@ test("progression badges show visible game stars, rarity color and accessible la
   const badge=dom.window.document.querySelector('[role="img"]')!;
   assert.equal(badge.getAttribute("aria-label"),label);
   assert.ok(badge.querySelector(`.rarity.${label.split(" · ")[0]!.toLowerCase()}`));
-  const images=badge.querySelectorAll("img");assert.equal(images.length,count);
+  const images=badge.querySelectorAll(".progressionStars img");assert.equal(images.length,count);
   for(const image of images){
    assert.equal(image.getAttribute("alt"),"");
    assert.equal(image.getAttribute("src"),`/progression/${color==="wings"?"mythic-wings":`${color}-star`}.png`);

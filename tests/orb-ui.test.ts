@@ -107,13 +107,13 @@ test("orb scopes restore War tiers, optional Mythic and full-goal budgets; sourc
  fireEvent.click(view.getByRole("tab",{name:"Xenos"}));
  fireEvent.click(view.getByLabelText("Show all shard-ready characters"));
  const rarityList=within(view.getByRole("region",{name:"Shard-ready orb shopping list"}));
- const buttons=()=>rarityList.getAllByRole("button").filter(button=>/^(Uncommon|Rare|Epic|Legendary|Mythic) orbs/.test(button.textContent??""));
- assert.deepEqual(buttons().map(button=>button.textContent!.split(" orbs")[0]),["Uncommon","Rare","Epic","Legendary"]);
+ const buttons=()=>rarityList.getAllByRole("button",{name:/^(Uncommon|Rare|Epic|Legendary|Mythic) orbs/});
+ assert.deepEqual(buttons().map(button=>within(button).getByRole("img").getAttribute("aria-label")),["Uncommon","Rare","Epic","Legendary"]);
  fireEvent.click(view.getByLabelText("Include star upgrades within a rarity"));
  assert.ok(rarityList.getByText("20 orbs"));
  assert.equal(rarityList.getAllByRole("table").length,4);
  fireEvent.click(view.getByLabelText("Include Mythic upgrades"));
- assert.deepEqual(buttons().map(button=>button.textContent!.split(" orbs")[0]),["Uncommon","Rare","Epic","Legendary","Mythic"]);
+ assert.deepEqual(buttons().map(button=>within(button).getByRole("img").getAttribute("aria-label")),["Uncommon","Rare","Epic","Legendary","Mythic"]);
  const rareButton=rarityList.getByRole("button",{name:/^Rare orbs/});
  fireEvent.click(rareButton);
  assert.equal(rarityList.queryByRole("table",{name:"Rare orb shopping"}),null);

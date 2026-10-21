@@ -1,0 +1,106 @@
+{
+  "repository": "https://github.com/svehera/tacticusplanner",
+  "commit": "5c5d05193038a0aadb1fd929cce877ef754f7868",
+  "assets": {
+    "stone1.png": {
+      "path": "src/assets/images/ranks/stone1.png",
+      "blob": "794d66f286c8803e14375d50d84f249118660b99",
+      "sha256": "dc8efdcac34aeda739fc7dd2d11f425bdace2dac2c5a2221e2dbe8d5c8e47236"
+    },
+    "stone2.png": {
+      "path": "src/assets/images/ranks/stone2.png",
+      "blob": "59a1abbc0ace4a3928656e5f9ccce6ab08c63899",
+      "sha256": "d52b129e3382fc9a945686168a2a10cac2d55bfcb4d71d9c2ea329d0028a8922"
+    },
+    "stone3.png": {
+      "path": "src/assets/images/ranks/stone3.png",
+      "blob": "86e8ca1435d71d2148f812a7d937b5c3d1062717",
+      "sha256": "fcc5f25192489937ad5f8b0a74908cfd0466beccdf5c7dd3719c0d599dc2506c"
+    },
+    "iron1.png": {
+      "path": "src/assets/images/ranks/iron1.png",
+      "blob": "d39214651ae78ef52f768b9e331280e4d2c6c8b1",
+      "sha256": "854d857836d19d92031e751851bf50dd304aa79a7cdf36d1952d674fde74c3ab"
+    },
+    "iron2.png": {
+      "path": "src/assets/images/ranks/iron2.png",
+      "blob": "8dd17b1795110728b48621926a8948e47ea5da86",
+      "sha256": "2d8ebcb0c05ec4360bf94293778ad6d6700d6dd768698c4546ec0c9df5be963f"
+    },
+    "iron3.png": {
+      "path": "src/assets/images/ranks/iron3.png",
+      "blob": "0260b0421776ad6299865f786694b260e6e365d5",
+      "sha256": "cdf1cb803790a8c569b439802c2cb54b40c845bfd04db8277e1353754e9a635d"
+    },
+    "bronze1.png": {
+      "path": "src/assets/images/ranks/bronze1.png",
+      "blob": "86d5b11c2e2942e3f099b70dac14b8b0e25cd3af",
+      "sha256": "02f2405302d6ccaf1b0e04e77ffeca282f9405529abb6c6056173ab460adc184"
+    },
+    "bronze2.png": {
+      "path": "src/assets/images/ranks/bronze2.png",
+      "blob": "2c181c449c31028c8a920f69a6592116488e0c93",
+      "sha256": "6354808030839b798accda7c4c65af7457063ba1ca4756c81ca734404ff9a79e"
+    },
+    "bronze3.png": {
+      "path": "src/assets/images/ranks/bronze3.png",
+      "blob": "6c881edbfbf298fd549713261bbd0b25cd5e86a5",
+      "sha256": "46a7d6702c49caac17b4eeff7a4842b0c100c6cd5e9ec21586c004ef9ab65786"
+    },
+    "silver1.png": {
+      "path": "src/assets/images/ranks/silver1.png",
+      "blob": "b2718800b2caf2d48dfde9ca49a0b416eb3a9673",
+      "sha256": "35e34ab4cc74d582260c7bd5cb5c2f1dd5284e9e039dff3ee403e786f29717f2"
+    },
+    "silver2.png": {
+      "path": "src/assets/images/ranks/silver2.png",
+      "blob": "33101d14c2c4ed41b4891ec368af521f2b00d9a7",
+      "sha256": "dfd439f9db56361f9f7620c29db5e04b6f12cc9a877f9ae5d20d8e0556b3e805"
+    },
+    "silver3.png": {
+      "path": "src/assets/images/ranks/silver3.png",
+      "blob": "8853fb2c3b3b905158c442d494d1364184770f86",
+      "sha256": "1ddd6588132b14d9ecbc49257de5f859156a1757e79cc79aec6584bcb90b30dd"
+    },
+    "gold1.png": {
+      "path": "src/assets/images/ranks/gold1.png",
+      "blob": "6e5e20e9bc998278bd819588c197bb185694ed16",
+      "sha256": "4b6356eaebc6ca77ed7554078e6993297d73f23a66dc4de98f65968b7d7bd53c"
+    },
+    "gold2.png": {
+      "path": "src/assets/images/ranks/gold2.png",
+      "blob": "2808c05f38738b570e62e5e9693356a0f7e79dc1",
+      "sha256": "3aa83f24bb13a3baebd7655c04d48522229a0d8a790309fac8eae998c2a3a076"
+    },
+    "gold3.png": {
+      "path": "src/assets/images/ranks/gold3.png",
+      "blob": "2ef31418d55a43c1e93aba1575390fd41a13c298",
+      "sha256": "f2446960eadddccd71198d29c7e15645de01ed1863d1e64d2995a6845cc9622f"
+    },
+    "diamond1.png": {
+      "path": "src/assets/images/ranks/diamond1.png",
+      "blob": "9c6e1a8194be38f0f2f65d34ad72835c7a8539d8",
+      "sha256": "1b8aafdaab9b8ab94737b576b4132080ede91797dae081c8d5c1ff796fc9f824"
+    },
+    "diamond2.png": {
+      "path": "src/assets/images/ranks/diamond2.png",
+      "blob": "c1e5b40384062065c69f24866ffa1dc640278186",
+      "sha256": "fc9fa34f621221a8e90ca1c4afb3882af45b32a8435fb669ed9240f4d55cc1c4"
+    },
+    "diamond3.png": {
+      "path": "src/assets/images/ranks/diamond3.png",
+      "blob": "440ef1dc9e1db0fe351fc8fdbfa0ec24fa8135bc",
+      "sha256": "fc8c8acfb0d154ba5f6fe91b218442f3c91a0802b4e85c5a8aa11b9ee5d32a23"
+    },
+    "adamantine1.png": {
+      "path": "src/assets/images/snowprint_assets/ranks/ui_icon_rank_mythical_01.png",
+      "blob": "84b8504befa76ba584ab8eadefa533ed6959e66f",
+      "sha256": "35bf2c6b12c706da4702769c4c0c3ecfd5c4c6f131cb256c1e679d63792aa246"
+    },
+    "adamantine2.png": {
+      "path": "src/assets/images/snowprint_assets/ranks/ui_icon_rank_mythical_02.png",
+      "blob": "747f250e9d6d10f962c0166d4761ce6e5d55b064",
+      "sha256": "437f99e677e63f112a6935e69c01de8bccf06767deeca526cb9e6f632bc981a8"
+    }
+  }
+}

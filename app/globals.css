@@ -162,3 +162,6 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .allianceContent{min-width:0}.allianceContent>h2{margin-top:0}
 
 .abilityViews .checkLabel{flex-direction:row;align-items:center;gap:8px}.abilityViews .checkLabel input{flex:none;margin:0}
+
+/* Local game badges retain complete accessible and hover labels. */
+.gameBadge{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;flex-shrink:0;line-height:1}.gameBadge img{display:block;object-fit:contain}.rankBadge img{width:36px;height:36px}.rarityBadge img{width:25px;height:25px}.rankSelect{display:flex;align-items:center;gap:8px;min-width:0}.rankSelect select{min-width:0;flex:1}.progressionBadge .rarity{display:inline-flex;align-items:center}

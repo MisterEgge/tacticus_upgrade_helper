@@ -165,3 +165,5 @@ See [PROJECT_REVIEW.md](PROJECT_REVIEW.md) for the targeted functionality and ef
 ### Equipment priority
 
 Equipment opens on your main Raid team. Save that lineup on the Guild Raid page to change which characters get first choice of shared inventory. Equipment, character pages, roster actions and Cleanout use the same assignments. The combined Raid/War view and full-roster view remain available; Raid members stay first. Search applies to every equipment action list.
+
+Rank and rarity badges use local game artwork, including rank numerals and the exact progression stars. Their source commit and image hashes are recorded in `public/ranks/SOURCES.json`, `public/rarity/SOURCES.json`, and `public/progression/SOURCES.json`. Full names remain available to screen readers and on hover; failed or unverified images fall back to text. Native select options retain readable rank names.

@@ -1,3 +1,4 @@
+import RankText from "../components/RankText";
 import ReferenceDetails from "../components/ReferenceDetails";
 import CollapsibleSection from "../components/CollapsibleSection";
 import Link from "next/link";
@@ -38,15 +39,15 @@ export default function LaviscusRoadmap({ roster, members, machine }: { roster: 
         <div className="roadmapNow"><h3>Do next · checkpoint {next ?? (hasWork ? "complete" : "unlock lineup")}</h3>{work?.targets.length ? <><div className="roadmapNowGrid">{work.targets.map(target =>
         {
             const unit = units.get(target.name);
-            return <div className="roadmapNowItem" key={target.name}><strong>{target.name}</strong><span>{targetDetails(target, unit).join(" · ")}</span>{unit && target.rank !== undefined && unit.rank < target.rank && target.name !== "Biovore" ? <Link href={`/farming?character=${encodeURIComponent(unit.id)}&target=${target.rank}`}>Plan rank materials →</Link> : null}</div>;
+            return <div className="roadmapNowItem" key={target.name}><strong>{target.name}</strong><span><RankText text={targetDetails(target, unit).join(" · ")}/></span>{unit && target.rank !== undefined && unit.rank < target.rank && target.name !== "Biovore" ? <Link href={`/farming?character=${encodeURIComponent(unit.id)}&target=${target.rank}`}>Plan rank materials →</Link> : null}</div>;
         })}</div></> : <p>{hasWork ? "All selected lineup checkpoints are met." : "Unlock selected characters to begin their upgrade plan."}</p>}</div>
         <div className="roadmapList">{checkpoints.map(checkpoint =>
         {
             const complete = checkpoint.targets.length > 0 && checkpoint.targets.every(target => roadmapTargetMet(target, units.get(target.name)));
-            return <details className="roadmapCheckpoint" key={checkpoint.number}><summary><span className="campaignChevron" aria-hidden="true">⌄</span><span><strong>Checkpoint {checkpoint.number}: {checkpoint.title}</strong><small>{complete ? "Target met" : checkpoint.number === next ? "Work on this next" : "Later goal"}</small></span></summary><div className="roadmapTargets">{checkpoint.targets.length ? checkpoint.targets.map(target =>
+            return <details className="roadmapCheckpoint" key={checkpoint.number}><summary><span className="campaignChevron" aria-hidden="true">⌄</span><span><strong>Checkpoint {checkpoint.number}: <RankText text={checkpoint.title}/></strong><small>{complete ? "Target met" : checkpoint.number === next ? "Work on this next" : "Later goal"}</small></span></summary><div className="roadmapTargets">{checkpoint.targets.length ? checkpoint.targets.map(target =>
                 {
                     const unit = units.get(target.name);
-                    return <div className="roadmapTarget" key={target.name}><strong>{unit && target.name !== "Biovore" ? <Link href={`/characters/${encodeURIComponent(unit.id)}`}>{target.name}</Link> : target.name}</strong><span>{targetDetails(target, unit).join(" · ")}</span></div>;
+                    return <div className="roadmapTarget" key={target.name}><strong>{unit && target.name !== "Biovore" ? <Link href={`/characters/${encodeURIComponent(unit.id)}`}>{target.name}</Link> : target.name}</strong><span><RankText text={targetDetails(target, unit).join(" · ")}/></span></div>;
                 }) : <p>Choose an owned buffer to see account-specific targets.</p>}</div></details>;
         })}</div>
     </CollapsibleSection>;
