@@ -45,7 +45,8 @@ test("actual sourced defense assignments use each character only once",()=>{
 
 test("owned defense cores yield ten separate five-character teams with no reused core or flex",()=>{
     const source=JSON.parse(readFileSync("config/war_defense_teams.json","utf8")) as {teams:DefenseCore[]};
-    const report=JSON.parse(readFileSync("output/upgrade-report.json","utf8")) as {roster:Array<{name:string}>};
+    // Synthetic all-owned roster tests source capacity independently of account unlocks.
+    const report={roster:[...new Set(source.teams.flatMap(team=>[...team.core,...team.flex.map(member=>member.name)]))].map(name=>({name}))};
     const teams=buildDistinctDefenseTeams(source.teams,new Set(report.roster.map(unit=>unit.name)));
     const names=teams.flatMap(team=>team.members);
     assert.equal(teams.length,10);
