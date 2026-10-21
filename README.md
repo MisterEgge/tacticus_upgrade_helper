@@ -151,3 +151,9 @@ first observation is a baseline, not a recent clear. Previous schema snapshots
 remain untouched; their character matching may be unreliable. No snapshot proves
 which upgrade caused a clear or establishes three-star completion. Campaign
 targets without campaign-specific evidence remain under research.
+
+### Onslaught recommendations
+
+Onslaught shows Imperial, Xenos and Chaos tracks, each with independently collapsible Common through Mythic sections. Each section ranks up to three eligible characters at their current rarity. Enable optional Mythic goals to include those investments; empty sections explain when no eligible choices exist. Sector selections remain separate for each alliance.
+
+See [PROJECT_REVIEW.md](PROJECT_REVIEW.md) for the targeted functionality and efficiency review and verified follow-up gaps.

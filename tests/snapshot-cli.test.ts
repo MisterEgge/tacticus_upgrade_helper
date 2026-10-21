@@ -3,6 +3,7 @@ import test from "node:test";
 import { mkdtemp, mkdir, writeFile, readdir, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import {pathToFileURL} from "node:url";
 import { spawnSync } from "node:child_process";
 import { createRequire } from "node:module";
 
@@ -17,7 +18,7 @@ test("snapshot CLI preserves baselines and roster changes, suppresses duplicate 
     {
 
         await writeFile(path.join(cwd, "data/player.json"), JSON.stringify(source));
-        return spawnSync(process.execPath, ["--import", require.resolve("tsx"), script], { cwd, encoding: "utf8" });
+        return spawnSync(process.execPath, ["--import", pathToFileURL(require.resolve("tsx")).href, script], { cwd, encoding: "utf8" });
 
     };
     const observations = async () => (await readdir(path.join(cwd, "data/history/campaigns"))).filter(f => f !== "latest.json");

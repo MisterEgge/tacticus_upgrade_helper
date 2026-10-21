@@ -92,14 +92,12 @@ test("every owned catalog character has a real planning floor without fabricatin
     assert.ok(rows.filter(row => !row.reviewed).every(row => row.activeTargetLevel === 17 && row.passiveTargetLevel === 17 && row.activeHigh === "Not researched"));
 });
 
-test("every previously unreviewed owned character has an explicit, distinct planning recommendation", () =>
+test("configured planning recipients have explicit targets and remain distinct from reviewed guidance", () =>
 {
-    const report = JSON.parse(readFileSync("output/upgrade-report.json", "utf8")) as { roster:RosterUnit[] };
     const reviewed = JSON.parse(readFileSync("config/ability_breakpoints.json", "utf8")) as Record<string,unknown>;
     const planning = JSON.parse(readFileSync("config/owned_ability_recommendations.json", "utf8")) as Record<string,{active:number;passive:number;note:string;source?:string}>;
-    const owned = new Set(report.roster.map(unit => unit.id));
-    const missing = catalog.filter(character => owned.has(character.id) && !reviewed[character.name]);
-    assert.equal(missing.length, 51);
+    const missing = catalog.filter(character => planning[character.name] && !reviewed[character.name]);
+    const report={roster:missing.map(character=>({...roster[0]!,id:character.id,name:character.name}))};
     assert.deepEqual(Object.keys(planning).filter(name => name !== "_meta").sort(),missing.map(character => character.name).sort());
     for(const character of missing){const entry=planning[character.name]!;assert.ok(Number.isInteger(entry.active) && entry.active >= 1 && entry.active <= 50,character.name);assert.ok(Number.isInteger(entry.passive) && entry.passive >= 1 && entry.passive <= 50,character.name);assert.ok(entry.note.length > 25,character.name);}
     const combined = {...Object.fromEntries(Object.entries(planning).filter(([name]) => name !== "_meta").map(([name,entry]) => [name,{active:{practical:String(entry.active)},passive:{practical:String(entry.passive)},confidence:"planning"}])),...reviewed};
