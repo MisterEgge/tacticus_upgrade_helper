@@ -21,10 +21,9 @@ test("gear transfers protect Aesoth and follow saved War selections when focus c
  };
  const view=render(createElement(ReallocationPlanner,props));
  const transfers=()=>within(view.getByRole("region",{name:"Suggested gear transfers"}));
- assert.ok(transfers().getByText("No useful transfers found. Keep gear equipped."));
- fireEvent.click(view.getByRole("button",{name:/Protected gear/}));
- assert.ok(view.getByText("Aesoth"));
- assert.ok(view.getByText("Raid team option"));
+ assert.ok(transfers().getByText("No gear transfers recommended."));
+ assert.equal(view.queryByText("Aesoth"),null);
+ assert.equal(view.queryByText(/Keep equipped|Protected gear|Why it stays/),null);
  dom.window.localStorage.setItem(WAR_PLAN_STORAGE_KEY,JSON.stringify({defense:["Team 1","Team 2","Team 3","Team 4","Team 5","Team 0"]}));
  await act(async()=>{dom.window.dispatchEvent(new dom.window.Event("focus"));});
  assert.ok(transfers().getByText("Maladus"));
@@ -32,5 +31,5 @@ test("gear transfers protect Aesoth and follow saved War selections when focus c
  assert.ok(transfers().getByText("Epic pistol"));
  assert.equal(transfers().queryByText("Aesoth"),null);
  assert.equal(transfers().getAllByRole("row").length,2);
- assert.ok(view.getByText("Raid team option"));
+ assert.equal(view.queryByText(/Keep equipped|Protected gear|Why it stays/),null);
 });
