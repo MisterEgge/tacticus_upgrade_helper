@@ -1,11 +1,12 @@
 "use client";
+import RankBadge from "../components/RankBadge";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import ReferenceDetails from "../components/ReferenceDetails";
 import CollapsibleSection from "../components/CollapsibleSection";
 import CharacterName from "../components/CharacterName";
-import { rankName } from "../../src/domain/ranks";
 import type { RaidTeam } from "../../src/domain/raidMeta";
 import { raidCandidates, suggestedRaidLineup } from "../../src/domain/raidLineup";
 import { RAID_MACHINES, recommendedRaidMachine, suggestedRaidMachine } from "../../src/domain/raidMachine";
@@ -107,7 +108,7 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, roster 
             <p className="sub">Upgrade steps respect current XP and rarity. Check badges and coins before spending.</p>
             <div className="tableWrap"><table><thead><tr><th>Character</th><th>Rank / level</th><th>Ability steps and targets</th></tr></thead><tbody>{members.map(member => <tr key={member.name}>
                 <td><Link className="characterLink" href={`/characters/${member.id}`}><CharacterName name={member.name} id={member.id} icon={member.icon}/></Link><small>{team.core.includes(member.name) ? "Core" : team.flex.includes(member.name) ? "Flex" : "Substitute"}</small></td>
-                <td>{member.rank === null ? "—" : rankName(member.rank)}<small>Level {member.xpLevel ?? "—"}</small></td>
+                <td>{member.rank === null ? "—" : <RankBadge rank={member.rank}/>}<small>Level {member.xpLevel ?? "—"}</small></td>
                 <td><strong>Active {formatAbilityTarget(member.activeLevel, member.activeTarget)}</strong><small>{abilityTargetMet(member.activeLevel, member.activeTarget) ? null : raidAbilityStep(member.activeLevel, member.activeTarget, member.xpLevel, member.rarity)}</small>
                     <strong>Passive {formatAbilityTarget(member.passiveLevel, member.passiveTarget)}</strong><small>{abilityTargetMet(member.passiveLevel, member.passiveTarget) ? null : raidAbilityStep(member.passiveLevel, member.passiveTarget, member.xpLevel, member.rarity)}</small>
                     <ReferenceDetails label="Ability target basis"><p>Active: {member.activeBasis}</p><p>Passive: {member.passiveBasis}</p></ReferenceDetails></td>

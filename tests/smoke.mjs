@@ -47,6 +47,8 @@ try
         // checked against the raw response separately, independent of wrappers.
         const dom = new JSDOM(html);
         dom.window.document.querySelectorAll('.resourceName').forEach(node => node.replaceWith(dom.window.document.createTextNode(node.textContent)));
+        // Compare player-facing meanings consistently for both image and text badges.
+        dom.window.document.querySelectorAll('.gameBadge').forEach(node => node.replaceWith(dom.window.document.createTextNode(node.getAttribute('aria-label') ?? node.getAttribute('title') ?? node.textContent)));
         const result = dom.window.document.documentElement.outerHTML;
         dom.window.close();
         return result;

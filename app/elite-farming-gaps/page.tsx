@@ -1,3 +1,5 @@
+import RankSelect from "../components/RankSelect";
+import RankBadge from "../components/RankBadge";
 import Link from "next/link";
 import Nav from "../components/Nav";
 import ReferenceDetails from "../components/ReferenceDetails";
@@ -28,7 +30,7 @@ export default async function EliteFarmingGaps({ searchParams }: { searchParams:
     const opportunities = eliteUnlockOpportunities(rows, progress);
     return <main><Nav/><header><div><p className="eyebrow">FARMING ACCESS</p><h1>Elite Farming Gaps</h1>
         <p className="sub">Materials with locked, missing, or unknown Elite farming routes.</p>
-        <p className="sub">Owned demand through {RANK_NAMES[target] ?? "unknown rank"}. The full gap list includes materials you do not currently need.</p>
+        <p className="sub">Owned demand through <RankBadge rank={target}/>. The full gap list includes materials you do not currently need.</p>
         <ReferenceDetails label="Coverage and savings details">
             <p>Any confirmed unlocked Elite node removes a material from this list. Missing or invalid campaign progress stays unknown; zero is a recorded locked campaign. No Elite source means none exists in the synced battle dataset.</p>
             <p>Shortages come from Material Completion, including equipped slots and shared crafted inventory. Unknown demand stays visible when filtering for shortages. Recipe-only upgrades, shards, currency and materials without farmable campaign nodes are excluded.</p>
@@ -38,7 +40,7 @@ export default async function EliteFarmingGaps({ searchParams }: { searchParams:
         </ReferenceDetails>
     </div><div className="power">{rows.length}<strong> material gaps</strong></div></header>
         <form className="goalForm panel" action="/elite-farming-gaps">
-            <label>Calculate demand through<select name="target" defaultValue={String(target)}>{RANK_NAMES.map((name, index) => index > 0 ? <option key={name} value={index}>{name}</option> : null)}</select></label>
+            <label>Calculate demand through<RankSelect name="target" defaultValue={String(target)} skipFirst/></label>
             <label className="checkLabel"><input type="checkbox" name="mythic" value="1" defaultChecked={includeMythic}/> Include Mythic materials</label>
             <label className="checkLabel"><input type="checkbox" name="needed" value="1" defaultChecked={onlyNeeded}/> Hide finished and stocked materials</label>
             <button type="submit">Update gaps</button>

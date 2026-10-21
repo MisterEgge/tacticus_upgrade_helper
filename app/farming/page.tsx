@@ -1,3 +1,4 @@
+import RankSelect from "../components/RankSelect";
 import ReferenceDetails from "../components/ReferenceDetails";
 import Link from "next/link";
 import { getShopCatalog } from "../lib/shops";
@@ -67,7 +68,7 @@ export default async function Farming({ searchParams }: { searchParams: Promise<
         <form className="goalForm panel" action="/farming">
             <label>Plan<select name="plan" defaultValue={query.plan ?? "next"}><option value="next">Roster next ranks</option><option value="campaign">Campaign recommendation gaps</option></select></label>
             <label>Character<select name="character" defaultValue={query.character ?? ""}><option value="">All characters — next rank</option>{rankRoster.map(u => <option key={u.id} value={u.id}>{u.name} ({rankName(u.rank)})</option>)}</select></label>
-            <label>Target rank<select name="target" defaultValue={query.target ?? ""}><option value="">Next rank</option>{RANK_NAMES.map((name, index) => <option key={name} value={index}>{name}</option>)}</select></label>
+            <label>Target rank<RankSelect name="target" defaultValue={query.target ?? ""} includeNext/></label>
             <button type="submit">Calculate materials</button>
         </form>
         {error ? <div className="empty" role="alert">{error}</div> : rows.length ? <section className="panel tablePanel"><FarmingTable rows={rows}/></section> : <div className="empty">No material shortages for this plan.</div>}

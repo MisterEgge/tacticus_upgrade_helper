@@ -1,3 +1,5 @@
+import RankSelect from "../components/RankSelect";
+import RankBadge from "../components/RankBadge";
 import Link from "next/link";
 import Nav from "../components/Nav";
 import ReferenceDetails from "../components/ReferenceDetails";
@@ -22,7 +24,7 @@ export default async function MaterialCompletion({ searchParams }: { searchParam
     const done = rows.filter(row => row.status.startsWith("done")).length;
     return <main><Nav/><header><div><p className="eyebrow">LIFETIME MATERIALS</p><h1>Material Completion</h1>
         <p className="sub">See which materials your owned characters have finished using, and which you already have enough of.</p>
-        <p className="sub">Through {RANK_NAMES[target] ?? "unknown rank"}. New characters and upgrades can add more uses.</p>
+        <p className="sub">Through <RankBadge rank={target}/>. New characters and upgrades can add more uses.</p>
         <Link className="sourceLink" href={`/elite-farming-gaps?target=${target}`}>Find missing Elite farming unlocks</Link>
         <ReferenceDetails label="How completion is calculated">
             <p>{catalog.characters.length} catalog characters. Recipe data last synced: {source?.syncedAt ?? "Unknown"}. Sync game data to include newly added characters and recipes.</p>
@@ -33,9 +35,7 @@ export default async function MaterialCompletion({ searchParams }: { searchParam
             <Link className="sourceLink" href="/farming">Plan shorter farming goals</Link>
         </ReferenceDetails>
     </div></header>
-        <form className="goalForm panel" action="/material-completion"><label>Calculate through rank<select name="target" defaultValue={String(target)}>
-            {RANK_NAMES.map((name, index) => index > 0 ? <option key={name} value={index}>{name}</option> : null)}
-        </select></label><button type="submit">Calculate completion</button></form>
+        <form className="goalForm panel" action="/material-completion"><label>Calculate through rank<RankSelect name="target" defaultValue={String(target)} skipFirst/></label><button type="submit">Calculate completion</button></form>
         {error ? <div className="empty" role="alert">{error}</div> : <>
             <section className="cards compact">
                 <div className="card"><strong>{done}</strong><span>No remaining owned uses</span></div>

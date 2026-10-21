@@ -1,3 +1,4 @@
+import RarityBadge from "../../components/RarityBadge";
 import ResourceName,{ResourceText} from "../../components/ResourceName";
 import CollapsibleSection from "../../components/CollapsibleSection";
 import ReferenceDetails from "../../components/ReferenceDetails";
@@ -18,7 +19,7 @@ export default function CharacterEquipment({unit,slots,shops,powerLevel}:{unit:R
  return <div id="equipment"><CollapsibleSection title="Equipment" summary={`${ready?`${ready} inventory replacement${ready===1?"":"s"} ready · `:""}${count} slot${count===1?"":"s"} with upgrade work`} className="panel detailPanel characterEquipment compactCharacterTable">
   {unit.items.length?<div className="tableWrap"><table aria-label="Character equipment upgrades"><thead><tr><th>Equipped</th><th>Next upgrade</th></tr></thead><tbody>{unit.items.map(item=>{
    const choices=orderedEquipmentChoices(slots.filter(slot=>slot.slotId===item.slotId)),primary=choices[0];
-   return <tr key={item.slotId}><td><strong><ResourceName id={item.id} name={item.name??item.id}/></strong><small>{item.rarity??"Unknown"} · level {item.level}</small></td><td>{primary?<><Upgrade choice={primary} shops={shops} powerLevel={powerLevel}/>{choices.length>1?<ReferenceDetails label={`Other upgrade options (${choices.length-1})`}>{choices.slice(1).map(choice=><Upgrade key={`${choice.itemRarity}:${choice.acquisition[0]?.id??choice.target}`} choice={choice} shops={shops} powerLevel={powerLevel}/>)}</ReferenceDetails>:null}</>:<small>No verified replacement target. Current gear or compatibility may need review.</small>}</td></tr>;
+   return <tr key={item.slotId}><td><strong><ResourceName id={item.id} name={item.name??item.id}/></strong><small><RarityBadge rarity={item.rarity??"Unknown"}/> · level {item.level}</small></td><td>{primary?<><Upgrade choice={primary} shops={shops} powerLevel={powerLevel}/>{choices.length>1?<ReferenceDetails label={`Other upgrade options (${choices.length-1})`}>{choices.slice(1).map(choice=><Upgrade key={`${choice.itemRarity}:${choice.acquisition[0]?.id??choice.target}`} choice={choice} shops={shops} powerLevel={powerLevel}/>)}</ReferenceDetails>:null}</>:<small>No verified replacement target. Current gear or compatibility may need review.</small>}</td></tr>;
   })}</tbody></table></div>:<p className="sub">No equipped gear recorded at the last sync.</p>}
  </CollapsibleSection></div>;
 }
