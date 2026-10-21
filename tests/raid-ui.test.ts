@@ -54,7 +54,7 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     assert.equal(dom.window.document.activeElement,mainTabs.getByRole("tab",{name:"Upgrades"}));
     fireEvent.keyDown(mainTabs.getByRole("tab",{name:"Upgrades"}),{key:"Home"});
     assert.equal(mainTabs.getByRole("tab",{name:"Team"}).getAttribute("aria-selected"),"true");
-    const upgradeTable = () => {show("Upgrades");const toggle=view.getByRole("button",{name:"Character ability targets"});if(toggle.getAttribute("aria-expanded")==="false")fireEvent.click(toggle);return within(view.getByRole("table"));};
+    const upgradeTable = () => {show("Upgrades");const toggle=view.getByRole("button",{name:"Character ability targets"});if(toggle.getAttribute("aria-expanded")==="false")fireEvent.click(toggle);return within(view.getByRole("table",{name:"Raid ability targets"}));};
     const now = () => {show("Upgrades");return within(view.container.querySelector(".roadmapNow") as HTMLElement);};
 
     fireEvent.change(view.getByLabelText("Raid boss"), { target: { value: "Tervigon" } });
@@ -62,6 +62,11 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     assert.equal(view.getAllByLabelText(/Character slot/).length, 5);
     assert.equal((view.getByLabelText("Machine of War") as HTMLSelectElement).value, "Plagueburst Crawler");
     assert.equal(upgradeTable().getAllByRole("row").length, 6);
+    const rarityTable=within(view.getByRole("table",{name:"Raid rarity priority"}));
+    assert.equal(rarityTable.getAllByRole("row").length,6);
+    assert.ok(rarityTable.getByRole("link",{name:/^Atlacoya(?: Atlacoya)?$/}));
+    assert.equal(rarityTable.queryByRole("link",{name:/^Aesoth(?: Aesoth)?$/}),null);
+    assert.equal(rarityTable.queryByRole("link",{name:/^Biovore(?: Biovore)?$/}),null);
     assert.ok(upgradeTable().getByRole("link", { name: /^Atlacoya(?: Atlacoya)?$/ }));
     assert.equal(upgradeTable().queryByRole("link", { name: /^Aesoth(?: Aesoth)?$/ }), null);
     assert.match(now().getByText("Atlacoya").parentElement!.textContent!, /Active 1 → 35/);

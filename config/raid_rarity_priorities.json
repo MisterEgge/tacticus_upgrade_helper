@@ -1,0 +1,31 @@
+{
+  "reviewedOn": "2026-10-21",
+  "basis": "Raid-first planning judgement for a selected Kariyan/Laviscus/Trajann lineup, not a measured damage ranking. Meet a current checkpoint's rarity gate first. Separate alliance orb pools can progress in parallel. First Mythic before optional extra Mythic stars.",
+  "order": ["Kariyan", "Laviscus", "Trajann", "Kharn", "Gulgortz", "Vitruvius", "Aesoth", "Dante", "Atlacoya"],
+  "reasons": {
+    "Kariyan": "First Imperial focus: damage and passive scaling support the whole damage sequence.",
+    "Laviscus": "First Chaos focus: finisher damage, survivability and the Adamantine rank path. Ahead of Kharn for this Raid team.",
+    "Trajann": "After Kariyan in the Imperial pool; prepare Mythic when pushing Commander beyond level 50.",
+    "Kharn": "After Laviscus in the Chaos pool for Raid-first spending. Broader Arena/War use can justify a different personal order.",
+    "Gulgortz": "Uses Xenos orbs independently; raise the team's damage core before prioritizing his late roadmap targets.",
+    "Vitruvius": "Support after the damage core; follow the selected support checkpoints.",
+    "Aesoth": "Support after the damage core; meet his earlier support targets first.",
+    "Dante": "Support after the damage core; follow the selected support checkpoints.",
+    "Atlacoya": "Selected flex after the damage core; precise Mythic priority needs more research."
+  },
+  "timing": {
+    "Kariyan": "First Mythic: passive at 50 or ready to push beyond Diamond III.",
+    "Laviscus": "First Mythic: ready to push beyond Diamond III; earlier if survival blocks raids.",
+    "Trajann": "First Mythic: Commander at 50, then push its higher ability levels or Adamantine ranks.",
+    "Kharn": "First Mythic: after Laviscus in the Chaos pool, when pushing Adamantine ranks.",
+    "Gulgortz": "First Mythic: prepare Xenos resources in parallel for his later rank and passive targets."
+  },
+  "sources": [
+    {"title":"Mawg's Laviscus team roadmap and investment discussion","url":"https://www.reddit.com/r/WH40KTacticus/comments/1u5p1yk/laviscus_raid_team_master_guide_all_infographics/"},
+    {"title":"Custodes Mythic priority discussion (opinions differ after Kariyan)","url":"https://www.reddit.com/r/WH40KTacticus/comments/1t64eb2/whats_the_mythic_priority_order_for_the_custodes/"},
+    {"title":"Kariyan ability scaling","url":"https://tacticus.wiki.gg/wiki/Kariyan"},
+    {"title":"Laviscus ability scaling","url":"https://tacticus.wiki.gg/wiki/Laviscus"},
+    {"title":"Progression costs","url":"https://tacticus.wiki.gg/wiki/Unit_Progression"},
+    {"title":"Mythic Journey missions","url":"https://tacticus.wiki.gg/wiki/Mythic_Missions"}
+  ]
+}
