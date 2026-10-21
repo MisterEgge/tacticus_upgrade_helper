@@ -3,6 +3,7 @@ import {useEffect,useMemo,useState} from "react";
 import Link from "next/link";
 import CharacterName from "../components/CharacterName";
 import ResourceName,{ResourceText} from "../components/ResourceName";
+import AllianceTabs from "../components/AllianceTabs";
 import CollapsibleSection from "../components/CollapsibleSection";
 import ReferenceDetails from "../components/ReferenceDetails";
 import {onslaughtPriorities,readSectorChoices,SECTORS,type Alliance,type Sector,type SectorChoice,type OnslaughtCandidate} from "../../src/domain/onslaught";
@@ -33,13 +34,15 @@ export default function HonorPriorities({candidates,orbs,badges,defenseTeams,off
  return <>
   <section className="panel detailPanel"><p><ResourceName id="onslaughtToken" name="Onslaught tokens"/> are shared across all three tracks: one attempt costs one token, one regenerates every 16 hours, normal cap 3.</p><p>Win, then honor one unit you deployed during that battle. A defeated character is still eligible. These are honor choices; take a team that can win.</p><label><input type="checkbox" checked={includeMythic} onChange={event=>setIncludeMythic(event.target.checked)}/> Include optional Mythic honor goals</label></section>
   <p className="sub">Top three per current character rarity in each alliance. Immediate goals first, then next-rarity projects and useful resource farmers. Recurring free shard income is skipped.</p>
-  {groups.map(group=>{
+  <AllianceTabs label="Onslaught alliance">{alliance=>{
+   const group=groups.find(group=>group.alliance===alliance)!;
    const choice=choices[group.alliance];
-   return <CollapsibleSection key={group.alliance} label={`${group.alliance} honor priorities`} title={`${group.alliance} · ${group.rarityGroups.reduce((total,tier)=>total+tier.rows.length,0)} recommendations`} summary={`Wave badges: ${group.waveBadges} · ${group.owned} owned characters`}>
+   return <section aria-label={`${group.alliance} honor priorities`} className="allianceContent">
+    <p className="sub">{group.rarityGroups.reduce((total,tier)=>total+tier.rows.length,0)} recommendations · {group.owned} owned characters · wave badges: {group.waveBadges}</p>
     <div className="abilityViews"><label>{group.alliance} sector<select value={choice?.sector??""} onChange={event=>choose(group.alliance,event.target.value?{sector:event.target.value as Sector,tier:choice?.tier??1}:undefined)}><option value="">Unknown · choose in-game sector</option>{SECTORS.map(sector=><option key={sector} value={sector}>{sector[0]!.toUpperCase()+sector.slice(1)}</option>)}</select></label>{choice?<label>{group.alliance} sector stage<select value={choice.tier} onChange={event=>choose(group.alliance,{...choice,tier:Number(event.target.value) as SectorChoice["tier"]})}><option value={1}>I</option><option value={2}>II</option><option value={3}>III</option><option value={4}>Completed sector (III rewards)</option></select></label>:null}</div>
     {!group.deployable?<p className="sub">At least five owned characters from {group.alliance} are needed to enter this track. This roster has {group.owned}.</p>:null}
     <p className="sub">Wave clears and Eradication crates give {group.waveBadges} badges; honor rewards use {group.alliance}. {choice?"Sector is your manual selection; confirm it before each run.":"Sector is not exported by the API. Shard amounts stay unknown until you choose it."}</p>
-    {group.rarityGroups.map(tier=><CollapsibleSection key={tier.rarity} title={`${tier.rarity} · top ${tier.rows.length}`} summary="Current character rarity">
+    {group.rarityGroups.filter(tier=>tier.rows.length>0).map(tier=><CollapsibleSection key={tier.rarity} title={`${tier.rarity} · top ${tier.rows.length}`}>
     {tier.rows.length?<div className="tableWrap"><table className="onslaughtTable" aria-label={`${group.alliance} ${tier.rarity} honor priorities`}><thead><tr><th>Honor order</th><th>Why this character</th><th>Honor rewards / goal</th></tr></thead><tbody>{tier.rows.map((row,index)=><tr key={row.id}>
      <td><strong>#{index+1}</strong><Link href={`/characters/${row.id}`}><CharacterName id={row.id} name={row.name}/></Link><small><ProgressionBadge index={row.progressionIndex}/></small></td>
      <td>{row.milestone?<strong>{row.milestone.from} → {row.milestone.to}</strong>:null}{row.reasons.map(reason=><small key={reason}><ResourceText text={reason}/></small>)}<ReferenceDetails label="Priority evidence">{row.milestone&&row.milestone.to!==row.goalRarity?<p>{row.goalRarity} goal: {row.shardBalance??"?"} / {row.shardsNeeded} total shards · {row.shardShortfall??"?"} short.</p>:null}<p>{row.utility.signals.join(" · ")||"No tracked utility signal; roster rarity goal only."}</p><p>{row.campaignShardSource?"Campaign shard sources exist in the synced catalog; check their access and costs.":"No repeatable campaign shard source in the synced catalog; other shops and event sources may exist."}</p><p>Alternatives share resource pools; these choices do not reserve shared stock.</p></ReferenceDetails></td>
@@ -53,9 +56,10 @@ export default function HonorPriorities({candidates,orbs,badges,defenseTeams,off
      </td>
     </tr>)}</tbody></table></div>:<p className="sub">No eligible {tier.rarity} choices in this track. Regular shard sources and optional Mythic goals still apply.</p>}
     </CollapsibleSection>)}
+    <p className="sub">No eligible choices at current goals: {group.rarityGroups.filter(tier=>!tier.rows.length).map(tier=>tier.rarity).join(", ")||"none"}.</p>
     {group.passive.length?<ReferenceDetails label="Use regular shard sources instead">{group.passive.map(unit=><p key={unit.id}><Link href={`/characters/${unit.id}`}>{unit.name}</Link> · <a href={unit.url} target="_blank" rel="noreferrer">{unit.source}</a></p>)}</ReferenceDetails>:null}
-   </CollapsibleSection>;
-  })}
+   </section>;
+  }}</AllianceTabs>
   <ReferenceDetails label="Current Onslaught rules and priority sources">
    <p>Reviewed {data.reviewedOn} · {data.rulesVersion}. Finished sectors can be replayed. Each alliance has separate sector progress and Eradication tiers; tokens are shared. Waves award badges and Tyranid Skulls. Eradication crates add <ResourceName id="gold"/>, badges, forge badges and <ResourceName id="gems"/>.</p>
    <p>Honor resource types follow the unit’s actual progression: an ascension boundary earns the next rarity’s orb; Legendary before the blue star earns Legendary badges and orbs. Blue-star Legendary and Mythic switch to Mythic shards and possible Mythic orbs, with Legendary/Mythic badges. Mythic wings no longer earns honor orbs. Shards are guaranteed after a win; their amount and orb/badge chances vary by played sector.</p>

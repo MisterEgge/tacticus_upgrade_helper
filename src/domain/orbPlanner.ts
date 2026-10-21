@@ -100,12 +100,12 @@ export function orbUpgradeAction(row: ReturnType<typeof orbPlan>["rows"][number]
 
 /** Shopping budget for each owned character's next orb spend, once its full
  * shard path is covered. Future, shard-blocked work cannot reserve this stock.
- * This is a readiness audit of the roster, not an instruction to invest in all.
+ * Defaults to account priorities; full-roster readiness is an explicit audit.
  */
-export function shardReadyOrbPlan(candidates: OrbCandidate[], inventory: OrbInventory | null | undefined, warTargets: Map<string, number>, includeMythic: boolean, includeStarUpgrades = false) {
+export function shardReadyOrbPlan(candidates: OrbCandidate[], inventory: OrbInventory | null | undefined, warTargets: Map<string, number>, includeMythic: boolean, includeStarUpgrades = false, scope: "priorities"|"all" = "priorities") {
     const eligible = candidates.filter(candidate => {
         const next = nextOrbMilestone(candidate.progressionIndex);
-        return next && (includeMythic || next.orbRarity !== "Mythic") && (includeStarUpgrades || progressionRarity(candidate.progressionIndex) !== next.orbRarity) && ["Imperial", "Xenos", "Chaos"].includes(normalizeAlliance(candidate.alliance));
+        return next && orbPriority(candidate,warTargets.get(candidate.name),{scope,horizon:"next",includeMythic,includeStarUpgrades}) !== null;
     });
     const stockKnown = (stock: number | null, cost: number) => cost === 0 || validShardStock(stock);
     const unknownShards = eligible.filter(candidate => {
@@ -118,8 +118,9 @@ export function shardReadyOrbPlan(candidates: OrbCandidate[], inventory: OrbInve
             && (next.shards === 0 || candidate.shards! >= next.shards)
             && (next.mythicShards === 0 || candidate.mythicShards! >= next.mythicShards);
     });
-    return { ...orbPlan(ready, inventory, warTargets, { scope: "all", horizon: "next", includeMythic, includeStarUpgrades }),
-        unknownShards: unknownShards.map(candidate => candidate.name), waitingForShards: eligible.length - ready.length - unknownShards.length };
+    const waitingForShardNames=eligible.filter(candidate=>!ready.includes(candidate)&&!unknownShards.includes(candidate)).map(candidate=>candidate.name);
+    return { ...orbPlan(ready, inventory, warTargets, { scope, horizon: "next", includeMythic, includeStarUpgrades }),
+        unknownShards: unknownShards.map(candidate => candidate.name), waitingForShardNames, waitingForShards: waitingForShardNames.length };
 }
 
 /** Protect the union of recipients when proposing lower-orb forge spending;

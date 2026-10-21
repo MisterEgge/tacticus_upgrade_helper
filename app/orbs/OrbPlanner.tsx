@@ -3,9 +3,10 @@ import ResourceName,{ResourceText} from "../components/ResourceName";
 import {useEffect,useMemo,useState} from "react";
 import Link from "next/link";
 import CharacterName from "../components/CharacterName";
+import AllianceTabs from "../components/AllianceTabs";
 import CollapsibleSection from "../components/CollapsibleSection";
 import ReferenceDetails from "../components/ReferenceDetails";
-import {orbPlan,orbUpgradeAction,shardReadyOrbPlan,combinedOrbDemand,orbHonorees,orbsOwned,type OrbCandidate,type OrbInventory,type OrbScope} from "../../src/domain/orbPlanner";
+import {orbPlan,orbUpgradeAction,shardReadyOrbPlan,combinedOrbDemand,orbHonorees,orbsOwned,normalizeAlliance,type OrbCandidate,type OrbInventory,type OrbScope} from "../../src/domain/orbPlanner";
 import ProgressionBadge from "../components/ProgressionBadge";
 import {CHARACTER_RARITIES,type CharacterRarity} from "../../src/domain/characterProgression";
 import {WAR_PLAN_STORAGE_KEY,warBadgeTargets,type WarBadgeTeam} from "../../src/domain/warBadgeTargets";
@@ -19,15 +20,15 @@ export default function OrbPlanner({candidates,inventory,defenseTeams,offenseTea
  const [includeMythic,setIncludeMythic]=useState(false);
  const [includeStarUpgrades,setIncludeStarUpgrades]=useState(false);
  const [includeShardBlocked,setIncludeShardBlocked]=useState(false);
+ const [allReady,setAllReady]=useState(false);
  const [savedPlan,setSavedPlan]=useState<unknown>(null);
  useEffect(()=>{const read=()=>{try{setSavedPlan(JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)??"null"));}catch{setSavedPlan(null);}};read();window.addEventListener("storage",read);window.addEventListener("focus",read);return()=>{window.removeEventListener("storage",read);window.removeEventListener("focus",read);};},[]);
  const warTargets=useMemo(()=>warBadgeTargets(defenseTeams,offenseTeams,savedPlan,"war-both"),[defenseTeams,offenseTeams,savedPlan]);
- const plan=useMemo(()=>orbPlan(candidates,inventory,warTargets,{scope,horizon,includeMythic,includeStarUpgrades,includeShardBlocked}),[candidates,inventory,warTargets,scope,horizon,includeMythic,includeStarUpgrades,includeShardBlocked]);
- const ready=useMemo(()=>shardReadyOrbPlan(candidates,inventory,warTargets,includeMythic,includeStarUpgrades),[candidates,inventory,warTargets,includeMythic,includeStarUpgrades]);
- const rarityGroups=CHARACTER_RARITIES.map(rarity=>({rarity,pools:ready.pools.filter(pool=>pool.rarity===rarity),rows:ready.rows.filter(row=>row.next.orbRarity===rarity)})).filter(group=>group.rows.length>0);
- const protectedDemand=useMemo(()=>combinedOrbDemand(plan,ready),[plan,ready]);
+ const planAll=useMemo(()=>orbPlan(candidates,inventory,warTargets,{scope,horizon,includeMythic,includeStarUpgrades,includeShardBlocked}),[candidates,inventory,warTargets,scope,horizon,includeMythic,includeStarUpgrades,includeShardBlocked]);
+ const readyAll=useMemo(()=>shardReadyOrbPlan(candidates,inventory,warTargets,includeMythic,includeStarUpgrades,allReady?"all":"priorities"),[candidates,inventory,warTargets,includeMythic,includeStarUpgrades,allReady]);
+ const protectedDemand=useMemo(()=>combinedOrbDemand(planAll,readyAll),[planAll,readyAll]);
  const orbOffers=(rarity:string)=>shops.shops.filter(shop=>shop.coverage==="catalog").flatMap(shop=>shop.offers.filter(offer=>offer.itemId===`draft_ascensionOrbs${rarity}`&&isActionableOffer(offer)).map(offer=>({shop,offer})));
- const acquisition=(pool:typeof plan.pools[number],label=`Get ${pool.alliance} ${pool.rarity} orbs`)=>{
+ const acquisition=(pool:typeof planAll.pools[number],label=`Get ${pool.alliance} ${pool.rarity} orbs`)=>{
   const offers=orbOffers(pool.rarity);
   const forge=sources.forge.offers.find(offer=>offer.rarity===pool.rarity);
   const lowerOwned=forge?orbsOwned(inventory,pool.alliance,forge.lower as CharacterRarity):null;
@@ -42,15 +43,22 @@ export default function OrbPlanner({candidates,inventory,defenseTeams,offenseTea
   </ReferenceDetails>;
  };
  return <>
-  <div className="abilityViews"><label><input type="checkbox" checked={includeStarUpgrades} onChange={event=>setIncludeStarUpgrades(event.target.checked)}/> Include star upgrades within a rarity</label><label><input type="checkbox" checked={includeMythic} onChange={event=>setIncludeMythic(event.target.checked)}/> Include Mythic upgrades</label></div>
+  <div className="abilityViews"><label className="checkLabel"><input type="checkbox" checked={includeStarUpgrades} onChange={event=>setIncludeStarUpgrades(event.target.checked)}/> Include star upgrades within a rarity</label><label className="checkLabel"><input type="checkbox" checked={includeMythic} onChange={event=>setIncludeMythic(event.target.checked)}/> Include Mythic upgrades</label><label className="checkLabel"><input type="checkbox" checked={allReady} onChange={event=>setAllReady(event.target.checked)}/> Show all shard-ready characters</label></div>
+  {planAll.unknown.length?<p className="sub">Progression or alliance needs review: {planAll.unknown.join(", ")}. These units are excluded from totals.</p>:null}
   {!inventory?<p className="sub">Orb inventory unavailable. Sync Account to calculate owned amounts, allocations and shortages.</p>:null}
+  <AllianceTabs label="Orb alliance">{alliance=>{
+   const names=new Set(candidates.filter(row=>normalizeAlliance(row.alliance)===alliance).map(row=>row.name));
+   const ready={...readyAll,rows:readyAll.rows.filter(row=>row.alliance===alliance),pools:readyAll.pools.filter(pool=>pool.alliance===alliance),unknownShards:readyAll.unknownShards.filter(name=>names.has(name)),waitingForShards:readyAll.waitingForShardNames.filter(name=>names.has(name)).length};
+   const plan={...planAll,rows:planAll.rows.filter(row=>row.alliance===alliance),pools:planAll.pools.filter(pool=>pool.alliance===alliance),deferred:planAll.deferred.filter(name=>names.has(name))};
+   const rarityGroups=CHARACTER_RARITIES.map(rarity=>({rarity,pools:ready.pools.filter(pool=>pool.rarity===rarity),rows:ready.rows.filter(row=>row.next.orbRarity===rarity)})).filter(group=>group.rows.length>0);
+   return <>
   <CollapsibleSection title="Shard-ready orb shopping list" summary={`${ready.rows.length} characters have the shards · ${ready.waitingForShards} still collecting shards`}>
-   <div className="raidTeamSummary">{["Imperial","Xenos","Chaos"].map(alliance=>{
+   {ready.pools.length?<div className="raidTeamSummary">{[alliance].map(alliance=>{
     const pools=ready.pools.filter(pool=>pool.alliance===alliance);
     const missing=pools.filter(pool=>pool.shortfall!==0);
     return <div key={alliance}><small>{alliance.toUpperCase()}</small><strong>{pools.length?pools.map((pool,index)=><span key={pool.rarity}>{index?" · ":""}<ResourceName id={`orb:${pool.alliance}:${pool.rarity}`} name={`${pool.needed} ${pool.rarity}`}/></span>):"No orbs needed"}</strong><span>{missing.length?`Still need: ${missing.map(pool=>`${pool.shortfall??"?"} ${pool.rarity}`).join(" · ")}`:"Orb stock covers this queue"}</span></div>;
-   })}</div>
-   <p className="sub">Shards covered · check coins before upgrading.</p>
+   })}</div>:null}
+   <p className="sub">Shards covered · check coins before upgrading. {allReady?"Full-roster readiness audit; compare usefulness before investing.":"Account priorities; capped War units and untracked bench upgrades are excluded."}</p>
    {rarityGroups.map(group=><CollapsibleSection key={group.rarity} title={`${group.rarity} orbs`} summary={`${group.rows.length} characters · ${group.pools.reduce((total,pool)=>total+pool.needed,0)} orbs needed`}>
     <div className="tableWrap"><table aria-label={`${group.rarity} orb shopping`}><thead><tr><th>Alliance</th><th>Characters</th><th>Owned</th><th>Needed</th><th>Short</th></tr></thead><tbody>{group.pools.map(pool=><tr key={pool.alliance}>
      <td><strong><ResourceName id={`orb:${pool.alliance}:${pool.rarity}`} name={pool.alliance}/></strong>{acquisition(pool,"Sources")}</td>
@@ -68,7 +76,7 @@ export default function OrbPlanner({candidates,inventory,defenseTeams,offenseTea
   <div className="abilityViews">
    <label>Include<select value={scope} onChange={event=>setScope(event.target.value as OrbScope)}><option value="priorities">Account priorities</option><option value="raid">Main Raid team</option><option value="campaign">Campaign targets</option><option value="war">Active War teams</option><option value="all">All owned characters</option></select></label>
    <label>Plan<select value={horizon} onChange={event=>setHorizon(event.target.value as "next"|"goal")}><option value="next">Next orb upgrade</option><option value="goal">Through planned rarity</option></select></label>
-   <label><input type="checkbox" checked={includeShardBlocked} onChange={event=>setIncludeShardBlocked(event.target.checked)}/> Include characters still collecting shards</label>
+   <label className="checkLabel"><input type="checkbox" checked={includeShardBlocked} onChange={event=>setIncludeShardBlocked(event.target.checked)}/> Include characters still collecting shards</label>
   </div>
   {includeShardBlocked?<p className="sub">Future cost estimates include characters missing shards. Collect their shards first; these estimates are separate from the shard-ready shopping list.</p>:null}
   <h2>{includeShardBlocked?"Projected costs by alliance and rarity":"Shard-covered costs by alliance and rarity"}</h2>
@@ -81,8 +89,8 @@ export default function OrbPlanner({candidates,inventory,defenseTeams,offenseTea
     <td>{row.shardsNeeded>0?<small><ResourceName id="shards" name={`${row.shardsNeeded} regular shards`}/> total · {row.shards??"?"} owned · {row.shardShortfall??"?"} short</small>:null}{row.mythicShardsNeeded>0?<small><ResourceName id="mythicShards" name={`${row.mythicShardsNeeded} Mythic shards`}/> · {row.mythicShards??"?"} owned · {row.mythicShardShortfall??"?"} short</small>:null}
      <strong>{orbUpgradeAction(row)}</strong></td></tr>;
   })}</tbody></table></div>:<p className="sub">No shard-covered orb upgrades in this scope. Enable future estimates to inspect characters still collecting shards.</p>}
-  {plan.unknown.length?<p className="sub">Progression or alliance needs review: {plan.unknown.join(", ")}. These units are excluded from totals.</p>:null}
   </CollapsibleSection>
-  <ReferenceDetails label="Priority rules and sources"><p>Selected Raid core, selected flex, unfinished campaign targets, active War slots, then general usefulness. Within each group, characters at an orb spend come first, followed by community score and account priority. This is an editable planning scope, not a damage forecast. Each shared pool is reserved once in queue order. Shard-blocked costs are excluded unless future estimates are explicitly enabled.</p><p>Raid members target Legendary as a first floor. Extra stars within Legendary/Mythic are excluded unless enabled; Mythic ascension is separately optional. Campaign floors follow recorded rank and ability targets; missing completion is labelled unknown. War Silver targets Rare and Gold targets Epic; War goals exclude reserves and capped members. Bench Core/Strong characters target Legendary and Useful characters target Epic. All-owned scope includes each character’s next rarity ascension, with extra star spends available through the toggle.</p><p>War uses this browser’s saved plan, with the War planner’s default distinct teams when none is saved. <Link href="/war-defense">Edit War teams</Link> · <Link href="/guild-raid">Edit main Raid team</Link> · <Link href="/campaigns">Review campaign targets</Link></p><p><a href={sources.progression.url} target="_blank" rel="noreferrer">Progression costs</a> · <a href={sources.progression.indexSource} target="_blank" rel="noreferrer">API star mapping</a> · reviewed {sources.reviewedOn}. Shop catalog checked {shops.reviewedAt.slice(0,10)}. Prices and schedules describe catalog offers; access, current stock, currencies and mission progress require an in-game check. Orb totals exclude ascension coins, shard acquisition and lower-orb conversions. The shard-ready queue covers each character’s next orb spend. Both views require the full shard path by default; the longer-term plan can optionally show shard-blocked projections. Do not add their totals together. Forge suggestions protect both queues, counting each character’s overlapping demand once.</p>{sources.sources.map(source=><p key={source.name}><a href={source.url} target="_blank" rel="noreferrer">{source.name}</a>: {source.note}</p>)}<p>{sources.forge.note}</p><p>Reward references: {sources.rewardReferences.map((url,index)=><a key={url} href={url} target="_blank" rel="noreferrer">{index?" · ":""}{url.split("/").at(-1)?.replaceAll("_"," ")}</a>)}</p></ReferenceDetails>
+  </>;}}</AllianceTabs>
+  <ReferenceDetails label="Priority rules and sources"><p>Selected Raid core, selected flex, unfinished campaign targets, active War slots, then general usefulness. Within each group, characters at an orb spend come first, followed by community score and account priority. This is an editable planning scope, not a damage forecast. Each shared pool is reserved once in queue order. Shard-blocked costs are excluded unless future estimates are explicitly enabled.</p><p>Raid members target Legendary as a first floor. Extra stars within Legendary/Mythic are excluded unless enabled; Mythic ascension is separately optional. Campaign floors follow recorded rank and ability targets; missing completion is labelled unknown. War Silver targets Rare and Gold targets Epic; War goals exclude reserves and capped members. Bench Core/Strong characters target Legendary and Useful characters target Epic. All-owned scope includes each character’s next rarity ascension, with extra star spends available through the toggle.</p><p>War uses this browser’s saved plan, with the War planner’s default distinct teams when none is saved. <Link href="/war-defense">Edit War teams</Link> · <Link href="/guild-raid">Edit main Raid team</Link> · <Link href="/campaigns">Review campaign targets</Link></p><p><a href={sources.progression.url} target="_blank" rel="noreferrer">Progression costs</a> · <a href={sources.progression.indexSource} target="_blank" rel="noreferrer">API star mapping</a> · reviewed {sources.reviewedOn}. Shop catalog checked {shops.reviewedAt.slice(0,10)}. Prices and schedules describe catalog offers; access, current stock, currencies and mission progress require an in-game check. Orb totals exclude ascension coins, shard acquisition and lower-orb conversions. The shard-ready queue follows account priorities by default. The optional full-roster audit also includes bench and capped War units. Both cover each character’s next orb spend. Both views require the full shard path by default; the longer-term plan can optionally show shard-blocked projections. Do not add their totals together. Forge suggestions protect both queues, counting each character’s overlapping demand once.</p>{sources.sources.map(source=><p key={source.name}><a href={source.url} target="_blank" rel="noreferrer">{source.name}</a>: {source.note}</p>)}<p>{sources.forge.note}</p><p>Reward references: {sources.rewardReferences.map((url,index)=><a key={url} href={url} target="_blank" rel="noreferrer">{index?" · ":""}{url.split("/").at(-1)?.replaceAll("_"," ")}</a>)}</p></ReferenceDetails>
  </>;
 }

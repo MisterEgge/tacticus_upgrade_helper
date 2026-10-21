@@ -9,6 +9,22 @@ export const candidate=(name:string,index=8,overrides:Partial<OrbCandidate>={}):
 const options:OrbOptions={scope:"priorities",horizon:"next",includeMythic:false,includeShardBlocked:true};
 const raid=(name:string,index=8)=>{const row=candidate(name,index);row.utility=rateCharacter({...row.utility,mainRaidCore:true});return row;};
 
+test("default shopping prioritizes selected work and excludes capped War and untracked bench recipients",()=>{
+ const capped=candidate("War cap",8,{shards:50});
+ const bench=candidate("Untracked bench",8,{shards:50});
+ bench.utility=rateCharacter({...bench.utility,communityScore:null,accountPriority:0});
+ const core={...raid("Selected core"),shards:50};
+ const flex={...raid("Selected flex"),shards:50};
+ flex.utility=rateCharacter({...flex.utility,mainRaidCore:false,mainRaidFlex:true});
+ const war=new Map([[capped.name,26]]),inventory={Xenos:[{rarity:"Epic",amount:12}]};
+ const defaults=shardReadyOrbPlan([bench,capped,flex,core],inventory,war,false);
+ assert.deepEqual(defaults.rows.map(row=>[row.name,row.allocations[0]?.reserved]),[[core.name,10],[flex.name,2]]);
+ assert.equal(defaults.pools[0]?.needed,20);
+ const audit=shardReadyOrbPlan([bench,capped,flex,core],inventory,war,false,false,"all");
+ assert.equal(audit.rows.length,4);assert.equal(audit.pools[0]?.needed,40);
+ assert.equal(audit.rows.reduce((sum,row)=>sum+(row.allocations[0]?.reserved??0),0),12);
+});
+
 test("Forcas cannot enter an orb recommendation or reserve a shared pool until the full shard cost is covered",()=>{
  const forcas=candidate("Forcas",8,{id:"darkaCompanion",alliance:"Imperial",shards:45});
  const covered=candidate("Covered Imperial",8,{alliance:"Imperial",shards:50});
@@ -117,7 +133,7 @@ test("shard-ready totals include each alliance and allocate only the ready queue
  const second=candidate("Second",8,{shards:80});
  const imperial=candidate("Imperial",5,{shards:20,alliance:"Imperium"});
  const chaos=candidate("Chaos",11,{shards:500,alliance:"Chaos"});
- const result=shardReadyOrbPlan([blocked,ready,second,imperial,chaos],{Xenos:[{rarity:"Epic",amount:12}],Imperial:[{rarity:"Rare",amount:7}],Chaos:[{rarity:"Legendary",amount:10}]},new Map([["Ready",26]]),false);
+ const result=shardReadyOrbPlan([blocked,ready,second,imperial,chaos],{Xenos:[{rarity:"Epic",amount:12}],Imperial:[{rarity:"Rare",amount:7}],Chaos:[{rarity:"Legendary",amount:10}]},new Map([["Ready",26]]),false,false,"all");
  assert.equal(result.waitingForShards,1);
  assert.equal(result.rows.some(row=>row.name==="Blocked Raid"),false);
  assert.deepEqual(result.rows.filter(row=>row.alliance==="Xenos").map(row=>row.allocations[0]?.reserved),[10,2]);
@@ -139,7 +155,7 @@ test("shard-ready ascensions require the whole intervening promotion path and pr
 });
 
 test("Mythic readiness uses Mythic shards and opt-in; spent shards remove a character from totals",()=>{
- const row=candidate("Wing",15,{shards:null,mythicShards:20});
+ const row={...raid("Wing",15),shards:null,mythicShards:20};
  assert.equal(shardReadyOrbPlan([row],{},new Map(),false).rows.length,0);
  assert.equal(shardReadyOrbPlan([row],{},new Map(),true).pools[0]?.needed,10);
  assert.deepEqual(shardReadyOrbPlan([{...row,mythicShards:null}],{},new Map(),true).unknownShards,["Wing"]);
@@ -166,7 +182,7 @@ test("rarity ascensions exclude extra Legendary and Mythic stars unless explicit
  const defaultPlan=shardReadyOrbPlan(roster,{},new Map(),true);
  assert.deepEqual(defaultPlan.rows.map(row=>row.name),["Epic to Legendary"]);
  assert.equal(defaultPlan.pools[0]?.needed,10);
- const expanded=shardReadyOrbPlan(roster,{},new Map(),true,true);
+ const expanded=shardReadyOrbPlan(roster,{},new Map(),true,true,"all");
  assert.equal(expanded.rows.length,3);
  assert.equal(expanded.pools.find(pool=>pool.rarity==="Legendary")?.needed,25);
  assert.equal(expanded.pools.find(pool=>pool.rarity==="Mythic")?.needed,10);
