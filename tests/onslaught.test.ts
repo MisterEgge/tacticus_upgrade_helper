@@ -167,21 +167,26 @@ test("honor UI separates faction lists, persists manual sectors per account and 
  const candidates=[rare,{...unit("Snotflogga","Xenos",11),id:"orksRuntherd"},unit("Imperial A"),unit("Imperial B"),unit("Imperial C"),unit("Imperial D"),unit("Chaos A","Chaos"),chaosProject,unit("Chaos farmer","Chaos",12),unit("Xenos A","Xenos"),unit("Blue star","Xenos",15)];
  const props={candidates,orbs:{},badges:{},defenseTeams:[],offenseTeams:[],accountKey:"TEST ACCOUNT"};
  const view=render(createElement(HonorPriorities,props));
- assert.equal(within(view.getByRole("table",{name:"Imperial honor priorities"})).getAllByRole("row").length,4);
+ assert.equal(within(view.getByRole("region",{name:"Imperial honor priorities"})).getAllByRole("row").length,6);
+ const imperial=within(view.getByRole("region",{name:"Imperial honor priorities"}));
+ fireEvent.click(imperial.getByRole("button",{name:/Rare .* top 1/}));
+ assert.equal(imperial.queryByRole("table",{name:"Imperial Rare honor priorities"}),null);
+ assert.ok(imperial.getByRole("table",{name:"Imperial Epic honor priorities"}));
+ fireEvent.click(imperial.getByRole("button",{name:/Rare .* top 1/}));
  assert.equal(view.queryByText("Blue star"),null);
  assert.ok(view.getByText(/one regenerates every 16 hours/));
  assert.ok(view.container.querySelector('[data-resource-id="onslaughtToken"] img'));
- const chaosTable=view.getByRole("table",{name:"Chaos honor priorities"});
- assert.equal(within(chaosTable).getAllByRole("row").length,4);
+ const chaosTable=view.getByRole("region",{name:"Chaos honor priorities"});
+ assert.equal(within(chaosTable).getAllByRole("row").length,6);
  assert.match(chaosTable.textContent!,/Next rarity project · 5 shards short of Epic/);
  assert.match(chaosTable.textContent!,/Resource banking · no verified current shortage/);
- const xenos=within(view.getByRole("table",{name:"Xenos honor priorities"}));
+ const xenos=within(view.getByRole("table",{name:"Xenos Epic honor priorities"}));
  assert.equal(xenos.queryByRole("link",{name:/Snotflogga/}),null);
  const passive=view.getByText("Use regular shard sources instead").closest("details")!;
  assert.equal(passive.hasAttribute("open"),false);
  fireEvent.click(within(passive).getByText("Use regular shard sources instead"));
  assert.ok(within(passive).getByRole("link",{name:"Salvage Run strongboxes"}));
- assert.match(view.getByRole("table",{name:"Imperial honor priorities"}).textContent!,/250 shards short of Legendary/);
+ assert.match(view.getByRole("region",{name:"Imperial honor priorities"}).textContent!,/250 shards short of Legendary/);
  const rareRow=view.getByRole("link",{name:/Rare upgrade/}).closest("tr")!;
  assert.ok(within(rareRow).getByRole("img",{name:"Rare · 1 red star"}));
  assert.equal(rareRow.querySelectorAll('[src="/progression/red-star.png"]').length,1);
@@ -195,14 +200,23 @@ test("honor UI separates faction lists, persists manual sectors per account and 
  fireEvent.change(view.getByRole("combobox",{name:"Imperial sector stage"}),{target:{value:"4"}});
  assert.deepEqual(JSON.parse(localStorage.getItem("tacticus-onslaught-sectors-v1:TEST ACCOUNT")!),{Imperial:{sector:"gold",tier:4}});
  assert.equal(view.getByRole("combobox",{name:"Chaos sector"}).getAttribute("value"),null);
- assert.match(view.getByRole("table",{name:"Imperial honor priorities"}).textContent!,/10–11 regular shards/);
+ assert.match(view.getByRole("region",{name:"Imperial honor priorities"}).textContent!,/10–11 regular shards/);
  fireEvent.click(view.getByRole("checkbox",{name:"Include optional Mythic honor goals"}));
  assert.ok(view.getByRole("link",{name:/Blue star/}));
- fireEvent.click(view.getByRole("button",{name:/Imperial · top 3/}));assert.equal(view.queryByRole("table",{name:"Imperial honor priorities"}),null);
+ fireEvent.click(view.getByRole("button",{name:/Imperial · 4 recommendations/}));assert.equal(view.queryByRole("table",{name:"Imperial Epic honor priorities"}),null);
  // An account change remounts the component on the page; settings stay scoped.
  view.unmount();
  const other=render(createElement(HonorPriorities,{...props,accountKey:"OTHER ACCOUNT"}));
  assert.equal((other.getByRole("combobox",{name:"Imperial sector"}) as HTMLSelectElement).value,"");
  localStorage.setItem(WAR_PLAN_STORAGE_KEY,"not json");fireEvent.focus(window);
- assert.ok(other.getByRole("table",{name:"Imperial honor priorities"}));
+ assert.ok(other.getByRole("region",{name:"Imperial honor priorities"}));
 });
+
+ test("each alliance keeps three alternatives per current rarity before applying display limits",()=>{
+ const candidates=[0,3,6,9,12,16].flatMap(index=>Array.from({length:4},(_,i)=>unit(`Tier ${index} member ${i}`,"Imperial",index,0)));
+ const group=onslaughtPriorities(candidates,{}, {},new Map(),{},true)[0]!;
+ assert.deepEqual(group.rarityGroups.map(tier=>tier.rarity),["Common","Uncommon","Rare","Epic","Legendary","Mythic"]);
+ assert.deepEqual(group.rarityGroups.map(tier=>tier.rows.length),[3,3,3,3,3,3]);
+ assert.equal(new Set(group.rarityGroups.flatMap(tier=>tier.rows.map(row=>row.id))).size,18);
+ assert.ok(onslaughtPriorities(candidates,{}, {},new Map(),{},false)[0]!.rarityGroups.find(tier=>tier.rarity==="Mythic")!.rows.length===0);
+ });

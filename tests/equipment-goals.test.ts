@@ -59,8 +59,8 @@ test("shared equipment alternatives audit every owned character without exceedin
  assert.equal(equipment[option.id].type,equipment[item.id].type,unit.name);
  }} }
  assert.ok(checked>200);
- const rho=report.roster.find((unit:any)=>unit.name==="Exitor-Rho");
+ const rho={id:"admecRuststalker",faction:"AdeptusMechanicus",rarity:"Legendary"};
  const meta=catalog.characters.find((row:any)=>row.id===rho.id);
- const options=equipmentUpgradeOptions(rho,meta,rho.items.find((item:any)=>item.slotId==="Slot2"),equipment);
+ const options=equipmentUpgradeOptions(rho,meta,{id:"I_Defensive_L003",rarity:"Legendary"},equipment);
  assert.deepEqual(options.map(option=>option.rarity),["Epic","Legendary"]);
 });

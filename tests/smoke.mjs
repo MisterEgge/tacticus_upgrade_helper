@@ -1,7 +1,7 @@
 // Production HTTP smoke test. Fixtures live only in a temporary directory;
 // never overwrite the user's player export, report, or history.
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, symlink, writeFile, rm, readFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, symlink, copyFile, writeFile, rm, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
@@ -14,7 +14,8 @@ let server;
 try
 {
 
-    for (const name of ['.next', 'node_modules', 'public', 'data', 'config', 'next.config.ts']) await symlink(path.join(root, name), path.join(cwd, name));
+    for (const name of ['.next', 'node_modules', 'public', 'data', 'config']) await symlink(path.join(root, name), path.join(cwd, name), process.platform === 'win32' ? 'junction' : 'dir');
+    await copyFile(path.join(root, 'next.config.ts'), path.join(cwd, 'next.config.ts'));
     await writeFile(path.join(cwd, 'package.json'), '{"type":"module"}');
     await mkdir(path.join(cwd, 'output'));
     server = spawn(process.execPath, [path.join(root, 'node_modules/next/dist/bin/next'), 'start', cwd, '--hostname', '127.0.0.1', '--port', '3197'], { cwd, env: { ...process.env, TACTICUS_AUTO_SYNC: 'false' }, stdio: ['ignore', 'pipe', 'pipe'] });
@@ -108,7 +109,7 @@ try
     assert.match(honor, /Onslaught honor priorities/);
     assert.match(honor, /aria-label="Xenos honor priorities".*?Aleph-Null.*?Farm Epic orbs: 6 short/s);
     assert.match(honor, /one regenerates every 16 hours/);
-    assert.match(honor, /Imperial · top 0/);
+    assert.match(honor, /Imperial · 0 recommendations/);
     assert.match(await get('/onslaught', true), /data-resource-id="onslaughtToken".*?<img/s);
     const forcas = { ...report.roster[0], id: 'darkaCompanion', name: 'Forcas', faction: 'DarkAngels', grandAlliance: 'Imperial', shards: 45 };
     report.roster.push(forcas);
@@ -148,7 +149,7 @@ try
     report.roster.push({ ...report.roster[0], id: 'orksRuntherd', name: 'Snotflogga', faction: 'Orks', shards: 0 });
     await writeFile(reportPath, JSON.stringify(report));
     const passiveHonor = new JSDOM(await get('/onslaught'));
-    assert.equal(passiveHonor.window.document.querySelector('[aria-label="Xenos honor priorities"] a[href="/characters/orksRuntherd"]'), null);
+    assert.equal(passiveHonor.window.document.querySelector('[aria-label="Xenos honor priorities"] tbody a[href="/characters/orksRuntherd"]'), null);
     assert.match(passiveHonor.window.document.querySelector('main').textContent, /Snotflogga · Salvage Run strongboxes/);
     passiveHonor.window.close();
     const snot = report.roster.at(-1);

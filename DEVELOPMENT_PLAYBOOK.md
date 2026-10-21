@@ -73,6 +73,7 @@ Do not ask for routine approval. Ask only when blocked by missing access, an irr
 
 ## Git and merge discipline
 
+- Owner policy: publish changes on feature branches, open GitHub pull requests targeting `main`, wait for checks to pass, and merge on GitHub. Never push local `main` directly. Update local `main` from the remote after the GitHub merge. The owner has authorized continuing this PR-and-merge workflow for tested changes.
 - Start with `git status`, current branch, and recent history.
 - Preserve unrelated user changes. Never reset, force-push, delete, or overwrite broad targets to simplify work.
 - Use a new small branch for each task: `feature/...`, `fix/...`, or `docs/...`.

@@ -1,5 +1,5 @@
 import rewards from "../../data/game/onslaught.json";
-import {nextOrbMilestone,progressionRarity,progressionStep,type CharacterRarity} from "./characterProgression";
+import {CHARACTER_RARITIES,nextOrbMilestone,progressionRarity,progressionStep,type CharacterRarity} from "./characterProgression";
 import {normalizeAlliance,orbsOwned,shardReadyOrbPlan,type OrbCandidate,type OrbInventory} from "./orbPlanner";
 import {utilityAtLeast} from "./characterUtility";
 import {abilityReadiness} from "./abilityReadiness";
@@ -60,11 +60,14 @@ function shardsToGoal(from:number,to:number):number {
  return shards;
 }
 export function onslaughtPriorities(candidates:OnslaughtCandidate[],orbs:OrbInventory|null|undefined,badges:AbilityBadgeInventory|null|undefined,war:Map<string,number>,choices:Partial<Record<Alliance,SectorChoice>>,includeMythic=false) {
+ const byAlliance=new Map(ALLIANCES.map(alliance=>[alliance,[] as OnslaughtCandidate[]]));
+ for(const unit of candidates){const alliance=normalizeAlliance(unit.alliance);if(alliance)byAlliance.get(alliance as Alliance)?.push(unit);}
  const ready=shardReadyOrbPlan(candidates.filter(unit=>{const goal=rarityGoal(unit,war),next=nextOrbMilestone(unit.progressionIndex);return goal!==null&&!!next&&next.to<=goal;}),orbs,war,false);
  return ALLIANCES.map(alliance=>{
-  const members=candidates.filter(unit=>normalizeAlliance(unit.alliance)===alliance&&progressionRarity(unit.progressionIndex));
+  const owned=byAlliance.get(alliance)!;
+  const members=owned.filter(unit=>progressionRarity(unit.progressionIndex));
   const pools=ready.pools.filter(pool=>pool.alliance===alliance&&pool.shortfall!==0);
-  const rows=members.flatMap(unit=>{
+  const ranked=members.flatMap(unit=>{
    const reward=honorReward(unit.progressionIndex,choices[alliance]??null)!;
    // These repeatable sources provide regular shards, never Mythic shards.
    if(reward.shardType==="regular"&&regularIncome.has(unit.id))return [];
@@ -122,8 +125,10 @@ export function onslaughtPriorities(candidates:OnslaughtCandidate[],orbs:OrbInve
    return [{...unit,alliance,reward,reasons,priority,relevance:relevance(unit,war),futureRarity,resourceBanking,shardsNeeded,shardBalance,shardShortfall,goalRarity,milestone,orbPool,badgeNeeds,
     battles:reward.shards&&honorShortfall!==null?{min:Math.ceil(honorShortfall/reward.shards.max),max:Math.ceil(honorShortfall/reward.shards.min)}:null}];
   }).sort((a,b)=>a.priority-b.priority||a.relevance-b.relevance||(a.futureRarity&&b.futureRarity?
-   (b.utility.communityScore??0)-(a.utility.communityScore??0)||b.utility.accountPriority-a.utility.accountPriority||(a.milestone?.shardShortfall??Infinity)-(b.milestone?.shardShortfall??Infinity):0)||Number(a.campaignShardSource)-Number(b.campaignShardSource)||(b.utility.communityScore??0)-(a.utility.communityScore??0)||b.utility.accountPriority-a.utility.accountPriority||(a.shardShortfall??Infinity)-(b.shardShortfall??Infinity)||a.name.localeCompare(b.name)).slice(0,3);
+   (b.utility.communityScore??0)-(a.utility.communityScore??0)||b.utility.accountPriority-a.utility.accountPriority||(a.milestone?.shardShortfall??Infinity)-(b.milestone?.shardShortfall??Infinity):0)||Number(a.campaignShardSource)-Number(b.campaignShardSource)||(b.utility.communityScore??0)-(a.utility.communityScore??0)||b.utility.accountPriority-a.utility.accountPriority||(a.shardShortfall??Infinity)-(b.shardShortfall??Infinity)||a.name.localeCompare(b.name));
+  const rarityGroups=CHARACTER_RARITIES.map(rarity=>({rarity,rows:ranked.filter(row=>progressionRarity(row.progressionIndex)===rarity).slice(0,3)}));
+  const rows=ranked.slice(0,3);
   const passive=members.filter(unit=>honorReward(unit.progressionIndex,null)?.shardType==="regular"&&regularIncome.has(unit.id)).map(unit=>({...regularIncome.get(unit.id)!}));
-  return {alliance,passive,owned:candidates.filter(unit=>normalizeAlliance(unit.alliance)===alliance).length,deployable:candidates.filter(unit=>normalizeAlliance(unit.alliance)===alliance).length>=5,waveBadges:WAVE_BADGE_ALLIANCE[alliance],rows};
+  return {alliance,passive,owned:owned.length,deployable:owned.length>=5,waveBadges:WAVE_BADGE_ALLIANCE[alliance],rows,rarityGroups};
  });
 }
