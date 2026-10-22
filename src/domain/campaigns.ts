@@ -218,7 +218,7 @@ export function campaignRecommendationPriority(input: CampaignRecommendationInpu
         targetRankIndex,
         rankStepsRemaining,
         recommendationPriority: roleWeight + confidenceWeight + accountWeight + gapWeight,
-        reason: (input.role ?? "campaign requirement") + " · " + rankStepsRemaining + " rank step(s) below " + input.targetRank
+        reason: input.role ?? "Campaign requirement"
     };
 
 }
