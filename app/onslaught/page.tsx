@@ -1,21 +1,20 @@
+import {getAccountWarDefense} from "../lib/warDefensePlan";
 import {readFile} from "node:fs/promises";
 import Nav from "../components/Nav";
 import {getReport} from "../lib/report";
 import {getCharacterCatalog,getAbilityBreakpoints} from "../lib/catalog";
 import {getUtilityRatings} from "../lib/utilityRatings";
 import {abilityGuideRows} from "../../src/domain/abilities";
-import {buildDistinctDefenseTeams,type DefenseCore} from "../../src/domain/warTeams";
 import type {WarBadgeTeam} from "../../src/domain/warBadgeTargets";
 import type {OnslaughtCandidate} from "../../src/domain/onslaught";
 import HonorPriorities from "./HonorPriorities";
 
-type WarSource={teams?:DefenseCore[];validatedFullLineups?:Array<{name:string;members:string[];used:number;wins:number}>};
+type WarSource={validatedFullLineups?:Array<{name:string;members:string[];used:number;wins:number}>};
 type BattleRewards={rewards?:{potential?:Array<{id:string;effective_rate?:number;chance_numerator?:number}>}};
 
 export default async function Onslaught() {
- const [report,catalog,guidance,defense,offense,battles]=await Promise.all([
+ const [report,catalog,guidance,offense,battles]=await Promise.all([
   getReport(),getCharacterCatalog(),getAbilityBreakpoints(),
-  readFile("config/war_defense_teams.json","utf8").then(JSON.parse) as Promise<WarSource>,
   readFile("config/war_offense_teams.json","utf8").then(JSON.parse) as Promise<WarSource>,
   readFile("data/game/campaign-battles.json","utf8").then(JSON.parse) as Promise<Record<string,BattleRewards>>
  ]);
@@ -34,7 +33,7 @@ export default async function Onslaught() {
    campaignShardSource:shardSources.has(`shards_${unit.id}`)}];
  });
  const owned=new Set(report.roster.map(unit=>unit.name));
- const defenseTeams:WarBadgeTeam[]=buildDistinctDefenseTeams(defense.teams??[],owned).map(team=>({name:team.name,used:team.used,members:team.members.map(name=>({name}))}));
+ const defenseTeams:WarBadgeTeam[]=getAccountWarDefense(report).map(team=>({name:team.name,used:team.used,tier:team.tier,members:team.members.map(name=>({name}))}));
  const offenseTeams:WarBadgeTeam[]=(offense.validatedFullLineups??[]).filter(team=>team.members.every(name=>owned.has(name))).sort((a,b)=>b.wins/b.used-a.wins/a.used||b.used-a.used).map(team=>({name:team.name,used:team.used,members:team.members.map(name=>({name}))}));
  return <main><Nav/><header><div><p className="eyebrow">HONOR YOUR WARRIORS</p><h1>Onslaught honor priorities</h1><p className="sub">Top three per rarity in each alliance: useful characters toward Legendary, then resource farming.</p></div></header>
   <HonorPriorities key={`${report.source.player}:${report.generatedAt}`} candidates={candidates} orbs={report.orbInventory??null} badges={report.abilityBadges??null} defenseTeams={defenseTeams} offenseTeams={offenseTeams} accountKey={report.source.player}/>

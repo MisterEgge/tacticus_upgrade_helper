@@ -1,14 +1,14 @@
 import {restoreWarTeamIndexes,type WarTeamCandidate} from "./warTeams";
 import type {EquipmentTargetRarity} from "./equipmentTier";
 import type {EquipmentDefinition} from "./equipmentCompatibility";
-export type EquipmentWarTeam=WarTeamCandidate & {name:string};
+export type EquipmentWarTeam=WarTeamCandidate & {name:string;tier?:"gold"|"silver"};
 export type EquipmentScope="teams"|"raid"|"war"|"campaign"|"all";
 export function selectedWarGearGoals(defense:EquipmentWarTeam[],offense:EquipmentWarTeam[],saved:unknown):Map<string,"silver"|"gold">
 {
  const plan=saved&&typeof saved==="object"?saved as Record<string,unknown>:{};
  const goals=new Map<string,"silver"|"gold">();
  const add=(team:EquipmentWarTeam,tier:"silver"|"gold")=>team.members.forEach(member=>{if(goals.get(member.name)!=="gold")goals.set(member.name,tier);});
- restoreWarTeamIndexes(defense,plan.defense,Math.min(10,defense.length)).slice(0,5).forEach((index,slot)=>add(defense[index]!,slot<2?"gold":"silver"));
+ restoreWarTeamIndexes(defense,plan.defense,Math.min(10,defense.length)).slice(0,5).forEach((index,slot)=>add(defense[index]!,defense[index]!.tier??(slot<2?"gold":"silver")));
  const tiers=Array.isArray(plan.offenseTiers)&&plan.offenseTiers.length===10&&plan.offenseTiers.every(tier=>tier==="gold"||tier==="silver")?plan.offenseTiers:[];
  restoreWarTeamIndexes(offense,plan.offense,10).forEach((index,slot)=>add(offense[index]!,tiers[slot]==="gold"?"gold":"silver"));
  return goals;

@@ -28,3 +28,7 @@ __pycache__/
 
 # OS
 .DS_Store
+
+# Saved War pages can contain account/session details; import aggregate evidence only.
+/*Cores & Flex Units.html
+/*Cores & Flex Units_files/

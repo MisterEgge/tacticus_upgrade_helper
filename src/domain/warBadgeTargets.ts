@@ -1,7 +1,7 @@
 import { restoreWarTeamIndexes, type WarTeamCandidate } from "./warTeams";
 
 export const WAR_PLAN_STORAGE_KEY="tacticus-war-plan-v1";
-export type WarBadgeTeam=WarTeamCandidate & {name:string};
+export type WarBadgeTeam=WarTeamCandidate & {name:string;tier?:"gold"|"silver"};
 export type WarBudgetScope="war-defense"|"war-offense"|"war-both";
 
 /** Use the selected slots, falling back to valid defaults when saved names are stale. */
@@ -18,7 +18,7 @@ export function warBadgeTargets(defense:WarBadgeTeam[],offense:WarBadgeTeam[],sa
         const savedDefense=Array.isArray(previous)&&previous.length===5&&count===10
             ? [...previous,...defense.filter(team=>!previous.includes(team.name)).map(team=>team.name)].slice(0,10)
             :previous;
-        restoreWarTeamIndexes(defense,savedDefense,count).slice(0,5).forEach((choice,slot)=>add(defense[choice]!,slot<2?35:26));
+        restoreWarTeamIndexes(defense,savedDefense,count).slice(0,5).forEach((choice,slot)=>add(defense[choice]!,defense[choice]!.tier?(defense[choice]!.tier==="gold"?35:26):(slot<2?35:26)));
     }
     if(scope!=="war-defense"){
         const tiers=Array.isArray(plan.offenseTiers)&&plan.offenseTiers.length===10&&plan.offenseTiers.every(tier=>tier==="gold"||tier==="silver")?plan.offenseTiers:[];
