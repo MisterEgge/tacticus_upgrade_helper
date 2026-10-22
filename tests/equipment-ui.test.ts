@@ -10,6 +10,9 @@ import type {CatalogCharacter} from "../app/lib/catalog";
 import catalogData from "../data/character_catalog.json";
 import {WAR_PLAN_STORAGE_KEY} from "../src/domain/warBadgeTargets";
 import shopsData from "../data/game/shops.json";
+import type {ReallocationProps} from "../app/reallocation/ReallocationPlanner";
+import GearTransferSource from "../app/components/GearTransferSource";
+const transferContext:ReallocationProps={units:[],targets:[],characters:[],equipment:{},raidNames:[],raidOptions:[],campaignNames:[],campaignUnknown:[],focus:{},defenseTeams:[],offenseTeams:[]};
 
 const catalog=catalogData as {characters:CatalogCharacter[]};
 const shops=shopsData as ShopCatalog;
@@ -30,7 +33,7 @@ test("equipment sections collapse independently, retain character expansion and 
  assert.deepEqual(raidPlan.tieredSlots.filter(slot=>slot.allocatedItemId==="I_Crit_L001").map(slot=>slot.character),["Kariyan"]);
  assert.equal(rows.length,5);
  assert.equal(rows.find(row=>row.character==="Exitor-Rho")!.slots.find(slot=>slot.state==="EQUIP NOW")!.allocatedItemId,"I_Defensive_L004");
- const view=render(createElement(EquipmentTable,{rows,needs:[],raidNames:["Trajann","Kariyan","Exitor-Rho","Tyrith","Aleph-Null"],campaignNames:[],defenseTeams:[],offenseTeams:[]}));
+ const view=render(createElement(EquipmentTable,{transferContext,rows,needs:[],raidNames:["Trajann","Kariyan","Exitor-Rho","Tyrith","Aleph-Null"],campaignNames:[],defenseTeams:[],offenseTeams:[]}));
  const ready=within(view.getByRole("region",{name:"Equip now"}));
  assert.match(ready.getByRole("table").textContent!,/Trajann.*Grand Combat Knife/s);
  assert.match(ready.getByRole("table").textContent!,/Exitor-Rho.*Grand Mantle/s);
@@ -65,7 +68,7 @@ test("equipment sections collapse independently, retain character expansion and 
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"Aleph-Null"}});
  assert.equal(characters.queryByRole("button",{name:/^Tyrith/}),null);
  assert.ok(characters.getByRole("button",{name:/^Aleph-Null/}));
- view.rerender(createElement(EquipmentTable,{key:"raid-first",rows:raidPlan.rows,needs:[],raidNames:["Kariyan"],campaignNames:[],defenseTeams:[{name:"Defense",used:1,members:[{name:"Trajann"}]}],offenseTeams:[{name:"Offense",used:1,members:[{name:"Exitor-Rho"}]}]}));
+ view.rerender(createElement(EquipmentTable,{transferContext,key:"raid-first",rows:raidPlan.rows,needs:[],raidNames:["Kariyan"],campaignNames:[],defenseTeams:[{name:"Defense",used:1,members:[{name:"Trajann"}]}],offenseTeams:[{name:"Offense",used:1,members:[{name:"Exitor-Rho"}]}]}));
  assert.equal((view.getByLabelText("Equipment upgrade focus") as HTMLSelectElement).value,"raid");
  const currentReady=()=>within(view.getByRole("region",{name:"Equip now"}));
  assert.match(currentReady().getByRole("table").textContent!,/Kariyan/);
@@ -82,4 +85,23 @@ test("equipment sections collapse independently, retain character expansion and 
  localStorage.setItem(WAR_PLAN_STORAGE_KEY,JSON.stringify({offense:["Offense"],offenseTiers:Array(10).fill("gold")}));
  fireEvent.focus(window);
  assert.match(currentReady().getByRole("table").textContent!,/War.*Gold target/s);
+ // Equipped sources use the same global reservations, rather than listing arbitrary holders.
+ localStorage.removeItem(WAR_PLAN_STORAGE_KEY);
+ const transferReport={...report,roster:[unit("Bellator","I_Crit_E001","Old Knife"),unit("Maladus","I_Crit_L001","Grand Combat Knife")],unequippedInventory:[]};
+ const transferPlan=buildEquipmentPlan(transferReport,catalog,shops,new Set(["Bellator"]));
+ const liveContext:ReallocationProps={...transferContext,units:transferReport.roster,characters:catalog.characters,equipment:shops.equipment,raidNames:["Bellator"],targets:[{character:"Bellator",characterId:transferReport.roster[0]!.id,slotId:"Slot1",itemId:"I_Crit_L001",minimumLevel:1,inventoryReady:false}]};
+ view.rerender(createElement(EquipmentTable,{key:"transfers",transferContext:liveContext,rows:transferPlan.rows,needs:[],raidNames:["Bellator"],campaignNames:[],defenseTeams:[],offenseTeams:[]}));
+ const transferRegion=within(view.getByRole("region",{name:"Suggested gear transfers"}));
+ assert.ok(transferRegion.getByText("Maladus"));
+ assert.ok(transferRegion.getByText("Bellator"));
+ assert.equal(within(view.getByRole("region",{name:"Shop upgrade opportunities"})).queryByRole("table"),null);
+ fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"missing"}});
+ assert.equal(view.queryByRole("region",{name:"Suggested gear transfers"}),null);
+ fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"Maladus"}});
+ assert.ok(view.getByRole("region",{name:"Suggested gear transfers"}));
+ view.rerender(createElement(GearTransferSource,{context:liveContext,characterId:transferReport.roster[0]!.id,slotId:"Slot1",children:"Buy replacement"}));
+ assert.ok(view.getByRole("link",{name:"Maladus"}));
+ assert.equal(view.queryByText("Buy replacement"),null);
+ view.rerender(createElement(GearTransferSource,{context:{...liveContext,focus:{Maladus:{modes:["LRE"]}}},characterId:transferReport.roster[0]!.id,slotId:"Slot1",children:"Buy replacement"}));
+ assert.ok(view.getByText("Buy replacement"));
 });

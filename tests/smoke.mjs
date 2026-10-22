@@ -436,7 +436,8 @@ try
     assert.match(rhoPage,/Equip Grand Mantle/);
     assert.match(rhoPage,/Inventory copy reserved · level 1/);
     assert.match(await get('/characters/'+rho.id,true),/data-resource-id="I_Defensive_L004".*?<img/s);
-    assert.doesNotMatch(rhoPage,/Fine Mantle|sources\?item=I_Defensive_R004/);
+    // Shared transfer props include other characters' targets; check this character's rendered recommendations.
+    assert.doesNotMatch(rhoPage.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,""),/Fine Mantle|sources\?item=I_Defensive_R004/);
     const abraxas=catalog.characters.find(character=>character.name==='Abraxas');
     report.roster.push({...report.roster[0],id:abraxas.id,name:'Abraxas',faction:'ThousandSons',rarity:'Legendary',progressionIndex:15,items:[{slotId:'Slot2',id:'I_Block_L006',name:'Warpforged Sigil of Corruption',rarity:'Legendary',level:11}]});
     report.unequippedInventory.push({id:'I_Block_L003',amount:1,level:1},{id:'I_Block_E006',amount:2,level:1});
