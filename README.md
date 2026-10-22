@@ -2,6 +2,8 @@
 
 Account-specific upgrade analysis for **Warhammer 40,000: Tacticus**.
 
+Guild War defense can import saved TacticusXYZ HTML exports with `npm run import:war-defense -- "path/to/page.html"`. See [defense data and selection](docs/war-defense-data.md) for source limits and refresh instructions.
+
 The tool reads an official Tacticus `player.json` export and generates:
 - a Legendary equipment shopping watchlist,
 - ability-level priorities,

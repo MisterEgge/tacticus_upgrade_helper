@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Account-specific Tacticus upgrade analysis using the official player API.",
   "scripts": {
+    "import:war-defense": "tsx src/importWarDefense.ts",
     "fetch": "tsx src/fetchPlayer.ts",
     "fetch:guild": "tsx src/fetchGuildData.ts",
     "discover": "tsx src/discover.ts",

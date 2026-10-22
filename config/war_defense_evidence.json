@@ -1,0 +1,856 @@
+{
+  "schemaVersion": 1,
+  "sourceUrl": "https://tacticus.xyz/wars/analyze/defenders",
+  "importedAt": "2026-10-22T17:53:31.819Z",
+  "sourceSha256": "6d8b5b3fe9abfe7ebd85ca3e257a0ffbe32fa5887455ced97e0a0cf2a544123f",
+  "metric": "Follow-up/debuffed attacks: holds / attacks faced. Core and individual flex cohorts; not exact five-character results.",
+  "scope": {
+    "battlefields": [],
+    "seasons": [],
+    "maps": [],
+    "outcome": "",
+    "battle": ""
+  },
+  "cores": [
+    {
+      "key": "admecManipulus|admecMarshall|admecRuststalker",
+      "core": [
+        "admecManipulus",
+        "admecMarshall",
+        "admecRuststalker"
+      ],
+      "used": 13393,
+      "wins": 11121,
+      "flex": [
+        {
+          "id": "orksWarboss",
+          "used": 3283,
+          "wins": 2697
+        },
+        {
+          "id": "admecDestroyer",
+          "used": 1033,
+          "wins": 807
+        },
+        {
+          "id": "tauMarksman",
+          "used": 3459,
+          "wins": 2852
+        },
+        {
+          "id": "admecDominus",
+          "used": 4727,
+          "wins": 4077
+        },
+        {
+          "id": "necroSpyder",
+          "used": 5425,
+          "wins": 4502
+        },
+        {
+          "id": "tauCrisis",
+          "used": 5657,
+          "wins": 4631
+        }
+      ]
+    },
+    {
+      "key": "custoBladeChampion|spaceBlackmane|worldKharn",
+      "core": [
+        "custoBladeChampion",
+        "spaceBlackmane",
+        "worldKharn"
+      ],
+      "used": 11002,
+      "wins": 9014,
+      "flex": [
+        {
+          "id": "orksRuntherd",
+          "used": 2183,
+          "wins": 1806
+        },
+        {
+          "id": "adeptHospitaller",
+          "used": 1422,
+          "wins": 1144
+        },
+        {
+          "id": "bloodMephiston",
+          "used": 1513,
+          "wins": 1230
+        },
+        {
+          "id": "custoTrajann",
+          "used": 1655,
+          "wins": 1390
+        },
+        {
+          "id": "orksWarboss",
+          "used": 1671,
+          "wins": 1379
+        },
+        {
+          "id": "bloodDante",
+          "used": 4060,
+          "wins": 3294
+        }
+      ]
+    },
+    {
+      "key": "blackAbaddon|deathBlightlord|deathRotbone",
+      "core": [
+        "blackAbaddon",
+        "deathBlightlord",
+        "deathRotbone"
+      ],
+      "used": 15372,
+      "wins": 11466,
+      "flex": [
+        {
+          "id": "tauMarksman",
+          "used": 4552,
+          "wins": 3501
+        },
+        {
+          "id": "emperLucius",
+          "used": 2026,
+          "wins": 1465
+        },
+        {
+          "id": "worldKharn",
+          "used": 2259,
+          "wins": 1754
+        },
+        {
+          "id": "deathBlightbringer",
+          "used": 3479,
+          "wins": 2589
+        },
+        {
+          "id": "deathTyphus",
+          "used": 3973,
+          "wins": 2848
+        },
+        {
+          "id": "blackObliterator",
+          "used": 4331,
+          "wins": 3026
+        }
+      ]
+    },
+    {
+      "key": "genesBiophagus|genesKelermorph|genesPrimus",
+      "core": [
+        "genesBiophagus",
+        "genesKelermorph",
+        "genesPrimus"
+      ],
+      "used": 23910,
+      "wins": 16194,
+      "flex": [
+        {
+          "id": "genesMagus",
+          "used": 16004,
+          "wins": 10601
+        },
+        {
+          "id": "genesPatriarch",
+          "used": 14912,
+          "wins": 10121
+        },
+        {
+          "id": "tyranNeurothrope",
+          "used": 1147,
+          "wins": 803
+        },
+        {
+          "id": "tauCrisis",
+          "used": 1162,
+          "wins": 722
+        },
+        {
+          "id": "emperLucius",
+          "used": 1898,
+          "wins": 1297
+        },
+        {
+          "id": "tyranWingedPrime",
+          "used": 4943,
+          "wins": 3477
+        }
+      ]
+    },
+    {
+      "key": "thousAhriman|thousInfernalMaster|tyranNeurothrope",
+      "core": [
+        "thousAhriman",
+        "thousInfernalMaster",
+        "tyranNeurothrope"
+      ],
+      "used": 2591,
+      "wins": 2242,
+      "flex": [
+        {
+          "id": "tyranWingedPrime",
+          "used": 234,
+          "wins": 203
+        },
+        {
+          "id": "deathTyphus",
+          "used": 207,
+          "wins": 166
+        },
+        {
+          "id": "bloodMephiston",
+          "used": 822,
+          "wins": 710
+        },
+        {
+          "id": "thousTzaangor",
+          "used": 807,
+          "wins": 703
+        },
+        {
+          "id": "eldarFarseer",
+          "used": 612,
+          "wins": 538
+        },
+        {
+          "id": "blackPossession",
+          "used": 1100,
+          "wins": 951
+        }
+      ]
+    },
+    {
+      "key": "orksBigMek|orksRuntherd|orksWarboss",
+      "core": [
+        "orksBigMek",
+        "orksRuntherd",
+        "orksWarboss"
+      ],
+      "used": 10236,
+      "wins": 7370,
+      "flex": [
+        {
+          "id": "tauMarksman",
+          "used": 217,
+          "wins": 142
+        },
+        {
+          "id": "orksKillaKan",
+          "used": 8793,
+          "wins": 6320
+        },
+        {
+          "id": "orksNob",
+          "used": 6615,
+          "wins": 4768
+        },
+        {
+          "id": "tauCrisis",
+          "used": 514,
+          "wins": 342
+        },
+        {
+          "id": "necroSpyder",
+          "used": 361,
+          "wins": 248
+        },
+        {
+          "id": "eldarRanger",
+          "used": 286,
+          "wins": 184
+        }
+      ]
+    },
+    {
+      "key": "necroDestroyer|necroSpyder|necroWarden",
+      "core": [
+        "necroDestroyer",
+        "necroSpyder",
+        "necroWarden"
+      ],
+      "used": 6509,
+      "wins": 4833,
+      "flex": [
+        {
+          "id": "admecMarshall",
+          "used": 238,
+          "wins": 186
+        },
+        {
+          "id": "necroOverlord",
+          "used": 4245,
+          "wins": 3144
+        },
+        {
+          "id": "tauCrisis",
+          "used": 710,
+          "wins": 496
+        },
+        {
+          "id": "necroPlasmancer",
+          "used": 5000,
+          "wins": 3664
+        },
+        {
+          "id": "orksWarboss",
+          "used": 371,
+          "wins": 278
+        },
+        {
+          "id": "necroChronomancer",
+          "used": 294,
+          "wins": 206
+        }
+      ]
+    },
+    {
+      "key": "eldarAutarch|eldarFarseer|eldarRanger",
+      "core": [
+        "eldarAutarch",
+        "eldarFarseer",
+        "eldarRanger"
+      ],
+      "used": 3128,
+      "wins": 2534,
+      "flex": [
+        {
+          "id": "orksWarboss",
+          "used": 201,
+          "wins": 161
+        },
+        {
+          "id": "tauMarksman",
+          "used": 217,
+          "wins": 177
+        },
+        {
+          "id": "tauCrisis",
+          "used": 386,
+          "wins": 304
+        },
+        {
+          "id": "eldarJainZar",
+          "used": 798,
+          "wins": 655
+        },
+        {
+          "id": "eldarMauganRa",
+          "used": 978,
+          "wins": 786
+        },
+        {
+          "id": "orksRuntherd",
+          "used": 206,
+          "wins": 156
+        }
+      ]
+    },
+    {
+      "key": "blackHaarken|blackPossession|blackTerminator",
+      "core": [
+        "blackHaarken",
+        "blackPossession",
+        "blackTerminator"
+      ],
+      "used": 6985,
+      "wins": 5089,
+      "flex": [
+        {
+          "id": "deathBlightlord",
+          "used": 2116,
+          "wins": 1541
+        },
+        {
+          "id": "thousInfernalMaster",
+          "used": 798,
+          "wins": 588
+        },
+        {
+          "id": "worldTerminator",
+          "used": 878,
+          "wins": 628
+        },
+        {
+          "id": "blackAbaddon",
+          "used": 1608,
+          "wins": 1130
+        },
+        {
+          "id": "blackObliterator",
+          "used": 1662,
+          "wins": 1109
+        },
+        {
+          "id": "deathRotbone",
+          "used": 2527,
+          "wins": 1865
+        }
+      ]
+    },
+    {
+      "key": "ultraApothecary|ultraInceptorSgt|ultraTigurius",
+      "core": [
+        "ultraApothecary",
+        "ultraInceptorSgt",
+        "ultraTigurius"
+      ],
+      "used": 2444,
+      "wins": 2005,
+      "flex": [
+        {
+          "id": "ultraCalgar",
+          "used": 815,
+          "wins": 645
+        },
+        {
+          "id": "bloodDeathCompany",
+          "used": 137,
+          "wins": 113
+        },
+        {
+          "id": "darkaAzrael",
+          "used": 194,
+          "wins": 168
+        },
+        {
+          "id": "adeptRetributor",
+          "used": 426,
+          "wins": 351
+        },
+        {
+          "id": "ultraTitus",
+          "used": 793,
+          "wins": 631
+        },
+        {
+          "id": "ultraEliminatorSgt",
+          "used": 1276,
+          "wins": 1056
+        }
+      ]
+    },
+    {
+      "key": "bloodDante|bloodDeathCompany|bloodMephiston",
+      "core": [
+        "bloodDante",
+        "bloodDeathCompany",
+        "bloodMephiston"
+      ],
+      "used": 3843,
+      "wins": 2933,
+      "flex": [
+        {
+          "id": "custoBladeChampion",
+          "used": 456,
+          "wins": 346
+        },
+        {
+          "id": "bloodIntercessor",
+          "used": 2430,
+          "wins": 1855
+        },
+        {
+          "id": "bloodSanguinary",
+          "used": 2436,
+          "wins": 1867
+        },
+        {
+          "id": "worldKharn",
+          "used": 255,
+          "wins": 208
+        },
+        {
+          "id": "adeptHospitaller",
+          "used": 353,
+          "wins": 252
+        },
+        {
+          "id": "adeptCelestine",
+          "used": 280,
+          "wins": 191
+        }
+      ]
+    },
+    {
+      "key": "tauAunShi|tauCrisis|tauMarksman",
+      "core": [
+        "tauAunShi",
+        "tauCrisis",
+        "tauMarksman"
+      ],
+      "used": 3204,
+      "wins": 2462,
+      "flex": [
+        {
+          "id": "orksWarboss",
+          "used": 1757,
+          "wins": 1361
+        },
+        {
+          "id": "tauDarkstrider",
+          "used": 294,
+          "wins": 219
+        },
+        {
+          "id": "tauFarsight",
+          "used": 373,
+          "wins": 306
+        },
+        {
+          "id": "tauShadowsun",
+          "used": 388,
+          "wins": 290
+        },
+        {
+          "id": "necroSpyder",
+          "used": 448,
+          "wins": 334
+        },
+        {
+          "id": "orksRuntherd",
+          "used": 1531,
+          "wins": 1177
+        }
+      ]
+    },
+    {
+      "key": "adeptCelestine|adeptHospitaller|astraYarrick",
+      "core": [
+        "adeptCelestine",
+        "adeptHospitaller",
+        "astraYarrick"
+      ],
+      "used": 2905,
+      "wins": 2244,
+      "flex": [
+        {
+          "id": "astraOrdnance",
+          "used": 401,
+          "wins": 306
+        },
+        {
+          "id": "darkaHellblaster",
+          "used": 362,
+          "wins": 275
+        },
+        {
+          "id": "astraDreir",
+          "used": 1000,
+          "wins": 755
+        },
+        {
+          "id": "astraCreed",
+          "used": 745,
+          "wins": 598
+        },
+        {
+          "id": "adeptRetributor",
+          "used": 715,
+          "wins": 555
+        },
+        {
+          "id": "ultraCalgar",
+          "used": 408,
+          "wins": 309
+        }
+      ]
+    },
+    {
+      "key": "blackObliterator|deathTyphus|thousTerminator",
+      "core": [
+        "blackObliterator",
+        "deathTyphus",
+        "thousTerminator"
+      ],
+      "used": 4301,
+      "wins": 2913,
+      "flex": [
+        {
+          "id": "spaceStormcaller",
+          "used": 1291,
+          "wins": 895
+        },
+        {
+          "id": "blackAbaddon",
+          "used": 536,
+          "wins": 392
+        },
+        {
+          "id": "deathBlightlord",
+          "used": 935,
+          "wins": 615
+        },
+        {
+          "id": "deathRotbone",
+          "used": 1086,
+          "wins": 724
+        },
+        {
+          "id": "worldTerminator",
+          "used": 1202,
+          "wins": 803
+        },
+        {
+          "id": "emperLucius",
+          "used": 1939,
+          "wins": 1278
+        }
+      ]
+    },
+    {
+      "key": "tyranParasite|tyranTyrantGuard|tyranWingedPrime",
+      "core": [
+        "tyranParasite",
+        "tyranTyrantGuard",
+        "tyranWingedPrime"
+      ],
+      "used": 975,
+      "wins": 788,
+      "flex": [
+        {
+          "id": "genesPrimus",
+          "used": 57,
+          "wins": 43
+        },
+        {
+          "id": "templChampion",
+          "used": 28,
+          "wins": 22
+        },
+        {
+          "id": "tyranNeurothrope",
+          "used": 883,
+          "wins": 716
+        },
+        {
+          "id": "tyranDeathleaper",
+          "used": 705,
+          "wins": 572
+        },
+        {
+          "id": "genesPatriarch",
+          "used": 93,
+          "wins": 78
+        },
+        {
+          "id": "genesBiophagus",
+          "used": 59,
+          "wins": 45
+        }
+      ]
+    },
+    {
+      "key": "templAggressor|templAncient|templSwordBrother",
+      "core": [
+        "templAggressor",
+        "templAncient",
+        "templSwordBrother"
+      ],
+      "used": 1234,
+      "wins": 952,
+      "flex": [
+        {
+          "id": "templChampion",
+          "used": 521,
+          "wins": 406
+        },
+        {
+          "id": "ultraTitus",
+          "used": 103,
+          "wins": 83
+        },
+        {
+          "id": "ultraInceptorSgt",
+          "used": 114,
+          "wins": 84
+        },
+        {
+          "id": "ultraApothecary",
+          "used": 190,
+          "wins": 146
+        },
+        {
+          "id": "adeptHospitaller",
+          "used": 204,
+          "wins": 157
+        },
+        {
+          "id": "templHelbrecht",
+          "used": 249,
+          "wins": 206
+        }
+      ]
+    },
+    {
+      "key": "darkaCompanion|darkaHellblaster|darkaTerminator",
+      "core": [
+        "darkaCompanion",
+        "darkaHellblaster",
+        "darkaTerminator"
+      ],
+      "used": 2118,
+      "wins": 1488,
+      "flex": [
+        {
+          "id": "astraDreir",
+          "used": 133,
+          "wins": 82
+        },
+        {
+          "id": "darkaAzrael",
+          "used": 1324,
+          "wins": 928
+        },
+        {
+          "id": "darkaAsmodai",
+          "used": 590,
+          "wins": 432
+        },
+        {
+          "id": "ultraApothecary",
+          "used": 484,
+          "wins": 334
+        },
+        {
+          "id": "adeptHospitaller",
+          "used": 333,
+          "wins": 204
+        },
+        {
+          "id": "ultraCalgar",
+          "used": 189,
+          "wins": 135
+        }
+      ]
+    },
+    {
+      "key": "astraOrdnance|eldarMauganRa|ultraCalgar",
+      "core": [
+        "astraOrdnance",
+        "eldarMauganRa",
+        "ultraCalgar"
+      ],
+      "used": 731,
+      "wins": 542,
+      "flex": [
+        {
+          "id": "tauCrisis",
+          "used": 73,
+          "wins": 55
+        },
+        {
+          "id": "blackObliterator",
+          "used": 76,
+          "wins": 56
+        },
+        {
+          "id": "adeptHospitaller",
+          "used": 77,
+          "wins": 53
+        },
+        {
+          "id": "eldarRanger",
+          "used": 152,
+          "wins": 110
+        },
+        {
+          "id": "darkaHellblaster",
+          "used": 153,
+          "wins": 110
+        },
+        {
+          "id": "ultraApothecary",
+          "used": 71,
+          "wins": 48
+        }
+      ]
+    },
+    {
+      "key": "necroChronomancer|necroOverlord|necroPlasmancer",
+      "core": [
+        "necroChronomancer",
+        "necroOverlord",
+        "necroPlasmancer"
+      ],
+      "used": 951,
+      "wins": 660,
+      "flex": [
+        {
+          "id": "admecDestroyer",
+          "used": 108,
+          "wins": 79
+        },
+        {
+          "id": "necroWarden",
+          "used": 45,
+          "wins": 34
+        },
+        {
+          "id": "necroDestroyer",
+          "used": 622,
+          "wins": 405
+        },
+        {
+          "id": "necroSpyder",
+          "used": 611,
+          "wins": 400
+        },
+        {
+          "id": "votanMemnyr",
+          "used": 203,
+          "wins": 153
+        },
+        {
+          "id": "orksWarboss",
+          "used": 178,
+          "wins": 139
+        }
+      ]
+    },
+    {
+      "key": "bloodTerminator|spaceRockfist|worldTerminator",
+      "core": [
+        "bloodTerminator",
+        "spaceRockfist",
+        "worldTerminator"
+      ],
+      "used": 537,
+      "wins": 369,
+      "flex": [
+        {
+          "id": "astarLysander",
+          "used": 133,
+          "wins": 94
+        },
+        {
+          "id": "darkaTerminator",
+          "used": 438,
+          "wins": 293
+        },
+        {
+          "id": "astraDreir",
+          "used": 10,
+          "wins": 9
+        },
+        {
+          "id": "astraOrdnance",
+          "used": 35,
+          "wins": 22
+        },
+        {
+          "id": "darkaHellblaster",
+          "used": 47,
+          "wins": 39
+        },
+        {
+          "id": "blackTerminator",
+          "used": 372,
+          "wins": 248
+        }
+      ]
+    }
+  ]
+}

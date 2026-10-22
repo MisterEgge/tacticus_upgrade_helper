@@ -1,0 +1,33 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import {createElement} from "react";
+import {JSDOM} from "jsdom";
+import WarDefensePlanner from "../app/war-defense/WarDefensePlanner";
+import {WAR_PLAN_STORAGE_KEY} from "../src/domain/warBadgeTargets";
+
+test("defense presents five-character assignments and persists owned machine choices independently of offense",async suite=>{
+ const dom=new JSDOM("<html><body></body></html>",{url:"http://localhost/"});
+ const descriptors=new Map<string,PropertyDescriptor|undefined>();
+ for(const key of ["window","self","document","navigator","HTMLElement","Node","Event","MutationObserver","localStorage"]){descriptors.set(key,Object.getOwnPropertyDescriptor(globalThis,key));Object.defineProperty(globalThis,key,{configurable:true,value:dom.window[key as keyof typeof dom.window]});}
+ const {render,fireEvent,cleanup,act,within}=await import("@testing-library/react");
+ suite.after(async()=>{await act(async()=>cleanup());dom.window.close();for(const [key,descriptor] of descriptors){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else Reflect.deleteProperty(globalThis,key);}});
+ const team={name:"A / B / C / D / E",tier:"gold" as const,core:["A","B","C"],flex:[{id:"D",used:100,wins:95},{id:"E",used:80,wins:70}],used:200,wins:180,fieldable:true,missing:[],evidence:"core-flex" as const,members:["A","B","C","D","E"].map(name=>({id:name,name,icon:undefined,rank:12,activeLevel:35,passiveLevel:35,items:[]}))};
+ const props={teams:[team],offenseTeams:[],machines:[{id:"tyranBiovore",name:"Biovore",active:17,passive:23}]};
+ let view=render(createElement(WarDefensePlanner,props));
+ assert.ok(view.getByText(/^Battlefield 2/));
+ const group=within(view.getByRole("region",{name:team.name}));
+ fireEvent.click(group.getByRole("button",{name:/A \/ B/}));
+ assert.equal(group.getAllByRole("table").length,2);
+ const machine=group.getByLabelText(team.name+" Machine of War");
+ assert.equal(machine.querySelectorAll("option").length,2);
+ fireEvent.change(machine,{target:{value:"tyranBiovore"}});
+ assert.equal(JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)!).defenseMachines[team.name],"tyranBiovore");
+ fireEvent.click(view.getByRole("button",{name:"Offense teams"}));
+ assert.ok(view.getByText("0 distinct offense teams"));
+ view.unmount();
+ view=render(createElement(WarDefensePlanner,props));
+ fireEvent.click(view.getByRole("button",{name:"Defense teams"}));
+ fireEvent.click(view.getByRole("button",{name:/A \/ B/}));
+ assert.equal((view.getByLabelText(team.name+" Machine of War") as HTMLSelectElement).value,"tyranBiovore");
+ assert.equal(view.queryByText(/RESERVE/),null);
+});

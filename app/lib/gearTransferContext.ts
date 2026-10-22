@@ -1,3 +1,4 @@
+import {getAccountWarDefense} from "./warDefensePlan";
 import {readFile} from "node:fs/promises";
 import {getCharacterCatalog,getAbilityBreakpoints} from "../lib/catalog";
 import {gearRoleFocus} from "../../src/domain/gearRoleFocus";
@@ -7,7 +8,6 @@ import {getAccountEquipmentPlan} from "../lib/accountEquipmentPlan";
 import {getRaidMeta} from "../lib/raidSelection";
 import {campaignGearProtection} from "../../src/domain/campaignGearProtection";
 import type {CampaignBattleDefinition} from "../../src/domain/campaigns";
-import {buildDistinctDefenseTeams,type DefenseCore} from "../../src/domain/warTeams";
 import type {EquipmentFocus} from "../../src/domain/equipmentFocus";
 import type {EquipmentDefinition} from "../../src/domain/equipmentCompatibility";
 import {equipmentStatsAtLevel} from "../../src/domain/equipmentCompatibility";
@@ -16,17 +16,16 @@ import type {ReallocationProps} from "../reallocation/ReallocationPlanner";
 import type {Report} from "./report";
 
 export async function getGearTransferContext(account?:{report:Report;catalog:Awaited<ReturnType<typeof getCharacterCatalog>>;shops:Awaited<ReturnType<typeof getShopCatalog>>;plan:Awaited<ReturnType<typeof getAccountEquipmentPlan>>}){
- const [report,catalog,shops,meta,focus,battleText,defensePlan,offensePlan,guidance]=await Promise.all([
+ const [report,catalog,shops,meta,focus,battleText,offensePlan,guidance]=await Promise.all([
   account?.report??getReport(),account?.catalog??getCharacterCatalog(),account?account.shops:getShopCatalog(),getRaidMeta(),
   readFile("config/character_priorities.json","utf8").then(text=>JSON.parse(text) as Record<string,EquipmentFocus>),
   readFile("data/game/campaign-battles.json","utf8"),
-  readFile("config/war_defense_teams.json","utf8").then(text=>JSON.parse(text) as {teams:DefenseCore[]}),
   readFile("config/war_offense_teams.json","utf8").then(text=>JSON.parse(text) as {validatedFullLineups:Array<{name:string;members:string[];used:number;wins:number}>}),getAbilityBreakpoints()
  ]);
  if(!report)return null;
  const plan=account?.plan??await getAccountEquipmentPlan(report,catalog,shops);
  const owned=new Set(report.roster.map(unit=>unit.name));
- const defenseTeams=buildDistinctDefenseTeams(defensePlan.teams,owned).map(team=>({name:team.name,used:team.used,members:team.members.map(name=>({name}))}));
+ const defenseTeams=getAccountWarDefense(report).map(team=>({name:team.name,used:team.used,tier:team.tier,members:team.members.map(name=>({name}))}));
  const offenseTeams=offensePlan.validatedFullLineups.filter(team=>team.members.every(name=>owned.has(name))).sort((a,b)=>b.wins/b.used-a.wins/a.used||b.used-a.used).map(team=>({name:team.name,used:team.used,members:team.members.map(name=>({name}))}));
  const raidOptions=[...new Set(Object.values(meta.bosses).flatMap(teams=>Object.values(teams).flatMap(team=>[...team.core,...team.flex].filter(name=>!team.excluded?.includes(name)))))];
  const battles=Object.values(JSON.parse(battleText)) as CampaignBattleDefinition[];
