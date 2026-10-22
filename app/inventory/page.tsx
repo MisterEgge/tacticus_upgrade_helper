@@ -1,7 +1,4 @@
-import Nav from "../components/Nav";import{getReport}from"../lib/report";import InventoryTable from "./InventoryTable";import { inventoryDemandTargets } from "../../src/domain/inventoryDemand";
+import Nav from "../components/Nav";import{getReport}from"../lib/report";import InventoryTable from "./InventoryTable";import {getAccountInventory} from "../lib/accountInventory";
 export default async function Inventory(){const r=await getReport();if(!r)return <main><Nav/><div className="empty">Run <code>npm run refresh</code>.</div></main>;
-const needs=inventoryDemandTargets([...r.equipmentAllocation.equipNow,...r.equipmentAllocation.buyWatch]);
-const demandIds=new Set(needs.map(n=>n.itemId));const rows=r.unequippedInventory.map(i=>{const demand=needs.filter(n=>n.itemId===i.id).sort((a,b)=>b.priority-a.priority);return {...i,demandCount:demand.length,net:i.amount-demand.length,recipients:demand,topRecipient:demand[0]?.character??"",topPriority:demand[0]?.priority??0}});
-const missing=[...demandIds].filter(id=>!r.unequippedInventory.some(i=>i.id===id)).map(id=>{const demand=needs.filter(n=>n.itemId===id).sort((a,b)=>b.priority-a.priority);return {id,name:demand[0]?.itemName??id,level:0,amount:0,demandCount:demand.length,net:-demand.length,recipients:demand,topRecipient:demand[0]?.character??"",topPriority:demand[0]?.priority??0}});
-const all=[...rows,...missing].sort((a,b)=>b.topPriority-a.topPriority||a.net-b.net);
-return <main><Nav/><header><div><p className="eyebrow">INVENTORY</p><h1>Inventory Demand</h1><p className="sub">Owned equipment and confirmed targets. Negative balance means more copies are needed.</p></div><div className="power">{demandIds.size} <strong>target items</strong></div></header><section className="panel tablePanel"><InventoryTable rows={all}/></section></main>}
+const all=await getAccountInventory(r);
+return <main><Nav/><header><div><p className="eyebrow">INVENTORY</p><h1>Inventory Demand</h1><p className="sub">Owned copies and next equipment targets. Refinement levels still determine whether a copy can be equipped.</p></div></header><section className="panel tablePanel"><InventoryTable rows={all}/></section></main>}
