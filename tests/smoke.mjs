@@ -211,7 +211,7 @@ try
     assert.doesNotMatch(war, /DEFENSE SOURCE OPTIONS/);
     const catalog = JSON.parse(await readFile(path.join(root, 'data/character_catalog.json'), 'utf8'));
     assert.match(dashboard, /ACCOUNT OVERVIEW/);
-    assert.match(dashboard, /Recommended next characters/);
+    assert.match(dashboard, /Next upgrades/);
     const ratings = await get('/ratings');
     assert.match(ratings, new RegExp(`${catalog.characters.length}<strong> catalog characters`));
     assert.match(ratings, /No tracked signal/);
@@ -222,7 +222,7 @@ try
         assert.match(html, /class="accountBar"/);
         assert.match(html, /SYNTHETIC TEST FIXTURE/);
         assert.match(html, /LEVEL<\/small><strong>52/);
-        assert.match(html, new RegExp(`UNLOCKED UNITS<\\/small><strong>2<\\/strong><span>1\\/${catalog.characters.length} characters · 1 machines\\/other`));
+        assert.doesNotMatch(html, /<small>(POWER|UNLOCKED UNITS)<\/small>/);
         assert.match(html, /MAIN RAID TEAM/);
         assert.match(html, /Sync Account/);
         assert.match(html, /Last synced:/);
@@ -397,6 +397,14 @@ try
     assert.doesNotMatch(readyEquipment,/Recipients and focus|Character Upgrade Queue|total needed item options/);
     assert.doesNotMatch(readyEquipment,/Inventory upgrade choices/);
     report.unequippedInventory[0].amount=2;
+    report.unequippedInventory.push({id:"I_Crit_L001",amount:3,level:5});
+    await writeFile(reportPath,JSON.stringify(report));
+    const inventoryDom=new JSDOM(await get('/inventory',true));
+    const knifeRows=[...inventoryDom.window.document.querySelectorAll('tbody tr')].filter(row=>row.querySelector('a[href="/sources?item=I_Crit_L001"]'));
+    assert.equal(knifeRows.length,1,'one inventory balance per item across refinement stacks');
+    assert.equal(knifeRows[0].querySelectorAll('td')[1].textContent,'5');
+    assert.match(knifeRows[0].textContent,/3 × level 5.*2 × level 1/);
+    report.unequippedInventory.pop();
     await writeFile(reportPath,JSON.stringify(report));
     assert.match(await get('/equipment'),/aria-label="Equip now".*?Trajann.*?Grand Combat Knife.*?Kariyan.*?Grand Combat Knife/s);
     report.unequippedInventory[0].amount=1;

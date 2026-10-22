@@ -1,4 +1,8 @@
 export type DashboardGearRow = { character: string };
+/** Raid membership precedes readiness; missing gear counts do not set spending priority. */
+export function rankAccountActions<T extends {name:string;actions:Array<{ready:boolean}>}>(rows:T[],raidNames:ReadonlySet<string>):T[]{
+ return rows.filter(row=>row.actions.length>0).sort((a,b)=>Number(raidNames.has(b.name))-Number(raidNames.has(a.name))||Number(b.actions.some(action=>action.ready))-Number(a.actions.some(action=>action.ready))||a.name.localeCompare(b.name));
+}
 export type DashboardAbilityRow = { character: string; activeLevel: number; passiveLevel: number; activeTo17: boolean; passiveTo17: boolean };
 export type DashboardFocus = { character: string; equipmentSlots: number; abilitySteps: Array<{ name: "Active" | "Passive"; level: number }> };
 
