@@ -71,3 +71,23 @@ test("unreadable saved War selections protect every holder rather than assuming 
  assert.equal(result.transfers.length,0);
  assert.match(result.protectedGear[0]!.reason,/War selections unavailable/);
 });
+
+test("Epic transfers support newer rosters without allowing rarity downgrades or gated equipment",()=>{
+ const uncommon="I_Crit_U006";
+ const definitions={...equipment,[uncommon]:{type:"I_Crit",rarity:"Uncommon",allowedFactions:["Allowed"]}};
+ const units=[unit("Donor",epic,9),{...unit("Raid",uncommon),rarity:"Epic"}];
+ const input={units,targets:[{...target("Raid"),itemId:epic,minimumLevel:7}],characters:characters(units),equipment:definitions,roles:roles({raidNames:["Raid"]})};
+ assert.equal(planLegendaryReallocation(input).transfers[0]?.level,9);
+ assert.equal(planLegendaryReallocation({...input,units:[units[0]!,{...units[1]!,rarity:"Rare"}]}).transfers.length,0);
+ assert.equal(planLegendaryReallocation({...input,units:[units[0]!,unit("Raid",legendary)]}).transfers.length,0);
+ assert.equal(planLegendaryReallocation({...input,targets:[{...input.targets[0]!,minimumLevel:10}]}).transfers.length,0);
+});
+
+test("a higher-rarity ready donor precedes lower-rarity alternatives for the same slot",()=>{
+ const uncommon="I_Crit_U006";
+ const definitions={...equipment,[uncommon]:{type:"I_Crit",rarity:"Uncommon",allowedFactions:["Allowed"]}};
+ const units=[unit("Legendary donor"),unit("Epic donor",epic,9),unit("Raid",uncommon)];
+ const result=planLegendaryReallocation({units,targets:[{...target("Raid"),itemId:epic},target("Raid")],characters:characters(units),equipment:definitions,roles:roles({raidNames:["Raid"]})});
+ assert.equal(result.transfers.length,1);
+ assert.equal(result.transfers[0]?.itemId,legendary);
+});
