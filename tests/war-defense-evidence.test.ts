@@ -13,6 +13,14 @@ test("tiny perfect samples rank below repeated strong performance",()=>{
  const team=core("A");
  assert.deepEqual(selectEvidenceDefense([team],roster([team]))[0]?.flex.map(unit=>unit.id),["A4","A5"]);
 });
+
+test("cores follow actual defense rate regardless of export order or Wilson ordering",()=>{
+ const higher=core("A",96,100),larger=core("B",950,1000),tie=core("C",960,1000);
+ const owned=roster([higher,larger,tie]);
+ assert.ok(defenseConfidence(larger.wins,larger.used)>defenseConfidence(higher.wins,higher.used));
+ assert.deepEqual(selectEvidenceDefense([larger,higher,tie],owned).map(team=>team.core),[tie.core,higher.core,larger.core]);
+ assert.deepEqual(selectEvidenceDefense([tie,higher,larger],owned).map(team=>team.core),[tie.core,higher.core,larger.core]);
+});
 test("two Gold and three Silver teams use 25 unique owned characters",()=>{
  const cores=Array.from({length:5},(_,index)=>core(String(index),95-index));
  const result=selectEvidenceDefense(cores,roster(cores));

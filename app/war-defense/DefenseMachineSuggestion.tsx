@@ -8,7 +8,7 @@ export default function DefenseMachineSuggestion({team,machines,selected,suggest
  return <section className="warMachineFit" aria-label="Machine recommendation">
   {machine?<>
    <div className="characterCell"><CharacterPortrait id={machine.id} name={machine.name}/><strong>{selected?machine.name:`Suggested: ${machine.name}`}</strong><span>Primary {machine.active} / Secondary {machine.passive}</span></div>
-   {fit?<><p>{fit.reason}</p><p className="sub">{fit.caution} <a href={fit.source}>Ability reference</a></p></>:<p className="sub">No reviewed synergy for this lineup. This manual assignment is preserved.</p>}
+   {fit?<details><summary>Why this machine</summary><p>{fit.reason}</p><p className="sub">{fit.caution} <a href={fit.source}>Ability reference</a></p></details>:<details><summary>Review pairing</summary><p className="sub">No reviewed synergy for this lineup. This manual assignment is preserved.</p></details>}
    {!selected&&fit?<button className="warMachineApply" type="button" onClick={()=>onChoose(fit.id)}>Use {machine.name}</button>:null}
   </>:<p className="sub">No unassigned owned machine has a reviewed fit. Change an assignment to free another option.</p>}
  </section>;
