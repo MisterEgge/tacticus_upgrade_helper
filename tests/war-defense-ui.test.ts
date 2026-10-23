@@ -41,4 +41,17 @@ test("defense presents five-character assignments and persists owned machine cho
  assert.deepEqual(JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)!).defenseOrders[orderKey],["A","B","C","D","E"]);
  assert.equal((view.getByLabelText(team.name+" Machine of War") as HTMLSelectElement).value,"tyranBiovore");
  assert.equal(view.queryByText(/RESERVE/),null);
+ view.unmount();
+ localStorage.clear();
+ view=render(createElement(WarDefensePlanner,{...props,machines:[...props.machines,{id:"blackForgefiend",name:"Forgefiend",active:1,passive:12}]}));
+ fireEvent.click(view.getByRole("button",{name:"Fill unassigned machines"}));
+ const assignments=JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)!).defenseMachines;
+ assert.equal(Object.keys(assignments).length,2);
+ assert.equal(new Set(Object.values(assignments)).size,2);
+ assert.equal(view.queryByRole("button",{name:"Fill unassigned machines"}),null);
+ fireEvent.change(view.getByLabelText(team.name+" Machine of War"),{target:{value:""}});
+ fireEvent.click(view.getByRole("button",{name:/A \/ B/}));
+ const suggestion=within(view.getByRole("region",{name:team.name})).getByRole("button",{name:/^Use /});
+ fireEvent.click(suggestion);
+ assert.deepEqual(JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)!).defenseMachines,assignments);
 });
