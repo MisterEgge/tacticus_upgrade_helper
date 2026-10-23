@@ -12,7 +12,8 @@ test("defense presents five-character assignments and persists owned machine cho
  const {render,fireEvent,cleanup,act,within}=await import("@testing-library/react");
  suite.after(async()=>{await act(async()=>cleanup());dom.window.close();for(const [key,descriptor] of descriptors){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else Reflect.deleteProperty(globalThis,key);}});
  const team={name:"A / B / C / D / E",tier:"gold" as const,core:["A","B","C"],flex:[{id:"D",used:100,wins:95},{id:"E",used:80,wins:70}],used:200,wins:180,fieldable:true,missing:[],evidence:"core-flex" as const,members:["A","B","C","D","E"].map(name=>({id:name,name,icon:undefined,rank:12,activeLevel:35,passiveLevel:35,items:[]}))};
- const props={teams:[team],offenseTeams:[],machines:[{id:"tyranBiovore",name:"Biovore",active:17,passive:23}]};
+ const other={...team,name:"F / G / H / I / J",tier:"silver" as const,members:team.members.map((member,index)=>({...member,id:String(index+5),name:String(index+5)}))};
+ const props={teams:[team,other],offenseTeams:[],machines:[{id:"tyranBiovore",name:"Biovore",active:17,passive:23}]};
  let view=render(createElement(WarDefensePlanner,props));
  assert.ok(view.getByText(/^Battlefield 2/));
  const group=within(view.getByRole("region",{name:team.name}));
@@ -22,6 +23,7 @@ test("defense presents five-character assignments and persists owned machine cho
  assert.equal(machine.querySelectorAll("option").length,2);
  fireEvent.change(machine,{target:{value:"tyranBiovore"}});
  assert.equal(JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)!).defenseMachines[team.name],"tyranBiovore");
+ assert.equal(view.getByLabelText(other.name+" Machine of War").querySelector<HTMLOptionElement>('option[value="tyranBiovore"]')!.disabled,true);
  fireEvent.click(view.getByRole("button",{name:"Offense teams"}));
  assert.ok(view.getByText("0 distinct offense teams"));
  view.unmount();
