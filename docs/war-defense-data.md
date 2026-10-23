@@ -19,3 +19,10 @@ All account resource views use the same selected defense teams and explicit tier
 Machine of War observations are absent from this export. The app offers manual owned-machine choices with current ability levels and persists them, enforcing one use per machine within defense. It does not label a machine as statistically best without team/machine observations. Completing that recommendation requires additional matchup data; usage alone cannot establish best performance. See the [machine investment assessment](machine-investment-assessment-2026-10-23.md) for role-specific spending judgments and integration requirements.
 
 The current owner context is Battlefield 2, Fortified Position (+10% armour/damage). This is planning context, not a filter applied to the pooled snapshot. A separate filtered export would be needed to compare Battlefield 2 against the broader pool.
+# Deployment order
+
+The numbered deployment editor is separate from core/flex selection and its statistics. Reordering does not change membership, evidence counts, upgrade targets or assigned machines. Orders are saved locally by the sorted five character IDs; stale or invalid permutations are discarded. Reset restores the starting order.
+
+Slot order affects spawn hexes and AI sequence, but movement, targets and ability decisions remain map dependent. The app does not claim an optimal AI combo. Teams retain source order unless a specific heuristic applies: Rotbone is placed last to give advancing teammates a chance to move before healing. This is planning judgment, not a measured result; adjust it after checking reach on the map.
+
+Sources: [community defense discussion](https://www.reddit.com/r/WH40KTacticus/comments/1t2zgo6/gw_defense_lineups_advice/) and [numbered map explanation](https://www.reddit.com/r/WH40KTacticus/comments/1pjbzic/guild_war_maps_s19_b1/). Generic Fortified Position does not identify a unique map; use the current war's actual starting hexes. Summon phases and passive auras should not be treated as guaranteed character active sequences.

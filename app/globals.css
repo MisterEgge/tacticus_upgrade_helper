@@ -172,3 +172,10 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .raidRarityPlan{margin:20px 0;min-width:0}.raidRarityPlan h3{padding:0;background:none}.raidRarityPlan table{min-width:780px}.raidRarityPlan td{vertical-align:top;padding:14px 12px}.raidRarityPlan td:nth-child(2){min-width:180px}.raidRarityPlan td:nth-child(3){min-width:220px}.raidRarityPlan .progressionBadge{margin:3px 0}.raidRarityPlan td>strong{display:block;margin-top:8px}.raidRarityPlan .sub{font-size:13px}
 
 @media(max-width:700px){.raidRarityPlan .tableWrap{overflow:visible}.raidRarityPlan table,.raidRarityPlan tbody,.raidRarityPlan tr,.raidRarityPlan td{display:block;width:100%;min-width:0}.raidRarityPlan thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.raidRarityPlan tr{padding:14px 0;border-bottom:1px solid #27303d}.raidRarityPlan td{padding:4px 0;border:0}.raidRarityPlan td:nth-child(2),.raidRarityPlan td:nth-child(3){min-width:0}.raidRarityPlan td:first-child{display:flex;align-items:center;justify-content:space-between;gap:8px}.raidRarityPlan td:last-child{padding-top:10px}.raidRarityPlan td>strong{margin:6px 0}.raidRarityPlan .resourceName{font-size:13px}}
+.warDeployment ol { list-style:none; padding:0; display:grid; gap:8px; }
+.warDeployment li { display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:8px; border:1px solid var(--border,#303846); border-radius:8px; }
+.warDeployment li strong { flex:1; min-width:100px; }
+.warDeployment li > div { display:flex; gap:6px; }
+.warDeploymentNumber { font-weight:700; width:20px; text-align:center; }
+.warDeployment button:disabled { opacity:.4; cursor:default; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }

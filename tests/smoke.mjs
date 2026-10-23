@@ -403,7 +403,7 @@ try
     await writeFile(reportPath,JSON.stringify(report));
     const lineup = await get('/war-defense');
     assert.match(lineup, /<h2>Imospekh \/ Aleph-Null \/ Makhotep/);
-    assert.match(lineup, /class="warTeamPortraits"[^>]*>.*?alt="Imospekh".*?alt="Makhotep"/s);
+    assert.match(lineup, /class="warDeployment"[^>]*>.*?alt="Imospekh".*?alt="Makhotep"/s);
     for(const name of ['Trajann','Kariyan']){const character=catalog.characters.find(row=>row.name===name);report.roster.push({...report.roster[0],id:character.id,name,rarity:'Legendary',progressionIndex:12});}
     report.roster.find(unit=>unit.name==='Imospekh').items=[{slotId:'Slot1',id:'I_Crit_E001',name:'War test weapon',rarity:'Epic',level:5}];
     report.roster.find(unit=>unit.name==='Imospekh').rarity='Legendary';
