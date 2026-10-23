@@ -4,6 +4,7 @@ import {createElement} from "react";
 import {JSDOM} from "jsdom";
 import WarDefensePlanner from "../app/war-defense/WarDefensePlanner";
 import {WAR_PLAN_STORAGE_KEY} from "../src/domain/warBadgeTargets";
+import {deploymentKey} from "../src/domain/warDeployment";
 
 test("defense presents five-character assignments and persists owned machine choices independently of offense",async suite=>{
  const dom=new JSDOM("<html><body></body></html>",{url:"http://localhost/"});
@@ -19,6 +20,9 @@ test("defense presents five-character assignments and persists owned machine cho
  const group=within(view.getByRole("region",{name:team.name}));
  fireEvent.click(group.getByRole("button",{name:/A \/ B/}));
  assert.equal(group.getAllByRole("table").length,2);
+ fireEvent.click(group.getByRole("button",{name:"Move B earlier"}));
+ const orderKey=deploymentKey(team.members.map(member=>member.id));
+ assert.deepEqual(JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)!).defenseOrders[orderKey],["B","A","C","D","E"]);
  const machine=group.getByLabelText(team.name+" Machine of War");
  assert.equal(machine.querySelectorAll("option").length,2);
  fireEvent.change(machine,{target:{value:"tyranBiovore"}});
@@ -30,6 +34,11 @@ test("defense presents five-character assignments and persists owned machine cho
  view=render(createElement(WarDefensePlanner,props));
  fireEvent.click(view.getByRole("button",{name:"Defense teams"}));
  fireEvent.click(view.getByRole("button",{name:/A \/ B/}));
+ assert.equal((view.getByLabelText(team.name+" Machine of War") as HTMLSelectElement).value,"tyranBiovore");
+ const restored=within(view.getByRole("region",{name:team.name}));
+ assert.equal(restored.getAllByRole("listitem")[0]!.textContent?.includes("B"),true);
+ fireEvent.click(restored.getByRole("button",{name:"Reset order"}));
+ assert.deepEqual(JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)!).defenseOrders[orderKey],["A","B","C","D","E"]);
  assert.equal((view.getByLabelText(team.name+" Machine of War") as HTMLSelectElement).value,"tyranBiovore");
  assert.equal(view.queryByText(/RESERVE/),null);
 });
