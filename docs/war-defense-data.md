@@ -21,6 +21,8 @@ Machine of War observations are absent from this export. The app offers manual o
 The current owner context is Battlefield 2, Fortified Position (+10% armour/damage). This is planning context, not a filter applied to the pooled snapshot. A separate filtered export would be needed to compare Battlefield 2 against the broader pool.
 # Deployment order
 
+Machine pairing is assessed separately in [War defense machine recommendations](war-defense-machines.md). Suggested assignments use owned-machine ability fit, preserve manual choices and enforce uniqueness; core/flex rates do not become machine win rates.
+
 The numbered deployment editor is separate from core/flex selection and its statistics. Reordering does not change membership, evidence counts, upgrade targets or assigned machines. Orders are saved locally by the sorted five character IDs; stale or invalid permutations are discarded. Reset restores the starting order.
 
 Slot order affects spawn hexes and AI sequence, but movement, targets and ability decisions remain map dependent. The app does not claim an optimal AI combo. Teams retain source order unless a specific heuristic applies: Rotbone is placed fourth to give advancing teammates a chance to move before healing. This is planning judgment, not a measured result; adjust it after checking reach on the map.

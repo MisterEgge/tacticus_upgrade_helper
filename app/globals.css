@@ -179,3 +179,10 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .warDeploymentNumber { font-weight:700; width:20px; text-align:center; }
 .warDeployment button:disabled { opacity:.4; cursor:default; }
 .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+.warMachineFit { margin:18px 0; padding:12px; border:1px solid #303846; border-radius:8px; }
+.warMachineFit .characterCell { flex-wrap:wrap; }
+.warMachineFit .characterCell span { color:#aab6c6; font-size:13px; }
+.warMachineActions { margin:12px 24px; }
+.warMachineApply { font:inherit; color:#edf1f7; background:#1b2330; border:1px solid #65758b; border-radius:8px; padding:10px 13px; cursor:pointer; min-height:44px; }
+.warMachineApply:hover { background:#273344; }
+.warMachineApply:focus-visible { outline:2px solid #9ccaff; outline-offset:3px; }
