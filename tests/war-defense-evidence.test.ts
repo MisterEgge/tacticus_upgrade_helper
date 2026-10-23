@@ -40,6 +40,17 @@ test("unowned flex is skipped without borrowing another core character or repeat
 });
 
 const html=`<form action="/wars/analyze/defenders"><input type="checkbox" name="battlefield[]" value="2" checked><input name="authenticity_token" value="PRIVATE_TOKEN"></form><p>debuffed attacks only</p><table><tbody><tr data-core-key="a|b|c"><td></td><td></td><td>100</td><td>95</td></tr><tr id="core-details-a|b|c"><td><div class="grid"><div><img alt="d">Used <span>100</span><!-- Wins <span>95</span> --></div><div><img alt="e">Used <span>50</span><!-- Wins <span>40</span> --></div></div></td></tr></tbody></table><script>throw new Error('must not run')</script>`;
+
+test("browser-saved absolute form URLs import with the same filters and statistics",()=>{
+ const timestamp="2026-10-23T00:00:00Z";
+ const relative=parseDefenseHtml(html,timestamp);
+ const absolute=parseDefenseHtml(html.replace('action="/wars/analyze/defenders"','action="https://tacticus.xyz/wars/analyze/defenders"'),timestamp);
+ assert.deepEqual(absolute.cores,relative.cores);
+ assert.deepEqual(absolute.scope,relative.scope);
+ for(const action of ["https://example.com/wars/analyze/defenders","https://tacticus.xyz/wars/analyze/attackers"]){
+  assert.throws(()=>parseDefenseHtml(html.replace('action="/wars/analyze/defenders"',`action="${action}"`)),/No defender/);
+ }
+});
 test("HTML import reads hidden flex counts, records filters and drops scripts and tokens",()=>{
  const data=parseDefenseHtml(html,"2026-10-22T00:00:00Z");
  assert.deepEqual(data.scope.battlefields,["2"]);

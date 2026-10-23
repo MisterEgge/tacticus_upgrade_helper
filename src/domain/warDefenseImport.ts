@@ -6,7 +6,12 @@ import type {DefenseEvidence} from "./warDefenseEvidence";
 export function parseDefenseHtml(html:string,importedAt=new Date().toISOString()):DefenseEvidence{
  const dom=new JSDOM(html),document=dom.window.document;
  try{
-  const form=document.querySelector('form[action="/wars/analyze/defenders"]');
+  const form=[...document.forms].find(form=>{
+   try{
+    const action=new URL(form.getAttribute("action")??"","https://tacticus.xyz");
+    return action.origin==="https://tacticus.xyz"&&action.pathname==="/wars/analyze/defenders";
+   }catch{return false;}
+  });
   if(!form)throw new Error("No defender report filter form found; use a fully loaded defender export.");
   const supported=new Set(["battlefield[]","season[]","map[]"]);
   if([...form.querySelectorAll<HTMLInputElement>('input:checked')].some(input=>input.name&&!supported.has(input.name)))throw new Error("Unsupported selected source filter; clear guild/player filters or extend the import schema before importing.");
