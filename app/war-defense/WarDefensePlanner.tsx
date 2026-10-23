@@ -11,6 +11,7 @@ import FittedTeamName from "./FittedTeamName";
 import { warGearLabel } from "../../src/domain/warGear";
 import { uniqueWarTeamIndexes, chooseWarTeamForSlot, warSlotChoices, restoreWarTeamIndexes } from "../../src/domain/warTeams";
 import { WAR_PLAN_STORAGE_KEY } from "../../src/domain/warBadgeTargets";
+import {restoreWarMachines,warMachineAvailable} from "../../src/domain/warMachineSelection";
 
 type Member={id:string;name:string;icon:string|undefined;rank:number|null;activeLevel:number|null;passiveLevel:number|null;items:Array<{slotId:string;rarity?:string;level:number;name?:string}>};
 type Machine={id:string;name:string;active:number;passive:number};
@@ -35,7 +36,7 @@ export default function WarDefensePlanner({teams,offenseTeams,machines=[],defens
             setDefenseSlots(restoreWarTeamIndexes(defense,saved.defense,5));
             setOffenseSlots(restoreWarTeamIndexes(offense,saved.offense,10));
             if(Array.isArray(saved.offenseTiers)&&saved.offenseTiers.length===10&&saved.offenseTiers.every((tier:unknown)=>tier==="gold"||tier==="silver"))setOffenseTiers(saved.offenseTiers);
-            if(saved.defenseMachines&&typeof saved.defenseMachines==="object")setDefenseMachines(Object.fromEntries(Object.entries(saved.defenseMachines).filter(([name,id])=>defense.some(team=>team.name===name)&&machines.some(machine=>machine.id===id))) as Record<string,string>);
+            setDefenseMachines(restoreWarMachines(saved.defenseMachines,defense.map(team=>team.name),new Set(machines.map(machine=>machine.id))));
             if(saved.mode==="offense")setMode("offense");
         }
     }catch{/* A malformed or unavailable browser store leaves the current defaults. */}
@@ -53,7 +54,7 @@ export default function WarDefensePlanner({teams,offenseTeams,machines=[],defens
   {(["gold","silver"] as const).map(tier=><div key={tier}><h3><RankBadge rank={tier==="gold"?12:9}/></h3>{defense.filter(team=>team.tier===tier).map(team=><CollapsibleSection key={team.name} title={team.name} label={team.name} defaultOpen={false} summary={<>{team.used.toLocaleString()} core observations / {(team.wins/team.used*100).toFixed(1)}% holds</>}>
    <div className="warTeamPortraits" aria-label="Team characters">{team.members.map(member=><CharacterPortrait key={member.id} name={member.name} id={member.id} icon={member.icon}/>)}</div>
    <h3>Flex choices</h3><div className="tableWrap"><table><thead><tr><th>Character</th><th>Holds</th><th>Attempts</th></tr></thead><tbody>{team.flex?.map(flex=><tr key={flex.id}><td><CharacterName name={team.members.find(member=>member.id===flex.id)?.name??flex.id} id={flex.id}/></td><td>{(flex.wins/flex.used*100).toFixed(1)}%</td><td>{flex.used.toLocaleString()}</td></tr>)}</tbody></table></div>
-   <label>Machine of War<select aria-label={team.name+" Machine of War"} value={defenseMachines[team.name]??""} onChange={event=>setDefenseMachines(current=>({...current,[team.name]:event.target.value}))}><option value="">Choose a machine</option>{machines.map(machine=><option key={machine.id} value={machine.id}>{machine.name} / {machine.active} / {machine.passive}</option>)}</select></label>
+   <label>Machine of War<select aria-label={team.name+" Machine of War"} value={defenseMachines[team.name]??""} onChange={event=>{const id=event.target.value;setDefenseMachines(current=>warMachineAvailable(current,team.name,id)?{...current,[team.name]:id}:current);}}><option value="">Choose a machine</option>{machines.map(machine=><option key={machine.id} value={machine.id} disabled={!warMachineAvailable(defenseMachines,team.name,machine.id)}>{machine.name} / {machine.active} / {machine.passive}{warMachineAvailable(defenseMachines,team.name,machine.id)?"":" / assigned to another team"}</option>)}</select></label>
    {detail(team,tier)}
   </CollapsibleSection>)}{defense.filter(team=>team.tier===tier).length<(tier==="gold"?2:3)?<p className="empty">Not enough owned, rank-qualified core and flex choices to fill {tier==="gold"?"two Gold":"three Silver"} teams from this snapshot.</p>:null}</div>)}
  </section>;

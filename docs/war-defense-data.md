@@ -16,6 +16,6 @@ Selection ranks cores by the Wilson 95% lower bound of their observed hold rates
 
 All account resource views use the same selected defense teams and explicit tiers. Legacy historical source files remain for reference and tests; active defense no longer reads them. Offense selection is unchanged.
 
-Machine of War observations are absent from this export. The app offers manual owned-machine choices with current ability levels and persists them. It does not label a machine as statistically best without team/machine observations. Completing that recommendation requires additional matchup data; usage alone cannot establish best performance.
+Machine of War observations are absent from this export. The app offers manual owned-machine choices with current ability levels and persists them, enforcing one use per machine within defense. It does not label a machine as statistically best without team/machine observations. Completing that recommendation requires additional matchup data; usage alone cannot establish best performance. See the [machine investment assessment](machine-investment-assessment-2026-10-23.md) for role-specific spending judgments and integration requirements.
 
 The current owner context is Battlefield 2, Fortified Position (+10% armour/damage). This is planning context, not a filter applied to the pooled snapshot. A separate filtered export would be needed to compare Battlefield 2 against the broader pool.
