@@ -23,7 +23,7 @@ test("moves preserve membership, handle boundaries and leave inputs untouched",(
 });
 test("Rotbone suggestion is explicit while unreviewed teams keep source order",()=>{
  const ids=["a","deathRotbone","b","c","d"];
- assert.deepEqual(suggestedDeployment(ids).ids,["a","b","c","d","deathRotbone"]);
+ assert.deepEqual(suggestedDeployment(ids).ids,["a","b","c","deathRotbone","d"]);
  assert.ok(suggestedDeployment(ids).reason);
  assert.deepEqual(suggestedDeployment(["a","b"]),{ids:["a","b"],reason:null});
 });

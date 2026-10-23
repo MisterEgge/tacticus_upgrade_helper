@@ -10,7 +10,11 @@ export function validDeployment(value: unknown, ids: readonly string[]): value i
 export function suggestedDeployment(ids: readonly string[]): {ids:string[];reason:string|null} {
  // Community guidance places Rotbone after advancing teammates, so healing
  // can reach them. This is a starting heuristic, not a measured win-rate result.
- if(ids.includes("deathRotbone"))return {ids:[...ids.filter(id=>id!=="deathRotbone"),"deathRotbone"],reason:"Rotbone acts after teammates advance, giving him a chance to heal their new positions. Check his reach on the map."};
+ if(ids.includes("deathRotbone")){
+  const ordered=ids.filter(id=>id!=="deathRotbone");
+  ordered.splice(Math.min(3,ordered.length),0,"deathRotbone");
+  return {ids:ordered,reason:"Rotbone starts in slot 4, after most teammates advance, giving him a chance to heal their new positions. Check his reach on the map."};
+ }
  return {ids:[...ids],reason:null};
 }
 
