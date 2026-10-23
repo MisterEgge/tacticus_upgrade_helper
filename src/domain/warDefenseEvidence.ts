@@ -11,10 +11,10 @@ export function defenseConfidence(wins:number,used:number):number{
 export type DefenseRosterMember={id:string;name:string;rank:number};
 export type EvidenceDefenseTeam={name:string;core:string[];members:string[];tier:"gold"|"silver";slot:number;used:number;wins:number;confidence:number;flex:DefenseObservation[];evidence:"core-flex"};
 
-/** Rank cores and flex by support-adjusted performance. A core is never replaced piecemeal. */
+/** Rank cores by actual defense rate; retain sample-aware ranking for flex. */
 export function selectEvidenceDefense(cores:DefenseCoreEvidence[],roster:DefenseRosterMember[]):EvidenceDefenseTeam[]{
  const byId=new Map(roster.map(unit=>[unit.id,unit]));
- const ranked=[...cores].filter(core=>core.core.length===3&&new Set(core.core).size===3&&core.used>0&&core.wins<=core.used).sort((a,b)=>defenseConfidence(b.wins,b.used)-defenseConfidence(a.wins,a.used)||b.used-a.used||a.key.localeCompare(b.key));
+ const ranked=[...cores].filter(core=>core.core.length===3&&new Set(core.core).size===3&&core.used>0&&core.wins>=0&&core.wins<=core.used).sort((a,b)=>b.wins/b.used-a.wins/a.used||b.used-a.used||a.key.localeCompare(b.key));
  const used=new Set<string>(),teams:EvidenceDefenseTeam[]=[];
  for(const [slot,tier] of (["gold","gold","silver","silver","silver"] as const).entries()){
   const minimum=tier==="gold"?12:9;

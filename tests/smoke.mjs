@@ -223,7 +223,7 @@ try
     await writeFile(reportPath,JSON.stringify(report));
     const dashboard = await get('/');
     const war = await get('/war-defense');
-    assert.match(war, /distinct defense teams/);
+    assert.match(war, /defense teams/);
     assert.doesNotMatch(war, /DEFENSE SOURCE OPTIONS/);
     const catalog = JSON.parse(await readFile(path.join(root, 'data/character_catalog.json'), 'utf8'));
     assert.match(dashboard, /ACCOUNT OVERVIEW/);
@@ -397,12 +397,12 @@ try
     }
     await writeFile(reportPath, JSON.stringify(report));
     const unreadyLineup = new JSDOM(await get('/war-defense'));
-    assert.equal(unreadyLineup.window.document.querySelectorAll('.collapsibleSection').length,0);
+    assert.equal(unreadyLineup.window.document.querySelectorAll('.warDefenseCard').length,0);
     unreadyLineup.window.close();
     for(const unit of report.roster)unit.rank=9;
     await writeFile(reportPath,JSON.stringify(report));
     const lineup = await get('/war-defense');
-    assert.match(lineup, /<h2>Imospekh \/ Aleph-Null \/ Makhotep/);
+    assert.match(lineup, /aria-label="Imospekh \/ Aleph-Null \/ Makhotep/);
     assert.match(lineup, /class="warDeployment"[^>]*>.*?alt="Imospekh".*?alt="Makhotep"/s);
     for(const name of ['Trajann','Kariyan']){const character=catalog.characters.find(row=>row.name===name);report.roster.push({...report.roster[0],id:character.id,name,rarity:'Legendary',progressionIndex:12});}
     report.roster.find(unit=>unit.name==='Imospekh').items=[{slotId:'Slot1',id:'I_Crit_E001',name:'War test weapon',rarity:'Epic',level:5}];

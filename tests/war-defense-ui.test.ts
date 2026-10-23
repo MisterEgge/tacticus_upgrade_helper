@@ -18,8 +18,11 @@ test("defense presents five-character assignments and persists owned machine cho
  let view=render(createElement(WarDefensePlanner,props));
  assert.ok(view.getByText(/^Battlefield 2/));
  const group=within(view.getByRole("region",{name:team.name}));
- fireEvent.click(group.getByRole("button",{name:/A \/ B/}));
- assert.equal(group.getAllByRole("table").length,2);
+ assert.equal(group.queryAllByRole("table").length,0);
+ assert.equal(group.getAllByRole("listitem").length,5);
+ assert.equal(group.getAllByRole("link").filter(link=>link.getAttribute("href")?.startsWith("/characters/")).length,5);
+ assert.equal(group.queryByText("Flex choices"),null);
+ fireEvent.click(group.getByRole("button",{name:"Edit order"}));
  fireEvent.click(group.getByRole("button",{name:"Move B earlier"}));
  const orderKey=deploymentKey(team.members.map(member=>member.id));
  assert.deepEqual(JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)!).defenseOrders[orderKey],["B","A","C","D","E"]);
@@ -33,7 +36,6 @@ test("defense presents five-character assignments and persists owned machine cho
  view.unmount();
  view=render(createElement(WarDefensePlanner,props));
  fireEvent.click(view.getByRole("button",{name:"Defense teams"}));
- fireEvent.click(view.getByRole("button",{name:/A \/ B/}));
  assert.equal((view.getByLabelText(team.name+" Machine of War") as HTMLSelectElement).value,"tyranBiovore");
  const restored=within(view.getByRole("region",{name:team.name}));
  assert.equal(restored.getAllByRole("listitem")[0]!.textContent?.includes("B"),true);
@@ -50,7 +52,6 @@ test("defense presents five-character assignments and persists owned machine cho
  assert.equal(new Set(Object.values(assignments)).size,2);
  assert.equal(view.queryByRole("button",{name:"Fill unassigned machines"}),null);
  fireEvent.change(view.getByLabelText(team.name+" Machine of War"),{target:{value:""}});
- fireEvent.click(view.getByRole("button",{name:/A \/ B/}));
  const suggestion=within(view.getByRole("region",{name:team.name})).getByRole("button",{name:/^Use /});
  fireEvent.click(suggestion);
  assert.deepEqual(JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)!).defenseMachines,assignments);
