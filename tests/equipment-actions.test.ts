@@ -3,6 +3,20 @@ import assert from "node:assert/strict";
 import {allocateEquipmentActions} from "../src/domain/equipmentActions";
 const make=(character:string,slotId:string,id:string,state="NEED",rarity="Legendary")=>({character,slotId,state,itemRarity:rarity,accountPriority:10,acquisition:[{id}]});
 
+test("nine unrefined Halos reserve two copies for two recipients, not nine per recipient",()=>{
+ const options=[{...make("Azrael","Slot2","halo","NEED","Epic"),minimumLevel:4},{...make("Baldr","Slot2","halo","NEED","Epic"),minimumLevel:5}];
+ const result=allocateEquipmentActions(options,[{id:"halo",level:1,amount:9}]);
+ assert.deepEqual(result.map(row=>[row.state,row.allocatedItemId,row.allocatedLevel,row.copiesToLevel]),[["LEVEL INVENTORY","halo",1,1],["LEVEL INVENTORY","halo",1,1]]);
+ const scarce=allocateEquipmentActions([{...options[0]!,raidPriority:true},options[1]!],[{id:"halo",level:1,amount:1}]);
+ assert.deepEqual(scarce.map(row=>row.state),["LEVEL INVENTORY","NEED"]);
+});
+
+test("one slot cannot reserve both a ready replacement and a future refinement",()=>{
+ const result=allocateEquipmentActions([make("A","Slot2","ready"),{...make("A","Slot2","halo"),minimumLevel:5}],[{id:"ready",level:2,amount:1},{id:"halo",level:1,amount:9}]);
+ assert.deepEqual(result.map(row=>row.state),["EQUIP NOW","NEED"]);
+ assert.equal(result.reduce((sum,row)=>sum+row.copiesToLevel,0),0);
+});
+
 test("selected Raid recipients get shared inventory before static priorities and old report assignments",()=>{
  const old={...make("Old priority","Slot1","knife","EQUIP NOW"),accountPriority:100};
  const raid={...make("Selected Raid","Slot1","knife"),accountPriority:0,raidPriority:true};

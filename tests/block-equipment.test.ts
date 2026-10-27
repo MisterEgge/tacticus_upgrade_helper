@@ -23,7 +23,7 @@ test("refinement thresholds and inventory allocation prevent a fresh high-chance
  const candidate={character:"Abraxas",slotId:"Slot2",state:"NEED",itemRarity:"Legendary",accountPriority:100,minimumLevel:minimum,acquisition:[{id:"I_Block_L003"}]};
  const rows=allocateEquipmentActions([candidate,{...candidate,character:"Other"}],[{id:"I_Block_L003",level:1,amount:2},{id:"I_Block_L003",level:minimum,amount:1}]);
  assert.equal(rows[0]!.state,"EQUIP NOW");assert.equal(rows[0]!.allocatedLevel,minimum);
- assert.equal(rows[1]!.state,"LEVEL INVENTORY");assert.equal(rows[1]!.copiesToLevel,2);
+ assert.equal(rows[1]!.state,"LEVEL INVENTORY");assert.equal(rows[1]!.copiesToLevel,1);
  assert.equal(minimumBlockReplacementLevel({id:"I_Block_L006",level:99},"I_Block_L003",shops.equipment),null);
 });
 test("the generated report shares preferences and consumes each adequately leveled shield only once",()=>{
