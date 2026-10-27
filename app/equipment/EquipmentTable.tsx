@@ -2,6 +2,8 @@
 import type {GearTransfer} from "../../src/domain/legendaryReallocation";
 import {useGearTransfers,GearTransferTable,type ReallocationProps} from "../reallocation/ReallocationPlanner";
 import EquipmentSlot,{equipmentSlotLabel} from "../components/EquipmentSlot";
+import ShopShoppingList from "./ShopShoppingList";
+import {groupEquipmentShopping} from "../../src/domain/equipmentShopping";
 import RarityBadge from "../components/RarityBadge";
 
 import ResourceName,{ResourceIcon,ResourceText} from "../components/ResourceName";
@@ -50,10 +52,6 @@ function characterSummary(row:Row){
 function UpgradeTable({slots,kind}:{slots:Slot[];kind:"ready"|"inventory"|"level"}){
  return <div className="tableWrap"><table><thead><tr><th>Character</th><th>{kind==="ready"?"Equip this":kind==="inventory"?"Available item":"Item to level"}</th><th>{kind==="ready"?"Replace":kind==="inventory"?"Copies available":"Next goal"}</th></tr></thead><tbody>{slots.map(slot=><tr key={`${slot.character}:${slot.slotId}:${slot.itemRarity}`}><td><CharacterName name={slot.character} id={slot.characterId}/><EquipmentSlot slotId={slot.slotId}/><small>{slot.goalLabel}</small></td><td>{kind==="level"?slot.state==="LEVEL INVENTORY"?<><UpgradeItem slot={slot}/><small>Inventory copy needs refinement</small></>:<><ResourceName id={slot.currentItemId??""} name={slot.currentItem}/><small>Level {slot.currentLevel}</small></>:<><UpgradeItem slot={slot}/>{kind==="ready"?<small>Level {slot.allocatedLevel??1}</small>:null}</>}</td><td>{kind==="ready"?<><ResourceName id={slot.currentItemId??""} name={slot.currentItem}/><small><RarityBadge rarity={slot.currentRarity}/> · level {slot.currentLevel}</small><strong className="ready">Upgrade now</strong></>:kind==="inventory"?slot.freeCopies:<>{slot.target}{slot.state==="LEVEL INVENTORY"?` · level ${slot.minimumLevel}`:""}<small>{slot.state==="LEVEL INVENTORY"?`Inventory replacement needs level ${slot.minimumLevel} before equipping · `:""}Check coins and salvage</small></>}</td></tr>)}</tbody></table></div>;
 }
-function ShopUpgradeRow({slot,source}:{slot:Slot;source:Source}){
- const offers=[...source.offers].sort((a,b)=>Number(b.match==="exact")-Number(a.match==="exact"));
- return <tr><td><CharacterName name={slot.character} id={slot.characterId}/><EquipmentSlot slotId={slot.slotId}/><small>{slot.goalLabel}</small></td><td><span className="itemName"><ItemIcon id={source.id}/><Link className="sourceLink" href={`/sources?item=${encodeURIComponent(source.id)}`}>{source.name}</Link></span><small><RarityBadge rarity={slot.itemRarity}/> · replaces <ResourceName id={slot.currentItemId??""} name={slot.currentItem}/> (<RarityBadge rarity={slot.currentRarity}/>)</small></td><td><strong>Buy an upgrade here</strong><OfferInfo offer={offers[0]!}/>{offers.length>1?<ReferenceDetails label={`${offers.length-1} other shop offers`}>{offers.slice(1).map(offer=><OfferInfo key={offer.id} offer={offer}/>)}</ReferenceDetails>:null}</td></tr>;
-}
 
 export default function EquipmentTable({rows,needs,raidNames,campaignNames,defenseTeams,offenseTeams,transferContext}:{transferContext:ReallocationProps;rows:Row[];needs:Need[];raidNames:string[];campaignNames:string[];defenseTeams:EquipmentWarTeam[];offenseTeams:EquipmentWarTeam[]})
 {
@@ -86,7 +84,8 @@ export default function EquipmentTable({rows,needs,raidNames,campaignNames,defen
  const itemGroups=equipmentTargetRarities.filter(rarity=>goalScope||selected[rarity]).map(rarity=>({rarity,items:filteredNeeds.filter(item=>tier(item.itemId)===rarity&&matches(`${item.name} ${equipmentSlotLabel(item.slotId)} ${item.characters.map(character=>character.name).join(" ")}`))})).filter(group=>group.items.length);
  const assignedSlots=new Set(rows.flatMap(row=>row.slots.filter(slot=>slot.state==="EQUIP NOW").map(slot=>`${slot.character}:${slot.slotId}`)));
  const visibleTransfers=transfers.filter(item=>scopedRows.some(row=>row.character===item.recipient&&row.slots.some(slot=>slot.slotId===item.recipientSlot&&slot.acquisition.some(source=>source.id===item.itemId)))&&matches(`${item.character} ${item.recipient} ${item.itemName} ${item.replacesName} ${equipmentSlotLabel(item.slotId)} ${equipmentSlotLabel(item.recipientSlot)}`));
- const shopUpgrades=[...scopedRows.flatMap(row=>row.slots.filter(slot=>slot.state!=="UNKNOWN"&&slot.state!=="LEVEL INVENTORY"&&slot.freeCopies<=0&&!transferredSlots.has(`${slot.character}:${slot.slotId}`)&&!assignedSlots.has(`${slot.character}:${slot.slotId}`)).flatMap(slot=>slot.acquisition.filter(source=>source.offers.length&&matches(`${slot.character} ${equipmentSlotLabel(slot.slotId)} ${source.name} ${source.offers.map(offer=>`${offer.shop} ${offer.rotation}`).join(" ")}`)).map(source=>({slot,source})))).reduce((choices,choice)=>choices.set(`${choice.slot.character}:${choice.slot.slotId}:${choice.source.id}`,choice),new Map<string,{slot:Slot;source:Source}>()).values()];
+ const shopUpgrades=[...scopedRows.flatMap(row=>row.slots.filter(slot=>slot.state!=="UNKNOWN"&&slot.state!=="LEVEL INVENTORY"&&slot.freeCopies<=0&&!transferredSlots.has(`${slot.character}:${slot.slotId}`)&&!assignedSlots.has(`${slot.character}:${slot.slotId}`)).flatMap(slot=>slot.acquisition.filter(source=>source.offers.length).map(source=>({slot,source})))).reduce((choices,choice)=>choices.set(`${choice.slot.character}:${choice.slot.slotId}:${choice.source.id}`,choice),new Map<string,{slot:Slot;source:Source}>()).values()];
+ const shoppingItems=groupEquipmentShopping(shopUpgrades).filter(item=>matches(`${item.name} ${item.members.map(({slot})=>`${slot.character} ${slot.currentItem} ${equipmentSlotLabel(slot.slotId)}`).join(" ")} ${item.offers.map(offer=>`${offer.shop} ${offer.rotation}`).join(" ")}`));
  return <>
   <div className="abilityViews"><label>Upgrade focus<select aria-label="Equipment upgrade focus" value={scope} onChange={event=>setScope(event.target.value as EquipmentScope)}><option value="raid">Main raid team</option><option value="teams">Raid first, then active War teams</option><option value="war">Active War teams</option><option value="campaign">Incomplete campaigns</option><option value="all">Full roster</option></select></label></div>
   <input className="equipmentSearch" aria-label="Search equipment upgrades" placeholder="Search character, item, slot, or shop…" value={query} onChange={event=>setQuery(event.target.value)}/>
@@ -104,10 +103,7 @@ export default function EquipmentTable({rows,needs,raidNames,campaignNames,defen
 
   </div>
   {!goalScope?<fieldset className="equipmentRarityFilter"><legend>Target rarity</legend>{equipmentTargetRarities.map(rarity=><label key={rarity}><input type="checkbox" checked={selected[rarity]} onChange={event=>setSelected(current=>({...current,[rarity]:event.target.checked}))}/><RarityBadge rarity={rarity}/></label>)}</fieldset>:null}
-  <div hidden={view!=="shops"}><CollapsibleSection title="Shop upgrade opportunities" summary={`${shopUpgrades.length} options · check current stock in-game`}>
-   <p className="sub equipmentShopNote">Schedules use UTC.</p>
-   {shopUpgrades.length?<div className="tableWrap"><table><thead><tr><th>Character</th><th>Upgrade</th><th>Where and when</th></tr></thead><tbody>{shopUpgrades.map(choice=><ShopUpgradeRow key={`${choice.slot.character}:${choice.source.id}`} {...choice}/>)}</tbody></table></div>:<p className="empty">No matching shop offers at these rarities.</p>}
-  </CollapsibleSection></div>
+  <div hidden={view!=="shops"}><section className="equipmentShopSummary" aria-label="Shop upgrade opportunities"><h2>Shopping list <small>{shoppingItems.length} item choices</small></h2><ShopShoppingList items={shoppingItems}/></section></div>
   <div hidden={view!=="needed"}><CollapsibleSection title="Needed Equipment" summary={`${itemGroups.reduce((sum,group)=>sum+group.items.length,0)} item types`}>
    {!itemGroups.length?<p className="empty">No equipment needs at these rarities.</p>:null}
    {itemGroups.map(group=><CollapsibleSection key={group.rarity} label={group.rarity} title={<RarityBadge rarity={group.rarity}/>} summary={`${group.items.length} item types`} defaultOpen={group.rarity==="Legendary"}>

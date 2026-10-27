@@ -12,6 +12,7 @@ import {WAR_PLAN_STORAGE_KEY} from "../src/domain/warBadgeTargets";
 import shopsData from "../data/game/shops.json";
 import {GearTransferTable,type ReallocationProps} from "../app/reallocation/ReallocationPlanner";
 import GearTransferSource from "../app/components/GearTransferSource";
+import ShopShoppingList from "../app/equipment/ShopShoppingList";
 const transferContext:ReallocationProps={units:[],targets:[],characters:[],equipment:{},raidNames:[],raidOptions:[],campaignNames:[],campaignUnknown:[],focus:{},defenseTeams:[],offenseTeams:[]};
 
 const catalog=catalogData as {characters:CatalogCharacter[]};
@@ -125,4 +126,24 @@ test("equipment sections collapse independently, retain character expansion and 
  const swap=within(view.getByRole("group",{name:"Replace equipment in Slot 2"}));
  assert.match(swap.getByText("Old item").closest("div")!.textContent!,/Replace.*Old item.*Level 3/);
  assert.match(swap.getByText("Better item").closest("div")!.textContent!,/With.*Better item.*Level 7/);
+ // One item row for multiple recipients; names/replacements stay collapsed.
+ const shopSlot={character:"Mataneo",characterId:"bloodMataneo",slotId:"Slot2",currentItem:"Old armour",currentLevel:2};
+ view.rerender(createElement(ShopShoppingList,{items:[{id:"I_Defensive_L002",name:"Artificer MK X Pauldron",members:[{slot:shopSlot},{slot:{...shopSlot,character:"Lucien",characterId:"bloodLucien"}}],offers:[{id:"unknown",shop:"Unverified shop",match:"exact",rotation:"Daily (UTC)",price:"200 War Credits",access:"unknown",adRefresh:false},{id:"offer",shop:"Test shop",match:"pool",rotation:"Daily (UTC)",price:"100 War Credits",access:"eligible",adRefresh:false}]}]}));
+ assert.equal(view.getAllByRole("row").length,2);
+ assert.equal(view.getAllByRole("cell")[1]!.textContent,"2");
+ assert.equal(view.getAllByRole("row")[1]!.querySelector("td:last-child > div > strong")!.textContent,"Test shop");
+ assert.equal(view.getByText("Who needs it").closest("details")!.open,false);
+ assert.ok(view.getByText(/Random pool/));
+ fireEvent.click(view.getByText("Who needs it"));
+ assert.equal(view.getByText("Who needs it").closest("details")!.open,true);
+ assert.ok(view.getByRole("link",{name:/Mataneo/}));
+ // A compatible Legendary character with Epic greaves really does get the Pauldron.
+ const pauldronReport={...report,roster:[unit("Mataneo","I_Defensive_E003","Adorned Plated Greaves","BloodAngels")],unequippedInventory:[],equipmentAllocation:{equipNow:[],buyWatch:[],compatibilityUnknown:[]}};
+ const pauldronPlan=buildEquipmentPlan(pauldronReport,catalog,shops,new Set(["Mataneo"]));
+ assert.ok(pauldronPlan.rows[0]!.slots.some(slot=>slot.acquisition.some(source=>source.id==="I_Defensive_L002")));
+ view.rerender(createElement(EquipmentTable,{key:"pauldron",transferContext,rows:pauldronPlan.rows,needs:[],raidNames:["Mataneo"],campaignNames:[],defenseTeams:[],offenseTeams:[]}));
+ fireEvent.click(view.getByRole("button",{name:"Shop upgrades"}));
+ assert.ok(view.getByRole("link",{name:"Artificer MK X Pauldron"}));
+ const equippedPlan=buildEquipmentPlan({...pauldronReport,roster:[unit("Mataneo","I_Defensive_L002","Artificer MK X Pauldron","BloodAngels")]},catalog,shops);
+ assert.equal(equippedPlan.rows[0]!.slots.some(slot=>slot.acquisition.some(source=>source.id==="I_Defensive_L002")),false);
 });

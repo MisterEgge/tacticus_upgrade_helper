@@ -431,7 +431,7 @@ try
     report.unequippedInventory[0].amount=1;
     await writeFile(reportPath,JSON.stringify(report));
     const shopEquipment=await get('/equipment');
-    assert.match(shopEquipment,/Where and when/);
+    assert.match(shopEquipment,/Shop \/ cost \/ rotation/);
     assert.match(shopEquipment,/War test weapon · level 9/);
     assert.match(shopEquipment,/Equipment upgrade focus/);
     assert.doesNotMatch(await get('/abilities'),/Level eligible now|level eligible<\/small>/);
