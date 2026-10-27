@@ -238,4 +238,4 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .equipmentShoppingList td { vertical-align:top; }
 .equipmentShoppingList td:first-child { width:47%; }
 .equipmentShoppingList td:last-child { width:40%; }
-@media(max-width:600px) { .equipmentPanel .equipmentShoppingList table { min-width:0; table-layout:fixed; } .equipmentShoppingList th:nth-child(2),.equipmentShoppingList td:nth-child(2) { width:48px; } .equipmentShoppingList .resourceName { flex-wrap:wrap; } .equipmentShoppingList .resourceIcon { flex-shrink:0; } }
+@media(max-width:600px) { .equipmentPanel .equipmentShoppingList table { min-width:0; table-layout:fixed; } .equipmentShoppingList td:first-child { width:44%; } .equipmentShoppingList td:last-child { width:auto; } .equipmentShoppingList th:nth-child(2),.equipmentShoppingList td:nth-child(2) { width:48px; } .equipmentShoppingList .resourceName { flex-wrap:wrap; } .equipmentShoppingList .resourceIcon { flex-shrink:0; } }
