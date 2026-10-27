@@ -229,3 +229,13 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .gearTransferCard details p { margin:8px 0 0; }
 .equipmentViewTabs button[aria-pressed=true] { border-color:#9ccaff; background:#273344; }
 @media(max-width:800px) { .gearTransferCard { grid-template-columns:minmax(0,1fr); padding:12px; gap:16px; } .gearTransferReplacement { border-top:1px solid #303b4b; padding-top:12px; } }
+.equipmentShopSummary h2 { display:flex; align-items:baseline; flex-wrap:wrap; gap:12px; font-size:22px; margin:14px 0; }
+.equipmentShopSummary h2 small { font-size:13px; font-weight:400; }
+.equipmentShoppingQuantity { width:70px; text-align:center; font-size:20px!important; }
+.equipmentShoppingSlots { margin-top:4px; }
+.equipmentShoppingRecipients { list-style:none; padding:0; margin:10px 0; display:grid; gap:12px; }
+.equipmentShoppingRecipients .portrait { width:30px; height:30px; }
+.equipmentShoppingList td { vertical-align:top; }
+.equipmentShoppingList td:first-child { width:47%; }
+.equipmentShoppingList td:last-child { width:40%; }
+@media(max-width:600px) { .equipmentPanel .equipmentShoppingList table { min-width:0; table-layout:fixed; } .equipmentShoppingList th:nth-child(2),.equipmentShoppingList td:nth-child(2) { width:48px; } .equipmentShoppingList .resourceName { flex-wrap:wrap; } .equipmentShoppingList .resourceIcon { flex-shrink:0; } }
