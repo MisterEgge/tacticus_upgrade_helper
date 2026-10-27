@@ -18,6 +18,7 @@ import { selectedRaidNames, type RaidSelection } from "../../src/domain/raidSele
 import type { RosterUnit } from "../lib/report";
 import LaviscusRoadmap from "./LaviscusRoadmap";
 import RaidBattleGuide from "./RaidBattleGuide";
+import RaidSideBossGuide from "./RaidSideBossGuide";
 
 type Member = { name: string; id: string; icon?: string | undefined; owned: boolean; rarity: string | null; rank: number | null; xpLevel: number | null; activeLevel: number | null; passiveLevel: number | null; activeTarget: string; passiveTarget: string; activeBasis: string; passiveBasis: string };
 type Team = RaidTeam & { members: Member[] };
@@ -110,6 +111,7 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, roster,
         </section>
 </>},
             {label:"Battle guide",content:<RaidBattleGuide key={`${boss}-${teamName}-${lineup.join("|")}-${machine}`} boss={boss} teamName={teamName} members={members} machine={machine}/>},
+            {label:"Side bosses",content:<RaidSideBossGuide boss={boss}/>},
             {label:"Upgrades",content:<>        <LaviscusRoadmap roster={roster} members={members} machine={machine ?? undefined} orbInventory={orbInventory}/>
         <CollapsibleSection title="Character ability targets" defaultOpen={false} className="panel detailPanel">
             <p className="sub">Upgrade steps respect current XP and rarity. Check badges and coins before spending.</p>
