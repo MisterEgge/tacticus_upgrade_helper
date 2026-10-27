@@ -4,8 +4,8 @@ import type {EquipmentFocus} from "./equipmentFocus";
 export type ReallocationUnit={id:string;name:string;rarity:string;items:Array<{slotId:string;id:string;level:number;rarity?:string;name?:string}>};
 export type ReallocationTarget={character:string;characterId:string;slotId:string;itemId:string;minimumLevel:number;inventoryReady:boolean};
 export type GearRole={label:string;priority:number};
-export type GearHolding={character:string;characterId:string;slotId:string;itemId:string;itemName:string;level:number;reason:string};
-export type GearTransfer=GearHolding&{recipient:string;recipientId:string;recipientSlot:string;replacesId:string;replacesName:string;replacesLevel:number;role:string};
+export type GearHolding={character:string;characterId:string;slotId:string;itemId:string;itemName:string;level:number;reason:string;rarity?:string};
+export type GearTransfer=GearHolding&{recipient:string;recipientId:string;recipientSlot:string;replacesId:string;replacesName:string;replacesLevel:number;replacesRarity?:string;role:string};
 export type GearReview=GearHolding&{action:string};
 
 /** Selected teams win priority; other recorded roles still protect their equipped gear. */
@@ -30,7 +30,7 @@ export function planLegendaryReallocation({units,targets,characters,equipment,ro
  for(const unit of units)for(const item of unit.items){
   if(!["Uncommon","Rare","Epic","Legendary"].includes(item.rarity??equipment[item.id]?.rarity??""))continue;
   const role=roles.get(unit.name);
-  const holding:GearHolding={character:unit.name,characterId:unit.id,slotId:item.slotId,itemId:item.id,itemName:equipment[item.id]?.name??item.name??item.id,level:item.level,reason:role?.label??"No recorded Raid, War or campaign role"};
+  const holding:GearHolding={character:unit.name,characterId:unit.id,slotId:item.slotId,itemId:item.id,itemName:equipment[item.id]?.name??item.name??item.id,level:item.level,rarity:equipment[item.id]?.rarity??item.rarity??"Unknown",reason:role?.label??"No recorded Raid, War or campaign role"};
   if(role||warUnknown){protectedGear.push({...holding,reason:role?.label??"War selections unavailable — keep equipped"});continue;}
   if(!equipment[item.id]||!definitions.has(unit.id)||!Number.isInteger(item.level)||item.level<1){review.push({...holding,action:"Keep equipped — item or character data needs review"});continue;}
   available.push(holding);
@@ -46,7 +46,7 @@ export function planLegendaryReallocation({units,targets,characters,equipment,ro
   const donor=available.filter(item=>!used.has(item)&&item.itemId===target.itemId&&item.characterId!==unit.id&&item.level>=target.minimumLevel).sort((a,b)=>b.level-a.level||a.character.localeCompare(b.character)||a.slotId.localeCompare(b.slotId))[0];
   if(!donor)continue;
   used.add(donor);slots.add(key);
-  transfers.push({...donor,recipient:unit.name,recipientId:unit.id,recipientSlot:target.slotId,replacesId:current.id,replacesName:currentDefinition.name??current.name??current.id,replacesLevel:current.level,role:roles.get(unit.name)!.label});
+  transfers.push({...donor,recipient:unit.name,recipientId:unit.id,recipientSlot:target.slotId,replacesId:current.id,replacesName:currentDefinition.name??current.name??current.id,replacesLevel:current.level,replacesRarity:currentDefinition.rarity,role:roles.get(unit.name)!.label});
  }
  for(const holding of available)if(!used.has(holding))review.push({...holding,action:"Keep equipped — no suitable transfer right now"});
  return {transfers,review,protectedGear};
