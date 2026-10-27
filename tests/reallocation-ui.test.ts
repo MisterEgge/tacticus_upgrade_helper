@@ -30,6 +30,11 @@ test("gear transfers protect Aesoth and follow saved War selections when focus c
  assert.ok(transfers().getByText("Raid"));
  assert.ok(transfers().getByText("Epic pistol"));
  assert.equal(transfers().queryByText("Aesoth"),null);
- assert.equal(transfers().getAllByRole("row").length,2);
+ assert.equal(transfers().getAllByRole("listitem").length,1);
+ assert.equal(transfers().queryByRole("table"),null);
+ assert.ok(transfers().getByRole("group",{name:"Transfer from Maladus to Raid"}));
+ const replacement=within(transfers().getByRole("group",{name:"Replace equipment in Slot 1"}));
+ assert.ok(replacement.getByRole("img",{name:"Epic"}));
+ assert.ok(replacement.getByRole("img",{name:"Legendary"}));
  assert.equal(view.queryByText(/Keep equipped|Protected gear|Why it stays/),null);
 });

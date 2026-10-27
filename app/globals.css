@@ -211,3 +211,21 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .warMachineApply { font:inherit; color:#edf1f7; background:#1b2330; border:1px solid #65758b; border-radius:8px; padding:10px 13px; cursor:pointer; min-height:44px; }
 .warMachineApply:hover { background:#273344; }
 .warMachineApply:focus-visible { outline:2px solid #9ccaff; outline-offset:3px; }
+.equipmentSlotBadge { display:inline-block; padding:2px 7px; margin:4px 5px 4px 0; border:1px solid #46536a; border-radius:5px; font-size:11px; color:#c5d2e3; white-space:nowrap; }
+.gearTransfers { margin:18px 0; }
+.gearTransfers h2 { font-size:20px; margin:0 0 12px; }
+.gearTransferList { list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+.gearTransferCard { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); gap:12px 24px; padding:16px; border:1px solid #303b4b; border-radius:12px; background:#101720; }
+.gearTransferRoute,.gearTransferReplacement { display:grid; grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr); gap:10px; align-items:center; min-width:0; }
+.gearTransferCard small { font-size:12px; margin:0 0 5px; }
+.gearTransferCard .gearTransferItemMeta { display:flex; align-items:center; gap:6px; margin-top:4px; }
+.gearTransferCard .characterCell { align-items:center; flex-wrap:wrap; }
+.gearTransferCard .resourceName { font-size:13px; }
+.gearTransferCard .characterLink { display:block; }
+.gearTransferCard .characterCell strong { overflow-wrap:anywhere; font-size:14px; }
+.gearTransferArrow { color:#9ccaff; font-size:20px; text-align:center; }
+.gearTransferCard details { grid-column:1/-1; font-size:12px; color:#9da9ba; }
+.gearTransferCard summary { cursor:pointer; }
+.gearTransferCard details p { margin:8px 0 0; }
+.equipmentViewTabs button[aria-pressed=true] { border-color:#9ccaff; background:#273344; }
+@media(max-width:800px) { .gearTransferCard { grid-template-columns:minmax(0,1fr); padding:12px; gap:16px; } .gearTransferReplacement { border-top:1px solid #303b4b; padding-top:12px; } }
