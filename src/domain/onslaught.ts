@@ -46,11 +46,11 @@ export function readSectorChoices(value:unknown):Partial<Record<Alliance,SectorC
 }
 
 const stock=(value:number|null)=>value!==null&&Number.isSafeInteger(value)&&value>=0?value:null;
-const relevance=(unit:OnslaughtCandidate,war:Map<string,number>)=>unit.utility.mainRaidCore?0:unit.utility.mainRaidFlex?1:unit.utility.tier==="Core"?2:unit.utility.tier==="Strong"?3:unit.utility.incompleteCampaign?4:unit.utility.tier==="Useful"?5:unit.utility.tier==="Situational"||war.has(unit.name)?6:7;
+const relevance=(unit:OnslaughtCandidate,war:Map<string,number>)=>unit.utility.mainRaidCore?0:unit.utility.mainRaidFlex?1:unit.utility.priorityModes?.includes("LRE")?2:unit.utility.tier==="Core"?3:unit.utility.tier==="Strong"?4:unit.utility.incompleteCampaign?5:unit.utility.tier==="Useful"?6:unit.utility.tier==="Situational"||war.has(unit.name)?7:8;
 const regularIncome=new Map(rewards.regularShardIncome.map(source=>[source.id,source]));
 function rarityGoal(unit:OnslaughtCandidate,war:Map<string,number>):number|null {
  // Broad usefulness justifies Legendary. War membership alone keeps its cap.
- if(unit.utility.mainRaidCore||unit.utility.mainRaidFlex||utilityAtLeast(unit.utility.tier,"Useful"))return 12;
+ if(unit.utility.mainRaidCore||unit.utility.mainRaidFlex||unit.utility.priorityModes?.includes("LRE")||utilityAtLeast(unit.utility.tier,"Useful"))return 12;
  const warTarget=war.get(unit.name);
  return warTarget===35?9:warTarget===26?6:null;
 }
@@ -114,10 +114,11 @@ export function onslaughtPriorities(candidates:OnslaughtCandidate[],orbs:OrbInve
    if(badgeNeeds.length)reasons.push(`Honor badges can help the eligible practical ability goal: ${badgeNeeds.map(row=>`${row.shortfall} ${row.rarity} short`).join(", ")}`);
    if(mythicGoal)reasons.push(`Optional Mythic goal · ${shardShortfall??"unknown"} Mythic shards short`);
    if(unit.utility.mainRaidCore||unit.utility.mainRaidFlex)reasons.push("Selected Raid team");
+   else if(unit.utility.priorityModes?.includes("LRE"))reasons.push("LRE roster priority · review current event track requirements");
    else if(unit.utility.incompleteCampaign)reasons.push("Required in unfinished Elite campaign");
    else if(war.has(unit.name))reasons.push(`Active War slot · ability target ${warTarget}`);
-   else if(unit.utility.tier!=="No tracked signal")reasons.push(`${unit.utility.tier} account usefulness`);
-   else reasons.push("Usefulness unranked · compare before investing");
+   else if(unit.utility.tier==="Low priority")reasons.push("Low priority for this roster · leave at the current rank unless you enjoy using them or a current LRE track needs them");
+   else reasons.push(`${unit.utility.tier} account usefulness`);
    const priority=futureRarity?5:resourceBanking?6:shardShortfall!==null&&(needsShards||helpsOwnOrb)?0:orbPool?1:badgeNeeds.length?2:needsShards?3:4;
    // Lack of a campaign source is a tie-breaker, never proof that Onslaught is
    // the only acquisition route. Shared pools are alternatives, not reservations.

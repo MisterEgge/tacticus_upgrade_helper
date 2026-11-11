@@ -1,0 +1,945 @@
+{
+  "_meta": {
+    "reviewedOn": "2026-11-03",
+    "note": "Curated matchup knowledge. Every listed recommendation must cite a source. Exact team records and defense-overlap attack-core data are kept separate; neither should be mistaken for individual character counter evidence."
+  },
+  "sources": {
+    "guild-war-rules": {
+      "title": "Guild War",
+      "url": "https://tacticus.wiki.gg/wiki/Guild_War",
+      "note": "Game mode structure and rarity caps; does not provide unit-counter outcomes."
+    },
+    "angrax-abilities": {
+      "title": "Angrax abilities",
+      "url": "https://tacticus.wiki.gg/wiki/Angrax",
+      "note": "Ability mechanics; tactical positioning implication is not a tested counter."
+    },
+    "maladus-abilities": {
+      "title": "Maladus abilities",
+      "url": "https://tacticus.wiki.gg/wiki/Maladus",
+      "note": "Maladus's Flail Swing active Always Overkills units it defeats; ability mechanics are not a tested Guild War counter."
+    },
+    "kharn-abilities": {
+      "title": "Kharn abilities",
+      "url": "https://tacticus.wiki.gg/wiki/Kharn",
+      "note": "Ability mechanics; tactical positioning implication is not a tested counter."
+    },
+    "typhus-abilities": {
+      "title": "Typhus abilities",
+      "url": "https://tacticus.wiki.gg/wiki/Typhus",
+      "note": "Ability mechanics; tactical positioning implication is not a tested counter."
+    },
+    "rotbone-community-observation": {
+      "title": "Guild War best defense teams",
+      "url": "https://www.reddit.com/r/WH40KTacticus/comments/1bpai0m/guild_war_best_defense_teams/",
+      "note": "Anecdotal community observation; original post could not be directly verified during research."
+    },
+    "terminus-defense-cohorts": {
+      "title": "Guild War defense cohorts",
+      "url": "https://terminusmaximus.com/guild-wars/defend/",
+      "note": "Uploaded war-log aggregates from Seasons 25–27, BF4–5. Counter cores are grouped against defenses sharing at least three of five characters; rates are not adjusted for tier, map, power, opponent choice, or repeated wars."
+    },
+    "terminus-attack-cores": {
+      "title": "Guild War attack cores",
+      "url": "https://terminusmaximus.com/guild-wars/attack/",
+      "note": "Documents attack-core compositions; aggregate defense-cohort clear rates do not validate an exact five-versus-five pairing."
+    },
+    "terminator-armour": {
+      "title": "Terminator Armour",
+      "url": "https://tacticus.wiki.gg/wiki/Terminator_Armour",
+      "note": "The trait's first-Attack damage reduction excludes Psychic and Direct hits and prevents Suppression."
+    },
+    "psychic-damage": {
+      "title": "Psychic damage",
+      "url": "https://tacticus.wiki.gg/wiki/Psychic",
+      "note": "Lists characters whose basic attacks or abilities deal Psychic damage."
+    },
+    "direct-damage": {
+      "title": "Direct damage",
+      "url": "https://tacticus.wiki.gg/wiki/Direct",
+      "note": "Lists characters whose abilities deal Direct damage."
+    },
+    "overwatch": {
+      "title": "Overwatch",
+      "url": "https://tacticus.wiki.gg/wiki/Overwatch",
+      "note": "Infiltrate units are not targeted by Overwatch attacks."
+    },
+    "suppressed": {
+      "title": "Suppressed",
+      "url": "https://tacticus.wiki.gg/wiki/Suppressed",
+      "note": "Suppressed units cannot fire Overwatch."
+    },
+    "suppressive-fire": {
+      "title": "Suppressive Fire",
+      "url": "https://tacticus.wiki.gg/wiki/Suppressive_Fire",
+      "note": "The trait applies Suppression to enemies hit by ranged attacks."
+    },
+    "resilient": {
+      "title": "Resilient",
+      "url": "https://tacticus.wiki.gg/wiki/Resilient",
+      "note": "Resilient's 1-Health prevention is negated by Overkill."
+    },
+    "overkill": {
+      "title": "How Does Overkill Work?",
+      "url": "https://tacticus.wiki.gg/wiki/HDTW_Overkill",
+      "note": "Describes when Overkill prevents Resilient and lists attacks that always Overkill."
+    },
+    "mechanical": {
+      "title": "Mechanical",
+      "url": "https://tacticus.wiki.gg/wiki/Mechanical",
+      "note": "Lists abilities concerning Mechanical units, including abilities marked as acting against them."
+    },
+    "sy-gex-abilities": {
+      "title": "Sy-Gex",
+      "url": "https://tacticus.wiki.gg/wiki/Sy-Gex",
+      "note": "Sy-Gex has bonus damage and pierce against Terminator Armour, Mk X Gravis, and Mechanical units."
+    },
+    "vynn-abilities": {
+      "title": "Vynn",
+      "url": "https://tacticus.wiki.gg/wiki/Vynn",
+      "note": "Vynn's active gains bonus pierce and stuns Terminator Armour, Mk X Gravis, and Mechanical units; its damage is Physical."
+    },
+    "rotbone-abilities": {
+      "title": "Nauseous Rotbone",
+      "url": "https://tacticus.wiki.gg/wiki/Nauseous_Rotbone",
+      "note": "Rotbone's passive can revive an adjacent Chaos ally even if Rotbone is Overkilled."
+    },
+    "njal-abilities": {
+      "title": "Njal",
+      "url": "https://tacticus.wiki.gg/wiki/Njal",
+      "note": "Njal's active Stuns Flying enemies it damages."
+    },
+    "tanksmasha-abilities": {
+      "title": "Tanksmasha",
+      "url": "https://tacticus.wiki.gg/wiki/Tanksmasha",
+      "note": "Tanksmasha's active Stuns a Big Target hit by its charge."
+    },
+    "stunned": {
+      "title": "Stunned",
+      "url": "https://tacticus.wiki.gg/wiki/Stunned",
+      "note": "Stunned units move with 1 Movement, deal less damage, and cannot use Active Abilities until the effect ends or is cleansed."
+    },
+    "psyker-trait": {
+      "title": "Psyker",
+      "url": "https://tacticus.wiki.gg/wiki/Psyker",
+      "note": "Lists Psykers and characters with abilities specifically concerning the Psyker trait."
+    },
+    "atlacoya-abilities": {
+      "title": "Atlacoya",
+      "url": "https://tacticus.wiki.gg/wiki/Atlacoya",
+      "note": "Her active deals Direct damage to Psyker targets; her passive increases damage they take and reduces Psychic damage to nearby allies."
+    },
+    "helbrecht-abilities": {
+      "title": "High Marshal Helbrecht",
+      "url": "https://tacticus.wiki.gg/wiki/High_Marshal_Helbrecht",
+      "note": "His passive grants movement and bonus melee damage against Psykers."
+    },
+    "roswitha-abilities": {
+      "title": "Roswitha",
+      "url": "https://tacticus.wiki.gg/wiki/Roswitha",
+      "note": "Her passive adds damage against Psykers."
+    },
+    "tjark-abilities": {
+      "title": "Tjark",
+      "url": "https://tacticus.wiki.gg/wiki/Tjark",
+      "note": "His passive adds damage against Psykers, reduces their damage nearby, and suppresses their secondary Psychic hit from normal ranged attacks."
+    },
+    "mkx-gravis": {
+      "title": "Mk X Gravis",
+      "url": "https://tacticus.wiki.gg/wiki/Mk_X_Gravis",
+      "note": "Incoming damage is applied against armour a second time, except on Critical hits."
+    },
+    "parry": {
+      "title": "Parry",
+      "url": "https://tacticus.wiki.gg/wiki/Parry",
+      "note": "Reduces incoming melee multi-hit attacks by one hit, to a minimum of one."
+    },
+    "camouflage": {
+      "title": "Camouflage",
+      "url": "https://tacticus.wiki.gg/wiki/Camouflage",
+      "note": "Reduces hits from incoming ranged attacks, with a larger reduction at range and in Tall Grass."
+    },
+    "explodes": {
+      "title": "Explodes",
+      "url": "https://tacticus.wiki.gg/wiki/Explodes",
+      "note": "Deals Direct damage to all adjacent units when defeated."
+    },
+    "melta-damage": {
+      "title": "Melta",
+      "url": "https://tacticus.wiki.gg/wiki/Melta",
+      "note": "Melta deals bonus damage against Vehicles; lists character basic attacks and abilities that deal Melta."
+    },
+    "beast-slayer": {
+      "title": "Beast Slayer",
+      "url": "https://tacticus.wiki.gg/wiki/Beast_Slayer",
+      "note": "Grants bonus melee damage against Big Targets and Vehicles."
+    },
+    "blast-damage": {
+      "title": "Blast damage",
+      "url": "https://tacticus.wiki.gg/wiki/Blast",
+      "note": "Lists character basic attacks and abilities that deal Blast; Blast bypasses Swarm and 2-Man Team effects."
+    },
+    "living-metal": {
+      "title": "Living Metal",
+      "url": "https://tacticus.wiki.gg/wiki/Living_Metal",
+      "note": "Living Metal regenerates 10% of maximum Health at the start of its owner's turn."
+    },
+    "healer": {
+      "title": "Healer",
+      "url": "https://tacticus.wiki.gg/wiki/Healer",
+      "note": "A Healer can spend its action to restore Health to a friendly unit."
+    },
+    "shadow-in-the-warp": {
+      "title": "Shadow in the Warp",
+      "url": "https://tacticus.wiki.gg/wiki/Shadow_in_the_Warp",
+      "note": "Enemy Psykers within two hexes deal reduced Psychic damage; this does not affect Tyranid Psykers."
+    },
+    "mechanic-trait": {
+      "title": "Mechanic",
+      "url": "https://tacticus.wiki.gg/wiki/Mechanic",
+      "note": "A Mechanic can spend its action to Repair a friendly Mechanical unit."
+    },
+    "ambush-trait": {
+      "title": "Ambush",
+      "url": "https://tacticus.wiki.gg/wiki/Ambush",
+      "note": "After its first defeat, the unit can return at full Health on a surviving friendly Decoy at the beginning of its next turn."
+    },
+    "blessings-of-khorne": {
+      "title": "Blessings of Khorne",
+      "url": "https://tacticus.wiki.gg/wiki/Blessings_of_Khorne",
+      "note": "Damage and Psychic resistance increase for each unit defeated in melee, up to eight."
+    },
+    "thrill-seekers": {
+      "title": "Thrill Seekers",
+      "url": "https://tacticus.wiki.gg/wiki/Thrill_Seekers",
+      "note": "Thrilled units gain Crit Chance; a critical-hit defeat while Thrilled is Always Overkilled."
+    },
+    "get-stuck-in": {
+      "title": "Get Stuck In",
+      "url": "https://tacticus.wiki.gg/wiki/Get_Stuck_In",
+      "note": "Adds hits to attacks, with a higher trigger chance based on the unit's faction and units adjacent to its target."
+    },
+    "terrifying": {
+      "title": "Terrifying",
+      "url": "https://tacticus.wiki.gg/wiki/Terrifying",
+      "note": "Reduces damage taken from Melee attacks by 30%."
+    },
+    "act-of-faith": {
+      "title": "Act of Faith",
+      "url": "https://tacticus.wiki.gg/wiki/Act_of_Faith",
+      "note": "Gains Crit Chance and Crit Damage when friendly Imperial units die or kill enemies; its bonus resets when it scores a Critical hit."
+    },
+    "prioritised-efficiency": {
+      "title": "Prioritised Efficiency",
+      "url": "https://tacticus.wiki.gg/wiki/Prioritised_Efficiency",
+      "note": "Grants +25% damage and -25% incoming damage until the unit traverses at least three hexes during its turn."
+    },
+    "indirect-fire": {
+      "title": "Indirect Fire",
+      "url": "https://tacticus.wiki.gg/wiki/Indirect_Fire",
+      "note": "Allows attacks over obscuring hexes and ignores Trenches."
+    },
+    "heavy-weapon": {
+      "title": "Heavy Weapon",
+      "url": "https://tacticus.wiki.gg/wiki/Heavy_Weapon",
+      "note": "Grants ranged damage while the unit has not moved; Overwatch benefits if it did not move on its own turn."
+    },
+    "unstoppable": {
+      "title": "Unstoppable",
+      "url": "https://tacticus.wiki.gg/wiki/Unstoppable",
+      "note": "Ignores movement-stopping effects from terrain such as Fire, Razor Wire, and Broken Ice."
+    },
+    "infiltrate": {
+      "title": "Infiltrate",
+      "url": "https://tacticus.wiki.gg/wiki/Infiltrate",
+      "note": "An Infiltrate unit cannot be targeted by Overwatch."
+    },
+    "synapse": {
+      "title": "Synapse",
+      "url": "https://tacticus.wiki.gg/wiki/Synapse",
+      "note": "Nearby friendly units ignore Instinctive Behaviour and Battle Fatigue."
+    },
+    "crushing-strike": {
+      "title": "Crushing Strike",
+      "url": "https://tacticus.wiki.gg/wiki/Crushing_Strike",
+      "note": "Normal Melee attacks deal 50% more damage if the unit has not moved that turn."
+    },
+    "creed-abilities": {
+      "title": "Castellan Creed",
+      "url": "https://tacticus.wiki.gg/wiki/Castellan_Creed",
+      "note": "Kell can intercept attacks aimed at adjacent Creed, and Creed's active summons and activates Cadian Guardsmen."
+    },
+    "aun-shi-abilities": {
+      "title": "Aun'Shi",
+      "url": "https://tacticus.wiki.gg/wiki/Aun%27Shi",
+      "note": "Aun'Shi cycles powerful buffs to nearby allies and can let an adjacent unit use its Active ability again while healing or repairing it."
+    }
+  },
+  "unitCounters": [],
+  "mechanicNotes": [
+    {
+      "defenderId": "blackTerminator",
+      "note": "Angrax can punish a unit that moves away while adjacent. Avoid moving away from him when possible; this is a positioning caution, not a proven counter-unit recommendation.",
+      "confidence": "medium",
+      "sourceId": "angrax-abilities"
+    },
+    {
+      "defenderId": "deathBlightlord",
+      "note": "Maladus can spread damage to a unit adjacent to both him and a defeated target. Avoid clustering vulnerable units around a likely kill when the map allows.",
+      "confidence": "medium",
+      "sourceId": "maladus-abilities"
+    },
+    {
+      "defenderId": "worldKharn",
+      "note": "Kharn's kill-triggered movement and attack can keep him dangerous after a kill. Consider nearby targets and positioning before triggering that behavior.",
+      "confidence": "low",
+      "sourceId": "kharn-abilities"
+    },
+    {
+      "defenderId": "deathRotbone",
+      "note": "A secondary search result associates Rotbone and Maladus with a difficult defense while a Medicae station is present. The original post could not be verified directly; treat this as a weak anecdote, not a tested counter.",
+      "confidence": "low",
+      "sourceId": "rotbone-community-observation"
+    },
+    {
+      "defenderId": "deathTyphus",
+      "note": "Typhus can chain active damage and threaten adjacent units at turn start. Avoid bunching units within the chain when positioning and map layout permit.",
+      "confidence": "medium",
+      "sourceId": "typhus-abilities"
+    }
+  ],
+  "mechanicRules": [
+    {
+      "id": "terminator-armour-damage-types",
+      "title": "Bypass Terminator Armour's first-Attack reduction",
+      "defenderTraits": ["TerminatorArmour"],
+      "rationale": "Terminator Armour reduces damage from the first Attack each turn by 75%, but hits dealing Psychic or Direct damage are excluded. Suppression cannot disable the trait. These are mechanic-based options, not proven Guild War counters or win-rate claims.",
+      "sourceIds": ["terminator-armour"],
+      "candidateGroups": [
+        {
+          "label": "Psychic basic attacks",
+          "rationale": "These characters' basic attacks deal Psychic damage, which is excluded from the reduction.",
+          "unitIds": ["thousInfernalMaster", "thousAhriman", "blackPossession", "eldarFarseer", "bloodMephiston", "tyranNeurothrope", "spaceStormcaller", "astraPrimarisPsy", "thousSorcerer", "deathTyphus", "ultraTigurius", "genesMagus"],
+          "sourceIds": ["psychic-damage", "terminator-armour"]
+        },
+        {
+          "label": "Psychic-damage abilities",
+          "rationale": "These characters have a listed ability that deals Psychic damage; confirm the ability is available before relying on it.",
+          "unitIds": ["thousInfernalMaster", "deathBlightbringer", "eldarFarseer", "bloodMephiston", "tyranNeurothrope", "spaceStormcaller", "astraPrimarisPsy", "genesPatriarch", "deathTyphus", "ultraTigurius", "thousTzaangor"],
+          "sourceIds": ["psychic-damage", "terminator-armour"]
+        },
+        {
+          "label": "Direct-damage abilities",
+          "rationale": "These characters have a listed ability that deals Direct damage; confirm the ability is available before relying on it.",
+          "unitIds": ["emperKakophonist", "custoAtlacoya", "darkaAzrael", "tyranDeathleaper", "admecRuststalker", "orksNob", "necroPlasmancer", "deathTyphus"],
+          "sourceIds": ["direct-damage", "terminator-armour"]
+        },
+        {
+          "label": "Terminator-targeted bonus damage, pierce, or control",
+          "rationale": "Sy-Gex gains bonus damage and pierce; Vynn gains bonus pierce and can stun with its active. Vynn's Physical damage does not bypass the first-Attack reduction, so do not treat these as replacements for Psychic or Direct damage.",
+          "unitIds": ["admecDestroyer", "votanIronmaster"],
+          "sourceIds": ["sy-gex-abilities", "vynn-abilities", "terminator-armour"]
+        }
+      ]
+    },
+    {
+      "id": "overwatch-infiltrate",
+      "title": "Avoid or suppress Overwatch",
+      "defenderTraits": ["Overwatch"],
+      "rationale": "Overwatch fires when an enemy moves into range. Infiltrate units are not targeted by Overwatch; Suppressed units cannot fire it. Terminator Armour prevents Suppression, so the suppressive-fire option does not apply to those defenders.",
+      "sourceIds": ["overwatch", "suppressed"],
+      "candidateGroups": [
+        {
+          "label": "Infiltrate",
+          "rationale": "The trait prevents the unit from being targeted by Overwatch attacks.",
+          "candidateTrait": "Infiltrate",
+          "sourceIds": ["overwatch"]
+        },
+        {
+          "label": "Suppressive Fire",
+          "rationale": "Ranged attacks from these units apply Suppression and stop Overwatch while it lasts.",
+          "candidateTrait": "SuppressiveFire",
+          "excludedDefenderTraits": ["TerminatorArmour"],
+          "sourceIds": ["suppressive-fire", "suppressed", "terminator-armour"]
+        }
+      ]
+    },
+    {
+      "id": "resilient-overkill",
+      "title": "Prevent Resilient with Overkill",
+      "defenderTraits": ["Resilient"],
+      "rationale": "Resilient does not prevent defeat if the unit is Overkilled. A critical hit or enough damage in one Attack can cause Overkill; the listed abilities always Overkill on a defeat. This depends on the target's remaining Health and is not a guaranteed matchup result.",
+      "sourceIds": ["resilient", "overkill"],
+      "candidateGroups": [
+        {
+          "label": "Maladus — Flail Swing active",
+          "rationale": "The active Always Overkills units it defeats; it must be available and deal the defeating blow.",
+          "unitIds": ["deathBlightlord"],
+          "sourceIds": ["maladus-abilities", "overkill"]
+        },
+        {
+          "label": "Pestillian — Blight Racks",
+          "rationale": "Defeats from attacks buffed by Blight Racks Always Overkill; the buff and kill conditions matter.",
+          "unitIds": ["deathPutrifier"],
+          "sourceIds": ["overkill"]
+        },
+        {
+          "label": "Godswyl — Thunderous Assault active",
+          "rationale": "Units defeated by this active are Always Overkilled.",
+          "unitIds": ["templSwordBrother"],
+          "sourceIds": ["overkill"]
+        }
+      ]
+    },
+    {
+      "id": "rotbone-revive",
+      "title": "Stop Rotbone's revive",
+      "defenderTraits": [],
+      "defenderIds": ["deathRotbone"],
+      "rationale": "Rotbone can revive an adjacent Chaos ally even if Rotbone is Overkilled. Maladus's Flail Swing active makes units it defeats Always Overkilled, which prevents revival. This is a sourced tactical interaction, not a guaranteed kill or an isolated Guild War win rate.",
+      "sourceIds": ["rotbone-abilities", "overkill"],
+      "candidateGroups": [
+        {
+          "label": "Maladus — Flail Swing active",
+          "rationale": "Save the active for a decisive defeat when stopping Rotbone's revive matters; the attack must defeat its target.",
+          "unitIds": ["deathBlightlord"],
+          "sourceIds": ["maladus-abilities", "rotbone-abilities", "overkill"]
+        }
+      ]
+    },
+    {
+      "id": "flying-stun",
+      "title": "Stun Flying defenders",
+      "defenderTraits": ["Flying"],
+      "rationale": "Njal's active deals Psychic damage to enemies on the targeted hex and adjacent hexes; Flying enemies damaged by it are Stunned for one round. The area placement and ability availability matter.",
+      "sourceIds": ["njal-abilities", "stunned"],
+      "candidateGroups": [
+        {
+          "label": "Njal — Stormcaller active",
+          "rationale": "Can Stun Flying enemies it damages with the active.",
+          "unitIds": ["spaceStormcaller"],
+          "sourceIds": ["njal-abilities", "stunned"]
+        }
+      ]
+    },
+    {
+      "id": "big-target-stun",
+      "title": "Stun Big Target defenders",
+      "defenderTraits": ["BigTarget"],
+      "rationale": "Beast Slayer grants bonus melee damage against Big Targets. Tanksmasha's active also Stuns a Big Target hit by its charge for one round, restricting movement and Active abilities unless the effect is cleansed.",
+      "sourceIds": ["beast-slayer", "tanksmasha-abilities", "stunned"],
+      "candidateGroups": [
+        {
+          "label": "Beast Slayer",
+          "rationale": "These characters deal bonus melee damage to Big Targets; they still need to reach melee range.",
+          "candidateTrait": "BeastSlayer",
+          "sourceIds": ["beast-slayer"]
+        },
+        {
+          "label": "Tanksmasha — Unstoppable Momentum active",
+          "rationale": "A Big Target struck by the charge is Stunned for one round.",
+          "unitIds": ["orksNob"],
+          "sourceIds": ["tanksmasha-abilities", "stunned"]
+        }
+      ]
+    },
+    {
+      "id": "psyker-specialists",
+      "title": "Specialists against Psykers",
+      "defenderTraits": ["Psyker"],
+      "rationale": "Several characters have explicit abilities that increase damage against Psykers or weaken their Psychic attacks. These bonuses depend on positioning, ability levels, and turn timing.",
+      "sourceIds": ["psyker-trait"],
+      "candidateGroups": [
+        {
+          "label": "Direct anti-Psyker abilities",
+          "rationale": "Atlacoya's active deals Direct damage to a Psyker target; her passive increases damage Psykers take and protects nearby allies from Psychic damage. Tjark and Roswitha gain damage against Psykers; Tjark also reduces nearby Psyker damage and disables their secondary Psychic hit from normal ranged attacks.",
+          "unitIds": ["custoAtlacoya", "spaceHound", "adeptCanoness"],
+          "sourceIds": ["atlacoya-abilities", "tjark-abilities", "roswitha-abilities"]
+        },
+        {
+          "label": "Helbrecht — Destroy The Witch",
+          "rationale": "Helbrecht gains movement when an enemy Psyker is present and he and adjacent allies gain bonus melee damage against Psykers.",
+          "unitIds": ["templHelbrecht"],
+          "sourceIds": ["helbrecht-abilities"]
+        }
+      ]
+    },
+    {
+      "id": "gravis-armour",
+      "title": "Handle Mk X Gravis armour",
+      "defenderTraits": ["MkXGravis"],
+      "rationale": "Gravis applies Armour a second time to incoming damage, except Critical hits. Psychic and Direct damage ignore Armour; Sy-Gex and Vynn also have abilities specifically concerning Gravis. These interactions do not guarantee a kill.",
+      "sourceIds": ["mkx-gravis", "psychic-damage", "direct-damage", "sy-gex-abilities", "vynn-abilities"],
+      "candidateGroups": [
+        {
+          "label": "Psychic and Direct damage",
+          "rationale": "Psychic and Direct damage have 100% pierce, bypassing the repeated Armour calculation. Psychic damage cannot be blocked; damage type does not prevent other effects.",
+          "unitIds": ["thousInfernalMaster", "thousAhriman", "blackPossession", "eldarFarseer", "bloodMephiston", "tyranNeurothrope", "spaceStormcaller", "astraPrimarisPsy", "thousSorcerer", "deathTyphus", "ultraTigurius", "genesMagus", "emperKakophonist", "custoAtlacoya", "darkaAzrael", "tyranDeathleaper", "admecRuststalker", "orksNob", "necroPlasmancer"],
+          "sourceIds": ["psychic-damage", "direct-damage", "mkx-gravis"]
+        },
+        {
+          "label": "Sy-Gex and Vynn",
+          "rationale": "Their abilities specifically gain damage or pierce against Mk X Gravis; Vynn's Physical damage does not bypass the extra Armour calculation.",
+          "unitIds": ["admecDestroyer", "votanIronmaster"],
+          "sourceIds": ["sy-gex-abilities", "vynn-abilities", "mkx-gravis"]
+        },
+        {
+          "label": "Critical hits",
+          "rationale": "Critical hits are exempt from the second Armour application. This is general attack guidance, not a character-specific guarantee; crit chance and damage still depend on the attacker and equipment.",
+          "guidanceOnly": true,
+          "sourceIds": ["mkx-gravis"]
+        }
+      ]
+    },
+    {
+      "id": "parry-counterplay",
+      "title": "Work around Parry",
+      "defenderTraits": ["Parry"],
+      "rationale": "Parry removes one hit from incoming melee multi-hit attacks, to a minimum of one.",
+      "sourceIds": ["parry"],
+      "candidateGroups": [
+        {
+          "label": "Choose a less-affected attack",
+          "rationale": "Prefer ranged attacks or single-hit attacks when practical; Parry specifically reduces melee multi-hit attacks. This does not make every ranged attacker a favorable matchup.",
+          "guidanceOnly": true,
+          "sourceIds": ["parry"]
+        }
+      ]
+    },
+    {
+      "id": "camouflage-counterplay",
+      "title": "Work around Camouflage",
+      "defenderTraits": ["Camouflage"],
+      "rationale": "Camouflage reduces hits scored by incoming ranged attacks, with a larger penalty at longer range and in Tall Grass.",
+      "sourceIds": ["camouflage"],
+      "candidateGroups": [
+        {
+          "label": "Change attack angle or range",
+          "rationale": "Consider closing to melee rather than trading ranged hits, or reduce the distance and avoid Tall Grass when possible. Camouflage still allows at least one hit; these tactics do not guarantee damage or a kill.",
+          "guidanceOnly": true,
+          "sourceIds": ["camouflage"]
+        }
+      ]
+    },
+    {
+      "id": "explodes-spacing",
+      "title": "Avoid Explodes splash damage",
+      "defenderTraits": ["Explodes"],
+      "rationale": "Explodes deals Direct damage to adjacent units when the character is defeated.",
+      "sourceIds": ["explodes"],
+      "candidateGroups": [
+        {
+          "label": "Separate nearby attackers before the final hit",
+          "rationale": "Move vulnerable allies out of adjacent hexes before defeating this target when the map and turn order allow. Overkill does not prevent Explodes.",
+          "guidanceOnly": true,
+          "sourceIds": ["explodes", "overkill"]
+        }
+      ]
+    },
+    {
+      "id": "vehicle-damage",
+      "title": "Exploit Vehicle weaknesses",
+      "defenderTraits": ["Vehicle"],
+      "rationale": "Melta deals bonus damage against Vehicles, and Beast Slayer grants bonus melee damage against Vehicles. Sy-Gex is a Vehicle character, so it is also Mechanical; consider those rules separately.",
+      "sourceIds": ["melta-damage", "beast-slayer", "mechanical"],
+      "candidateGroups": [
+        {
+          "label": "Melta damage",
+          "rationale": "These characters have a listed Melta basic attack or ability; Melta deals bonus damage to Vehicles.",
+          "unitIds": ["tauShadowsun", "darkaSternguard", "bloodDante", "blackObliterator"],
+          "sourceIds": ["melta-damage"]
+        },
+        {
+          "label": "Beast Slayer",
+          "rationale": "These characters deal bonus melee damage to Vehicles; reaching melee range is still necessary.",
+          "candidateTrait": "BeastSlayer",
+          "sourceIds": ["beast-slayer"]
+        }
+      ]
+    },
+    {
+      "id": "final-vengeance-overkill",
+      "title": "Stop Final Vengeance with Overkill",
+      "defenderTraits": ["FinalJustice"],
+      "rationale": "Final Vengeance triggers an immediate normal attack when its unit loses its last Health unless that defeat is an Overkill. The attack must actually Overkill; merely defeating the unit is not enough.",
+      "sourceIds": ["overkill"],
+      "candidateGroups": [
+        {
+          "label": "Maladus — Always Overkill",
+          "rationale": "Maladus's Flail Swing active Always Overkills units it defeats. This requires the active to be available and to defeat the target.",
+          "unitIds": ["deathBlightlord"],
+          "sourceIds": ["maladus-abilities", "overkill"]
+        },
+        {
+          "label": "Pestillian — Blight Racks",
+          "rationale": "Pestillian's passive makes defeats from attacks buffed by Blight Racks Always Overkills; the buff and kill conditions matter.",
+          "unitIds": ["deathPutrifier"],
+          "sourceIds": ["overkill"]
+        }
+      ]
+    },
+    {
+      "id": "living-metal-regeneration",
+      "title": "Plan for Living Metal regeneration",
+      "defenderTraits": ["LivingMetal"],
+      "rationale": "Living Metal restores 10% of its maximum Health at the start of its owner's turn.",
+      "sourceIds": ["living-metal"],
+      "candidateGroups": [
+        {
+          "label": "Avoid leaving a low-health target alive through its turn",
+          "rationale": "If possible, finish the target before its next turn or account for the healing in your damage plan. This is a timing consideration, not a special anti-Necron character matchup.",
+          "guidanceOnly": true,
+          "sourceIds": ["living-metal"]
+        }
+      ]
+    },
+    {
+      "id": "healer-focus",
+      "title": "Pressure Healer units",
+      "defenderTraits": ["Healer"],
+      "rationale": "A Healer can spend its action to restore Health to a friendly unit; healing amount depends on its Damage and weapon hit count.",
+      "sourceIds": ["healer"],
+      "candidateGroups": [
+        {
+          "label": "Deny a healing action",
+          "rationale": "If safe and practical, prioritize the Healer before it can act or force it to spend its action under pressure. This is general target-priority advice, not a claim that one attacker counters every Healer.",
+          "guidanceOnly": true,
+          "sourceIds": ["healer"]
+        }
+      ]
+    },
+    {
+      "id": "shadow-in-the-warp",
+      "title": "Account for Shadow in the Warp",
+      "defenderTraits": ["ShadowInTheWarp"],
+      "rationale": "Enemy Psykers within two hexes deal 25% less Psychic damage; the trait does not affect Tyranid Psykers.",
+      "sourceIds": ["shadow-in-the-warp"],
+      "candidateGroups": [
+        {
+          "label": "Avoid the Psychic damage penalty",
+          "rationale": "Keep non-Tyranid attacking Psykers outside the aura or use non-Psychic damage while in range. The aura changes damage, not the attacker’s ability to target the defender.",
+          "guidanceOnly": true,
+          "sourceIds": ["shadow-in-the-warp"]
+        }
+      ]
+    },
+    {
+      "id": "ambush-decoys",
+      "title": "Prevent an Ambush return",
+      "defenderTraits": ["Ambush"],
+      "rationale": "After its first defeat, an Ambush unit leaves a Decoy and can return with full Health at the beginning of its next turn if a friendly Decoy remains.",
+      "sourceIds": ["ambush-trait"],
+      "candidateGroups": [
+        {
+          "label": "Remove the Decoy before the return trigger",
+          "rationale": "If the battle continues into its next turn, remove all remaining friendly Decoys before the Ambush unit returns. Do not assume Overkill alone prevents this trait; Ambush is not listed among the effects Overkill prevents.",
+          "guidanceOnly": true,
+          "sourceIds": ["ambush-trait", "overkill"]
+        }
+      ]
+    },
+    {
+      "id": "khorne-melee-stacks",
+      "title": "Limit Blessings of Khorne stacks",
+      "defenderTraits": ["BlessingsOfKhorne"],
+      "rationale": "The unit gains damage and Psychic resistance for each unit defeated in melee during the battle, up to eight.",
+      "sourceIds": ["blessings-of-khorne"],
+      "candidateGroups": [
+        {
+          "label": "Avoid feeding melee defeats",
+          "rationale": "Where practical, avoid giving this unit melee kills; ranged defeats do not add to the trait's melee-defeat count. The unit can still gain stacks from its allies' melee kills.",
+          "guidanceOnly": true,
+          "sourceIds": ["blessings-of-khorne"]
+        }
+      ]
+    },
+    {
+      "id": "thrill-seeker-crits",
+      "title": "Account for Thrill Seekers",
+      "defenderTraits": ["ThrillSeekers"],
+      "rationale": "The trait can trigger when its unit loses Health or targets a full-Health enemy. While Thrilled, it gains 15% Crit Chance; a Critical-hit defeat is Always Overkilled.",
+      "sourceIds": ["thrill-seekers"],
+      "candidateGroups": [
+        {
+          "label": "Plan for critical-hit Overkill",
+          "rationale": "Do not depend on a revive, Resilient, or another effect that can be stopped by Always Overkilled if this unit may score a Critical-hit defeat while Thrilled. This is a warning about the defender's threat, not an attacker recommendation.",
+          "guidanceOnly": true,
+          "sourceIds": ["thrill-seekers", "overkill"]
+        }
+      ]
+    },
+    {
+      "id": "get-stuck-in-positioning",
+      "title": "Avoid enabling Get Stuck In",
+      "defenderTraits": ["GetStuckIn"],
+      "rationale": "This trait adds attacks and can reach a 100% chance to add hits when its conditions about nearby friendly Orks or units adjacent to the target are met.",
+      "sourceIds": ["get-stuck-in"],
+      "candidateGroups": [
+        {
+          "label": "Watch spacing around its target",
+          "rationale": "Avoid leaving an attacker surrounded by the defender's nearby allies when possible, especially two Orks or four friendly units adjacent to that target. The trait still has a baseline chance to add hits.",
+          "guidanceOnly": true,
+          "sourceIds": ["get-stuck-in"]
+        }
+      ]
+    },
+    {
+      "id": "mechanic-repair",
+      "title": "Deny Mechanical repairs",
+      "defenderTraits": ["Mechanic"],
+      "rationale": "A Mechanic can spend its action to Repair a friendly Mechanical unit; the repair amount depends on its Damage and weapon hit count.",
+      "sourceIds": ["mechanic-trait"],
+      "candidateGroups": [
+        {
+          "label": "Pressure the Mechanic or its repair target",
+          "rationale": "Consider prioritizing the Mechanic or defeating its damaged Mechanical ally before a repair action can change the fight. Repair requires the Mechanic to act and a friendly Mechanical unit to benefit.",
+          "guidanceOnly": true,
+          "sourceIds": ["mechanic-trait", "mechanical"]
+        }
+      ]
+    },
+    {
+      "id": "terrifying-ranged",
+      "title": "Bypass Terrifying's melee reduction",
+      "defenderTraits": ["Terrifying"],
+      "rationale": "Terrifying units take 30% less damage from Melee attacks.",
+      "sourceIds": ["terrifying"],
+      "candidateGroups": [
+        {
+          "label": "Prefer ranged attacks",
+          "rationale": "Use ranged attacks where positioning permits; the trait's reduction applies to melee damage, not ranged attacks. This does not account for the target's other defenses.",
+          "guidanceOnly": true,
+          "sourceIds": ["terrifying"]
+        }
+      ]
+    },
+    {
+      "id": "act-of-faith-crit",
+      "title": "Manage Act of Faith's Crit buildup",
+      "defenderTraits": ["ActOfFaith"],
+      "rationale": "The unit gains Crit Chance and Crit Damage each time a friendly Imperial unit dies or kills an enemy; its own Critical hit resets the bonus.",
+      "sourceIds": ["act-of-faith"],
+      "candidateGroups": [
+        {
+          "label": "Prioritize the Act of Faith unit when practical",
+          "rationale": "Its critical threat can grow as Imperial allies die or secure kills. Consider addressing it early and do not assume the accumulated bonus remains after it scores a Critical hit.",
+          "guidanceOnly": true,
+          "sourceIds": ["act-of-faith"]
+        }
+      ]
+    },
+    {
+      "id": "prioritised-efficiency",
+      "title": "Track Prioritised Efficiency",
+      "defenderTraits": ["PrioritisedEfficiency"],
+      "rationale": "The unit deals 25% more damage and takes 25% less damage until it traverses at least three hexes during its turn.",
+      "sourceIds": ["prioritised-efficiency"],
+      "candidateGroups": [
+        {
+          "label": "Reassess its damage and durability after movement",
+          "rationale": "Do not assume the bonus is permanent: if the unit traverses at least three hexes during its turn, the effect ends until its next turn. If it has not done so, account for both bonuses.",
+          "guidanceOnly": true,
+          "sourceIds": ["prioritised-efficiency"]
+        }
+      ]
+    },
+    {
+      "id": "indirect-fire-counterplay",
+      "title": "Do not rely on obscuring terrain against Indirect Fire",
+      "defenderTraits": ["IndirectFire"],
+      "rationale": "Indirect Fire can shoot over obscuring hexes and ignores Trenches.",
+      "sourceIds": ["indirect-fire"],
+      "candidateGroups": [
+        {
+          "label": "Use pressure, not obstructing terrain alone",
+          "rationale": "Obscuring hexes and Trenches do not provide their usual protection against this attack. Consider threatening the shooter directly or suppressing its damage if possible.",
+          "guidanceOnly": true,
+          "sourceIds": ["indirect-fire", "suppressed"]
+        }
+      ]
+    },
+    {
+      "id": "heavy-weapon-counterplay",
+      "title": "Reduce Heavy Weapon pressure",
+      "defenderTraits": ["HeavyWeapon"],
+      "rationale": "A Heavy Weapon unit deals 25% more ranged damage when it has not moved this turn; its Overwatch benefits if it did not move on its own turn.",
+      "sourceIds": ["heavy-weapon"],
+      "candidateGroups": [
+        {
+          "label": "Suppression can reduce damage and stop Overwatch",
+          "rationale": "Suppressive Fire can lower the affected unit's damage and prevent it firing Overwatch while Suppression lasts. This does not remove the Heavy Weapon trait, and Terminator Armour units cannot be Suppressed.",
+          "candidateTrait": "SuppressiveFire",
+          "excludedDefenderTraits": ["TerminatorArmour"],
+          "sourceIds": ["suppressive-fire", "suppressed", "heavy-weapon", "terminator-armour"]
+        }
+      ]
+    },
+    {
+      "id": "unstoppable-terrain",
+      "title": "Do not rely on movement-stopping terrain",
+      "defenderTraits": ["Unstoppable"],
+      "rationale": "Unstoppable units do not have to stop on terrain effects that normally end movement, including Fire, Razor Wire, and Broken Ice.",
+      "sourceIds": ["unstoppable"],
+      "candidateGroups": [
+        {
+          "label": "Plan for continued movement",
+          "rationale": "Do not count on those terrain effects to halt the defender's movement; plan positioning and threat ranges as though it can continue through them.",
+          "guidanceOnly": true,
+          "sourceIds": ["unstoppable"]
+        }
+      ]
+    },
+    {
+      "id": "infiltrate-overwatch-warning",
+      "title": "Do not rely on Overwatch against Infiltrate",
+      "defenderTraits": ["Infiltrate"],
+      "rationale": "Infiltrate prevents the unit from being targeted by Overwatch attacks.",
+      "sourceIds": ["infiltrate", "overwatch"],
+      "candidateGroups": [
+        {
+          "label": "Use other attacks or abilities",
+          "rationale": "An Overwatch attack will not target this unit while Infiltrate applies. Do not count it as a guaranteed way to damage or control the defender.",
+          "guidanceOnly": true,
+          "sourceIds": ["infiltrate", "overwatch"]
+        }
+      ]
+    },
+    {
+      "id": "synapse-aura",
+      "title": "Account for Synapse support",
+      "defenderTraits": ["Synapse"],
+      "rationale": "Nearby friendly units ignore Instinctive Behaviour and Battle Fatigue while within two hexes of this unit.",
+      "sourceIds": ["synapse"],
+      "candidateGroups": [
+        {
+          "label": "Check the aura before relying on behaviour or fatigue effects",
+          "rationale": "Nearby units can ignore those effects while Synapse remains in range. The trait does not directly reduce incoming damage, so treat this as a team-support warning rather than a damage counter.",
+          "guidanceOnly": true,
+          "sourceIds": ["synapse"]
+        }
+      ]
+    },
+    {
+      "id": "crushing-strike-stationary",
+      "title": "Respect a stationary Crushing Strike",
+      "defenderTraits": ["CrushingStrike"],
+      "rationale": "Crushing Strike units deal 50% more damage with normal melee attacks if they have not moved this turn.",
+      "sourceIds": ["crushing-strike"],
+      "candidateGroups": [
+        {
+          "label": "Watch movement and melee range",
+          "rationale": "If the defender has not moved, account for the stronger normal melee attack. Avoid leaving a vulnerable unit in range when practical; movement removes this bonus for that turn.",
+          "guidanceOnly": true,
+          "sourceIds": ["crushing-strike"]
+        }
+      ]
+    },
+    {
+      "id": "castellan-creed-support",
+      "title": "Account for Castellan Creed and Kell",
+      "defenderTraits": [],
+      "defenderIds": ["astraCreed"],
+      "rationale": "When Creed is first targeted, Colour Sergeant Kell appears in an adjacent free hex. While they are adjacent, attacks against Creed make Kell swap hexes with him and take the damage. Creed can also summon Cadian Guardsmen and immediately activate nearby Guardsmen.",
+      "sourceIds": ["creed-abilities"],
+      "candidateGroups": [
+        {
+          "label": "Plan around Kell's interception and the Guardsmen",
+          "rationale": "Do not assume an attack aimed at Creed damages Creed while Kell is adjacent. Account for the active's potential extra bodies and immediate Guardsmen turn; positioning and available hexes affect the result.",
+          "guidanceOnly": true,
+          "sourceIds": ["creed-abilities"]
+        }
+      ]
+    },
+    {
+      "id": "aunshi-support",
+      "title": "Plan around Aun'Shi's support cycle",
+      "defenderTraits": [],
+      "defenderIds": ["tauAunShi"],
+      "rationale": "Aun'Shi cycles damage reduction, movement, and damage buffs for himself and nearby allies. His active can give an adjacent ally another use of its Active ability while healing or repairing it. Buffs persist on affected units until the start of their next turn, even if Aun'Shi is defeated.",
+      "sourceIds": ["aun-shi-abilities"],
+      "candidateGroups": [
+        {
+          "label": "Check round, adjacency, and Active availability",
+          "rationale": "Before committing damage, check which buff round is active and which allies are in range. Prioritize preventing a high-impact second Active when possible, but do not assume defeating Aun'Shi removes buffs already applied.",
+          "guidanceOnly": true,
+          "sourceIds": ["aun-shi-abilities"]
+        }
+      ]
+    },
+    {
+      "id": "mechanical-specialists",
+      "title": "Specialists against Mechanical units",
+      "defenderTraits": ["Mechanical"],
+      "rationale": "Mechanical units cannot be Healed and instead can be Repaired. The cited trait reference identifies abilities from Cyrus and Sy-Gex as acting against Mechanical units, and lists Vynn's ability as concerning the trait. These are ability interactions, not verified Guild War outcomes.",
+      "sourceIds": ["mechanical"],
+      "candidateGroups": [
+        {
+          "label": "Abilities concerning Mechanical",
+          "rationale": "Listed by the game-mechanics reference as having an ability against or concerning Mechanical units.",
+          "unitIds": ["astarCyrus", "admecDestroyer", "votanIronmaster"],
+          "sourceIds": ["mechanical"]
+        }
+      ]
+    }
+  ],
+  "teamMatchups": [],
+  "defenseCohorts": [
+    {
+      "name": "Z'kar Psykers",
+      "defenseIds": ["deathTyphus", "thousTerminator", "blackObliterator", "emperLucius", "worldTerminator"],
+      "minimumSharedDefenders": 3,
+      "defenseAttempts": 274,
+      "defenseFailures": 127,
+      "mostCommonBattlefield": "BF5",
+      "mostCommonBattlefieldShare": 56.6,
+      "mostCommonMachine": "Z'kar",
+      "sourceIds": ["terminus-defense-cohorts", "terminus-attack-cores"],
+      "attackCores": [
+        {"name": "Genestealer Cults", "unitIds": ["genesPrimus", "genesKelermorph", "genesBiophagus", "genesPatriarch", "genesMagus"], "wins": 115, "attempts": 123, "supported": true},
+        {"name": "Blood Angels", "unitIds": ["bloodMephiston", "bloodDeathCompany", "bloodIntercessor", "bloodSanguinary", "bloodDante"], "wins": 229, "attempts": 275, "supported": true},
+        {"name": "Abraxas / Yazaghor / Ahriman / Archimatos", "unitIds": ["thousInfernalMaster", "thousTzaangor", "thousAhriman", "blackPossession"], "wins": 103, "attempts": 142, "supported": true},
+        {"name": "Maladus / Rotbone / Abaddon", "unitIds": ["deathBlightlord", "deathRotbone", "blackAbaddon"], "wins": 79, "attempts": 112, "supported": true},
+        {"name": "Typhus / Toth / Njal", "unitIds": ["deathTyphus", "thousTerminator", "spaceStormcaller"], "wins": 26, "attempts": 36, "supported": false},
+        {"name": "Double Howl", "unitIds": ["spaceBlackmane", "tauAunShi", "worldKharn", "custoBladeChampion"], "wins": 19, "attempts": 24, "supported": false}
+      ]
+    },
+    {
+      "name": "Death Guard",
+      "defenseIds": ["deathBlightlord", "deathRotbone", "deathBlightbringer", "deathTyphus", "thousTerminator"],
+      "minimumSharedDefenders": 3,
+      "defenseAttempts": 109,
+      "defenseFailures": 44,
+      "mostCommonBattlefield": "BF5",
+      "mostCommonBattlefieldShare": 56.0,
+      "mostCommonMachine": "Plagueburst Crawler",
+      "sourceIds": ["terminus-defense-cohorts", "terminus-attack-cores"],
+      "attackCores": [
+        {"name": "Genestealer Cults", "unitIds": ["genesPrimus", "genesKelermorph", "genesBiophagus", "genesPatriarch", "genesMagus"], "wins": 138, "attempts": 153, "supported": true},
+        {"name": "Blood Angels", "unitIds": ["bloodMephiston", "bloodDeathCompany", "bloodIntercessor", "bloodSanguinary", "bloodDante"], "wins": 502, "attempts": 583, "supported": true},
+        {"name": "Abraxas / Yazaghor / Ahriman / Archimatos", "unitIds": ["thousInfernalMaster", "thousTzaangor", "thousAhriman", "blackPossession"], "wins": 279, "attempts": 319, "supported": true},
+        {"name": "Maladus / Rotbone / Abaddon", "unitIds": ["deathBlightlord", "deathRotbone", "blackAbaddon"], "wins": 218, "attempts": 285, "supported": true},
+        {"name": "Typhus / Toth / Njal", "unitIds": ["deathTyphus", "thousTerminator", "spaceStormcaller"], "wins": 35, "attempts": 42, "supported": true},
+        {"name": "Double Howl", "unitIds": ["spaceBlackmane", "tauAunShi", "worldKharn", "custoBladeChampion"], "wins": 39, "attempts": 47, "supported": true}
+      ]
+    },
+    {
+      "name": "Death Guard Ranged",
+      "defenseIds": ["blackObliterator", "tauMarksman", "deathBlightlord", "deathRotbone", "blackAbaddon"],
+      "minimumSharedDefenders": 3,
+      "defenseAttempts": 99,
+      "defenseFailures": 28,
+      "mostCommonBattlefield": "BF5",
+      "mostCommonBattlefieldShare": 67.7,
+      "mostCommonMachine": "Plagueburst Crawler",
+      "sourceIds": ["terminus-defense-cohorts", "terminus-attack-cores"],
+      "attackCores": [
+        {"name": "Genestealer Cults", "unitIds": ["genesPrimus", "genesKelermorph", "genesBiophagus", "genesPatriarch", "genesMagus"], "wins": 167, "attempts": 176, "supported": true},
+        {"name": "Blood Angels", "unitIds": ["bloodMephiston", "bloodDeathCompany", "bloodIntercessor", "bloodSanguinary", "bloodDante"], "wins": 639, "attempts": 728, "supported": true},
+        {"name": "Abraxas / Yazaghor / Ahriman / Archimatos", "unitIds": ["thousInfernalMaster", "thousTzaangor", "thousAhriman", "blackPossession"], "wins": 403, "attempts": 444, "supported": true},
+        {"name": "Maladus / Rotbone / Abaddon", "unitIds": ["deathBlightlord", "deathRotbone", "blackAbaddon"], "wins": 284, "attempts": 373, "supported": true},
+        {"name": "Typhus / Toth / Njal", "unitIds": ["deathTyphus", "thousTerminator", "spaceStormcaller"], "wins": 37, "attempts": 42, "supported": true},
+        {"name": "Double Howl", "unitIds": ["spaceBlackmane", "tauAunShi", "worldKharn", "custoBladeChampion"], "wins": 85, "attempts": 104, "supported": true}
+      ]
+    }
+  ]
+}

@@ -92,21 +92,14 @@ export function sourceMatch(itemId: string, offer: ShopOffer, equipment: ShopCat
 
 }
 
-export function sourcesForItem(itemId: string, catalog: ShopCatalog): string[]
-{
-
-    return catalog.shops.filter(s => s.coverage === "catalog" && s.offers.some(o => isActionableOffer(o) && sourceMatch(itemId, o, catalog.equipment)
-        &&offerEligibility(o,catalog.accountContext?.powerLevel??null,catalog.accountContext)!=="locked"&&!unverifiedCrusadeTier(s.id,o,catalog.accountContext))).map(s => s.name);
-
-}
-
-export type EquipmentShopOffer = {
+export type ShopItemOffer = {
     id:string;shop:string;match:"exact"|"pool";rotation:string;price:string;
     access:"eligible"|"unknown";adRefresh:boolean|null;
 };
+export type EquipmentShopOffer = ShopItemOffer;
 
 /** Catalog routes are potential offers, never confirmation of live shop stock. */
-export function equipmentOffersForItem(itemId:string,catalog:ShopCatalog,powerLevel:number|null):EquipmentShopOffer[]
+export function shopOffersForItem(itemId:string,catalog:ShopCatalog,powerLevel:number|null=catalog.accountContext?.powerLevel??null):ShopItemOffer[]
 {
     return catalog.shops.filter(shop=>shop.coverage==="catalog").flatMap(shop=>shop.offers.flatMap(offer=>{
         const match=sourceMatch(itemId,offer,catalog.equipment),access=offerEligibility(offer,powerLevel,catalog.accountContext);
@@ -115,6 +108,17 @@ export function equipmentOffersForItem(itemId:string,catalog:ShopCatalog,powerLe
         const rotation=scheduleLabel(offer.schedule).replace(/SUN|MON|TUE|WED|THU|FRI|SAT/g,day=>days[day]!);
         return [{id:offer.id,shop:shop.name,match,rotation,price:`${offer.cost.amount.toLocaleString("en-US")} ${currencyName(offer.cost.currency)}`,access,adRefresh:shop.adRefresh}];
     }));
+}
+
+export function equipmentOffersForItem(itemId:string,catalog:ShopCatalog,powerLevel:number|null):EquipmentShopOffer[]
+{
+    return shopOffersForItem(itemId,catalog,powerLevel);
+}
+
+/** Shop routes include catalog schedules, not confirmation of live stock. */
+export function sourcesForItem(itemId: string, catalog: ShopCatalog): string[]
+{
+    return [...new Set(shopOffersForItem(itemId,catalog).map(offer=>offer.shop))];
 }
 
 export function itemCategory(id: string): "upgrade" | "equipment" | "other"

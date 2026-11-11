@@ -4,6 +4,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import {getCharacterCatalog} from "./catalog";
 import type {AbilityBadgeInventory} from "../../src/domain/badgeInventory";
+import { getSupabasePublicConfig } from "../../src/server/supabaseConfig";
+import { createSupabaseServerClient } from "./supabase/server";
 
 export type EquipmentRow = {
   character: string; characterId?: string; slotId: string; currentItem: string; currentRarity: string;
@@ -31,13 +33,29 @@ export type Report = {
   abilityBadges?:AbilityBadgeInventory|null;
 };
 export async function getReport():Promise<Report|null>{
+  if(getSupabasePublicConfig()){
+    const supabase=await createSupabaseServerClient();
+    const {data:{user},error:userError}=await supabase.auth.getUser();
+    if(userError)throw new Error(`Could not verify report owner: ${userError.message}`);
+    if(!user)return null;
+    const {data,error}=await supabase.from("user_game_credentials").select("report_data").eq("user_id",user.id).maybeSingle();
+    if(error){
+      if(error.code==="42P01"||error.code==="PGRST205")return null;
+      throw new Error(`Could not load this account's report: ${error.message}`);
+    }
+    if(!data?.report_data)return null;
+    return addCharacterIcons(data.report_data as Report);
+  }
   try{
     const report=JSON.parse(await fs.readFile(path.join(process.cwd(),"output","upgrade-report.json"),"utf8")) as Report;
-    const catalog=await getCharacterCatalog();
-    const byKey=new Map(catalog.characters.flatMap(c=>[[c.id.toLowerCase(),c],[c.name.toLowerCase(),c],[c.fullName.toLowerCase(),c],[c.shortName.toLowerCase(),c]] as const));
-    report.roster=report.roster.map(u=>{const c=byKey.get(u.id.toLowerCase())??byKey.get(u.name.toLowerCase());return {...u,rarity:progressionRarity(u.progressionIndex)??"Unknown",icon:c?.icon??""};});
-    return report;
+    return addCharacterIcons(report);
   }catch{return null;}
+}
+async function addCharacterIcons(report:Report):Promise<Report>{
+  const catalog=await getCharacterCatalog();
+  const byKey=new Map(catalog.characters.flatMap(c=>[[c.id.toLowerCase(),c],[c.name.toLowerCase(),c],[c.fullName.toLowerCase(),c],[c.shortName.toLowerCase(),c]] as const));
+  report.roster=report.roster.map(u=>{const c=byKey.get(u.id.toLowerCase())??byKey.get(u.name.toLowerCase());return {...u,rarity:progressionRarity(u.progressionIndex)??"Unknown",icon:c?.icon??""};});
+  return report;
 }
 export function targetName(row:EquipmentRow){return row.recommendedItem??row.preferredLegendaryItems?.join(", ")??row.preferredLegendaryItemIds?.join(", ")??"Review";}
 export function unitFor(report:Report,name:string){return report.roster.find(unit=>unit.name===name);}

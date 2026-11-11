@@ -24,15 +24,17 @@ test("under-refined Epic gear remains a War upgrade", () =>
     assert.match(label.detail, /Epic 8/);
 });
 
-test("Silver War slots accept Rare 7 or any higher-rarity item",()=>{
+test("Rare 7 and Legendary 1 gear are equivalent while Gold can use Epic 9",()=>{
     const items=[
         {slotId:"Slot1",rarity:"Rare",level:7},
         {slotId:"Slot2",rarity:"Epic",level:1},
         {slotId:"Slot3",rarity:"Legendary",level:1}
     ];
     assert.equal(warGearStatus(items,"silver").ready,3);
-    assert.equal(warGearStatus(items,"gold").ready,1);
+    assert.equal(warGearStatus(items,"gold").ready,2);
     assert.match(warGearLabel(items,"silver").detail,/Rare 7 or higher rarity/);
+    assert.match(warGearLabel(items,"gold").detail,/Rare 7, Epic 9, or Legendary 1\+/);
+    assert.equal(warGearStatus([{slotId:"Slot1",rarity:"Rare",level:7}],"gold").ready,1);
     assert.deepEqual(warGearStatus([{slotId:"Slot1",rarity:"Rare",level:6}],"silver").missing[0],{slotId:"Slot1",rarity:"Rare",level:6});
 });
 

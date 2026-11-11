@@ -5,16 +5,16 @@ import CharacterName from "../components/CharacterName";
 import type {UtilityRating,UtilityTier} from "../../src/domain/characterUtility";
 
 type Row=UtilityRating & {id:string;alliance:string;owned:boolean};
-const order:Record<UtilityTier,number>={Core:4,Strong:3,Useful:2,Situational:1,"No tracked signal":0};
+const order:Record<UtilityTier,number>={Core:4,Strong:3,Useful:2,Situational:1,"Low priority":0};
 export default function RatingTable({rows}:{rows:Row[]})
 {
     const[query,setQuery]=useState("");
     const[ownership,setOwnership]=useState("owned");
-    const filtered=rows.filter(row=>(ownership==="all"||row.owned)&&`${row.name} ${row.alliance} ${row.tier} ${row.tier==="No tracked signal"?"Not rated yet":""} ${row.signals.join(" ")}`.toLowerCase().includes(query.toLowerCase())).sort((a,b)=>order[b.tier]-order[a.tier]||(b.communityScore??0)-(a.communityScore??0)||a.name.localeCompare(b.name));
+    const filtered=rows.filter(row=>(ownership==="all"||row.owned)&&`${row.name} ${row.alliance} ${row.tier} ${row.signals.join(" ")}`.toLowerCase().includes(query.toLowerCase())).sort((a,b)=>order[b.tier]-order[a.tier]||(b.communityScore??0)-(a.communityScore??0)||a.name.localeCompare(b.name));
     return <><div className="abilityViews"><label>Roster<select value={ownership} onChange={event=>setOwnership(event.target.value)}><option value="owned">Owned</option><option value="all">All catalog characters</option></select></label><label>Find character<input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Name, tier or reason"/></label></div>
         <p className="sub">{filtered.length} characters shown.</p>
         <div className="tableWrap"><table><thead><tr><th>Character</th><th>Usefulness</th><th>Why</th></tr></thead><tbody>{filtered.map(row=><tr key={row.id}>
-            <td><CharacterName name={row.name} id={row.id}/><small>{row.alliance} · {row.owned?"Owned":"Not owned"}</small></td><td><strong>{row.tier==="No tracked signal"?"Not rated yet":row.tier}</strong>{row.communityScore!==null?<small>Community score {row.communityScore}</small>:null}</td><td>{row.signals.length?<>{row.signals.slice(0,2).join(" · ")}{row.signals.length>2?<ReferenceDetails label={`${row.signals.length-2} more reasons`}>{row.signals.slice(2).join(" · ")}</ReferenceDetails>:null}</>:"Not enough information to rate this character"}</td>
+            <td><CharacterName name={row.name} id={row.id}/><small>{row.alliance} · {row.owned?"Owned":"Not owned"}</small></td><td><strong>{row.tier}</strong>{row.tier==="Low priority"?<small>Hold resources unless you enjoy using them or a current LRE track needs them.</small>:null}{row.communityScore!==null?<small>Community score {row.communityScore}</small>:null}</td><td>{row.signals.length?<>{row.signals.slice(0,2).join(" · ")}{row.signals.length>2?<ReferenceDetails label={`${row.signals.length-2} more reasons`}>{row.signals.slice(2).join(" · ")}</ReferenceDetails>:null}</>:"No account-specific signal"}</td>
         </tr>)}</tbody></table></div>
     </>;
 }

@@ -3,6 +3,7 @@ import {progressionRarity} from "./domain/characterProgression";
 import { allocateEquipment } from "./domain/equipment";
 import { campaignProgress } from "./domain/campaigns";
 import {latestRaidPowerByUnit,type RaidPowerEntry}from "./domain/raidPower";
+import { pathToFileURL } from "node:url";
 
 type Ability = {
     id: string;
@@ -32,7 +33,7 @@ type Unit = {
     mythicShards?: number;
 };
 
-type PlayerResponse = {
+export type PlayerResponse = {
     metaData: {
         configHash: string;
         lastUpdatedOn: number;
@@ -60,7 +61,7 @@ type PlayerResponse = {
     };
 };
 
-type GuildRaidResponse={entries:RaidPowerEntry[]};
+export type GuildRaidResponse={entries:RaidPowerEntry[]};
 
 type AbilityTarget = {
     active: string;
@@ -114,11 +115,9 @@ function rarityFor(unit: Unit): string
 
 }
 
-async function main()
+export async function buildPlayerReport(playerResponse: PlayerResponse, raidResponse: GuildRaidResponse = { entries: [] })
 {
 
-    const playerResponse = await readJson<PlayerResponse>("data/player.json");
-    const raidResponse=await readJson<GuildRaidResponse>("data/guild-raid.json").catch(()=>({entries:[]}));
     const priorities = await readJson<Record<string, CharacterPriority>>("config/character_priorities.json");
     const targets = await readJson<Record<string, AbilityTarget>>("config/ability_targets.json");
     const compatibility = await readJson<EquipmentCompatibility>("config/equipment_compatibility.json");
@@ -171,7 +170,7 @@ async function main()
         0
     );
 
-    const report = {
+    return {
         generatedAt: new Date().toISOString(),
         source: {
             player: playerResponse.player.details.name,
@@ -222,6 +221,18 @@ async function main()
         unequippedInventory: playerResponse.player.inventory.items
     };
 
+}
+
+async function main()
+{
+
+    const playerResponse = await readJson<PlayerResponse>("data/player.json");
+    const raidResponse=await readJson<GuildRaidResponse>("data/guild-raid.json").catch(()=>({entries:[]}));
+    const report = await buildPlayerReport(playerResponse, raidResponse);
+    const equipNow = report.equipmentAllocation.equipNow;
+    const buyWatch = report.equipmentAllocation.buyWatch;
+    const compatibilityUnknown = report.equipmentAllocation.compatibilityUnknown;
+
     await fs.mkdir("output", { recursive: true });
     await fs.writeFile("output/upgrade-report.json.tmp", JSON.stringify(report, null, 2));
     await fs.rename("output/upgrade-report.json.tmp", "output/upgrade-report.json");
@@ -247,10 +258,15 @@ async function main()
 
 }
 
-main().catch((error) =>
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href)
 {
 
-    console.error(error);
-    process.exitCode = 1;
+    main().catch((error) =>
+    {
 
-});
+        console.error(error);
+        process.exitCode = 1;
+
+    });
+
+}

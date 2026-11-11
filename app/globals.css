@@ -3,6 +3,9 @@
 main { width:min(1180px,calc(100% - 40px)); margin:auto; padding:48px 0 70px; }
 .accountBar{border-bottom:1px solid #354153;background:#111a26}.accountBarInner{width:min(1180px,calc(100% - 40px));margin:auto;padding:14px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.accountBar small{margin:0;color:#92a2b7;font-size:10px;font-weight:700;letter-spacing:.07em}.accountIdentity,.accountMetric,.accountRaid{display:flex;flex-direction:column;gap:4px}.accountIdentity>a{font-size:18px;font-weight:800;color:#edf1f7;text-decoration:none}.accountMetric strong,.accountRaid strong{font-size:18px}.accountMetric span{color:#bbc8d8;font-size:11px;line-height:1.35}.accountRaid{max-width:330px}.accountRaid span{color:#bbc8d8;font-size:11px;line-height:1.35}.accountRaid a{color:#9ccaff}.accountBar .syncAccount{display:flex;flex-direction:column;align-items:flex-end;gap:4px}.accountBar .syncAccount button{white-space:nowrap}.accountBar .syncAccount small{font-weight:400;letter-spacing:0}.accountBar .syncError{color:#ff9999}
 @media(max-width:800px){.accountBarInner{width:min(100% - 24px,1180px)}.accountRaid{order:2;flex-basis:100%;max-width:none}.accountBar .syncAccount{margin-left:auto}.accountMetric strong{font-size:16px}}
+.authPage{display:grid;place-items:start center;min-height:calc(100vh - 100px);padding-top:8vh}.authCard{width:min(460px,100%);padding:30px;border:1px solid #27303d;border-radius:16px;background:rgba(17,23,32,.96)}.authCard h1{font-size:30px;margin-top:8px}.authForm{display:grid;gap:16px;margin-top:24px}.authForm label{display:grid;gap:7px;color:#c5d2e3;font-size:13px;font-weight:700}.authForm input{width:100%;padding:12px;border:1px solid #46536a;border-radius:8px;background:#0c1118;color:#edf1f7;font:inherit}.authForm input:focus{outline:2px solid #9ccaff;outline-offset:1px}.authForm small{font-weight:400}.authForm button,.authSignedIn button{min-height:42px;padding:10px 14px;border:1px solid #65758b;border-radius:8px;background:#273344;color:#edf1f7;font:inherit;font-weight:700;cursor:pointer}.authForm button:disabled{opacity:.55;cursor:not-allowed}.authLinks{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:18px}.authLinks a,.authSignedIn a{color:#9ccaff}.authNotice,.authError,.authSuccess{padding:12px;border:1px solid #6c5524;border-radius:8px;background:#29210f;color:#f1c96b;line-height:1.5}.authError{border-color:#713b43;background:#30171b;color:#ffb5bb}.authSuccess{border-color:#286642;background:#102a1c;color:#7ee2a8}.authSignedIn{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.authSignedIn form{margin:0}.authSignedIn button{min-height:36px;padding:7px 10px}.authAccountBar .accountIdentity>a{font-size:16px}.accountSettingsPanel{margin-top:20px;padding:22px}.accountSettingsPanel h2{margin:0}.accountSettingsPanel dl{margin:16px 0 0}.accountSettingsPanel dl>div{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-top:1px solid #27303d}.accountSettingsPanel dt{color:#9da9ba}.accountSettingsPanel dd{margin:0;overflow-wrap:anywhere}.apiConnectionPanel .eyebrow{margin-bottom:6px}
+.gameApiKeyForm{max-width:560px}.removeApiKeyForm{margin-top:16px}.removeApiKeyForm button{padding:9px 12px;border:1px solid #713b43;border-radius:8px;background:#30171b;color:#ffb5bb;font:inherit;cursor:pointer}.removeApiKeyForm button:disabled{opacity:.55;cursor:not-allowed}
+@media(max-width:600px){.authPage{padding-top:24px}.authCard{padding:22px}.authSignedIn{width:100%;justify-content:space-between}.accountSettingsPanel dl>div{grid-template-columns:1fr;gap:4px}}
 header,.sectionTitle { display:flex; justify-content:space-between; align-items:end; gap:24px; } h1 { font-size:42px; margin:4px 0 0; } h2 { margin:4px 0 0; }
 .eyebrow { color:#9da9ba; font-size:12px; font-weight:800; letter-spacing:.16em; margin:0; }
 .power { padding:12px 16px; border:1px solid #2b3442; border-radius:12px; background:#111720; }
@@ -168,6 +171,8 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 
 /* Guild Raid: one task at a time, with positioning separate from rotation. */
 .viewTabList{display:flex;gap:4px;margin:16px 0;border-bottom:1px solid #38404d}.viewTabList [role=tab]{flex:1;min-width:0;min-height:44px;padding:10px 12px;border:0;border-radius:6px 6px 0 0;background:transparent;color:#a3adbd;font:inherit;font-weight:700;cursor:pointer}.viewTabList [aria-selected=true]{color:#9ccaff;background:#192537;box-shadow:inset 0 -3px #9ccaff}.viewTabs>[role=tabpanel][hidden]{display:none}.viewTabList [role=tab]:focus-visible{outline:2px solid #9ccaff;outline-offset:2px}.viewTabs>[role=tabpanel]{min-width:0}.raidOverview{margin-top:20px;padding:18px 22px}.raidOverviewControls{margin-bottom:14px}.raidOverviewControls label{flex:1}.raidOverviewControls select{width:100%}.raidLineupStrip{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}.raidLineupStrip .characterCell{font-size:13px}.raidOverview .raidSave{margin:14px 0 0}.raidTeamEditor{padding:20px 22px}.raidTeamEditor h2{margin:0 0 18px}.raidTeamEditor .abilityViews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.raidTeamEditor .abilityViews select{width:100%;min-width:0}.raidGuidePanel .raidBattleGuide{padding:20px 22px}.raidGuidePanel .raidBattleGuide>h2{margin:0 0 14px}.raidWorkspace .viewTabs .collapsibleSection:first-child{margin-top:0}.raidPositioning .raidPositions{margin:20px 0}.raidPositioning .raidPositions li{border-bottom:1px solid #27303d;padding-bottom:14px}.raidGuidePanel .raidTurn h3{margin-top:18px}@media(max-width:600px){.raidOverview,.raidTeamEditor,.raidGuidePanel .raidBattleGuide{padding:16px}.raidTeamEditor .abilityViews{grid-template-columns:1fr}.viewTabList [role=tab]{padding:10px 6px;font-size:13px}.raidLineupStrip{gap:10px}.raidLineupStrip .characterCell{font-size:12px}}
+.dashboardActionList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.dashboardActionItem{min-width:0;padding:12px 14px;border:1px solid #27303d;border-radius:8px;background:#0c1118}.dashboardActionItem>a{font-weight:700}.dashboardActionDetail{margin-top:6px;color:#9da9ba;font-size:13px;line-height:1.45}.dashboardActionDetail small{display:block;margin-top:2px}.dashboardActionTags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.dashboardActionTags span{padding:2px 7px;border-radius:999px;background:#192537;color:#9ccaff;font-size:11px;font-weight:700}.dashboardResourceLinks{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 12px}.dashboardResourceColumns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.dashboardResourceColumns h3{margin:0 0 8px;font-size:15px}.dashboardResourceColumns h3 span{color:#9da9ba;font-size:12px}.dashboardResourceColumns .dashboardActionList{grid-template-columns:1fr}.dashboardResourceColumns .dashboardActionItem{padding:9px 11px}.overviewPanel .viewTabs{margin-top:-4px}
+@media(max-width:650px){.dashboardActionList,.dashboardResourceColumns{grid-template-columns:1fr}.overviewPanel .viewTabList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.overviewPanel .viewTabList [role=tab]{border-radius:6px}}.raidOverview{margin-top:20px;padding:18px 22px}.raidOverviewControls{margin-bottom:14px}.raidOverviewControls label{flex:1}.raidOverviewControls select{width:100%}.raidLineupStrip{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}.raidLineupStrip .characterCell{font-size:13px}.raidOverview .raidSave{margin:14px 0 0}.raidTeamEditor{padding:20px 22px}.raidTeamEditor h2{margin:0 0 18px}.raidTeamEditor .abilityViews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.raidTeamEditor .abilityViews select{width:100%;min-width:0}.raidGuidePanel .raidBattleGuide{padding:20px 22px}.raidGuidePanel .raidBattleGuide>h2{margin:0 0 14px}.raidWorkspace .viewTabs .collapsibleSection:first-child{margin-top:0}.raidPositioning .raidPositions{margin:20px 0}.raidPositioning .raidPositions li{border-bottom:1px solid #27303d;padding-bottom:14px}.raidGuidePanel .raidTurn h3{margin-top:18px}@media(max-width:600px){.raidOverview,.raidTeamEditor,.raidGuidePanel .raidBattleGuide{padding:16px}.raidTeamEditor .abilityViews{grid-template-columns:1fr}.viewTabList [role=tab]{padding:10px 6px;font-size:13px}.raidLineupStrip{gap:10px}.raidLineupStrip .characterCell{font-size:12px}}
 
 .raidRarityPlan{margin:20px 0;min-width:0}.raidRarityPlan h3{padding:0;background:none}.raidRarityPlan table{min-width:780px}.raidRarityPlan td{vertical-align:top;padding:14px 12px}.raidRarityPlan td:nth-child(2){min-width:180px}.raidRarityPlan td:nth-child(3){min-width:220px}.raidRarityPlan .progressionBadge{margin:3px 0}.raidRarityPlan td>strong{display:block;margin-top:8px}.raidRarityPlan .sub{font-size:13px}
 
@@ -187,6 +192,23 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .warOrderButtons { display:flex; gap:4px; }
 .warOrderButtons button { min-width:30px; min-height:36px; }
 .warDefenseCard { padding:18px 24px; border-top:1px solid #303846; }
+.warCollapsibleTeam { border:1px solid #303846; border-radius:10px; background:#0c1118; }
+.warCollapsibleSummary { display:flex; align-items:center; gap:14px; min-height:64px; padding:10px 14px; cursor:pointer; list-style:none; }
+.warCollapsibleSummary::-webkit-details-marker { display:none; }
+.warCollapsibleSummary::before { content:"›"; flex:0 0 16px; color:#9da9ba; font-size:24px; line-height:1; text-align:center; transform:rotate(0); transition:transform .15s ease; }
+.warCollapsibleTeam[open]>.warCollapsibleSummary::before { transform:rotate(90deg); }
+.warCollapsibleSummary:focus-visible { outline:2px solid #9ccaff; outline-offset:2px; border-radius:8px; }
+.warCollapsibleTitle { flex:0 0 auto; font-size:15px; font-weight:750; }
+.warCollapsibleSummary .warTeamPortraits { display:flex; align-items:center; gap:5px; min-width:0; margin:0; }
+.warCollapsibleSummary .warTeamPortraits .portrait { width:36px; height:36px; border-radius:8px; }
+.warTeamSummaryStats { margin-left:auto; color:#9da9ba; font-size:12px; text-align:right; }
+.warTeamSummaryStats strong { color:#edf1f7; }
+.warTargetTierPreview { pointer-events:none; flex:0 0 42px; }
+.warCollapsibleBody { padding:8px 14px 14px; border-top:1px solid #303846; }
+.warCollapsibleBody>.warDefenseCardHeader { margin:0 0 10px; }
+.warCollapsibleBody>.warOffenseEvidence { margin:0 0 12px; }
+.warCollapsibleBody>.warOffenseGroups { margin:0 10px 16px; }
+.warCollapsibleBody>.warDefenseLayout { margin:0 10px; }
 .warTierHeader { margin:14px 24px; }
 .warDefenseCardHeader { display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-bottom:10px; }
 .warDefenseCardHeader h3,.warDefenseCardHeader p { margin:0; }
@@ -198,8 +220,139 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .warDefenseMachine > label { display:block; font-size:12px; color:#9da9ba; }
 .warMachineChange { font-size:12px; color:#9da9ba; }
 .warMachineChange summary { cursor:pointer; margin-bottom:8px; }
+.warUnitReadiness { display:grid; justify-items:center; gap:6px; width:100%; min-width:0; }
+.warUnitRank { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:4px; }
+.warUnitRank .gameBadge img { width:27px; height:27px; object-fit:contain; }
+.warReadinessMark { position:relative; display:inline-flex; align-items:center; justify-content:center; border-radius:7px; }
+.warReadinessMark.ready { box-shadow:0 0 0 2px #70c892; }
+.warReadinessMark.needs-upgrade { box-shadow:0 0 0 2px #c46a6a; }
+.warReadinessMark.ready::after,.warReadinessMark.needs-upgrade::after { position:absolute; right:-6px; top:-7px; display:grid; place-items:center; width:15px; height:15px; border:1px solid #111820; border-radius:50%; font-size:11px; font-weight:900; line-height:1; }
+.warReadinessMark.ready::after { content:"✓"; background:#286642; color:#eafff0; }
+.warReadinessMark.needs-upgrade::after { content:"!"; background:#833d42; color:#fff0f0; }
+.warRankStatus { margin:2px 3px 4px; }
+.warRankFloor { position:absolute; left:-6px; bottom:-7px; display:grid; place-items:center; width:19px; height:19px; border:1px solid #111820; border-radius:50%; background:#111820; }
+.warRankFloor .gameBadge img { width:16px; height:16px; }
+.warProgressionStatus { min-height:29px; padding:0 4px; gap:3px; }
+.warProgressionStatus::after,.warGearItem::after { top:auto; bottom:-6px; }
+.warProgressionStatus .progressionBadge { gap:2px; }
+.warProgressionStatus .progressionBadge .rarityBadge img { width:20px; height:20px; }
+.warProgressionStatus .progressionBadge .progressionStars { height:16px; }
+.warProgressionStatus .progressionBadge .progressionStars img { width:13px; height:13px; }
+.warProgressionStatus .progressionBadge .progressionStars.blue img { width:25px; }
+.warProgressionArrow { color:#9da9ba; font-size:12px; font-weight:800; }
+.warProgressionUnknown { font-size:10px; color:#9da9ba; }
+.warAbilityLevels { display:flex; justify-content:center; gap:10px; }
+.warAbilityLevel { position:relative; width:38px; height:38px; display:grid; place-items:center; border:1px solid #596375; border-radius:10px; background:#141a22; color:#d5b66b; }
+.warAbilityLevel svg { position:absolute; inset:6px; width:24px; height:24px; fill:rgba(213,182,107,.14); stroke:currentColor; stroke-width:1.8; stroke-linejoin:round; stroke-linecap:round; }
+.warAbilityLevel.passive { color:#82b5df; }
+.warAbilityLevel.passive svg { fill:rgba(130,181,223,.12); }
+.warAbilityLevel strong { position:relative; z-index:1; margin-top:17px; padding:0 3px; border-radius:4px; background:#0a0d12; color:#edf1f7; font-size:10px; line-height:13px; }
+.warAbilityLevel strong small { display:inline; margin:0; color:#9da9ba; font-size:9px; }
+.warAbilityLevel.maxed { border-color:#70c892; box-shadow:0 0 0 1px rgba(112,200,146,.24); }
+.warAbilityLevel.needs-upgrade { border-color:#98605d; }
+.warAbilityMaxed { position:absolute; top:-5px; right:-5px; width:15px; height:15px; border-radius:50%; background:#286642; color:#eafff0; font-size:10px; font-weight:900; line-height:15px; }
+.warUnitGear { display:flex; justify-content:center; gap:5px; }
+.warGearItem { position:relative; width:38px; height:38px; display:grid; place-items:center; border:1px solid #46536a; border-radius:8px; background:#0c1118; }
+.warGearItem.ready { border-color:#70c892; }
+.warGearItem.needs-upgrade { border-color:#98605d; }
+.warGearItem>.resourceIcon { width:30px; height:30px; flex-basis:30px; }
+.warGearItem>.rarityBadge { position:absolute; right:-5px; top:-6px; display:grid; place-items:center; width:16px; height:16px; border:1px solid #0a0d12; border-radius:50%; background:#0a0d12; }
+.warGearItem>.rarityBadge img { width:14px; height:14px; }
+.warGearItem>small { position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); margin:0; padding:0 4px; border-radius:5px; background:#263140; color:#fff; font-size:10px; font-weight:800; line-height:14px; }
+.warGearItem.empty { border-style:dashed; color:#65758b; font-size:18px; }
+.warDefenseCharacter .warUnitReadiness { margin-top:2px; }
+.warOffenseControls { display:flex; align-items:end; justify-content:flex-end; flex-wrap:wrap; gap:8px; }
+.warTargetTier { display:grid; place-items:center; width:42px; height:42px; padding:4px; border:1px solid #46536a; border-radius:8px; background:#1b2330; cursor:pointer; }
+.warTargetTier:hover { border-color:#9ccaff; }
+.warTargetTier .gameBadge img { width:30px; height:30px; }
+.warOffenseControls label { display:grid; gap:4px; color:#9da9ba; font-size:11px; }
+.warOffenseControls select,.warLineupChange select { max-width:min(420px,70vw); font:inherit; color:#edf1f7; background:#1b2330; border:1px solid #65758b; border-radius:8px; padding:7px; }
+.warLineupChange { color:#9da9ba; font-size:11px; }
+.warLineupChange summary { cursor:pointer; padding:8px; border:1px solid #46536a; border-radius:8px; }
+.warLineupChange select { width:min(480px,80vw); margin-top:6px; }
+.warOffenseEvidence { margin:0 24px 12px; color:#9da9ba; font-size:11px; }
+.warOffenseGroups { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:0 24px 16px; }
+.warOffenseDeployment { min-width:0; color:#9da9ba; font-size:12px; }
+.warOffenseDeployment summary { cursor:pointer; padding:8px 10px; border:1px solid #46536a; border-radius:8px; background:#141a22; }
+.warOffenseDeployment[open] summary { margin-bottom:8px; }
+.warOffenseGroup,.warUnassignedRecommendations { min-width:0; padding:12px; border:1px solid #303846; border-radius:10px; background:#101720; }
+.warOffenseGroup h4,.warUnassignedRecommendations h3 { margin:0 0 10px; }
+.warOffenseGroup.below { border-color:#69474a; }
+.warOffenseCandidates { display:flex; flex-wrap:wrap; align-items:stretch; gap:10px; }
+.warOffenseCandidates article { display:grid; align-content:start; justify-items:center; gap:7px; min-width:96px; padding:8px; border:1px solid #303846; border-radius:8px; background:#0b1118; }
+.warOffenseCandidates .warDefenseCharacter { width:auto; gap:5px; }
+.warOffenseCandidates .warDefenseCharacter .portrait { width:42px; height:42px; }
+.warOffenseCandidates .warDefenseCharacter strong { min-height:0; max-width:110px; font-size:11px; }
+.warOffenseCandidates .warUnitReadiness { transform:scale(.88); }
+.warOffenseCandidates small { color:#9da9ba; font-size:10px; text-align:center; }
+.warOffenseCandidates button { padding:5px 8px; border:1px solid #46536a; border-radius:6px; background:#1b2330; color:#edf1f7; font:inherit; font-size:11px; cursor:pointer; }
+.warOffenseCandidates button:disabled { opacity:.65; cursor:default; }
+.warUnassignedRecommendations { margin:18px 24px; }
+.warUnassignedRecommendations>p { margin:0 0 12px; font-size:12px; }
+.warUnlockTargets summary { cursor:pointer; }
+.warUnlockTargets summary h3 { display:inline; }
+.warDefenseGroups { margin:0 10px 16px; }
+.warDefenseSlots { display:grid; gap:0; }
+.warDefenseSlot { border-top:1px solid #303846; }
+.warDefenseSlotControls { display:flex; align-items:center; gap:8px; margin:0 0 8px; }
+.warDefenseSlotControls>strong { margin-right:4px; }
+.warDefenseSlotControls button { min-width:34px; min-height:34px; border:1px solid #46536a; border-radius:7px; background:#1b2330; color:#edf1f7; font:inherit; cursor:pointer; }
+.warDefenseSlotControls button:disabled { opacity:.4; cursor:default; }
+.warDefenseSlotControls .warDefenseDragHandle { cursor:grab; font-size:20px; touch-action:none; }
+.warDefenseSlotControls .warDefenseDragHandle:active { cursor:grabbing; }
+.warDefenseEmptySlot { display:grid; grid-template-columns:auto auto; justify-content:start; align-items:center; gap:10px; min-height:92px; }
+.warDefenseEmptySlot p { grid-column:1/-1; margin:0; color:#9da9ba; font-size:12px; }
+.warGoldBuildPanel { margin:12px 24px; padding:14px; border:1px solid #6b5934; border-radius:10px; background:#17160f; }
+.warGoldBuildPanel>h4,.warGoldBuildPanel>p { margin:0 0 10px; }
+.warGoldBuildPanel>h4 { color:#e7c77b; }
+.warGoldBuildPanel>.sub { font-size:12px; }
+.warGoldBuildTeam { margin-top:10px; padding:12px; border:1px solid #3c4148; border-radius:8px; background:#10151b; }
+.warGoldBuildHeading { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px; }
+.warGoldBuildHeading span,.warGoldBuildMember small { color:#aab4c2; font-size:11px; }
+.warGoldBuildGroups { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.warGoldBuildGroups h5,.warGoldBuildCharacterList h5 { margin:0 0 8px; color:#c6d0dd; font-size:12px; }
+.warGoldBuildMembers { display:flex; flex-wrap:wrap; gap:8px; }
+.warGoldBuildMember { display:grid; justify-items:center; align-content:start; gap:5px; min-width:105px; padding:8px; border:1px solid #303846; border-radius:8px; background:#0b1118; }
+.warGoldBuildMember .warDefenseCharacter strong { max-width:110px; font-size:11px; }
+.warGoldBuildMember .warUnitReadiness { transform:scale(.88); }
+.warGoldBuildMember small { text-align:center; }
+.warGoldBuildReady { color:#70c892; font-size:10px; font-weight:700; }
+.warGoldBuildNeeds { color:#e0ad6c; font-size:10px; font-weight:700; }
+.warGoldBuildCharacterList { margin-top:14px; }
+.warGoldBuildCharacterList .warOffenseCandidates article { min-width:120px; }
+.raidUpgradeCoverage { margin:20px 0; padding:18px 22px; }
+.raidUpgradeCoverage .sectionTitle { margin-bottom:12px; }
+.raidUpgradeRosterGroup { margin-top:16px; }
+.raidUpgradeRosterGroup>h3 { display:flex; align-items:center; gap:8px; margin:0 0 10px; font-size:16px; }
+.raidUpgradeRosterGroup>h3 small { display:grid; place-items:center; min-width:22px; height:22px; padding:0 5px; border-radius:12px; background:#263140; color:#c6d0dd; font-size:11px; }
+.raidUpgradeRosterGrid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+.raidUpgradeRosterCard { min-width:0; padding:10px; border:1px solid #303846; border-radius:8px; background:#0c1118; }
+.raidUpgradeRosterCharacter { display:flex; align-items:center; justify-content:space-between; gap:8px; color:inherit; text-decoration:none; }
+.raidUpgradeRosterCharacter:hover .characterCell strong { color:#9ccaff; }
+.raidUpgradeOwned,.raidUpgradeUnowned { flex:none; font-size:10px; font-weight:700; }
+.raidUpgradeOwned { color:#70c892; }
+.raidUpgradeUnowned { color:#9da9ba; }
+.raidUpgradeRosterLevels { display:flex; flex-wrap:wrap; gap:5px 12px; margin-top:6px; color:#b9c3d1; font-size:11px; }
+.raidUpgradeRosterUses { display:flex; flex-wrap:wrap; gap:4px; margin-top:8px; }
+.raidUpgradeRosterUses span { padding:3px 6px; border:1px solid #354355; border-radius:5px; color:#9ccaff; font-size:10px; }
+.warModeTabs button { min-width:130px; }
+.warModePanel[hidden] { display:none; }
+.warOffenseMachine label { margin-bottom:6px; }
+.warOffenseMachineStatus { display:grid; gap:10px; margin-top:14px; padding-top:12px; border-top:1px solid #303846; }
+.warOffenseMachineName { display:flex; align-items:center; gap:10px; color:inherit; text-decoration:none; }
+.warOffenseMachineName .portrait { width:42px; height:42px; border-radius:8px; }
+.warOffenseMachineName:hover strong { color:#9ccaff; }
+.warOffenseMachineStatus .warUnitReadiness { justify-items:start; }
+.warOffenseMachineStatus .warUnitRank { justify-content:flex-start; }
+.warOffenseMachineStatus .warUnitGear { justify-items:start; }
+@media(max-width:700px) { .warOffenseGroups { grid-template-columns:minmax(0,1fr); margin:0 12px 14px; } }
+@media(max-width:700px) { .raidUpgradeRosterGrid { grid-template-columns:minmax(0,1fr); } .warDefenseSlotControls { gap:6px; } .warDefenseSlotControls>strong { margin-right:auto; } }
+@media(max-width:700px) { .raidUpgradeRosterGrid { grid-template-columns:minmax(0,1fr); } .warDefenseSlotControls { gap:6px; } .warDefenseSlotControls>strong { margin-right:auto; } }
+@media(max-width:700px) { .warGoldBuildGroups { grid-template-columns:minmax(0,1fr); } .warGoldBuildPanel { margin:12px; } }
+@media(max-width:500px) { .warOffenseEvidence { margin:0 12px 10px; } .warOffenseControls { justify-content:flex-start; } .warOffenseControls select { max-width:80vw; } .warUnassignedRecommendations { margin:14px 12px; } }
 @media(max-width:850px) { .warDefenseLayout { grid-template-columns:minmax(0,1fr); gap:14px; } .warDefenseMachine { border-left:0; border-top:1px solid #303846; padding:12px 0 0; } }
-@media(max-width:500px) { .warDefenseCard { padding:16px 12px; } .warDeployment ol { gap:5px; } .warDefenseCharacter strong { font-size:11px; } .warCharacterStatus small { font-size:10px; } }
+@media(max-width:700px) { .warCollapsibleSummary { gap:8px; flex-wrap:wrap; } .warTeamSummaryStats { flex-basis:100%; margin-left:24px; text-align:left; } }
+@media(max-width:500px) { .warDefenseCard { padding:12px; } .warCollapsibleSummary { padding:10px; } .warCollapsibleSummary .warTeamPortraits { flex:1 1 100%; margin-left:24px; } .warCollapsibleSummary .warTeamPortraits .portrait { width:32px; height:32px; } .warCollapsibleBody { padding:8px 4px 12px; } .warCollapsibleBody>.warOffenseGroups,.warCollapsibleBody>.warDefenseLayout { margin-right:4px; margin-left:4px; } .warDeployment ol { gap:5px; } .warDefenseCharacter strong { font-size:11px; } .warCharacterStatus small { font-size:10px; } }
 .warDeployment button:disabled { opacity:.4; cursor:default; }
 .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 .warMachineFit { margin:0 0 12px; font-size:13px; }
@@ -207,6 +360,11 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .warMachineFit summary { cursor:pointer; color:#9da9ba; }
 .warMachineFit .characterCell { flex-wrap:wrap; }
 .warMachineFit .characterCell span { color:#aab6c6; font-size:13px; }
+.warCounterLink{color:#9ccaff;font-weight:700}.warCounterPanel{padding:20px}.warCounterFilters{display:flex;gap:14px;align-items:end;margin-bottom:16px}.warCounterFilters label,.warCounterTeamForm label{display:grid;gap:6px;min-width:0;color:#9da9ba;font-size:12px}.warCounterFilters label:first-child{flex:1}.warCounterFilters input,.warCounterFilters select,.warCounterTeamForm select{min-width:0;width:100%;padding:10px 12px;border:1px solid #46536a;border-radius:8px;background:#0c1118;color:#edf1f7;font:inherit}.warCounterLayout{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,2fr);gap:20px}.warCounterRoster{max-height:70vh;overflow:auto;border:1px solid #303846;border-radius:8px}.warCounterRoster>.sub{padding:0 12px}.warCounterRoster>button{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:9px 10px;border:0;border-top:1px solid #27303d;background:transparent;color:#c5d2e3;font:inherit;text-align:left;cursor:pointer}.warCounterRoster>button.active{background:#192537;color:#9ccaff}.warCounterRoster>button .characterCell{min-width:0}.warCounterRoster>button .characterCell strong{overflow-wrap:anywhere}.warCounterRoster>button>span:last-child{flex:none;color:#9da9ba;font-size:11px}.warCounterDetails{min-width:0}.warCounterUnitHeader{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px;padding:0 0 12px;border-bottom:1px solid #303846}.warCounterUnitHeader .characterCell{font-size:20px}.warCounterUnitHeader .portrait{width:48px;height:48px}.warCounterUnitHeader>small,.warCounterConfidence{color:#e0ad6c;font-size:12px;text-transform:capitalize}.warCounterList{display:grid;gap:10px;margin:0;padding:0;list-style:none}.warCounterList>li,.warCounterMatches article{padding:14px;border:1px solid #303846;border-radius:8px;background:#0c1118}.warCounterList>li>a,.warCounterTeamMembers>a{color:inherit;text-decoration:none}.warCounterList .characterCell,.warCounterTeamMembers .characterCell{font-size:14px}.warCounterList .portrait,.warCounterTeamMembers .portrait{width:36px;height:36px}.warCounterList p,.warCounterMatches p{margin:8px 0;color:#c5d2e3;line-height:1.55}.warCounterSources{display:block;margin-top:8px;color:#9da9ba;font-size:11px}.warCounterSources a{color:#9ccaff}.warCounterTeamForm{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:end}.warCounterTeamForm>button{min-height:40px;padding:8px 12px;border:1px solid #46536a;border-radius:8px;background:#1b2330;color:#edf1f7;font:inherit;cursor:pointer}.warCounterMatches{display:grid;gap:12px;margin-top:20px}.warCounterMatches h2{font-size:18px}.warCounterTeamMembers{display:flex;flex-wrap:wrap;gap:12px}.warCounterTeamMembers>a{min-width:90px}.warCounterTeamMembers .characterCell{flex-direction:column;align-items:center;text-align:center}.warCounterMatches article>.warCounterConfidence{display:block}
+.warCounterMechanic{margin:0 0 14px;padding:14px;border-left:3px solid #c69b56;background:#141a22}.warCounterMechanic p{margin:8px 0;color:#c5d2e3;line-height:1.55}
+.warMechanicResults{display:grid;gap:12px}.warMechanicResults>article,.warDefenseMechanic{padding:14px;border:1px solid #303846;border-radius:8px;background:#0c1118}.warMechanicResults h3,.warMechanicResults h4{margin:0 0 6px}.warMechanicResults p,.warDefenseMechanic>p{margin:8px 0;color:#c5d2e3;line-height:1.55}.warMechanicMatchedTraits{color:#9da9ba;font-size:11px}.warMechanicResults>article>section{margin-top:12px;padding-top:10px;border-top:1px solid #303846}.warMechanicDisclaimer{display:block;margin-top:10px;color:#e0ad6c;font-size:12px}.warDefenseMechanic{margin-top:12px}.warDefenseMechanic>h3{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px}.warDefenseMechanic>h3 .characterCell{font-size:16px}.warDefenseMechanic>h3 .portrait{width:36px;height:36px}.warDefenseMechanic>h3>small{color:#9da9ba;font-size:12px}
+.warCounterRelated{margin-top:20px}.warCounterRelated>h3{margin-bottom:4px}.warCounterRelated>.warDefenseCohortCard{margin:12px 0}.warDefenseCohortCard{display:block;padding:16px;border:1px solid #303846;border-radius:8px;background:#0c1118}.warDefenseCohortCard>h3{margin:0}.warDefenseCohortCard>p{color:#c5d2e3;line-height:1.55}.warCounterCoreList{display:grid;gap:8px;margin:12px 0}.warCounterCoreList>section{padding:10px;border:1px solid #303846;border-radius:8px;background:#0c1118}.warCounterCoreList>section>header{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.warCounterCoreList h4{margin:0}.warCounterCoreList>section>header>strong{font-size:13px;color:#a6d9a0}.warCounterCoreList .warCounterTeamMembers{margin:8px 0}.warCounterCoreList>section>small{color:#9da9ba}
+@media(max-width:700px){.warCounterPanel{padding:14px}.warCounterLayout{grid-template-columns:1fr}.warCounterRoster{max-height:260px}.warCounterFilters{align-items:stretch;flex-direction:column}.warCounterFilters label:first-child{flex:auto}.warCounterTeamForm{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .warMachineActions { margin:12px 24px; }
 .warMachineApply { font:inherit; color:#edf1f7; background:#1b2330; border:1px solid #65758b; border-radius:8px; padding:10px 13px; cursor:pointer; min-height:44px; }
 .warMachineApply:hover { background:#273344; }
@@ -239,3 +397,13 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .equipmentShoppingList td:first-child { width:47%; }
 .equipmentShoppingList td:last-child { width:40%; }
 @media(max-width:600px) { .equipmentPanel .equipmentShoppingList table { min-width:0; table-layout:fixed; } .equipmentShoppingList td:first-child { width:44%; } .equipmentShoppingList td:last-child { width:auto; } .equipmentShoppingList th:nth-child(2),.equipmentShoppingList td:nth-child(2) { width:48px; } .equipmentShoppingList .resourceName { flex-wrap:wrap; } .equipmentShoppingList .resourceIcon { flex-shrink:0; } }
+.raidSideBossGuide { padding:20px 22px; }
+.raidSideBossGuide>h2 { margin:0 0 10px; }
+.raidSideBossCards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:18px 0; }
+.raidSideBossCards article { min-width:0; padding:18px; border:1px solid #303b4b; border-radius:12px; background:#101720; }
+.raidSideBossCards h3 { margin:0 0 14px; }
+.raidSideBossCards ul { padding-left:20px; }
+.raidSideBossCards li+li { margin-top:12px; }
+.raidSideBossCards a { overflow-wrap:anywhere; }
+.raidSupportBenefit { border-top:1px solid #303b4b; padding-top:14px; }
+@media(max-width:800px) { .raidSideBossCards { grid-template-columns:minmax(0,1fr); } .raidSideBossGuide { padding:16px; } }

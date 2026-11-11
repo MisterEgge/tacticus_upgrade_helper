@@ -52,9 +52,23 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     fireEvent.keyDown(mainTabs.getByRole("tab",{name:"Battle guide"}),{key:"End"});
     assert.equal(mainTabs.getByRole("tab",{name:"Upgrades"}).getAttribute("aria-selected"),"true");
     assert.equal(dom.window.document.activeElement,mainTabs.getByRole("tab",{name:"Upgrades"}));
+    const upgradeCoverage=within(view.getByRole("region",{name:"Guild Raid upgrade coverage"}));
+    assert.ok(upgradeCoverage.getByRole("heading",{name:/Core characters/}));
+    assert.ok(upgradeCoverage.getByRole("heading",{name:/Flex characters/}));
+    assert.ok(upgradeCoverage.getAllByText(/ · /).length>0);
     fireEvent.keyDown(mainTabs.getByRole("tab",{name:"Upgrades"}),{key:"Home"});
     assert.equal(mainTabs.getByRole("tab",{name:"Team"}).getAttribute("aria-selected"),"true");
     const upgradeTable = () => {show("Upgrades");const toggle=view.getByRole("button",{name:"Character ability targets"});if(toggle.getAttribute("aria-expanded")==="false")fireEvent.click(toggle);return within(view.getByRole("table",{name:"Raid ability targets"}));};
+    show("Side bosses");
+    fireEvent.change(view.getByLabelText("Raid boss"), { target: { value: "Screamer-Killer" } });
+    let sideGuide=within(view.getByRole("region",{name:"Screamer-Killer side bosses"}));
+    assert.equal(sideGuide.getAllByRole("article").length,2);
+    assert.ok(sideGuide.getByRole("article",{name:"Neurothrope"}));
+    fireEvent.change(view.getByLabelText("Raid boss"), { target: { value: "Rogal Dorn" } });
+    sideGuide=within(view.getByRole("region",{name:"Rogal Dorn side bosses"}));
+    assert.ok(sideGuide.getByRole("article",{name:"Sibyll Devine"}));
+    assert.equal(sideGuide.queryByRole("article",{name:"Neurothrope"})===null,true);
+    show("Team");
     const now = () => {show("Upgrades");return within(view.container.querySelector(".roadmapNow") as HTMLElement);};
 
     fireEvent.change(view.getByLabelText("Raid boss"), { target: { value: "Tervigon" } });

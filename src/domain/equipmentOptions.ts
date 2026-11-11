@@ -1,9 +1,12 @@
 import {preferredDefensiveItemId,type DefensiveEquipment} from "./equipmentGoals";
 import {equipmentTargetRarities,tierUpgradeItemId} from "./equipmentTier";
 import {preferredBlockItemId} from "./blockEquipment";
+import {preferredActOfFaithCritItemId} from "./critEquipment";
 
 export function preferredEquipmentItemId(unit:{id:string;faction:string},traits:string[],types:string[],rarity:string,currentId:string,equipment:Record<string,DefensiveEquipment>) {
- return preferredBlockItemId(unit,types,rarity,currentId,equipment)??preferredDefensiveItemId(unit,traits,types,rarity,currentId,equipment);
+ return preferredBlockItemId(unit,types,rarity,currentId,equipment)
+  ??preferredDefensiveItemId(unit,traits,types,rarity,currentId,equipment)
+  ??preferredActOfFaithCritItemId(unit,traits,types,rarity,currentId,equipment);
 }
 
 /** Shared roster-wide replacement rules. Mode caps never choose a weaker replacement. */
@@ -14,6 +17,6 @@ export function equipmentUpgradeOptions(unit:{id:string;faction:string;rarity:st
   if(tiers.indexOf(rarity)>tiers.indexOf(unit.rarity))return [];
   const preferred=preferredEquipmentItemId(unit,character.traits,character.equipment,rarity,item.id,equipment);
   const id=preferred??tierUpgradeItemId(item.rarity??"",item.id,rarity,equipment);
-  return id?[{id,rarity,reason:preferred?(equipment[id]?.type==="I_Block"?"Preferred block chance · general reliability":"Preferred health + armor"):"Rarity upgrade"}]:[];
+  return id?[{id,rarity,reason:preferred?(equipment[id]?.type==="I_Block"?"Preferred block chance · general reliability":equipment[id]?.type==="I_Crit"&&character.traits.includes("ActOfFaith")?"Preferred crit damage · Act of Faith":"Preferred health + armor"):"Rarity upgrade"}]:[];
  });
 }

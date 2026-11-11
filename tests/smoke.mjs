@@ -203,20 +203,21 @@ try
     assert.match(campaigns, /Elite 3★ Upgrade Planner/);
     assert.match(campaigns, /class="campaignInvestmentGroup"><button type="button" class="campaignSectionToggle" aria-expanded="true" aria-controls="[^"]+"><h3>Indomitus Mirror Elite<\/h3>/);
     assert.match(campaigns, /class="campaignSectionToggle" aria-expanded="true" aria-controls="[^"]+".*?Account-specific campaign priorities/s);
-    assert.match(campaigns, /completed through/);
+    assert.match(campaigns, /class="power">38<strong> of \d+ missions cleared<\/strong>/);
     assert.doesNotMatch(campaigns, /Tyranids Elite/);
     const progressPanel=(dom,label)=>dom.window.document.getElementById([...dom.window.document.querySelectorAll('[role="tab"]')].find(tab=>tab.textContent===label).getAttribute('aria-controls'));
     const campaignTabs=new JSDOM(campaigns);
     assert.match(progressPanel(campaignTabs,'In progress').textContent,/Indomitus Mirror Elite/);
     assert.equal(progressPanel(campaignTabs,'Completed').hidden,true);
-    assert.match(progressPanel(campaignTabs,'Completed').textContent,/No completed campaigns yet/);
+    assert.match(progressPanel(campaignTabs,'Completed').textContent,/No fully 3★ completed campaigns yet/);
     campaignTabs.window.close();
     const incompleteCampaign=report.campaignProgress[0];
     report.campaignProgress[0]={...incompleteCampaign,highestCompletedBattle:40,highestUnlockedBattle:40};
     await writeFile(reportPath,JSON.stringify(report));
     const completedTabs=new JSDOM(await get('/campaigns'));
-    assert.doesNotMatch(progressPanel(completedTabs,'In progress').textContent,/Indomitus Mirror Elite/);
-    assert.match(progressPanel(completedTabs,'Completed').textContent,/Indomitus Mirror Elite/);
+    assert.match(progressPanel(completedTabs,'In progress').textContent,/Indomitus Mirror Elite/);
+    assert.match(progressPanel(completedTabs,'In progress').textContent,/40 of 40 missions cleared/);
+    assert.doesNotMatch(progressPanel(completedTabs,'Completed').textContent,/Indomitus Mirror Elite/);
     assert.doesNotMatch(progressPanel(completedTabs,'Completed').textContent,/Account-specific campaign priorities/);
     completedTabs.window.close();
     report.campaignProgress[0]=incompleteCampaign;
@@ -227,10 +228,10 @@ try
     assert.doesNotMatch(war, /DEFENSE SOURCE OPTIONS/);
     const catalog = JSON.parse(await readFile(path.join(root, 'data/character_catalog.json'), 'utf8'));
     assert.match(dashboard, /ACCOUNT OVERVIEW/);
-    assert.match(dashboard, /Next upgrades/);
+    assert.match(dashboard, /Next \(\d+\)/);
     const ratings = await get('/ratings');
     assert.match(ratings, new RegExp(`${catalog.characters.length}<strong> catalog characters`));
-    assert.match(ratings, /No tracked signal/);
+    assert.match(ratings, /Low priority for this roster/);
     for (const route of ['/', '/equipment', '/equipment-demand', '/abilities', '/orbs', '/ratings', '/characters', '/characters/necroSpyder', '/inventory', '/guild-raid', '/war-defense'])
     {
 
@@ -397,7 +398,8 @@ try
     }
     await writeFile(reportPath, JSON.stringify(report));
     const unreadyLineup = new JSDOM(await get('/war-defense'));
-    assert.equal(unreadyLineup.window.document.querySelectorAll('.warDefenseCard').length,0);
+    assert.ok(unreadyLineup.window.document.querySelector('.warDefenseCard'));
+    assert.ok(unreadyLineup.window.document.querySelector('[aria-label="Below Gold I minimum rank"]'));
     unreadyLineup.window.close();
     for(const unit of report.roster)unit.rank=9;
     await writeFile(reportPath,JSON.stringify(report));

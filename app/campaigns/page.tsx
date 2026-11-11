@@ -1,4 +1,3 @@
-import ViewTabs from "../components/ViewTabs";
 import RankBadge from "../components/RankBadge";
 import CampaignRecommendationGroup from "./CampaignRecommendationGroup";
 import CampaignRecommendations from "./CampaignRecommendations";
@@ -6,6 +5,7 @@ import Nav from "../components/Nav";
 import ReferenceDetails from "../components/ReferenceDetails";
 import CharacterName from "../components/CharacterName";
 import CampaignSection from "./CampaignSection";
+import CampaignStatusTabs from "./CampaignStatusTabs";
 import ThreeStarProgress from "./ThreeStarProgress";
 import { getReport } from "../lib/report";
 import { getCampaignEvidence, getCampaignTargets, getCharacterCatalog } from "../lib/catalog";
@@ -30,8 +30,8 @@ export default async function Campaigns()
             const finalBattle = progress
                 ? finalCampaignBattle(progress.name, progress.type, battleCatalog)
                 : finalCampaignBattle(name, / Mirror$/i.test(name) ? "EliteMirror" : "Elite", battleCatalog);
-            const progressLabel = <>{campaignComplete ? "Completed" : progress?.highestCompletedBattle ?? "Unknown"}<strong>{campaignComplete ? " · all Elite missions cleared" : ` completed through · ${progress?.highestUnlockedBattle ?? "unknown"} unlock frontier`}</strong></>;
-            return {completed:campaignComplete,content:<CampaignSection key={name} status={campaign.status} name={name} progressLabel={progressLabel} finalBattle={finalBattle}>
+            const progressLabel = <>{progress?.highestCompletedBattle ?? "Unknown"}<strong> of {finalBattle ?? "?"} missions cleared</strong></>;
+            return {name, finalBattle, content:<CampaignSection key={name} status={campaign.status} name={name} progressLabel={progressLabel} finalBattle={finalBattle}>
                 <ThreeStarProgress campaign={name} finalBattle={finalBattle}/>
                 <div className="tableWrap"><table><thead><tr><th>Character</th><th>Rank</th><th>Elite target</th><th>Abilities</th><th>Role</th></tr></thead>
                     <tbody>{required.map(character =>
@@ -39,12 +39,12 @@ export default async function Campaigns()
 
                         const unit = roster.get(character.id);
                         const target = campaign.characters[character.name];
-                        const rankMet = Boolean(unit && (campaignComplete || campaignRankGap(unit.rank,target?.rank)===0));
+                        const rankMet = Boolean(unit && campaignRankGap(unit.rank,target?.rank)===0);
                         return <tr key={character.id}>
                             <td><CharacterName name={character.name} id={character.id}/></td>
                             <td><strong>{unit ? <RankBadge rank={unit.rank}/> : "Not in account roster"}</strong></td>
-                            <td><strong>{rankMet ? "Target met" : target?.rank ? <RankBadge rank={target.rank}/> : "RESEARCHING"}</strong>{!campaignComplete && !rankMet && target?.rank ? <small>{target.confidence ?? "Unknown"} confidence · {unit ? `${campaignRankGap(unit.rank, target.rank) ?? "?"} rank step(s) remaining` : "current rank unavailable"}</small> : null}</td>
-                            <td><strong>A {formatAbilityTarget(unit?.abilities[0]?.level,campaignComplete && unit ? unit.abilities[0]?.level : target?.active)}</strong><small>P {formatAbilityTarget(unit?.abilities[1]?.level,campaignComplete && unit ? unit.abilities[1]?.level : target?.passive)}</small></td>
+                            <td><strong>{rankMet ? "Target met" : target?.rank ? <RankBadge rank={target.rank}/> : "RESEARCHING"}</strong>{!rankMet && target?.rank ? <small>{target.confidence ?? "Unknown"} confidence · {unit ? `${campaignRankGap(unit.rank, target.rank) ?? "?"} rank step(s) remaining` : "current rank unavailable"}</small> : null}</td>
+                            <td><strong>A {formatAbilityTarget(unit?.abilities[0]?.level,target?.active)}</strong><small>P {formatAbilityTarget(unit?.abilities[1]?.level,target?.passive)}</small></td>
                             <td><strong>{target?.role ?? "Unreviewed"}</strong><ReferenceDetails label="Target details"><p>{target?.note ?? "Campaign-specific Elite 3★ research pending."}</p>{target?.evidence?.length ? <small>Evidence: {target.evidence.map((id, index) => { const source = evidence.sources[id]; return source ? <span key={id}>{index ? " · " : ""}<a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></span> : null; })}</small> : null}</ReferenceDetails></td>
                         </tr>;
 
@@ -59,10 +59,7 @@ export default async function Campaigns()
             <p className="sub">Upgrades for your next Elite clears.</p>
             <ReferenceDetails label="About campaign targets"><p>Targets marked RESEARCHING still need campaign-specific evidence.</p><p>Current ranks do not show which upgrades were used for earlier clears. Campaign history records progress alongside roster changes; it cannot prove which upgrade caused a clear.</p></ReferenceDetails>
         </div></header>
-        <ViewTabs label="Campaign status" defaultTab="In progress" tabs={[
-            {label:"In progress",content:<>{recommendations.length ? <CampaignRecommendations count={recommendations.length}>{Object.entries(Object.groupBy(recommendations.slice(0, 12), row => row.campaign)).map(([campaignName, rows]) => <CampaignRecommendationGroup key={campaignName} name={campaignName} count={rows?.length??0}><div className="tableWrap"><table><thead><tr><th>Character</th><th>Current</th><th>Target</th><th>Why</th></tr></thead><tbody>{rows?.map(row => <tr key={row.campaign + row.characterId}><td><CharacterName name={row.characterName} id={row.characterId}/></td><td><RankBadge rank={row.currentRank??undefined}/></td><td><RankBadge rank={row.targetRank}/></td><td><strong>{row.reason}</strong></td></tr>)}</tbody></table></div></CampaignRecommendationGroup>)}</CampaignRecommendations> : null}{sections.filter(section=>!section.completed).map(section=>section.content)}{sections.every(section=>section.completed)?<p className="empty">All tracked campaigns completed.</p>:null}</>},
-            {label:"Completed",content:<>{sections.filter(section=>section.completed).map(section=>section.content)}{sections.every(section=>!section.completed)?<p className="empty">No completed campaigns yet.</p>:null}</>}
-        ]}/>
+        <CampaignStatusTabs sections={sections} inProgressContent={recommendations.length ? <CampaignRecommendations key="campaign-recommendations" count={recommendations.length}>{Object.entries(Object.groupBy(recommendations.slice(0, 12), row => row.campaign)).map(([campaignName, rows]) => <CampaignRecommendationGroup key={campaignName} name={campaignName} count={rows?.length??0}><div className="tableWrap"><table><thead><tr><th>Character</th><th>Current</th><th>Target</th><th>Why</th></tr></thead><tbody>{rows?.map(row => <tr key={row.campaign + row.characterId}><td><CharacterName name={row.characterName} id={row.characterId}/></td><td><RankBadge rank={row.currentRank??undefined}/></td><td><RankBadge rank={row.targetRank}/></td><td><strong>{row.reason}</strong></td></tr>)}</tbody></table></div></CampaignRecommendationGroup>)}</CampaignRecommendations> : null}/>
 
     </main>;
 

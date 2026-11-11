@@ -2,7 +2,7 @@ import RankSelect from "../components/RankSelect";
 import ReferenceDetails from "../components/ReferenceDetails";
 import Link from "next/link";
 import { getShopCatalog } from "../lib/shops";
-import { sourcesForItem } from "../../src/domain/shops";
+import { shopOffersForItem } from "../../src/domain/shops";
 import Nav from "../components/Nav";
 import FarmingTable from "./FarmingTable";
 import { loadFarmingData, bestFarmNode, planMaterials, progressFromReport, RANK_NAMES } from "../lib/farming";
@@ -56,7 +56,7 @@ export default async function Farming({ searchParams }: { searchParams: Promise<
 
         const recipe = data.recipes[id];
         const node = bestFarmNode(id, data.battles, progress);
-        return { id, shops: shops ? sourcesForItem(id, shops) : [], name: recipe?.material ?? id, rarity: recipe?.rarity ?? "", owned: d.owned, needed: d.needed, shortage: d.shortage, topCharacter: d.characters[0]?.name ?? "", topPriority: d.characters[0]?.priority ?? 0, node: node?.id ?? "", campaign: node?.campaign ?? "", campaignType: node?.campaignType ?? "", nodeNumber: node?.nodeNumber ?? 0, energy: node?.energyCost ?? 0, rate: node?.rate ?? 0 };
+        return { id, shops: shops ? shopOffersForItem(id, shops, report.source.powerLevel) : [], name: recipe?.material ?? id, rarity: recipe?.rarity ?? "", owned: d.owned, needed: d.needed, shortage: d.shortage, topCharacter: d.characters[0]?.name ?? "", topPriority: d.characters[0]?.priority ?? 0, node: node?.id ?? "", campaign: node?.campaign ?? "", campaignType: node?.campaignType ?? "", nodeNumber: node?.nodeNumber ?? 0, energy: node?.energyCost ?? 0, rate: node?.rate ?? 0 };
 
     }).filter(x => x.shortage > 0).sort((a, b) => b.topPriority - a.topPriority || b.shortage - a.shortage);
     return <main><Nav/><header><div><p className="eyebrow">FARMING</p><h1>Personal Farming Queue</h1>

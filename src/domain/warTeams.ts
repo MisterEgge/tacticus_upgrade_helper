@@ -1,6 +1,10 @@
 export type WarTeamCandidate = { members: Array<{ name: string }>; used: number };
 export type DefenseCore = { name:string; core:string[]; flex:Array<{name:string;used:number}>; used:number; wins:number; score:number; defense?:number };
 export type BuiltDefenseTeam = {name:string;members:string[];used:number;wins:number;score:number; evidence:"core-flex"};
+export type OffenseCore = { name:string; core:string[]; flex:Array<{name:string;used:number;win:number}>; used:number; wins:number };
+export type BuiltOffenseTeam = {name:string;members:string[];core:string[];flex:OffenseCore["flex"];used:number;wins:number;score:number;evidence:"core-flex"};
+
+const rate=(candidate:{win?:number;wins?:number;used:number})=>candidate.win??(candidate.used>0?(candidate.wins??0)/candidate.used*100:0);
 
 /** Walk the observed cores by win rate, reserving later cores before choosing flex units. */
 export function buildDistinctDefenseTeams(cores:DefenseCore[],owned:Set<string>,limit=10):BuiltDefenseTeam[]
@@ -23,6 +27,57 @@ export function buildDistinctDefenseTeams(cores:DefenseCore[],owned:Set<string>,
         result.push({name:members.join(" / "),members,used:team.used,wins:team.wins,score:team.score,evidence:"core-flex"});
     }
     return result;
+}
+
+/** Build distinct, owned offense suggestions from observed cores and their flex candidates. */
+export function buildDistinctOffenseTeams(cores:OffenseCore[],owned:Set<string>,limit=10):BuiltOffenseTeam[]
+{
+    const ranked=[...cores].sort((a,b)=>b.wins/b.used-a.wins/a.used||b.used-a.used);
+    const bestFlexTeam=new Map<string,OffenseCore>();
+    for(const team of ranked)for(const candidate of team.flex){
+        const current=bestFlexTeam.get(candidate.name);
+        if(!current||rate(candidate)>rate(current.flex.find(member=>member.name===candidate.name)!)||
+            rate(candidate)===rate(current.flex.find(member=>member.name===candidate.name)!)&&candidate.used>(current.flex.find(member=>member.name===candidate.name)?.used??0))bestFlexTeam.set(candidate.name,team);
+    }
+    const pairsFor=(team:OffenseCore)=>
+    {
+        const flex=team.flex.filter((member,index)=>owned.has(member.name)&&!team.core.includes(member.name)&&bestFlexTeam.get(member.name)===team&&team.flex.findIndex(other=>other.name===member.name)===index);
+        const pairs:Array<Array<OffenseCore["flex"][number]>>=[];
+        for(let first=0;first<flex.length;first++)for(let second=first+1;second<flex.length;second++)pairs.push([flex[first]!,flex[second]!]);
+        return pairs.sort((a,b)=>
+        {
+            const score=(pair:Array<OffenseCore["flex"][number]>)=>pair.reduce((total,member)=>total+rate(member),0);
+            return score(b)-score(a)||b.reduce((total,member)=>total+member.used,0)-a.reduce((total,member)=>total+member.used,0);
+        });
+    };
+    const best:BuiltOffenseTeam[]=[];
+    const visit=(start:number,used:Set<string>,selected:BuiltOffenseTeam[]):boolean=>
+    {
+        if(selected.length>best.length)best.splice(0,best.length,...selected);
+        if(selected.length>=limit)return true;
+        if(start>=ranked.length||selected.length+ranked.length-start<=best.length)return false;
+        for(let index=start;index<ranked.length;index++)
+        {
+            const team=ranked[index]!;
+            if(team.core.length!==3||new Set(team.core).size!==3||team.core.some(name=>!owned.has(name)||used.has(name)))continue;
+            const futureCores=new Set(ranked.slice(index+1).filter(other=>other.core.length===3&&other.core.every(name=>owned.has(name)&&!used.has(name))).flatMap(other=>other.core));
+            const pairs=pairsFor(team).sort((a,b)=>
+            {
+                const futureCount=(pair:Array<OffenseCore["flex"][number]>)=>pair.filter(member=>futureCores.has(member.name)).length;
+                return futureCount(a)-futureCount(b);
+            });
+            for(const pair of pairs)
+            {
+                const members=[...team.core,...pair.map(member=>member.name)];
+                if(members.some(name=>used.has(name))||new Set(members).size!==5)continue;
+                const next=[...selected,{name:team.name,members,core:[...team.core],flex:team.flex.filter(member=>owned.has(member.name)&&!team.core.includes(member.name)&&bestFlexTeam.get(member.name)===team),used:team.used,wins:team.wins,score:team.wins/team.used*1000,evidence:"core-flex" as const}];
+                if(visit(index+1,new Set([...used,...members]),next))return true;
+            }
+        }
+        return false;
+    };
+    visit(0,new Set(),[]);
+    return best;
 }
 const hasDistinctMembers=(team:WarTeamCandidate)=>new Set(team.members.map(member=>member.name)).size===team.members.length;
 
@@ -55,10 +110,20 @@ export function chooseWarTeamForSlot(teams:WarTeamCandidate[],slots:number[],slo
     return distinctWarSlots(teams,next)?next:null;
 }
 
-/** Restore saved source team names only when every team is still owned and distinct. */
-export function restoreWarTeamIndexes<T extends WarTeamCandidate & {name:string}>(teams:T[],saved:unknown,count:number):number[]
+/** Reorder two assigned slots; Gold/Silver tier is determined by the destination slot. */
+export function swapWarTeamSlots(slots:Array<number|null>,from:number,to:number):Array<number|null>|null
 {
-    const defaults=uniqueWarTeamIndexes(teams,count);
+    const assigned=slots.filter((slot):slot is number=>slot!==null);
+    if(from<0||to<0||from>=slots.length||to>=slots.length||from===to||new Set(assigned).size!==assigned.length)return null;
+    const next=[...slots];
+    [next[from],next[to]]=[next[to]!,next[from]!];
+    return next;
+}
+
+/** Restore saved source team names only when every team is still owned and distinct. */
+export function restoreWarTeamIndexes<T extends WarTeamCandidate & {name:string}>(teams:T[],saved:unknown,count:number,preferredIndexes:number[]=[]):number[]
+{
+    const defaults=uniqueWarTeamIndexes(teams,count,preferredIndexes);
     if(!Array.isArray(saved)||saved.length!==defaults.length||saved.some(name=>typeof name!=="string"))return defaults;
     const indexes=saved.map(name=>teams.findIndex(team=>team.name===name));
     if(indexes.some(index=>index<0)||new Set(indexes).size!==indexes.length||indexes.some(index=>!hasDistinctMembers(teams[index]!)))return defaults;
@@ -67,8 +132,20 @@ export function restoreWarTeamIndexes<T extends WarTeamCandidate & {name:string}
 }
 
 /** Choose the highest-observed set of distinct teams; a character can appear once. */
-export function uniqueWarTeamIndexes(teams: WarTeamCandidate[], count: number): number[]
+export function uniqueWarTeamIndexes(teams: WarTeamCandidate[], count: number, preferredIndexes:number[]=[]): number[]
 {
+    if(preferredIndexes.length)
+    {
+        const picks:number[]=[],members=new Set<string>();
+        for(const index of [...preferredIndexes,...teams.map((_,teamIndex)=>teamIndex)])
+        {
+            const team=teams[index];
+            if(picks.length>=count||picks.includes(index)||!team||!hasDistinctMembers(team)||team.members.some(member=>members.has(member.name)))continue;
+            picks.push(index);
+            team.members.forEach(member=>members.add(member.name));
+        }
+        if(picks.length)return picks;
+    }
     let best: { picks: number[]; used: number } = { picks: [], used: -1 };
     const visit = (start: number, picks: number[], members: Set<string>, used: number) =>
     {

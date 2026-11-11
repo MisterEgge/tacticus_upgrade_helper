@@ -59,7 +59,7 @@ export function inventoryCleanout(items:CleanoutInventoryItem[],units:CleanoutUn
     const preferred=equipmentUpgradeOptions({id:unit.id,faction:character.faction,rarity:"Mythic"},{equipment:character.equipment,traits:character.traits??[]},held,equipment).some(option=>option.id===id);
     let need=false,reason="Equipped gear already covers this option";
     if(tier(item.rarity)>tier(old.rarity)){need=true;reason=tier(item.rarity)>tier(rarity)?"Future ascension · higher-rarity equipment":"Higher-rarity equipment upgrade";}
-    else if(preferred){need=true;reason=item.type==="I_Block"?"Preferred block chance · check refinement level":"Preferred health + armor";}
+    else if(preferred){need=true;reason=item.type==="I_Block"?"Preferred block chance · check refinement level":item.type==="I_Crit"&&character.traits?.includes("ActOfFaith")?"Preferred crit damage · Act of Faith · check refinement level":"Preferred health + armor";}
     else if(equipmentFamily(id)===equipmentFamily(held.id)&&tier(item.rarity)===tier(old.rarity)&&stacks[0]!.level>held.level){need=true;reason="Higher-level inventory copy";}
     else if(tier(item.rarity)>=tier(old.rarity)&&equipmentFamily(id)!==equipmentFamily(held.id)){
      const keys=metrics[item.type];
