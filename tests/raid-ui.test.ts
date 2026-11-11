@@ -52,6 +52,10 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     fireEvent.keyDown(mainTabs.getByRole("tab",{name:"Battle guide"}),{key:"End"});
     assert.equal(mainTabs.getByRole("tab",{name:"Upgrades"}).getAttribute("aria-selected"),"true");
     assert.equal(dom.window.document.activeElement,mainTabs.getByRole("tab",{name:"Upgrades"}));
+    const upgradeCoverage=within(view.getByRole("region",{name:"Guild Raid upgrade coverage"}));
+    assert.ok(upgradeCoverage.getByRole("heading",{name:/Core characters/}));
+    assert.ok(upgradeCoverage.getByRole("heading",{name:/Flex characters/}));
+    assert.ok(upgradeCoverage.getAllByText(/ · /).length>0);
     fireEvent.keyDown(mainTabs.getByRole("tab",{name:"Upgrades"}),{key:"Home"});
     assert.equal(mainTabs.getByRole("tab",{name:"Team"}).getAttribute("aria-selected"),"true");
     const upgradeTable = () => {show("Upgrades");const toggle=view.getByRole("button",{name:"Character ability targets"});if(toggle.getAttribute("aria-expanded")==="false")fireEvent.click(toggle);return within(view.getByRole("table",{name:"Raid ability targets"}));};

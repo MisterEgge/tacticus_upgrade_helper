@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { campaignThreeStarComplete } from "../../src/domain/campaigns";
 
 type Props = {
     status: string;
@@ -38,7 +39,7 @@ export default function CampaignSection({ status, name, progressLabel, finalBatt
 
     }, [name, storageKey]);
 
-    const threeStarComplete = threeStar !== null && finalBattle !== null && threeStar >= finalBattle;
+    const threeStarComplete = campaignThreeStarComplete(threeStar, finalBattle);
     const objective = threeStarComplete ? "3★ complete" : threeStar !== null ? `3★ through ${threeStar} · Next: ${threeStar + 1}` : null;
     const percent = threeStar !== null && finalBattle ? Math.min(100, Math.round((threeStar / finalBattle) * 100)) : 0;
 

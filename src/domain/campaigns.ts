@@ -46,6 +46,16 @@ export function campaignIsComplete(campaign: { name: string; type: string; highe
 
 }
 
+export function campaignThreeStarComplete(highestThreeStarBattle: number | null | undefined, finalBattle: number | null): boolean
+{
+
+    return highestThreeStarBattle !== null && highestThreeStarBattle !== undefined
+        && Number.isInteger(highestThreeStarBattle) && highestThreeStarBattle > 0
+        && finalBattle !== null && Number.isInteger(finalBattle) && finalBattle > 0
+        && highestThreeStarBattle === finalBattle;
+
+}
+
 export function campaignProgress(campaign: Campaign)
 {
 

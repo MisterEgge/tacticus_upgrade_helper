@@ -14,6 +14,7 @@ import {GearTransferTable,type ReallocationProps} from "../app/reallocation/Real
 import GearTransferSource from "../app/components/GearTransferSource";
 import InventoryRefinements from "../app/equipment/InventoryRefinements";
 import ShopShoppingList from "../app/equipment/ShopShoppingList";
+import CharacterEquipment from "../app/characters/[id]/CharacterEquipment";
 const transferContext:ReallocationProps={units:[],targets:[],characters:[],equipment:{},raidNames:[],raidOptions:[],campaignNames:[],campaignUnknown:[],focus:{},defenseTeams:[],offenseTeams:[]};
 
 const catalog=catalogData as {characters:CatalogCharacter[]};
@@ -140,5 +141,12 @@ test("equipment sections collapse independently, retain character expansion and 
  fireEvent.click(refinement.getByText("Who needs it"));
  assert.ok(refinement.getByText("Azrael"));assert.ok(refinement.getByText("Baldr"));
  assert.ok(refinement.getByText("Refine one copy to level 4"));assert.ok(refinement.getByText("Refine one copy to level 5"));
+
+ const vindicta={...unit("Vindicta","I_Crit_L001","Grand Combat Knife")};
+ const completedGear=buildEquipmentPlan({...report,roster:[vindicta],unequippedInventory:[],equipmentAllocation:{equipNow:[],buyWatch:[],compatibilityUnknown:[]}},catalog,shops);
+ assert.equal(completedGear.rows[0]!.slots.length,0);
+ view.rerender(createElement(CharacterEquipment,{unit:vindicta,slots:completedGear.rows[0]!.slots,shops,powerLevel:52}));
+ assert.ok(view.getByText("At the Legendary rarity target; no higher-rarity upgrade is shown."));
+ assert.equal(view.queryByText("No verified replacement target. Current gear or compatibility may need review."),null);
 
 });

@@ -2,6 +2,33 @@
 
 Account-specific upgrade analysis for **Warhammer 40,000: Tacticus**.
 
+## Run the app
+
+Start it with `npm ci` followed by `npm run dev`, then visit [http://localhost:3000](http://localhost:3000).
+
+## Hosted accounts (auth-first)
+
+### Supabase setup
+
+1. Create a Supabase account and project at [supabase.com/dashboard](https://supabase.com/dashboard). Choose a project name, database password, and region; keep the database password private.
+2. In **Project Settings → API**, copy the Project URL and the publishable key (or legacy `anon` key). Do not use or expose the `service_role` key.
+3. In **Authentication → Providers → Email**, enable email/password sign-in and email confirmations. In **Authentication → URL Configuration**, set the Site URL to `http://localhost:3000` and add `http://localhost:3000/auth/callback` to the redirect URL allowlist for local development.
+4. Open **SQL Editor**, run [the profile migration](supabase/migrations/20261030000000_user_profiles.sql), and confirm it succeeds.
+5. Add these entries to your existing `.env` (do not overwrite it; it may already contain `TACTICUS_API_KEY`):
+
+   ```dotenv
+   NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-publishable-or-anon-key
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+   ```
+
+6. Generate an encryption secret with `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"` and add the output to `.env` as `TACTICUS_CREDENTIAL_ENCRYPTION_KEY=...`. Keep this server-only key private and backed up; losing it makes saved game API keys undecryptable.
+7. Restart the dev server with `npm run dev`, then visit `http://localhost:3000/signup`. Supabase must be configured before signup, verification, login, and password reset can work.
+
+For a deployed site, change the Site URL and `NEXT_PUBLIC_SITE_URL` to its HTTPS origin and add `https://your-site/auth/callback` to the redirect allowlist. Set `TACTICUS_CREDENTIAL_ENCRYPTION_KEY` to a new 32-byte hex secret generated with the command in `.env.example`; configure it as a server-only deployment secret and never commit or expose it.
+
+To let users connect their game API key, run [the credential migration](supabase/migrations/20261102000000_user_game_credentials.sql) in the Supabase SQL Editor. The Settings page verifies each key with Tacticus and stores it AES-256-GCM encrypted in that user's RLS-protected row. The Sync Account button fetches that user's player data and saves the generated report in the same private row; planning pages read only the signed-in user's report. Hosted accounts sync manually for now. Without Supabase variables, the existing local single-user app and daily sync remain available.
+
 Guild War defense can import saved TacticusXYZ HTML exports with `npm run import:war-defense -- "path/to/page.html"`. See [defense data and selection](docs/war-defense-data.md) for source limits and refresh instructions.
 
 The [Machine of War investment assessment](docs/machine-investment-assessment-2026-10-23.md) covers low-level utility, ability breakpoints, rarity priorities and the remaining resource-planner work.
@@ -11,19 +38,6 @@ The tool reads an official Tacticus `player.json` export and generates:
 - ability-level priorities,
 - an Uncommon-badge queue for abilities below level 17,
 - account-specific recommendations driven by character value rather than rarity alone.
-
-## Quick start
-
-```bash
-python -m venv .venv
-# Windows
-.venv\Scripts\activate
-pip install -r requirements.txt
-
-python src/build_report.py data/player.json
-```
-
-`npm run refresh` fetches the latest player snapshot and writes `output/upgrade-report.json`. The existing Python workbook generator remains available while the report logic is migrated into TypeScript.
 
 ## Data model
 

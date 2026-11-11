@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
-import { abilityGap, advancedCampaigns, campaignIsComplete, campaignRecommendationPriority, buildCampaignSnapshot, campaignKey, campaignProgress, campaignRankGap, finalCampaignBattle, requiredCampaignName, type Campaign, type CampaignCharacter, type SnapshotPlayer } from "../src/domain/campaigns";
+import { abilityGap, advancedCampaigns, campaignIsComplete, campaignThreeStarComplete, campaignRecommendationPriority, buildCampaignSnapshot, campaignKey, campaignProgress, campaignRankGap, finalCampaignBattle, requiredCampaignName, type Campaign, type CampaignCharacter, type SnapshotPlayer } from "../src/domain/campaigns";
 import { farmNodesFor, progressFromApi, progressFromReport } from "../app/lib/farming";
 
 const campaign: Campaign = { id: "mirror", name: "Indomitus", type: "EliteMirror", battles: [{ battleIndex: 38 }] };
@@ -155,6 +155,18 @@ test("campaign completion is derived from the synced playable endpoint", () =>
     assert.equal(campaignIsComplete({ name: "Variable", type: "Elite", highestCompletedBattle: 16 }, battles), false);
     assert.equal(campaignIsComplete({ name: "Variable", type: "Elite", highestCompletedBattle: 17 }, battles), true);
     assert.equal(campaignIsComplete({ name: "Missing", type: "Elite", highestCompletedBattle: 75 }, battles), false);
+
+});
+
+test("campaigns are only marked completed after the final mission is recorded as three-starred", () =>
+{
+
+    assert.equal(campaignThreeStarComplete(16, 17), false);
+    assert.equal(campaignThreeStarComplete(17, 17), true);
+    assert.equal(campaignThreeStarComplete(18, 17), false);
+    assert.equal(campaignThreeStarComplete(null, 17), false);
+    assert.equal(campaignThreeStarComplete(17, null), false);
+    assert.equal(campaignThreeStarComplete(0, 17), false);
 
 });
 

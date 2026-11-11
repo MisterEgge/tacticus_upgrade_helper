@@ -29,6 +29,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@supabase/ssr": "^0.6.1",
     "dotenv": "^17.4.2",
     "next": "^16.0.0",
     "react": "^19.0.0",

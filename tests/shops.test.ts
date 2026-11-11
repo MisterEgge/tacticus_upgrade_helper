@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { currencyClass, isActionableOffer, offerEligibility, shopAccountContext, recordState, refreshesLoggedToday, scheduleLabel, scheduledOn, sourceMatch, sourcesForItem, equipmentOffersForItem, validateRecord, type ShopCatalog, type ShopOffer, type ShopRecord } from "../src/domain/shops";
+import { currencyClass, isActionableOffer, offerEligibility, shopAccountContext, recordState, refreshesLoggedToday, scheduleLabel, scheduledOn, sourceMatch, sourcesForItem, shopOffersForItem, equipmentOffersForItem, validateRecord, type ShopCatalog, type ShopOffer, type ShopRecord } from "../src/domain/shops";
 
 const offer = (itemId = "I_Test_L001"): ShopOffer => ({ id: `guild:1:${itemId}`, slot: 1, itemId, quantity: 1, schedule: "0 0 0 ? * MON,WED *", cost: { currency: "guildCredits", amount: 100 }, maxPurchases: 1, conditions: {}, weight: null });
 const catalog: ShopCatalog = { schemaVersion: 1, reviewedAt: "2026-09-22T00:00:00.000Z", sourceCommit: "a".repeat(40), sourceKind: "community", equipment: { I_Test_L001: { name: "Test item", rarity: "Legendary", type: "I_Test" } }, shops: [{ id: "guild", name: "Guild Shop", coverage: "catalog", sourceUrl: "", notes: "", adRefresh: true, refreshLimit: 1, refreshCost: null, offers: [offer(), offer("itemsLegendary_I_Test")] }] };
@@ -29,6 +29,15 @@ test("equipment opportunities retain exact versus pool, weekday, price and ad re
     assert.equal(offers[0]?.match,"exact");
     assert.equal(offers[1]?.match,"pool");
     assert.deepEqual(equipmentOffersForItem("unknown",catalog,52),[]);
+});
+
+test("upgrade material shop references include the scheduled weekday",()=>{
+    const upgrade:ShopOffer={...offer("upg_test"),schedule:"0 0 0 ? * THU *"};
+    const source:ShopCatalog={...catalog,shops:[{...catalog.shops[0]!,offers:[upgrade]}]};
+    const offers=shopOffersForItem("upg_test",source,52);
+    assert.equal(offers.length,1);
+    assert.equal(offers[0]?.rotation,"Thursday (UTC)");
+    assert.deepEqual(sourcesForItem("upg_test",source),["Guild Shop"]);
 });
 
 test("equipment opportunities omit locked offers and mark unknown access and rotations",()=>{

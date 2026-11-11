@@ -122,9 +122,17 @@ test("quiet Chaos tracks suggest owned next-rarity projects before optional reso
  assert.equal(onslaughtPriorities([near,ready,strong],null,null,new Map(),{})[2]!.rows[0]!.id,strong.id);
  const warCapped=onslaughtPriorities([ready],{}, {},new Map([[ready.name,26]]),{})[2]!;
  assert.equal(warCapped.rows.length,0); // No fallback growth beyond an active War cap.
- const unranked={...near,utility:rateCharacter({...near.utility,warOption:false})};
- assert.match(onslaughtPriorities([unranked],null,null,new Map(),{})[2]!.rows[0]!.reasons.join(" "),/Usefulness unranked/);
- assert.equal(onslaughtPriorities([{...unranked,shards:100},far],null,null,new Map(),{})[2]!.rows[0]!.id,far.id); // Tracked usefulness beats an unranked easy upgrade.
+ const lowPriority={...near,utility:rateCharacter({...near.utility,warOption:false})};
+ assert.match(onslaughtPriorities([lowPriority],null,null,new Map(),{})[2]!.rows[0]!.reasons.join(" "),/Low priority for this roster · leave at the current rank/);
+ assert.equal(onslaughtPriorities([{...lowPriority,shards:100},far],null,null,new Map(),{})[2]!.rows[0]!.id,far.id); // Tracked usefulness beats a low-priority easy upgrade.
+});
+
+test("LRE-focused roster priorities rank before general growth projects",()=>{
+ const lre={...unit("LRE roster priority","Xenos",9,0),utility:rateCharacter({...unit("LRE roster priority").utility,priorityModes:["LRE"]})};
+ const general=unit("General growth","Xenos",9,0);
+ const rows=onslaughtPriorities([general,lre],null,null,new Map(),{})[1]!.rows;
+ assert.equal(rows[0]!.id,lre.id);
+ assert.match(rows[0]!.reasons.join(" "),/LRE roster priority · review current event track requirements/);
 });
 
 test("regular free shard sources exclude passive farmers without blocking Mythic honors",()=>{
