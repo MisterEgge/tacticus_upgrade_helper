@@ -6,7 +6,6 @@ import { getMainRaidSelection, getRaidMeta } from "./lib/raidSelection";
 import AuthAccountHeader from "./components/AuthAccountHeader";
 import { getSupabasePublicConfig } from "../src/server/supabaseConfig";
 import { createSupabaseServerClient } from "./lib/supabase/server";
-import { getReport } from "./lib/report";
 
 // Account reports are read from disk and change after refresh. Never freeze them at build time.
 export const dynamic = "force-dynamic";
