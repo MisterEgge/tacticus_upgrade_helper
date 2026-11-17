@@ -6,6 +6,7 @@ import { getMainRaidSelection, getRaidMeta } from "./lib/raidSelection";
 import AuthAccountHeader from "./components/AuthAccountHeader";
 import { getSupabasePublicConfig } from "../src/server/supabaseConfig";
 import { createSupabaseServerClient } from "./lib/supabase/server";
+import { getReport } from "./lib/report";
 
 // Account reports are read from disk and change after refresh. Never freeze them at build time.
 export const dynamic = "force-dynamic";
@@ -25,8 +26,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       : { data: null, error: null };
     if (accountError && accountError.code !== "42P01" && accountError.code !== "PGRST205")
       console.error("Could not load account sync status.", accountError.message);
+    const report = user ? await getReport() : null;
     return <html lang="en"><body><AuthAccountHeader
-      {...(user?.email ? { email: user.email } : {})}
+      {...(report?.source.player ? { playerName: report.source.player } : {})}
       connected={!!account?.encrypted_api_key}
       {...(account?.synced_at ? { lastSynced: account.synced_at } : {})}
     />{children}</body></html>;

@@ -238,6 +238,7 @@ try
         const html = await get(route);
         assert.match(html, /class="accountBar"/);
         assert.match(html, /SYNTHETIC TEST FIXTURE/);
+        assert.doesNotMatch(html, /<small>ACCOUNT<\/small>/);
         assert.match(html, /LEVEL<\/small><strong>52/);
         assert.doesNotMatch(html, /<small>(POWER|UNLOCKED UNITS)<\/small>/);
         assert.match(html, /MAIN RAID TEAM/);
