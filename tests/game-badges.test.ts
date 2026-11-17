@@ -69,10 +69,18 @@ test("failed artwork falls back to readable text and a changed source can load a
   selector.unmount();
   const base:MaterialCompletionRow={id:"fixture-rare",name:"First material",rarity:"Rare",craftable:false,inventory:0,remaining:1,required:1,allocated:0,shortage:1,surplus:0,unowned:0,status:"farming",recipients:[]};
   const materials=render(createElement(MaterialTable,{rows:[base,{...base,id:"fixture-epic",name:"Second material",rarity:"Epic"}]}));
+  assert.equal(materials.container.querySelector(".responsiveDataTable td")?.getAttribute("data-label"),"Material");
   fireEvent.change(materials.getByRole("textbox"),{target:{value:"rare"}});
   assert.ok(materials.getByText("First material"));
   assert.equal(materials.queryByText("Second material"),null);
   assert.ok(materials.getByRole("img",{name:"Rare"}));
+  materials.rerender(createElement(MaterialTable,{rows:[{...base,recipients:[{id:"unit-a",name:"Alpha",owned:true,lifetime:12,remaining:2,direct:1,crafting:1},{id:"unit-b",name:"Beta",owned:false,lifetime:8,remaining:4,direct:2,crafting:2}]}]}));
+  const recipientDisclosure=materials.getByText("Used by 2").closest("details")!;
+  fireEvent.click(recipientDisclosure.querySelector("summary")!);
+  await act(async()=>{await new Promise(resolve=>setTimeout(resolve,0));});
+  assert.equal(materials.container.querySelectorAll(".materialRecipientGrid li").length,2);
+  assert.ok(materials.getByText("Owned · 2 remaining"));
+  assert.equal(materials.queryByText(/lifetime total|direct \+/),null);
   await act(async()=>cleanup());
  }finally{Object.assign(globalThis,previous);dom.window.close();}
 });

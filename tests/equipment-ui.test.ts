@@ -47,12 +47,12 @@ test("equipment sections collapse independently, retain character expansion and 
  assert.equal(ready.queryByRole("table"),null);
  assert.equal(view.queryByRole("region",{name:"Shop upgrade opportunities"}),null);
  fireEvent.click(view.getByRole("button",{name:"Shop upgrades"}));
- assert.ok(within(view.getByRole("region",{name:"Shop upgrade opportunities"})).getByRole("table"));
+ assert.ok(within(view.getByRole("region",{name:"Shop upgrade opportunities"})).getAllByRole("article").length);
  assert.equal(view.queryByRole("button",{name:"Characters"}),null);
  assert.equal(view.queryByRole("button",{name:"Item needs"}),null);
  const shop=within(view.getByRole("region",{name:"Shop upgrade opportunities"}));
  assert.ok(shop.getByRole("link",{name:"Grand Ceremonial Knife"}));
- assert.match(shop.getByRole("table").textContent!,/715 Crusade Credits/);
+ assert.match(shop.getByRole("article",{name:/Grand Ceremonial Knife/}).textContent!,/715 Crusade Credits/);
  fireEvent.click(view.getByRole("button",{name:"Actions"}));
  assert.equal(ready.queryByRole("table"),null);
  fireEvent.click(ready.getByRole("button",{name:/Equip now/}));
@@ -115,15 +115,21 @@ test("equipment sections collapse independently, retain character expansion and 
  assert.match(swap.getByText("Better item").closest("div")!.textContent!,/With.*Better item.*Level 7/);
  // One item row for multiple recipients; names/replacements stay collapsed.
  const shopSlot={character:"Mataneo",characterId:"bloodMataneo",slotId:"Slot2",currentItem:"Old armour",currentLevel:2};
- view.rerender(createElement(ShopShoppingList,{items:[{id:"I_Defensive_L002",name:"Artificer MK X Pauldron",members:[{slot:shopSlot},{slot:{...shopSlot,character:"Lucien",characterId:"bloodLucien"}}],offers:[{id:"unknown",shop:"Unverified shop",match:"exact",rotation:"Daily (UTC)",price:"200 War Credits",access:"unknown",adRefresh:false},{id:"offer",shop:"Test shop",match:"pool",rotation:"Daily (UTC)",price:"100 War Credits",access:"eligible",adRefresh:false}]}]}));
- assert.equal(view.getAllByRole("row").length,2);
- assert.equal(view.getAllByRole("cell")[1]!.textContent,"2");
- assert.equal(view.getAllByRole("row")[1]!.querySelector("td:last-child > div > strong")!.textContent,"Test shop");
- assert.equal(view.getByText("Who needs it").closest("details")!.open,false);
+ view.rerender(createElement(ShopShoppingList,{items:[{id:"I_Defensive_L002",name:"Artificer MK X Pauldron",members:[{slot:shopSlot},{slot:{...shopSlot,slotId:"Slot3"}},{slot:{...shopSlot,character:"Lucien",characterId:"bloodLucien"}}],offers:[{id:"pool",shop:"Test shop",match:"pool",rotation:"Daily (UTC)",price:"100 War Credits",access:"eligible",adRefresh:false},{id:"duplicate",shop:"Test shop",match:"pool",rotation:"Daily (UTC)",price:"100 War Credits",access:"eligible",adRefresh:false},{id:"other",shop:"Another shop",match:"exact",rotation:"Monday (UTC)",price:"200 War Credits",access:"unknown",adRefresh:false}]}]}));
+ const shopCard=view.getByRole("article",{name:/Artificer MK X Pauldron/});
+ assert.match(shopCard.textContent!,/3needed/);
+ assert.equal(view.getByText("Test shop").textContent,"Test shop");
+ assert.equal(within(shopCard).getAllByText("Test shop").length,1);
+ assert.doesNotMatch(shopCard.textContent!,/Access unverified/);
+ assert.ok(within(shopCard).getByText("1 other shop"));
+ assert.equal(view.getByText("Needs it (2)").closest("details")!.open,false);
  assert.ok(view.getByText(/Random pool/));
- fireEvent.click(view.getByText("Who needs it"));
- assert.equal(view.getByText("Who needs it").closest("details")!.open,true);
- assert.ok(view.getByRole("link",{name:/Mataneo/}));
+ fireEvent.click(view.getByText("Needs it (2)"));
+ const recipientList=view.getByText("Needs it (2)").closest("details")!;
+ assert.equal(recipientList.open,true);
+ assert.equal(within(recipientList).getAllByRole("link").length,2);
+ assert.doesNotMatch(recipientList.textContent!,/Slot|Replace|Advanced Force Field Amplifier|level 2/);
+ assert.ok(within(recipientList).getByRole("link",{name:/Mataneo/}));
  // A compatible Legendary character with Epic greaves really does get the Pauldron.
  const pauldronReport={...report,roster:[unit("Mataneo","I_Defensive_E003","Adorned Plated Greaves","BloodAngels")],unequippedInventory:[],equipmentAllocation:{equipNow:[],buyWatch:[],compatibilityUnknown:[]}};
  const pauldronPlan=buildEquipmentPlan(pauldronReport,catalog,shops,new Set(["Mataneo"]));
@@ -136,11 +142,11 @@ test("equipment sections collapse independently, retain character expansion and 
  const haloSlots=[{character:"Azrael",characterId:"darkAzrael",slotId:"Slot2",minimumLevel:4,currentItem:"Advanced Force Field",currentLevel:5,allocatedItemId:"I_Block_E004",acquisition:[{id:"I_Block_E004",name:"Master-Crafted Iron Halo"}]},{character:"Baldr",characterId:"spaceBaldr",slotId:"Slot2",minimumLevel:5,currentItem:"Advanced Force Field",currentLevel:7,allocatedItemId:"I_Block_E004",acquisition:[{id:"I_Block_E004",name:"Master-Crafted Iron Halo"}]}];
  view.rerender(createElement(InventoryRefinements,{slots:haloSlots,inventory:[{id:"I_Block_E004",level:1,amount:9}]}));
  const refinement=within(view.getByRole("region",{name:"Refine inventory"}));
- assert.equal(refinement.getAllByRole("cell")[1]!.textContent,"9");
+ assert.match(refinement.getByRole("article",{name:/Master-Crafted Iron Halo/}).textContent!,/9owned/);
  assert.ok(refinement.getByText("Refine 2 copies"));
- fireEvent.click(refinement.getByText("Who needs it"));
+ fireEvent.click(refinement.getByText("Needs it (2)"));
  assert.ok(refinement.getByText("Azrael"));assert.ok(refinement.getByText("Baldr"));
- assert.ok(refinement.getByText("Refine one copy to level 4"));assert.ok(refinement.getByText("Refine one copy to level 5"));
+ assert.doesNotMatch(refinement.getByText("Needs it (2)").closest("details")!.textContent!,/Slot|Refine to level|replace/i);
 
  const vindicta={...unit("Vindicta","I_Crit_L001","Grand Combat Knife")};
  const completedGear=buildEquipmentPlan({...report,roster:[vindicta],unequippedInventory:[],equipmentAllocation:{equipNow:[],buyWatch:[],compatibilityUnknown:[]}},catalog,shops);
