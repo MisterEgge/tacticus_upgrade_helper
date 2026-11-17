@@ -1,5 +1,7 @@
 # Guild Raid page design
 
+Follow the shared [site design system](./site-design-system.md) for responsive layout, concise content, and disclosure patterns.
+
 Keep the page focused on the player's current task:
 
 - Keep boss selection and one portrait lineup visible as shared context.

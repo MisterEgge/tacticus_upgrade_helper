@@ -46,16 +46,17 @@ test("Elite gap interactions work with synthetic account data", async suite => {
         cleanup();
     });
 
-    await suite.test("recipient details reveal direct and nested crafting counts", () => {
+    await suite.test("recipient details reveal concise character needs", async () => {
         const view = render(createElement(GapTable, { rows: [ore] }));
-        const details = view.getByText("1 characters").closest("details")!;
+        const details = view.getByText("Used by 1").closest("details")!;
         assert.equal(view.queryByRole("link", { name: "Alpha" }), null);
-        details.open = true;
-        fireEvent(details, new dom.window.Event("toggle"));
+        fireEvent.click(details.querySelector("summary")!);
+        await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
         assert.ok(view.getByRole("link", { name: "Alpha" }));
-        assert.match(view.getByText(/1 direct \+ 10 through crafting/).textContent!, /11 remaining/);
-        details.open = false;
-        fireEvent(details, new dom.window.Event("toggle"));
+        assert.match(details.textContent!, /11 remaining/);
+        assert.doesNotMatch(details.textContent!, /direct|crafting|lifetime/i);
+        fireEvent.click(details.querySelector("summary")!);
+        await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
         assert.equal(view.queryByRole("link", { name: "Alpha" }), null);
         cleanup();
     });

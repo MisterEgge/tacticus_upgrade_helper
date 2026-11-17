@@ -433,13 +433,14 @@ try
     report.unequippedInventory[0].amount=1;
     await writeFile(reportPath,JSON.stringify(report));
     const shopEquipment=await get('/equipment');
-    assert.match(shopEquipment,/Shop \/ cost \/ rotation/);
+    assert.match(shopEquipment,/class="equipmentOpportunityGrid"/);
     assert.match(shopEquipment,/War test weapon · level 9/);
     assert.match(shopEquipment,/Equipment upgrade focus/);
     assert.doesNotMatch(await get('/abilities'),/Level eligible now|level eligible<\/small>/);
     assert.match(shopEquipment,/Kariyan.*?Grand Combat Knife.*?(Guild Shop|Crusade Shop|Rogue Trader)/s);
     assert.match(shopEquipment,/UTC/);
     assert.match(shopEquipment,/Random pool/);
+    assert.doesNotMatch(shopEquipment,/Access unverified/);
     const tyrith=catalog.characters.find(character=>character.name==='Tyrith');
     assert.ok(tyrith);
     report.roster.push({...report.roster[0],id:tyrith.id,name:'Tyrith',rarity:'Legendary',progressionIndex:12,items:[{slotId:'Slot1',id:'I_Crit_E010',name:'Adorned Ceremonial Knife',rarity:'Epic',level:1}]});
