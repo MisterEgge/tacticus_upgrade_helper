@@ -36,6 +36,51 @@ const teamMembersForFlex=(team:Team,selectedIds:string[])=>{
  const core=teamCoreMembers(team),flex=selectedIds.flatMap(id=>teamFlexChoices(team).find(choice=>choice.member.id===id)?.member??[]);
  return [...core,...flex].slice(0,5);
 };
+type LineupSnapshot={
+ core:Pick<Member,"id"|"name">[];
+ flex:Pick<Member,"id"|"name">[];
+ used:number;
+ wins:number;
+};
+type WarSnapshot={defense:(LineupSnapshot|null)[];offense:(LineupSnapshot|null)[]};
+const isWarSnapshot=(value:WarSnapshot|undefined):value is WarSnapshot=>
+ !!value&&[value.defense,value.offense].every(slots=>Array.isArray(slots)&&slots.every(lineup=>
+  lineup===null||(lineup&&Number.isFinite(lineup.used)&&Number.isFinite(lineup.wins)&&
+   [lineup.core,lineup.flex].every(members=>Array.isArray(members)&&members.every(member=>
+    member&&typeof member.id==="string"&&typeof member.name==="string"))
+  )
+ ));
+const describeLineupChanges=(before:WarSnapshot,after:WarSnapshot)=>{
+ const names=(members:LineupSnapshot["core"])=>members.map(member=>member.name).join(", ");
+ const rate=(lineup:LineupSnapshot)=>lineup.used>0
+  ? `${(lineup.wins/lineup.used*100).toFixed(1)}% across ${lineup.used.toLocaleString()} attacks`
+  : "no recorded attacks";
+ return (["defense","offense"] as const).flatMap(side=>
+  Array.from({length:Math.max(before[side].length,after[side].length)},(_,index)=>{
+   const previous=before[side][index],next=after[side][index],details:string[]=[];
+   const oldCore=previous?.core??[],newCore=next?.core??[];
+   const oldFlex=previous?.flex??[],newFlex=next?.flex??[];
+   const removed=new Set(oldFlex.map(member=>member.id));
+   const added=newFlex.filter(member=>!removed.delete(member.id));
+   const outgoing=oldFlex.filter(member=>removed.has(member.id));
+   const lineupLabel=side==="defense"?"Core":"Lineup";
+   if(previous&&next&& (oldCore.length!==newCore.length||oldCore.some(member=>!newCore.some(candidate=>candidate.id===member.id)))){
+    details.push(`${lineupLabel} swapped from ${names(oldCore)} to ${names(newCore)}.`);
+    if(side==="defense")details.push(`Observed core hold rate changed from ${rate(previous)} to ${rate(next)}.`);
+   }else if(next&&!previous){
+    details.push(`${lineupLabel} assigned: ${names(newCore)}.`);
+    if(side==="defense")details.push(`Observed core hold rate: ${rate(next)}.`);
+   }else if(previous&&!next){
+    details.push(`${lineupLabel} cleared: ${names(oldCore)}.`);
+   }
+   if(added.length&&outgoing.length)details.push(`Flex changed from ${names(outgoing)} to ${names(added)}.`);
+   else if(added.length)details.push(`Added as flex: ${names(added)}.`);
+   else if(outgoing.length)details.push(`Removed from flex: ${names(outgoing)}.`);
+   const label=`${side==="defense"?`Defense ${index<2?"Gold":"Silver"}`:"Offense"} slot ${index+1}`;
+   return {label,details};
+  }).filter(change=>change.details.length>0)
+ );
+};
 const defaultDefenseSlots=(teams:Team[]):Array<number|null>=>{
  const slots:Array<number|null>=Array(5).fill(null),used=new Set<number>();
  for(const [index,team] of teams.entries())if(team.slot!==undefined&&team.slot>=0&&team.slot<5&&slots[team.slot]===null){slots[team.slot]=index;used.add(index);}
@@ -89,6 +134,32 @@ export default function WarDefensePlanner({teams,offenseTeams,ownedCharacterIds,
  const [offenseTargets,setOffenseTargets]=useState<Record<string,WarGearCap>>(()=>Object.fromEntries(offense.map(team=>[team.name,warTierDefaultForRanks(team.members.map(member=>member.rank))])));
  const [offenseOrders,setOffenseOrders]=useState<Record<string,string[]>>({});
  const [reviewedRoster,setReviewedRoster]=useState<string[]|null>(null);
+ const [savedLineups,setSavedLineups]=useState<WarSnapshot|null>(null);
+ const [reassessment,setReassessment]=useState<ReturnType<typeof describeLineupChanges>|null>(null);
+ const defenseLineup=(team:Team,flexIds?:string[])=>{
+  const core=teamCoreMembers(team);
+  const defaultFlex=team.members.filter(member=>!core.some(unit=>unit.id===member.id)).map(member=>member.id);
+  return {core,members:teamMembersForFlex(team,flexIds??defaultFlex)};
+ };
+ const offenseLineup=(team:Team,flexNames?:string[])=>{
+  const core=team.core ? teamCoreMembers(team) : team.members;
+  const fallbackFlex=team.members.filter(member=>!core.some(unit=>unit.id===member.id)).map(member=>member.name);
+  const selectedFlexNames=flexNames??fallbackFlex;
+  const flex=selectedFlexNames.flatMap(name=>team.members.find(member=>member.name===name)??recommendedUnits.find(member=>member.name===name)??[]);
+  return {core,members:[...core,...flex].slice(0,5),selectedFlexNames};
+ };
+ const snapshot=(defenseChoices:(number|null)[],offenseChoices:number[],includeOverrides:boolean):WarSnapshot=>{
+  const capture=(team:Team|undefined,lineup:(team:Team)=>{core:Member[];members:Member[]})=>{
+   if(!team)return null;
+   const {core,members}=lineup(team);
+   const identify=({id,name}:Member)=>({id,name});
+   return {core:core.map(identify),flex:members.filter(member=>!core.some(unit=>unit.id===member.id)).map(identify),used:team.used,wins:team.wins};
+  };
+  return {
+   defense:defenseChoices.map(choice=>capture(choice===null?undefined:defense[choice],team=>defenseLineup(team,includeOverrides?defenseFlex[team.name]:undefined))),
+   offense:offenseChoices.map(choice=>capture(offense[choice],team=>offenseLineup(team,includeOverrides?offenseFlex[team.name]:undefined))),
+  };
+ };
  const defenseInSlots=defenseSlots.flatMap((choice,index)=>{
   const team=choice===null?undefined:defense[choice];
   return team?[{...team,tier:index<2?"gold" as const:"silver" as const,slot:index}]:[];
@@ -101,6 +172,7 @@ export default function WarDefensePlanner({teams,offenseTeams,ownedCharacterIds,
         const saved=JSON.parse(window.localStorage.getItem(WAR_PLAN_STORAGE_KEY)??"null");
         if(saved&&typeof saved==="object"){
             setReviewedRoster(Array.isArray(saved.reviewedRoster)&&saved.reviewedRoster.every((id:unknown)=>typeof id==="string")?saved.reviewedRoster: null);
+            if(isWarSnapshot(saved.lineups))setSavedLineups(saved.lineups);
             setDefenseSlots(restoreDefenseSlots(defense,saved.defense));
             setOffenseSlots(restoreWarTeamIndexes(offense,saved.offense,10));
             const validDefenseFlex:Record<string,string[]>={};
@@ -137,11 +209,15 @@ export default function WarDefensePlanner({teams,offenseTeams,ownedCharacterIds,
  const rosterChanged=restored&&(reviewedRoster===null||reviewedRoster.length!==ownedRoster.length||reviewedRoster.some((id,index)=>id!==ownedRoster[index]));
  useEffect(()=>{
     if(!restored)return;
-    try{window.localStorage.setItem(WAR_PLAN_STORAGE_KEY,JSON.stringify({version:3,defense:defenseSlots.map(index=>index===null?null:defense[index]!.name),offense:offenseSlots.map(index=>offense[index]!.name),defenseMachines,defenseOrders,defenseFlex,offenseMachines,offenseTargets,offenseFlex,offenseOrders,reviewedRoster,mode}));}catch{/* Planning still works if storage is blocked. */}
- },[restored,defenseSlots,offenseSlots,defenseMachines,defenseOrders,defenseFlex,offenseMachines,offenseTargets,offenseFlex,offenseOrders,reviewedRoster,mode,defense,offense]);
+    const lineups=rosterChanged&&savedLineups?savedLineups:snapshot(defenseSlots,offenseSlots,true);
+    try{window.localStorage.setItem(WAR_PLAN_STORAGE_KEY,JSON.stringify({version:3,defense:defenseSlots.map(index=>index===null?null:defense[index]!.name),offense:offenseSlots.map(index=>offense[index]!.name),defenseMachines,defenseOrders,defenseFlex,offenseMachines,offenseTargets,offenseFlex,offenseOrders,reviewedRoster,lineups,mode}));}catch{/* Planning still works if storage is blocked. */}
+ });
  const reassessTeams=()=>{
-  setDefenseSlots(defaultDefenseSlots(defense));
-  setOffenseSlots(uniqueWarTeamIndexes(offense,10));
+  const nextDefense=defaultDefenseSlots(defense),nextOffense=uniqueWarTeamIndexes(offense,10);
+  const previous=rosterChanged&&savedLineups?savedLineups:snapshot(defenseSlots,offenseSlots,true);
+  setReassessment(describeLineupChanges(previous,snapshot(nextDefense,nextOffense,false)));
+  setDefenseSlots(nextDefense);
+  setOffenseSlots(nextOffense);
   setDefenseFlex({});
   setOffenseFlex({});
   setReviewedRoster(ownedRoster);
@@ -161,7 +237,7 @@ export default function WarDefensePlanner({teams,offenseTeams,ownedCharacterIds,
    const teamNumber=index+1,coreMembers=teamCoreMembers(team);
    const defaultFlex=team.members.filter(member=>!coreMembers.some(core=>core.id===member.id)).map(member=>member.id);
    const selectedFlexIds=defenseFlex[team.name]??defaultFlex;
-   const members=teamMembersForFlex(team,selectedFlexIds);
+   const {members}=defenseLineup(team,selectedFlexIds);
    const flexChoices=teamFlexChoices(team).filter(({member})=>!coreMembers.some(core=>core.id===member.id));
    const rankFloor=warTierMinimumRank(tier);
    const qualifiedFlex=flexChoices.filter(({member})=>member.rank!==null&&member.rank>=rankFloor);
@@ -229,11 +305,7 @@ export default function WarDefensePlanner({teams,offenseTeams,ownedCharacterIds,
  const offensePanel=<section className="panel detailPanel"><div className="sectionTitle"><div><h2>{offenseSlots.length} offense teams</h2><p className="sub">Character ranks, ability caps, equipped gear, and a Machine of War are shown for each lineup.</p></div></div>
   {offenseSlots.map((choice,index)=>{const team=offense[choice];if(!team)return null;
    const teamKey=team.name,machine=machines.find(value=>value.id===offenseMachines[teamKey]),targetTier=offenseTargets[teamKey]??warTierDefaultForRanks(team.members.map(member=>member.rank));
-   const coreIds=team.core??team.members.map(member=>member.id),coreMembers=team.members.filter(member=>coreIds.includes(member.name)||coreIds.includes(member.id));
-   const fallbackFlex=team.members.filter(member=>!coreMembers.some(core=>core.id===member.id)).map(member=>member.name);
-   const selectedFlexNames=offenseFlex[teamKey]??fallbackFlex;
-   const selectedFlex=selectedFlexNames.flatMap(name=>{const member=team.members.find(value=>value.name===name)||recommendedUnits.find(value=>value.name===name);return member?[member]:[];});
-   const members=[...coreMembers,...selectedFlex].slice(0,5);
+   const {core:coreMembers,members,selectedFlexNames}=offenseLineup(team,offenseFlex[teamKey]);
    const lineupChoices=warSlotChoices(offense,offenseSlots,index);
    const deployment=deploymentKey(members.map(member=>member.id));
    const otherAssigned=new Set(offenseSlots.flatMap((option,slot)=>{
@@ -285,5 +357,15 @@ export default function WarDefensePlanner({teams,offenseTeams,ownedCharacterIds,
   <section className="warUnassignedRecommendations"><h3>Strong unassigned characters</h3><p className="sub">Owned, high-ranked characters with a strong community rating who are not on a selected War team.</p><div className="warOffenseCandidates">{availableRecommendations.map(unit=><article key={unit.id}><Link href={`/characters/${unit.id}`} className="warDefenseCharacter"><CharacterPortrait id={unit.id} name={unit.name} icon={unit.icon}/><strong>{unit.name}</strong></Link><WarUnitReadiness unit={unit} tier="silver"/><small>Community rating {unit.score.toFixed(2)}</small></article>)}</div>{availableRecommendations.length===0?<p className="sub">No unassigned owned characters currently meet the rating threshold.</p>:null}</section>
   {unlockTargets.length?<details className="warUnassignedRecommendations warUnlockTargets"><summary><h3>Potential unlocks · top {Math.min(8,unlockTargets.length)}</h3></summary><p className="sub">Unowned characters seen in strong source lineups. Rates are for the observed core or exact lineup—not guaranteed for your team. Shop entries are catalog schedules, not live stock.</p><div className="warOffenseCandidates">{unlockTargets.slice(0,8).map(target=><article key={target.id}><Link href={`/characters/${target.id}`} className="warDefenseCharacter"><CharacterPortrait id={target.id} name={target.name} icon={target.icon}/><strong>{target.name}</strong></Link><small>{target.evidence}</small><small>{target.used.toLocaleString()} uses · {target.win.toFixed(1)}% wins</small>{target.campaigns.length?<small>Campaigns: {target.campaigns.join(", ")}</small>:null}{target.shops.length?<small>Shops: {target.shops.map(offer=>`${offer.shop} · ${offer.rotation} · ${offer.price}`).join("; ")}</small>:null}<Link href={`/sources?item=shards_${target.id}`}>Shard sources</Link></article>)}</div></details>:null}
  </section>;
- return <><section className="warReassess"><div>{rosterChanged?<p className="status need" role="status">Your roster changed since the last War review. Reassess to update both offense and defense suggestions.</p>:null}<p className="sub">Rebuild both team lists from your currently synced roster. Manual team assignments and flex choices reset; deployment orders and machine selections are kept where they still apply.</p></div><button type="button" onClick={reassessTeams}>Reassess teams</button></section><div className="abilityViews warModeTabs" role="tablist" aria-label="Guild War views"><button type="button" id="war-tab-defense" role="tab" aria-controls="war-panel-defense" aria-selected={mode==="defense"} className={mode==="defense"?"active":""} onClick={()=>setMode("defense")}>Defense teams</button><button type="button" id="war-tab-offense" role="tab" aria-controls="war-panel-offense" aria-selected={mode==="offense"} className={mode==="offense"?"active":""} onClick={()=>setMode("offense")}>Offense teams</button><button type="button" id="war-tab-counters" role="tab" aria-controls="war-panel-counters" aria-selected={mode==="counters"} className={mode==="counters"?"active":""} onClick={()=>setMode("counters")}>Counter guide</button></div><div className="warModePanel" id="war-panel-defense" role="tabpanel" aria-labelledby="war-tab-defense" hidden={mode!=="defense"}>{defensePanel}</div><div className="warModePanel" id="war-panel-offense" role="tabpanel" aria-labelledby="war-tab-offense" hidden={mode!=="offense"}>{offensePanel}</div><div className="warModePanel" id="war-panel-counters" role="tabpanel" aria-labelledby="war-tab-counters" hidden={mode!=="counters"}>{counterGuide}</div><ReferenceDetails label="Team selection and source evidence">{defenseSource?<p>Imported {defenseSource.importedAt.slice(0,10)} / <Link href="https://tacticus.xyz/wars/analyze/defenders">TacticusXYZ defender source</Link></p>:null}<p>Defense and offense have separate sources and assignments. Each character appears once within each list. Defense ranks cores by their observed defense rate, breaking ties by sample size. Flex suggestions require at least 100 observed attacks and are ranked by hold rate, then sample size; overlapping flex samples are not added together or presented as a measured five-character hold rate. Exact offense statistics belong to the recorded five-character lineup; a core/flex suggestion displays the three-character core's observed rate only.</p><p>Slot order affects starting positions and the AI action sequence, but does not guarantee ability timing. Map layout, movement and targeting still matter. The Rotbone-late starting suggestion is a planning judgment from <a href="https://www.reddit.com/r/WH40KTacticus/comments/1t2zgo6/gw_defense_lineups_advice/">community defense guidance</a>; other teams retain source order until you adjust them. <a href="https://www.reddit.com/r/WH40KTacticus/comments/1pjbzic/guild_war_maps_s19_b1/">Numbered community maps</a> explain slot-to-hex placement; use the map for your current war.</p><p>The snapshot contains 20 displayed cores, with no Battlefield 2 or Fortified-only breakdown. Gold requires current Gold I rank or higher; Silver requires Silver I or higher. Ability and gear shortfalls appear inside each team. Machine suggestions allocate reviewed ability fits across all teams without duplicates, preserving manual selections. Current levels provide a small readiness preference within the lineup's rarity and ability caps, not a damage or survival guarantee. Silver readiness uses the Rare 1 red star / level 26 ceiling; Gold uses Epic 3 red stars / level 35. These are planning targets for the lineup categories, not a substitute for checking each live zone's slot cap. No Mythic benefit is assumed. This does not spend resources or set upgrade targets. Your selections are saved in this browser.</p></ReferenceDetails></>;
+ return <><section className="warReassess"><div>{rosterChanged?<p className="status need" role="status">Your roster changed since the last War review. Reassess to update both offense and defense suggestions.</p>:null}<p className="sub">Rebuild both team lists from your currently synced roster. Manual team assignments and flex choices reset; deployment orders and machine selections are kept where they still apply.</p></div><button type="button" onClick={reassessTeams}>Reassess teams</button></section>
+ <section className="warReassessResult" aria-label="Reassessment results" aria-live="polite" aria-atomic="true">
+  {reassessment!==null&&<>
+   <h2>Reassessment complete</h2>
+   {reassessment.length===0?<p>No team assignments or flex selections changed.</p>:
+    <ul>{reassessment.map(({label,details})=><li key={label}>
+     <strong>{label}</strong>
+     {details.map(detail=><p key={detail}>{detail}</p>)}
+    </li>)}</ul>}
+  </>}
+ </section><div className="abilityViews warModeTabs" role="tablist" aria-label="Guild War views"><button type="button" id="war-tab-defense" role="tab" aria-controls="war-panel-defense" aria-selected={mode==="defense"} className={mode==="defense"?"active":""} onClick={()=>setMode("defense")}>Defense teams</button><button type="button" id="war-tab-offense" role="tab" aria-controls="war-panel-offense" aria-selected={mode==="offense"} className={mode==="offense"?"active":""} onClick={()=>setMode("offense")}>Offense teams</button><button type="button" id="war-tab-counters" role="tab" aria-controls="war-panel-counters" aria-selected={mode==="counters"} className={mode==="counters"?"active":""} onClick={()=>setMode("counters")}>Counter guide</button></div><div className="warModePanel" id="war-panel-defense" role="tabpanel" aria-labelledby="war-tab-defense" hidden={mode!=="defense"}>{defensePanel}</div><div className="warModePanel" id="war-panel-offense" role="tabpanel" aria-labelledby="war-tab-offense" hidden={mode!=="offense"}>{offensePanel}</div><div className="warModePanel" id="war-panel-counters" role="tabpanel" aria-labelledby="war-tab-counters" hidden={mode!=="counters"}>{counterGuide}</div><ReferenceDetails label="Team selection and source evidence">{defenseSource?<p>Imported {defenseSource.importedAt.slice(0,10)} / <Link href="https://tacticus.xyz/wars/analyze/defenders">TacticusXYZ defender source</Link></p>:null}<p>Defense and offense have separate sources and assignments. Each character appears once within each list. Defense ranks cores by their observed defense rate, breaking ties by sample size. Flex suggestions require at least 100 observed attacks and are ranked by hold rate, then sample size; overlapping flex samples are not added together or presented as a measured five-character hold rate. Exact offense statistics belong to the recorded five-character lineup; a core/flex suggestion displays the three-character core's observed rate only.</p><p>Slot order affects starting positions and the AI action sequence, but does not guarantee ability timing. Map layout, movement and targeting still matter. The Rotbone-late starting suggestion is a planning judgment from <a href="https://www.reddit.com/r/WH40KTacticus/comments/1t2zgo6/gw_defense_lineups_advice/">community defense guidance</a>; other teams retain source order until you adjust them. <a href="https://www.reddit.com/r/WH40KTacticus/comments/1pjbzic/guild_war_maps_s19_b1/">Numbered community maps</a> explain slot-to-hex placement; use the map for your current war.</p><p>The snapshot contains 20 displayed cores, with no Battlefield 2 or Fortified-only breakdown. Gold requires current Gold I rank or higher; Silver requires Silver I or higher. Ability and gear shortfalls appear inside each team. Machine suggestions allocate reviewed ability fits across all teams without duplicates, preserving manual selections. Current levels provide a small readiness preference within the lineup's rarity and ability caps, not a damage or survival guarantee. Silver readiness uses the Rare 1 red star / level 26 ceiling; Gold uses Epic 3 red stars / level 35. These are planning targets for the lineup categories, not a substitute for checking each live zone's slot cap. No Mythic benefit is assumed. This does not spend resources or set upgrade targets. Your selections are saved in this browser.</p></ReferenceDetails></>;
 }
