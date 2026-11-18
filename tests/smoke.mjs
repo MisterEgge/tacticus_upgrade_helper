@@ -224,6 +224,8 @@ try
     await writeFile(reportPath,JSON.stringify(report));
     const dashboard = await get('/');
     const war = await get('/war-defense');
+    assert.match(war,/Reassess teams/);
+    assert.match(war,/Rebuild both team lists from your currently synced roster/);
     assert.match(war, /defense teams/);
     assert.doesNotMatch(war, /DEFENSE SOURCE OPTIONS/);
     const catalog = JSON.parse(await readFile(path.join(root, 'data/character_catalog.json'), 'utf8'));
