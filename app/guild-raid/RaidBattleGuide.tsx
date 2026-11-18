@@ -3,6 +3,7 @@ import { useState } from "react";
 import CharacterName from "../components/CharacterName";
 import ViewTabs from "../components/ViewTabs";
 import ReferenceDetails from "../components/ReferenceDetails";
+import {raidMachinePlan} from "../../src/domain/raidMachine";
 import { raidPlaybook, RAID_PLAYBOOK_REVIEWED, RAID_PLAYBOOK_SOURCES } from "../../src/domain/raidPlaybook";
 
 type Member = { name: string; id: string; icon?: string | undefined };
@@ -24,6 +25,10 @@ export default function RaidBattleGuide({ boss, teamName, members, machine }: { 
         <div className="raidBattleGuide">
             <h2>Battle guide</h2>
             {plan.bossGuide ? <p className="raidBossRule"><strong>{boss}: </strong>{plan.bossGuide.rule}</p> : null}
+            <section className="raidMachineTactics" aria-label="Machine of War tactics">
+                <h3>{machine ?? "Machine of War"}</h3>
+                <p>{raidMachinePlan(machine,boss)}</p>
+            </section>
             <ViewTabs key={plan.available ? "rotation" : "positioning"} label="Battle guide views" defaultTab={plan.available ? "Turn order" : "Positioning"} tabs={[
             {label:"Turn order",content:!plan.available ? <p role="status">{plan.reason}</p> : <>
                 <div className="raidTurnControls">

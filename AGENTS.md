@@ -1,5 +1,7 @@
 # Code changes
 
+For any user-facing page or component, follow [Interface design](docs/interface-design.md).
+
 Follow this workflow for intentional code changes:
 
 1. Identify the affected code and tests. Preserve unrelated work and keep the change focused.

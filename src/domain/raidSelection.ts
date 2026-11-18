@@ -47,7 +47,7 @@ export function resolveRaidSelection(value: unknown, teams: RaidTeams, owned: Se
     const lineup = selection.autoFlex === false
         ? [...new Set([...selectedRaidNames(selection, team).filter(name => owned.has(name) && raidCandidates(team).includes(name)), ...suggested])].slice(0, 5)
         : suggested;
-    const machine = selection.autoMachine === false && selection.machine && owned.has(selection.machine)
+    const machine = selection.autoMachine === false && (selection.machine === null || selection.machine && owned.has(selection.machine))
         ? selection.machine : suggestedRaidMachine(team, owned);
     return { ...selection, autoFlex: selection.autoFlex !== false, lineup, flex: lineup.filter(name => !team.core.includes(name)), machine, autoMachine: selection.autoMachine !== false };
 }

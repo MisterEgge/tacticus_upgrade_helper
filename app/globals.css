@@ -323,21 +323,6 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .warGoldBuildNeeds { color:#e0ad6c; font-size:10px; font-weight:700; }
 .warGoldBuildCharacterList { margin-top:14px; }
 .warGoldBuildCharacterList .warOffenseCandidates article { min-width:120px; }
-.raidUpgradeCoverage { margin:20px 0; padding:18px 22px; }
-.raidUpgradeCoverage .sectionTitle { margin-bottom:12px; }
-.raidUpgradeRosterGroup { margin-top:16px; }
-.raidUpgradeRosterGroup>h3 { display:flex; align-items:center; gap:8px; margin:0 0 10px; font-size:16px; }
-.raidUpgradeRosterGroup>h3 small { display:grid; place-items:center; min-width:22px; height:22px; padding:0 5px; border-radius:12px; background:#263140; color:#c6d0dd; font-size:11px; }
-.raidUpgradeRosterGrid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
-.raidUpgradeRosterCard { min-width:0; padding:10px; border:1px solid #303846; border-radius:8px; background:#0c1118; }
-.raidUpgradeRosterCharacter { display:flex; align-items:center; justify-content:space-between; gap:8px; color:inherit; text-decoration:none; }
-.raidUpgradeRosterCharacter:hover .characterCell strong { color:#9ccaff; }
-.raidUpgradeOwned,.raidUpgradeUnowned { flex:none; font-size:10px; font-weight:700; }
-.raidUpgradeOwned { color:#70c892; }
-.raidUpgradeUnowned { color:#9da9ba; }
-.raidUpgradeRosterLevels { display:flex; flex-wrap:wrap; gap:5px 12px; margin-top:6px; color:#b9c3d1; font-size:11px; }
-.raidUpgradeRosterUses { display:flex; flex-wrap:wrap; gap:4px; margin-top:8px; }
-.raidUpgradeRosterUses span { padding:3px 6px; border:1px solid #354355; border-radius:5px; color:#9ccaff; font-size:10px; }
 .warModeTabs button { min-width:130px; }
 .warModePanel[hidden] { display:none; }
 .warOffenseMachine label { margin-bottom:6px; }
@@ -508,3 +493,5 @@ th,td { padding:12px 14px; }
  .responsiveDataTable tbody td:first-child::before { content:attr(data-label); }
  .badgeBudgetLayout .tableWrap { overflow-x:auto; }
 }
+
+.raidPreferredTeam,.raidMachineTactics{margin-bottom:18px;padding:12px 14px;border:1px solid #354355;border-radius:8px;background:#111923}.raidTeamEditor .raidPreferredTeam h2,.raidMachineTactics h3{margin:0 0 6px;font-size:15px}.raidPreferredTeam p,.raidMachineTactics p{margin:0}.raidPreferredTeam small{display:block;margin-top:5px}.raidTeamMachineNote{margin:12px 0}.raidTeamMachineNote small{display:block;margin-bottom:5px}.raidOverview .raidSave{display:flex;flex-wrap:wrap;gap:8px}

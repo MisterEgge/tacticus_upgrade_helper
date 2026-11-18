@@ -3,7 +3,7 @@ import type {OrbInventory} from "../../src/domain/orbPlanner";
 import ViewTabs from "../components/ViewTabs";
 import RankBadge from "../components/RankBadge";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import ReferenceDetails from "../components/ReferenceDetails";
@@ -11,7 +11,7 @@ import CollapsibleSection from "../components/CollapsibleSection";
 import CharacterName from "../components/CharacterName";
 import type { RaidTeam } from "../../src/domain/raidMeta";
 import { raidCandidates, suggestedRaidLineup } from "../../src/domain/raidLineup";
-import { RAID_MACHINES, recommendedRaidMachine, suggestedRaidMachine } from "../../src/domain/raidMachine";
+import { RAID_MACHINES, raidMachinePlan, recommendedRaidMachine, suggestedRaidMachine } from "../../src/domain/raidMachine";
 import { raidAbilityStep } from "../../src/domain/raidAbilityStep";
 import { abilityTargetMet, formatAbilityTarget } from "../../src/domain/targetDisplay";
 import { selectedRaidNames, type RaidSelection } from "../../src/domain/raidSelection";
@@ -19,7 +19,6 @@ import type { RosterUnit } from "../lib/report";
 import LaviscusRoadmap from "./LaviscusRoadmap";
 import RaidBattleGuide from "./RaidBattleGuide";
 import RaidSideBossGuide from "./RaidSideBossGuide";
-import RaidUpgradeCoverage from "./RaidUpgradeCoverage";
 
 type Member = { name: string; id: string; icon?: string | undefined; owned: boolean; rarity: string | null; rank: number | null; xpLevel: number | null; activeLevel: number | null; passiveLevel: number | null; activeTarget: string; passiveTarget: string; activeBasis: string; passiveBasis: string };
 type Team = RaidTeam & { members: Member[] };
@@ -34,18 +33,29 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, roster,
     const [autoFlex, setAutoFlex] = useState(mainSelection.autoFlex !== false);
     const ownedMachines = RAID_MACHINES.filter(machine => roster.some(unit => unit.id === machine.id));
     const machineNames = new Set<string>(ownedMachines.map(machine => machine.name));
-    const [machine, setMachine] = useState<string | null>(mainSelection.machine ?? suggestedRaidMachine(teams[mainSelection.boss]![mainSelection.teamName]!, machineNames));
+    const [machine, setMachine] = useState<string | null>(mainSelection.machine === undefined ? suggestedRaidMachine(teams[mainSelection.boss]![mainSelection.teamName]!, machineNames) : mainSelection.machine);
     const [autoMachine, setAutoMachine] = useState(mainSelection.autoMachine !== false);
     const [saved, setSaved] = useState(mainSelection);
     const [saving, setSaving] = useState(false);
     const [saveError, setSaveError] = useState("");
+    const [tab, setTab] = useState("Battle guide");
+    const editFocus = useRef<HTMLSelectElement>(null);
+    const focusEditor = useRef(false);
     const team = teams[boss]![teamName]!;
     const suggested = suggestedRaidLineup(team);
     const recommendation = team.recommendation;
+    const preferred = recommendation?.lineup ?? [...team.core, ...team.flex.slice(0, Math.max(0, 5-team.core.length))];
     const preferredMachine = recommendedRaidMachine(team);
     const selectedMachine = RAID_MACHINES.find(option => option.name === machine);
     const machineUnit = roster.find(unit => unit.id === selectedMachine?.id);
     const members = lineup.map(name => team.members.find(member => member.name === name)!).filter(Boolean);
+    const flexSlot = lineup.findIndex(name=>!team.core.includes(name));
+    useEffect(()=>{
+        if(tab==="Team"&&focusEditor.current){
+            editFocus.current?.focus();
+            focusEditor.current=false;
+        }
+    },[tab]);
     const selection: RaidSelection = { boss, teamName, lineup, flex: lineup.filter(name => !team.core.includes(name)), autoFlex, machine, autoMachine };
     const isSaved = saved.boss === boss && saved.teamName === teamName
         && JSON.stringify(selectedRaidNames(saved, team)) === JSON.stringify(lineup)
@@ -78,25 +88,32 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, roster,
             <div className="raidLineupStrip">{members.map(member=><CharacterName key={member.id} name={member.name} id={member.id} icon={member.icon}/>)}{selectedMachine?<CharacterName name={selectedMachine.name} id={selectedMachine.id}/>:null}</div>
             {lineup.length<5?<p role="status">Choose {5-lineup.length} more characters in Team.</p>:null}
             <div className="raidSave">
+                {tab!=="Team"?<button type="button" onClick={()=>{focusEditor.current=true;setTab("Team");}}>Edit team</button>:null}
                 <button type="button" onClick={saveMainTeam} disabled={saving || isSaved || lineup.length < 5}>{saving ? "Saving…" : isSaved ? "Main team saved" : "Set as main Raid team"}</button>
                 {saveError ? <small role="alert">{saveError}</small> : null}
             </div>
         </section>
-        <ViewTabs label="Guild Raid views" defaultTab="Battle guide" tabs={[
+        <ViewTabs label="Guild Raid views" defaultTab="Battle guide" selectedTab={tab} onSelect={setTab} tabs={[
             {label:"Team",content:<>
-        <section className="panel detailPanel raidTeamEditor"><h2>Edit lineup</h2>
+        <section className="panel detailPanel raidTeamEditor">
+            <div className="raidPreferredTeam" role="region" aria-label="Recommended team">
+                <h2>Recommended team</h2>
+                <p>{preferred.map(name=>team.members.find(member=>member.name===name)?.owned?name:`${name} (not owned)`).join(" · ")}{preferredMachine?<small>Machine of War · {preferredMachine}</small>:null}</p>
+            </div>
+            <h2>Deploy this lineup</h2>
             <div className="abilityViews">
-                {Array.from({ length: 5 }, (_, index) => <label key={index}>Character slot {index + 1}<select value={lineup[index] ?? ""} onChange={event => {
+                {Array.from({ length: 5 }, (_, index) => <label key={index}>Character slot {index + 1}<select aria-label={`Character slot ${index+1}`} ref={index===(flexSlot<0?Math.min(4,lineup.length):flexSlot)?editFocus:undefined} value={lineup[index] ?? ""} onChange={event => {
                     const next = [...lineup]; next[Math.min(index, next.length)] = event.target.value; setLineup(next); setAutoFlex(false);
                 }}>
                     {!lineup[index] ? <option value="">Insufficient owned substitutes</option> : null}
                     {raidCandidates(team).filter(name => !lineup.includes(name) || lineup[index] === name).map(name => <option key={name} value={name} disabled={!team.members.find(member => member.name === name)?.owned}>{name}{team.members.find(member => member.name === name)?.owned ? "" : " · not owned"}</option>)}
-                </select></label>)}
+                </select>{lineup[index]?<small>{team.core.includes(lineup[index]!)?"Core":"Flex"}{members[index]?.rank!=null?<> · <RankBadge rank={members[index].rank}/></>:null}</small>:null}</label>)}
                 <label>Machine of War<select value={machine ?? ""} onChange={event => { setMachine(event.target.value || null); setAutoMachine(false); }}>
-                    {!machine ? <option value="">No owned Machine of War</option> : null}
+                    <option value="">{machineNames.size?"No Machine of War":"No owned Machine of War"}</option>
                     {RAID_MACHINES.filter(option => !team.excludedMachines?.includes(option.name)).map(option => <option key={option.id} value={option.name} disabled={!machineNames.has(option.name)}>{option.name}{option.name === preferredMachine ? " · recommended" : ""}{machineNames.has(option.name) ? "" : " · not owned"}</option>)}
                 </select></label>
             </div>
+            <p className="raidTeamMachineNote">{machineUnit?<small>Primary {machineUnit.abilities[0]?.level ?? "unknown"} ? Secondary {machineUnit.abilities[1]?.level ?? "unknown"}</small>:null}{machine?<><strong>{machine}</strong> · </>:null}{raidMachinePlan(machine,boss)}</p>
             <div className="raidSave">
                 <button type="button" onClick={() => { setLineup(suggested); setAutoFlex(true); setMachine(suggestedRaidMachine(team, machineNames)); setAutoMachine(true); }} disabled={autoFlex && autoMachine && JSON.stringify(lineup) === JSON.stringify(suggested) && machine === suggestedRaidMachine(team, machineNames)}>Use recommended owned team</button>
 
@@ -113,7 +130,7 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, roster,
 </>},
             {label:"Battle guide",content:<RaidBattleGuide key={`${boss}-${teamName}-${lineup.join("|")}-${machine}`} boss={boss} teamName={teamName} members={members} machine={machine}/>},
             {label:"Side bosses",content:<RaidSideBossGuide boss={boss}/>},
-            {label:"Upgrades",content:<><RaidUpgradeCoverage teams={teams}/><LaviscusRoadmap roster={roster} members={members} machine={machine ?? undefined} orbInventory={orbInventory}/>
+            {label:"Upgrades",content:<><LaviscusRoadmap roster={roster} members={members} machine={machine ?? undefined} orbInventory={orbInventory}/>
         <CollapsibleSection title="Character ability targets" defaultOpen={false} className="panel detailPanel">
             <p className="sub">Upgrade steps respect current XP and rarity. Check badges and coins before spending.</p>
             <div className="tableWrap"><table aria-label="Raid ability targets"><thead><tr><th>Character</th><th>Rank / level</th><th>Ability steps and targets</th></tr></thead><tbody>{members.map(member => <tr key={member.name}>
@@ -124,12 +141,7 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, roster,
                     <ReferenceDetails label="Ability target basis"><p>Active: {member.activeBasis}</p><p>Passive: {member.passiveBasis}</p></ReferenceDetails></td>
             </tr>)}</tbody></table></div>
         </CollapsibleSection>
-        <CollapsibleSection title="Machine of War plan" defaultOpen={false} summary={machineUnit ? `${machine} · ${machineUnit.rarity} · primary ${machineUnit.abilities[0]?.level ?? "unknown"}, secondary ${machineUnit.abilities[1]?.level ?? "unknown"}` : "No owned Machine of War selected"} className="panel detailPanel">
-            {machineUnit && selectedMachine ? <CharacterName name={selectedMachine.name} id={selectedMachine.id}/> : null}
-            <p>Recommended machine: <strong>{preferredMachine ?? "Research needed"}</strong>. {machine === preferredMachine ? "Recommended machine selected." : machine ? `Using owned ${machine} as a fallback; exact team performance is unverified.` : "Unlock a Machine of War to complete the support slot."}</p>
-            <p>{machine === "Biovore" ? "Biovore primary before secondary; documented ability checkpoints appear in the roadmap below." : "Verified ability targets for this machine need research. Current levels are shown above; character rank and badge costs are not applied to Machines of War."}</p>
-            {team.machine ? <ReferenceDetails label="Machine recommendation source"><p>{team.machine.note} <a href={team.machine.sourceUrl} target="_blank" rel="noreferrer">Recommendation source</a> · checked {team.machine.reviewedOn}.</p></ReferenceDetails> : null}
-        </CollapsibleSection>
+
 </>}
         ]}/>
     </div>;

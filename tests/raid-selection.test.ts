@@ -31,6 +31,7 @@ test("automatic saves refresh after unlocks; manual substitutions and machine ov
     assert.deepEqual(resolveRaidSelection(stored, teams, owned).flex, ["Aesoth", "Gulgortz"]);
     const manual = { ...stored, autoFlex: false, lineup: ["Kariyan", "Laviscus", "Trajann", "Kharn", "Bellator"], flex: ["Kharn", "Bellator"], machine: "Galatian", autoMachine: false };
     assert.deepEqual(resolveRaidSelection(manual, teams, owned), manual);
+    assert.equal(resolveRaidSelection({...manual,machine:null},teams,owned).machine,null);
     owned.delete("Laviscus");
     const replaced = resolveRaidSelection(manual, teams, owned);
     assert.equal(replaced.lineup!.length, 5);

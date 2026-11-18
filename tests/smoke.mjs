@@ -277,7 +277,7 @@ try
     assert.match(raidSelectionDom.window.document.querySelector('.raidLineupStrip').textContent, /Actus.*Exitor-Rho.*Tan Gi'da.*Gulgortz.*Anuphet.*Galatian/);
     assert.equal(raidSelectionDom.window.document.querySelector('[role="tablist"][aria-label="Guild Raid views"] [aria-selected="true"]').textContent, 'Battle guide');
     raidSelectionDom.window.close();
-    assert.match(selectedHtml, /Machine of War plan/);
+    assert.match(selectedHtml, /aria-label="Machine of War tactics".*?Galatian.*?Deploy where/s);
     assert.match(selectedHtml, /Turn orders for this archetype still need research/);
     assert.match(selectedHtml, /aria-label="Positioning guidance"/);
     assert.doesNotMatch(selectedHtml, /aria-label="Battle turn"/);
