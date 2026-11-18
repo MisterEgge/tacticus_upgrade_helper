@@ -21,11 +21,13 @@ test("completed normal campaign cannot release gear while Elite is unknown or un
  assert.deepEqual(campaignGearProtection(characters,[normal,{...elite,highestCompletedBattle:39}],battles).campaignNames,["Donor"]);
  assert.deepEqual(campaignGearProtection(characters,[normal,elite],battles),{campaignNames:[],campaignUnknown:[]});
 });
-test("campaign completion permits a donor only without another protected use",()=>{
+test("campaign completion releases a donor, while a lower-priority role can supply a selected Raid upgrade",()=>{
  const protection=campaignGearProtection(characters,[normal,elite],battles);
  const base={raidNames:["Laviscus"],raidOptions:[],warNames:[],focus:{},...protection};
  const units=[{id:"donor",name:"Donor",rarity:"Legendary",items:[{slotId:"Slot2",id:"shield",level:3}]},{id:"lav",name:"Laviscus",rarity:"Legendary",items:[{slotId:"Slot2",id:"old",level:1}]}];
  const input={units,targets:[{character:"Laviscus",characterId:"lav",slotId:"Slot2",itemId:"shield",minimumLevel:3,inventoryReady:false}],characters:units.map(unit=>({id:unit.id,name:unit.name,faction:"Allowed",equipment:["I_Block"]})),equipment:{shield:{type:"I_Block",rarity:"Legendary",allowedFactions:["Allowed"]},old:{type:"I_Block",rarity:"Epic",allowedFactions:["Allowed"]}}};
  assert.equal(planLegendaryReallocation({...input,roles:gearRoles(base)}).transfers.length,1);
- for(const other of [{warNames:["Donor"]},{raidOptions:["Donor"]},{focus:{Donor:{modes:["LRE","Onslaught"]}}}])assert.equal(planLegendaryReallocation({...input,roles:gearRoles({...base,...other})}).transfers.length,0);
+ for(const other of [{campaignNames:["Donor"]},{warNames:["Donor"]},{raidOptions:["Donor"]},{focus:{Donor:{modes:["LRE","Onslaught"]}}}])assert.equal(planLegendaryReallocation({...input,roles:gearRoles({...base,...other})}).transfers.length,1);
+ assert.equal(planLegendaryReallocation({...input,roles:gearRoles({...base,campaignUnknown:["Donor"]})}).transfers.length,0);
+ assert.equal(planLegendaryReallocation({...input,roles:gearRoles({...base,raidNames:["Laviscus","Donor"]})}).transfers.length,0);
 });

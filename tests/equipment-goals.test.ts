@@ -1,5 +1,5 @@
 import {equipmentCompatibility,type EquipmentCharacter,type EquipmentDefinition} from "../src/domain/equipmentCompatibility";
-import {equipmentUpgradeOptions} from "../src/domain/equipmentOptions";
+import {equipmentReplacementMinimumLevel,equipmentUpgradeOptions} from "../src/domain/equipmentOptions";
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
@@ -13,6 +13,23 @@ test("equipment follows five active defense slots, excludes reserves, and retain
  assert.equal(goals.has("D0"),false);assert.equal(goals.has("D5"),false);
  assert.equal(goals.get("D9"),"gold");assert.equal(goals.get("D4"),"silver");
  assert.equal(goals.get("D3"),"gold");assert.equal(goals.get("O"),"gold");
+});
+test("War gear roles include roster-built teams and the actual saved flex characters",()=>{
+ const defense=[
+  {name:"Observed",used:100,slot:0,core:["a","b","c"],members:["A","B","C","D","E"].map(name=>({name,id:name.toLowerCase()})),flex:[{name:"D",id:"d"},{name:"F",id:"f"}]},
+  {name:"Roster-built",used:0,slot:4,rosterBuilt:true,members:["G","H","I","J","K"].map(name=>({name}))},
+ ];
+ const goals=selectedWarGearGoals(defense,[],{defense:["Observed",null,null,null,null],defenseFlex:{Observed:["d","f"]}});
+ assert.equal(goals.get("F"),"gold");
+ assert.equal(goals.has("E"),false);
+ assert.equal(goals.get("K"),"silver");
+});
+test("Kharn's legendary crit booster improves both bonuses over his level-nine epic booster",()=>{
+ const equipment=JSON.parse(readFileSync("data/game/shops.json","utf8")).equipment;
+ assert.equal(equipmentReplacementMinimumLevel({id:"I_Booster_Crit_E003",level:9},"I_Booster_Crit_L003",equipment),1);
+ const current={id:"I_Booster_Crit_E003",level:9};
+ const candidate={...equipment.I_Booster_Crit_L003,statsByLevel:[{critChanceBonus:5,critDamageBonus:200},{critChanceBonus:5,critDamageBonus:210}]};
+ assert.equal(equipmentReplacementMinimumLevel(current,"I_Booster_Crit_L003",{...equipment,I_Booster_Crit_L003:candidate}),2);
 });
 test("War goal caps prevent unnecessary Legendary purchases while selected raid goals take precedence",()=>{
  const war=new Map<string,"gold"|"silver">([["Gold","gold"],["Silver","silver"]]);

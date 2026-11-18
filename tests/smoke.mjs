@@ -224,6 +224,12 @@ try
     await writeFile(reportPath,JSON.stringify(report));
     const dashboard = await get('/');
     const war = await get('/war-defense');
+    const navigation = new JSDOM(dashboard);
+    const menus = [...navigation.window.document.querySelectorAll('nav .navGroup')];
+    assert.deepEqual(menus.map(menu=>menu.querySelector('summary').textContent), ['Equipment', 'Resources']);
+    assert.deepEqual([...menus[1].querySelectorAll('a')].map(link=>link.textContent), ['Orbs', 'Badges']);
+    assert.ok(!menus[0].querySelector('a[href="/inventory"]'));
+    navigation.window.close();
     assert.match(war,/Reassess teams/);
     assert.match(war,/Rebuild both team lists from your currently synced roster/);
     assert.match(war, /defense teams/);
@@ -339,9 +345,9 @@ try
     assert.doesNotMatch(roadmap, /<details[^>]*class="referenceDetails"[^>]*open/);
     assert.match(roadmap, /<details class="navGroup"><summary[^>]*>Equipment<\/summary>/);
     assert.match(roadmap, /<summary[^>]*>Resources<\/summary>/);
-    assert.match(roadmap, /<summary[^>]*>Roster<\/summary>/);
+    assert.doesNotMatch(roadmap, /<summary[^>]*>Roster<\/summary>/);
     assert.doesNotMatch(roadmap, /class="navMore"/);
-    assert.match(roadmap, /href="\/review-status"/);
+    assert.doesNotMatch(roadmap, /href="\/review-status"/);
     assert.match(ratings, /<summary>Rating criteria<\/summary>/);
     for(const route of ['/inventory-cleanout','/reallocation']) assert.match(await get(route), /class="accountBar"/);
 
