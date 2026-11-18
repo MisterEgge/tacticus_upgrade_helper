@@ -91,3 +91,23 @@ test("a higher-rarity ready donor precedes lower-rarity alternatives for the sam
  assert.equal(result.transfers.length,1);
  assert.equal(result.transfers[0]?.itemId,legendary);
 });
+
+test("transfer recipients follow Raid, unfinished campaigns, War, then LRE",()=>{
+ const order=["Raid","Campaign","War","LRE"];
+ const priorities=roles({raidNames:["Raid"],campaignNames:["Campaign"],warNames:["War"],focus:{LRE:{modes:["LRE"]}}});
+ for(const [index,recipient] of order.entries()){
+  const queue=order.slice(index).reverse();
+  const units=[unit("Donor"),...queue.map(name=>unit(name,epic))];
+  const result=planLegendaryReallocation({units,targets:queue.map(target),characters:characters(units),equipment,roles:priorities});
+  assert.deepEqual(result.transfers.map(move=>move.recipient),[recipient]);
+ }
+});
+
+test("a selected Raid upgrade can come from a lower-priority holder, and Raid gear never moves downhill",()=>{
+ const units=[unit("Campaign",legendary,3),unit("War",legendary,2),unit("Raid",epic),unit("Raid peer",legendary,9)];
+ const priorities=roles({raidNames:["Raid","Raid peer"],campaignNames:["Campaign"],warNames:["War"]});
+ const result=planLegendaryReallocation({units,targets:[target("Raid")],characters:characters(units),equipment,roles:priorities});
+ assert.equal(result.transfers[0]?.character,"War");
+ assert.ok(result.protectedGear.some(holding=>holding.character==="Raid peer"));
+ assert.ok(!result.protectedGear.some(holding=>holding.character==="War"));
+});

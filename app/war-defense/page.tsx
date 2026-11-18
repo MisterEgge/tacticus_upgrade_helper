@@ -1,4 +1,5 @@
-import {getAccountWarDefense,warDefenseEvidence} from "../lib/warDefensePlan";
+import {warDefenseEvidence} from "../lib/warDefensePlan";
+import {getWarLineups,type FullLineup} from "../lib/warLineups";
 import {suggestGoldDefenseBuilds} from "../../src/domain/warDefenseEvidence";
 import {RAID_MACHINES} from "../../src/domain/raidMachine";
 import { readFile } from "node:fs/promises";
@@ -6,68 +7,35 @@ import Nav from "../components/Nav";
 import WarDefensePlanner from "./WarDefensePlanner";
 import { getCharacterCatalog } from "../lib/catalog";
 import { getReport } from "../lib/report";
-import { buildDistinctOffenseTeams, uniqueWarTeamIndexes, type OffenseCore } from "../../src/domain/warTeams";
-import {buildWarRosterLineups} from "../../src/domain/warRosterLineups";
 import { getUtilityRatings } from "../lib/utilityRatings";
 import { validateGuildWarCounterKnowledge, type GuildWarCounterKnowledge } from "../../src/domain/guildWarCounters";
 import GuildWarCounterGuide from "./counters/GuildWarCounterGuide";
 import { getShopCatalog } from "../lib/shops";
 import { shopOffersForItem } from "../../src/domain/shops";
 
-type FullLineup={name:string;members:string[];core?:string[];flex?:Array<{name?:string;id?:string;used:number;win?:number;wins?:number}>;used:number;wins:number;defense?:number;win?:number;score:number;evidence?:"core-flex";reasons?:string[]};type Plan={teams?:OffenseCore[];validatedFullLineups?:FullLineup[]};
 type BattleRewards={rewards?:{potential?:Array<{id:string;effective_rate?:number;chance_numerator?:number}>}};
 type UnlockTarget={id:string;name:string;icon?:string;evidence:"observed core"|"observed flex"|"exact five-character lineup";used:number;win:number;campaigns:string[];shops:Array<{shop:string;rotation:string;price:string}>};
 
 export default async function WarDefense()
 {
 
-    const [report,catalog,offenseText,knowledgeText,shopCatalog,battleText]=await Promise.all([getReport(),getCharacterCatalog(),readFile("config/war_offense_teams.json","utf8"),readFile("config/guild_war_counters.json","utf8"),getShopCatalog(),readFile("data/game/campaign-battles.json","utf8")]);
+    const [report,catalog,knowledgeText,shopCatalog,battleText]=await Promise.all([getReport(),getCharacterCatalog(),readFile("config/guild_war_counters.json","utf8"),getShopCatalog(),readFile("data/game/campaign-battles.json","utf8")]);
     if(!report)return <main><Nav/><div className="empty">Run <code>npm run refresh</code> to load your roster.</div></main>;
     const units=new Map(report.roster.map(unit=>[unit.name,unit]));
     const icons=new Map(catalog.characters.map(character=>[character.id,character.icon]));
     const metadata=new Map(catalog.characters.map(character=>[character.id,character]));
     const memberFor=(name:string)=>{const unit=units.get(name)??report.roster.find(value=>value.id===name);return unit?{id:unit.id,name:unit.name,traits:metadata.get(unit.id)?.traits??[],faction:metadata.get(unit.id)?.faction??"",icon:icons.get(unit.id),rank:unit.rank,rarity:unit.rarity,progressionIndex:unit.progressionIndex,activeLevel:unit.abilities[0]?.level??null,passiveLevel:unit.abilities[1]?.level??null,items:unit.items}:undefined;};
-    const build=(lineup:FullLineup)=>{const missing=lineup.members.filter(name=>!units.has(name));return {name:lineup.name,used:lineup.used,wins:lineup.wins,defense:lineup.defense,score:lineup.score,evidence:lineup.evidence,reasons:lineup.reasons,core:lineup.core??[],flex:(lineup.flex??[]).flatMap(candidate=>{const name=candidate.name??candidate.id;if(!name)return [];const member=memberFor(name);return member?[{name,used:candidate.used,win:candidate.win??((candidate.wins??0)/candidate.used*100),member}]:[];}).sort((a,b)=>b.win-a.win||b.used-a.used||a.name.localeCompare(b.name)),fieldable:missing.length===0,missing,members:lineup.members.map(name=>memberFor(name)??{id:`missing-${name}`,name,traits:[],faction:"",icon:undefined,rank:null,rarity:undefined,progressionIndex:undefined,activeLevel:null,passiveLevel:null,items:[]})};};
-    const offensePlan=JSON.parse(offenseText)as Plan;
-    const byWinRate=(a:ReturnType<typeof build>,b:ReturnType<typeof build>)=>b.wins/b.used-a.wins/a.used||b.used-a.used;
-    const machineIds=new Set<string>(RAID_MACHINES.map(machine=>machine.id));
-    const roster=report.roster.filter(unit=>!machineIds.has(unit.id)).map(unit=>({...unit,traits:metadata.get(unit.id)?.traits??[]}));
-    const asRosterLineup=(lineup:ReturnType<typeof buildWarRosterLineups>[number])=>
-        build({...lineup,name:lineup.members.join(" / "),core:lineup.members,used:0,wins:0,score:0});
-    const observedDefense=getAccountWarDefense(report).map(lineup=>({...build({...lineup,score:lineup.confidence}),tier:lineup.tier,slot:lineup.slot,core:lineup.core,confidence:lineup.confidence}));
-    const emptyDefenseSlots=(["gold","gold","silver","silver","silver"] as const)
-        .flatMap((tier,slot)=>observedDefense.some(team=>team.slot===slot)?[]:[{tier,slot}]);
-    const defenseFallback=buildWarRosterLineups(roster,new Set(observedDefense.flatMap(team=>team.members.map(member=>member.id))),
-        emptyDefenseSlots.map(slot=>slot.tier),warDefenseEvidence.cores.flatMap(group=>[
-            {ids:group.core,used:group.used},
-            ...group.flex.map(flex=>({ids:[...group.core,flex.id],used:flex.used})),
-        ])).map((lineup,index)=>({...asRosterLineup(lineup),...emptyDefenseSlots[index]!}));
-    const fallbackDefenseIds=new Set(defenseFallback.flatMap(team=>team.members.map(member=>member.id)));
-    const defense=[...observedDefense.map(team=>({...team,flex:team.flex.filter(choice=>!fallbackDefenseIds.has(choice.member.id))})),...defenseFallback];
+    const build=(lineup:FullLineup)=>{const missing=lineup.members.filter(name=>!units.has(name));return {name:lineup.name,used:lineup.used,wins:lineup.wins,defense:lineup.defense,score:lineup.score,evidence:lineup.evidence,reasons:lineup.reasons,rosterBuilt:!!lineup.reasons,core:lineup.core??[],flex:(lineup.flex??[]).flatMap(candidate=>{const name=candidate.name??candidate.id;if(!name)return [];const member=memberFor(name);return member?[{name,used:candidate.used,win:candidate.win??((candidate.wins??0)/candidate.used*100),member}]:[];}).sort((a,b)=>b.win-a.win||b.used-a.used||a.name.localeCompare(b.name)),fieldable:missing.length===0,missing,members:lineup.members.map(name=>memberFor(name)??{id:`missing-${name}`,name,traits:[],faction:"",icon:undefined,rank:null,rarity:undefined,progressionIndex:undefined,activeLevel:null,passiveLevel:null,items:[]})};};
+    const lineups=await getWarLineups(report,catalog);
+    const {offensePlan}=lineups;
+    const defense=lineups.defense.map(lineup=>({...build(lineup),tier:lineup.tier,slot:lineup.slot}));
+    const offense=lineups.offense.map(build);
     const goldBuildSuggestions=suggestGoldDefenseBuilds(warDefenseEvidence.cores,report.roster,new Set(defense.flatMap(team=>team.members.map(member=>member.id))),2);
     const goldBuildTargets={
         teams:goldBuildSuggestions.teams.map(team=>({...team,members:team.members.flatMap(id=>memberFor(id)??[])})),
         characters:goldBuildSuggestions.characters.flatMap(target=>{const member=memberFor(target.id);return member?[{...target,member}]:[]})
     };
     const machines=RAID_MACHINES.flatMap(machine=>{const unit=report.roster.find(unit=>unit.id===machine.id);return unit?[{...machine,icon:icons.get(unit.id),rank:unit.rank,rarity:unit.rarity,progressionIndex:unit.progressionIndex,active:unit.abilities[0]?.level??0,passive:unit.abilities[1]?.level??0,activeLevel:unit.abilities[0]?.level??null,passiveLevel:unit.abilities[1]?.level??null,items:unit.items}]:[];});
-    const offenseCores=buildDistinctOffenseTeams(offensePlan.teams??[],new Set(report.roster.map(unit=>unit.name))).map(build);
-    const exactOffense=(offensePlan.validatedFullLineups??[]).map(lineup=>{
-        return build({...lineup,core:lineup.members,flex:[]});
-    }).filter(team=>team.fieldable);
-    const observedOffense=[...offenseCores,...exactOffense].sort(byWinRate);
-    const selectedOffense=uniqueWarTeamIndexes(observedOffense,10).map(index=>observedOffense[index]!);
-    const offenseObservations=[
-        ...(offensePlan.teams??[]).flatMap(group=>[
-            {names:group.core,used:group.used},
-            ...group.flex.map(flex=>({names:[...group.core,flex.name],used:flex.used})),
-        ]),
-        ...(offensePlan.validatedFullLineups??[]).map(group=>({names:group.members,used:group.used})),
-    ].map(group=>({ids:group.names.flatMap(name=>units.get(name)?.id??[]),used:group.used}));
-    const offenseFallback=buildWarRosterLineups(roster,new Set(selectedOffense.flatMap(team=>team.members.map(member=>member.id))),
-        Array.from({length:10-selectedOffense.length},()=>"silver" as const),offenseObservations).map(asRosterLineup);
-    const fallbackOffenseIds=new Set(offenseFallback.flatMap(team=>team.members.map(member=>member.id)));
-    const offense=[...observedOffense.filter(team=>team.members.every(member=>!fallbackOffenseIds.has(member.id)))
-        .map(team=>({...team,flex:team.flex.filter(choice=>!fallbackOffenseIds.has(choice.member.id))})),...offenseFallback];
     const knowledge=JSON.parse(knowledgeText) as GuildWarCounterKnowledge;
     validateGuildWarCounterKnowledge(catalog.characters,knowledge);
     const ratings=await getUtilityRatings(report);

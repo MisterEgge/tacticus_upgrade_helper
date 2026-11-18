@@ -11,7 +11,7 @@ import Link from "next/link";
 import { CharacterPortrait } from "../components/CharacterName";
 import ReferenceDetails from "../components/ReferenceDetails";
 import WarUnitReadiness from "./WarUnitReadiness";
-import { uniqueWarTeamIndexes, chooseWarTeamForSlot, warSlotChoices, restoreWarTeamIndexes, swapWarTeamSlots, distinctWarSlots } from "../../src/domain/warTeams";
+import { uniqueWarTeamIndexes, chooseWarTeamForSlot, warSlotChoices, restoreWarTeamIndexes, swapWarTeamSlots, defaultDefenseSlots, restoreDefenseSlots } from "../../src/domain/warTeams";
 import { WAR_PLAN_STORAGE_KEY } from "../../src/domain/warBadgeTargets";
 import {restoreWarMachines,warMachineAvailable} from "../../src/domain/warMachineSelection";
 import {warTierDefaultForRanks,warTierMinimumRank} from "../../src/domain/warReadiness";
@@ -21,7 +21,7 @@ import type {DragEvent,ReactNode} from "react";
 type Member={traits?:readonly string[];faction?:string;id:string;name:string;icon:string|undefined;rank:number|null;rarity?:string|undefined;progressionIndex?:number|undefined;activeLevel:number|null;passiveLevel:number|null;items:Array<{slotId:string;id:string;rarity?:string;level:number;name?:string}>};
 type Machine={id:string;name:string;active:number;passive:number;icon?:string|undefined;rank?:number|null;rarity?:string|undefined;progressionIndex?:number|undefined;activeLevel?:number|null;passiveLevel?:number|null;items?:Array<{slotId:string;id:string;rarity?:string;level:number;name?:string}>};
 type FlexChoice={name?:string;id?:string;used:number;win?:number;wins?:number;member?:Member};
-type Team={tier?:"gold"|"silver";slot?:number;core?:string[];flex?:FlexChoice[];confidence?:number;name:string;used:number;wins:number;evidence?:"core-flex"|undefined;reasons?:string[]|undefined;members:Member[];fieldable:boolean;missing:string[]};
+type Team={rosterBuilt?:boolean;tier?:"gold"|"silver";slot?:number;core?:string[];flex?:FlexChoice[];confidence?:number;name:string;used:number;wins:number;evidence?:"core-flex"|undefined;reasons?:string[]|undefined;members:Member[];fieldable:boolean;missing:string[]};
 function RosterLineupNotes({team,tier}:{team:Team;tier:WarGearCap}){
  const belowTarget=team.members.filter(member=>(member.rank??-1)<warTierMinimumRank(tier));
  return <div className="warOffenseEvidence">
@@ -88,51 +88,6 @@ const describeLineupChanges=(before:WarSnapshot,after:WarSnapshot)=>{
    return {label,details};
   }).filter(change=>change.details.length>0)
  );
-};
-const defaultDefenseSlots=(teams:Team[]):Array<number|null>=>{
- const slots:Array<number|null>=Array(5).fill(null),used=new Set<number>();
- for(const [index,team] of teams.entries())if(team.slot!==undefined&&team.slot>=0&&team.slot<5&&slots[team.slot]===null){slots[team.slot]=index;used.add(index);}
- for(const tier of ["gold","silver"] as const){
-  const tierSlots=tier==="gold"?[0,1]:[2,3,4];
-  for(const [index,team] of teams.entries())if(!used.has(index)&&team.tier===tier){
-   const empty=tierSlots.find(slot=>slots[slot]===null);
-   if(empty!==undefined){slots[empty]=index;used.add(index);}
-  }
- }
- for(const index of uniqueWarTeamIndexes(teams,5))if(!used.has(index)){
-  const empty=slots.findIndex(slot=>slot===null);
-  if(empty>=0){slots[empty]=index;used.add(index);}
- }
- return slots;
-};
-const restoreDefenseSlots=(teams:Team[],saved:unknown):Array<number|null>=>{
- const defaults=defaultDefenseSlots(teams);
- if(!Array.isArray(saved))return defaults;
- if(saved.length===5&&saved.every(value=>value===null||typeof value==="string")){
-  const indexes=saved.map(name=>name===null?null:teams.findIndex(team=>team.name===name));
-  const chosen=indexes.filter((index):index is number=>index!==null);
-  if(distinctWarSlots(teams,chosen)){
-   for(const [slot,index] of defaults.entries()){
-    if(indexes[slot]!==null||index===null||!teams[index]?.reasons||!distinctWarSlots(teams,[...chosen,index]))continue;
-    indexes[slot]=index;
-    chosen.push(index);
-   }
-   return indexes;
-  }
- }
- const legacy=restoreWarTeamIndexes(teams,saved,5),slots:Array<number|null>=Array(5).fill(null),used=new Set<number>();
- for(const index of legacy){
-  const team=teams[index]!;
-  const preferred=team.slot;
-  const tierSlots=team.tier==="gold"?[0,1]:[2,3,4];
-  const slot=preferred!==undefined&&slots[preferred]===null?preferred:tierSlots.find(value=>slots[value]===null);
-  if(slot!==undefined){slots[slot]=index;used.add(index);}
- }
- for(const index of legacy)if(!used.has(index)){
-  const empty=slots.findIndex(value=>value===null);
-  if(empty>=0){slots[empty]=index;used.add(index);}
- }
- return slots;
 };
 export default function WarDefensePlanner({teams,offenseTeams,ownedCharacterIds,machines=[],recommendedUnits=[],unlockTargets=[],goldBuildTargets,counterGuide,defenseSource}:{teams:Team[];offenseTeams:Team[];ownedCharacterIds:string[];machines?:Machine[];recommendedUnits?:Recommendation[];unlockTargets?:UnlockTarget[];goldBuildTargets?:GoldBuildTargets;counterGuide?:ReactNode;defenseSource?:Pick<DefenseEvidence,"scope"|"metric"|"importedAt">})
 {

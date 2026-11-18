@@ -5,7 +5,7 @@ import {JSDOM} from "jsdom";
 import ReallocationPlanner,{type ReallocationProps} from "../app/reallocation/ReallocationPlanner";
 import {WAR_PLAN_STORAGE_KEY} from "../src/domain/warBadgeTargets";
 
-test("gear transfers protect Aesoth and follow saved War selections when focus changes",async suite=>{
+test("gear transfers prefer the lower-priority donor and follow saved War selections when focus changes",async suite=>{
  const dom=new JSDOM("<!doctype html><html><body></body></html>",{url:"http://localhost/"});
  const descriptors=new Map<string,PropertyDescriptor|undefined>();
  for(const key of ["window","self","document","navigator","HTMLElement","Node","Event","MutationObserver","localStorage"]){descriptors.set(key,Object.getOwnPropertyDescriptor(globalThis,key));Object.defineProperty(globalThis,key,{configurable:true,value:dom.window[key as keyof typeof dom.window]});}
@@ -21,8 +21,8 @@ test("gear transfers protect Aesoth and follow saved War selections when focus c
  };
  const view=render(createElement(ReallocationPlanner,props));
  const transfers=()=>within(view.getByRole("region",{name:"Suggested gear transfers"}));
- assert.ok(transfers().getByText("No gear transfers recommended."));
- assert.equal(view.queryByText("Aesoth"),null);
+ assert.ok(transfers().getByRole("group",{name:"Transfer from Aesoth to Raid"}));
+ assert.equal(view.queryByText("Maladus"),null);
  assert.equal(view.queryByText(/Keep equipped|Protected gear|Why it stays/),null);
  dom.window.localStorage.setItem(WAR_PLAN_STORAGE_KEY,JSON.stringify({defense:["Team 1","Team 2","Team 3","Team 4","Team 5","Team 0"]}));
  await act(async()=>{dom.window.dispatchEvent(new dom.window.Event("focus"));});

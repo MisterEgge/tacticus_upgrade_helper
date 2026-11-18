@@ -105,7 +105,7 @@ test("equipment sections collapse independently, retain character expansion and 
  view.rerender(createElement(GearTransferSource,{context:liveContext,characterId:transferReport.roster[0]!.id,slotId:"Slot1",children:"Buy replacement"}));
  assert.ok(view.getByRole("link",{name:"Maladus"}));
  assert.equal(view.queryByText("Buy replacement"),null);
- view.rerender(createElement(GearTransferSource,{context:{...liveContext,focus:{Maladus:{modes:["LRE"]}}},characterId:transferReport.roster[0]!.id,slotId:"Slot1",children:"Buy replacement"}));
+ view.rerender(createElement(GearTransferSource,{context:{...liveContext,raidNames:[...liveContext.raidNames,"Maladus"]},characterId:transferReport.roster[0]!.id,slotId:"Slot1",children:"Buy replacement"}));
  assert.ok(view.getByText("Buy replacement"));
  view.rerender(createElement(GearTransferTable,{transfers:[{character:"Donor",characterId:"donor",slotId:"Slot3",itemId:"new",itemName:"Better item",level:7,reason:"No active role",recipient:"Recipient",recipientId:"recipient",recipientSlot:"Slot2",replacesId:"old",replacesName:"Old item",replacesLevel:3,role:"Selected Raid team"}]}));
  const route=within(view.getByRole("group",{name:"Transfer from Donor to Recipient"}));

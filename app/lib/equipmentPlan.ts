@@ -1,8 +1,6 @@
 import priorities from "../../config/character_priorities.json";
-import {equipmentUpgradeOptions,preferredEquipmentItemId} from "../../src/domain/equipmentOptions";
+import {equipmentReplacementMinimumLevel,equipmentUpgradeOptions,preferredEquipmentItemId} from "../../src/domain/equipmentOptions";
 import {allocateEquipmentActions} from "../../src/domain/equipmentActions";
-import {minimumBlockReplacementLevel} from "../../src/domain/blockEquipment";
-import {equipmentStatsAtLevel} from "../../src/domain/equipmentCompatibility";
 import {sourcesForItem,equipmentOffersForItem,shopAccountContext,type ShopCatalog} from "../../src/domain/shops";
 import {targetName,type Report} from "./report";
 import type {CatalogCharacter} from "./catalog";
@@ -37,8 +35,7 @@ export function buildEquipmentPlan(report:Report,catalog:{characters:CatalogChar
  const candidates=tieredSlots.map(slot=>{
   const unit=unitByName.get(slot.character),current=unit?.items.find(item=>item.slotId===slot.slotId),target=slot.acquisition[0]?.id;
   const booster=unit?.items.find(item=>catalogEquipment[item.id]?.type==="I_Booster_Block");
-  const bonus=booster?equipmentStatsAtLevel(catalogEquipment[booster.id],booster.level):null;
-  const minimumLevel=current&&target&&catalogEquipment[current.id]?.type==="I_Block"&&current.id!==target?(booster&&!bonus?null:minimumBlockReplacementLevel(current,target,catalogEquipment,{chance:bonus?.blockChanceBonus??0,damage:bonus?.blockDamageBonus??0})):1;
+  const minimumLevel=equipmentReplacementMinimumLevel(current,target,catalogEquipment,booster);
   return {...slot,raidPriority:raidNames.has(slot.character),currentItemId:current?.id,minimumLevel:minimumLevel??1,...(minimumLevel===null?{state:"UNKNOWN"}:{}),reason:"reason" in slot?slot.reason:catalogEquipment[target??""]?.type==="I_Block"?"Preferred block chance · general reliability":"Rarity upgrade"};
  });
  const assigned=allocateEquipmentActions(candidates,report.unequippedInventory).map(slot=>({...slot,target:slot.acquisition.find(source=>source.id===slot.allocatedItemId)?.name??slot.target}));

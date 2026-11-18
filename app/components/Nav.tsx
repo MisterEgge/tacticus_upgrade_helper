@@ -5,9 +5,8 @@ import { useEffect, useRef } from "react";
 
 const primary = [["/", "Dashboard"], ["/guild-raid", "Guild Raid"], ["/war-defense", "Guild War"], ["/campaigns", "Campaigns"], ["/onslaught", "Onslaught"]] as const;
 const groups = [
- {label:"Equipment", links:[["/equipment", "Upgrade equipment"], ["/inventory", "Inventory demand"], ["/inventory-cleanout", "Cleanout"], ["/reallocation", "Gear transfers"]]},
- {label:"Resources", links:[["/orbs", "Orb priorities"], ["/abilities", "Badge budget"], ["/farming", "Farming"], ["/elite-farming-gaps", "Elite farming gaps"], ["/material-completion", "Material completion"], ["/sources", "Shops & sources"], ["/review-status", "Review coverage"]]},
- {label:"Roster", links:[["/characters", "Characters"], ["/ratings", "Ratings"]]}
+ {label:"Equipment", links:[["/equipment", "Upgrade equipment"], ["/inventory-cleanout", "Cleanout"], ["/reallocation", "Gear transfers"]]},
+ {label:"Resources", links:[["/orbs", "Orbs"], ["/abilities", "Badges"]]}
 ] as const;
 
 export default function Nav()
