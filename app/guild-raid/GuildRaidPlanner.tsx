@@ -24,17 +24,17 @@ type Member = { name: string; id: string; icon?: string | undefined; owned: bool
 type Team = RaidTeam & { members: Member[] };
 type Teams = Record<string, Record<string, Team>>;
 
-export default function GuildRaidPlanner({ teams, source, mainSelection, roster, orbInventory }: { teams: Teams; source: { sourceUrl: string; reviewedOn: string; note: string }; mainSelection: RaidSelection; roster: RosterUnit[];orbInventory?:OrbInventory|null|undefined })
+export default function GuildRaidPlanner({ teams, source, mainSelection, initialSelection=mainSelection, guildBoss, roster, orbInventory }: { teams: Teams; source: { sourceUrl: string; reviewedOn: string; note: string }; mainSelection: RaidSelection; initialSelection?:RaidSelection;guildBoss?:string|null;roster: RosterUnit[];orbInventory?:OrbInventory|null|undefined })
 {
     const router = useRouter();
-    const [boss, setBoss] = useState(mainSelection.boss);
-    const [teamName, setTeamName] = useState(mainSelection.teamName);
-    const [lineup, setLineup] = useState(selectedRaidNames(mainSelection, teams[mainSelection.boss]![mainSelection.teamName]!));
-    const [autoFlex, setAutoFlex] = useState(mainSelection.autoFlex !== false);
+    const [boss, setBoss] = useState(initialSelection.boss);
+    const [teamName, setTeamName] = useState(initialSelection.teamName);
+    const [lineup, setLineup] = useState(selectedRaidNames(initialSelection, teams[initialSelection.boss]![initialSelection.teamName]!));
+    const [autoFlex, setAutoFlex] = useState(initialSelection.autoFlex !== false);
     const ownedMachines = RAID_MACHINES.filter(machine => roster.some(unit => unit.id === machine.id));
     const machineNames = new Set<string>(ownedMachines.map(machine => machine.name));
-    const [machine, setMachine] = useState<string | null>(mainSelection.machine === undefined ? suggestedRaidMachine(teams[mainSelection.boss]![mainSelection.teamName]!, machineNames) : mainSelection.machine);
-    const [autoMachine, setAutoMachine] = useState(mainSelection.autoMachine !== false);
+    const [machine, setMachine] = useState<string | null>(initialSelection.machine === undefined ? suggestedRaidMachine(teams[initialSelection.boss]![initialSelection.teamName]!, machineNames) : initialSelection.machine);
+    const [autoMachine, setAutoMachine] = useState(initialSelection.autoMachine !== false);
     const [saved, setSaved] = useState(mainSelection);
     const [saving, setSaving] = useState(false);
     const [saveError, setSaveError] = useState("");
@@ -64,8 +64,12 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, roster,
     function chooseTeam(nextBoss: string, nextTeam: string)
     {
         const next = teams[nextBoss]![nextTeam]!;
-        setBoss(nextBoss); setTeamName(nextTeam); setLineup(suggestedRaidLineup(next)); setAutoFlex(true);
-        setMachine(suggestedRaidMachine(next, machineNames)); setAutoMachine(true);
+        const previous=nextBoss===saved.boss&&nextTeam===saved.teamName?saved:null;
+        setBoss(nextBoss); setTeamName(nextTeam);
+        setLineup(previous?selectedRaidNames(previous,next):suggestedRaidLineup(next));
+        setAutoFlex(previous?.autoFlex!==false);
+        setMachine(previous?.machine===undefined?suggestedRaidMachine(next,machineNames):previous.machine);
+        setAutoMachine(previous?.autoMachine!==false);
     }
 
     async function saveMainTeam()
@@ -82,9 +86,10 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, roster,
     return <div className="raidWorkspace">
         <section className="raidOverview panel" aria-label="Raid selection">
             <div className="raidOverviewControls abilityViews">
-                <label>Raid boss<select value={boss} onChange={event => chooseTeam(event.target.value, Object.keys(teams[event.target.value]!)[0]!)}>{Object.keys(teams).map(name => <option key={name}>{name}</option>)}</select></label>
+                <label>Raid boss<select value={boss} onChange={event => chooseTeam(event.target.value,event.target.value===saved.boss?saved.teamName:Object.keys(teams[event.target.value]!)[0]!)}>{Object.keys(teams).map(name => <option key={name}>{name}</option>)}</select></label>
                 <label>Meta team<select value={teamName} onChange={event => chooseTeam(boss, event.target.value)}>{Object.keys(teams[boss]!).map(name => <option key={name}>{name}</option>)}</select></label>
             </div>
+            {guildBoss?<p className="sub">Recent guild battle · {guildBoss}</p>:null}
             <div className="raidLineupStrip">{members.map(member=><CharacterName key={member.id} name={member.name} id={member.id} icon={member.icon}/>)}{selectedMachine?<CharacterName name={selectedMachine.name} id={selectedMachine.id}/>:null}</div>
             {lineup.length<5?<p role="status">Choose {5-lineup.length} more characters in Team.</p>:null}
             <div className="raidSave">

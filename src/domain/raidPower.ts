@@ -6,11 +6,12 @@ export function latestRaidPowerByUnit(entries:RaidPowerEntry[],userId:string|und
     const latest=new Map<string,{startedOn:number;power:number}>();
     for(const entry of entries)
     {
-        if(entry.userId!==userId)continue;
+        if(entry?.userId!==userId||!Array.isArray(entry.heroDetails))continue;
         const startedOn=typeof entry.startedOn==="number"?entry.startedOn:Date.parse(entry.startedOn);
         if(!Number.isFinite(startedOn))continue;
         for(const hero of entry.heroDetails)
         {
+            if(!hero||typeof hero.unitId!=="string"||!Number.isFinite(hero.power))continue;
             const existing=latest.get(hero.unitId);
             if(!existing||startedOn>existing.startedOn)latest.set(hero.unitId,{startedOn,power:hero.power});
         }
