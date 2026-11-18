@@ -2,8 +2,10 @@
 import {useId,useRef,useState,type ReactNode} from "react";
 
 /** Keep each view mounted so navigating between tasks preserves local controls. */
-export default function ViewTabs({label,tabs,defaultTab}:{label:string;tabs:Array<{label:string;content:ReactNode}>;defaultTab:string}){
- const [active,setActive]=useState(defaultTab);
+export default function ViewTabs({label,tabs,defaultTab,selectedTab,onSelect}:{label:string;tabs:Array<{label:string;content:ReactNode}>;defaultTab:string;selectedTab?:string;onSelect?:(tab:string)=>void}){
+ const [localTab,setLocalTab]=useState(defaultTab);
+ const active=selectedTab??localTab;
+ const setActive=(tab:string)=>{setLocalTab(tab);onSelect?.(tab);};
  const id=useId(),buttons=useRef<Array<HTMLButtonElement|null>>([]);
  return <div className="viewTabs"><div role="tablist" aria-label={label} className="viewTabList">{tabs.map((tab,index)=><button key={tab.label} ref={button=>{buttons.current[index]=button;}} type="button" role="tab" id={`${id}-tab-${index}`} aria-controls={`${id}-panel-${index}`} aria-selected={active===tab.label} tabIndex={active===tab.label?0:-1} onClick={()=>setActive(tab.label)} onKeyDown={event=>{
   const next=event.key==="ArrowRight"?(index+1)%tabs.length:event.key==="ArrowLeft"?(index+tabs.length-1)%tabs.length:event.key==="Home"?0:event.key==="End"?tabs.length-1:null;

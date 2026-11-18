@@ -52,10 +52,8 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     fireEvent.keyDown(mainTabs.getByRole("tab",{name:"Battle guide"}),{key:"End"});
     assert.equal(mainTabs.getByRole("tab",{name:"Upgrades"}).getAttribute("aria-selected"),"true");
     assert.equal(dom.window.document.activeElement,mainTabs.getByRole("tab",{name:"Upgrades"}));
-    const upgradeCoverage=within(view.getByRole("region",{name:"Guild Raid upgrade coverage"}));
-    assert.ok(upgradeCoverage.getByRole("heading",{name:/Core characters/}));
-    assert.ok(upgradeCoverage.getByRole("heading",{name:/Flex characters/}));
-    assert.ok(upgradeCoverage.getAllByText(/ · /).length>0);
+    assert.equal(view.queryByRole("region",{name:"Guild Raid upgrade coverage"}),null);
+    assert.ok(view.getByRole("heading",{name:/Do next/}));
     fireEvent.keyDown(mainTabs.getByRole("tab",{name:"Upgrades"}),{key:"Home"});
     assert.equal(mainTabs.getByRole("tab",{name:"Team"}).getAttribute("aria-selected"),"true");
     const upgradeTable = () => {show("Upgrades");const toggle=view.getByRole("button",{name:"Character ability targets"});if(toggle.getAttribute("aria-expanded")==="false")fireEvent.click(toggle);return within(view.getByRole("table",{name:"Raid ability targets"}));};
@@ -76,6 +74,7 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     assert.equal(view.getAllByLabelText(/Character slot/).length, 5);
     assert.equal((view.getByLabelText("Machine of War") as HTMLSelectElement).value, "Plagueburst Crawler");
     assert.equal(upgradeTable().getAllByRole("row").length, 6);
+    fireEvent.click(view.getByRole("button",{name:"Rarity upgrades"}));
     const rarityTable=within(view.getByRole("table",{name:"Raid rarity priority"}));
     assert.equal(rarityTable.getAllByRole("row").length,6);
     assert.ok(rarityTable.getByRole("link",{name:/^Atlacoya(?: Atlacoya)?$/}));
@@ -129,6 +128,22 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     assert.equal((view.getByLabelText("Character slot 5") as HTMLSelectElement).value, "Atlacoya");
     assert.equal((view.getByRole("button",{name:"Use recommended owned team"}) as HTMLButtonElement).disabled,true);
 
+    fireEvent.change(view.getByLabelText("Raid boss"), { target: { value: "Hive Tyrant" } });
+    const tyrantGuide=guide();
+    assert.match(tyrantGuide.getByRole("region",{name:"Machine of War tactics"}).textContent!,/Plagueburst Crawler.*secondary contamination/);
+    fireEvent.click(view.getByRole("button",{name:"Edit team"}));
+    assert.equal(dom.window.document.activeElement,view.getByLabelText("Character slot 4"));
+    const preferred=within(view.getByRole("region",{name:"Recommended team"}));
+    assert.match(preferred.getByText(/Atlacoya/).textContent!,/Atlacoya/);
+    fireEvent.change(view.getByLabelText("Character slot 5"), {target:{value:"Kharn"}});
+    assert.equal((view.getByLabelText("Character slot 5") as HTMLSelectElement).value,"Kharn");
+    assert.match(preferred.getByText(/Atlacoya/).textContent!,/Atlacoya/);
+    assert.match(guide().getByRole("region",{name:"Turn 1 actions"}).textContent!,/Kharn/);
+    assert.equal(guide().queryByText("Atlacoya"),null);
+    assert.equal(upgradeTable().queryByRole("link",{name:/^Atlacoya(?: Atlacoya)?$/}),null);
+    assert.ok(upgradeTable().getByRole("link",{name:/^Kharn(?: Kharn)?$/}));
+
+    fireEvent.change(view.getByLabelText("Raid boss"), { target: { value: "Tervigon" } });
     fireEvent.change(view.getByLabelText("Meta team"), { target: { value: "Big Hit" } });
     assert.equal((view.getByLabelText("Character slot 4") as HTMLSelectElement).value, "Gulgortz");
     assert.equal((view.getByLabelText("Character slot 5") as HTMLSelectElement).value, "Atlacoya");
@@ -163,6 +178,7 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     assert.ok(now().getByText("Anuphet"));
     assert.ok(now().getAllByRole("link", { name: "Plan rank materials →" }).some(link => link.getAttribute("href") === "/farming?character=synthetic-Anuphet&target=12"));
     assert.equal((view.getByLabelText("Machine of War") as HTMLSelectElement).value, "Reanimator");
+    assert.match(guide().getByRole("region",{name:"Machine of War tactics"}).textContent!,/Reanimator.*marked summons/);
     assert.ok(guide().getByRole("region",{name:"Positioning guidance"}));
     assert.ok(guide().getByRole("link",{name:"Open map gallery"}));
     fireEvent.click(guide().getByRole("tab",{name:"Turn order"}));
@@ -173,9 +189,6 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     await waitFor(() => assert.equal((saved as { machine: string }).machine, "Galatian"));
     assert.equal((saved as { autoMachine: boolean }).autoMachine, false);
     assert.equal((saved as { lineup: string[] }).lineup.length, 5);
-    show("Upgrades");
-    fireEvent.click(view.getByRole("button", { name: /^Machine of War plan/ }));
-    assert.equal(view.getByRole("button", { name: /^Machine of War plan/ }).getAttribute("aria-expanded"), "true");
-    fireEvent.click(view.getByRole("button", { name: /^Machine of War plan/ }));
+    assert.match(guide().getByRole("region",{name:"Machine of War tactics"}).textContent!,/Galatian.*melee hex/);
     assert.equal((view.getByLabelText("Machine of War") as HTMLSelectElement).value, "Galatian");
 });
