@@ -18,8 +18,9 @@ test("defense presents five-character assignments and persists owned machine cho
  const extraFlex={id:"F",name:"F",icon:undefined,rank:12,rarity:"Epic",progressionIndex:11,activeLevel:35,passiveLevel:35,items:[]};
  const team={name:"A / B / C / D / E",tier:"gold" as const,core:["A","B","C"],flex:[{id:"D",used:100,wins:95},{id:"E",used:80,wins:70},{id:"F",used:500,wins:450,member:extraFlex}],used:200,wins:180,fieldable:true,missing:[],evidence:"core-flex" as const,members:["A","B","C","D","E"].map(name=>({id:name,name,icon:undefined,rank:12,rarity:"Epic",progressionIndex:11,activeLevel:35,passiveLevel:35,items:[]}))};
  const other={...team,name:"F / G / H / I / J",tier:"silver" as const,core:["5","6","7"],flex:[{id:"8",used:100,wins:95},{id:"9",used:80,wins:70}],members:team.members.map((member,index)=>({...member,id:String(index+5),name:String(index+5),rank:9,rarity:"Epic",progressionIndex:11,activeLevel:35,passiveLevel:35,items:[{slotId:"Slot1",id:"I_Crit_E001",rarity:"Epic",level:1,name:"Epic piece"}]}))};
- const props={teams:[team,other],offenseTeams:[],machines:[{id:"tyranBiovore",name:"Biovore",active:17,passive:23}],recommendedUnits:[{id:"kharn",name:"Kharn",icon:undefined,rank:12,rarity:"Epic",progressionIndex:11,activeLevel:35,passiveLevel:35,items:[],score:3.9}],goldBuildTargets:{teams:[{core:["A","B","C"],members:[...team.members.slice(0,4),{...extraFlex,rank:8}],used:1000,wins:850,flex:[{id:"D",used:100,wins:90},{id:"F",used:200,wins:180}],rankGap:4}],characters:[]},counterGuide:createElement("div",null,"Counter guide content")};
+ const props={teams:[team,other],offenseTeams:[],ownedCharacterIds:["A","B","C","D","E","5","6","7","8","9"],machines:[{id:"tyranBiovore",name:"Biovore",active:17,passive:23}],recommendedUnits:[{id:"kharn",name:"Kharn",icon:undefined,rank:12,rarity:"Epic",progressionIndex:11,activeLevel:35,passiveLevel:35,items:[],score:3.9}],goldBuildTargets:{teams:[{core:["A","B","C"],members:[...team.members.slice(0,4),{...extraFlex,rank:8}],used:1000,wins:850,flex:[{id:"D",used:100,wins:90},{id:"F",used:200,wins:180}],rankGap:4}],characters:[]},counterGuide:createElement("div",null,"Counter guide content")};
  let view=render(createElement(WarDefensePlanner,props));
+ assert.ok(view.getByRole("button",{name:"Reassess teams"}));
  assert.ok(view.getByText(/^Battlefield 2/));
  const buildPanel=within(view.getByRole("region",{name:"Build toward Gold"}));
  assert.ok(buildPanel.getByText("Potential Gold team 1"));
@@ -86,6 +87,22 @@ test("defense presents five-character assignments and persists owned machine cho
  fireEvent.click(suggestion);
  assert.deepEqual(JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)!).defenseMachines,assignments);
  view.unmount();
+ const newMembers=["P","Q","R","S","T"].map(name=>({...team.members[0]!,id:name,name}));
+ const newDefenseTeam={...team,name:"P / Q / R / S / T",slot:0,core:["P","Q","R"],members:newMembers,flex:[{id:"S",used:100,wins:95},{id:"T",used:80,wins:70}]};
+ const newOffenseTeam={...newDefenseTeam,name:"New source lineup"};
+ localStorage.setItem(WAR_PLAN_STORAGE_KEY,JSON.stringify({version:3,defense:[team.name,other.name,null,null,null],offense:[],reviewedRoster:props.ownedCharacterIds}));
+ view=render(createElement(WarDefensePlanner,{...props,teams:[team,other,newDefenseTeam],offenseTeams:[newOffenseTeam],ownedCharacterIds:[...props.ownedCharacterIds,"P","Q","R","S","T"]}));
+ assert.ok(view.container.querySelector(".warReassess [role=\"status\"]")?.textContent?.includes("roster changed"));
+ assert.equal(view.queryByRole("region",{name:newDefenseTeam.name}),null);
+ fireEvent.click(view.getByRole("button",{name:"Reassess teams"}));
+ assert.equal(view.container.querySelector(".warReassess [role=\"status\"]"),null);
+ assert.ok(view.getByRole("region",{name:newDefenseTeam.name}));
+ fireEvent.click(view.getByRole("tab",{name:"Offense teams"}));
+ assert.ok(view.getByText("1 offense teams"));
+ assert.ok(view.container.querySelector('a[href="/characters/P"]'));
+ assert.deepEqual(JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)!).reviewedRoster,["5","6","7","8","9","A","B","C","D","E","P","Q","R","S","T"]);
+ view.unmount();
+ localStorage.removeItem(WAR_PLAN_STORAGE_KEY);
  const offenseTeams=Array.from({length:10},(_,teamIndex)=>{
   const members=team.members.map((member,memberIndex)=>({...member,id:`offense-${teamIndex}-${memberIndex}`,name:`Unit ${teamIndex+1}-${memberIndex+1}`,rank:memberIndex<4?12:4,rarity:memberIndex===0?"Rare":"Epic",progressionIndex:memberIndex===0?8:11,activeLevel:memberIndex===0?26:35,passiveLevel:memberIndex===0?25:34,items:[{slotId:"Slot1",id:"I_Crit_E001",rarity:"Epic",level:1,name:"Epic piece"},{slotId:"Slot2",id:"I_Crit_R002",rarity:"Rare",level:7},{slotId:"Slot3",id:"I_Crit_R003",rarity:"Rare",level:7}]}));
   const extra={...members[3]!,id:`candidate-${teamIndex}`,name:`Extra flex ${teamIndex+1}`,rank:12};
