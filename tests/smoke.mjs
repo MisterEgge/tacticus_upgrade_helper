@@ -551,6 +551,13 @@ try
     for (const route of ['/', '/equipment', '/abilities']) {
         assert.match(await withAutoFocus(route), /Mortarion · Kariyan · Laviscus · Trajann · Gulgortz · Atlacoya/);
     }
+    report.raidBossActivity = {boss:'Hive Tyrant',battleAt:new Date().toISOString()};
+    await writeFile(reportPath, JSON.stringify(report));
+    const guildRaidDom = new JSDOM(await withAutoFocus('/guild-raid'));
+    assert.equal(guildRaidDom.window.document.querySelector('.raidOverview select').value,'Hive Tyrant');
+    assert.match(guildRaidDom.window.document.querySelector('.raidOverview').textContent,/Recent guild battle.*Hive Tyrant/);
+    assert.match(guildRaidDom.window.document.querySelector('.accountRaid').textContent,/Mortarion/);
+    guildRaidDom.window.close();
     console.log('PASS: production routes, report refresh, Mirror Elite planner, multi-rank farming, invalid goal and missing inventory states');
 
 }

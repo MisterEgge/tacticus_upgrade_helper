@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { buildPlayerReport, type PlayerResponse } from "../../../src/analyzePlayer";
+import { buildPlayerReport, type GuildRaidResponse, type PlayerResponse } from "../../../src/analyzePlayer";
 import { decryptCredential } from "../../../src/server/credentialEncryption";
 import { isSupabaseAuthEnabled } from "../../../src/server/supabaseConfig";
 import { createSupabaseServerClient } from "../../lib/supabase/server";
@@ -39,6 +39,21 @@ function isPlayerResponse(value: unknown): value is PlayerResponse
         && !!root.player.inventory
         && Array.isArray(root.player.inventory.items);
 
+}
+
+async function fetchGuildRaid(apiKey:string):Promise<GuildRaidResponse>{
+    try {
+        const response=await fetch("https://api.tacticusgame.com/api/v1/guildRaid",{
+            headers:{"X-API-Key":apiKey},signal:AbortSignal.timeout(8_000)
+        });
+        if(response.ok){
+            const payload=await response.json() as Partial<GuildRaidResponse>|null;
+            if(Array.isArray(payload?.entries))return {entries:payload.entries};
+        }
+    } catch {
+        // Guild data is optional for accounts without access or during an outage.
+    }
+    return {entries:[]};
 }
 
 async function authenticatedCredential(supabase: Awaited<ReturnType<typeof createSupabaseServerClient>>)
@@ -146,7 +161,7 @@ export async function POST()
     if (!isPlayerResponse(payload)) return json({ ok: false, error: "Tacticus returned account data in an unsupported format." }, 502);
 
     let report: Awaited<ReturnType<typeof buildPlayerReport>>;
-    try { report = await buildPlayerReport(payload); }
+    try { report = await buildPlayerReport(payload,await fetchGuildRaid(apiKey)); }
     catch (error)
     {
 

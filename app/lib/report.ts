@@ -4,6 +4,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import {getCharacterCatalog} from "./catalog";
 import type {AbilityBadgeInventory} from "../../src/domain/badgeInventory";
+import type {RaidBossActivity} from "../../src/domain/raidBossActivity";
 import { getSupabasePublicConfig } from "../../src/server/supabaseConfig";
 import { createSupabaseServerClient } from "./supabase/server";
 
@@ -31,6 +32,7 @@ export type Report = {
   upgradeInventory?:Array<{id:string;name?:string;amount:number}>;
   orbInventory?:OrbInventory|null;
   abilityBadges?:AbilityBadgeInventory|null;
+  raidBossActivity?:RaidBossActivity|null;
 };
 export async function getReport():Promise<Report|null>{
   if(getSupabasePublicConfig()){

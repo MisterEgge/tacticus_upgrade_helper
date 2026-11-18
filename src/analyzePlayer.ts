@@ -3,6 +3,7 @@ import {progressionRarity} from "./domain/characterProgression";
 import { allocateEquipment } from "./domain/equipment";
 import { campaignProgress } from "./domain/campaigns";
 import {latestRaidPowerByUnit,type RaidPowerEntry}from "./domain/raidPower";
+import {recentRaidBoss} from "./domain/raidBossActivity";
 import { pathToFileURL } from "node:url";
 
 type Ability = {
@@ -61,7 +62,7 @@ export type PlayerResponse = {
     };
 };
 
-export type GuildRaidResponse={entries:RaidPowerEntry[]};
+export type GuildRaidResponse={entries:Array<RaidPowerEntry&{encounterType?:string;type?:string;unitId?:string;remainingHp?:number;completedOn?:string|number}>};
 
 type AbilityTarget = {
     active: string;
@@ -128,7 +129,8 @@ export async function buildPlayerReport(playerResponse: PlayerResponse, raidResp
     const equipmentNames = await readJson<Record<string, string>>("config/equipment_names.json");
 
     const units = playerResponse.player.units;
-    const raidPower=latestRaidPowerByUnit(raidResponse.entries,playerResponse.player.details.userId);
+    const raidEntries=Array.isArray(raidResponse?.entries)?raidResponse.entries:[];
+    const raidPower=latestRaidPowerByUnit(raidEntries,playerResponse.player.details.userId);
 
     const abilityQueue: AbilityQueueRow[] = units
         .filter((unit) => unit.abilities.length >= 2)
@@ -172,6 +174,7 @@ export async function buildPlayerReport(playerResponse: PlayerResponse, raidResp
 
     return {
         generatedAt: new Date().toISOString(),
+        raidBossActivity: recentRaidBoss(raidEntries),
         source: {
             player: playerResponse.player.details.name,
             powerLevel: playerResponse.player.details.powerLevel,
