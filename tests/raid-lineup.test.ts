@@ -9,6 +9,15 @@ import {expandRaidCompositions} from "../src/domain/raidMeta";
 
 const bosses = meta.bosses as RaidTeams;
 
+test("Crawler is automatic only when its Mythic damage support has a beneficiary",()=>{
+    const team=bosses["Hive Tyrant"]!["Big Hit"]!;
+    const machines=new Set(["Biovore","Plagueburst Crawler","Galatian","Forgefiend"]);
+    assert.equal(suggestedRaidMachine(team,machines,["Kharn"]),"Galatian");
+    assert.equal(suggestedRaidMachine(team,machines,["Kharn"],new Set(["Plagueburst Crawler"])),"Galatian");
+    assert.equal(suggestedRaidMachine(team,machines,["Kharn"],new Set(["Plagueburst Crawler","Kharn"])),"Plagueburst Crawler");
+    assert.equal(suggestedRaidMachine(team,new Set(["Plagueburst Crawler","Biovore"]),["Kharn"]),null);
+});
+
 test("every boss offers every known composition while keeping its own recommendations and restrictions",()=>{
     const expanded=expandRaidCompositions(bosses,catalog.characters);
     const expected=new Set(Object.values(bosses).flatMap(options=>Object.keys(options)));
@@ -106,7 +115,7 @@ test("boss faction restrictions constrain substitutes and machine fallbacks", ()
     const fallback = resolveRaidSelection(saved, bosses, new Set([...source.core, ...source.flex, "Galatian"]));
     assert.equal(fallback.machine, "Galatian");
     const preferred = resolveRaidSelection(fallback, bosses, new Set([...source.core, ...source.flex, "Galatian", "Plagueburst Crawler"]));
-    assert.equal(preferred.machine, "Plagueburst Crawler");
-    const manual = resolveRaidSelection({ ...fallback, autoMachine: false }, bosses, new Set([...source.core, ...source.flex, "Galatian", "Plagueburst Crawler"]));
-    assert.equal(manual.machine, "Galatian");
+    assert.equal(preferred.machine, "Galatian");
+    const manual = resolveRaidSelection({ ...fallback, machine:"Plagueburst Crawler", autoMachine: false }, bosses, new Set([...source.core, ...source.flex, "Galatian", "Plagueburst Crawler"]));
+    assert.equal(manual.machine, "Plagueburst Crawler");
 });

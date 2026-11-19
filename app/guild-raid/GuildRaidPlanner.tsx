@@ -11,7 +11,7 @@ import CollapsibleSection from "../components/CollapsibleSection";
 import CharacterName from "../components/CharacterName";
 import type { RaidTeam } from "../../src/domain/raidMeta";
 import { raidCandidates, suggestedRaidLineup } from "../../src/domain/raidLineup";
-import { RAID_MACHINES, raidMachinePlan, recommendedRaidMachine, suggestedRaidMachine } from "../../src/domain/raidMachine";
+import { RAID_MACHINES, raidMachinePlan, raidMythicNames, recommendedRaidMachine, suggestedRaidMachine } from "../../src/domain/raidMachine";
 import { raidAbilityStep } from "../../src/domain/raidAbilityStep";
 import { abilityTargetMet, formatAbilityTarget } from "../../src/domain/targetDisplay";
 import { selectedRaidNames, type RaidSelection } from "../../src/domain/raidSelection";
@@ -33,7 +33,7 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, initial
     const [autoFlex, setAutoFlex] = useState(initialSelection.autoFlex !== false);
     const ownedMachines = RAID_MACHINES.filter(machine => roster.some(unit => unit.id === machine.id));
     const machineNames = new Set<string>(ownedMachines.map(machine => machine.name));
-    const [machine, setMachine] = useState<string | null>(initialSelection.machine === undefined ? suggestedRaidMachine(teams[initialSelection.boss]![initialSelection.teamName]!, machineNames) : initialSelection.machine);
+    const [chosenMachine, setMachine] = useState(initialSelection.machine ?? null);
     const [autoMachine, setAutoMachine] = useState(initialSelection.autoMachine !== false);
     const [saved, setSaved] = useState(mainSelection);
     const [saving, setSaving] = useState(false);
@@ -42,6 +42,10 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, initial
     const editFocus = useRef<HTMLSelectElement>(null);
     const focusEditor = useRef(false);
     const team = teams[boss]![teamName]!;
+    const metaTeam = Object.keys(teams[boss]!)[0];
+    const mythic = raidMythicNames(roster);
+    const automaticMachine = suggestedRaidMachine(team,machineNames,lineup,mythic);
+    const machine = autoMachine ? automaticMachine : chosenMachine;
     const suggested = suggestedRaidLineup(team);
     const recommendation = team.recommendation;
     const allowed = raidCandidates(team);
@@ -69,7 +73,7 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, initial
         setBoss(nextBoss); setTeamName(nextTeam);
         setLineup(previous?selectedRaidNames(previous,next):suggestedRaidLineup(next));
         setAutoFlex(previous?.autoFlex!==false);
-        setMachine(previous?.machine===undefined?suggestedRaidMachine(next,machineNames):previous.machine);
+        setMachine(previous?.machine??null);
         setAutoMachine(previous?.autoMachine!==false);
     }
 
@@ -88,7 +92,7 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, initial
         <section className="raidOverview panel" aria-label="Raid selection">
             <div className="raidOverviewControls abilityViews">
                 <label>Raid boss<select value={boss} onChange={event => chooseTeam(event.target.value,event.target.value===saved.boss?saved.teamName:Object.keys(teams[event.target.value]!)[0]!)}>{Object.keys(teams).map(name => <option key={name}>{name}</option>)}</select></label>
-                <label>Team Comp<select value={teamName} onChange={event => chooseTeam(boss, event.target.value)}>{Object.keys(teams[boss]!).map(name => <option key={name}>{name}</option>)}</select></label>
+                <label>Team Comp<select value={teamName} onChange={event => chooseTeam(boss, event.target.value)}>{Object.keys(teams[boss]!).map(name => <option key={name} value={name}>{name}{name===metaTeam?" · Meta":""}</option>)}</select></label>
             </div>
             {guildBoss?<p className="sub">Recent guild battle · {guildBoss}</p>:null}
             <div className="raidLineupStrip">{members.map(member=><CharacterName key={member.id} name={member.name} id={member.id} icon={member.icon}/>)}{selectedMachine?<CharacterName name={selectedMachine.name} id={selectedMachine.id}/>:null}</div>
@@ -104,7 +108,8 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, initial
         <section className="panel detailPanel raidTeamEditor">
             <div className="raidPreferredTeam" role="region" aria-label="Recommended team">
                 <h2>Recommended team</h2>
-                <p>{preferred.map(name=>team.members.find(member=>member.name===name)?.owned?name:`${name} (not owned)`).join(" · ")}{preferredMachine?<small>Machine of War · {preferredMachine}</small>:null}</p>
+                <p>{preferred.map(name=>team.members.find(member=>member.name===name)?.owned?name:`${name} (not owned)`).join(" · ")}{automaticMachine?<small>Recommended machine for your lineup · {automaticMachine}</small>:null}</p>
+                {teamName==="Big Hit"||teamName==="Lavistodes"?<small>Lavistodes builds around Gulgortz as the fourth core member. Big Hit treats him as a flex choice. Both can recommend the same five.</small>:null}
             </div>
             <h2>Deploy this lineup</h2>
             <div className="abilityViews">
@@ -116,12 +121,13 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, initial
                 </select>{lineup[index]?<small>{team.core.includes(lineup[index]!)?"Core":"Flex"}{members[index]?.rank!=null?<> · <RankBadge rank={members[index].rank}/></>:null}</small>:null}</label>)}
                 <label>Machine of War<select value={machine ?? ""} onChange={event => { setMachine(event.target.value || null); setAutoMachine(false); }}>
                     <option value="">{machineNames.size?"No Machine of War":"No owned Machine of War"}</option>
-                    {RAID_MACHINES.filter(option => !team.excludedMachines?.includes(option.name)).map(option => <option key={option.id} value={option.name} disabled={!machineNames.has(option.name)}>{option.name}{option.name === preferredMachine ? " · recommended" : ""}{machineNames.has(option.name) ? "" : " · not owned"}</option>)}
+                    {RAID_MACHINES.filter(option => !team.excludedMachines?.includes(option.name)).map(option => <option key={option.id} value={option.name} disabled={!machineNames.has(option.name)}>{option.name}{option.name === automaticMachine ? " · recommended" : ""}{machineNames.has(option.name) ? "" : " · not owned"}</option>)}
                 </select></label>
             </div>
-            <p className="raidTeamMachineNote">{machineUnit?<small>Primary {machineUnit.abilities[0]?.level ?? "unknown"} ? Secondary {machineUnit.abilities[1]?.level ?? "unknown"}</small>:null}{machine?<><strong>{machine}</strong> · </>:null}{raidMachinePlan(machine,boss)}</p>
+            <p className="raidTeamMachineNote">{machineUnit?<small>Primary {machineUnit.abilities[0]?.level ?? "unknown"} · Secondary {machineUnit.abilities[1]?.level ?? "unknown"}</small>:null}{machine?<><strong>{machine}</strong> · </>:null}{raidMachinePlan(machine,boss)}</p>
+            {preferredMachine==="Plagueburst Crawler"&&automaticMachine!==preferredMachine&&machineNames.has(preferredMachine)?<p className="sub">The source suggests Plagueburst Crawler. Its damage support needs a Mythic Crawler and Mythic attackers.</p>:null}
             <div className="raidSave">
-                <button type="button" onClick={() => { setLineup(suggested); setAutoFlex(true); setMachine(suggestedRaidMachine(team, machineNames)); setAutoMachine(true); }} disabled={autoFlex && autoMachine && JSON.stringify(lineup) === JSON.stringify(suggested) && machine === suggestedRaidMachine(team, machineNames)}>Use recommended owned team</button>
+                <button type="button" onClick={() => { setLineup(suggested); setAutoFlex(true); setAutoMachine(true); }} disabled={autoFlex && autoMachine && JSON.stringify(lineup) === JSON.stringify(suggested)}>Use recommended owned team</button>
 
             </div>
             <div className="raidTeamSummary">

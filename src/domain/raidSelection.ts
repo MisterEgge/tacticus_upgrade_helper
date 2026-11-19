@@ -34,13 +34,13 @@ export function selectedRaidNames(selection: RaidSelection, team: RaidTeam): str
 
 // Legacy saves enter auto mode once; explicit manual overrides are honored.
 // Re-resolve with each report so newly unlocked preferred flex replaces a fallback.
-export function resolveRaidSelection(value: unknown, teams: RaidTeams, owned: Set<string>): RaidSelection
+export function resolveRaidSelection(value: unknown, teams: RaidTeams, owned: Set<string>,mythic:ReadonlySet<string>=new Set()): RaidSelection
 {
     const choice = value && typeof value === "object" ? value as Record<string, unknown> : null;
     // Keep the boss/core when an automatic cookie contains an obsolete flex name.
     const context = choice && (choice.autoFlex === undefined || choice.autoFlex === true)
         ? validateRaidSelection({ ...choice, flex: [], lineup: undefined, machine: undefined, autoFlex: true }, teams) : null;
-    const selection = validateRaidSelection(value, teams) ?? context ?? defaultRaidSelection(teams, owned);
+    const selection = validateRaidSelection(value, teams) ?? context ?? defaultRaidSelection(teams, owned,mythic);
     const team = teams[selection.boss]![selection.teamName]!;
     const members = raidCandidates(team).map(name => ({ name, owned: owned.has(name) }));
     const suggested = suggestedRaidLineup({ ...team, members });
@@ -48,13 +48,13 @@ export function resolveRaidSelection(value: unknown, teams: RaidTeams, owned: Se
         ? [...new Set([...selectedRaidNames(selection, team).filter(name => owned.has(name) && raidCandidates(team).includes(name)), ...suggested])].slice(0, 5)
         : suggested;
     const machine = selection.autoMachine === false && (selection.machine === null || selection.machine && owned.has(selection.machine))
-        ? selection.machine : suggestedRaidMachine(team, owned);
+        ? selection.machine : suggestedRaidMachine(team, owned,lineup,mythic);
     return { ...selection, autoFlex: selection.autoFlex !== false, lineup, flex: lineup.filter(name => !team.core.includes(name)), machine, autoMachine: selection.autoMachine !== false };
 }
 
-export function defaultRaidSelection(teams: RaidTeams, owned: Set<string>): RaidSelection
+export function defaultRaidSelection(teams: RaidTeams, owned: Set<string>,mythic:ReadonlySet<string>=new Set()): RaidSelection
 {
     const boss = teams["Avatar of Khaine"]?.["Big Hit"] ? "Avatar of Khaine" : Object.keys(teams)[0]!;
     const teamName = teams[boss]?.["Big Hit"] ? "Big Hit" : Object.keys(teams[boss]!)[0]!;
-    return resolveRaidSelection({ boss, teamName, flex: [], autoFlex: true }, teams, owned);
+    return resolveRaidSelection({ boss, teamName, flex: [], autoFlex: true }, teams, owned,mythic);
 }
