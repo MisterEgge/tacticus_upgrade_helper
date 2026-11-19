@@ -72,7 +72,8 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     fireEvent.change(view.getByLabelText("Raid boss"), { target: { value: "Tervigon" } });
     assert.equal((view.getByLabelText("Character slot 5") as HTMLSelectElement).value, "Atlacoya");
     assert.equal(view.getAllByLabelText(/Character slot/).length, 5);
-    assert.equal((view.getByLabelText("Machine of War") as HTMLSelectElement).value, "Plagueburst Crawler");
+    assert.equal((view.getByLabelText("Machine of War") as HTMLSelectElement).value, "Galatian");
+    assert.equal(within(view.getByLabelText("Team Comp")).getByRole("option",{name:"Lavistodes · Meta"}).getAttribute("value"),"Lavistodes");
     assert.equal(upgradeTable().getAllByRole("row").length, 6);
     fireEvent.click(view.getByRole("button",{name:"Rarity upgrades"}));
     const rarityTable=within(view.getByRole("table",{name:"Raid rarity priority"}));
@@ -121,7 +122,7 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     globalThis.fetch = async (_input, init) => { saved = JSON.parse(String(init?.body)); return new Response('{"ok":true}', { status: 200 }); };
     fireEvent.click(view.getByRole("button", { name: "Set as main Raid team" }));
     await waitFor(() => assert.equal((view.getByRole("button", { name: "Main team saved" }) as HTMLButtonElement).disabled, true));
-    assert.deepEqual(saved, { boss: "Tervigon", teamName: "Lavistodes", flex: ["Helbrecht"], lineup: ["Gulgortz", "Kariyan", "Laviscus", "Trajann", "Helbrecht"], autoFlex: false, machine: "Plagueburst Crawler", autoMachine: true });
+    assert.deepEqual(saved, { boss: "Tervigon", teamName: "Lavistodes", flex: ["Helbrecht"], lineup: ["Gulgortz", "Kariyan", "Laviscus", "Trajann", "Helbrecht"], autoFlex: false, machine: "Galatian", autoMachine: true });
     assert.equal(refreshed, 1);
     show("Team");
     fireEvent.click(view.getByRole("button", { name: "Use recommended owned team" }));
@@ -130,7 +131,7 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
 
     fireEvent.change(view.getByLabelText("Raid boss"), { target: { value: "Hive Tyrant" } });
     const tyrantGuide=guide();
-    assert.match(tyrantGuide.getByRole("region",{name:"Machine of War tactics"}).textContent!,/Plagueburst Crawler.*secondary contamination/);
+    assert.match(tyrantGuide.getByRole("region",{name:"Machine of War tactics"}).textContent!,/Galatian.*melee hex/);
     fireEvent.click(view.getByRole("button",{name:"Edit team"}));
     assert.equal(dom.window.document.activeElement,view.getByLabelText("Character slot 4"));
     const preferred=within(view.getByRole("region",{name:"Recommended team"}));

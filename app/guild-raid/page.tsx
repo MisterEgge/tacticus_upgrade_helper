@@ -7,6 +7,7 @@ import { raidTargetBasis } from "../../src/domain/raidTargetBasis";
 import { getMainRaidSelection, getRaidMeta, ownedRaidUnits } from "../lib/raidSelection";
 import { activeRaidBoss } from "../../src/domain/raidBossActivity";
 import { resolveRaidSelection } from "../../src/domain/raidSelection";
+import { raidMythicNames } from "../../src/domain/raidMachine";
 
 export default async function GuildRaid()
 {
@@ -17,7 +18,7 @@ export default async function GuildRaid()
     const detected=activeRaidBoss(report.raidBossActivity);
     const guildBoss=detected&&Object.hasOwn(meta.bosses,detected)?detected:null;
     const initialSelection=guildBoss&&guildBoss!==mainSelection.boss
-        ?resolveRaidSelection({boss:guildBoss,teamName:Object.keys(meta.bosses[guildBoss]!)[0],flex:[],autoFlex:true},meta.bosses,ownedRaidUnits(report))
+        ?resolveRaidSelection({boss:guildBoss,teamName:Object.keys(meta.bosses[guildBoss]!)[0],flex:[],autoFlex:true},meta.bosses,ownedRaidUnits(report),raidMythicNames(report.roster))
         :mainSelection;
     const units=new Map(report.roster.map(unit=>[unit.name,unit]));
     const icons=new Map(catalog.characters.map(character=>[character.id,character.icon]));

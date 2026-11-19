@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { cookies } from "next/headers";
 import { resolveRaidSelection, type RaidSelection, type RaidTeams } from "../../src/domain/raidSelection";
 import type { Report } from "./report";
-import { RAID_MACHINES } from "../../src/domain/raidMachine";
+import { RAID_MACHINES, raidMythicNames } from "../../src/domain/raidMachine";
 import { expandRaidCompositions } from "../../src/domain/raidMeta";
 import { getCharacterCatalog } from "./catalog";
 
@@ -20,7 +20,7 @@ export async function getMainRaidSelection(teams: RaidTeams, report: Report | nu
     const raw = (await cookies()).get(RAID_SELECTION_COOKIE)?.value;
     let stored: unknown;
     try { stored = raw ? JSON.parse(raw) : null; } catch { stored = null; }
-    return resolveRaidSelection(stored, teams, ownedRaidUnits(report));
+    return resolveRaidSelection(stored, teams, ownedRaidUnits(report),raidMythicNames(report?.roster??[]));
 }
 
 export function ownedRaidUnits(report: Report | null): Set<string>
