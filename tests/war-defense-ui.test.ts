@@ -19,7 +19,7 @@ test("defense presents five-character assignments and persists owned machine cho
  const team={name:"A / B / C / D / E",tier:"gold" as const,core:["A","B","C"],flex:[{id:"D",used:100,wins:95},{id:"E",used:80,wins:70},{id:"F",used:500,wins:450,member:extraFlex}],used:200,wins:180,fieldable:true,missing:[],evidence:"core-flex" as const,members:["A","B","C","D","E"].map(name=>({id:name,name,icon:undefined,rank:12,rarity:"Epic",progressionIndex:11,activeLevel:35,passiveLevel:35,items:[]}))};
  const other={...team,name:"F / G / H / I / J",tier:"silver" as const,core:["5","6","7"],flex:[{id:"8",used:100,wins:95},{id:"9",used:80,wins:70}],members:team.members.map((member,index)=>({...member,id:String(index+5),name:String(index+5),rank:9,rarity:"Epic",progressionIndex:11,activeLevel:35,passiveLevel:35,items:[{slotId:"Slot1",id:"I_Crit_E001",rarity:"Epic",level:1,name:"Epic piece"}]}))};
  const props={teams:[team,other],offenseTeams:[],ownedCharacterIds:["A","B","C","D","E","5","6","7","8","9"],machines:[{id:"tyranBiovore",name:"Biovore",active:17,passive:23}],recommendedUnits:[{id:"kharn",name:"Kharn",icon:undefined,rank:12,rarity:"Epic",progressionIndex:11,activeLevel:35,passiveLevel:35,items:[],score:3.9}],goldBuildTargets:{teams:[{core:["A","B","C"],members:[...team.members.slice(0,4),{...extraFlex,rank:8}],used:1000,wins:850,flex:[{id:"D",used:100,wins:90},{id:"F",used:200,wins:180}],rankGap:4}],characters:[]},counterGuide:createElement("div",null,"Counter guide content")};
- let view=render(createElement(WarDefensePlanner,props));
+ let view=render(createElement(WarDefensePlanner,{...props,goldRoster:team.members}));
  assert.ok(view.getByRole("button",{name:"Reassess teams"}));
  assert.ok(view.getByText(/^Battlefield 2/));
  const buildPanel=within(view.getByRole("region",{name:"Build toward Gold"}));
@@ -27,6 +27,9 @@ test("defense presents five-character assignments and persists owned machine cho
  assert.ok(buildPanel.getByText("Build to Gold I"));
  assert.ok(buildPanel.getByText(/1,000 core attacks · 85.0% holds/));
  const group=within(view.getByRole("region",{name:team.name}));
+ assert.ok(group.getByText("Gold ready"));
+ assert.ok(view.getByText("Gold-ready characters (5)"));
+ assert.ok(view.getByText(/1\/2 Gold defense slots ready/));
  assert.equal(view.container.querySelector<HTMLDetailsElement>(".warCollapsibleTeam")?.open,false);
  fireEvent.click(view.getByRole("region",{name:team.name}).querySelector("summary")!);
  assert.equal(group.queryAllByRole("table").length,0);
@@ -38,6 +41,7 @@ test("defense presents five-character assignments and persists owned machine cho
  const silverTeam=within(silverRegion);
  fireEvent.click(silverRegion.querySelector("summary")!);
  fireEvent.click(silverTeam.getByRole("button",{name:"Move Team 3 earlier"}));
+ assert.ok(silverTeam.getByText("0/5 at Gold I+"));
  assert.match(silverRegion.querySelector("summary")!.getAttribute("aria-label")!,/^Team 2, gold/);
  fireEvent.click(silverTeam.getByRole("button",{name:"Move Team 2 later"}));
  assert.match(silverRegion.querySelector("summary")!.getAttribute("aria-label")!,/^Team 3, silver/);
@@ -163,13 +167,13 @@ test("defense presents five-character assignments and persists owned machine cho
  assert.ok(view.getByText("Counter guide content"));
  view.unmount();
  localStorage.removeItem(WAR_PLAN_STORAGE_KEY);
- const secondGold={...team,name:"K / L / M / N / O",slot:1,core:["K","L","M"],members:team.members.map((member,index)=>({...member,id:`${member.id}-second`,name:String.fromCharCode(75+index)}))};
+ const secondGold={...team,name:"K / L / M / N / O",slot:1,core:["K","L","M"],flex:[{id:"N",used:100,wins:95},{id:"O",used:80,wins:70}],members:team.members.map((member,index)=>({...member,id:String.fromCharCode(75+index),name:String.fromCharCode(75+index)}))};
  view=render(createElement(WarDefensePlanner,{...props,teams:[{...team,slot:0},secondGold],offenseTeams:[]}));
  assert.equal(view.queryByRole("region",{name:"Build toward Gold"}),null);
  const secondGoldRegion=view.getByRole("region",{name:secondGold.name});
  fireEvent.click(within(secondGoldRegion).getByRole("button",{name:"Move Team 2 later"}));
  assert.ok(view.getByRole("region",{name:"Build toward Gold"}));
- assert.ok(view.getByText("Build toward Gold · 1 slot open"));
+ assert.ok(view.getByText("Build toward Gold · 1 of 2 Gold slots below target"));
 });
 
 test("Battlefield 2 readiness matches rank, character progression, and ability caps",()=>{

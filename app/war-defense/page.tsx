@@ -12,6 +12,7 @@ import { validateGuildWarCounterKnowledge, type GuildWarCounterKnowledge } from 
 import GuildWarCounterGuide from "./counters/GuildWarCounterGuide";
 import { getShopCatalog } from "../lib/shops";
 import { shopOffersForItem } from "../../src/domain/shops";
+import {warTierMinimumRank} from "../../src/domain/warReadiness";
 
 type BattleRewards={rewards?:{potential?:Array<{id:string;effective_rate?:number;chance_numerator?:number}>}};
 type UnlockTarget={id:string;name:string;icon?:string;evidence:"observed core"|"observed flex"|"exact five-character lineup";used:number;win:number;campaigns:string[];shops:Array<{shop:string;rotation:string;price:string}>};
@@ -25,7 +26,7 @@ export default async function WarDefense()
     const icons=new Map(catalog.characters.map(character=>[character.id,character.icon]));
     const metadata=new Map(catalog.characters.map(character=>[character.id,character]));
     const memberFor=(name:string)=>{const unit=units.get(name)??report.roster.find(value=>value.id===name);return unit?{id:unit.id,name:unit.name,traits:metadata.get(unit.id)?.traits??[],faction:metadata.get(unit.id)?.faction??"",icon:icons.get(unit.id),rank:unit.rank,rarity:unit.rarity,progressionIndex:unit.progressionIndex,activeLevel:unit.abilities[0]?.level??null,passiveLevel:unit.abilities[1]?.level??null,items:unit.items}:undefined;};
-    const build=(lineup:FullLineup)=>{const missing=lineup.members.filter(name=>!units.has(name));return {name:lineup.name,used:lineup.used,wins:lineup.wins,defense:lineup.defense,score:lineup.score,evidence:lineup.evidence,reasons:lineup.reasons,rosterBuilt:!!lineup.reasons,core:lineup.core??[],flex:(lineup.flex??[]).flatMap(candidate=>{const name=candidate.name??candidate.id;if(!name)return [];const member=memberFor(name);return member?[{name,used:candidate.used,win:candidate.win??((candidate.wins??0)/candidate.used*100),member}]:[];}).sort((a,b)=>b.win-a.win||b.used-a.used||a.name.localeCompare(b.name)),fieldable:missing.length===0,missing,members:lineup.members.map(name=>memberFor(name)??{id:`missing-${name}`,name,traits:[],faction:"",icon:undefined,rank:null,rarity:undefined,progressionIndex:undefined,activeLevel:null,passiveLevel:null,items:[]})};};
+    const build=(lineup:FullLineup)=>{const missing=lineup.members.filter(name=>!units.has(name));return {name:lineup.name,used:lineup.used,wins:lineup.wins,defense:lineup.defense,score:lineup.score,priority:lineup.priority??0,evidence:lineup.evidence,reasons:lineup.reasons,rosterBuilt:!!lineup.reasons,core:lineup.core??[],flex:(lineup.flex??[]).flatMap(candidate=>{const name=candidate.name??candidate.id;if(!name)return [];const member=memberFor(name);return member?[{name,used:candidate.used,win:candidate.win??((candidate.wins??0)/candidate.used*100),member}]:[];}).sort((a,b)=>b.win-a.win||b.used-a.used||a.name.localeCompare(b.name)),fieldable:missing.length===0,missing,members:lineup.members.map(name=>memberFor(name)??{id:`missing-${name}`,name,traits:[],faction:"",icon:undefined,rank:null,rarity:undefined,progressionIndex:undefined,activeLevel:null,passiveLevel:null,items:[]})};};
     const lineups=await getWarLineups(report,catalog);
     const {offensePlan}=lineups;
     const defense=lineups.defense.map(lineup=>({...build(lineup),tier:lineup.tier,slot:lineup.slot}));
@@ -36,6 +37,9 @@ export default async function WarDefense()
         characters:goldBuildSuggestions.characters.flatMap(target=>{const member=memberFor(target.id);return member?[{...target,member}]:[]})
     };
     const machines=RAID_MACHINES.flatMap(machine=>{const unit=report.roster.find(unit=>unit.id===machine.id);return unit?[{...machine,icon:icons.get(unit.id),rank:unit.rank,rarity:unit.rarity,progressionIndex:unit.progressionIndex,active:unit.abilities[0]?.level??0,passive:unit.abilities[1]?.level??0,activeLevel:unit.abilities[0]?.level??null,passiveLevel:unit.abilities[1]?.level??null,items:unit.items}]:[];});
+    const machineIds=new Set(machines.map(machine=>machine.id as string));
+    const goldRoster=report.roster.filter(unit=>unit.rank>=warTierMinimumRank("gold")&&!machineIds.has(unit.id))
+        .sort((a,b)=>b.rank-a.rank||a.name.localeCompare(b.name)).flatMap(unit=>memberFor(unit.id)??[]);
     const knowledge=JSON.parse(knowledgeText) as GuildWarCounterKnowledge;
     validateGuildWarCounterKnowledge(catalog.characters,knowledge);
     const ratings=await getUtilityRatings(report);
@@ -69,6 +73,6 @@ export default async function WarDefense()
         const shops=shopCatalog?shopOffersForItem(`shards_${character.id}`,shopCatalog).map(offer=>({shop:offer.shop,rotation:offer.rotation,price:offer.price})):[];
         return [{id:character.id,icon:character.icon,...evidence,campaigns:[...(campaignSources.get(character.id)??[])].sort(),shops}];
     }).sort((a,b)=>b.win-a.win||b.used-a.used||a.name.localeCompare(b.name));
-    return <main><Nav/><header><div><p className="eyebrow">GUILD WAR</p><h1>Guild War lineups</h1><p className="sub">Plan your defense, offense, and counter picks.</p></div></header><WarDefensePlanner teams={defense} offenseTeams={offense} ownedCharacterIds={report.roster.map(unit=>unit.id)} machines={machines} recommendedUnits={recommended} unlockTargets={unlockTargets} goldBuildTargets={goldBuildTargets} defenseSource={{scope:warDefenseEvidence.scope,metric:warDefenseEvidence.metric,importedAt:warDefenseEvidence.importedAt}} counterGuide={<GuildWarCounterGuide characters={catalog.characters} knowledge={knowledge}/>}/></main>;
+    return <main><Nav/><header><div><p className="eyebrow">GUILD WAR</p><h1>Guild War lineups</h1><p className="sub">Plan your defense, offense, and counter picks.</p></div></header><WarDefensePlanner teams={defense} offenseTeams={offense} goldRoster={goldRoster} ownedCharacterIds={report.roster.map(unit=>unit.id)} machines={machines} recommendedUnits={recommended} unlockTargets={unlockTargets} goldBuildTargets={goldBuildTargets} defenseSource={{scope:warDefenseEvidence.scope,metric:warDefenseEvidence.metric,importedAt:warDefenseEvidence.importedAt}} counterGuide={<GuildWarCounterGuide characters={catalog.characters} knowledge={knowledge}/>}/></main>;
 
 }

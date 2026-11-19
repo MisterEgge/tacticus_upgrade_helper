@@ -2,11 +2,12 @@ import {getAccountWarDefense,warDefenseEvidence} from "./warDefensePlan";
 import {RAID_MACHINES} from "../../src/domain/raidMachine";
 import {buildDistinctOffenseTeams,uniqueWarTeamIndexes,type OffenseCore} from "../../src/domain/warTeams";
 import {buildWarRosterLineups} from "../../src/domain/warRosterLineups";
+import {warTierMinimumRank} from "../../src/domain/warReadiness";
 import {readFile} from "node:fs/promises";
 import type {Report} from "./report";
 import type {CatalogCharacter} from "./catalog";
 
-export type FullLineup={name:string;members:string[];core?:string[];flex?:Array<{name?:string;id?:string;used:number;win?:number;wins?:number}>;used:number;wins:number;defense?:number;win?:number;score:number;evidence?:"core-flex";reasons?:string[]};type Plan={teams?:OffenseCore[];validatedFullLineups?:FullLineup[]};
+export type FullLineup={name:string;members:string[];core?:string[];flex?:Array<{name?:string;id?:string;used:number;win?:number;wins?:number}>;used:number;wins:number;defense?:number;win?:number;score:number;evidence?:"core-flex";reasons?:string[];priority?:number};type Plan={teams?:OffenseCore[];validatedFullLineups?:FullLineup[]};
 
 export async function getWarLineups(report:Report,catalog:{characters:CatalogCharacter[]}){
  const offensePlan=JSON.parse(await readFile("config/war_offense_teams.json","utf8")) as Plan;
@@ -33,8 +34,6 @@ export async function getWarLineups(report:Report,catalog:{characters:CatalogCha
  const exactOffense=(offensePlan.validatedFullLineups??[]).filter(team=>team.members.every(name=>byName.has(name)))
   .map(lineup=>({...lineup,core:lineup.members,flex:[]}));
  const observedOffense=[...offenseCores,...exactOffense].sort((a,b)=>b.wins/b.used-a.wins/a.used||b.used-a.used);
- const selectedOffense=uniqueWarTeamIndexes(observedOffense.map(team=>({...team,members:team.members.map(name=>({name}))})),10)
-  .map(index=>observedOffense[index]!);
  const offenseObservations=[
   ...(offensePlan.teams??[]).flatMap(group=>[
    {names:group.core,used:group.used},
@@ -42,10 +41,24 @@ export async function getWarLineups(report:Report,catalog:{characters:CatalogCha
   ]),
   ...(offensePlan.validatedFullLineups??[]).map(group=>({names:group.members,used:group.used})),
  ].map(group=>({ids:group.names.flatMap(name=>byName.get(name)?.id??[]),used:group.used}));
- const offenseFallback=buildWarRosterLineups(roster,new Set(selectedOffense.flatMap(team=>team.members.map(name=>byName.get(name)!.id))),
-  Array.from({length:10-selectedOffense.length},()=>"silver" as const),offenseObservations).map(buildFallback);
+ const select=<T extends FullLineup>(teams:T[],limit:number)=>
+  uniqueWarTeamIndexes(teams.map(team=>({...team,members:team.members.map(name=>({name}))})),limit).map(index=>teams[index]!);
+ const isGold=(team:FullLineup)=>team.members.length===5&&team.members.every(name=>(byName.get(name)?.rank??-1)>=warTierMinimumRank("gold"));
+ const assignedIds=(teams:FullLineup[])=>new Set(teams.flatMap(team=>team.members.map(name=>byName.get(name)!.id)));
+ const goldRoster=roster.filter(unit=>unit.rank>=warTierMinimumRank("gold"));
+ const goldTargets=["gold","gold"] as const;
+ const observedGold=select(observedOffense.filter(isGold),goldTargets.length);
+ const goldFallback=buildWarRosterLineups(goldRoster,assignedIds(observedGold),goldTargets.slice(observedGold.length),offenseObservations).map(buildFallback);
+ const goldTeams=[...observedGold,...goldFallback];
+ const goldNames=new Set(goldTeams.flatMap(team=>team.members));
+ const remainingObserved=observedOffense.filter(team=>team.members.every(name=>!goldNames.has(name)));
+ const selectedOffense=select(remainingObserved,10-goldTeams.length);
+ const offenseFallback=buildWarRosterLineups(roster,assignedIds([...goldTeams,...selectedOffense]),
+  Array.from({length:10-goldTeams.length-selectedOffense.length},()=>"silver" as const),offenseObservations).map(buildFallback);
  const fallbackOffenseNames=new Set(offenseFallback.flatMap(team=>team.members));
- const offense=[...observedOffense.filter(team=>team.members.every(name=>!fallbackOffenseNames.has(name)))
-  .map(team=>({...team,flex:team.flex.filter(choice=>!fallbackOffenseNames.has(choice.name))})),...offenseFallback];
+ const protectedNames=new Set([...goldNames,...fallbackOffenseNames]);
+ const offense=[...goldTeams.map(team=>({...team,priority:1,flex:team.flex.filter(choice=>!protectedNames.has(choice.name)||team.members.includes(choice.name))})),
+  ...remainingObserved.filter(team=>team.members.every(name=>!fallbackOffenseNames.has(name)))
+   .map(team=>({...team,flex:team.flex.filter(choice=>!protectedNames.has(choice.name))})),...offenseFallback];
  return {defense,offense,offensePlan};
 }

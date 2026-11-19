@@ -1,6 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { uniqueWarTeamIndexes, restoreWarTeamIndexes, warSlotChoices, chooseWarTeamForSlot, swapWarTeamSlots, distinctWarSlots, buildDistinctDefenseTeams, buildDistinctOffenseTeams, type DefenseCore, type OffenseCore } from "../src/domain/warTeams";
+
+test("default War assignments preserve complete slots and prefer Gold-ready teams over higher sample counts",()=>{
+    const team=(names:string[],used:number,priority=0)=>({members:names.map(name=>({name})),used,priority});
+    const silver=team(["A","B"],800);
+    assert.deepEqual(uniqueWarTeamIndexes([silver,team(["A","C"],0,1),team(["D"],10)],2),[1,2]);
+    assert.deepEqual(uniqueWarTeamIndexes([silver,team(["A","C"],0,1),team(["C"],10)],2),[0,2]);
+});
 import {readFileSync} from "node:fs";
 
 test("War defaults choose five distinct teams instead of the five first options", () =>

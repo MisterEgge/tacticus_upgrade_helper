@@ -1,4 +1,4 @@
-export type WarTeamCandidate = { members: Array<{ name: string }>; used: number };
+export type WarTeamCandidate = { members: Array<{ name: string }>; used: number; priority?:number };
 export type DefenseCore = { name:string; core:string[]; flex:Array<{name:string;used:number}>; used:number; wins:number; score:number; defense?:number };
 export type BuiltDefenseTeam = {name:string;members:string[];used:number;wins:number;score:number; evidence:"core-flex"};
 export type OffenseCore = { name:string; core:string[]; flex:Array<{name:string;used:number;win:number}>; used:number; wins:number };
@@ -146,19 +146,19 @@ export function uniqueWarTeamIndexes(teams: WarTeamCandidate[], count: number, p
         }
         if(picks.length)return picks;
     }
-    let best: { picks: number[]; used: number } = { picks: [], used: -1 };
-    const visit = (start: number, picks: number[], members: Set<string>, used: number) =>
+    let best: { picks: number[]; used: number; priority:number } = { picks: [], used: -1, priority:-1 };
+    const visit = (start: number, picks: number[], members: Set<string>, used: number,priority:number) =>
     {
-        if (picks.length > best.picks.length || picks.length === best.picks.length && used > best.used) best = { picks, used };
+        if (picks.length > best.picks.length || picks.length === best.picks.length && (priority>best.priority||priority===best.priority&&used>best.used)) best = { picks, used,priority };
         if (picks.length === count) return;
         for (let index = start; index < teams.length; index++)
         {
             const team = teams[index]!;
             if (!hasDistinctMembers(team) || team.members.some((member) => members.has(member.name))) continue;
-            visit(index + 1, [...picks, index], new Set([...members, ...team.members.map((member) => member.name)]), used + team.used);
+            visit(index + 1, [...picks, index], new Set([...members, ...team.members.map((member) => member.name)]), used + team.used,priority+(team.priority??0));
         }
     };
-    visit(0, [], new Set(), 0);
+    visit(0, [], new Set(), 0,0);
     return best.picks;
 }
 

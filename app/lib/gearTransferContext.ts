@@ -27,7 +27,7 @@ export async function getGearTransferContext(account?:{report:Report;catalog:Awa
  const unitsById=new Map(report.roster.map(unit=>[unit.id,unit]));
  const gearTeam=(team:FullLineup)=>{
   const unitFor=(value:string)=>plan.unitByName.get(value)??unitsById.get(value);
-  return {name:team.name,used:team.used,core:team.core??[],members:team.members.flatMap(name=>{const unit=unitFor(name);return unit?[{id:unit.id,name:unit.name}]:[];}),
+  return {name:team.name,used:team.used,priority:team.priority??0,core:team.core??[],members:team.members.flatMap(name=>{const unit=unitFor(name);return unit?[{id:unit.id,name:unit.name}]:[];}),
    flex:(team.flex??[]).flatMap(choice=>{const unit=unitFor(choice.id??choice.name??"");return unit?[{id:unit.id,name:unit.name}]:[];})};
  };
  const defenseTeams=lineups.defense.map(team=>({...gearTeam(team),tier:team.tier,slot:team.slot,rosterBuilt:"reasons" in team}));
