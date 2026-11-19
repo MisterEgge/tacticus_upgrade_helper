@@ -91,7 +91,7 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     assert.equal((view.getByLabelText("Machine of War") as HTMLSelectElement).value, "Biovore");
     assert.match(guide().getByRole("region", { name: "Turn 1 actions" }).textContent!, /Gunners lane before moving/);
     assert.ok(upgradeTable().getByRole("link", { name: /^Vitruvius(?: Vitruvius)?$/ }));
-    fireEvent.change(view.getByLabelText("Meta team"), { target: { value: "Ad-Mech" } });
+    fireEvent.change(view.getByLabelText("Team Comp"), { target: { value: "Ad-Mech" } });
     assert.equal(view.queryByRole("option", { name: /^Trajann/ }), null);
     assert.match(guide().getByText(/Below 60% pierce/).textContent!, /Rear-arc/);
     fireEvent.change(view.getByLabelText("Raid boss"), { target: { value: "Tervigon" } });
@@ -144,7 +144,7 @@ test("boss selection, manual overrides, roadmap links and saving use the same ow
     assert.ok(upgradeTable().getByRole("link",{name:/^Kharn(?: Kharn)?$/}));
 
     fireEvent.change(view.getByLabelText("Raid boss"), { target: { value: "Tervigon" } });
-    fireEvent.change(view.getByLabelText("Meta team"), { target: { value: "Big Hit" } });
+    fireEvent.change(view.getByLabelText("Team Comp"), { target: { value: "Big Hit" } });
     assert.equal((view.getByLabelText("Character slot 4") as HTMLSelectElement).value, "Gulgortz");
     assert.equal((view.getByLabelText("Character slot 5") as HTMLSelectElement).value, "Atlacoya");
     assert.equal(upgradeTable().getAllByRole("row").length, 6);

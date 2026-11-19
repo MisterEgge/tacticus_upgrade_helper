@@ -3,12 +3,16 @@ import { cookies } from "next/headers";
 import { resolveRaidSelection, type RaidSelection, type RaidTeams } from "../../src/domain/raidSelection";
 import type { Report } from "./report";
 import { RAID_MACHINES } from "../../src/domain/raidMachine";
+import { expandRaidCompositions } from "../../src/domain/raidMeta";
+import { getCharacterCatalog } from "./catalog";
 
 export const RAID_SELECTION_COOKIE = "tacticus-main-raid-team";
 
 export async function getRaidMeta(): Promise<{ _meta: { sourceUrl: string; reviewedOn: string; note: string }; bosses: RaidTeams }>
 {
-    return JSON.parse(await readFile("config/raid_boss_meta.json", "utf8"));
+    const [text,catalog]=await Promise.all([readFile("config/raid_boss_meta.json","utf8"),getCharacterCatalog()]);
+    const meta=JSON.parse(text) as {_meta:{sourceUrl:string;reviewedOn:string;note:string};bosses:RaidTeams};
+    return {...meta,bosses:expandRaidCompositions(meta.bosses,catalog.characters)};
 }
 
 export async function getMainRaidSelection(teams: RaidTeams, report: Report | null): Promise<RaidSelection>

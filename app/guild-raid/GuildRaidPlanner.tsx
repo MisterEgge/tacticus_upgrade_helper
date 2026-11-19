@@ -44,7 +44,8 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, initial
     const team = teams[boss]![teamName]!;
     const suggested = suggestedRaidLineup(team);
     const recommendation = team.recommendation;
-    const preferred = recommendation?.lineup ?? [...team.core, ...team.flex.slice(0, Math.max(0, 5-team.core.length))];
+    const allowed = raidCandidates(team);
+    const preferred = recommendation?.lineup.every(name=>allowed.includes(name)) ? recommendation.lineup : allowed.slice(0,5);
     const preferredMachine = recommendedRaidMachine(team);
     const selectedMachine = RAID_MACHINES.find(option => option.name === machine);
     const machineUnit = roster.find(unit => unit.id === selectedMachine?.id);
@@ -87,7 +88,7 @@ export default function GuildRaidPlanner({ teams, source, mainSelection, initial
         <section className="raidOverview panel" aria-label="Raid selection">
             <div className="raidOverviewControls abilityViews">
                 <label>Raid boss<select value={boss} onChange={event => chooseTeam(event.target.value,event.target.value===saved.boss?saved.teamName:Object.keys(teams[event.target.value]!)[0]!)}>{Object.keys(teams).map(name => <option key={name}>{name}</option>)}</select></label>
-                <label>Meta team<select value={teamName} onChange={event => chooseTeam(boss, event.target.value)}>{Object.keys(teams[boss]!).map(name => <option key={name}>{name}</option>)}</select></label>
+                <label>Team Comp<select value={teamName} onChange={event => chooseTeam(boss, event.target.value)}>{Object.keys(teams[boss]!).map(name => <option key={name}>{name}</option>)}</select></label>
             </div>
             {guildBoss?<p className="sub">Recent guild battle · {guildBoss}</p>:null}
             <div className="raidLineupStrip">{members.map(member=><CharacterName key={member.id} name={member.name} id={member.id} icon={member.icon}/>)}{selectedMachine?<CharacterName name={selectedMachine.name} id={selectedMachine.id}/>:null}</div>
