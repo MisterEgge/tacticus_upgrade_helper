@@ -5,8 +5,29 @@ import { resolveRaidSelection, validateRaidSelection, type RaidTeams } from "../
 import { RAID_MACHINES, suggestedRaidMachine } from "../src/domain/raidMachine";
 import meta from "../config/raid_boss_meta.json";
 import catalog from "../data/character_catalog.json";
+import {expandRaidCompositions} from "../src/domain/raidMeta";
 
 const bosses = meta.bosses as RaidTeams;
+
+test("every boss offers every known composition while keeping its own recommendations and restrictions",()=>{
+    const expanded=expandRaidCompositions(bosses,catalog.characters);
+    const expected=new Set(Object.values(bosses).flatMap(options=>Object.keys(options)));
+    for(const options of Object.values(expanded))assert.deepEqual(new Set(Object.keys(options)),expected);
+    const riptide=expanded.Riptide!;
+    assert.equal(Object.keys(riptide)[0],"Ad-Mech");
+    assert.equal(riptide["Ad-Mech"]!.machine?.name,"Reanimator");
+    assert.equal(riptide["Big Hit"]!.recommendation,undefined);
+    assert.equal(riptide["Big Hit"]!.machine,undefined);
+    const tau=new Set(catalog.characters.filter(unit=>unit.faction==="T'au Empire").map(unit=>unit.name));
+    for(const team of Object.values(riptide)){
+        assert.ok(raidCandidates(team).every(name=>!tau.has(name)));
+        assert.ok(team.excludedMachines?.includes("Tson'ji"));
+    }
+    const owned=new Set(["Kariyan","Laviscus","Trajann","Gulgortz","Kharn"]);
+    const choice=resolveRaidSelection({boss:"Riptide",teamName:"Big Hit",flex:[],autoFlex:true},expanded,owned);
+    assert.deepEqual(choice.lineup,[...owned]);
+    assert.ok(validateRaidSelection(choice,expanded));
+});
 
 test("Rogal Dorn retains source fives, fills missing cores and rejects Astra Militarum", () => {
     const teams = bosses["Rogal Dorn"]!;

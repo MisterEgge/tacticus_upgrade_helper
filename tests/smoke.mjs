@@ -274,6 +274,9 @@ try
     const raidSelectionDom = new JSDOM(selectedHtml);
     const raidSelectors = raidSelectionDom.window.document.querySelectorAll('.raidOverview select');
     assert.deepEqual([...raidSelectors].map(select => select.value), ['Riptide', 'Ad-Mech']);
+    assert.equal(raidSelectors[1].labels[0].firstChild.textContent,'Team Comp');
+    assert.deepEqual(new Set([...raidSelectors[1].options].map(option=>option.value)),
+        new Set(['Big Hit','Lavistodes','Custodes','Ad-Mech','Psyker','Battle Suit','Multi-Hit','Terminus']));
     assert.match(raidSelectionDom.window.document.querySelector('.raidLineupStrip').textContent, /Actus.*Exitor-Rho.*Tan Gi'da.*Gulgortz.*Anuphet.*Galatian/);
     assert.equal(raidSelectionDom.window.document.querySelector('[role="tablist"][aria-label="Guild Raid views"] [aria-selected="true"]').textContent, 'Battle guide');
     raidSelectionDom.window.close();
