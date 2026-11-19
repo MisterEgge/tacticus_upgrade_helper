@@ -204,6 +204,9 @@ h1, h2, p, td, .card span, .card small, .accountIdentity, .accountRaid { overflo
 .warCollapsibleTitle { flex:0 0 auto; font-size:15px; font-weight:750; }
 .warCollapsibleSummary .warTeamPortraits { display:flex; align-items:center; gap:5px; min-width:0; margin:0; }
 .warCollapsibleSummary .warTeamPortraits .portrait { width:36px; height:36px; border-radius:8px; }
+.warTeamSummaryStats small{display:block}.warRankSummary{font-weight:700}.warRankSummary.ready{color:#83d5a4}.warRankSummary.needs-upgrade{color:#f0bd83}
+.warGoldRoster{margin-top:12px;padding:12px 16px;border:1px solid #354355;border-radius:10px;background:#111923}.warGoldRoster summary{cursor:pointer}.warGoldRoster summary span{display:inline-block;margin-left:12px;color:#c8d1dd}.warGoldRoster ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;list-style:none;padding:0}.warGoldRoster li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px;align-items:center;padding:8px;border:1px solid #303846;border-radius:8px}.warGoldRoster li small{grid-column:1/-1;color:#a6b2c2}
+@media(max-width:600px){.warGoldRoster summary span{display:block;margin:4px 0 0}}
 .warTeamSummaryStats { margin-left:auto; color:#9da9ba; font-size:12px; text-align:right; }
 .warTeamSummaryStats strong { color:#edf1f7; }
 .warTargetTierPreview { pointer-events:none; flex:0 0 42px; }
