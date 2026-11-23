@@ -9,7 +9,7 @@ export type GearTransfer=GearHolding&{recipient:string;recipientId:string;recipi
 export type GearReview=GearHolding&{action:string};
 
 /** Selected teams win priority; other recorded roles still protect their equipped gear. */
-export function gearRoles({raidNames,raidOptions,warNames,campaignNames,campaignUnknown,focus}:{raidNames:string[];raidOptions:string[];warNames:string[];campaignNames:string[];campaignUnknown:string[];focus:Record<string,EquipmentFocus>}) {
+export function gearRoles({raidNames,raidOptions,warNames,campaignNames,campaignUnknown,focus,planningScores}:{raidNames:string[];raidOptions:string[];warNames:string[];campaignNames:string[];campaignUnknown:string[];focus:Record<string,EquipmentFocus>;planningScores?:Record<string,number>}) {
  const roles=new Map<string,GearRole>();
  const add=(names:string[],label:string,priority:number)=>names.forEach(name=>{if((roles.get(name)?.priority??-1)<priority)roles.set(name,{label,priority});});
  add(campaignUnknown,"Campaign progress unknown",0);
@@ -19,6 +19,11 @@ export function gearRoles({raidNames,raidOptions,warNames,campaignNames,campaign
  add(warNames,"Selected War team",300);
  add(campaignNames,"Required for unfinished campaign",400);
  add(raidNames,"Selected Raid team",1000);
+ if(planningScores)for(const [name,priority]of Object.entries(planningScores)){
+  const role=roles.get(name);
+  if(role)role.priority=priority;
+  else if(priority>0)roles.set(name,{label:"Pinned character",priority});
+ }
  for(const name of campaignUnknown)roles.get(name)!.donationBlocked=true;
  return roles;
 }

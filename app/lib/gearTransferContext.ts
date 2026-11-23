@@ -46,5 +46,5 @@ export async function getGearTransferContext(account?:{report:Report;catalog:Awa
  }):[]);
  // The browser needs restrictions and names, not the full per-level stat tables.
  const equipment=Object.fromEntries(Object.entries(plan.catalogEquipment).map(([id,item])=>[id,{type:item.type,rarity:item.rarity,...(item.name?{name:item.name}:{}),...(item.allowedUnits?{allowedUnits:item.allowedUnits}:{}),...(item.allowedFactions?{allowedFactions:item.allowedFactions}:{})}])) as Record<string,EquipmentDefinition>;
- return {units:report.roster,targets,characters:catalog.characters.map(character=>({id:character.id,name:character.name,faction:plan.unitByName.get(character.name)?.faction??character.faction,equipment:character.equipment})),equipment,raidNames:plan.raidNames,raidOptions,campaignNames,campaignUnknown,focus:protectedFocus,defenseTeams,offenseTeams} satisfies ReallocationProps;
+ return {units:report.roster,targets,characters:catalog.characters.map(character=>({id:character.id,name:character.name,faction:plan.unitByName.get(character.name)?.faction??character.faction,equipment:character.equipment})),equipment,raidNames:plan.raidNames,raidOptions,campaignNames,campaignUnknown,focus:protectedFocus,defenseTeams,offenseTeams,planningScores:plan.planning.scores,planningPreferences:plan.planning.preferences} satisfies ReallocationProps;
 }

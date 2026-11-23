@@ -12,6 +12,7 @@ import { campaignIsComplete, campaignRankIndex, campaignRecommendationPriority, 
 import { readFile } from "node:fs/promises";
 import { collapseCampaignGoals } from "../../src/domain/campaignGoals";
 import { rankName } from "../../src/domain/ranks";
+import {getPlanningContext} from "../lib/playerPriorities";
 
 type Query = { character?: string; target?: string; plan?: string };
 export default async function Farming({ searchParams }: { searchParams: Promise<Query> })
@@ -19,6 +20,7 @@ export default async function Farming({ searchParams }: { searchParams: Promise<
 
     const [data, report, query, catalog, campaignTargets, shops] = await Promise.all([loadFarmingData(), getReport(), searchParams, getCharacterCatalog(), getCampaignTargets(), getShopCatalog()]);
     if (!data || !report) return <main><Nav/><header><h1>Personal Farming Queue</h1></header><div className="empty">Account or farming data unavailable. Run <code>npm run sync:game-data</code> and <code>npm run refresh</code>.</div></main>;
+    const planning=await getPlanningContext(report,catalog);
     const [priorities, battleCatalog] = await Promise.all([
         readFile("config/character_priorities.json", "utf8").then(value => JSON.parse(value) as Record<string, { priority: number }>),
         readFile("data/game/campaign-battles.json", "utf8").then(value => Object.values(JSON.parse(value) as Record<string, CampaignBattleDefinition>))
@@ -40,8 +42,9 @@ export default async function Farming({ searchParams }: { searchParams: Promise<
             throw new Error("Choose a target rank above the selected character’s current rank.");
         const campaignGoalCandidates = query.plan === "campaign" ? Object.entries(campaignTargets.campaigns).flatMap(([campaignName, campaign]) => { const campaignProgress = report.campaignProgress?.find(c => (c.type === "Elite" || c.type === "EliteMirror") && requiredCampaignName(c) === campaignName); const campaignComplete = campaignIsComplete(campaignProgress, battleCatalog); return catalog.characters.filter(character => character.campaignsRequiredIn.includes(campaignName)).flatMap(character => { const unit = rankRoster.find(u => u.id === character.id); const target = campaign.characters[character.name]; if (!unit || !target?.rank) return []; const recommendation = campaignRecommendationPriority({ campaign: campaignName, campaignComplete, characterId: character.id, characterName: character.name, currentRank: unit.rank, targetRank: target.rank, role: target.role, confidence: target.confidence, accountPriority: priorities[character.name]?.priority ?? 0 }); const targetRank = campaignRankIndex(target.rank); return recommendation.recommendationPriority > 0 && targetRank !== null ? [{ id: unit.id, name: unit.name, currentRank: unit.rank, targetRank, ...(unit.upgrades === undefined ? {} : { upgrades: unit.upgrades }), priority: recommendation.recommendationPriority, ...(target.confidence === undefined ? {} : { confidence: target.confidence }) }] : []; }); }) : [];
         const campaignGoals = collapseCampaignGoals(campaignGoalCandidates);
-        const units = selected ? [selected] : rankRoster.filter(u => u.rank < RANK_NAMES.length - 1);
-        const goals = query.plan === "campaign" ? campaignGoals : units.map(u => ({ id: u.id, name: u.name, currentRank: u.rank, targetRank: selected && requestedRank !== undefined ? requestedRank : u.rank + 1, ...(u.upgrades === undefined ? {} : { upgrades: u.upgrades }), priority: priorities[u.name]?.priority ?? 0 }));
+        const personalPlan=!query.plan||query.plan==="priorities";
+        const units = selected ? [selected] : rankRoster.filter(u => u.rank < RANK_NAMES.length - 1&&(!personalPlan||(planning.scores[u.name]??0)>0));
+        const goals = query.plan === "campaign" ? campaignGoals : units.map(u => ({ id: u.id, name: u.name, currentRank: u.rank, targetRank: selected && requestedRank !== undefined ? requestedRank : u.rank + 1, ...(u.upgrades === undefined ? {} : { upgrades: u.upgrades }), priority:personalPlan?planning.scores[u.name]??0: priorities[u.name]?.priority ?? 0 }));
         demand = planMaterials(goals, data.rankData, data.recipes, report.upgradeInventory);
 
     }
@@ -66,7 +69,7 @@ export default async function Farming({ searchParams }: { searchParams: Promise<
         <ReferenceDetails label="Calculation and source details"><p>Equipped upgrades and owned crafted materials are deducted before base-material shortages. Unlocked sources are accessible battles; raid eligibility and three-star completion are unknown.</p><Link className="sourceLink" href="/sources">Shop rotations and refresh tracking</Link>{excluded.length?<p>Outside the character rank catalog: {excluded.map(u=>u.name).join(", ")}. No rank costs assumed.</p>:null}</ReferenceDetails>
     </div><div className="power">{error ? "Unknown" : rows.length}<strong> shortages</strong></div></header>
         <form className="goalForm panel" action="/farming">
-            <label>Plan<select name="plan" defaultValue={query.plan ?? "next"}><option value="next">Roster next ranks</option><option value="campaign">Campaign recommendation gaps</option></select></label>
+            <label>Plan<select name="plan" defaultValue={query.plan ?? "priorities"}><option value="priorities">Account priorities</option><option value="next">Roster next ranks</option><option value="campaign">Campaign recommendation gaps</option></select></label>
             <label>Character<select name="character" defaultValue={query.character ?? ""}><option value="">All characters — next rank</option>{rankRoster.map(u => <option key={u.id} value={u.id}>{u.name} ({rankName(u.rank)})</option>)}</select></label>
             <label>Target rank<RankSelect name="target" defaultValue={query.target ?? ""} includeNext/></label>
             <button type="submit">Calculate materials</button>

@@ -10,15 +10,17 @@ import {selectedWarGearGoals,type EquipmentWarTeam} from "../../src/domain/equip
 import {WAR_PLAN_STORAGE_KEY} from "../../src/domain/warBadgeTargets";
 import type {EquipmentCharacter,EquipmentDefinition} from "../../src/domain/equipmentCompatibility";
 import type {EquipmentFocus} from "../../src/domain/equipmentFocus";
+import {characterPlanningPriority,type PlayerPriorities} from "../../src/domain/playerPriorities";
 
-export type ReallocationProps={units:ReallocationUnit[];targets:ReallocationTarget[];characters:EquipmentCharacter[];equipment:Record<string,EquipmentDefinition>;raidNames:string[];raidOptions:string[];campaignNames:string[];campaignUnknown:string[];focus:Record<string,EquipmentFocus>;defenseTeams:EquipmentWarTeam[];offenseTeams:EquipmentWarTeam[]};
+export type ReallocationProps={units:ReallocationUnit[];targets:ReallocationTarget[];characters:EquipmentCharacter[];equipment:Record<string,EquipmentDefinition>;raidNames:string[];raidOptions:string[];campaignNames:string[];campaignUnknown:string[];focus:Record<string,EquipmentFocus>;defenseTeams:EquipmentWarTeam[];offenseTeams:EquipmentWarTeam[];planningScores?:Record<string,number>;planningPreferences?:PlayerPriorities};
 function Holder({item}:{item:GearHolding}){return <Link className="characterLink" href={`/characters/${encodeURIComponent(item.characterId)}`}><CharacterName name={item.character} id={item.characterId}/></Link>;}
 
 export function useGearTransfers(props:ReallocationProps){
  const [saved,setSaved]=useState<unknown>(null),[ready,setReady]=useState(false),[warUnknown,setWarUnknown]=useState(false);
  useEffect(()=>{const read=()=>{try{const raw=localStorage.getItem(WAR_PLAN_STORAGE_KEY);setSaved(raw?JSON.parse(raw):null);setWarUnknown(false);}catch{setWarUnknown(true);}setReady(true);};read();window.addEventListener("storage",read);window.addEventListener("focus",read);return()=>{window.removeEventListener("storage",read);window.removeEventListener("focus",read);};},[]);
  const war=selectedWarGearGoals(props.defenseTeams,props.offenseTeams,saved);
- const roles=gearRoles({...props,warNames:[...war.keys()]});
+ const planningScores=props.planningPreferences?Object.fromEntries(props.units.map(unit=>[unit.name,characterPlanningPriority(props.planningPreferences!,unit.id,[...(props.campaignNames.includes(unit.name)||props.campaignUnknown.includes(unit.name)?["campaign" as const]:[]),...(props.raidNames.includes(unit.name)?["raid" as const]:[]),...(war.has(unit.name)?["war" as const]:[])])])):props.planningScores;
+ const roles=gearRoles({...props,...(planningScores?{planningScores}:{}),warNames:[...war.keys()]});
  const {transfers}=planLegendaryReallocation({...props,roles,warUnknown});
  return {ready,transfers:ready?transfers:[]};
 }

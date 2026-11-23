@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { signOutAction } from "../actions/auth";
 import SyncAccountButton from "./SyncAccountButton";
+import PriorityLink from "./PriorityLink";
 
-export default function AuthAccountHeader({ playerName, connected = false, lastSynced }: { playerName?: string; connected?: boolean; lastSynced?: string })
+export default function AuthAccountHeader({ playerName, connected = false, lastSynced, prioritiesConfigured=false }: { playerName?: string; connected?: boolean; lastSynced?: string;prioritiesConfigured?:boolean })
 {
 
     return <div className="accountBar"><div className="accountBarInner authAccountBar">
         <div className="accountIdentity"><Link href="/settings">Tacticus Upgrade Helper</Link></div>
-        {connected ? <SyncAccountButton {...(lastSynced ? { lastSynced } : {})}/> : null}
+        <PriorityLink configured={prioritiesConfigured}/>{connected ? <SyncAccountButton {...(lastSynced ? { lastSynced } : {})}/> : null}
         <div className="authSignedIn">
             <span>{playerName ?? "No player synced"}</span>
             <Link className="authSettingsLink" href="/settings">

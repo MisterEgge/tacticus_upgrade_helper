@@ -13,6 +13,14 @@ function unit(id:string,alliance="Imperial",index=9,shards:number|null=0):Onslau
   utility:rateCharacter({name:id,communityScore:3,accountPriority:0,mainRaidCore:false,mainRaidFlex:false,raidCore:false,raidFlex:false,warOption:false,incompleteCampaign:false})};
 }
 
+test("disabled priorities hide honor suggestions without changing the track's owned deployment count",()=>{
+ const candidates=Array.from({length:5},(_,index)=>{const row=unit(`unit-${index}`);row.utility.planningPriority=0;return row;});
+ const result=onslaughtPriorities(candidates,null,null,new Map(),{}).find(group=>group.alliance==="Imperial")!;
+ assert.equal(result.owned,5);
+ assert.equal(result.deployable,true);
+ assert.equal(result.rows.length,0);
+});
+
 test("current honor rules separate stages, shard types and sector rewards",()=>{
  for(const [index,orb] of [[2,"Uncommon"],[5,"Rare"],[8,"Epic"],[11,"Legendary"],[12,"Legendary"],[14,"Legendary"],[15,"Mythic"],[18,"Mythic"]] as const)assert.equal(honorReward(index,null)?.orb,orb);
  assert.deepEqual(honorReward(9,null)?.badges,["Epic"]);

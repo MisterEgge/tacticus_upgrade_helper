@@ -17,6 +17,8 @@ import {equipmentTargetRarities,type EquipmentTargetRarity} from "../../src/doma
 import type {EquipmentShopOffer} from "../../src/domain/shops";
 import {equipmentTeamGoal,equipmentOptionFitsGoal,selectedWarGearGoals,type EquipmentScope,type EquipmentWarTeam} from "../../src/domain/equipmentGoals";
 import {WAR_PLAN_STORAGE_KEY} from "../../src/domain/warBadgeTargets";
+import {characterPlanningPriority} from "../../src/domain/playerPriorities";
+import {allocateEquipmentActions} from "../../src/domain/equipmentActions";
 
 type Source={id:string;name:string;shops:string[];offers:EquipmentShopOffer[]};
 type Holder={character:string;characterId:string;slotId:string;level:number};
@@ -31,23 +33,28 @@ function UpgradeTable({slots,kind}:{slots:Slot[];kind:"ready"|"level"}){
  return <div className="tableWrap"><table><thead><tr><th>Character</th><th>{kind==="ready"?"Equip this":"Item to level"}</th><th>{kind==="ready"?"Replace":"Next goal"}</th></tr></thead><tbody>{slots.map(slot=><tr key={`${slot.character}:${slot.slotId}:${slot.itemRarity}`}><td><CharacterName name={slot.character} id={slot.characterId}/><EquipmentSlot slotId={slot.slotId}/><small>{slot.goalLabel}</small></td><td>{kind==="ready"?<><UpgradeItem slot={slot}/><small>Level {slot.allocatedLevel??1}</small></>:<><ResourceName id={slot.currentItemId??""} name={slot.currentItem}/><small>Level {slot.currentLevel}</small></>}</td><td>{kind==="ready"?<><ResourceName id={slot.currentItemId??""} name={slot.currentItem}/><small><RarityBadge rarity={slot.currentRarity}/> / level {slot.currentLevel}</small></>:<>{slot.target}<small>Check coins and salvage</small></>}</td></tr>)}</tbody></table></div>;
 }
 
-export default function EquipmentTable({rows,inventory,raidNames,campaignNames,defenseTeams,offenseTeams,transferContext}:{transferContext:ReallocationProps;rows:Row[];inventory:ReadonlyArray<{id:string;amount:number;level:number}>;raidNames:string[];campaignNames:string[];defenseTeams:EquipmentWarTeam[];offenseTeams:EquipmentWarTeam[]})
+export default function EquipmentTable({rows:initialRows,inventory,raidNames,campaignNames,defenseTeams,offenseTeams,transferContext,planningScores:serverPlanningScores,enabledModes}:{transferContext:ReallocationProps;rows:Row[];inventory:ReadonlyArray<{id:string;amount:number;level:number}>;raidNames:string[];campaignNames:string[];defenseTeams:EquipmentWarTeam[];offenseTeams:EquipmentWarTeam[];planningScores?:Record<string,number>;enabledModes?:string[]})
 {
  const {transfers}=useGearTransfers(transferContext);
  const transferredSlots=new Set(transfers.map(item=>`${item.recipient}:${item.recipientSlot}`));
- const [scope,setScope]=useState<EquipmentScope>("raid");
+ const [scope,setScope]=useState<EquipmentScope>(serverPlanningScores?"priorities":"raid");
  const [savedPlan,setSavedPlan]=useState<unknown>(null);
  useEffect(()=>{const read=()=>{try{setSavedPlan(JSON.parse(localStorage.getItem(WAR_PLAN_STORAGE_KEY)??"null"));}catch{setSavedPlan(null);}};read();window.addEventListener("storage",read);window.addEventListener("focus",read);return()=>{window.removeEventListener("storage",read);window.removeEventListener("focus",read);};},[]);
  const warGoals=useMemo(()=>selectedWarGearGoals(defenseTeams,offenseTeams,savedPlan),[defenseTeams,offenseTeams,savedPlan]);
  const raid=new Set(raidNames),campaign=new Set(campaignNames);
+ const preferences=transferContext.planningPreferences;
+ const planningScores=preferences?Object.fromEntries(transferContext.units.map(unit=>[unit.name,characterPlanningPriority(preferences,unit.id,[...(transferContext.campaignNames.includes(unit.name)||transferContext.campaignUnknown.includes(unit.name)?["campaign" as const]:[]),...(raid.has(unit.name)?["raid" as const]:[]),...(warGoals.has(unit.name)?["war" as const]:[])])])):serverPlanningScores;
+ const reassigned=planningScores?allocateEquipmentActions(initialRows.flatMap(row=>row.slots.map(slot=>{const {allocatedItemId,allocatedLevel,...candidate}=slot;return {...candidate,planningPriority:planningScores[row.character]??0};})),[...inventory]):null;
+ const rows=reassigned?initialRows.map(row=>({...row,slots:reassigned.filter(slot=>slot.character===row.character)})):initialRows;
  const [selected,setSelected]=useState<Record<EquipmentTargetRarity,boolean>>({Uncommon:false,Rare:false,Epic:true,Legendary:true});
  const goalScope=scope==="teams"||scope==="raid"||scope==="war";
  const scopedRows=rows.flatMap(row=>{
-  const goal=equipmentTeamGoal(row.character,row.rarity,raid,warGoals,scope);
+  if(scope==="priorities"&&(planningScores?.[row.character]??0)<=0)return [];
+  const goal=equipmentTeamGoal(row.character,row.rarity,raid,warGoals,scope==="priorities"?(enabledModes?.includes("raid")&&raid.has(row.character)?"raid":enabledModes?.includes("war")&&warGoals.has(row.character)?"war":"all"):scope);
   if(goalScope&&!goal||scope==="campaign"&&!campaign.has(row.character))return [];
   const slots=row.slots.filter(slot=>slot.state==="EQUIP NOW"||(goal?equipmentOptionFitsGoal(slot.currentRarity,slot.itemRarity,row.rarity,goal):selected[slot.itemRarity]&&["Common",...equipmentTargetRarities,"Mythic"].indexOf(slot.itemRarity)>=["Common",...equipmentTargetRarities,"Mythic"].indexOf(slot.currentRarity))).map(slot=>goal?{...slot,goalLabel:goal.priority===100?goal.label:`${goal.label} · ${goal.rarity} ${goal.level}`}:slot);
   return [{...row,slots,goal}];
- }).sort((a,b)=>Number(raid.has(b.character))-Number(raid.has(a.character))||(b.goal?.priority??0)-(a.goal?.priority??0));
+ }).sort((a,b)=>(scope==="priorities"?(planningScores?.[b.character]??0)-(planningScores?.[a.character]??0):Number(raid.has(b.character))-Number(raid.has(a.character)))||(b.goal?.priority??0)-(a.goal?.priority??0));
  const [view,setView]=useState<"actions"|"shops">("actions");
  const [query,setQuery]=useState("");
  const matches=(value:string)=>value.toLowerCase().includes(query.toLowerCase().trim());
@@ -63,7 +70,7 @@ export default function EquipmentTable({rows,inventory,raidNames,campaignNames,d
  const shopUpgrades=[...scopedRows.flatMap(row=>row.slots.filter(slot=>slot.state!=="UNKNOWN"&&slot.state!=="LEVEL INVENTORY"&&!refinementSlots.has(`${slot.character}:${slot.slotId}`)&&slot.freeCopies<=0&&!transferredSlots.has(`${slot.character}:${slot.slotId}`)&&!assignedSlots.has(`${slot.character}:${slot.slotId}`)).flatMap(slot=>slot.acquisition.filter(source=>source.offers.length).map(source=>({slot,source})))).reduce((choices,choice)=>choices.set(`${choice.slot.character}:${choice.slot.slotId}:${choice.source.id}`,choice),new Map<string,{slot:Slot;source:Source}>()).values()];
  const shoppingItems=groupEquipmentShopping(shopUpgrades).filter(item=>matches(`${item.name} ${item.members.map(({slot})=>`${slot.character} ${slot.currentItem} ${equipmentSlotLabel(slot.slotId)}`).join(" ")} ${item.offers.map(offer=>`${offer.shop} ${offer.rotation}`).join(" ")}`));
  return <>
-  <div className="abilityViews"><label>Upgrade focus<select aria-label="Equipment upgrade focus" value={scope} onChange={event=>setScope(event.target.value as EquipmentScope)}><option value="raid">Main raid team</option><option value="teams">Raid first, then active War teams</option><option value="war">Active War teams</option><option value="campaign">Incomplete campaigns</option><option value="all">Full roster</option></select></label></div>
+  <div className="abilityViews"><label>Upgrade focus<select aria-label="Equipment upgrade focus" value={scope} onChange={event=>setScope(event.target.value as EquipmentScope)}><option value="priorities">Account priorities</option><option value="raid">Main raid team</option><option value="teams">Raid first, then active War teams</option><option value="war">Active War teams</option><option value="campaign">Incomplete campaigns</option><option value="all">Full roster</option></select></label></div>
   <input className="equipmentSearch" aria-label="Search equipment upgrades" placeholder="Search character, item, slot, or shop…" value={query} onChange={event=>setQuery(event.target.value)}/>
   {scope==="raid"&&!raidNames.length?<p className="sub">Choose your <Link className="sourceLink" href="/guild-raid">main Raid team</Link> to see its equipment upgrades.</p>:null}
   <ReferenceDetails label="Equipment goals and caps"><p>{goalScope?"Raid shows useful Epic and Legendary alternatives where compatible. Gold War minimum is Epic 9; Silver War minimum is Rare 7. These are minimum goals, not downgrade instructions. Higher tiers remain alternatives, not additional required copies. Defense reserves are excluded.":"Choose target rarities for this planning view."}</p><p>Your selected Raid team gets first choice of inventory upgrades. Each copy is assigned once across the roster. Block replacements favor verified higher chance. The refinement threshold compares expected blocked damage over three hits using the equipped booster; it is general guidance, not a survival guarantee. Level-up affordability and current shop stock must be checked in-game.</p></ReferenceDetails>

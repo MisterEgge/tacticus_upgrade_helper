@@ -5,6 +5,7 @@ import {getMainRaidSelection,getRaidMeta} from "./raidSelection";
 import {campaignIsComplete,requiredCampaignName,type CampaignBattleDefinition} from "../../src/domain/campaigns";
 import {rateCharacter} from "../../src/domain/characterUtility";
 import type {Report} from "./report";
+import {getPlanningContext} from "./playerPriorities";
 
 type WarPlan={validatedFullLineups?:Array<{members:string[]}>};
 
@@ -33,11 +34,12 @@ export async function getUtilityRatings(report:Report)
         const progress=report.campaignProgress?.find(c=>(c.type==="Elite"||c.type==="EliteMirror")&&requiredCampaignName(c)===name);
         return !campaignIsComplete(progress,battleCatalog);
     }));
-    return catalog.characters.map(character=>rateCharacter({
+    const planning=await getPlanningContext(report,catalog);
+    return catalog.characters.map(character=>({...rateCharacter({
         name:character.name,communityScore:scores.get(character.name)??null,communityTeams:communityTeams.get(character.name)??[],accountPriority:priorities[character.name]?.priority??0,
         accountNote:priorities[character.name]?.note??null,priorityModes:priorities[character.name]?.modes??[],
         mainRaidCore:!!main && selectedRaidNames(selection,main).includes(character.name) && main.core.includes(character.name),mainRaidFlex:!!main && selectedRaidNames(selection,main).includes(character.name) && !main.core.includes(character.name),
         raidCore:raidCore.has(character.name),raidFlex:raidFlex.has(character.name),warOption:warOption.has(character.name),
         incompleteCampaign:character.campaignsRequiredIn.some(name=>unfinished.has(name))
-    }));
+    }),planningPriority:planning.scores[character.name]??0,planningModes:planning.preferences.modes,planningRoles:planning.roles[character.name]??[],pinned:planning.preferences.characters.includes(character.id)}));
 }

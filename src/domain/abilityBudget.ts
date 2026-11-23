@@ -1,12 +1,14 @@
 import { badgeCostBetween, totalBadgeCosts, abilityLevelCap } from "./abilityCosts";
 import { utilityAtLeast, type UtilityTier } from "./characterUtility";
+import type {PriorityMode} from "./playerPriorities";
 
-export type BudgetRow = { id:string; name:string; alliance:string; rank:number; rarity:string; xpLevel:number; activeLevel:number|null; passiveLevel:number|null; activeTarget:number; passiveTarget:number; reviewed:boolean; recommended:boolean; communityScore:number|null; accountPriority:number; mainRaid:boolean; utilityTier:UtilityTier; utilitySignals:string[] };
-export type BudgetScope = "useful"|"situational"|"top"|"raid";
+export type BudgetRow = { id:string; name:string; alliance:string; rank:number; rarity:string; xpLevel:number; activeLevel:number|null; passiveLevel:number|null; activeTarget:number; passiveTarget:number; reviewed:boolean; recommended:boolean; communityScore:number|null; accountPriority:number; mainRaid:boolean; utilityTier:UtilityTier; utilitySignals:string[];planningPriority?:number;planningModes?:PriorityMode[];planningRoles?:PriorityMode[];pinned?:boolean };
+export type BudgetScope = "priorities"|"useful"|"situational"|"top"|"raid";
 
 export function eligibleForBudget(row:BudgetRow,scope:BudgetScope,minRank:number):boolean
 {
     if(row.rank<minRank)return false;
+    if(scope==="priorities")return (row.planningPriority??0)>0;
     if(scope==="raid")return row.mainRaid;
     if(scope==="top")return row.utilityTier==="Core";
     return utilityAtLeast(row.utilityTier,scope==="situational"?"Situational":"Useful");

@@ -498,3 +498,20 @@ th,td { padding:12px 14px; }
 }
 
 .raidPreferredTeam,.raidMachineTactics{margin-bottom:18px;padding:12px 14px;border:1px solid #354355;border-radius:8px;background:#111923}.raidTeamEditor .raidPreferredTeam h2,.raidMachineTactics h3{margin:0 0 6px;font-size:15px}.raidPreferredTeam p,.raidMachineTactics p{margin:0}.raidPreferredTeam small{display:block;margin-top:5px}.raidTeamMachineNote{margin:12px 0}.raidTeamMachineNote small{display:block;margin-bottom:5px}.raidOverview .raidSave{display:flex;flex-wrap:wrap;gap:8px}
+.priorityLink { border:1px solid #65758b; border-radius:8px; padding:9px 12px; color:#c8def9; text-decoration:none; font-weight:600; }
+.priorityEditor { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin-top:24px; }
+.priorityEditor section { padding:22px; }
+.priorityEditor ol { padding-left:24px; }
+.priorityEditor ol>li { padding:14px 0; border-bottom:1px solid #303b4b; }
+.priorityControls { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.priorityEditor button { padding:8px 12px; border:1px solid #65758b; border-radius:8px; background:#1b2330; color:#edf1f7; font:inherit; cursor:pointer; }
+.priorityEditor button:disabled { opacity:.45; cursor:default; }
+.priorityEditor button:focus-visible,.priorityLink:focus-visible { outline:2px solid #9ccaff; outline-offset:3px; }
+.priorityEnable { margin:8px 8px 0 0; }
+.priorityEditor input { display:block; width:100%; margin-top:8px; padding:10px; border:1px solid #65758b; border-radius:8px; background:#101720; color:#edf1f7; font:inherit; }
+.prioritySearchResults { list-style:none; padding:0; }
+.prioritySearchResults li { display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding:10px 0; }
+.prioritySave { grid-column:1/-1; }
+.prioritySave>button { margin-right:10px; }
+.prioritySave>button:first-child { background:#273f58; }
+@media(max-width:700px) { .priorityEditor { grid-template-columns:minmax(0,1fr); } .priorityEditor section { padding:16px; } }

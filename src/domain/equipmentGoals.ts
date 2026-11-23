@@ -3,7 +3,7 @@ import type {EquipmentTargetRarity} from "./equipmentTier";
 import type {EquipmentDefinition} from "./equipmentCompatibility";
 type WarMember={id?:string;name:string};
 export type EquipmentWarTeam=Omit<WarTeamCandidate,"members"> & {name:string;tier?:"gold"|"silver";slot?:number;rosterBuilt?:boolean;members:WarMember[];core?:string[];flex?:WarMember[]};
-export type EquipmentScope="teams"|"raid"|"war"|"campaign"|"all";
+export type EquipmentScope="priorities"|"teams"|"raid"|"war"|"campaign"|"all";
 export function selectedWarGearGoals(defense:EquipmentWarTeam[],offense:EquipmentWarTeam[],saved:unknown):Map<string,"silver"|"gold">
 {
  const plan=saved&&typeof saved==="object"?saved as Record<string,unknown>:{};

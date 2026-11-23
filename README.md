@@ -8,6 +8,14 @@ Start it with `npm ci` followed by `npm run dev`, then visit [http://localhost:3
 
 For Git Bash on Windows, see the [local startup instructions](output/RUN-LOCALLY.txt).
 
+## Your priorities
+
+Use **Set priorities** beside Sync Account (then **Update priorities** after saving), or visit `/priorities`. Reorder unfinished campaigns, Guild Raid and Guild War, turn off modes you do not want to invest in, and optionally pin up to 30 owned characters above the mode order. The default is unfinished campaigns, then Raid, then War. Completed campaigns stop contributing; unknown completion remains eligible until synced.
+
+These preferences guide dashboard actions, shared equipment reservations and transfers, orb allocations, the default badge budget and farming queue, and Onslaught ordering. Explicit mode and full-roster views remain available. Pins do not change team membership, compatibility, XP or rarity requirements. A pinned character without a mode goal contributes only its next orb milestone, not an assumed Legendary goal. Unknown campaign progress still protects donor gear.
+
+Signed-in users save priorities in their own Supabase user metadata, across devices and account syncs, without a database migration. The local single-user app saves an HTTP-only browser cookie; clearing browser data resets that local preference. Changes take effect after Save without regenerating the report.
+
 ## Hosted accounts (auth-first)
 
 ### Supabase setup

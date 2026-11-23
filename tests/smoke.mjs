@@ -11,6 +11,7 @@ import { JSDOM } from 'jsdom';
 const root = process.cwd();
 const cwd = await mkdtemp(path.join(tmpdir(), 'tacticus-http-test-'));
 let server;
+let accountPriorityCookie;
 try
 {
 
@@ -39,7 +40,7 @@ try
     const get = async (route, raw = false) =>
     {
 
-        const response = await fetch('http://127.0.0.1:3197' + route);
+        const response = await fetch('http://127.0.0.1:3197' + route,accountPriorityCookie?{headers:{Cookie:accountPriorityCookie}}:{});
         assert.equal(response.status, 200, route);
         const html = (await response.text()).replace(/<!--.*?-->/gs, "");
         if (raw || !response.headers.get("content-type")?.includes("text/html")) return html;
@@ -55,6 +56,24 @@ try
 
     };
     const initialSync = JSON.parse(await get('/api/sync'));
+    const prioritiesPage = await get('/priorities');
+    assert.match(prioritiesPage,/Invest in this order/);
+    assert.match(prioritiesPage,/Set priorities/);
+    const postPriorities = (value, origin='http://127.0.0.1:3197') => fetch('http://127.0.0.1:3197/api/priorities', {method:'POST', headers:{'Content-Type':'application/json',Origin:origin}, body:JSON.stringify(value)});
+    assert.equal((await postPriorities({version:1,modes:['raid','raid'],characters:[]})).status,400);
+    assert.equal((await postPriorities({version:1,modes:['raid'],characters:['not-owned']})).status,400);
+    assert.equal((await postPriorities({version:1,modes:['raid'],characters:[]},'https://another-site.example')).status,403);
+    const savedPriorities = await postPriorities({version:1,modes:['raid','war'],characters:[]});
+    assert.equal(savedPriorities.status,200);
+    const priorityCookie=savedPriorities.headers.get('set-cookie').split(';')[0];
+    const pinTestCharacters=async (characters,modes=['campaign','raid','war'])=>{
+        const saved=await postPriorities({version:1,modes,characters});
+        assert.equal(saved.status,200);
+        accountPriorityCookie=saved.headers.get('set-cookie').split(';')[0];
+    };
+    const savedPriorityPage=(await (await fetch('http://127.0.0.1:3197/priorities',{headers:{Cookie:priorityCookie}})).text()).replace(/<!--.*?-->/gs,'');
+    assert.match(savedPriorityPage,/Update priorities/);
+    assert.match(savedPriorityPage,/Include Unfinished campaigns/);
     assert.equal(initialSync.automatic, false);
     assert.equal(initialSync.running, false);
     assert.equal(initialSync.lastSynced, null);
@@ -121,6 +140,7 @@ try
     report.roster.push(forcas);
     report.orbInventory.Imperial = [{ rarity: 'Epic', amount: 0 }];
     await writeFile(reportPath, JSON.stringify(report));
+    await pinTestCharacters(['darkaCompanion']);
     const shardBlocked = await get('/orbs');
     const blockedDom = new JSDOM(shardBlocked);
     assert.equal(blockedDom.window.document.querySelector('a[href="/characters/darkaCompanion"]'), null);
@@ -141,6 +161,7 @@ try
     );
     report.orbInventory.Chaos = [{ rarity: 'Legendary', amount: 100 }];
     await writeFile(reportPath, JSON.stringify(report));
+    await pinTestCharacters(['darkaCompanion','thousTzaangor','worldTerminator','thousInfernalMaster']);
     const quietChaos = new JSDOM(await get('/onslaught'));
     const chaosHonors = quietChaos.window.document.querySelector('[aria-label="Chaos honor priorities"]');
     assert.equal(chaosHonors.querySelectorAll('tbody tr').length, 3);
@@ -303,7 +324,7 @@ try
     const raidEquipment=await withRaid('/equipment');
     const equipmentReady=raidEquipment.window.document.querySelector('[aria-label="Equip now"] tbody');
     assert.match(equipmentReady.textContent,/Exitor-Rho.*Grand Mantle/s);assert.doesNotMatch(equipmentReady.textContent,/Trajann/);
-    assert.equal(raidEquipment.window.document.querySelector('[aria-label="Equipment upgrade focus"]').value,'raid');
+    assert.equal(raidEquipment.window.document.querySelector('[aria-label="Equipment upgrade focus"]').value,'priorities');
     raidEquipment.window.close();
     const rhoEquipment=await withRaid('/characters/'+rhoId);
     assert.match(rhoEquipment.window.document.querySelector('#equipment').textContent,/Equip Grand Mantle/);rhoEquipment.window.close();
@@ -426,6 +447,8 @@ try
     report.equipmentAllocation.buyWatch=[{character:"Kariyan",characterId:catalog.characters.find(character=>character.name==="Kariyan").id,slotId:"Slot1",currentItem:"Other test item",currentRarity:"Epic",currentLevel:4,accountPriority:80,recommendedItemId:"I_Crit_L001",recommendedItem:"Grand Combat Knife"}];
     report.unequippedInventory=[{id:"I_Crit_L001",amount:1,level:1}];
     await writeFile(reportPath,JSON.stringify(report));
+    // This fixture checks a Raid-first user's gear allocation rather than the new campaign-first default.
+    await pinTestCharacters([],['raid','campaign','war']);
     const readyEquipment=await get('/equipment');
     assert.match(readyEquipment,/aria-label="Equip now".*?<h2>Equip now.*?<td>.*?Trajann.*?<\/td>.*?Grand Combat Knife.*?Old test item/s);
     assert.doesNotMatch(readyEquipment,/>Slot[123]</);
