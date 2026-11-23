@@ -1,6 +1,6 @@
 export type UtilityTier="Core"|"Strong"|"Useful"|"Situational"|"Low priority";
 export type UtilityInputs={name:string;communityScore:number|null;communityTeams?:string[];accountPriority:number;accountNote?:string|null;priorityModes?:string[];mainRaidCore:boolean;mainRaidFlex:boolean;raidCore:boolean;raidFlex:boolean;warOption:boolean;incompleteCampaign:boolean};
-export type UtilityRating=UtilityInputs & {tier:UtilityTier;signals:string[]};
+export type UtilityRating=UtilityInputs & {tier:UtilityTier;signals:string[];planningPriority?:number;planningModes?:import("./playerPriorities").PriorityMode[];planningRoles?:import("./playerPriorities").PriorityMode[];pinned?:boolean};
 
 /** Account planning relevance from recorded evidence, not a universal combat tier list. */
 export function rateCharacter(input:UtilityInputs):UtilityRating

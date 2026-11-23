@@ -2,6 +2,9 @@ import {getAccountWarDefense} from "../lib/warDefensePlan";
 import {readFile} from "node:fs/promises";
 import Nav from "../components/Nav";
 import {getReport} from "../lib/report";
+import {getCampaignTargets} from "../lib/catalog";
+import {campaignOrbGoals} from "../../src/domain/orbCampaignGoals";
+import type {CampaignBattleDefinition} from "../../src/domain/campaigns";
 import {getCharacterCatalog,getAbilityBreakpoints} from "../lib/catalog";
 import {getUtilityRatings} from "../lib/utilityRatings";
 import {abilityGuideRows} from "../../src/domain/abilities";
@@ -10,7 +13,7 @@ import type {OnslaughtCandidate} from "../../src/domain/onslaught";
 import HonorPriorities from "./HonorPriorities";
 
 type WarSource={validatedFullLineups?:Array<{name:string;members:string[];used:number;wins:number}>};
-type BattleRewards={rewards?:{potential?:Array<{id:string;effective_rate?:number;chance_numerator?:number}>}};
+type BattleRewards=CampaignBattleDefinition & {rewards?:{potential?:Array<{id:string;effective_rate?:number;chance_numerator?:number}>}};
 
 export default async function Onslaught() {
  const [report,catalog,guidance,offense,battles]=await Promise.all([
@@ -20,6 +23,8 @@ export default async function Onslaught() {
  ]);
  if(!report)return <main><Nav/><h1>Onslaught honor priorities</h1><div className="empty">Run <code>npm run refresh</code> to load your roster and resources.</div></main>;
  const ratings=new Map((await getUtilityRatings(report)).map(row=>[row.name,row]));
+ const campaignTargets=await getCampaignTargets();
+ const campaignBattles=Object.values(battles);
  const guides=new Map(abilityGuideRows(catalog.characters,report.roster,guidance,{}).map(row=>[row.id,row]));
  const shardSources=new Set(Object.values(battles).flatMap(battle=>battle.rewards?.potential?.filter(reward=>(reward.effective_rate??reward.chance_numerator??0)>0).map(reward=>reward.id)??[]));
  const candidates:OnslaughtCandidate[]=report.roster.flatMap(unit=>{
@@ -28,7 +33,7 @@ export default async function Onslaught() {
   return [{id:unit.id,name:guide.character,alliance:unit.grandAlliance,rank:unit.rank,progressionIndex:unit.progressionIndex,
    shards:Number.isSafeInteger(unit.shards)&&unit.shards>=0?unit.shards:null,
    mythicShards:Number.isSafeInteger(unit.mythicShards)&&unit.mythicShards>=0?unit.mythicShards:null,
-   utility,campaignGoals:[],xpLevel:unit.xpLevel,activeLevel:guide.activeLevel,passiveLevel:guide.passiveLevel,
+   utility,campaignGoals:campaignOrbGoals(guide.character,campaignTargets,report.campaignProgress,campaignBattles),xpLevel:unit.xpLevel,activeLevel:guide.activeLevel,passiveLevel:guide.passiveLevel,
    activeTarget:guide.activeTargetLevel,passiveTarget:guide.passiveTargetLevel,targetsReviewed:guide.reviewed,
    campaignShardSource:shardSources.has(`shards_${unit.id}`)}];
  });

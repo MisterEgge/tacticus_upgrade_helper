@@ -6,7 +6,7 @@ import {targetName,type Report} from "./report";
 import type {CatalogCharacter} from "./catalog";
 
 /** One replacement and inventory allocation model for Equipment and character details. */
-export function buildEquipmentPlan(report:Report,catalog:{characters:CatalogCharacter[]},shops:ShopCatalog|null,raidNames:ReadonlySet<string>=new Set())
+export function buildEquipmentPlan(report:Report,catalog:{characters:CatalogCharacter[]},shops:ShopCatalog|null,raidNames:ReadonlySet<string>=new Set(),planningScores?:Record<string,number>)
 {
  if(shops)shops={...shops,accountContext:shopAccountContext(report.roster,report.source.powerLevel)};
  const unitByName=new Map(report.roster.map(unit=>[unit.name,unit]));
@@ -36,7 +36,7 @@ export function buildEquipmentPlan(report:Report,catalog:{characters:CatalogChar
   const unit=unitByName.get(slot.character),current=unit?.items.find(item=>item.slotId===slot.slotId),target=slot.acquisition[0]?.id;
   const booster=unit?.items.find(item=>catalogEquipment[item.id]?.type==="I_Booster_Block");
   const minimumLevel=equipmentReplacementMinimumLevel(current,target,catalogEquipment,booster);
-  return {...slot,raidPriority:raidNames.has(slot.character),currentItemId:current?.id,minimumLevel:minimumLevel??1,...(minimumLevel===null?{state:"UNKNOWN"}:{}),reason:"reason" in slot?slot.reason:catalogEquipment[target??""]?.type==="I_Block"?"Preferred block chance · general reliability":"Rarity upgrade"};
+  return {...slot,...(planningScores?{planningPriority:planningScores[slot.character]??0}:{}),raidPriority:raidNames.has(slot.character),currentItemId:current?.id,minimumLevel:minimumLevel??1,...(minimumLevel===null?{state:"UNKNOWN"}:{}),reason:"reason" in slot?slot.reason:catalogEquipment[target??""]?.type==="I_Block"?"Preferred block chance · general reliability":"Rarity upgrade"};
  });
  const assigned=allocateEquipmentActions(candidates,report.unequippedInventory).map(slot=>({...slot,target:slot.acquisition.find(source=>source.id===slot.allocatedItemId)?.name??slot.target}));
  const occupied=new Set(assigned.filter(slot=>slot.state==="EQUIP NOW").map(slot=>`${slot.character}:${slot.slotId}`));

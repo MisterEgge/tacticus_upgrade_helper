@@ -5,6 +5,7 @@ import {utilityAtLeast} from "./characterUtility";
 import {abilityReadiness} from "./abilityReadiness";
 import {totalBadgeCosts} from "./abilityCosts";
 import {badgeShortfalls,type AbilityBadgeInventory} from "./badgeInventory";
+import {priorityWithWarSelection} from "./playerPriorities";
 
 export const ALLIANCES=["Imperial","Xenos","Chaos"] as const;
 export type Alliance=typeof ALLIANCES[number];
@@ -61,13 +62,14 @@ function shardsToGoal(from:number,to:number):number {
 }
 export function onslaughtPriorities(candidates:OnslaughtCandidate[],orbs:OrbInventory|null|undefined,badges:AbilityBadgeInventory|null|undefined,war:Map<string,number>,choices:Partial<Record<Alliance,SectorChoice>>,includeMythic=false) {
  const byAlliance=new Map(ALLIANCES.map(alliance=>[alliance,[] as OnslaughtCandidate[]]));
- for(const unit of candidates){const alliance=normalizeAlliance(unit.alliance);if(alliance)byAlliance.get(alliance as Alliance)?.push(unit);}
+ for(const unit of candidates){const alliance=normalizeAlliance(unit.alliance),priority=priorityWithWarSelection(unit.utility,war.has(unit.name));if(alliance)byAlliance.get(alliance as Alliance)?.push(priority===undefined?unit:{...unit,utility:{...unit.utility,planningPriority:priority}});}
  const ready=shardReadyOrbPlan(candidates.filter(unit=>{const goal=rarityGoal(unit,war),next=nextOrbMilestone(unit.progressionIndex);return goal!==null&&!!next&&next.to<=goal;}),orbs,war,false);
  return ALLIANCES.map(alliance=>{
   const owned=byAlliance.get(alliance)!;
   const members=owned.filter(unit=>progressionRarity(unit.progressionIndex));
   const pools=ready.pools.filter(pool=>pool.alliance===alliance&&pool.shortfall!==0);
   const ranked=members.flatMap(unit=>{
+   if(unit.utility.planningPriority===0)return [];
    const reward=honorReward(unit.progressionIndex,choices[alliance]??null)!;
    // These repeatable sources provide regular shards, never Mythic shards.
    if(reward.shardType==="regular"&&regularIncome.has(unit.id))return [];
@@ -125,7 +127,7 @@ export function onslaughtPriorities(candidates:OnslaughtCandidate[],orbs:OrbInve
    const honorShortfall=milestone?milestone.shardShortfall:shardShortfall;
    return [{...unit,alliance,reward,reasons,priority,relevance:relevance(unit,war),futureRarity,resourceBanking,shardsNeeded,shardBalance,shardShortfall,goalRarity,milestone,orbPool,badgeNeeds,
     battles:reward.shards&&honorShortfall!==null?{min:Math.ceil(honorShortfall/reward.shards.max),max:Math.ceil(honorShortfall/reward.shards.min)}:null}];
-  }).sort((a,b)=>a.priority-b.priority||a.relevance-b.relevance||(a.futureRarity&&b.futureRarity?
+  }).sort((a,b)=>(b.utility.planningPriority??0)-(a.utility.planningPriority??0)||a.priority-b.priority||a.relevance-b.relevance||(a.futureRarity&&b.futureRarity?
    (b.utility.communityScore??0)-(a.utility.communityScore??0)||b.utility.accountPriority-a.utility.accountPriority||(a.milestone?.shardShortfall??Infinity)-(b.milestone?.shardShortfall??Infinity):0)||Number(a.campaignShardSource)-Number(b.campaignShardSource)||(b.utility.communityScore??0)-(a.utility.communityScore??0)||b.utility.accountPriority-a.utility.accountPriority||(a.shardShortfall??Infinity)-(b.shardShortfall??Infinity)||a.name.localeCompare(b.name));
   const rarityGroups=CHARACTER_RARITIES.map(rarity=>({rarity,rows:ranked.filter(row=>progressionRarity(row.progressionIndex)===rarity).slice(0,3)}));
   const rows=ranked.slice(0,3);

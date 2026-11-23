@@ -16,6 +16,7 @@ import { WAR_PLAN_STORAGE_KEY, warBadgeTargets, type WarBadgeTeam, type WarBudge
 import {badgeShortfalls,type AbilityBadgeInventory} from "../../src/domain/badgeInventory";
 
 import {abilityBudgetNextStep} from "../../src/domain/abilityBudgetNextStep";
+import {priorityWithWarSelection} from "../../src/domain/playerPriorities";
 
 const caps = [{level:17,label:"Uncommon · 17"},{level:26,label:"Rare · 26"},{level:35,label:"Epic · 35"},{level:50,label:"Legendary · 50"}];
 const rarities:BadgeRarity[] = ["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
@@ -27,7 +28,7 @@ const isWarScope=(scope:Scope):scope is WarBudgetScope=>scope.startsWith("war-")
 export default function AbilityBadgeBudget({rows,badgeInventory,defenseTeams,offenseTeams}:{rows:BudgetRow[];badgeInventory:AbilityBadgeInventory|null|undefined;defenseTeams:WarBadgeTeam[];offenseTeams:WarBadgeTeam[]})
 {
     const [cap,setCap] = useState(17);
-    const [scope,setScope] = useState<Scope>("useful");
+    const [scope,setScope] = useState<Scope>(rows.some(row=>row.planningPriority!==undefined)?"priorities":"useful");
     const [minRank,setMinRank] = useState(0);
 
     const [savedPlan,setSavedPlan] = useState<unknown>(null);
@@ -36,23 +37,25 @@ export default function AbilityBadgeBudget({rows,badgeInventory,defenseTeams,off
         read();window.addEventListener("storage",read);return()=>window.removeEventListener("storage",read);
     },[]);
     const selectedWarTargets=useMemo(()=>isWarScope(scope)?warBadgeTargets(defenseTeams,offenseTeams,savedPlan,scope):new Map<string,number>(),[defenseTeams,offenseTeams,savedPlan,scope]);
+    const activeWarTargets=useMemo(()=>warBadgeTargets(defenseTeams,offenseTeams,savedPlan,"war-both"),[defenseTeams,offenseTeams,savedPlan]);
     const groups = useMemo(() => ["Imperial","Xenos","Chaos"].map(alliance => {
-        const members = rows.filter(row => normalizeAlliance(row.alliance) === alliance && (isWarScope(scope)?selectedWarTargets.has(row.name):eligibleForBudget(row,scope,minRank)))
+        const members = rows.map(row=>{const priority=priorityWithWarSelection(row,activeWarTargets.has(row.name));return priority===undefined?row:{...row,planningPriority:priority};}).filter(row => normalizeAlliance(row.alliance) === alliance && (isWarScope(scope)?selectedWarTargets.has(row.name):eligibleForBudget(row,scope,minRank)))
             .map(row => {const warTarget=selectedWarTargets.get(row.name);const goal=warTarget?{...row,activeTarget:warTarget,passiveTarget:warTarget}:row;return {...goal,...budgetForRow(goal,warTarget??cap),warTarget};})
-            .filter(row => Object.values(row.planned).some(amount => amount > 0));
+            .filter(row => Object.values(row.planned).some(amount => amount > 0)).sort((a,b)=>(b.planningPriority??0)-(a.planningPriority??0)||a.name.localeCompare(b.name));
         const planned=totalBadgeCosts(members.map(row => row.planned)),eligible=totalBadgeCosts(members.map(row => row.eligible));
         return {alliance,members,planned,eligible,badges:badgeShortfalls(badgeInventory,alliance,planned,eligible)};
-    }),[rows,cap,scope,minRank,selectedWarTargets,badgeInventory]);
+    }),[rows,cap,scope,minRank,selectedWarTargets,badgeInventory,activeWarTargets]);
 
     return <><div className="abilityViews">
         <label>Include<select value={scope} onChange={event => setScope(event.target.value as Scope)}>
+            <option value="priorities">Account priorities</option>
             <option value="useful">Useful and above</option><option value="situational">Situational and above</option><option value="top">Core only</option><option value="raid">Main raid team only</option>
             <option value="war-defense">Selected War defense</option><option value="war-offense">Selected War offense</option><option value="war-both">War defense + offense</option>
         </select></label>
         {!isWarScope(scope)?<><label>Current rank<select value={minRank} onChange={event => setMinRank(Number(event.target.value))}>{rankFloors.map(option => <option key={option.level} value={option.level}>{option.label}</option>)}</select></label>
         <label>Plan through<select value={cap} onChange={event => setCap(Number(event.target.value))}>{caps.map(option => <option key={option.level} value={option.level}>{option.label}</option>)}</select></label></>:null}
     </div>
-        <ReferenceDetails label="How badge goals are calculated"><p>{isWarScope(scope)?"War totals use your saved buildable lineups. Defense slots 1–2 target 35/35; later slots target 26/26. Offense uses each slot’s Gold or Silver target. A character selected on both sides counts once at the higher target. If no plan is saved, the War planner’s default distinct teams are used.":"Useful includes relevant raid roles, unfinished campaign requirements, account priorities and the supplied community table. Situational also includes buildable War options and raid flex roles. See Character Ratings for every character and the exact signals. Rank narrows the current roster; it does not gate ability levels."}</p></ReferenceDetails>
+        <ReferenceDetails label="How badge goals are calculated"><p>{scope==="priorities"?"Uses the modes and pinned characters on your Priorities page, in that order. Existing practical ability targets and the selected tier still limit the budget.":isWarScope(scope)?"War totals use your saved buildable lineups. Defense slots 1–2 target 35/35; later slots target 26/26. Offense uses each slot’s Gold or Silver target. A character selected on both sides counts once at the higher target. If no plan is saved, the War planner’s default distinct teams are used.":"Useful includes relevant raid roles, unfinished campaign requirements, account priorities and the supplied community table. Situational also includes buildable War options and raid flex roles. See Character Ratings for every character and the exact signals. Rank narrows the current roster; it does not gate ability levels."}</p></ReferenceDetails>
         <AllianceTabs label="Badge budget alliance">{alliance=>{const group=groups.find(group=>group.alliance===alliance)!;return <section className="allianceContent" aria-label={`${alliance} badge budget`}>
             <p className="sub">{group.members.length} characters need badges for this goal.</p>
             <div className="badgeBudgetLayout">

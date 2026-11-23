@@ -3,6 +3,7 @@ type Candidate = {
  recommendedItemId?:string; acquisition:Array<{id:string}>;
  minimumLevel?:number;
  raidPriority?:boolean;
+ planningPriority?:number;
 };
 
 /** Reserve each shared copy once and offer at most one immediate replacement per slot. */
@@ -11,7 +12,7 @@ export function allocateEquipmentActions<T extends Candidate>(candidates:T[],inv
  const remaining=inventory.filter(item=>Number.isSafeInteger(item.amount)&&item.amount>0&&(item.level===undefined||Number.isSafeInteger(item.level)&&item.level>=1)).map(item=>({...item,level:item.level??1})).sort((a,b)=>b.level-a.level);
  const chosen=new Map<T,{id:string;level:number}>(),refinements=new Map<T,{id:string;level:number}>(),slots=new Set<string>();
  const tiers=["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
- const sorted=[...candidates].sort((a,b)=>Number(!!b.raidPriority)-Number(!!a.raidPriority)||Number(b.state==="EQUIP NOW")-Number(a.state==="EQUIP NOW")||b.accountPriority-a.accountPriority||a.character.localeCompare(b.character)||tiers.indexOf(b.itemRarity)-tiers.indexOf(a.itemRarity));
+ const sorted=[...candidates].sort((a,b)=>(b.planningPriority??Number(!!b.raidPriority))-(a.planningPriority??Number(!!a.raidPriority))||Number(b.state==="EQUIP NOW")-Number(a.state==="EQUIP NOW")||b.accountPriority-a.accountPriority||a.character.localeCompare(b.character)||tiers.indexOf(b.itemRarity)-tiers.indexOf(a.itemRarity));
  for(const option of sorted){
   const key=`${option.character}:${option.slotId}`;
   if(slots.has(key)||option.state==="UNKNOWN"||option.state==="LEVEL UP")continue;

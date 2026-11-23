@@ -6,6 +6,7 @@ import { getMainRaidSelection, getRaidMeta } from "./lib/raidSelection";
 import AuthAccountHeader from "./components/AuthAccountHeader";
 import { getSupabasePublicConfig } from "../src/server/supabaseConfig";
 import { createSupabaseServerClient } from "./lib/supabase/server";
+import {getPlayerPriorities} from "./lib/playerPriorities";
 
 // Account reports are read from disk and change after refresh. Never freeze them at build time.
 export const dynamic = "force-dynamic";
@@ -16,6 +17,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const {configured:prioritiesConfigured}=await getPlayerPriorities();
   if (getSupabasePublicConfig()) {
     const supabase = await createSupabaseServerClient();
     const { data: { user }, error } = await supabase.auth.getUser();
@@ -27,6 +29,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       console.error("Could not load account sync status.", accountError.message);
     const report = user ? await getReport() : null;
     return <html lang="en"><body><AuthAccountHeader
+      prioritiesConfigured={prioritiesConfigured}
       {...(report?.source.player ? { playerName: report.source.player } : {})}
       connected={!!account?.encrypted_api_key}
       {...(account?.synced_at ? { lastSynced: account.synced_at } : {})}
@@ -36,5 +39,5 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const meta = await getRaidMeta();
   const raidSelection = await getMainRaidSelection(meta.bosses, report);
   const raidTeam = meta.bosses[raidSelection.boss]![raidSelection.teamName]!;
-  return <html lang="en"><body><AccountHeader report={report} raidSelection={raidSelection} raidLineup={selectedRaidNames(raidSelection,raidTeam)}/>{children}</body></html>;
+  return <html lang="en"><body><AccountHeader prioritiesConfigured={prioritiesConfigured} report={report} raidSelection={raidSelection} raidLineup={selectedRaidNames(raidSelection,raidTeam)}/>{children}</body></html>;
 }

@@ -1,5 +1,6 @@
 import { CHARACTER_RARITIES, nextOrbMilestone, progressionRarity, progressionStep, rarityForGoal, type CharacterRarity } from "./characterProgression";
 import { utilityAtLeast, type UtilityRating } from "./characterUtility";
+import {priorityWithWarSelection} from "./playerPriorities";
 
 export type OrbInventory = Record<string, Array<{ rarity: string; amount: number }>>;
 export type OrbCandidate = { id: string; name: string; alliance: string; progressionIndex: number; rank: number;
@@ -26,20 +27,25 @@ export function orbPriority(candidate: OrbCandidate, warTarget: number | undefin
     const raid = candidate.utility.mainRaidCore || candidate.utility.mainRaidFlex;
     const campaigns = candidate.campaignGoals.filter(goal => CHARACTER_RARITIES.indexOf(rarityForGoal(goal.rank, goal.ability)) > CHARACTER_RARITIES.indexOf(current));
     const war = warTarget !== undefined && CHARACTER_RARITIES.indexOf(rarityForGoal(null, warTarget)) > CHARACTER_RARITIES.indexOf(current);
+    const personalPriority=priorityWithWarSelection(candidate.utility,warTarget!==undefined);
+    const accountScope=options.scope==="priorities" && personalPriority!==undefined;
+    if(accountScope&&personalPriority===0)return null;
+    const enabled=(mode:import("./playerPriorities").PriorityMode)=>!accountScope||candidate.utility.planningModes?.includes(mode);
     let tier = 4, goalIndex = candidate.progressionIndex, reasons: string[] = [];
     const add = (priority: number, goal: number, reason: string) => { tier = Math.min(tier, priority); goalIndex = Math.max(goalIndex, goal); reasons.push(reason); };
-    if (raid && ["priorities", "raid", "all"].includes(options.scope)) add(candidate.utility.mainRaidCore ? 0 : 1, Math.max(12, next.to), candidate.utility.mainRaidCore ? "Selected Raid core" : "Selected Raid flex");
-    if (["priorities", "campaign", "all"].includes(options.scope)) for (const goal of campaigns) add(2, rarityFloor[rarityForGoal(goal.rank, goal.ability)], `${goal.campaign} Elite target${goal.progressKnown ? "" : " · completion unknown"}`);
-    if (war && ["priorities", "war", "all"].includes(options.scope)) add(3, warTarget === 35 ? 9 : 6, `Active War ${warTarget === 35 ? "Gold" : "Silver"} slot`);
+    if (raid && enabled("raid") && ["priorities", "raid", "all"].includes(options.scope)) add(candidate.utility.mainRaidCore ? 0 : 1, Math.max(12, next.to), candidate.utility.mainRaidCore ? "Selected Raid core" : "Selected Raid flex");
+    if (enabled("campaign") && ["priorities", "campaign", "all"].includes(options.scope)) for (const goal of campaigns) add(2, rarityFloor[rarityForGoal(goal.rank, goal.ability)], `${goal.campaign} Elite target${goal.progressKnown ? "" : " · completion unknown"}`);
+    if (war && enabled("war") && ["priorities", "war", "all"].includes(options.scope)) add(3, warTarget === 35 ? 9 : 6, `Active War ${warTarget === 35 ? "Gold" : "Silver"} slot`);
+    if(accountScope&&candidate.utility.pinned)add(-candidate.utility.planningPriority!,next.to,"Pinned character");
     // Utility is a fallback for the bench, never a reason to exceed an active War cap.
-    if (!reasons.length && options.scope === "priorities" && !warTarget && utilityAtLeast(candidate.utility.tier, "Useful")) {
+    if (!accountScope && !reasons.length && options.scope === "priorities" && !warTarget && utilityAtLeast(candidate.utility.tier, "Useful")) {
         const floor = ["Core", "Strong"].includes(candidate.utility.tier) ? 12 : 9;
         if (candidate.progressionIndex < floor) add(4, floor, `${candidate.utility.tier} usefulness · planning floor`);
     }
     if (options.scope === "all" && !reasons.length) add(5, next.to, "Manual full-roster scope");
     if (!reasons.length || goalIndex < next.to) return null;
     if (!options.includeMythic) goalIndex = Math.min(goalIndex, 15);
-    return { tier, goalIndex, reasons };
+    return { tier:accountScope?-personalPriority!:tier, goalIndex, reasons };
 }
 export function orbPlan(candidates: OrbCandidate[], inventory: OrbInventory | null | undefined, warTargets: Map<string, number>, options: OrbOptions) {
     const projected = candidates.flatMap(candidate => {

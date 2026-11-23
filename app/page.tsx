@@ -11,6 +11,9 @@ import {getAccountWarDefense} from "./lib/warDefensePlan";
 import {warBadgeTargets,type WarBadgeTeam} from "../src/domain/warBadgeTargets";
 import {rankAccountActions} from "../src/domain/dashboard";
 import {readFile} from "node:fs/promises";
+import {getCampaignTargets} from "./lib/catalog";
+import {campaignOrbGoals} from "../src/domain/orbCampaignGoals";
+import type {CampaignBattleDefinition} from "../src/domain/campaigns";
 
 type WarSource={validatedFullLineups?:Array<{name:string;members:string[];used:number}>};
 type BattleRewards={rewards?:{potential?:Array<{id:string;effective_rate?:number;chance_numerator?:number}>}};
@@ -23,7 +26,9 @@ export default async function Home(){
   readFile("config/war_offense_teams.json","utf8"),readFile("data/game/campaign-battles.json","utf8")
  ]);
  const ratingByName=new Map(ratings.map(row=>[row.name,row]));
- const nextRows=rankAccountActions(rows,new Set(equipment.raidNames)).slice(0,6);
+ const campaignTargets=await getCampaignTargets();
+ const campaignBattles=Object.values(JSON.parse(battleText)) as CampaignBattleDefinition[];
+ const nextRows=rankAccountActions(rows,new Set(equipment.raidNames),equipment.planning.scores).slice(0,6);
  const owned=new Set(report.roster.map(unit=>unit.name));
  const defenseTeams:WarBadgeTeam[]=getAccountWarDefense(report).map(team=>({name:team.name,tier:team.tier,used:team.used,members:team.members.map(name=>({name}))}));
  const offensePlan=JSON.parse(offenseText) as WarSource;
@@ -37,12 +42,12 @@ export default async function Home(){
   return [{id:unit.id,name:guide.character,alliance:unit.grandAlliance,rank:unit.rank,progressionIndex:unit.progressionIndex,
    shards:Number.isSafeInteger(unit.shards)&&unit.shards>=0?unit.shards:null,
    mythicShards:Number.isSafeInteger(unit.mythicShards)&&unit.mythicShards>=0?unit.mythicShards:null,
-   utility,campaignGoals:[],xpLevel:unit.xpLevel,activeLevel:guide.activeLevel,passiveLevel:guide.passiveLevel,
+   utility,campaignGoals:campaignOrbGoals(guide.character,campaignTargets,report.campaignProgress,campaignBattles),xpLevel:unit.xpLevel,activeLevel:guide.activeLevel,passiveLevel:guide.passiveLevel,
    activeTarget:guide.activeTargetLevel,passiveTarget:guide.passiveTargetLevel,targetsReviewed:guide.reviewed,
    campaignShardSource:shardSources.has(`shards_${unit.id}`)}];
  });
  const onslaughtTargets=onslaughtPriorities(candidates,report.orbInventory??null,report.abilityBadges??null,war,{},false)
-  .flatMap(group=>group.rows).sort((a,b)=>a.priority-b.priority||a.relevance-b.relevance||a.name.localeCompare(b.name))
+  .flatMap(group=>group.rows).sort((a,b)=>(b.utility.planningPriority??0)-(a.utility.planningPriority??0)||a.priority-b.priority||a.relevance-b.relevance||a.name.localeCompare(b.name))
   .filter((target,index,all)=>all.findIndex(candidate=>candidate.id===target.id)===index).slice(0,6)
   .map(target=>({id:target.id,name:target.name,icon:catalog.characters.find(character=>character.id===target.id)?.icon,rarity:progressionRarity(target.progressionIndex)??"Unknown",reasons:target.reasons}));
  return <main><Nav/><header><div><p className="eyebrow">ACCOUNT OVERVIEW</p><h1>Dashboard</h1></div></header>
