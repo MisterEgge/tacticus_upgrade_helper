@@ -1,3 +1,7 @@
+# User preferences
+
+- Garrett uses Git Bash. Default user-facing terminal instructions to Git Bash syntax, including `/c/Users/...` paths and `npm` commands. Do not default to PowerShell or `npm.cmd` unless explicitly requested.
+
 # Code changes
 
 For any user-facing page or component, follow [Interface design](docs/interface-design.md).

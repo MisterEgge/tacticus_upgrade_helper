@@ -6,6 +6,8 @@ Account-specific upgrade analysis for **Warhammer 40,000: Tacticus**.
 
 Start it with `npm ci` followed by `npm run dev`, then visit [http://localhost:3000](http://localhost:3000).
 
+For Git Bash on Windows, see the [local startup instructions](output/RUN-LOCALLY.txt).
+
 ## Hosted accounts (auth-first)
 
 ### Supabase setup

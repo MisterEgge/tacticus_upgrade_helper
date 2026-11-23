@@ -23,6 +23,7 @@ output/*.xlsx
 /data/history/
 
 # Python
+.pytest_cache/
 .venv/
 __pycache__/
 *.pyc

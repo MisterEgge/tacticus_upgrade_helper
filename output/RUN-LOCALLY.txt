@@ -1,0 +1,83 @@
+TACTICUS UPGRADE HELPER - RUN LOCALLY WITH GIT BASH
+
+QUICK START (your usual day-to-day commands)
+
+1. Open a Git Bash terminal in VS Code.
+2. Run:
+
+   cd /c/Users/Garrett/Desktop/tacticus_api
+   npm run dev
+
+3. Leave that terminal running and open:
+
+   http://localhost:3000
+
+   If Next.js reports a different port, use the URL printed in the terminal.
+
+To stop the app: press Ctrl+C in that terminal.
+To start it again: run npm run dev again.
+
+
+FIRST-TIME SETUP (or after dependencies change)
+
+This project uses Node.js 24 and npm. Check your installation with:
+
+   node --version
+   npm --version
+
+From the project folder, install the dependencies:
+
+   npm ci
+
+You do not need to run npm ci every time you start the app.
+These commands are for Git Bash, your preferred terminal.
+
+
+LOAD OR REFRESH YOUR TACTICUS ACCOUNT DATA
+
+For the local single-user app, add this entry to the project's .env file:
+
+   TACTICUS_API_KEY=your_actual_tacticus_api_key
+
+Keep any existing .env entries. Do not overwrite the file or share your key.
+Then run from the project folder:
+
+   npm run refresh
+   npm run dev
+
+Refresh fetches your account data and generates output/upgrade-report.json.
+An existing report can be used without refreshing every startup. Without a
+report, the app can start but account dashboards will show unavailable data.
+You can also use the app's Sync Account button to update account data.
+
+The .env file, account exports, and generated account report stay local and
+are ignored by Git. You do not need to commit them to run the app.
+
+
+IF YOU SEE A LOGIN SCREEN
+
+When Supabase settings are configured, the app uses account sign-in. Sign in
+at http://localhost:3000/login, then use Settings to connect your Tacticus key
+and Sync Account to load your data.
+
+Supabase is optional for local single-user use. The README's "Hosted accounts
+(auth-first)" section explains its configuration, migrations, and encryption
+secret. A hosted account reads its own saved report, not the local report.
+Do not delete existing Supabase settings just to start the server.
+
+
+COMMON FIXES
+
+- Missing packages or "next is not recognized": run npm ci, then retry.
+- Port 3000 is occupied: use the port Next.js prints, or explicitly run:
+
+    npm run dev -- --port 3001
+
+  Then visit http://localhost:3001. For Supabase sign-in, also configure the
+  matching site/callback URLs as described in README.md.
+- No account recommendations: run npm run refresh for local mode, or
+  connect your key and sync through Settings for a signed-in hosted account.
+- After changing .env: stop the server with Ctrl+C and start it again.
+
+You do not need a hosted domain, a production build, or Python just to run
+the local web app with npm run dev.
