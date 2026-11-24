@@ -8,6 +8,12 @@ Start it with `npm ci` followed by `npm run dev`, then visit [http://localhost:3
 
 For Git Bash on Windows, see the [local startup instructions](output/RUN-LOCALLY.txt).
 
+## Character upgrades
+
+The **Upgrades** page (`/upgrades`, also linked from Guild War) lists owned characters whose rank upgrades open source-backed defense or offense lineups. Choose Silver I or Gold I; each character appears once per view with Current/Target icons, the relevant recorded core or exact-lineup rate and sample, any other teammates that need upgrades, and a direct material-planning link. Five-character teams stay collapsed, with reassignment notes from the saved browser War plan when available.
+
+Ranking balances sample-aware evidence against the whole lineup's remaining rank steps; it is not an energy estimate or a predicted win-rate increase. All five must be owned, and core/flex/exact cohorts need at least 100 attacks. Already-ready flex alternatives with equal or better evidence suppress redundant upgrade projects. Core/flex samples overlap and are never summed or presented as an exact five-character rate. Silver/Gold are rank planning thresholds, not source filters; source dates, scope and limits are disclosed on the page. Team membership and account priorities are unchanged until the player edits them.
+
 ## Your priorities
 
 Use **Set priorities** beside Sync Account (then **Update priorities** after saving), or visit `/priorities`. Reorder unfinished campaigns, Guild Raid and Guild War, turn off modes you do not want to invest in, and optionally pin up to 30 owned characters above the mode order. The default is unfinished campaigns, then Raid, then War. Completed campaigns stop contributing; unknown completion remains eligible until synced.
