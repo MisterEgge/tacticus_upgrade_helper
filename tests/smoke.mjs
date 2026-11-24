@@ -82,6 +82,7 @@ try
     assert.match(await get('/abilities'), /npm run refresh/);
     assert.match(await get('/orbs'), /npm run refresh/);
     assert.match(await get('/onslaught'), /npm run refresh/);
+    assert.match(await get('/upgrades'), /Sync Account to find War upgrades/);
     assert.match(await get('/material-completion'), /Account or farming data unavailable/);
     assert.match(await get('/elite-farming-gaps'), /Elite access unknown/);
     const report = {
@@ -431,6 +432,12 @@ try
     }
     await writeFile(reportPath, JSON.stringify(report));
     const unreadyLineup = new JSDOM(await get('/war-defense'));
+    const warUpgrades=new JSDOM(await get('/upgrades'));
+    assert.match(warUpgrades.window.document.querySelector('h1').textContent,/Build stronger War teams/);
+    assert.equal(warUpgrades.window.document.querySelector('[aria-label="War upgrade target"]').value,'silver');
+    assert.ok(warUpgrades.window.document.querySelector('a[href^="/farming?character="][href$="target=9"]'));
+    assert.match(warUpgrades.window.document.querySelector('main').textContent,/teammates also need upgrades/);
+    warUpgrades.window.close();
     assert.ok(unreadyLineup.window.document.querySelector('.warDefenseCard'));
     assert.ok(unreadyLineup.window.document.querySelector('[aria-label="Below Gold I minimum rank"]'));
     unreadyLineup.window.close();
