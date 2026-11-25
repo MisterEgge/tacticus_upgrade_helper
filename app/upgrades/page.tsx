@@ -12,7 +12,8 @@ import WarUpgradePlanner from "./WarUpgradePlanner";
 import {uniqueWarTeamIndexes} from "../../src/domain/warTeams";
 
 type OffenseEvidence={_meta:{reviewedOn:string};teams:OffenseCore[];validatedFullLineups:Array<{name:string;members:string[];used:number;wins:number}>};
-export default async function Upgrades(){
+export default async function Upgrades({searchParams}:{searchParams:Promise<{team?:string;side?:string;tier?:string}>}){
+    const selected=await searchParams;
     const [report,catalog,offense,preferences]=await Promise.all([getReport(),getCharacterCatalog(),readFile("config/war_offense_teams.json","utf8").then(JSON.parse) as Promise<OffenseEvidence>,getPlayerPriorities()]);
     if(!report)return <main><Nav/><header><h1>Character upgrades</h1></header><div className="empty">Sync Account to find War upgrades for your roster.</div></main>;
     const characters=new Map(catalog.characters.map(unit=>[unit.id,unit]));
@@ -34,6 +35,6 @@ export default async function Upgrades(){
     const defaults={defense:lineups.defense.map(team=>team.members.map(resolve)),offense:selectedOffense.map(index=>lineups.offense[index]!.members.map(resolve)).filter(ids=>ids.length===5)};
     return <main><Nav/><header><div><p className="eyebrow">CHARACTER UPGRADES</p><h1>Build stronger War teams</h1><p className="sub">Rank upgrades that open source-backed lineups from characters you own.</p></div></header>
         {!preferences.preferences.modes.includes("war")?<p className="sub">War is off in your account priorities. These are optional upgrades. <Link href="/priorities">Update priorities</Link></p>:null}
-        <WarUpgradePlanner defenseMetric={warDefenseEvidence.metric} roster={roster} sources={sources} defaults={defaults} reviewed={{defense:warDefenseEvidence.importedAt.slice(0,10),offense:offense._meta.reviewedOn}}/>
+        <WarUpgradePlanner initialTeam={selected.team} initialSide={selected.side==="offense"?"offense":"defense"} initialTier={selected.tier==="gold"?"gold":"silver"} defenseMetric={warDefenseEvidence.metric} roster={roster} sources={sources} defaults={defaults} reviewed={{defense:warDefenseEvidence.importedAt.slice(0,10),offense:offense._meta.reviewedOn}}/>
     </main>;
 }

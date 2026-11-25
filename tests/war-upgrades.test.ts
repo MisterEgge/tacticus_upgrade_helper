@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {warUpgradeRecommendations,warEvidenceConfidence,warUpgradeAssignments,warUpgradeReassignments,type WarUpgradeSource,type WarUpgradeUnit} from "../src/domain/warUpgrades";
+import {groupWarUpgrades,warUpgradeRecommendations,warEvidenceConfidence,warUpgradeAssignments,warUpgradeReassignments,type WarUpgradeSource,type WarUpgradeUnit} from "../src/domain/warUpgrades";
 
 const group=(key="A",side:"defense"|"offense"="defense"):WarUpgradeSource=>({key,side,kind:"core",core:[`${key}1`,`${key}2`,`${key}3`],used:1000,rate:90,flex:[{id:`${key}4`,used:1000,rate:92},{id:`${key}5`,used:1000,rate:90}]});
 const roster=(groups:WarUpgradeSource[],rank=9):WarUpgradeUnit[]=>[...new Set(groups.flatMap(source=>[...source.core,...source.flex.map(choice=>choice.id)]))].map(id=>({id,name:id,rank,rarity:"Rare"}));
@@ -78,4 +78,26 @@ test("saved assignments describe reassignments without permitting duplicate char
     assert.equal(warUpgradeReassignments(plan,[["A1","X","Y","Z","Q"]]),1);
     assert.deepEqual(warUpgradeAssignments({lineups:{defense:[snapshot.lineups.defense[0],snapshot.lineups.defense[0]]}},"defense",[["fallback"]],owned),[["fallback"]]);
     assert.deepEqual(warUpgradeAssignments({lineups:{defense:[{core:[{id:"unowned"}],flex:[]}]}},"defense",[["fallback"]],owned),[["fallback"]]);
+});
+
+test("team grouping retains shared core upgrades and alternative flexes once per team",()=>{
+ const source=group();source.flex.push({id:"A6",used:900,rate:91});
+ const units=roster([source],7);
+ const groups=groupWarUpgrades(warUpgradeRecommendations(units,[source],"silver","defense"),units);
+ assert.equal(groups.length,1);
+ assert.deepEqual(new Set(groups[0]!.upgrades.map(row=>row.unit.id)),new Set(units.map(unit=>unit.id)));
+ assert.equal(groups[0]!.upgrades.length,6);
+ const reordered={...source,key:"different-source",core:[...source.core].reverse(),flex:[...source.flex].reverse()};
+ const next=groupWarUpgrades(warUpgradeRecommendations(units,[reordered],"gold","defense"),units);
+ assert.equal(next[0]!.id,groups[0]!.id);
+ assert.equal(next[0]!.name,groups[0]!.name);
+});
+test("a shared upgrade stays visible under each distinct team rather than losing its alternatives",()=>{
+ const a=group(),b=group("B");b.core[0]="A1";
+ const units=roster([a,b]);units.find(unit=>unit.id==="A1")!.rank=7;
+ const groups=groupWarUpgrades(warUpgradeRecommendations(units,[a,b],"silver","defense"),units);
+ assert.equal(groups.length,2);
+ assert.ok(groups.every(team=>team.upgrades.length===1&&team.upgrades[0]!.unit.id==="A1"));
+ assert.notEqual(groups[0]!.id,groups[1]!.id);
+ assert.ok(groups.every(team=>team.plan.used===1000));
 });

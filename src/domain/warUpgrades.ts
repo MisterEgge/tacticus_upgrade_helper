@@ -1,3 +1,4 @@
+import {warTeamIdentity} from "./warTeamIdentity";
 import {warTierMinimumRank} from "./warReadiness";
 import {RANK_NAMES} from "./ranks";
 
@@ -95,4 +96,22 @@ export function warUpgradeAssignments(saved:unknown,side:WarSide,defaults:string
 
 export function warUpgradeReassignments(plan:WarUpgradePlan,assignments:readonly string[][]):number {
     return assignments.filter(group=>group.some(id=>plan.members.includes(id))&&!(group.length===5&&group.every(id=>plan.members.includes(id)))).length;
+}
+
+export type WarUpgradeTeam={id:string;name:string;plan:WarUpgradePlan;upgrades:WarUpgradeRecommendation[]};
+/** Preserve each character's other team opportunities, but list it once per core. */
+export function groupWarUpgrades(recommendations:readonly WarUpgradeRecommendation[],roster:readonly WarUpgradeUnit[]):WarUpgradeTeam[]{
+ const units=new Map(roster.map(unit=>[unit.id,unit]));
+ const groups=new Map<string,WarUpgradeTeam>();
+ for(const row of recommendations)for(const plan of [row.plan,...row.alternatives]){
+  const identity=warTeamIdentity(plan.core.map(id=>units.get(id)!),plan.kind);
+  let group=groups.get(identity.id);
+  if(!group){group={...identity,plan,upgrades:[]};groups.set(identity.id,group);}
+  if(plan.score>group.plan.score)group.plan=plan;
+  const previous=group.upgrades.find(upgrade=>upgrade.unit.id===row.unit.id);
+  if(!previous)group.upgrades.push({...row,plan,alternatives:[]});
+  else if(plan.score>previous.plan.score)previous.plan=plan;
+ }
+ for(const group of groups.values())group.upgrades.sort((a,b)=>Number(group.plan.core.includes(b.unit.id))-Number(group.plan.core.includes(a.unit.id))||a.unit.name.localeCompare(b.unit.name));
+ return [...groups.values()].sort((a,b)=>b.plan.score-a.plan.score||a.id.localeCompare(b.id));
 }
