@@ -24,7 +24,7 @@ function unit(name:string,id:string,itemName:string,faction?:string):Report["ros
  return {id:meta.id,name,faction:faction??meta.faction,grandAlliance:"Imperial",rarity:"Legendary",rank:12,xpLevel:36,progressionIndex:12,shards:0,mythicShards:0,abilities:[],items:id?[{id,name:itemName,rarity:id.includes("_L")?"Legendary":"Epic",slotId:id.includes("Defensive")?"Slot2":"Slot1",level:1}]:[]};
 }
 
-test("equipment sections collapse independently, retain character expansion and expose shared readiness and purchase routes",async suite=>{
+test("equipment task tabs isolate actions, preserve collapse state and expose shared readiness and purchase routes",async suite=>{
  const dom=new JSDOM("<!doctype html><html><body></body></html>",{url:"http://localhost/"});
  const descriptors=new Map<string,PropertyDescriptor|undefined>();
  for(const key of ["window","self","document","navigator","HTMLElement","Node","Event","MutationObserver","localStorage"]){descriptors.set(key,Object.getOwnPropertyDescriptor(globalThis,key));Object.defineProperty(globalThis,key,{configurable:true,value:dom.window[key as keyof typeof dom.window]});}
@@ -37,29 +37,36 @@ test("equipment sections collapse independently, retain character expansion and 
  assert.equal(rows.length,5);
  assert.equal(rows.find(row=>row.character==="Exitor-Rho")!.slots.find(slot=>slot.state==="EQUIP NOW")!.allocatedItemId,"I_Defensive_L004");
  const view=render(createElement(EquipmentTable,{transferContext,inventory:report.unequippedInventory,rows,raidNames:["Trajann","Kariyan","Exitor-Rho","Tyrith","Aleph-Null"],campaignNames:[],defenseTeams:[],offenseTeams:[]}));
+ const tasks=within(view.getByRole("tablist",{name:"Equipment tasks"}));
+ assert.deepEqual(tasks.getAllByRole("tab").map(tab=>tab.textContent),["Equip now","Transfers","Refine","Shop upgrades"]);
+ assert.equal(view.getAllByRole("tabpanel").length,1);
+ fireEvent.keyDown(tasks.getByRole("tab",{name:"Equip now"}),{key:"End"});
+ assert.equal(tasks.getByRole("tab",{name:"Shop upgrades"}).getAttribute("aria-selected"),"true");
+ fireEvent.keyDown(tasks.getByRole("tab",{name:"Shop upgrades"}),{key:"Home"});
  const ready=within(view.getByRole("region",{name:"Equip now"}));
+ assert.ok(ready.getByText("Minimize"));
  assert.match(ready.getByRole("table").textContent!,/Trajann.*Grand Combat Knife/s);
  assert.match(ready.getByRole("table").textContent!,/Exitor-Rho.*Grand Mantle/s);
  assert.doesNotMatch(ready.getByRole("table").textContent!,/Kariyan/);
  assert.ok(ready.getAllByText("Slot 1").length);
  assert.ok(ready.getAllByText("Slot 2").length);
  fireEvent.click(ready.getByRole("button",{name:/Equip now/}));
- assert.equal(ready.queryByRole("table"),null);
- assert.equal(view.queryByRole("region",{name:"Shop upgrade opportunities"}),null);
- fireEvent.click(view.getByRole("button",{name:"Shop upgrades"}));
+ assert.equal((ready.queryByRole("table"))===null,true);
+ assert.equal((view.queryByRole("region",{name:"Shop upgrade opportunities"}))===null,true);
+ fireEvent.click(view.getByRole("tab",{name:"Shop upgrades"}));
  assert.ok(within(view.getByRole("region",{name:"Shop upgrade opportunities"})).getAllByRole("article").length);
- assert.equal(view.queryByRole("button",{name:"Characters"}),null);
- assert.equal(view.queryByRole("button",{name:"Item needs"}),null);
+ assert.equal((view.queryByRole("button",{name:"Characters"}))===null,true);
+ assert.equal((view.queryByRole("button",{name:"Item needs"}))===null,true);
  const shop=within(view.getByRole("region",{name:"Shop upgrade opportunities"}));
  assert.ok(shop.getByRole("link",{name:"Grand Ceremonial Knife"}));
  assert.match(shop.getByRole("article",{name:/Grand Ceremonial Knife/}).textContent!,/715 Crusade Credits/);
- fireEvent.click(view.getByRole("button",{name:"Actions"}));
- assert.equal(ready.queryByRole("table"),null);
+ fireEvent.click(view.getByRole("tab",{name:"Equip now"}));
+ assert.equal((ready.queryByRole("table"))===null,true);
  fireEvent.click(ready.getByRole("button",{name:/Equip now/}));
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"Grand Plated Greaves"}});
  assert.match(ready.getByRole("table").textContent!,/Exitor-Rho/);
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"no equipment"}});
- assert.equal(ready.queryByRole("table"),null);
+ assert.equal((ready.queryByRole("table"))===null,true);
  view.rerender(createElement(EquipmentTable,{transferContext,inventory:report.unequippedInventory,key:"raid-first",rows:raidPlan.rows,raidNames:["Kariyan"],campaignNames:[],defenseTeams:[{name:"Defense",used:1,members:[{name:"Trajann"}]}],offenseTeams:[{name:"Offense",used:1,members:[{name:"Exitor-Rho"}]}]}));
  assert.equal((view.getByLabelText("Equipment upgrade focus") as HTMLSelectElement).value,"raid");
  const currentReady=()=>within(view.getByRole("region",{name:"Equip now"}));
@@ -69,10 +76,10 @@ test("equipment sections collapse independently, retain character expansion and 
  assert.match(currentReady().getByRole("table").textContent!,/Kariyan.*Exitor-Rho/s);
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"Kariyan"}});
  assert.doesNotMatch(currentReady().getByRole("table").textContent!,/Exitor-Rho/);
- assert.equal(view.queryByRole("button",{name:/outside this focus/}),null);
+ assert.equal((view.queryByRole("button",{name:/outside this focus/}))===null,true);
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"no such equipment"}});
- assert.equal(currentReady().queryByRole("table"),null);
- assert.equal(view.queryByRole("button",{name:/outside this focus/}),null);
+ assert.equal((currentReady().queryByRole("table"))===null,true);
+ assert.equal((view.queryByRole("button",{name:/outside this focus/}))===null,true);
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:""}});
  localStorage.setItem(WAR_PLAN_STORAGE_KEY,JSON.stringify({offense:["Offense"],offenseTiers:Array(10).fill("gold")}));
  fireEvent.focus(window);
@@ -83,28 +90,29 @@ test("equipment sections collapse independently, retain character expansion and 
  const transferPlan=buildEquipmentPlan(transferReport,catalog,shops,new Set(["Bellator"]));
  const liveContext:ReallocationProps={...transferContext,units:transferReport.roster,characters:catalog.characters,equipment:shops.equipment,raidNames:["Bellator"],targets:[{character:"Bellator",characterId:transferReport.roster[0]!.id,slotId:"Slot1",itemId:"I_Crit_L001",minimumLevel:1,inventoryReady:false}]};
  view.rerender(createElement(EquipmentTable,{key:"transfers",transferContext:liveContext,inventory:transferReport.unequippedInventory,rows:transferPlan.rows,raidNames:["Bellator"],campaignNames:[],defenseTeams:[],offenseTeams:[]}));
+ fireEvent.click(view.getByRole("tab",{name:"Transfers"}));
  const transferRegion=within(view.getByRole("region",{name:"Suggested gear transfers"}));
  assert.ok(transferRegion.getByText("Maladus"));
  assert.ok(transferRegion.getByText("Bellator"));
- assert.equal(transferRegion.queryByRole("table"),null);
+ assert.equal((transferRegion.queryByRole("table"))===null,true);
  assert.equal(transferRegion.getAllByText("Slot 1").length,2);
  const replacement=within(transferRegion.getByRole("group",{name:"Replace equipment in Slot 1"}));
  assert.ok(replacement.getByText("Advanced Combat Knife"));
  assert.ok(replacement.getByText("Grand Combat Knife"));
- assert.equal(view.queryByRole("region",{name:"Level up gear"}),null);
+ assert.equal((view.queryByRole("region",{name:"Level up gear"}))===null,true);
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"missing"}});
- assert.equal(view.queryByRole("region",{name:"Suggested gear transfers"}),null);
+ assert.ok(view.getByText("No gear transfers recommended."));
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"Maladus"}});
  assert.ok(view.getByRole("region",{name:"Suggested gear transfers"}));
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"Advanced Combat Knife"}});
  assert.ok(view.getByRole("region",{name:"Suggested gear transfers"}));
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"Slot 3"}});
- assert.equal(view.queryByRole("region",{name:"Suggested gear transfers"}),null);
+ assert.ok(view.getByText("No gear transfers recommended."));
  fireEvent.change(view.getByLabelText("Search equipment upgrades"),{target:{value:"Slot 1"}});
  assert.ok(view.getByRole("region",{name:"Suggested gear transfers"}));
  view.rerender(createElement(GearTransferSource,{context:liveContext,characterId:transferReport.roster[0]!.id,slotId:"Slot1",children:"Buy replacement"}));
  assert.ok(view.getByRole("link",{name:"Maladus"}));
- assert.equal(view.queryByText("Buy replacement"),null);
+ assert.equal((view.queryByText("Buy replacement"))===null,true);
  view.rerender(createElement(GearTransferSource,{context:{...liveContext,raidNames:[...liveContext.raidNames,"Maladus"]},characterId:transferReport.roster[0]!.id,slotId:"Slot1",children:"Buy replacement"}));
  assert.ok(view.getByText("Buy replacement"));
  view.rerender(createElement(GearTransferTable,{transfers:[{character:"Donor",characterId:"donor",slotId:"Slot3",itemId:"new",itemName:"Better item",level:7,reason:"No active role",recipient:"Recipient",recipientId:"recipient",recipientSlot:"Slot2",replacesId:"old",replacesName:"Old item",replacesLevel:3,role:"Selected Raid team"}]}));
@@ -135,7 +143,7 @@ test("equipment sections collapse independently, retain character expansion and 
  const pauldronPlan=buildEquipmentPlan(pauldronReport,catalog,shops,new Set(["Mataneo"]));
  assert.ok(pauldronPlan.rows[0]!.slots.some(slot=>slot.acquisition.some(source=>source.id==="I_Defensive_L002")));
  view.rerender(createElement(EquipmentTable,{key:"pauldron",transferContext,inventory:pauldronReport.unequippedInventory,rows:pauldronPlan.rows,raidNames:["Mataneo"],campaignNames:[],defenseTeams:[],offenseTeams:[]}));
- fireEvent.click(view.getByRole("button",{name:"Shop upgrades"}));
+ fireEvent.click(view.getByRole("tab",{name:"Shop upgrades"}));
  assert.ok(view.getByRole("link",{name:"Artificer MK X Pauldron"}));
  const equippedPlan=buildEquipmentPlan({...pauldronReport,roster:[unit("Mataneo","I_Defensive_L002","Artificer MK X Pauldron","BloodAngels")]},catalog,shops);
  assert.equal(equippedPlan.rows[0]!.slots.some(slot=>slot.acquisition.some(source=>source.id==="I_Defensive_L002")),false);
@@ -153,6 +161,6 @@ test("equipment sections collapse independently, retain character expansion and 
  assert.equal(completedGear.rows[0]!.slots.length,0);
  view.rerender(createElement(CharacterEquipment,{unit:vindicta,slots:completedGear.rows[0]!.slots,shops,powerLevel:52}));
  assert.ok(view.getByText("At the Legendary rarity target; no higher-rarity upgrade is shown."));
- assert.equal(view.queryByText("No verified replacement target. Current gear or compatibility may need review."),null);
+ assert.equal((view.queryByText("No verified replacement target. Current gear or compatibility may need review."))===null,true);
 
 });

@@ -5,7 +5,6 @@ import Link from "next/link";
 import {getShopCatalog}from "../lib/shops";
 import {getCharacterCatalog}from "../lib/catalog";
 import {readFile}from "node:fs/promises";
-import {campaignIsComplete,requiredCampaignName,type CampaignBattleDefinition}from "../../src/domain/campaigns";
 import {equipmentFocusPriority,type EquipmentFocus}from "../../src/domain/equipmentFocus";
 import Nav from "../components/Nav";
 import {getReport}from "../lib/report";
@@ -13,14 +12,12 @@ import EquipmentTable from "./EquipmentTable";
 
 export default async function Equipment()
 {
- const[report,shops,catalog,focus,battleText,offensePlan]=await Promise.all([getReport(),getShopCatalog(),getCharacterCatalog(),readFile("config/character_priorities.json","utf8").then(value=>JSON.parse(value)as Record<string,EquipmentFocus>),readFile("data/game/campaign-battles.json","utf8"),readFile("config/war_offense_teams.json","utf8").then(JSON.parse) as Promise<{validatedFullLineups:Array<{name:string;members:string[];used:number;wins:number}>}>]);
+ const[report,shops,catalog,focus,offensePlan]=await Promise.all([getReport(),getShopCatalog(),getCharacterCatalog(),readFile("config/character_priorities.json","utf8").then(value=>JSON.parse(value)as Record<string,EquipmentFocus>),readFile("config/war_offense_teams.json","utf8").then(JSON.parse) as Promise<{validatedFullLineups:Array<{name:string;members:string[];used:number;wins:number}>}>]);
  if(!report)return <main><Nav/><div className="empty">Run <code>npm run refresh</code>.</div></main>;
  const equipmentPlan=await getAccountEquipmentPlan(report,catalog,shops);
  const {rows,catalogEquipment,unitByName,catalogByName,raidNames}=equipmentPlan;
  const raid=new Set(raidNames);
- const battles=Object.values(JSON.parse(battleText))as CampaignBattleDefinition[];
- const incomplete=new Set((report.campaignProgress??[]).filter(progress=>!campaignIsComplete(progress,battles)).map(requiredCampaignName));
- const campaignRequired=new Set(catalog.characters.filter(character=>character.campaignsRequiredIn.some(name=>incomplete.has(name))).map(character=>character.name));
+ const campaignRequired=new Set(Object.entries(equipmentPlan.planning.roles).filter(([,roles])=>roles.includes("campaign")).map(([name])=>name));
  const defensiveAudit=report.roster.flatMap(unit=>
  {
    const character=catalogByName.get(unit.name);

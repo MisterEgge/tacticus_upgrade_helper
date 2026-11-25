@@ -1,0 +1,14 @@
+{
+  "reviewedOn": "2026-11-25",
+  "sources": ["https://tacticus.wiki.gg/wiki/Campaign", "https://tacticus.wiki.gg/wiki/Saim-Hann", "https://tacticus.wiki.gg/wiki/Indomitus", "https://tacticus.wiki.gg/wiki/Indomitus_Mirror", "https://tacticus.wiki.gg/wiki/Octarius", "https://tacticus.wiki.gg/wiki/Fall_of_Cadia", "https://tacticus.wiki.gg/wiki/Saim-Hann_Mirror"],
+  "campaigns": {
+    "Indomitus": {"faction": "Ultramarines", "helperAlliance": "Imperial"},
+    "Indomitus Mirror": {"faction": "Necrons"},
+    "Fall of Cadia": {"faction": "Black Legion", "helperAlliance": "Chaos"},
+    "Fall of Cadia Mirror": {"faction": "Astra Militarum", "helperAlliance": "Imperial"},
+    "Octarius": {"faction": "Orks"},
+    "Octarius Mirror": {"faction": "Black Templars", "helperAlliance": "Imperial"},
+    "Saim-Hann": {"faction": "Aeldari"},
+    "Saim-Hann Mirror": {"faction": "Thousand Sons", "helperAlliance": "Chaos"}
+  }
+}

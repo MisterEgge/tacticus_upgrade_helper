@@ -17,14 +17,15 @@ export function gearRoles({raidNames,raidOptions,warNames,campaignNames,campaign
  for(const [name,entry] of Object.entries(focus))if(entry.modes?.length)add([name],`Planned role: ${entry.modes.join(" / ")}`,0);
  add(Object.entries(focus).filter(([,entry])=>entry.modes?.includes("LRE")).map(([name])=>name),"Legendary Release Event",200);
  add(warNames,"Selected War team",300);
- add(campaignNames,"Required for unfinished campaign",400);
+ add(campaignNames,"Unfinished campaign roster",400);
  add(raidNames,"Selected Raid team",1000);
  if(planningScores)for(const [name,priority]of Object.entries(planningScores)){
   const role=roles.get(name);
   if(role)role.priority=priority;
   else if(priority>0)roles.set(name,{label:"Pinned character",priority});
  }
- for(const name of campaignUnknown)roles.get(name)!.donationBlocked=true;
+ // A higher investment score is not permission to empty a campaign slot.
+ for(const name of [...campaignNames,...campaignUnknown])roles.get(name)!.donationBlocked=true;
  return roles;
 }
 

@@ -1,14 +1,14 @@
 "use client";
 import {useId,useState,type ReactNode} from "react";
 
-export default function CollapsibleSection({title,summary,children,defaultOpen=true,className="",label}:{title:ReactNode;summary?:ReactNode;children:ReactNode;defaultOpen?:boolean;className?:string;label?:string})
+export default function CollapsibleSection({title,summary,children,defaultOpen=true,className="",label,showToggleLabel=false}:{title:ReactNode;summary?:ReactNode;children:ReactNode;defaultOpen?:boolean;className?:string;label?:string;showToggleLabel?:boolean})
 {
  const [open,setOpen]=useState(defaultOpen);
  const id=useId();
  return <section className={`campaignInvestmentGroup collapsibleSection ${className}`} aria-label={label??(typeof title==="string"?title:undefined)}>
   <button type="button" className="campaignSectionToggle" aria-expanded={open} aria-controls={id} onClick={()=>setOpen(value=>!value)}>
    <div><h2>{title}</h2>{summary?<p className="warSource">{summary}</p>:null}</div>
-   <span className="campaignChevron" aria-hidden="true">{open?"▴":"▾"}</span>
+   <span className="campaignChevron" aria-hidden="true">{showToggleLabel?(open?"Minimize":"Show"):(open?"▴":"▾")}</span>
   </button>
   <div id={id} className="campaignSectionBody" hidden={!open}>{children}</div>
  </section>;

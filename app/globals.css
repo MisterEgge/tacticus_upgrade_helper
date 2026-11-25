@@ -532,3 +532,11 @@ th,td { padding:12px 14px; }
 .warUpgradeMore { margin:16px; padding:9px 14px; border:1px solid #65758b; border-radius:8px; background:#1b2330; color:#edf1f7; font:inherit; cursor:pointer; }
 .warUpgradeMore:focus-visible { outline:2px solid #9ccaff; outline-offset:3px; }
 @media(max-width:700px) { .warUpgradeTable thead { display:none; } .warUpgradeTable tbody,.warUpgradeTable tr { display:block; } .warUpgradeTable tr { display:grid; grid-template-columns:1fr 1fr; padding:12px; border-bottom:1px solid #303b4b; } .warUpgradeTable td { display:block; padding:8px; border:0; min-width:0; } .warUpgradeTable td:nth-child(1),.warUpgradeTable td:nth-child(4),.warUpgradeTable td:nth-child(5) { grid-column:1/-1; } .warUpgradeTable td:nth-child(2)::before,.warUpgradeTable td:nth-child(3)::before { display:block; content:attr(data-label); color:#9da9ba; font-size:12px; margin-bottom:6px; } }
+.gearTransferCard { display:block; }
+.gearTransferInstruction { display:grid; grid-template-columns:minmax(150px,1fr) minmax(0,2fr) minmax(150px,1fr); align-items:center; gap:20px; }
+.gearTransferRecipient,.gearTransferDonor { display:flex; align-items:center; flex-wrap:wrap; gap:8px; min-width:0; }
+.gearTransferRecipient>strong,.gearTransferDonor>strong,.gearTransferRecipient>small,.gearTransferDonor>small { flex-basis:100%; }
+.gearTransferDonor { border-left:1px solid #303b4b; padding-left:16px; }
+.gearTransferCard details { margin-top:12px; }
+.equipmentActions .campaignChevron { font-size:12px; font-weight:700; }
+@media(max-width:800px) { .gearTransferInstruction { grid-template-columns:minmax(0,1fr); gap:16px; } .gearTransferDonor { border-left:0; padding-left:0; } }
