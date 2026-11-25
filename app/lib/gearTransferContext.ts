@@ -6,7 +6,7 @@ import {getReport} from "../lib/report";
 import {getShopCatalog} from "../lib/shops";
 import {getAccountEquipmentPlan} from "../lib/accountEquipmentPlan";
 import {getRaidMeta} from "../lib/raidSelection";
-import {campaignGearProtection} from "../../src/domain/campaignGearProtection";
+import {campaignGearProtection,campaignHelperProtection} from "../../src/domain/campaignGearProtection";
 import type {CampaignBattleDefinition} from "../../src/domain/campaigns";
 import type {EquipmentFocus} from "../../src/domain/equipmentFocus";
 import type {EquipmentDefinition} from "../../src/domain/equipmentCompatibility";
@@ -34,7 +34,9 @@ export async function getGearTransferContext(account?:{report:Report;catalog:Awa
  const offenseTeams=lineups.offense.map(gearTeam);
  const raidOptions=[...new Set(Object.values(meta.bosses).flatMap(teams=>Object.values(teams).flatMap(team=>[...team.core,...team.flex].filter(name=>!team.excluded?.includes(name)))))];
  const battles=Object.values(JSON.parse(battleText)) as CampaignBattleDefinition[];
- const {campaignNames,campaignUnknown}=campaignGearProtection(catalog.characters,report.campaignProgress??[],battles,true);
+ const {campaignNames,campaignUnknown}=campaignGearProtection(catalog.characters,report.campaignProgress??[],battles);
+ const helpers=campaignHelperProtection(catalog.characters,report.campaignProgress??[],battles,focus);
+ const campaignHelpers=[...new Set([...helpers.campaignNames,...helpers.campaignUnknown])].filter(name=>!campaignNames.includes(name)&&!campaignUnknown.includes(name));
  const protectedFocus=gearRoleFocus(focus,guidance);
  const targets=plan.tieredSlots.filter(slot=>slot.state!=="UNKNOWN"&&slot.state!=="LEVEL UP").flatMap(slot=>slot.characterId?slot.acquisition.flatMap(source=>{
   const unit=plan.unitByName.get(slot.character),current=unit?.items.find(item=>item.slotId===slot.slotId);
@@ -46,5 +48,5 @@ export async function getGearTransferContext(account?:{report:Report;catalog:Awa
  }):[]);
  // The browser needs restrictions and names, not the full per-level stat tables.
  const equipment=Object.fromEntries(Object.entries(plan.catalogEquipment).map(([id,item])=>[id,{type:item.type,rarity:item.rarity,...(item.name?{name:item.name}:{}),...(item.allowedUnits?{allowedUnits:item.allowedUnits}:{}),...(item.allowedFactions?{allowedFactions:item.allowedFactions}:{})}])) as Record<string,EquipmentDefinition>;
- return {units:report.roster,targets,characters:catalog.characters.map(character=>({id:character.id,name:character.name,faction:plan.unitByName.get(character.name)?.faction??character.faction,equipment:character.equipment})),equipment,raidNames:plan.raidNames,raidOptions,campaignNames,campaignUnknown,focus:protectedFocus,defenseTeams,offenseTeams,planningScores:plan.planning.scores,planningPreferences:plan.planning.preferences,planningRoles:plan.planning.roles} satisfies ReallocationProps;
+ return {units:report.roster,targets,characters:catalog.characters.map(character=>({id:character.id,name:character.name,faction:plan.unitByName.get(character.name)?.faction??character.faction,equipment:character.equipment})),equipment,raidNames:plan.raidNames,raidOptions,campaignNames,campaignUnknown,campaignHelpers,focus:protectedFocus,defenseTeams,offenseTeams,planningScores:plan.planning.scores,planningPreferences:plan.planning.preferences,planningRoles:plan.planning.roles} satisfies ReallocationProps;
 }

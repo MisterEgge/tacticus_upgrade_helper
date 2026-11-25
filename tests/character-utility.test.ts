@@ -24,3 +24,16 @@ test("the rating rubric covers every synced catalog character without inventing 
     assert.equal(new Set(ratings.map(row=>row.name)).size,catalog.characters.length);
     assert.ok(ratings.every(row=>row.communityScore===null&&row.tier==="Low priority"));
 });
+
+ test("optional usefulness and selected helpers never claim a mandatory campaign requirement",()=>{
+ for(const name of ["Calgar","Azrael"]){
+  assert.ok(rateCharacter({...input,name,communityScore:4}).signals.every(signal=>!signal.includes("Required")));
+  const helper=rateCharacter({...input,name,campaignHelper:true});
+  assert.ok(helper.signals.includes("Selected campaign helper"));
+  assert.ok(helper.signals.every(signal=>!signal.includes("Required")));
+ }
+ const unknown=rateCharacter({...input,campaignProgressUnknown:true});
+ assert.ok(unknown.signals.includes("Required campaign character: completion unverified"));
+ assert.ok(unknown.signals.every(signal=>!signal.includes("unfinished")));
+ assert.ok(rateCharacter({...input,incompleteCampaign:true}).signals.includes("Required in unfinished campaign"));
+ });

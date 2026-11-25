@@ -262,6 +262,22 @@ try
     const ratings = await get('/ratings');
     assert.match(ratings, new RegExp(`${catalog.characters.length}<strong> catalog characters`));
     assert.match(ratings, /Low priority for this roster/);
+    const beforeCampaignAccuracy={roster:report.roster,campaignProgress:report.campaignProgress};
+    report.roster=catalog.characters.map(unit=>({...report.roster[0],id:unit.id,name:unit.name,faction:unit.faction,grandAlliance:unit.alliance}));
+    report.campaignProgress=[{name:'Indomitus',type:'Standard',highestCompletedBattle:30},{name:'Saim-Hann',type:'Standard',highestCompletedBattle:75},{name:'Saim-Hann',type:'Elite',highestCompletedBattle:39}];
+    await writeFile(reportPath,JSON.stringify(report));
+    const campaignRatings=new JSDOM(await get('/ratings'));
+    const ratingRow=name=>[...campaignRatings.window.document.querySelectorAll('tbody tr')].find(row=>row.querySelector('.characterCell')?.textContent.includes(name)||row.querySelector('td')?.textContent.includes(name));
+    for(const character of catalog.characters){
+        const row=ratingRow(character.name);assert.ok(row,character.name);
+        if(character.campaignsRequiredIn.length===0)assert.doesNotMatch(row.textContent,/Required.*campaign/,character.name);
+    }
+    for(const name of ['Calgar','Azrael'])assert.doesNotMatch(ratingRow(name).textContent,/Selected campaign helper/);
+    assert.match(ratingRow('Jain Zar').textContent,/Selected campaign helper/);
+    assert.doesNotMatch(ratingRow('Jain Zar').textContent,/Required.*campaign/);
+    assert.match(ratingRow('Bellator').textContent,/Required in unfinished campaign/);
+    campaignRatings.window.close();
+    Object.assign(report,beforeCampaignAccuracy);await writeFile(reportPath,JSON.stringify(report));
     for (const route of ['/', '/equipment', '/equipment-demand', '/abilities', '/orbs', '/ratings', '/characters', '/characters/necroSpyder', '/inventory', '/guild-raid', '/war-defense'])
     {
 
