@@ -12,7 +12,7 @@ import type {EquipmentCharacter,EquipmentDefinition} from "../../src/domain/equi
 import type {EquipmentFocus} from "../../src/domain/equipmentFocus";
 import {characterPlanningPriority,type PlayerPriorities,type PriorityMode} from "../../src/domain/playerPriorities";
 
-export type ReallocationProps={units:ReallocationUnit[];targets:ReallocationTarget[];characters:EquipmentCharacter[];equipment:Record<string,EquipmentDefinition>;raidNames:string[];raidOptions:string[];campaignNames:string[];campaignUnknown:string[];focus:Record<string,EquipmentFocus>;defenseTeams:EquipmentWarTeam[];offenseTeams:EquipmentWarTeam[];planningScores?:Record<string,number>;planningPreferences?:PlayerPriorities;planningRoles?:Record<string,PriorityMode[]>};
+export type ReallocationProps={units:ReallocationUnit[];targets:ReallocationTarget[];characters:EquipmentCharacter[];equipment:Record<string,EquipmentDefinition>;raidNames:string[];raidOptions:string[];campaignNames:string[];campaignUnknown:string[];campaignHelpers?:string[];focus:Record<string,EquipmentFocus>;defenseTeams:EquipmentWarTeam[];offenseTeams:EquipmentWarTeam[];planningScores?:Record<string,number>;planningPreferences?:PlayerPriorities;planningRoles?:Record<string,PriorityMode[]>};
 function Holder({item}:{item:GearHolding}){return <Link className="characterLink" href={`/characters/${encodeURIComponent(item.characterId)}`}><CharacterName name={item.character} id={item.characterId}/></Link>;}
 
 export function useGearTransfers(props:ReallocationProps){

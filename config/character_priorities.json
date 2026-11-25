@@ -94,6 +94,7 @@
   },
   "Jain Zar": {
     "priority": 72,
+    "campaignHelpersFor": ["Saim-Hann"],
     "modes": [
       "Campaign",
       "Guild War"

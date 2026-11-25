@@ -33,6 +33,7 @@ export async function getUtilityRatings(report:Report)
         accountNote:priorities[character.name]?.note??null,priorityModes:priorities[character.name]?.modes??[],
         mainRaidCore:!!main && selectedRaidNames(selection,main).includes(character.name) && main.core.includes(character.name),mainRaidFlex:!!main && selectedRaidNames(selection,main).includes(character.name) && !main.core.includes(character.name),
         raidCore:raidCore.has(character.name),raidFlex:raidFlex.has(character.name),warOption:warOption.has(character.name),
-        incompleteCampaign:planning.roles[character.name]?.includes("campaign")??false
+        incompleteCampaign:planning.requiredCampaignNames.includes(character.name),
+        campaignProgressUnknown:planning.requiredCampaignUnknown.includes(character.name),campaignHelper:planning.campaignHelperNames.includes(character.name)&&!planning.requiredCampaignNames.includes(character.name)&&!planning.requiredCampaignUnknown.includes(character.name)
     }),planningPriority:planning.scores[character.name]??0,planningModes:planning.preferences.modes,planningRoles:planning.roles[character.name]??[],pinned:planning.preferences.characters.includes(character.id)}));
 }
