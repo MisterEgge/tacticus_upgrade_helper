@@ -375,6 +375,13 @@ try
     assert.doesNotMatch(roadmap, /href="\/review-status"/);
     assert.match(ratings, /<summary>Rating criteria<\/summary>/);
     for(const route of ['/inventory-cleanout','/reallocation']) assert.match(await get(route), /class="accountBar"/);
+    const legacyTransfers=await fetch('http://127.0.0.1:3197/reallocation',{redirect:'manual'});
+    assert.equal(legacyTransfers.status,307);
+    assert.equal(legacyTransfers.headers.get('location'),'/equipment?tab=transfers');
+    const transferTab=new JSDOM(await get('/equipment?tab=transfers'));
+    assert.equal(transferTab.window.document.querySelector('[role=tab][aria-selected=true]').textContent,'Transfers');
+    assert.equal(transferTab.window.document.querySelector('nav a[href="/reallocation"]'),null);
+    transferTab.window.close();
 
     assert.match(roadmap, /Unlock selected characters to begin their upgrade plan/);
     assert.match(roadmap, /Do next · checkpoint/);
@@ -436,7 +443,14 @@ try
     assert.match(warUpgrades.window.document.querySelector('h1').textContent,/Build stronger War teams/);
     assert.equal(warUpgrades.window.document.querySelector('[aria-label="War upgrade target"]').value,'silver');
     assert.ok(warUpgrades.window.document.querySelector('a[href^="/farming?character="][href$="target=9"]'));
-    assert.match(warUpgrades.window.document.querySelector('main').textContent,/teammates also need upgrades/);
+    assert.match(warUpgrades.window.document.querySelector('main').textContent,/characters need upgrades for this suggested five/);
+    assert.equal(warUpgrades.window.document.querySelectorAll('[aria-label="Defense upgrade opportunities"] article').length,1);
+    const teamUpgradeLink=unreadyLineup.window.document.querySelector('a[href^="/upgrades?side=defense"]');
+    assert.ok(teamUpgradeLink);
+    const linkedUpgrade=new JSDOM(await get(teamUpgradeLink.getAttribute('href')));
+    assert.equal(linkedUpgrade.window.document.querySelector('[aria-label="War upgrade target"]').value,'gold');
+    assert.ok(linkedUpgrade.window.document.querySelector('article.warUpgradeTeam'));
+    linkedUpgrade.window.close();
     warUpgrades.window.close();
     assert.ok(unreadyLineup.window.document.querySelector('.warDefenseCard'));
     assert.ok(unreadyLineup.window.document.querySelector('[aria-label="Below Gold I minimum rank"]'));

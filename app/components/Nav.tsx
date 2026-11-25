@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 
 const primary = [["/", "Dashboard"], ["/upgrades", "Upgrades"], ["/guild-raid", "Guild Raid"], ["/war-defense", "Guild War"], ["/campaigns", "Campaigns"], ["/onslaught", "Onslaught"]] as const;
 const groups = [
- {label:"Equipment", links:[["/equipment", "Upgrade equipment"], ["/inventory-cleanout", "Cleanout"], ["/reallocation", "Gear transfers"]]},
+ {label:"Equipment", links:[["/equipment", "Upgrade equipment"], ["/inventory-cleanout", "Cleanout"]]},
  {label:"Resources", links:[["/orbs", "Orbs"], ["/abilities", "Badges"]]}
 ] as const;
 

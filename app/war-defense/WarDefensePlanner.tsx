@@ -1,4 +1,5 @@
 "use client";
+import {warTeamIdentity} from "../../src/domain/warTeamIdentity";
 import type {DefenseEvidence} from "../../src/domain/warDefenseEvidence";
 import DefenseMachineSuggestion from "./DefenseMachineSuggestion";
 import {recommendDefenseMachines} from "../../src/domain/warMachineRecommendations";
@@ -216,7 +217,7 @@ export default function WarDefensePlanner({teams,offenseTeams,ownedCharacterIds,
   <div className="warDefenseSlots">{Array.from({length:5},(_,index)=>{
    const choice=defenseSlots[index],team=choice===null||choice===undefined?undefined:defense[choice],tier=index<2?"gold" as const:"silver" as const;
    if(!team)return <section className="warDefenseCard warDefenseEmptySlot" key={`empty-${index}`} aria-label={`Team slot ${index+1}, ${tier}`} onDragOver={event=>event.preventDefault()} onDrop={event=>dropDefenseTeam(event,index)}><span>Team {index+1}</span><RankBadge rank={tier==="gold"?12:9}/><p>Open slot · no complete owned lineup available.</p></section>;
-   const teamNumber=index+1,coreMembers=teamCoreMembers(team);
+   const teamNumber=index+1,coreMembers=teamCoreMembers(team),identity=warTeamIdentity(coreMembers,coreMembers.length===3?"core":"lineup");
    const defaultFlex=team.members.filter(member=>!coreMembers.some(core=>core.id===member.id)).map(member=>member.id);
    const selectedFlexIds=defenseFlex[team.name]??defaultFlex;
    const {members}=defenseLineup(team,selectedFlexIds);
@@ -239,11 +240,11 @@ export default function WarDefensePlanner({teams,offenseTeams,ownedCharacterIds,
     <div className="warDefenseSlotControls"><strong>Team {teamNumber}</strong><RankBadge rank={tier==="gold"?12:9}/><button type="button" className="warDefenseDragHandle" draggable aria-label={`Drag Team ${teamNumber} to another slot`} title="Drag to reorder" onDragStart={event=>{event.dataTransfer.setData("text/plain",String(index));event.dataTransfer.effectAllowed="move";}}>⠿</button><button type="button" aria-label={`Move Team ${teamNumber} earlier`} disabled={index===0} onClick={()=>moveDefenseTeam(index,index-1)}>↑</button><button type="button" aria-label={`Move Team ${teamNumber} later`} disabled={index===defenseSlots.length-1} onClick={()=>moveDefenseTeam(index,index+1)}>↓</button></div>
     <details className="warCollapsibleTeam">
      <summary className="warCollapsibleSummary" aria-label={`Team ${teamNumber}, ${tier}, ${members.map(member=>member.name).join(", ")}`}>
-      <span className="warCollapsibleTitle">Team {teamNumber}</span>
+      <span className="warCollapsibleTitle">{identity.name}</span>
       <span className="warTeamPortraits">{members.map(member=><CharacterPortrait key={member.id} id={member.id} name={member.name} icon={member.icon}/>)}</span>
       <span className="warTeamSummaryStats"><LineupRankSummary members={members} tier={tier}/>{team.reasons?<small>Roster-built lineup</small>:<small><strong>{(team.wins/team.used*100).toFixed(1)}%</strong> core defense / {team.used.toLocaleString()} attacks</small>}</span>
      </summary>
-     <div className="warCollapsibleBody">
+     <div className="warCollapsibleBody"><Link className="sourceLink" href={`/upgrades?side=defense&tier=${tier}&team=${encodeURIComponent(identity.id)}`}>Team upgrades</Link>
       {team.reasons?<RosterLineupNotes team={team} tier={tier}/>:<p className="warOffenseEvidence">Observed three-character core: {team.used.toLocaleString()} attacks · {(team.wins/team.used*100).toFixed(1)}% holds. This is not a measured result for the five-character lineup.</p>}
       {!team.reasons&&<div className="warOffenseGroups warDefenseGroups">
        <section className="warOffenseGroup"><h4>Core 3</h4><div className="warOffenseCandidates">{coreMembers.map(member=><article key={member.id}><Link href={`/characters/${member.id}`} className="warDefenseCharacter"><CharacterPortrait id={member.id} name={member.name} icon={member.icon}/><strong>{member.name}</strong></Link><WarUnitReadiness unit={member} tier={tier}/></article>)}</div></section>
@@ -288,6 +289,7 @@ export default function WarDefensePlanner({teams,offenseTeams,ownedCharacterIds,
   {offenseSlots.map((choice,index)=>{const team=offense[choice];if(!team)return null;
    const teamKey=team.name,machine=machines.find(value=>value.id===offenseMachines[teamKey]),targetTier=offenseTargets[teamKey]??warTierDefaultForRanks(team.members.map(member=>member.rank));
    const {core:coreMembers,members,selectedFlexNames}=offenseLineup(team,offenseFlex[teamKey]);
+   const identity=warTeamIdentity(coreMembers,coreMembers.length===3?"core":"lineup");
    const lineupChoices=warSlotChoices(offense,offenseSlots,index);
    const deployment=deploymentKey(members.map(member=>member.id));
    const otherAssigned=new Set(offenseSlots.flatMap((option,slot)=>{
@@ -302,13 +304,13 @@ export default function WarDefensePlanner({teams,offenseTeams,ownedCharacterIds,
    return <section className="warDefenseCard" key={index} aria-label={`Offense team ${index+1}`}>
     <details className="warCollapsibleTeam">
      <summary className="warCollapsibleSummary" aria-label={`Offense team ${index+1}, ${targetTier} target, ${members.map(member=>member.name).join(", ")}`}>
-      <span className="warCollapsibleTitle">Offense {index+1}</span>
+      <span className="warCollapsibleTitle">{identity.name}</span>
       <span className="warTargetTier warTargetTierPreview"><RankBadge rank={targetTier==="gold"?12:9} decorative/></span>
       <span className="warTeamPortraits">{members.map(member=><CharacterPortrait key={member.id} id={member.id} name={member.name} icon={member.icon}/>)}</span>
       <span className="warTeamSummaryStats"><LineupRankSummary members={members} tier={targetTier}/><small>{team.reasons?"Roster-built lineup":team.evidence==="core-flex"?`${team.used.toLocaleString()} core uses · ${(team.wins/team.used*100).toFixed(1)}% wins`:`${team.used.toLocaleString()} uses · ${(team.wins/team.used*100).toFixed(1)}% wins`}</small></span>
      </summary>
      <div className="warCollapsibleBody">
-    <header className="warDefenseCardHeader"><h3>Offense {index+1}</h3><div className="warOffenseControls">
+    <Link className="sourceLink" href={`/upgrades?side=offense&tier=${targetTier}&team=${encodeURIComponent(identity.id)}`}>Team upgrades</Link><header className="warDefenseCardHeader"><h3>Offense {index+1}</h3><div className="warOffenseControls">
      <button type="button" className="warTargetTier" aria-label={`Offense ${index+1} targets ${targetTier} defense. Change target tier`} title={`Targeting ${targetTier} defense`} onClick={()=>setOffenseTargets(current=>({...current,[teamKey]:targetTier==="gold"?"silver":"gold"}))}><RankBadge rank={targetTier==="gold"?12:9}/></button>
      <details className="warLineupChange"><summary>Change lineup</summary><select aria-label={`Offense ${index+1} lineup`} value={choice} onChange={event=>setOffenseSlots(current=>chooseWarTeamForSlot(offense,current,index,Number(event.target.value))??current)}>
       <optgroup label="Assigned teams">{lineupChoices.assigned.map(({index:optionIndex,slot})=><option key={optionIndex} value={optionIndex}>Offense {slot+1}: {offense[optionIndex]!.members.map(member=>member.name).join(" / ")}</option>)}</optgroup>

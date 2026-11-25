@@ -540,3 +540,11 @@ th,td { padding:12px 14px; }
 .gearTransferCard details { margin-top:12px; }
 .equipmentActions .campaignChevron { font-size:12px; font-weight:700; }
 @media(max-width:800px) { .gearTransferInstruction { grid-template-columns:minmax(0,1fr); gap:16px; } .gearTransferDonor { border-left:0; padding-left:0; } }
+
+.warUpgradeTeam { margin-top:16px; padding:16px; min-width:0; }
+.warUpgradeTeam>header { margin:0; }
+.warUpgradeTeam h2,.warCollapsibleTitle { overflow-wrap:anywhere; }
+.warUpgradeTeam .warUpgradeLineup { grid-template-columns:repeat(auto-fit,minmax(70px,1fr)); max-width:600px; }
+
+.warCollapsibleTitle { flex:0 1 32%; min-width:0; }
+@media(max-width:700px) { .warCollapsibleTitle { flex:1 1 calc(100% - 40px); } }
