@@ -117,7 +117,7 @@ export function onslaughtPriorities(candidates:OnslaughtCandidate[],orbs:OrbInve
    if(mythicGoal)reasons.push(`Optional Mythic goal · ${shardShortfall??"unknown"} Mythic shards short`);
    if(unit.utility.mainRaidCore||unit.utility.mainRaidFlex)reasons.push("Selected Raid team");
    else if(unit.utility.priorityModes?.includes("LRE"))reasons.push("LRE roster priority · review current event track requirements");
-   else if(unit.utility.incompleteCampaign)reasons.push("Required in unfinished Elite campaign");
+   else if(unit.utility.incompleteCampaign)reasons.push("Required in unfinished campaign");
    else if(war.has(unit.name))reasons.push(`Active War slot · ability target ${warTarget}`);
    else if(unit.utility.tier==="Low priority")reasons.push("Low priority for this roster · leave at the current rank unless you enjoy using them or a current LRE track needs them");
    else reasons.push(`${unit.utility.tier} account usefulness`);

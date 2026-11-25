@@ -1,4 +1,4 @@
-export type EquipmentFocus = { priority?: number; modes?: string[] };
+export type EquipmentFocus = { priority?: number; modes?: string[]; campaignHelpersFor?:string[] };
 
 export function equipmentFocusLabels(character:string,focus:Record<string,EquipmentFocus>,campaignRequired:Set<string>,raidNames?:ReadonlySet<string>):string[]
 {
