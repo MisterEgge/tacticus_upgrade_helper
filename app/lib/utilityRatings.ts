@@ -1,8 +1,7 @@
 import { selectedRaidNames } from "../../src/domain/raidSelection";
 import {readFile} from "node:fs/promises";
-import {getCharacterCatalog,getCampaignTargets} from "./catalog";
+import {getCharacterCatalog} from "./catalog";
 import {getMainRaidSelection,getRaidMeta} from "./raidSelection";
-import {campaignIsComplete,requiredCampaignName,type CampaignBattleDefinition} from "../../src/domain/campaigns";
 import {rateCharacter} from "../../src/domain/characterUtility";
 import type {Report} from "./report";
 import {getPlanningContext} from "./playerPriorities";
@@ -11,14 +10,13 @@ type WarPlan={validatedFullLineups?:Array<{members:string[]}>};
 
 export async function getUtilityRatings(report:Report)
 {
-    const[catalog,community,priorities,raidMeta,defense,offense,targets,battleText]=await Promise.all([
+    const[catalog,community,priorities,raidMeta,defense,offense]=await Promise.all([
         getCharacterCatalog(),
         readFile("config/community_character_priorities.json","utf8").then(JSON.parse) as Promise<{characters:Array<{name:string;score:number;teams?:string[]}>}>,
         readFile("config/character_priorities.json","utf8").then(JSON.parse) as Promise<Record<string,{priority:number;note?:string;modes?:string[]}>>,
         getRaidMeta(),
         readFile("config/war_defense_teams.json","utf8").then(JSON.parse) as Promise<WarPlan>,
-        readFile("config/war_offense_teams.json","utf8").then(JSON.parse) as Promise<WarPlan>,
-        getCampaignTargets(),readFile("data/game/campaign-battles.json","utf8")
+        readFile("config/war_offense_teams.json","utf8").then(JSON.parse) as Promise<WarPlan>
     ]);
     const selection=await getMainRaidSelection(raidMeta.bosses,report);
     const main=raidMeta.bosses[selection.boss]?.[selection.teamName];
@@ -29,17 +27,12 @@ export async function getUtilityRatings(report:Report)
     const raidFlex=new Set(raidTeams.flatMap(team=>team.flex));
     const owned=new Set(report.roster.map(unit=>unit.name));
     const warOption=new Set([...(defense.validatedFullLineups??[]),...(offense.validatedFullLineups??[])].filter(team=>team.members.every(name=>owned.has(name))).flatMap(team=>team.members));
-    const battleCatalog=Object.values(JSON.parse(battleText) as Record<string,CampaignBattleDefinition>);
-    const unfinished=new Set(Object.keys(targets.campaigns).filter(name=>{
-        const progress=report.campaignProgress?.find(c=>(c.type==="Elite"||c.type==="EliteMirror")&&requiredCampaignName(c)===name);
-        return !campaignIsComplete(progress,battleCatalog);
-    }));
     const planning=await getPlanningContext(report,catalog);
     return catalog.characters.map(character=>({...rateCharacter({
         name:character.name,communityScore:scores.get(character.name)??null,communityTeams:communityTeams.get(character.name)??[],accountPriority:priorities[character.name]?.priority??0,
         accountNote:priorities[character.name]?.note??null,priorityModes:priorities[character.name]?.modes??[],
         mainRaidCore:!!main && selectedRaidNames(selection,main).includes(character.name) && main.core.includes(character.name),mainRaidFlex:!!main && selectedRaidNames(selection,main).includes(character.name) && !main.core.includes(character.name),
         raidCore:raidCore.has(character.name),raidFlex:raidFlex.has(character.name),warOption:warOption.has(character.name),
-        incompleteCampaign:character.campaignsRequiredIn.some(name=>unfinished.has(name))
+        incompleteCampaign:planning.roles[character.name]?.includes("campaign")??false
     }),planningPriority:planning.scores[character.name]??0,planningModes:planning.preferences.modes,planningRoles:planning.roles[character.name]??[],pinned:planning.preferences.characters.includes(character.id)}));
 }

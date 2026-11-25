@@ -37,4 +37,10 @@ test("gear transfers prefer the lower-priority donor and follow saved War select
  assert.ok(replacement.getByRole("img",{name:"Epic"}));
  assert.ok(replacement.getByRole("img",{name:"Legendary"}));
  assert.equal(view.queryByText(/Keep equipped|Protected gear|Why it stays/),null);
+ const card=transfers().getByRole("group",{name:"Transfer from Maladus to Raid"});
+ assert.deepEqual([...card.children].map(child=>child.querySelector("strong,small")?.textContent),["Upgrade","Replace","Take from"]);
+ view.rerender(createElement(ReallocationPlanner,{...props,campaignNames:["Maladus"],planningScores:{Raid:43000,Maladus:0,Aesoth:43000}}));
+ assert.ok(transfers().getByText("No gear transfers recommended."));
+ view.rerender(createElement(ReallocationPlanner,props));
+ assert.ok(transfers().getByRole("group",{name:"Transfer from Maladus to Raid"}));
 });
